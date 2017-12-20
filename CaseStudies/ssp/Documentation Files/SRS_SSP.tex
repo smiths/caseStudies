@@ -85,7 +85,7 @@
 \newcommand{\lcref}[1]{LC\ref{#1}}
 \newcounter{fnum} %Figure number
 \newcommand{\fthefnum}{Fig\thefnum}
-\newcommand{\fref}[1]{Fig\ref{#1}}
+\newcommand{\fref}[1]{Fig~\ref{#1}}
 \newcounter{tablenum} %Table number
 \newcommand{\tablethetablenum}{Table\thetablenum}
 \newcommand{\tableref}[1]{Table\ref{#1}}
@@ -1076,28 +1076,33 @@ instance models.
   \hline Label&\bf Moment Equilibrium\\
   
   \hline Equation& \( 0 = \begin{array}{l} - {E}_{\text{i}} \left[
-      {z_{\text{i}}} - \frac{b_{\text{i}}}{2} {
+      {z_{\text{i}}} + \frac{b_{\text{i}}}{2} {
         \tan\left(\alpha_{\text{i}}\right)} \right] + {E}_{\text{i-1}}
-    \left[ {z_{\text{i-1}}} + \frac{b_{\text{i}}}{2} {
+    \left[ {z_{\text{i-1}}} - \frac{b_{\text{i}}}{2} {
         \tan\left(\alpha_{\text{i}}\right)} \right] -
-    H_{\text{i}}\left[ z_{\text{w,i}} - \frac{b_{\text{i}}}{2} {
+    H_{\text{i}}\left[ z_{\text{w,i}} + \frac{b_{\text{i}}}{2} {
         \tan\left(\alpha_{\text{i}}\right)} \right] \\[5pt] +
-    H_{\text{i-1}}\left[ z_{\text{w,i-1}} + \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] -
+    H_{\text{i-1}}\left[ z_{\text{w,i-1}} - \frac{b_{\text{i}}}{2} {
+        \tan\left(\alpha_{\text{i}}\right)} \right] +
     \frac{b_{\text{i}}}{2} \left( X_{\text{i}} + X_{\text{i-1}}
-    \right) + K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} -
-    U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} \\ -
+    \right) - K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} +
+    U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} \\ +
     Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
     h_{\text{i}} \end{array} \) \\
 
-  \hline Description & For a slice of mass in the slope the moment
-  equilibrium to satisfy \tref{TM_Eqm} in the direction perpendicular
-  to the base surface of the slice. Moment equilibrium is derived from
-  the free body diagram of \fref{Fig_Forces} in
-  section~\ref{sec_system}. Index $\text{i}$ refers to the values of
-  the properties for slice/interslices following convention in
-  \fref{Fig_Index} in section~\ref{sec_system}.  Variable
-  definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
+  \hline Description & The equation shows the moment equilibrium (\tref{TM_Eqm})
+                       for a slice of mass in the slope.  Moment equilibrium is derived from
+                       the free body diagram of \fref{Fig_Forces} in
+                       section~\ref{sec_system}. Index $\text{i}$ refers to the values of
+                       the properties for slice/interslices following convention in
+                       \fref{Fig_Index} in section~\ref{sec_system}.  Variable
+                       definitions can be found in \ddref{DD_W} to
+                       \ddref{DD_EX}.  The signs shown in the equation consider
+                       a clockwise moment as positive and a counter clockwise
+                       moment as negative.  (The opposite can be achieved simply
+                       by multiplying the equation by $-1$.)  The moment arm for
+  the force $K_\text{c} W_\text{i}$ is the equivalent moment arm that results from considering
+  a uniformly distributed load over the length $h_\text{i}$.  \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
