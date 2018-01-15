@@ -20,6 +20,7 @@
 \usepackage{url}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{array}
+\usepackage{tabu}
 %\usepackage{refcheck}
 
 \hypersetup{
@@ -278,6 +279,16 @@ the glass slab and also the parameters related to blast type. Given the input,
 \progname{} is intended to use the data and predict whether the glass slab is
 safe to use or not.
 
+\subsection{Characteristics of Intended Reader}
+\label{Sec:CharofInteRead}
+Reviewers of this documentation should have a strong knowledge in theory behind
+glass breakage and blast risk. The reviewers should also have an understanding
+of second year calculus, structural mechanics, and computer applications in
+civil engineering.In addition, reviewers should be familiar with the applicable
+standards for constructions using glass from {[}4-6{]} in
+Section. The users of GlassBR can have a lower level of
+expertise, as explained in Section~\ref{sec_userchar}.
+
 \subsection{Organization of Document}
 
 The organization of this document follows the template for an SRS for scientific
@@ -314,7 +325,8 @@ characteristics and the system constraints.
 
 %\subsection{System Context}
 
-\subsection{User Characteristics}
+\subsection{User Characteristics} 
+\label{sec_userchar}
 \begin{itemize}
 \item The end user of \progname{} is expected to have completed at least the
   equivalent of the second year of an undergraduate degree in civil or
@@ -338,48 +350,36 @@ the output.
 
 \subsection{Product Use Case Table} \label{UseCase}
 
-\renewcommand{\arraystretch}{1.2}
-\captionof{table}{Use Case Table} 
-\noindent \begin{tabular}{l l l p{7cm}} 
-\toprule		
-\textbf{Use Case No.} & \textbf{Use Case Name} & \textbf{Actor} & 
-\textbf{Input and Output}\\
+\begin{longtabu}{l X[l]}
+\toprule
+Actor & Input and Output
+\\
 \midrule
-\label{input} \refstepcounter{ucnum}\theucnum  & Inputs & User & Characteristics
-                                                                 of the glass
-                                                                 slab and of the
-                                                                 blast.  Details in \ref{sec_usecasedetails}\\
-		
-\midrule
-\refstepcounter{ucnum}\theucnum \label{output}&Output&\progname{}&
-Whether or not the glass slab is safe for the calculated load and supporting calculated
-                                                                      values\\ 
-
+User & Characteristics of the glass slab and of the blast. Details in Section~\ref{sec_usecasedetails}
+\\
+GlassBR & Whether or not the glass slab is safe for the calculated load and supporting calculated values
+\\
 \bottomrule
-\end{tabular}
-
+\caption{Use Case Table}
+\label{Table:UseCaseTabl}
+\end{longtabu}
 \subsection{Individual Product Use Cases}\label{sec_usecasedetails} 
 
-\begin{itemize}
-\item \hyperref[input]{Use Case \ref{input}} refers to the user providing input
-  to \progname{} for use within the analysis. There are two classes of inputs:
-  glass geometry and blast type. The glass geometry based inputs include the
-  dimensions of the glass plane, glass type and response type.  The blast type
-  input includes parameters like weight of charge, TNT equivalent factor and
-  stand off distance from the point of explosion.  These parameters describe
-  charge weight and stand off blast.  Another input the user gives is the
-  tolerable value of probability of breakage.
-\item \hyperref[output]{Use Case \ref{output}} \progname{} outputs if the glass
-  slab will be safe by comparing whether \textit{capacity} $>$ \textit{demand}.
-  Capacity is the load resistance calculated and demand is the requirement which
-  is the 3 second duration equivalent pressure.  The second condition is to
-  check whether the calculated probability $( P_b)$ is less than the tolerable
-  probability $(P_{b_{\text{tol}}})$ which is obtained from the user as an
-  input. If both conditions return true then it is shown that the glass slab is safe to
-  use, else if both return false then the glass slab is considered unsafe.  All
-  the supporting calculated values are also displayed as output.
-
-\end{itemize}
+The user provides the inputs to GlassBR for use within the analysis. There are
+two main classes of inputs: glass geometry and blast type. The glass geometry
+based inputs include the glass type and dimensions of the glass plane. The blast
+type input includes parameters like weight of charge, TNT equivalent factor and
+stand off distance from the point of explosion. These parameters describe charge
+weight and stand off blast. Another input the user gives is the tolerable value
+of probability of breakage. GlassBR outputs if the glass slab will be safe by
+comparing whether capacity is greater than demand. Capacity is the the load
+resistance calculated and demand is the requirement which is the 3 second
+duration equivalent pressure. The second condition is to check whether the
+calculated probability (${P_{b}}$) is less than the tolerable probability
+(${P_{btol}}$) which is obtained from the user as an input. If both conditions
+return true then it's shown that the glass slab is safe to use, else if both
+return false then the glass slab is considered unsafe. All the supporting
+calculated values are also displayed as output.
 
 \section{Specific System Description}
 
@@ -628,86 +628,7 @@ or the instance model, in which the respective assumption is used.
 \end{minipage}\\
 ~\newline
 
-\subsubsection{Instance Models}
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_prob} \\
-  \hline
-  Label&\bf Probability of Glass Breakage\\
-  \hline
-  Equation& $P_b = 1-e^{-B}$\\
-\hline
-  Description & $P_b$ is the calculated probability of breakage\\
-  & $B$ is the risk of failure, as defined in \ddref{DD_B}\\
-  \hline
-  Source &
-  \cite{E1300}\\
-  \hline
-  Ref.\ By & \tref{prob}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-~\newline
 
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_cap} \\
-  \hline
-  Label&\bf Calculation of Capacity (LR)\\
-  \hline
-  Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\ 
-\hline
-  Description 
-  & $\text{LR}$ is the Load Resistance, which is also called capacity\\
-  & $\text{NFL}$ is the Non-Factored Load, as defined in \ddref{DD_NFL}\\
-  &$\text{GTF}$ is the Glass Type Factor, as given by \ddref{DD_GTF}\\
-  & $\text{LSF}$ is the Load Share Factor\\
-  \hline
-  Source &
-           \cite{E1300}\\
-  \hline
-  Ref.\ By & \tref{cap}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-~\newline
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_dem} \\
-  \hline
-  Label&\bf Calculation of Demand ($q$)\\
-  \hline
-  Equation& $q=q(w_{\text{TNT}}, \text{SD}$)\\ 
-\hline
-  Description & $q$, or demand, is the 3 second equivalent pressure obtained from the
-                Figure~\ref{Fig_ASTM_F2248-09} by interpolation using stand off distance $(\text{SD})$ and
-                $w_{\text{TNT}}$ as parameters\\
-  & $w_{\text{TNT}}$ is defined as $w_{\text{TNT}}= w \times \text{TNT} $\\
-   &$w$ is the charge weight\\
-  & $\text{TNT}$ is the TNT equivalent factor\\
-  & $\text{SD}$ is the stand off distance where $\text{SD}=\sqrt{{\text{SD}_x}^2 + {\text{SD}_y}^2 + {\text{SD}_z}^2}$\\
-  & where $(\text{SD}_x,\text{SD}_y,\text{SD}_z)$ are coordinates. \\
-  \hline
-  Source &
-  \cite{E1300}\\
-  \hline
-  Ref.\ By & \tref{cap}, \ddref{DD_qhat}\\
-  \hline
-\end{tabular}
-\end{minipage}\\
 
 
 \subsubsection{Data Definitions}\label{sec_datadef}
@@ -994,6 +915,87 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
 \end{tabular}
 \end{minipage}\\
 ~\newline
+
+\subsubsection{Instance Models}
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_prob} \\
+  \hline
+  Label&\bf Probability of Glass Breakage\\
+  \hline
+  Equation& $P_b = 1-e^{-B}$\\
+\hline
+  Description & $P_b$ is the calculated probability of breakage\\
+  & $B$ is the risk of failure, as defined in \ddref{DD_B}\\
+  \hline
+  Source &
+  \cite{E1300}\\
+  \hline
+  Ref.\ By & \tref{prob}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_cap} \\
+  \hline
+  Label&\bf Calculation of Capacity (LR)\\
+  \hline
+  Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\ 
+\hline
+  Description 
+  & $\text{LR}$ is the Load Resistance, which is also called capacity\\
+  & $\text{NFL}$ is the Non-Factored Load, as defined in \ddref{DD_NFL}\\
+  &$\text{GTF}$ is the Glass Type Factor, as given by \ddref{DD_GTF}\\
+  & $\text{LSF}$ is the Load Share Factor\\
+  \hline
+  Source &
+           \cite{E1300}\\
+  \hline
+  Ref.\ By & \tref{cap}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_dem} \\
+  \hline
+  Label&\bf Calculation of Demand ($q$)\\
+  \hline
+  Equation& $q=q(w_{\text{TNT}}, \text{SD}$)\\ 
+\hline
+  Description & $q$, or demand, is the 3 second equivalent pressure obtained from the
+                Figure~\ref{Fig_ASTM_F2248-09} by interpolation using stand off distance $(\text{SD})$ and
+                $w_{\text{TNT}}$ as parameters\\
+  & $w_{\text{TNT}}$ is defined as $w_{\text{TNT}}= w \times \text{TNT} $\\
+   &$w$ is the charge weight\\
+  & $\text{TNT}$ is the TNT equivalent factor\\
+  & $\text{SD}$ is the stand off distance where $\text{SD}=\sqrt{{\text{SD}_x}^2 + {\text{SD}_y}^2 + {\text{SD}_z}^2}$\\
+  & where $(\text{SD}_x,\text{SD}_y,\text{SD}_z)$ are coordinates. \\
+  \hline
+  Source &
+  \cite{E1300}\\
+  \hline
+  Ref.\ By & \tref{cap}, \ddref{DD_qhat}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}
 
@@ -1335,7 +1337,7 @@ future work.
 		{
 			\includegraphics[width=\textwidth]{Trace.png}
 		}
-		\caption{\label{Fig_Trace} Traceability Matrix Showing the Connections Between Items of Different Sections.}
+		\caption{\label{Fig_Trace} Traceability Graph Showing the Connections Between Items of Different Sections.}
 	\end{center}
 \end{figure}
 
@@ -1345,7 +1347,7 @@ future work.
 		{
 			\includegraphics[width=\textwidth]{RTrace.png}
 		}
-		\caption{\label{Fig_RTrace} Traceability Matrix Showing the Connections Between Requirements and Other Items.}
+		\caption{\label{Fig_RTrace} Traceability Graph Showing the Connections Between Requirements and Other Items.}
 	\end{center}
 \end{figure}
 
@@ -1357,10 +1359,48 @@ future work.
 		{
 			\includegraphics[width=\textwidth]{ATrace.png}
 		}
-		\caption{\label{Fig_ATrace} Traceability Matrix Showing the Connections Between Assumptions and Other Items.}
+		\caption{\label{Fig_ATrace} Traceability Graph Showing the Connections Between Assumptions and Other Items.}
 	\end{center}
 \end{figure} 
 
+\section{Values of Auxiliary Constants}
+\label{Sec:ValuofAuxiCons}
+This section contains the standard values that are used for calculations in GlassBR.
+\begin{longtabu}{l X[l] l l}
+\toprule
+Symbol & Description & Value & Unit
+\\
+\midrule
+$m$ & surface flaw parameter & $7$ & $\frac{\text{m}^{12}}{\text{N}^{7}}$
+\\
+$k$ & surface flaw parameter & $\left(2.86\right)10^{-53}$ & $\frac{\text{m}^{12}}{\text{N}^{7}}$
+\\
+$E$ & modulus of elasticity of glass & $\left(7.17\right)10^{7}$ & Pa
+\\
+${t_{d}}$ & duration of load & $3$ & s
+\\
+$LDF$ & load duration factor & $\left(\frac{{t_{d}}}{60}\right)^{\frac{m}{16}}$ & Unitless
+\\
+$LSF$ & load share factor & $1$ & Unitless
+\\
+${d_{max}}$ & maximum value for one of the dimensions of the glass plate & $5.0$ & mm
+\\
+${d_{min}}$ & minimum value for one of the dimensions of the glass plate & $0.1$ & mm
+\\
+${AR_{max}}$ & maximum aspect ratio & $5.0$ & Unitless
+\\
+${w_{max}}$ & maximum permissible input charge weight & $910.0$ & kg
+\\
+${w_{min}}$ & minimum permissible input charge weight & $4.5$ & kg
+\\
+${SD_{min}}$ & minimum stand off distance permissible for input & $6.0$ & m
+\\
+${SD_{max}}$ & maximum stand off distance permissible for input & $130.0$ & m
+\\
+\bottomrule
+\caption{Auxiliary Constants}
+\label{Table:AuxiCons}
+\end{longtabu}
 
 \bibliographystyle{ieeetr}
 \bibliography{glassbr_srs}
