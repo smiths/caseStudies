@@ -108,10 +108,7 @@ This section records information for easy reference.
 
 \subsection{Table of Units}
 
-Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is employed
-as the unit system.  In addition to the basic units, several derived units are
-used as described below.  For each unit, the symbol is given followed by a
-description of the unit and the SI name.
+The unit system used throughout is SI (Syst\`{e}me International d'Unit\'{e}s). In addition to the basic units, several derived units are also used. For each unit, the table lists the symbol, a description and the SI name.
 ~\newline
 
 \renewcommand{\arraystretch}{1.2}
@@ -143,7 +140,7 @@ systems.  The symbols are listed in alphabetical order.
 \noindent \begin{longtable*}{l l p{12cm}} \toprule
   \textbf{symbol} & \textbf{unit} & \textbf{description}\\
   \midrule 
-  $A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
+  $A_C$ & \si[per-mode=symbol] {\square\metre} & heating coil surface area
   \\
   $A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
   which heat is transferred in
@@ -177,14 +174,13 @@ systems.  The symbols are listed in alphabetical order.
   \\  
   $D$ & \si{\metre} & diameter of tank
   \\
-  $E$ & \si[per-mode=symbol] {\joule} & sensible heat energy
+  $E$ & \si[per-mode=symbol] {\joule} & sensible heat
   \\
-  $E_{P\text{melt}}^\text{init}$ & \si[per-mode=symbol] {\joule} & heat energy
-  in the PCM at the instant when melting begins
+  $E_{P\text{melt}}^\text{init}$ & \si[per-mode=symbol] {\joule} & change in heat energy in the PCM at the instant when melting begins
   \\ 
-  $E_P$ & \si[per-mode=symbol] {\joule} & heat energy in the PCM
+  $E_P$ & \si[per-mode=symbol] {\joule} & change in heat energy in the PCM
   \\ 
-  $E_W$ & \si[per-mode=symbol] {\joule} & heat energy in the water
+  $E_W$ & \si[per-mode=symbol] {\joule} & change in heat energy in the water
   \\ 
   $g$ & \si[per-mode=symbol] {\watt\per\cubic\metre} & volumetric heat
   generation per unit volume
@@ -215,18 +211,17 @@ systems.  The symbols are listed in alphabetical order.
   $q$ & \si[per-mode=symbol] {\watt \per \square \metre} & heat
   flux
   \\
-  $Q$ & \si[per-mode=symbol] {\joule} & latent heat energy
+  $Q$ & \si[per-mode=symbol] {\joule} & latent heat
   \\
   $\bf{q}$ & \si[per-mode=symbol] {\watt\per\square\metre} & thermal flux vector
   \\
-  $q_C$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux from coil
+  $q_C$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux into the water from the coil
   \\
-  $q_\text{in}$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux in
+  $q_\text{in}$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux input
   \\ 
-  $q_\text{out}$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux out
+  $q_\text{out}$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux output
   \\
-  $q_P$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux into phase
-  change material
+  $q_P$ & \si[per-mode=symbol] {\watt\per\square\metre} & heat flux into the PCM from water
   \\
   $Q_P$ & \si[per-mode=symbol] {\joule} & latent heat energy added to PCM
   \\
@@ -236,17 +231,17 @@ systems.  The symbols are listed in alphabetical order.
   \\
   $T$ & \si[per-mode=symbol] {\celsius} & temperature
   \\
-  $T_\text{boil}$ & \si[per-mode=symbol] {\celsius} & temperature at boiling point
+  $T_\text{boil}$ & \si[per-mode=symbol] {\celsius} & boiling point temperature
   \\
   $T_C$ &\si[per-mode=symbol] {\celsius} & temperature of coil
   \\
-  $T_\text{env}$ & \si[per-mode=symbol] {\celsius} & temperature of environment
+  $T_\text{env}$ & \si[per-mode=symbol] {\celsius} & temperature of the environment
   \\ 
   $t_\text{final}$ & \si[per-mode=symbol] {\second} & final time
   \\ 
   $T_\text{init}$ & \si[per-mode=symbol] {\celsius} & initial temperature
   \\
-  $T_\text{melt}$ & \si[per-mode=symbol] {\celsius} & temperature at melting point
+  $T_\text{melt}$ & \si[per-mode=symbol] {\celsius} & melting point temperature
   \\
   $t_\text{melt}^\text{init}$ & \si[per-mode=symbol] {\second} & time at which
                                                                  melting of PCM begins
@@ -254,12 +249,11 @@ systems.  The symbols are listed in alphabetical order.
   $t_\text{melt}^\text{final}$ & \si[per-mode=symbol] {\second} & time at which
                                                                  melting of PCM ends
   \\ 
-  $T_\text{melt}^{P}$ & \si[per-mode=symbol] {\celsius} & temperature at melting
-                                                          point for PCM
+  $T_\text{melt}^{P}$ & \si[per-mode=symbol] {\celsius} & Melting point temperature for PCM
+    \\
+  $T_P$ & \si[per-mode=symbol] {\celsius} & temperature of the phase change material
   \\
-  $T_P$ & \si[per-mode=symbol] {\celsius} & temperature of phase change material
-  \\
-  $T_W$ & \si[per-mode=symbol] {\celsius} & temperature of water
+  $T_W$ & \si[per-mode=symbol] {\celsius} & temperature of the water
   \\
   $V$ & \si[per-mode=symbol] {\cubic\metre} & volume
   \\
@@ -274,9 +268,7 @@ systems.  The symbols are listed in alphabetical order.
   \\
   $\eta$ & \si[per-mode=symbol] {unitless} & ODE parameter
   \\
-  $\rho$ & \si[per-mode=symbol] {\kilogram\per\cubic\metre} & density, mass per
-  unit volume
-  \\
+  $\rho$ & \si[per-mode=symbol] {\kilogram\per\cubic\metre} & density  \\
   $\rho_P$ & \si[per-mode=symbol] {\kilogram\per\cubic\metre} & density of PCM
   \\
   $\rho_W$ & \si[per-mode=symbol] {\kilogram\per\cubic\metre} & density of water
@@ -325,6 +317,7 @@ systems.  The symbols are listed in alphabetical order.
   SRS & Software Requirements Specification\\
   \progname{} & Solar Water Heating System\\
   T & Theoretical Model\\
+  TU & Typical Uncertainty\\
   \bottomrule
 \end{tabular}\\
 
@@ -334,7 +327,7 @@ Due to the increasing cost, diminishing availability, and negative environmental
 impact of fossil fuels, there is a higher demand for renewable energy sources
 and energy storage technology.  Solar water heating systems incorporating Phase
 Change Material (PCM) use a renewable energy source and provide a novel way of
-storing energy.  Solar water heating systems with PCM improve over the
+storing energy.  Solar water heating systems incorporating with PCM improve over the
 traditional solar heating systems because of their smaller size.  The smaller
 size is possible because of the ability of PCM to store thermal energy as latent
 heat, which allows higher thermal energy storage capacity per unit weight.
@@ -364,17 +357,13 @@ environment.  The verification and validation plan will show the steps that will
 be used to increase confidence in the software documentation and the
 implementation.  Although the SRS fits in a series of documents that follow the
 so-called waterfall model, the actual development process is not constrained in
-any way.  Even when the process is not waterfall, as Parnas and
+any way.  Even when the waterfall model is not followed, as Parnas and
 Clements~\cite{ParnasAndClements1986} point out, the most logical way to present
 the documentation is still to ``fake'' a rational design process.
 
 \subsection{Scope of Requirements} 
 
-The scope of the requirements is limited to thermal analysis of a single solar
-water heating tank incorporating PCM.  Given the appropriate inputs, the code
-for \progname{} is intended to predict the temperature and energy histories for
-the water and the PCM.  This entire document is written assuming that the
-substances inside the heating tank are water and PCM.
+The scope of the requirements includes thermal analysis of a single solar water heating tank incorporating PCM. Given the appropriate inputs, the code for solar water heating systems incorporating PCM is intended to predict the temperature and thermal energy histories for the water and the PCM. This entire document is written assuming that the substances inside the solar water heating tank are water and PCM.
 
 \subsection{Characteristics of Intended Reader} 
 
@@ -393,18 +382,11 @@ The presentation follows the standard pattern of presenting goals, theories,
 definitions, and assumptions.  For readers that would like a more bottom up
 approach, they can start reading the instance models in Section
 \ref{sec_instance} and trace back to find any additional information they
-require.  The instance models provide the Ordinary Differential Equations (ODEs)
-and algebraic equations that model the solar water heating system with PCM.
-\progname{} solves these ODEs.
-
-The goal statements are refined to the theoretical models, and theoretical
-models to the instance models.  The instance models (Section \ref{sec_instance})
-to be solved are referred to as \iref{ewat} to \iref{I_HPCM}.
+require.  The goal statements are refined to the theoretical models, and the theoretical models to the instance models. The instance models (Section~\ref{Sec:InstMode}) to be solved are referred to as IM1 to IM4. The instance models provide the Ordinary Differential Equation (ODEs) and algebraic equations that model the solar water heating systems incorporating PCM. SWHS solves these ODEs.
 
 \section{General System Description}
 
-This section identifies the interfaces between the system and its environment,
-describes the user characteristics and lists the system constraints.
+This section provides general information about the system, identifies the interfaces between the system and its environment, and describes the user characteristics and the system constraints.
 
 \subsection{System Context}
 
@@ -451,10 +433,7 @@ There are no system constraints.
 
 \section{Specific System Description}
 
-This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution characteristics
-specification, which presents the assumptions, theories, definitions and finally
-the instance models (ODEs) that model the solar water heating tank with PCM.
+This section first presents the problem description, which gives a high-level view of the problem to be solved. This is followed by the solution characteristics specification, which presents the assumptions, theories, theoretical models, general definitions, data definitions, and finally the instance models (ODEs) that model the solar water heating systems incorporating PCM.
 
 \subsection{Problem Description} \label{Sec_pd}
 
@@ -471,12 +450,12 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item Heat Flux: The rate of heat energy transfer per unit area.
+\item Heat Flux: The rate of heat energy transfer through a given surface per unit time.
 
 \item Phase Change Material (PCM): A substance that uses phase changes (such as melting)
   to absorb or release large amounts of heat at a constant temperature.
 
-\item Specific Heat: heat capacity per unit mass.
+\item Specific Heat Capacity: The amount of energy required to raise the temperature of the unit mass of a given substance by a given amount.
 
 \item Thermal Conduction: the transfer of heat energy through a substance.
 
@@ -494,7 +473,7 @@ includes the following elements:
 \item[PS1:] Tank containing water.
 
 \item[PS2:] Heating coil at bottom of tank.  ($q_C$ represents the heat flux
-  from the coil into the water.)
+  into the water from the coil.)
 
 \item[PS3:] PCM suspended in tank.  ($q_P$ represents
   the heat flux from the water into the PCM.)
@@ -514,9 +493,7 @@ and to the PCM of $q_C$ and $q_P$, respectively}
 
 \subsubsection{Goal Statements}
 
-\noindent Given the temperature of the coil, initial conditions for the temperature of 
-the water and the PCM, and material properties, the goal statements are:
-
+\noindent Given the temperature of the heating coil, initial conditions for the temperature of the water and the temperature of the phase change material, and material properties, the goal statements are:
 \begin{itemize}
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_wtemp}:] Predict the water 
@@ -535,8 +512,8 @@ change in the energy of the PCM over time.
 
 \subsection{Solution Characteristics Specification}
 
-The instance models (ODEs) that govern \progname{} are presented in
-Subsection~\ref{sec_instance}.  The information to understand the meaning of the
+The instance models that govern \progname{} are presented in
+Section~\ref{sec_instance}.  The information to understand the meaning of the
 instance models and their derivation is also presented, so that the instance
 models can be verified.
 
@@ -562,16 +539,11 @@ likely change [LC], in which the respective assumption is used.
   the tank is fully mixed, so the temperature is the same throughout the entire
   tank [\dref{ROCT}, \ddref{FluxPCM}].
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tpcm}:] The PCM has the
-  same temperature throughout [\dref{ROCT}, \ddref{FluxPCM}, \lcref{LC_tpcm}].
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tpcm}:] The temperature of the phase change material is the same throughout the volume of PCM [\dref{ROCT}, \ddref{FluxPCM}, \lcref{LC_tpcm}].
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_const_density}:] Density
-  of the water and PCM have no spatial variation; that is, they are each
-  constant over their entire volume [\dref{ROCT}].
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_const_density}:] The density of water and density of PCM have no spatial variation; that is, they are each constant over their entire volume [\dref{ROCT}].
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_const_C}:] Specific heat
-  capacity of the water and PCM have no spatial variation; that is, they are
-  each constant over their entire volume [\dref{ROCT}].
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_const_C}:] The specific heat capacity of water, specific heat capacity of PCM as a solid, and specific heat capacity of PCM as a liquid have no spatial variation; that is, they are each constant over their entire volume  [\dref{ROCT}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Newt_coil}:] Newton's
   law of convective cooling applies between the coil and the water [\ddref{FluxCoil}].
@@ -590,19 +562,16 @@ likely change [LC], in which the respective assumption is used.
   accounts for charging of the tank, not discharging.  The temperature of the
   water and PCM can only increase, or remain constant; they do not decrease.
   This implies that the initial temperature (\aref{A_InitTemp}) is less than (or
-  equal) to the temperature of the coil [\iref{ewat}, \lcref{LC_charge}].
+  equal) to the temperature of the heating coil [\iref{ewat}, \lcref{LC_charge}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_InitTemp}:] The
   initial temperature of the water and the PCM is the same [\iref{ewat},
   \iref{epcm}, \lcref{LC_InitTemp}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OpRangePCM}:] The
-  simulation will start with the PCM in solid form [\iref{epcm}, \iref{I_HPCM}].
+  simulation will start with the PCM in solid state [\iref{epcm}, \iref{I_HPCM}].
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OpRange}:] The operating
-  temperature range of the system is such that the water is always in liquid
-  form.  That is, the temperature will not drop below the melting point of water, or rise
-  above its boiling point [\iref{ewat}, \iref{I_HWAT}].
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OpRange}:] The operating temperature range of the system is such that the water is always in liquid state. That is, the temperature will not drop below the melting point temperature of water, or rise above its boiling point temperature [\iref{ewat}, \iref{I_HWAT}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_htank}:] The tank is
   perfectly insulated so that there is no heat loss from the tank [\iref{ewat},
@@ -616,7 +585,7 @@ likely change [LC], in which the respective assumption is used.
   change of the PCM due to melting is negligible [\iref{epcm}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_PCM_state}:] The PCM is
-  either in a liquid or solid state, but not a gas [\iref{epcm}, \iref{I_HPCM}].
+  either in a liquid or solid state, but not a gaseous state [\iref{epcm}, \iref{I_HPCM}].
   
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Pressure}:] The pressure
   in the tank is atmospheric, so the melting and boiling points of water are
@@ -651,8 +620,8 @@ on.
   The above equation gives the conservation of energy for transient heat transfer in a material
   of specific heat capacity $C$ (\si{\joule\per\kilogram\per\celsius}) and density $\rho$ 
   (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector (\si{\watt\per\square\metre}),
-  $g$ is the volumetric heat generation (\si{\watt\per\cubic\metre}), $T$ is the temperature (\si{\celsius}), $t$ is time (\si{\second}), and $\nabla$ is the gradient operator.  For this equation to apply, other forms of energy, such as mechanical energy, are assumed to be negligible in the
-  system (\aref{A_OnlyThermalEnergy}).  In general, the material properties ($\rho$ and $C$) depend on temperature.\\
+  $g$ is the volumetric heat generation (\si{\watt\per\cubic\metre}), $T$ is the temperature (\si{\celsius}), $t$ is time (\si{\second}), and $\nabla$ is the degree of steepness of a graph at any point.  For this equation to apply, other forms of energy, such as mechanical energy, are assumed to be negligible in the
+  system (\aref{A_OnlyThermalEnergy}). \\
   \hline
   Source &
   \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}\\
@@ -693,7 +662,7 @@ on.
 	and vapour, respectively (\si{\joule\per\kilogram\per\celsius}).\\
   & $m$ is the mass (\si{\kilogram}).\\
   & $T$ is the temperature (\si{\celsius}), and $\Delta T$ is the change in temperature (\si{\celsius}).\\
-  & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling points, respectively (\si{\celsius}).\\
+  & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling point temperature, respectively (\si{\celsius}).\\
   & Sensible heating occurs as long as the material does not reach a temperature 
   where a phase change occurs.\\
   & A phase change occurs if $T = T_\text{boil}$ or $T = T_\text{melt}$.  
@@ -723,14 +692,14 @@ on.
   \hline
   Label&\bf Latent heat energy\\
   \hline
-  Equation& $T=T_\text{melt}$ or $T = T_\text{boil}$, $Q(t)$ = 
-  $\int_0^t \frac{dQ(\tau)}{d\tau}d\tau$, with $Q(0)=0$\\
+  Equation& $Q(t)$ = 
+  $\int_0^t \frac{dQ(\tau)}{d\tau}d\tau$\\
   \hline
   Description & $Q$ is the change in thermal energy (\si{\joule}), latent heat energy.\\
   &$\int_0^t \frac{dQ(\tau)}{d\tau}d\tau$ is the rate of change of $Q$ with respect 
   to time $\tau$ (\si{\second}).  $t$ is the time (\si{\second}) elapsed, as long as the phase change is not complete.
   The status of the phase change depends on the melt fraction \ddref{D_MF}.\\
-  & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling points, respectively (\si{\celsius}).\\
+  & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling point temperature, respectively (\si{\celsius}).\\
   & Latent heating stops when all material has changed to the new phase. 
   \\
   \hline
@@ -884,7 +853,7 @@ models. The dimension of each quantity is also given.
 \rowcolor[gray]{0.9}
 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
 \hline
-Label& \bf Heat flux out of coil\\
+Label& \bf Heat flux into the water from the coil\\
 \hline
 Symbol &$q_C$\\
 \hline
@@ -892,14 +861,14 @@ Symbol &$q_C$\\
 % \hline
 SI Units & \si{\watt\per\square\metre}\\
 \hline
-Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
+Equation&$q_C(t) = h_C (T_C - T_W(t))$\\
 \hline
 Description & 
-$T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by assuming that Newton's Law of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-transfer coefficient $h_C$ (\si{\watt\per\square\metre\per\celsius}).  This equation assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-of the coil (\aref{A_tlcoil}).
+${q_{C}}$ is the heat flux into the water from the coil (\si{\watt\per\square\metre})\newline
+${h_{C}}$ is the convective heat transfer coefficient between coil and water (\si{\watt\per\square\metre\per\celsius})\newline
+${T_{C}}$ is the temperature of the heating coil (\si{\celsius})\newline
+${T_{W}}$ is the temperature of the water (\si{\celsius})\newline
+$t$ is the time (s)\newline
 \\
 \hline
 Sources&~\cite{Lightstone2012}  \\
@@ -922,7 +891,7 @@ Ref.\ By & \iref{ewat}\\
 \rowcolor[gray]{0.9}
 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxPCM}\\
 \hline
-Label& \bf Heat flux into PCM\\
+Label& \bf Heat flux into PCM from Water\\
 \hline
 Symbol &$q_P$\\
 \hline
@@ -933,10 +902,8 @@ SI Units & \si{\watt\per\square\metre}\\
 Equation&$q_P(t) = h_P (T_W(t) - T_P(t))$, over area $A_P$\\
 \hline
 Description & 
-$T_W$ is the temperature of the water (\si{\celsius}).  $T_P$ is the temperature of the PCM (\si{\celsius}).  
-The heat flux into the PCM, $q_P$ (\si{\watt\per\square\metre}), is found by assuming that Newton's Law of Cooling applies (\aref{A_Newt_pcm}).  This law (\dref{NL}) is used on the surface of the PCM, which has area $A_P$ (\si{\square\metre}) and heat transfer coefficient $h_P$ (\si{\watt\per\square\metre\per\celsius}).    This equation assumes that the temperature of the PCM and water each have constant values over the surface area over which they interact
-(\aref{A_mixed} and \aref{A_tpcm}).
-\\
+${q_{P}}$ is the heat flux into the PCM from water ($\frac{\text{W}}{\text{m}^{2}}$)\newline${h_{P}}$ is the convective heat transfer coefficient between PCM and water ($\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$)\newline${T_{W}}$ is the temperature of the water (${}^{\circ}C$)\newline$t$ is the time (s)\newline${T_{P}}$ is the temperature of the phase change material (${}^{\circ}C$)
+\\ 
 \hline
 Sources&~\cite{Lightstone2012}  \\
 \hline
@@ -1059,7 +1026,7 @@ Ref.\ By & \iref{ewat}, \iref{epcm}, \iref{I_HPCM}\\
   Equation&$H_f$ = $\frac{Q}{m}$\\
   \hline
   Description & 
-  $H_f$ is the amount of heat energy required to completely melt a unit mass of a substance (\si{\joule\per\kilogram}).\\
+  $H_f$ is the specific latent heat of fusion (\si{\joule\per\kilogram}).\\
   &$Q$ is the heat energy required for melting (\si{\joule}).\\
   &$m$ is the mass being melted (\si{\kilogram}).
   \\
@@ -1089,7 +1056,7 @@ Symbol &$\phi$ \\
 % \hline
 SI Units & dimensionless\\
 \hline
-Equation&$\phi$ = $\frac{Q_P}{H_f m_P}$, ($0\leq \phi \leq 1$)\\
+Equation&$\phi$ = $\frac{Q_P}{H_f m_P}$\\
 \hline
 Description & $\phi$ is the fraction of the PCM that is liquid (dimensionless).\\
 & $Q_P$ is the latent heat energy added to the PCM (\si{\joule}).\\
@@ -1436,13 +1403,26 @@ model the flexibility to experiment with unusual situations.  The column of
 typical values is intended to provide a feel for a common scenario.  The
 uncertainty column provides an estimate of the confidence with which the
 physical quantities can be measured.  This information would be part of the
-input if one were performing an uncertainty quantification exercise.
+input if one were performing an uncertainty quantification exercise.The constraints are conservative, to give the user of the model the flexibility to experiment with unusual situations. The column of typical values is intended to provide a feel for a common scenario. The column for software constraints restricts the range of inputs to reasonable values.
 
-The specification parameters in Table~\ref{TblInputVar} are listed in
-Table~\ref{TblSpecParams}.
+\noindent 
+\begin{description}
+\item[(*)] These quantities cannot be equal to zero, or there will be a divide
+  by zero in the model.
+\item[(+)] These quantities cannot be zero, or there would be freezing
+  (\aref{A_OpRange}).
+\item[(\#)] The constraints on the surface area are calculated by considering
+  the surface area to volume ratio.  The assumption is that the lowest ratio is
+  1 and the highest possible is $2/h_\text{min}$, where $h_\text{min}$ is the
+  thickness of a ``sheet'' of PCM.  A thin sheet has the greatest surface area to
+  volume ratio.
+\item[(**)] The constraint on the maximum time at the end of the simulation is 
+	the total number of seconds in one day.
+
+\end{description}
 
 \begin{table}[!h]
-  \caption{Input Variables} \label{TblInputVar}
+  \caption{Input Data Constraints} \label{TblInputVar}
   \renewcommand{\arraystretch}{1.2}
 \noindent \begin{longtable*}{l l l l c} 
   \toprule
@@ -1502,58 +1482,9 @@ Table~\ref{TblSpecParams}.
 \end{longtable*}
 \end{table}
 
-\noindent 
-\begin{description}
-\item[(*)] These quantities cannot be equal to zero, or there will be a divide
-  by zero in the model.
-\item[(+)] These quantities cannot be zero, or there would be freezing
-  (\aref{A_OpRange}).
-\item[(\#)] The constraints on the surface area are calculated by considering
-  the surface area to volume ratio.  The assumption is that the lowest ratio is
-  1 and the highest possible is $2/h_\text{min}$, where $h_\text{min}$ is the
-  thickness of a ``sheet'' of PCM.  A thin sheet has the greatest surface area to
-  volume ratio.
-\item[(**)] The constraint on the maximum time at the end of the simulation is 
-	the total number of seconds in one day.
-
-\end{description}
 
 \begin{table}[!h]
-\caption{Specification Parameter Values} \label{TblSpecParams}
-\renewcommand{\arraystretch}{1.2}
-\noindent \begin{longtable*}{l l} 
-  \toprule
-  \textbf{Var} & \textbf{Value} \\
-  \midrule 
-  $L_\text{min}$ & 0.1 \si{\metre}\\
-  $L_\text{max}$ & 50 \si{\metre}\\
-  ${\frac{D}{L}}_\text{min}$ & 0.002 \\
-  ${\frac{D}{L}}_\text{max}$ & 200 \\
-  $\text{minfrac} $ & $10^{-6}$\\
-  $h_\text{min}$ & 0.001 \si{\metre}\\
-  $\rho_P^{\text{min}}$ & 500 \si{\kilo\gram\per\cubic\metre}\\
-  $\rho_P^{\text{max}}$ & 20000 \si{\kilo\gram\per\cubic\metre}\\
-  $C_{P\text{min}}^S$ & 100 \si{\joule\per\kilo\gram\per\celsius}\\
-  $C_{P\text{max}}^S$ & 4000 \si{\joule\per\kilo\gram\per\celsius}\\
-  $C_{P\text{min}}^L$ & 100 \si{\joule\per\kilo\gram\per\celsius}\\
-  $C_{P\text{max}}^L$ & 5000 \si{\joule\per\kilo\gram\per\celsius}\\
-  $A_C^{\text{max}}$ & $\pi(\frac{D}{2})^2$ \si{\square\metre}\\
-  $\rho_W^{\text{min}}$ & 950 \si{\kilo\gram\per\cubic\metre}\\
-  $\rho_W^{\text{max}}$ & 1000 \si{\kilo\gram\per\cubic\metre}\\
-  $C_W^{\text{min}}$ & 4170 \si{\joule\per\kilo\gram\per\celsius}\\
-  $C_W^{\text{max}}$ & 4210 \si{\joule\per\kilo\gram\per\celsius}\\
-  $h_C^{\text{min}}$ & 10 \si{\watt\per\square\metre\per\celsius}\\
-  $h_C^{\text{max}}$ & 10000 \si{\watt\per\square\metre\per\celsius}\\
-  $h_P^{\text{min}}$ & 10 \si{\watt\per\square\metre\per\celsius}\\
-  $h_P^{\text{max}}$ & 10000 \si{\watt\per\square\metre\per\celsius}\\
-  $t_{\text{final}}^{\text{max}}$ & 86400 \si{\second}\\
-  
-  \bottomrule
-\end{longtable*}
-\end{table}
-
-\begin{table}[!h]
-\caption{Output Variables} \label{TblOutputVar}
+\caption{Output Data Constraints} \label{TblOutputVar}
 \renewcommand{\arraystretch}{1.2}
 \noindent \begin{longtable*}{l l} 
   \toprule
@@ -1928,7 +1859,56 @@ future work.
 	\end{center}
 \end{figure}
 
+
 \newpage
+\section{Values of Auxiliary Constants}
+\label{Sec:ValuofAuxiCons}
+This section contains the standard values that are used for calculations in SWHS.\\
+\begin{tabular}{l X[l] l l}
+\toprule
+Symbol & Description & Value & Unit
+\\
+\midrule
+${L_{min}}$ & minimum length of tank & $0.1$ & m
+\\
+${L_{max}}$ & maximum length of tank & $50$ & m
+\\
+${h_{min}}$ & minimum convective heat transfer coefficient & $0.001$ & $\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$
+\\
+${{\rho{}_{P}}^{min}}$ & minimum density of PCM & $500$ & $\frac{\text{kg}}{\text{m}^{3}}$
+\\
+${{\rho{}_{P}}^{max}}$ & maximum density of PCM & $20000$ & $\frac{\text{kg}}{\text{m}^{3}}$
+\\
+${{\rho{}_{W}}^{min}}$ & minimum density of water & $950$ & $\frac{\text{kg}}{\text{m}^{3}}$
+\\
+${{\rho{}_{W}}^{max}}$ & maximum density of water & $1000$ & $\frac{\text{kg}}{\text{m}^{3}}$
+\\
+${{{C_{P}}^{S}}_{min}}$ & minimum specific heat capacity of PCM as a solid & $100$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{{C_{P}}^{S}}_{max}}$ & maximum specific heat capacity of PCM as a solid & $4000$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{{C_{P}}^{L}}_{min}}$ & minimum specific heat capacity of PCM as a liquid & $100$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{{C_{P}}^{L}}_{max}}$ & maximum specific heat capacity of PCM as a liquid & $5000$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{C_{W}}^{min}}$ & minimum specific heat capacity of water & $4170$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{C_{W}}^{max}}$ & maximum specific heat capacity of water & $4210$ & $\frac{\text{J}}{(\text{kg}{}^{\circ}C)}$
+\\
+${{h_{C}}^{min}}$ & minimum convective heat transfer coefficient between coil and water & $10$ & $\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$
+\\
+${{h_{C}}^{max}}$ & maximum convective heat transfer coefficient between coil and water & $10000$ & $\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$
+\\
+${{h_{P}}^{min}}$ & minimum convective heat transfer coefficient between PCM and water & $10$ & $\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$
+\\
+${{h_{P}}^{max}}$ & maximum convective heat transfer coefficient between PCM and water & $10000$ & $\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$
+\\
+${{t_{final}}^{max}}$ & maximum final time & $86400$ & s
+\\
+\bottomrule
+\caption{Auxiliary Constants}
+\label{Table:AuxiCons}
+\end{tabular}
 
 \bibliographystyle {plain}
 \bibliography {PCM_SRS}
