@@ -1437,9 +1437,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
 \hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles}\\
+DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_alpha}\\
 
-\hline Label& \bf Angle \\
+\hline Label& \bf Angle\\
 
 \hline
 Equation & 
@@ -1466,7 +1466,7 @@ Description & $\alpha{}$ is the angle (${}^{\circ}$)\newline${y_{slip}}$
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
 \hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles}\\
+DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_Beta}\\
 
 \hline Label& \bf Angle \\
 
@@ -1974,7 +1974,7 @@ in \ddref{DD_Stiff}.
 
 ~\newline\noindent For basal surfaces the stiffness constants and
 displacements refer to a system rotated for the base angle alpha
-(\ddref{DD_Angles}). To analyze the effect of force-displacement
+(\ddref{DD_Angles_alpha}). To analyze the effect of force-displacement
 relationships occurring on both basal and interslice surfaces of an
 element $i$ they must reference the same coordinate system. The
 basal stiffness matrix must be rotated counter clockwise to align with
@@ -2619,7 +2619,7 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 \renewcommand*{\arraystretch}{1.6}
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
-\hline \rowcolor{AFB} Number&
+\hline Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_RFEM}\\
 
 \hline Label& \bf Force Displacement Equilibrium \\
@@ -2759,7 +2759,7 @@ required.
 \renewcommand*{\arraystretch}{1.6}
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
-\hline \rowcolor{AFB} Number&
+\hline  Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_RFEMFS}\\
 
 \hline Label& \bf RFEM Factor of Safety \\
@@ -2926,7 +2926,7 @@ FS = \frac{\displaystyle\sum_{i=1}^{n} \ell_{\text{i}} \cdot
 \renewcommand*{\arraystretch}{1.6}
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
-\hline \rowcolor{Brass} Number&
+\hline  Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Label& \bf Critical Slip Identification \\
