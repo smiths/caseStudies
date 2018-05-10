@@ -65,6 +65,8 @@
 \newcounter{reqnum} %Requirement Number
 \newcommand{\rthereqnum}{P\thereqnum}
 \newcommand{\rref}[1]{R\ref{#1}}
+\newcounter{nfrnum} %Nonfunctional Requirement Number
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
@@ -1463,6 +1465,44 @@ bodies that have undergone a collision (\iref{IM_C}, \rref{R_CheckCollision}).
 Games are resource-intensive, so performance is a high priority.
 Other non-functional requirements that are a priority are: correctness,
 understandability, portability, reliability, and maintainability. 
+
+\subsubsection{Performance Requirements}
+
+\begin{itemize}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_ComputationTime}:] Calculate a step of the simulation involving 1000 rigid bodies in no more than $\frac{1}{60}s$ on minimum hardware (\nfrref{NFR_MinimumRequirements}).
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_ComputationMemory}:] Consume no more than 200 megabytes of memory at any point during the simulation.
+\end{itemize}
+
+\subsubsection{Understandability Requirements}
+
+\begin{itemize}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_APIDocumentation}:] Provide interface documentation generated from the code.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_Examples}:] Include documentation with examples demonstrating use of the system.
+\end{itemize}
+
+\subsubsection{Portability Requirements}
+
+\begin{itemize}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_DesktopOS}:] Run on desktop operating systems Windows, macOS, and Linux.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_MobileOS}:] Run on mobile operating systems iOS and Android.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_GameConsoles}:] Run on the Nintendo Wii game console.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_LanguageCompatibility}:] Provide a C99-compatible\cite{C99ISO} interface.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_MinimumRequirements}:] Meet \nfrref{NFR_ComputationTime} on a dual-core 1.5 gigahertz processor with 2 gigabytes of memory available.
+\end{itemize}
+
+\subsubsection{Reliability Requirements}
+
+\begin{itemize}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_CrashAdverse}:] No step of the simulation should cause the calling program to terminate while executing inside the library.
+\end{itemize}
+
+\subsubsection{Maintainability Requirements}
+
+\begin{itemize}
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_CleanCode}:] Produce no warning messages when building the package.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_UniformCode}:] Adhere to a consistent code formatting style.
+\item[NFR\refstepcounter{nfrnum}\thenfrnum \label{NFR_PredictableCode}:] Adhere to the language formatting guide if one exists.
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%
