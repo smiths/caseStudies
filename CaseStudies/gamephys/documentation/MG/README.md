@@ -4,6 +4,9 @@ Module Guide (MG)
 Revision Notes
 --------------
 
+**10/5/2018**
+- Changed wording to avoid referring to a specific implementation language.
+
 **15/8/2016**
 - Updated MG to reflect changes and corrections from Drasil MG.
 
