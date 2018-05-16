@@ -6,30 +6,55 @@ import numpy as np
 class TestReadTable(unittest.TestCase):
    
    def setUp(self):
+        # reads readTable.txt input file and saves it as input
         with open(os.path.join("Test/Inputfiles", "readTable.txt"), 'r') as f:
             input = f.readlines()
+
+        # input is split based on ";" delimiter
         input = list(map(lambda x: x.split(";"), input))
+ 
         self.numTests = len(input)
         self.inputFileName    = [row[0]          for row in input]
         self.num_colShouldBe  = [row[1]          for row in input] #--> ['4.5,9.1,14.,18.', '23.,27.,32.,36.,41.']
-        print (self.num_colShouldBe)
         self.array1Expctd     = [row[2]          for row in input]
         self.array2Expctd     = [row[3].rstrip() for row in input]
 
         for i in range(self.numTests):
             self.num_col, self.array1, self.array2 = readTable.read_table(os.path.join("Test/Inputfiles", self.inputFileName[i]))
-            print(self.num_col, "!!!")
 
+'''        self.xArray = ?
+        self.yArray = ?
+        self.zArray = ?
+        self.xArrayShouldBe = ?
+        self.yArrayShouldBe = ?
+        self.zArrayShouldBe = ?'''
 
    def test_read_table(self):
        for i in range(self.numTests):
         with self.subTest(i=i):
           print (self.num_colShouldBe[i])
           print (self.num_col)
+          print ("done")
           self.assertTrue((self.num_col[i] == np.array(self.num_colShouldBe[i])).all())
           self.assertTrue((self.array1[i] == np.array(self.array1Expctd[i])).all())
           self.assertTrue((self.array2[i] == np.array(self.array2Expctd[i])).all())
-    
+"""
+   def test_read_z_array(self):
+       for i in range(self.numTests):
+        with self.subTest(i=i):
+          self.assertTrue(...)
+
+   def test_read_x_array(self):
+       for i in range(self.numTests):
+        with self.subTest(i=i):
+          self.assertTrue(...)
+
+   def test_read_y_array(self):
+       for i in range(self.numTests):
+        with self.subTest(i=i):
+          self.assertTrue(...)
+
+"""    
 if __name__ == "__main__":
     unittest.main()
 
