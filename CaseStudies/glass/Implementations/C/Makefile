@@ -26,7 +26,7 @@ PROG_NAME=glassbr
 PROG_TARGET=$(PROG_NAME)$(TARGET_EXTENSION)
 
 .PHONY: all
-all: clean prog
+all: prog
 
 .PHONY: prog
 prog: $(PROG_TARGET) 
