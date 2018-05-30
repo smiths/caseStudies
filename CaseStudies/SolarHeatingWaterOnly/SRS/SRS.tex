@@ -1432,7 +1432,7 @@ qualities that the software is expected to exhibit.
 
   \renewcommand{\arraystretch}{1.2}
 %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
-  \noindent \begin{longtable*}{l l p{12cm}} \toprule
+  \noindent \begin{tabular}{l l p{12cm}} \toprule
               \textbf{symbol} & \textbf{unit} & \textbf{description}\\
               \midrule 
               $L$ & \si{\metre} & length of tank\\
@@ -1462,17 +1462,16 @@ qualities that the software is expected to exhibit.
                                                           temperature of water\\ % and PCM\\
               $t_\text{final}$ & \si {\second} & final time\\
             \bottomrule
-\end{longtable*}
+\end{tabular}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_MassInputs}:] Use the inputs
   in \rref{R_RawInputs} to find the mass needed for \iref{ewat}, % to \iref{I_HPCM},
   as follows:
 
-\begin{align*}
-m_W &= V_W \rho_W = \pi (D/2)^2 L \rho_W \\
-%m_P &= V_P \rho_P,
-\end{align*}
-%
+$$
+m_W = V_W \rho_W = \pi (D/2)^2 L \rho_W
+$$
+
 \noindent
 where $V_W$ is the volume of water in the tank.%  and $V_\text{tank}$ is the volume
 % inside of the cylindrical tank.
@@ -1485,7 +1484,6 @@ where $V_W$ is the volume of water in the tank.%  and $V_\text{tank}$ is the vol
   \rref{R_RawInputs}, the mass from \rref{R_MassInputs} and $\tau_W$ (from
   \iref{ewat}).% , $\eta$ (from \iref{ewat}), $\tau_P^S$ (from \iref{epcm}) and
   % $\tau_P^L$ (from \iref{epcm}).
-
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_TempWater}:] Calculate and
   output the temperature of the water ($T_W(t)$) over the simulation time  (from
