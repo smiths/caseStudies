@@ -13,7 +13,7 @@ class Param(object):
     a: plate length (long dimension) (mm)
     b: plate width (short dimension) (mm)
     t: nominal thickness (stored as a string) (mm)
-    gt: glass type (stored as a string) (element of "AN", "HS", "GT")
+    gt: glass type (stored as a string) (element of ["AN", "HS", "GT"])
     w: weight (kg)
     tnt: TNT equivalent factor
     sdvect: coordinates of stand off distance
