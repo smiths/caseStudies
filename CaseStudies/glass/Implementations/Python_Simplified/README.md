@@ -37,8 +37,6 @@ To do all of the above in one step: Go to /Python_Simplified and type "make all"
 
 /Python_Simplified/Implementation: Contains the code for each module of Glass-BR.
 
-/Python_Simplified/Reference: Contains references.
-
 /Python_Simplified/Test: Contains the code for testing.
 
 /Python_Simplified/Test/allTests.py: Test summary for all tests.
@@ -57,7 +55,12 @@ To do all of the above in one step: Go to /Python_Simplified and type "make all"
 
 /Python_Simplified/Test/Inputfiles/testTable*.txt: These files contain data used in testReadTable*.py.
 
+/Python_Simplified/OldTests: The same as /Test, but for old tests.
+
+/Python_Simplified/TestDocumentation: Contains the documentation for the tests.
+
 /Python_Simplified/SDF.txt TSD.txt: Contain data for interpolation.
 
 /Python_Simplified/defaultInput.txt: The default input file that mainfun.py consumes.
 
+/Python_Simplified/Makefile: Contains the build instructions for running 'make'.
