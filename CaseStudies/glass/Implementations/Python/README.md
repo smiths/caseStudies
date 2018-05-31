@@ -53,12 +53,12 @@ To do all of the above in one step: Go to /Python and type "make all" at the pro
 
 /Python/Test/Inputfiles/testTable*.txt: These files contain data used in testReadTable*.py.
 
+/Python/OldTests: The same as /Test, but for old tests.
+
+/Python/TestDocumentation: Contains the documentation for the tests.
+
 /Python/SDF.txt TSD.txt: Contain data for interpolation.
 
 /Python/defaultInput.txt: The default input file that mainfun.py consumes.
 
 /Python/Makefile: Contains the build instructions for running 'make'.
-
-/Python/outputfile.txt: The output file created by mainfun.py.
-
-/Python/testoutput.txt: The output file of the test.
