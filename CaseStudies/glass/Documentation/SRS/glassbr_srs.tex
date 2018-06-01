@@ -342,22 +342,26 @@ flow between the system and its environment.
 	\end{center}
 \end{figure}
 
-\progname{} is an outstanding application which predicts whether the given glass slab withstand the blast. The interaction between the product and user is through user interface and is capable of interchanging inputs from the user and output from the system. The responsibilities of the user and the system are as
-follows:
+The interaction between the product and the user is through a user
+interface.  The responsibilities of the user and the system are as follows:
 
 \begin{itemize}
-	\item User Responsibilities:
-	\begin{itemize}
-		\item Provide the input data related to the glass slab and the blast type, ensuring no errors in the data entry
-		\item Take care that consistent units are used for input variables
-	\end{itemize}
-	\item \progname{} Responsibilities:
-	\begin{itemize}
-		\item Detect data type mismatch, such as a string of characters instead of a
-		floating point number
-		\item Determine if the inputs satisfy the required physical and software constraints
-		\item Predict whether the glass slab is safe to use or not.
-	\end{itemize}
+\item User Responsibilities:
+  \begin{itemize}
+  \item Provide the input data related to the glass slab and the blast type,
+    ensuring no errors in the data entry
+  \item Ensure that consistent units are used for input variables
+  \item Ensure required software assumptions (Section~\ref{Assumptions}) are
+    appropriate for any particular problem input to the software
+  \end{itemize}
+\item \progname{} Responsibilities:
+  \begin{itemize}
+  \item Detect data type mismatch, such as a string of characters input instead
+    of a floating point number
+  \item Determine if the inputs satisfy the required physical and software
+    constraints
+  \item Predict whether the glass slab is safe to use or not.
+  \end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics} 
