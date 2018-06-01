@@ -107,7 +107,7 @@ Anticipated changes are the source of the information that is to be hidden
 inside the modules. Ideally, changing one of the anticipated changes will only
 require changing the one module that hides the associated decision. The approach
 adapted here is called design for
-change. %Anticipated changes are numbered by \textbf{AC} followed by a number.
+change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
@@ -140,7 +140,8 @@ more complex. Sometimes this complexity is not necessary. Fixing some design
 decisions at the system architecture stage can simplify the software design. If
 these decision should later need to be changed, then many parts of the design
 will potentially need to be modified. Hence, it is not intended that these
-decisions will be changed. 
+decisions will be changed.  Unlikely changes are numbered by \textbf{UC}
+followed by a number.
 
 \begin{description}
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
@@ -162,7 +163,8 @@ are 2D.
 This section provides an overview of the module design. Modules are summarized
 in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
-actually be implemented.
+actually be implemented.  Modules are numbered by \textbf{M}
+followed by a number.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module 
