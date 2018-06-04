@@ -45,11 +45,11 @@ def derived_params(params):
         print("Wrong thickness entered - Not an industrial standard")
 
     # cal glass type factor
-    if params.gt == 'AN' or params.gt == 'an':
+    if params.gt in ['AN', 'an']
         params.gtf = 1
-    elif params.gt == 'HS' or params.gt == 'hs':
+    elif params.gt in ['HS', 'hs']
         params.gtf = 2
-    elif params.gt == 'FT' or params.gt == 'ft':
+    elif params.gt in ['FT', 'ft']
         params.gtf = 4
     else:
         print("Wrong glass type entered")
