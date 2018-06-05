@@ -9,7 +9,7 @@ def read_z_array(filename):
     with open(filename, "r") as f:
         line = f.readline()
     z_array = line.split(",")[1::2]
-    z_array = [float(i) for i in z_array]  
+    z_array = [float(i) for i in z_array]
     return z_array
     
 def read_x_array(filename, length):
