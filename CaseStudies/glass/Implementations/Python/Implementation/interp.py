@@ -1,10 +1,7 @@
-"""
-Interpolation Module
-Secret: The interpolation algorithm.
-Service: Provides the equations that take the input parameters and interpolation
-data and return an interpolated value.
-"""
-
+##Interpolation Module
+##Secret: The interpolation algorithm.
+##Service: Provides the equations that take the input parameters and interpolation
+##data and return an interpolated value.
 
 class BoundError(Exception):
     pass

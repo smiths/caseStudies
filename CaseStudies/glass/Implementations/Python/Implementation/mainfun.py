@@ -1,8 +1,6 @@
-"""
-Control Module
-Secret: The algorithm for coordinating the running of the program.
-Service: Provides the main program.
-"""
+##Control Module
+##Secret: The algorithm for coordinating the running of the program.
+##Service: Provides the main program.
 
 import sys
 from . import inputFormat

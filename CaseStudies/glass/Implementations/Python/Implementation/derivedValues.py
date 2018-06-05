@@ -1,8 +1,6 @@
-"""
-Derived Values Module
-Secret: The transformations from initial inputs to derived quantities
-Service: Defines the equations transforming the initial inputs into derived quantities
-"""
+##Derived Values Module
+##Secret: The transformations from initial inputs to derived quantities
+##Service: Defines the equations transforming the initial inputs into derived quantities
 
 import math
 

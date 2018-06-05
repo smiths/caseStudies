@@ -1,9 +1,6 @@
-"""
-Input Constraints Module
-Secret: The constraints on the input data.
-Service: Defines the constraints on the input data and gives and error if a constraint is violated.
-"""
-
+##Input Constraints Module
+##Secret: The constraints on the input data.
+##Service: Defines the constraints on the input data and gives and error if a constraint is violated
 
 def check_constraints(params):
     if params.a <= 0 or params.b <= 0:

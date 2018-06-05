@@ -1,9 +1,8 @@
-"""
-Output Format Module
-Secret: The format and structure of the output data.
-Service: Outputs the results of the calculations, including the input parameters, the demand, the capacity,
-the probability of breakage, and both safety requirements.
-"""
+##Output Format Module
+##Secret: The format and structure of the output data.
+##Service: Outputs the results of the calculations, including the input parameters, the demand, the capacity,
+##the probability of breakage, and both safety requirements.
+
 def display_output(filename, q, j, q_hat_tol, pb, lr, nfl, is_safe1, is_safe2, params):
 
     f = open(filename, 'w')

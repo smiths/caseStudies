@@ -1,29 +1,25 @@
-"""
-Input Parameters Module
-Secret: The format and structure of the input parameters.
-Service: Stores the parameters needed for Glass-BR, including
-the glass plate properties and the blast loading
-"""
+##Input Parameters Module
+##Secret: The format and structure of the input parameters.
+##Service: Stores the parameters needed for Glass-BR, including
+##the glass plate properties and the blast loading.
 
 class Param(object):
-    """
-    Parameters for Glass-BR.
-
-    State Variables
-    a: plate length (long dimension) (mm)
-    b: plate width (short dimension) (mm)
-    t: nominal thickness (stored as a string) (mm)
-    gt: glass type (stored as a string) (element of ["AN", "HS", "GT"])
-    w: weight (kg)
-    tnt: TNT equivalent factor
-    sdvect: coordinates of stand off distance
-    pbtol: tolerable pressure
-    asprat: aspect ratio
-    sd: stand off distance (m)
-    h: actual thickness (mm)
-    gtf: glass type factor
-    wtnt: explosive mass in equivalent weight of TNT
-    """
+##    Parameters for Glass-BR.
+##
+##    State Variables
+##    a: plate length (long dimension) (mm)
+##    b: plate width (short dimension) (mm)
+##    t: nominal thickness (stored as a string) (mm)
+##    gt: glass type (stored as a string) (element of ["AN", "HS", "GT"])
+##    w: weight (kg)
+##    tnt: TNT equivalent factor
+##    sdvect: coordinates of stand off distance
+##    pbtol: tolerable pressure
+##    asprat: aspect ratio
+##    sd: stand off distance (m)
+##    h: actual thickness (mm)
+##    gtf: glass type factor
+##    wtnt: explosive mass in equivalent weight of TNT
 
     def __init__(self):
         self.a = 0.0

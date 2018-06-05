@@ -1,16 +1,12 @@
-"""
-Input Format Module
-Secret: The format of the input data.
-Service: Converts the input data into the data structures used in the
-input parameters module.
-"""
-
+##Input Format Module
+##Secret: The format of the input data.
+##Service: Converts the input data into the data structures used in the
+##input parameters module.
 
 def get_input(filename, params):
-    """
-    Reads the data from the input file and writes the data to the
-    Param object.  Lines with comments are skipped.
-    """
+
+##    Reads the data from the input file and writes the data to the
+##    Param object.  Lines with comments are skipped.
 
     infile = open(filename, "r")
     text = infile.readline()

@@ -1,7 +1,5 @@
-"""
-This module implements a portion of the Input Format Module.  In this
-case the input is the tabular data necessary for the different interpolations.
-"""
+##This module implements a portion of the Input Format Module.  In this
+##case the input is the tabular data necessary for the different interpolations
 
 import numpy as np
 

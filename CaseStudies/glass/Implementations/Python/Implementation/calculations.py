@@ -1,10 +1,8 @@
-"""
-Calculations Module
-Secret: The equations for predicting the probability of glass breakage, capacity, and demand,
-using the input parameters
-Service: Converts the input data into the data structures used in the
-input parameters module.
-"""
+##Calculations Module
+##Secret: The equations for predicting the probability of glass breakage, capacity, and demand,
+##using the input parameters
+##Service: Converts the input data into the data structures used in the
+##input parameters module.
 
 from . import interp
 import math
@@ -20,9 +18,7 @@ def calc_j_tol(params):
    
 
 def calc_pb(j, params):
-    """
-    Calculates probability of glass breakage (Pb, IM1).
-    """
+    #Calculates probability of glass breakage (Pb, IM1).
     b = (params.k / (pow(params.a/1000 * params.b/1000, params.m - 1))) * (
         pow(1000*params.E * pow(params.h/1000, 2), params.m)) * params.ldf * (math.exp(j))
     pb = 1 - math.exp(-b)
