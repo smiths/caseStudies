@@ -11,6 +11,7 @@ def read_z_array(filename):
     return z_array
     
 def read_x_array(filename, length):
+    #length needs to be used somehow
     with open(filename, "r") as f:
         lines = f.readlines()
     lines = lines[1:]
@@ -20,6 +21,7 @@ def read_x_array(filename, length):
     return x_array
     
 def read_y_array(filename, length):
+    #length needs to be used somehow
     with open(filename, "r") as f:
         lines = f.readlines()
     lines = lines[1:]
