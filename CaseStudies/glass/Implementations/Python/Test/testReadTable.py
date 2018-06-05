@@ -32,7 +32,6 @@ class TestReadTable(unittest.TestCase):
 #        self.yArrayShouldBe = ?
 #        self.zArrayShouldBe = ?
 
-
 #   def test_read_table(self):
 #       for i in range(self.numTests):
 #        with self.subTest(i=i):
