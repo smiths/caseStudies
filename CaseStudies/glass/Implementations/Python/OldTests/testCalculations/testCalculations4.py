@@ -14,10 +14,8 @@ class TestCalculations(unittest.TestCase):
         self.derivedValues = derivedValues.derived_params(self.params)
  
     def test_calc_pb(self):
-        """
-        Test to make sure returns expected value of pb.  Test should
-        actually use some epsilon error, instead of equality of floats
-        """
+##        Test to make sure returns expected value of pb.  Test should
+##        actually use some epsilon error, instead of equality of floats
         pb = calculations.calc_pb(float64(9.5489517812960898e+00), self.params)
         self.assertEqual(pb, 1.3015245902037176e-04)
         

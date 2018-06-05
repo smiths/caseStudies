@@ -1,6 +1,5 @@
-'''
-Test when the input file for mainfun.py is "testInput1.txt"
-'''
+#Test when the input file for mainfun.py is "testInput1.txt"
+
 import os
 import unittest
 from Implementation import mainfun

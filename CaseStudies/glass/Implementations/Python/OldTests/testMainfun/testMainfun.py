@@ -1,6 +1,5 @@
-'''
-Test when the input file for mainfun.py is "defaultInput.txt"
-'''
+#Test when the input file for mainfun.py is "defaultInput.txt"
+
 import os
 import unittest
 from Implementation import mainfun
