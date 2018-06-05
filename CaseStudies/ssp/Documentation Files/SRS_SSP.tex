@@ -412,8 +412,6 @@ This section provides general information about the system, identifies
 the interfaces between the system and its environment, and describes
 the user characteristics and the system constraints.
 
-%\subsection{System Context}
-
 \subsection{User Characteristics}
 
 The end user of SSA should have an understanding of undergraduate
@@ -2530,9 +2528,14 @@ equation~(\ref{eq:F_par}).
 
 
 \begin{equation}  \label{eq:F_par}
-  \frac{ N_{\text{i}} \tan\left(\varphi'\right_{i}) + c'_{\text{i}} \cdot
-    b'_{\text{i}} \cdot \sec\left(\alpha_{\text{i}}\right) }{
-    \text{FS} } = \begin{array}{l} \left[ W_{\text{i}} - \lambda \cdot
+  \frac{
+   N_{\text{i}} \tan\left(\varphi'\right._{i}) + c'_{\text{i}} \cdot b'_{\text{i}} \cdot \sec\left(\alpha_{\text{i}}\right.) 
+  }
+    { \text{FS} }
+     = \begin{array}{l}
+      \left[ W_{\text{i}}
+       - \lambda \cdot
+    
       f_{\text{i-1}} \cdot E_{\text{i-1}} + \lambda \cdot f_{\text{i}}
       \cdot E_{\text{i}} + U_{\text{t,i}}
       \cos\left(\beta_{\text{i}}\right) + Q_{\text{i}}
@@ -2554,14 +2557,15 @@ rearranging results in equation~(\ref{eq:Interslice1})
 E_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
-    \tan\left(\varphi'\right_{i}) \\ - \left[ \lambda \cdot f_\text{i}
+    \tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_\text{i}
       \sin\left(\alpha_\text{i}\right) +
-      \cos\left(\alpha_\text{i}\right) \right]
+      \cos\left(\alpha_\text{i}\right) \right.]
     \left(\text{FS}\right) \end{array} \right] = E_\text{i-1}
 \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i-1}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
-    \tan\left(\varphi'\right_{i}) \\ - \left[ \lambda \cdot f_\text{i-1}
+    \tan\left(\varphi'\right._{i}) 
+    \\ - \left[ \lambda \cdot f_\text{i-1}
       \sin\left(\alpha_\text{i}\right) +
       \cos\left(\alpha_\text{i}\right) \right]
     \left(\text{FS}\right) \end{array} \right] +
