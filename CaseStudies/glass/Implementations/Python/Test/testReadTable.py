@@ -33,7 +33,7 @@ class TestReadTable(unittest.TestCase):
        for i in range(self.numTests):
         with self.subTest(i=i):
           z = (self.num_colShouldBe[i]).split(",") #e.g. --> '4.5,9.1,14.,18.' becomes ['4.5','9.1','14.','18.']
-          z = [float(temp) for temp in z]         #e.g. --> [4.5,9.1,14.,18.]
+          z = [float(temp) for temp in z]          #e.g. --> [4.5,9.1,14.,18.]
           self.assertTrue(self.num_col[i] == z)
 
   #fixme: determine semantics of using these particular numbers

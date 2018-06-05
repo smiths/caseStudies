@@ -29,19 +29,3 @@ def read_y_array(filename, length):
     for i in range(len(y_array)):
         y_array[i] = [float(j) for j in y_array[i]]
     return y_array
-
-#---#
-
-#older function; needs to be removed#
-
-def read_table(filename):
-    with open(filename, 'rb') as f:
-        num_col = [f.readline()]
-
-    num_col = np.genfromtxt(num_col, delimiter=',', dtype=str)
-    num_col = num_col[1::2].astype(float)
-
-    array1 = np.loadtxt(filename, delimiter=',', usecols=range(0, 2*len(num_col), 2), skiprows=1)
-    array2 = np.loadtxt(filename, delimiter=',', usecols=range(1, 2*len(num_col), 2), skiprows=1)
-
-    return num_col, array1, array2
