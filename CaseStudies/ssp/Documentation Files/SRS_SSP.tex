@@ -50,6 +50,8 @@
 \newcommand{\hf}[1]{\authornote{cyan}{HF}{#1}}
 \newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
 
+\newcommand{\progname}{SSP}
+
 \newcommand{\colAwidth}{0.13\textwidth}
 \newcommand{\colBwidth}{0.82\textwidth}
 \newcommand{\colCwidth}{0.1\textwidth}
@@ -332,7 +334,7 @@ ${\ell{}_{s}}$ &  \si{\meter}& Length of an Interslice Surface: from slip base t
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
-  SSA & Slope Stability Analysis\\
+  \progname\ & Slope Stability Analysis Program\\
   T & Theoretical Model\\
 TU & Typical Uncertainty
 \\
@@ -354,12 +356,12 @@ known as the factor of safety.
 ~\newline~\newline 
 The following section provides an overview of the Software Requirements 
 Specification (SRS) for a slope stability analysis problem. The developed 
-program will be referred to as the Slope Stability Analysis (SSA) program. 
+program will be referred to as the Slope Stability Analysis Program (\progname) program. 
 This section explains the purpose of this document, the scope of the system, 
 the organization of the document, and the characteristics of the intended readers.
 \subsection{Purpose of Document}
 
-The SSA program determines the critical slip surface, and its respective factor of safety
+The \progname\ determines the critical slip surface, and its respective factor of safety
  as a method of assessing the stability of a slope design. The program is intended to
  be used as an educational tool for introducing slope stability issues, and will
  facilitate the analysis and design of a safe slope.
@@ -380,13 +382,13 @@ as Parnas and Clements point out, the most logical way to present the documentat
 
 The scope of the requirements includes stability analysis of a 2 dimensional slope, 
 composed of homogeneous soil layers. Given the appropriate inputs, the code for 
-SSA is intended to identify the most likely failure surface within the possible input
+\progname\ is intended to identify the most likely failure surface within the possible input
  range, and find the factor of safety for the slope as well as displacement of
  soil that will occur on the slope.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
-Reviewers of this documentation should have a strong knowledge in solid mechanics. The reviewers should also have an understanding of undergraduate level 4 physics. The users of SSA can have a lower level of expertise, as explained in Section~\ref{Sec:UserChar}.
+Reviewers of this documentation should have a strong knowledge in solid mechanics. The reviewers should also have an understanding of undergraduate level 4 physics. The users of \progname\ can have a lower level of expertise, as explained in Section~\ref{Sec:UserChar}.
 
 \subsection{Organization of Document}
 
@@ -417,7 +419,7 @@ the user characteristics and the system constraints.
 Figure~\ref{Fig_SystemContext}
  shows the system context.  A circle represents an
 external entity outside the software, the user in this case.  A rectangle
-represents the software system itself (SSA Program).  Arrows are used to show the data
+represents the software system itself (\progname).  Arrows are used to show the data
 flow between the system and its environment.
 
 \begin{figure}[h!]
@@ -440,7 +442,7 @@ interface.  The responsibilities of the user and the system are as follows:
   \item Ensure required software assumptions (Section~\ref{Assumptions}) are
     appropriate for any particular problem input to the software
   \end{itemize}
-\item SSA Program Responsibilities:
+\item \progname\ Responsibilities:
   \begin{itemize}
   \item Detect data type mismatch, such as a string of characters input instead
     of a floating point number
@@ -454,7 +456,7 @@ interface.  The responsibilities of the user and the system are as follows:
 
 \subsection{User Characteristics}
 
-The end user of SSA should have an understanding of undergraduate
+The end user of \progname\ should have an understanding of undergraduate
 Level 1 Calculus and Physics, and be familiar with soil and material
 properties.
 
@@ -472,7 +474,7 @@ that model the slope. \\
 
 \subsection{Problem Description} \label{Sec_pd}
 
-SSA is a computer program developed to evaluate the factor of safety
+\progname\ is a computer program developed to evaluate the factor of safety
 of a slopes slip surface and, calculate the displacement the slope
 will experience.
 
@@ -606,7 +608,7 @@ layers, the goal statements are:
 
 \subsection{Solution Characteristics Specification}
 
-The instance models that govern SSA are presented in
+The instance models that govern \progname\ are presented in
 Section~\ref{sec_instance}.  The information to understand the
 meaning of the instance models and their derivation is also presented,
 so that the instance models can be verified.
@@ -669,7 +671,7 @@ assumption is used.
 
 \subsubsection{Theoretical Models} \label{sec_theoretical}
 
-This section focuses on the general equations and laws that SSA is based
+This section focuses on the general equations and laws that \progname\ is based
 on.
 
 ~\newline
@@ -3138,7 +3140,7 @@ requirements, the qualities that the software is expected to exhibit.
 
 \subsection{Nonfunctional Requirements}
 
-SSA is intended to be an educational tool, therefore accuracy and
+\progname\ is intended to be an educational tool, therefore accuracy and
 performance speed are secondary program priorities to correctness,
 understandability, reusability, and maintainability.
 
