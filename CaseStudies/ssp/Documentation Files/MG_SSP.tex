@@ -38,6 +38,8 @@
 \newcommand{\hf}[1]{\authornote{cyan}{HF}{#1}}
 \newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
 
+\newcommand{\progname}{SSP}
+
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
 \newcommand{\acref}[1]{AC\ref{#1}}
@@ -58,8 +60,6 @@
 \newcounter{tablenum}
 \newcommand{\tablethetablenum}{Table\thetablenum}
 \newcommand{\tableref}[1]{Table\ref{#1}}
-
-\newcommand{\progname}[1]{SSA}
 
 \newgeometry{margin=2cm}
 
@@ -100,7 +100,7 @@ This section records information for easy reference.
   RFEM & Rigid Finite Element \\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  SSA & Slope Stability Analysis\\
+  \progname & Slope Stability Analysis Program\\
   UC & Unlikely Change \\
   \bottomrule
 \end{tabular}\\
@@ -339,8 +339,8 @@ specifies \emph{what} the module will do without documenting
 implementing software is given under the \emph{Implemented By}
 title. If the entry is \emph{OS}, this means that the module is
 provided by the operating system or by standard programming language
-libraries. \emph{\progname{}} means the module will be implemented by
-the \progname{} software. Only the leaf modules in the hierarchy have
+libraries. \emph{\progname} means the module will be implemented by
+the \progname software. Only the leaf modules in the hierarchy have
 to be implemented. If a dash (\emph{--}) is shown, this means that the
 module is not a leaf and will not have to be implemented. Whether or
 not this module is implemented depends on the programming language
@@ -377,7 +377,7 @@ selected.
 \item[Secrets:] The algorithm for coordinating the running of the
   program.
 \item[Services:] Provides the main program.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description}
 
 
@@ -395,7 +395,7 @@ selected.
   its coordinates and the unit weight of water are also included in
   the input. Lastly an expected range for the entrance and exit points
   of the critical slip surface are inputted.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Output Format Module (\mref{mOutput})}
@@ -408,7 +408,7 @@ selected.
   Element Method Module (\mref{mRFEM}), and a plot of the critical
   slip surface on the slope geometry, with the showing the element
   displacements as calculated by the RFEM Module
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 
@@ -419,7 +419,7 @@ selected.
   minimum factor of safety, based on the inputs.
 \item[Services:] Searches the slope for the critical slip surface with
   the minimum factor of safety 
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description}
 
 
@@ -434,7 +434,7 @@ selected.
   randomly generated or mutated slopes from the Genetic Algorithm
   Module (\mref{mGenAlg}) are physically possible according to the
   criteria of the Kinematic Admissibility Module.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 
@@ -447,7 +447,7 @@ selected.
   Morgenstern Price Module (\mref{mMorgPrice}) or the RFEM Module
   (\mref{mRFEM}), the x-coordinates defining the boundaries of the
   slices are identified and stored in a vector.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Slip Weighting Module (\mref{mSlipWeight})}
@@ -460,7 +460,7 @@ selected.
   safety. A slip surface with a low factor of safety will have a high
   weight as it is more likely to be or to lead to generation of the
   critical slip surface.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Morgenstern Price Solver Module (\mref{mMorgPrice})}
@@ -470,7 +470,7 @@ selected.
 \item[Services:] Calculates the factor of safety of a given slip
   surface, through implementation of a Morgenstern Price slope
   stability analysis method.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 
@@ -483,7 +483,7 @@ selected.
   factors of safety, and local slice displacements of a given slip
   surface under given conditions, through implementation of a rigid
   finite element slope stability analysis method.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Slice Property Sorter Module (\mref{mSliceProperty})}
@@ -498,7 +498,7 @@ selected.
   Module identifies which soil layer the surface is in to assign
   properties from that soil layer, and uses a weighting scheme when
   the surface crosses multiple soil layers.
-\item[Implemented By:] \progname{}
+\item[Implemented By:] \progname
 \end{description} 
 
 
