@@ -4,6 +4,9 @@ Software Requirements Specification (SRS)
 Revision Notes
 --------------
 
+**05/09/2018**
+- Expanded nonfunctional requirements to include what some may be instead just the priority of certain categories of nonfunctional requirements.
+
 **07/06/2016**
 - Tidied up the formatting of models and definitions to make it more readable and similar to other SRSs.
 - Changed goal statements and the corresponding instance models quite a bit.
