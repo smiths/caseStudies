@@ -32,6 +32,8 @@ Slip_poolB = ...
       ['S3'], 1.19, [] ;
       ['S4'], 1.2, []; };
 
+cd ../src/
+
 Out_PoolB = SlipWeighter ( 4, Slip_poolB )
   
 % for i = 1:length(Roll)
