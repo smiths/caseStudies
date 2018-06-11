@@ -22,12 +22,12 @@ clear all; close all; clc;
 
 %%
 % <latex>
-% \input{./VV_SubDocuments/SSA_MPSliceTester.tex}
+% \input{..docs/VnVReport/VV_SubDocuments/MPSliceTester.tex}
 % </latex>
  publish('SSA_MPSliceTester',...
      'format','latex','showCode',false,'imageFormat','png',...
-     'stylesheet','../Documentation Files/VV_SubDocuments/latexsheet_Blank.xsl',...
-    'outputDir','../Documentation Files/VV_SubDocuments')
+     'stylesheet','../docs/VnVReport/VV_SubDocuments/latexsheet_Blank.xsl',...
+    'outputDir','../docs/VnVReport/VV_SubDocuments')
 
 %%
 % <latex>
