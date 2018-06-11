@@ -1,6 +1,8 @@
 function SSA_GenAlgTester
 clear all; close all;  
 
+cd ../src/
+
 %%
 % <latex>
 % \section{Genetic Algorithm Tester} \label{sec:GenAlgTests}
