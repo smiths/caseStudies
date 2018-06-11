@@ -26,3 +26,5 @@ A Guide to the files in this folder.
 
 6. VV_SubDocuments
 - Sub documents created while compiling the different testing scripts for SSA_TesterMain.
+
+7. UserGuide - A user's guide explaining how to operate the original program. Should still apply to the reimplemented program.
