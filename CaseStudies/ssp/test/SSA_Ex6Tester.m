@@ -1,5 +1,7 @@
 clear all; close all;
 
+cd ../src/
+
 %%
 % <latex>
 % \section{Example 6 - Further Study} \label{sec:Ex6Tests}
