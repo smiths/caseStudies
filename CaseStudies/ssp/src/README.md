@@ -1,5 +1,5 @@
-# Project Name Source Code
+# SSP Source Code
 
-The folders and files for this project are as follows:
+This folder contains the scripts for the reimplemented SSP.
 
-...
+To run the program open the Control.m script and run.
