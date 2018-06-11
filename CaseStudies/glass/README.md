@@ -16,10 +16,12 @@ Numpy: A Python extension numpy needs to be installed in order to run the code a
 
 -------Purpose of files and subfolders-------
 
-/glass/Documentation: Contains the Software Requirements Specification (SRS) , Module Guide (MG) for Glass-BR.
+/glass/docs: Contains the Software Requirements Specification (SRS), Module Guide (MG) for Glass-BR.
 
-/glass/Implementations: Contains the code and testing for each module of Glass-BR, in C and Python.
+/glass/refs: Contains references.
 
-/glass/Reference: Contains references.
+/glass/src: Contains the code and testing for each module of Glass-BR, in C and Python.
 
-/glass/latex.pdf: A general overview of the project.
+/glass/test: Will contain testing in the future.
+
+/glass/misc/latex.pdf: A general overview of the project.

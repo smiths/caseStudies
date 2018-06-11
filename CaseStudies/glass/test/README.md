@@ -1,0 +1,1 @@
+This folder will be the location of the testing for Glass-BR in the future. For now, the testing is located in glass/src/Python/Test or /OldTests, and the documentation is in /TestDocumentation.
