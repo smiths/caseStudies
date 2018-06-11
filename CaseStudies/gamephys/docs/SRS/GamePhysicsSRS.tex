@@ -279,7 +279,40 @@ This section provides general information about the system including identifying
 the interfaces between the system and its environment (system context), describing
 the user characteristics and listing the system constraints.
 
-%3.1 User Characteristics
+%3.1 System Context
+\subsection{System Context}
+Figure~\ref{Fig_SystemContext} shows the system context. A circle represents an
+external entity outside the software, the user in this case. A rectangle
+represents the software system itself (\progname{}). Arrows are used to show the data
+flow between the system and its environment.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{SysCtx.png}
+    \caption{System Context}
+    \label{Fig_SystemContext}
+  \end{center}
+\end{figure}
+
+The interaction between the product and the user is through an application programming interface. The responsibilities of the user and the system are as follows:
+
+\begin{itemize}
+\item User Responsibilities:
+  \begin{itemize}
+  \item Provide initial conditions of the physical state of the simulation, rigid bodies present, and forces applied to them.
+  \item Ensure application programming interface use complies with the user guide.
+  \item Ensure required software assumptions (Section~\ref{sec_assu}) are
+    appropriate for any particular problem the software addresses.
+  \end{itemize}
+\item \progname{} Responsibilities:
+  \begin{itemize}
+  \item Determine if the inputs and simulation state satisfy the required physical and software constraints. (Section~\ref{sec_DataConstraints})
+  \item Calculate the new state of all rigid bodies within the simulation at each simulation step.
+  \item Provide updated physical state of all rigid bodies at the end of simulation step.
+  \end{itemize}
+\end{itemize}
+
+%3.2 User Characteristics
 \subsection{User Characteristics}
 \label{Sec_UserChar}
 
@@ -287,7 +320,7 @@ The end user of Chipmunk2D should have an understanding
 of first year programming concepts and of high school
 physics.
 
-%3.2 System Constraints
+%3.3 System Constraints
 \subsection{System Constraints}
 
 There are no system constraints.
