@@ -39,10 +39,10 @@ nStar = 5:50;
 % </latex>
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex1.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex1.dat');
 params_soln = struct('ltor',ltor,'ftype',0);
 
-data = dlmread('../data files/Ex1_RFEM_30slice.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_RFEM_30slice.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -124,11 +124,11 @@ legend( 'RFEM', 'Morg Price', 'Location', 'northwest')
 % </latex>
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex2.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex2.dat');
 params_soln = struct('ltor',ltor,'ftype',0);
 
 data = ... % read in slip surfaces
-    dlmread('../data files/Ex2_RFEM.surf')'; 
+    dlmread('./dataFiles/Ex2_RFEM.surf')'; 
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -153,12 +153,12 @@ legend( 'RFEM', 'Morg Price', 'Location', 'northeast')
 % -----------------
 %
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex2.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex2.dat');
 params_soln = struct('ltor',ltor,'ftype',0);
 
 
 data = ... % read in slip surfaces
-    dlmread('../data files/Ex6_RFEM.surf')';
+    dlmread('./dataFiles/Ex6_RFEM.surf')';
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);

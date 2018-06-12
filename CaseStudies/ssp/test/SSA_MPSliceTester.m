@@ -37,16 +37,16 @@ nStar = 5:100;
 % -----------------
 %
 
-[params_layers, params_piezYes, ltor] = RecieveInput('../data files/FredlundKrahn1977.dat');
+[params_layers, params_piezYes, ltor] = RecieveInput('./dataFiles/FredlundKrahn1977.dat');
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
 params_soln = struct ('ftype',0,'ltor',ltor);
 params_piezNo = struct('piez',[],'gamw',0);
 
-data = dlmread('../data files/FredlundKrahn1977_circ.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/FredlundKrahn1977_circ.surf')'; % read in slip surfaces
 slipc = data(1:2,:);
 
-data = dlmread('../data files/FredlundKrahn1977_noncirc.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/FredlundKrahn1977_noncirc.surf')'; % read in slip surfaces
 slipnc = data(1:2,:);
 
 [ECD] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slipc, params_layers, params_piezNo, params_soln, params_load, 2.074, nStar); % compute F and lam for circular surface, dry slope
@@ -181,34 +181,34 @@ legend('Circular Dry','Circular Wet','NonCircular Dry','NonCirular Wet','Locatio
 % </latex>
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex1.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex1.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
 Q = [];
 omega = [];
 
-data = dlmread('../data files/Ex1_Greco1996.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_Greco1996.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EG1]= SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load, 1.327, nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex1_MalkawiEtAl2001.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_MalkawiEtAl2001.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EM1]= SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.238,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex1_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_ChengEtAl2007.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EC1]= SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.325,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex1_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_LiEtAl2010.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -232,24 +232,24 @@ legend('Greco (1996)','Malkawi et al (2001)','Cheng et al (2007)','Li et al (201
 % -----------------
 %
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex2.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex2.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
-data = dlmread('../data files/Ex2_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex2_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EZ2] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load, 1.240, nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex2_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex2_ChengEtAl2007.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EC2] = SSA_SliceTesterAlgorithm (@MorgPriceSolver,slip,params_layers, params_piez, params_soln, params_load,1.101,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex2_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex2_LiEtAl2010.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -271,24 +271,24 @@ legend('Zolfaghari et al (2005)','Cheng et al (2007)','Li et al (2010)','Locatio
 % -----------------
 %
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex3.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex3.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
-data = dlmread('../data files/Ex3_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EZ3] = SSA_SliceTesterAlgorithm (@MorgPriceSolver,slip,params_layers, params_piez, params_soln, params_load,1.48,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex3_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_ChengEtAl2007.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EC3] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.349,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex3_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_LiEtAl2010.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -310,17 +310,17 @@ legend('Zolfaghari et al (2005)','Cheng et al (2007)','Li et al (2010)','Locatio
 % -----------------
 %
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex4.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex4.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
-data = dlmread('../data files/Ex4_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex4_ChengEtAl2007.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EC4] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.184,nStar);% compute F and lam for slip surface
 
-data = dlmread('../data files/Ex4_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex4_LiEtAl2010.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -340,25 +340,25 @@ legend('Cheng et al (2007)','Li et al (2010)','Location','northeast')
 % -----------------
 %
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex5.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex5.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
 
-data = dlmread('../data files/Ex5_PhamFredlund2003.surf')';% read in slip surfaces
+data = dlmread('./dataFiles/Ex5_PhamFredlund2003.surf')';% read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EPD5] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.413,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex5_PhamFredlund2003_circ.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex5_PhamFredlund2003_circ.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
 [EPC5] = SSA_SliceTesterAlgorithm (@MorgPriceSolver, slip, params_layers, params_piez, params_soln, params_load,1.485,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex5_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex5_LiEtAl2010.surf')'; % read in slip surfaces
 slip = data(1:2,:);
 Kc = data(3,1);
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
@@ -389,24 +389,24 @@ legend('Pham and Fredlund (2003) - DYN','Pham and Fredlund (2003) - cir','Li et 
 % iterations.
 % </latex>
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex6.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex6.dat');
 params_soln = struct ('ftype',0,'ltor',ltor);
 
-data = dlmread('../data files/Ex6_PhamFredlund2003.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex6_PhamFredlund2003.surf')'; % read in slip surfaces
 slipPD = data(1:2,:);
 KcPD = data(3,1);
 params_load = struct('Kc',KcPD, 'Q',[], 'omega',[]);
 
 [EPD6] = SSA_SliceTesterAlgorithm (@MorgPriceSolver,slipPD,params_layers, params_piez, params_soln, params_load,1.000,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex6_PhamFredlund2003_circ.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex6_PhamFredlund2003_circ.surf')'; % read in slip surfaces
 slipPC = data(1:2,:);
 KcPC = data(3,1);
 params_load = struct('Kc',KcPC, 'Q',[], 'omega',[]);
 
 [EPC6] = SSA_SliceTesterAlgorithm (@MorgPriceSolver,slipPC,params_layers, params_piez, params_soln, params_load,1.140,nStar); % compute F and lam for slip surface
 
-data = dlmread('../data files/Ex6_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex6_LiEtAl2010.surf')'; % read in slip surfaces
 slipL = data(1:2,:);
 KcL = data(3,1);
 params_load = struct('Kc',KcL, 'Q',[], 'omega',[]);
