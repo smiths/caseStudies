@@ -47,6 +47,8 @@ slip_iA=[5,5.0001,15,22;20,18,8,10]; % Increasing
 slip_iB=[5,5,15,22;20,18,8,10]; % Flat
 slip_iC=[5,4.9999,15,22;20,18,8,10]; % Decreasing
 
+cd ../src/
+
 fprintf('Failure (i):\n');
 [pass_i1,newslip_i1,ReportCode_i1] = ...
    KinAdm (slip_iA, strat1, params_solnNo);
@@ -348,3 +350,5 @@ fprintf(strcat('(C): pass=',num2str(pass_vi3),ReportCode_vi3)); % Expect fail - 
 % calculation likely comes from a \textit{pi} rounding error. Other than
 % this small error, all other tests were successful.
 % </latex>
+
+cd ../test/
