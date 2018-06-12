@@ -1,8 +1,6 @@
 function SSA_GenAlgTester
 clear all; close all;  
 
-cd ../src/
-
 %%
 % <latex>
 % \section{Genetic Algorithm Tester} \label{sec:GenAlgTests}
@@ -29,24 +27,24 @@ F1_malk = 1.238;
 F1_cheng = 1.325;
 F1_li = 1.327;
 
-data = dlmread('../data files/Ex1_Greco1996.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_Greco1996.surf')'; % read in slip surfaces
 slip1_greco = data(1:2,:);
 slip1_grecoVert = MatchSlice (slip1_greco, VertInspect);
 
-data = dlmread('../data files/Ex1_MalkawiEtAl2001.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_MalkawiEtAl2001.surf')'; % read in slip surfaces
 slip1_malk = data(1:2,:);
 slip1_malkVert = MatchSlice (slip1_malk, VertInspect);
 
-data = dlmread('../data files/Ex1_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_ChengEtAl2007.surf')'; % read in slip surfaces
 slip1_cheng = data(1:2,:);
 slip1_chengVert = MatchSlice (slip1_cheng, VertInspect);
 
-data = dlmread('../data files/Ex1_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex1_LiEtAl2010.surf')'; % read in slip surfaces
 slip1_li = data(1:2,:);
 slip1_liVert = MatchSlice (slip1_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex1.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex1.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -74,6 +72,8 @@ delr1_li = zeros(niterations,1);
 % clip surfaces will be investigated.
 % </latex>
 %
+
+cd ../src/
 
 for i=1:niterations
 
@@ -363,20 +363,22 @@ F2_zolf = 1.240; % reported values of Fs
 F2_cheng = 1.101;
 F2_li = 1.113;
 
-data = dlmread('../data files/Ex2_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
+cd ../test/
+
+data = dlmread('./dataFiles/Ex2_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
 slip2_zolf = data(1:2,:);
 slip2_zolfVert = MatchSlice (slip2_zolf, VertInspect);
 
-data = dlmread('../data files/Ex2_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex2_ChengEtAl2007.surf')'; % read in slip surfaces
 slip2_cheng = data(1:2,:);
 slip2_chengVert = MatchSlice (slip2_cheng, VertInspect);
 
-data = dlmread('../data files/Ex2_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex2_LiEtAl2010.surf')'; % read in slip surfaces
 slip2_li = data(1:2,:);
 slip2_liVert = MatchSlice (slip2_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex2.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex2.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -446,26 +448,27 @@ F3_zolf = 1.480; % reported values of Fs
 F3_cheng = 1.349;
 F3_li = 1.335;
 
-data = dlmread('../data files/Ex3_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_ZolfaghariEtAl2005.surf')'; % read in slip surfaces
 slip3_zolf = data(1:2,:);
 slip3_zolfVert = MatchSlice (slip3_zolf, VertInspect);
 
-data = dlmread('../data files/Ex3_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_ChengEtAl2007.surf')'; % read in slip surfaces
 slip3_cheng = data(1:2,:);
 slip3_chengVert = MatchSlice (slip3_cheng, VertInspect);
 
-data = dlmread('../data files/Ex3_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex3_LiEtAl2010.surf')'; % read in slip surfaces
 slip3_li = data(1:2,:);
 slip3_liVert = MatchSlice (slip3_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex3.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex3.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
 params_search = struct ('Xetr',[10,15],'Xext',[23,30],'Ylim',[40,52]);
 params_soln = struct ('cncvu',1,'obtu',1,'evnslc',1,'ftype',0,'ltor',ltor);
 
+cd ../src/
 
 [ cslip3, F3, ~, ~, ~, ~, rt3] = ... % pass on to GenAlg
     GenAlg ( @MorgPriceSolver, params_layers, ...
@@ -527,16 +530,16 @@ fprintf('Li et al (2010)           %7.4f     %7.4f', F3_li, abs(F3-F3_li)/F3_li*
 F4_cheng = 1.184; % reported values of Fs
 F4_li = 1.197;
 
-data = dlmread('../data files/Ex4_ChengEtAl2007.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex4_ChengEtAl2007.surf')'; % read in slip surfaces
 slip4_cheng = data(1:2,:);
 slip4_chengVert = MatchSlice (slip4_cheng, VertInspect);
 
-data = dlmread('../data files/Ex4_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex4_LiEtAl2010.surf')'; % read in slip surfaces
 slip4_li = data(1:2,:);
 slip4_liVert = MatchSlice (slip4_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex4.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex4.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -598,16 +601,16 @@ fprintf('Li et al (2010)           %7.4f     %7.4f', F4_li, abs(F4-F4_li)/F4_li*
 F5_pham = 1.413; % reported values of Fs
 F5_li = 1.408;
 
-data = dlmread('../data files/Ex5_PhamFredlund2003.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex5_PhamFredlund2003.surf')'; % read in slip surfaces
 slip5_pham = data(1:2,:);
 slip5_phamVert = MatchSlice (slip5_pham, VertInspect);
 
-data = dlmread('../data files/Ex5_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex5_LiEtAl2010.surf')'; % read in slip surfaces
 slip5_li = data(1:2,:);
 slip5_liVert = MatchSlice (slip5_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex2.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex2.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -669,16 +672,16 @@ fprintf('Li et al (2010)           %7.4f     %7.4f', F5_li, abs(F5-F5_li)/F5_li*
 F6_pham = 1.000; % reported values of Fs
 F6_li = 1.017;
 
-data = dlmread('../data files/Ex6_PhamFredlund2003.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex6_PhamFredlund2003.surf')'; % read in slip surfaces
 slip6_pham = data(1:2,:);
 slip6_phamVert = MatchSlice (slip6_pham, VertInspect);
 
-data = dlmread('../data files/Ex6_LiEtAl2010.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/Ex6_LiEtAl2010.surf')'; % read in slip surfaces
 slip6_li = data(1:2,:);
 slip6_liVert = MatchSlice (slip6_li, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/Ex6.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/Ex6.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -739,12 +742,12 @@ fprintf('Li et al (2010)           %7.4f     %7.4f', F6_li, abs(F6-F6_li)/F6_li*
 
 F7_fred = 1.245; % reported values of Fs
 
-data = dlmread('../data files/FredlundKrahn1977_noncirc.surf')'; % read in slip surfaces
+data = dlmread('./dataFiles/FredlundKrahn1977_noncirc.surf')'; % read in slip surfaces
 slip7_fred = data(1:2,:);
 slip7_fredVert = MatchSlice (slip7_fred, VertInspect);
 
 
-[params_layers, params_piez, ltor] = RecieveInput('../data files/FredlundKrahn1977.dat');
+[params_layers, params_piez, ltor] = RecieveInput('./dataFiles/FredlundKrahn1977.dat');
 strat = params_layers.strat;
 
 params_load = struct('Kc',0, 'Q',[], 'omega',[]);
@@ -878,4 +881,3 @@ for i = 1:Points
     sum_r = sum_r + r;
 end
 end
-

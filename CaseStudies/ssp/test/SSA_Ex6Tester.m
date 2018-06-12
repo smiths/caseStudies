@@ -1,7 +1,5 @@
 clear all; close all;
 
-cd ../src/
-
 %%
 % <latex>
 % \section{Example 6 - Further Study} \label{sec:Ex6Tests}
@@ -14,7 +12,9 @@ F6_pham = 1.000; % reported values of Fs
 F6_li = 1.017;
 
 data = ... % read in slope geometry, stratigraphy, and piezometric surface
-    dlmread('../data files/Ex6.dat');
+    dlmread('./dataFiles/Ex6.dat');
+
+cd ../src/
 
 i = 1;
 nlayer = data(i,1);         % number of stratigraphic layers
@@ -242,6 +242,8 @@ end
 
 fprintf('\n')
 fprintf('The average rise angle of the slopes with factors of safety\n greater than 1 is %.3f rads, while the average rise angle \n of slopes with factors of safety less than 1 is %.3f rads.', mean(rise_high), mean(rise_low));
+
+cd ../test
 
 %%
 % <latex>
