@@ -85,11 +85,13 @@
 % ------------------------ NOTATION ------------------------------ %
 % ---------------------------------------------------------------- %
 
+\newpage
+
 \section{Notation}
 
 The \progname\ uses four data types of: Boolean, Real, String, and
 Sequence. These data types are summarized in the following table. The
-table lists the name of the data type, it's notation method, and a
+table lists the name of the data type, its notation method, and a
 description of the data type.
 
 ~\newline \renewcommand*{\arraystretch}{1.5}
@@ -127,7 +129,7 @@ provided.
 
 \subsection*{Morgenstern Price (Section \ref{sec:MPMod})}
 The non-linear nature of the systems of equations in the Morgenstern
-Price solver algorithm, requires that solutions to the equations for
+Price solver algorithm requires that solutions to the equations for
 the unknown values: \textit{F\_MP} (IM\ref{SRS-IM_FS}), \textit{Lam}
 (IM\ref{SRS-IM_Lambda}) and \textit{E\_force} (IM\ref{SRS-IM_E}) are
 solved iterativley, with an initial guess for two of the values,
@@ -1117,7 +1119,7 @@ coordinates the critical slip surface will be searched for in.
   to the point of the slip at lower elevation that the slope mass will
   move towards during failure. \\
 
-  Xent : $[\mathbb{R}]^{1,2}$ & sequence of the range of $x$-ordinates
+  Xent : $[\mathbb{R}]^{1,2}$ & Sequence of the range of $x$-ordinates
   that the entry point of the slip will be searched for in. Entry
   refers to the point of the slip at higher elevation that the slope
   mass will move away from during failure. \\
@@ -1132,7 +1134,7 @@ coordinates the critical slip surface will be searched for in.
 
 \subsubsection{Solution Parameters} \label{Tbl:SolnParam}
 \noindent
-the elements in the structure for parameters relating to method in
+The elements in the structure for parameters relating to method in
 which the solution method will be approached.
 
 \begin{center}
@@ -1286,7 +1288,7 @@ Property Sorter module (section \ref{sec:PropSortMod}).
 \end{center}
 
 \subsubsection{Soil Base Properties} \label{Tbl:SoilBaseParam}
-the elements in the structure for parameters relating to the soil
+The elements in the structure for parameters relating to the soil
 properties of the slope, as calculated at the basal surfaces of an
 evaluation slip. Calculation is based on the ratio of the basal
 surface that is in different stratigraphic layers, and the values of
