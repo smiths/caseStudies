@@ -1990,7 +1990,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_KMats}\\
 %               End DD K Mats         %
 % ------------------------------------------ %
 
-\subsubsection*{Derivation of Stifness Matrixes}
+\subsubsection*{Derivation of Stiffness Matrices}
 \noindent
 Using the force-displacement relationship of \dref{GD_Hookes} to
 define stiffness matrix ${K_\text{st}}$, as seen in
@@ -2179,7 +2179,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Stiff}\\
 
 \hline Label& \bf Shear Stiffness \\
 
-\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$
+\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$ ,
 $a$ , $A$ , $u$ , $v$\\
 
 \hline
@@ -2669,8 +2669,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_RFEM}\\
 
 \hline Label& \bf Force Displacement Equilibrium \\
 
-\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$
-$a$ , $A$ , $u$ , $v$\\
+\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$, $a$ , $A$ , $u$ , $v$\\
 
 \hline
 Output &
@@ -3014,14 +3013,14 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
   \toprule  \label{TblInputVar}
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
-  $(x,y)$ of water table vertices's & Consecutive vertexes have
-  increasing x values. All layers start and end vertices's go to the
+  $(x,y)$ of water table vertices' & Consecutive vertices have
+  increasing x values. All layers start and end vertices' go to the
   same x values. & N/A & 10\% \\
-  $(x,y)$ of slip vertices's & Consecutive vertexes have increasing x
-  values. All layers start and end vertices's go to the same x
+  $(x,y)$ of slip vertices' & Consecutive vertices have increasing x
+  values. All layers start and end vertices' go to the same x
   values. & N/A & 10\% \\
-  $(x,y)$ of slope vertices's (*) & Consecutive vertexes have
-  increasing x values. All layers start and end vertices's go to the
+  $(x,y)$ of slope vertices' (*) & Consecutive vertices have
+  increasing x values. All layers start and end vertices' go to the
   same x values. & N/A & 10\% \\
   $E$ (*) & $E > 0$ & 15000 & 10\%\\
   $c$ (*) & $c >0$ & 10 & 10\%\\
@@ -3047,7 +3046,7 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $FS$ & $FS>0$ \\
-  $(x,y)$ Slip vertices's &  Vertices's monotonic \\
+  $(x,y)$ Slip vertices' &  Vertices are monotonic \\
   $\delta x$ &  \\
   $\delta y$ &  \\
   \bottomrule
@@ -3075,7 +3074,7 @@ requirements, the qualities that the software is expected to exhibit.
     \textbf{unit} & \textbf{description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & x and y coordinates for vertices
     of the slope layers, and for the water table if one exists.
-    Assumed straight line fits between vertexes.\\
+    Assumed straight line fits between vertices.\\
     $E$ & $\text{kPa}$ & Young's modulus for each layer of the
     slope.\\
     $c$ & $\text{kPa}$ & Cohesion for each slope layer. \\
