@@ -1,6 +1,8 @@
+- dataFiles - .dat files containing input for slip surfaces with known solutions to be used when testing the SSA program.
+
 # Automated tests
 
-These scripts are are testing files. 
+These scripts are testing files. 
 
 To compile the testing document open the SSA_TesterMain.m program and run.
 

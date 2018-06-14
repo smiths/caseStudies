@@ -1,7 +1,5 @@
-# Project Name
-
-This folder holds information and resources of interest for the project.  This
-is intended to be a convenient location for project members to access
+This folder holds information and resources of interest for SSP.  
+This is intended to be a convenient location for project members to access
 support material for the project.
 
 References are named using the Nat Bib convention.  That is, the citation name,
