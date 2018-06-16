@@ -126,22 +126,32 @@ adapted here is called design for
 change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 
 \begin{description}
+
 \item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
   hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item[\refstepcounter{acnum} \actheacnum \label{acParams}:] The format of the
-  input parameters.
+\item[\refstepcounter{acnum} \actheacnum \label{acInputFormat}:] The format of the
+  input parameters external to the software.
+\item[\refstepcounter{acnum} \actheacnum \label{acParamsStruct}:] The data structure
+  used internally to store the input parameters.
+\item[\refstepcounter{acnum} \actheacnum \label{acVerific}:] Rules for
+  verification of the input data.
+\item[\refstepcounter{acnum} \actheacnum \label{acInASTMFormat}:] The format of the
+  ASTM data tables.
 \item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] The format of the
   final output data.
-\item[\refstepcounter{acnum} \actheacnum \label{acCalc}:] How the equations are 
-defined using the input parameters.
+\item[\refstepcounter{acnum} \actheacnum \label{acCalc}:] How the calculation
+  equations are defined.
 \item[\refstepcounter{acnum} \actheacnum \label{acControl}:] How the overall
   control of the calculations is orchestrated.
-\item[\refstepcounter{acnum} \actheacnum \label{acIntData}:] The format of the 
-data used for interpolation.
-\item[\refstepcounter{acnum} \actheacnum \label{acInt}:] The algorithm used
-  for interpolation.
+\item[\refstepcounter{acnum} \actheacnum \label{acConstants}:] The values of
+  constants and new types.
+\item[\refstepcounter{acnum} \actheacnum \label{acFuncts}:] The data structure
+  used to represent a two dimensional function.
+\item[\refstepcounter{acnum} \actheacnum \label{acContours}:] The data structure used
+  to represent a sequence of two dimensional functions as contours.
+\item[\refstepcounter{acnum} \actheacnum \label{acSeqServices}:] The algorithms
+  used to provide typical services on a sequence of numbers, such as checking
+  for ascending, interpolation, etc.
 
 \end{description}
 
@@ -172,7 +182,7 @@ followed by a number.
   is to predict whether the glass slab under consideration can withstand an 
   explosion of a certain degree.
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucODEstructure}:] The 
-equations for Safety can be defined using parameters defined in the input parameters 
+equations for safety can be defined using parameters defined in the input parameters 
 module.
 
 \end{description}
@@ -187,19 +197,16 @@ actually be implemented.  Modules are numbered by \textbf{M}
 followed by a number.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input Format Module
-\item [\refstepcounter{mnum} \mthemnum \label{mParams}:] Input Parameters Module
-\item [\refstepcounter{mnum} \mthemnum \label{mConstraints}:] Input 
-	Constraints Module
-\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output Format Module
-\item [\refstepcounter{mnum} \mthemnum \label{mDerVal}:]  Derived Values Module
-\item [\refstepcounter{mnum} \mthemnum \label{mCalc}:]  Calculations Module
-\item[\refstepcounter{mnum} \mthemnum \label{mControl}:]  Control Module
-\item [\refstepcounter{mnum} \mthemnum \label{mIntData}:] Interpolation Data 
-	Module
-\item [\refstepcounter{mnum} \mthemnum \label{mInt}:] Interpolation Module
-
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
+\item [\refstepcounter{mnum} \mthemnum \label{mParams}:] InputT
+\item [\refstepcounter{mnum} \mthemnum \label{mLoad}:] LoadASTM
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
+\item [\refstepcounter{mnum} \mthemnum \label{mCalc}:]  Calc
+\item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
+\item [\refstepcounter{mnum} \mthemnum \label{mConstants}:] ConstantsAndTypes
+\item [\refstepcounter{mnum} \mthemnum \label{mFunctT}:] FunctT
+\item [\refstepcounter{mnum} \mthemnum \label{mContoursT}:] ContoursT
+\item [\refstepcounter{mnum} \mthemnum \label{mSeqServices}:] SeqServices
 \end{description}
 
 Note that \mref{mHH} is a commonly used module and is already implemented by 
@@ -237,22 +244,23 @@ selected.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & Input Format Module\\
-& Input Parameters Module\\
-& Input Constraints Module\\
-& Output Format Module\\
-& Derived Values Module\\
-& Calculations Module\\
-& Interpolation Data Module\\
-& Control Module\\
+\multirow{5}{0.3\textwidth}{Behaviour-Hiding Module} 
+& InputT\\
+& LoadASTM\\
+& Output\\
+& Calc\\
+& Control\\
+& ConstantsAndTypes\\
 
 \midrule
 
-\multirow{1}{0.3\textwidth}{Software Decision Module}
-& Interpolation Module\\
+\multirow{1}{0.3\textwidth}{Software Decision}
+& FunctT\\
+& ContoursT\\
+& SeqServices\\
 
 \bottomrule
 
@@ -260,6 +268,7 @@ selected.
 \caption{Module Hierarchy}
 \label{TblMH}
 \end{table}
+
 \subsection{Hardware Hiding Modules (\mref{mHH})}
 
 \begin{description}
@@ -275,7 +284,7 @@ selected.
 
 \begin{description}
 \item[Secrets:]The contents of the required behaviours.
-\item[Services:]Includes programs that provide externally visible behavior of
+\item[Services:]Includes programs that provide externally visible behaviour of
   the system as specified in the software requirements specification (SRS)
   documents. This module serves as a communication layer between the
   hardware-hiding module and the software decision module. The programs in this
@@ -283,35 +292,36 @@ selected.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{InputT (\mref{mParams})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
+\item[Secrets:] The data structure for input parameters, how the
+values are input and how the values are verified.  The load and verify secrets
+are isolated to their own access programs (like submodules).  This, combined
+with the fact that all of the services are invoked together, suggests that the
+one module one secret rule can be relaxed in this instance.
+\item[Services:] Gets input from user, stores input and verifies that the
+  input parameters comply with physical and software constraints. Throws an
+  error if a parameter violates a physical constraint. Throws a warning if a
+  parameter violates a software constraint.  Stored parameters can be read
+  individually, but write access is only to redefine the entire set of inputs.
 \item[Implemented By:] Glass-BR
 \end{description}
 
-\subsubsection{Input Parameters Module (\mref{mParams})}
+\subsubsection{LoadASTM (\mref{mLoad})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input parameters.
-\item[Services:]Stores the parameters needed for the program, including material
-  properties, processing conditions and numerical parameters.  The values can be
-  read as needed.  This module knows how many parameters it stores.
+\item[Secrets:] The format of the two ASTM data tables: i) 3 second equivalent
+  pressure ($q$) versus stand off distance (SD) versus charge weight ($w$), and
+  ii) Non dimensional lateral load ($\hat q$) versus aspect ration versus Stress
+  distribution factor ($J$).
+\item[Services:] Reads the data from each ASTM file and creates an object that
+  stores the sequence of functions represented by the data for each table of
+  data.
 \item[Implemented By:] Glass-BR
 \end{description}
 
-\subsubsection{Input Constraints Module (\mref{mConstraints})}
-
-\begin{description}
-\item[Secrets:]The constraints on the input data.
-\item[Services:]Defines the constraints on the input data and gives and error 
-if a constraint is violated.
-\item[Implemented By:] Glass-BR
-\end{description}
-
-\subsubsection{Output Format Module (\mref{mOutput})}
+\subsubsection{Output Module (\mref{mOutput})}
 
 \begin{description}
 \item[Secrets:] The format and structure of the output data.
@@ -321,16 +331,7 @@ if a constraint is violated.
 \item[Implemented By:] Glass-BR
 \end{description} 
 
-\subsubsection{Derived Values Module (\mref{mDerVal})}
-
-\begin{description}
-\item[Secrets:] The transformations from initial inputs to derived quantities
-\item[Services:] Defines the equations transforming the initial inputs into 
-derived quantities.
-\item[Implemented By:] Glass-BR
-\end{description} 
-
-\subsubsection{Calculations Module (\mref{mCalc})}
+\subsubsection{Calc Module (\mref{mCalc})}
 
 \begin{description}
 \item[Secrets:] The equations for predicting the probability of glass 
@@ -349,12 +350,11 @@ module.
 \item[Implemented By:] Glass-BR
 \end{description}
 
-\subsubsection{Interpolation Data Module (\mref{mIntData})}
+\subsubsection{ConstantsAndTypes Module (\mref{mConstants})}
 
 \begin{description}
-\item[Secrets:] The format and structure of the data used for interpolation.
-\item[Services:] Converts the input interpolation data into the data structure 
-used by the interpolation module.
+\item[Secrets:] The values of constants and new types.
+\item[Services:] Provides constants and types used by other modules.
 \item[Implemented By:] Glass-BR
 \end{description}
 
@@ -371,12 +371,36 @@ used by the interpolation module.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Interpolation Module (\mref{mInt})}
+\subsubsection{FunctT Module (\mref{mFunctT})}
 
 \begin{description}
-\item[Secrets:] The interpolation algorithm.
-\item[Services:] Provides the equations that take the input parameters and 
-interpolation data and return an interpolated value.
+\item[Secrets:] The data structure used to represent a two dimensional
+  function.  For instance, the data may be represented by a table of data, or a
+  polynomial, or a piecewise linear function, etc.
+\item[Services:] Defines the abstract data type for functions, providing a
+  constructor and a means to evaluate the function for a given value of the
+  independent variable.
+\item[Implemented By:] Glass-BR
+\end{description}
+
+\subsubsection{ContoursT Module (\mref{mContoursT})}
+
+\begin{description}
+\item[Secrets:] The data structure used to represent a
+  sequence of two dimensional functions in the form of contours.  Each function
+  is associated with a particular value, like a contour in a contour map.
+\item[Services:] Defines the abstract data type for a sequence of functions.
+  Allows adding/removing functions to/from the sequence.  Provides evaluation of
+  the 3d function at values between the contours.
+\item[Implemented By:] Glass-BR
+\end{description}
+
+\subsubsection{SeqServices Module (\mref{mSeqServices})}
+
+\begin{description}
+\item[Secrets:] The algorithms for services related to sequences of numbers.
+\item[Services:] Provides functions operating on sequences of numbers, such as
+  checks for monotonically increasing values and interpolation.
 \item[Implemented By:] Glass-BR
 \end{description}
 
@@ -392,16 +416,17 @@ Python files.
 \begin{table}[H]
 \centering
 \begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
-\toprule
-\textbf{Req.} & \textbf{Modules}\\
-\midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mConstraints}\\
-R4 & \mref{mOutput}\\
-R5 & \mref{mOutput}, \mref{mCalc}\\
-R6 & \mref{mOutput}\\
-\bottomrule
+  \toprule
+  \textbf{Req.} & \textbf{Modules}\\
+  \midrule
+  R1 & \mref{mHH}, \mref{mParams}, \mref{mControl}\\
+  R2 & \mref{mParams}\\
+  R3 & \mref{mParams}, \mref{mConstants}\\
+  R4 & \mref{mOutput}\\
+  R5 & \mref{mLoad}, \mref{mOutput}, \mref{mCalc}, \mref{mConstants}, \mref{mFunctT},
+       \mref{mContoursT}, \mref{mSeqServices}\\
+  R6 & \mref{mOutput}\\
+  \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
 \label{TblRT}
@@ -414,13 +439,17 @@ R6 & \mref{mOutput}\\
 \textbf{AC} & \textbf{Modules}\\
 \midrule
 \acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
+\acref{acInputFormat} & \mref{mParams}\\
+\acref{acParamsStruct} & \mref{mParams}\\
+\acref{acVerific} & \mref{mParams}\\
+\acref{acInASTMFormat} & \mref{mLoad}\\
 \acref{acOutput} & \mref{mOutput}\\
 \acref{acCalc} & \mref{mCalc}\\
 \acref{acControl} & \mref{mControl}\\
-\acref{acIntData} & \mref{mIntData}\\
-\acref{acInt} & \mref{mInt}\\
+\acref{acConstants} & \mref{mConstants}\\
+\acref{acFuncts} & \mref{mFunctT}\\
+\acref{acContours} & \mref{mContoursT}\\
+\acref{acSeqServices} & \mref{mSeqServices}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -441,7 +470,7 @@ because they use modules from the lower levels.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{UsesHierarchyGlassBR.png}
+	\includegraphics[width=0.7\textwidth]{GlassBR-UsesHierarchy-FunctT.pdf}
 	\caption{Use Hierarchy among Modules}
 	\label{FigUH}
 \end{figure}
