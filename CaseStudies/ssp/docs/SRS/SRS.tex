@@ -2553,11 +2553,11 @@ equation~(\ref{eq:F_perp}).
 
 \begin{equation}\label{eq:F_perp}   N'_{\text{i}}  = \begin{array}{l}    
     \left[ W_{\text{i}} - \lambda \cdot f_{\text{i-1}} \cdot
-      E_{\text{i-1}} + \lambda \cdot f_{\text{i}} \cdot E_{\text{i}} +
+      G_{\text{i-1}} + \lambda \cdot f_{\text{i}} \cdot G_{\text{i}} +
       U_{\text{t,i}} {\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}} \cos\left(\omega_{\text{i}}\right)
       \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-      -K_{\text{c}} W_{\text{i}} - E_{\text{i}} + E_{\text{i-1}} -
+      -K_{\text{c}} W_{\text{i}} - G_{\text{i}} + G_{\text{i-1}} -
       H_{\text{i}} + H_{\text{i-1}} + U_{\text{t,i}}
       \sin\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \sin\left(\omega_{\text{i}}\right) \right]
@@ -2580,12 +2580,12 @@ equation~(\ref{eq:F_par}).
       \left[ W_{\text{i}}
        - \lambda \cdot
     
-      f_{\text{i-1}} \cdot E_{\text{i-1}} + \lambda \cdot f_{\text{i}}
-      \cdot E_{\text{i}} + U_{\text{t,i}}
+      f_{\text{i-1}} \cdot G_{\text{i-1}} + \lambda \cdot f_{\text{i}}
+      \cdot G_{\text{i}} + U_{\text{t,i}}
       \cos\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \cos\left(\omega_{\text{i}}\right) \right]
     \sin\left(\alpha_{\text{i}}\right) \\ - \left[ -K_{\text{c}}
-      W_{\text{i}} - E_{\text{i}} + E_{\text{i-1}} - H_{\text{i}} +
+      W_{\text{i}} - G_{\text{i}} + G_{\text{i-1}} - H_{\text{i}} +
       H_{\text{i-1}} + U_{\text{t,i}} \cdot
       \sin\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \sin\left(\omega_{\text{i}}\right) \right]
@@ -2598,13 +2598,13 @@ equation~(\ref{eq:F_perp}) into equation~(\ref{eq:F_par}) and
 rearranging results in equation~(\ref{eq:Interslice1})
 
 \begin{equation}\label{eq:Interslice1}
-E_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
+G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
     \tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_\text{i}
       \sin\left(\alpha_\text{i}\right) +
       \cos\left(\alpha_\text{i}\right) \right.]
-    \left(\text{FS}\right) \end{array} \right] = E_\text{i-1}
+    \left(\text{FS}\right) \end{array} \right] = G_\text{i-1}
 \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i-1}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
@@ -2618,7 +2618,7 @@ E_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 
 \noindent
 Where $R$ and $T$ are the resistive and mobile shear
-of the slice, without the influence of interslice forces $E$ and $X$,
+of the slice, without the influence of interslice forces $G$ and $X$,
 as defined in \ddref{DD_R} and \ddref{DD_T}.  Making use of the
 constants $\phi$ and $\Psi$ with full equations found below in
 equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) respectively, then
@@ -2646,7 +2646,7 @@ equation ~(\ref{eq:Interslice1}) can be simplified to equation
  \end{aligned}\end{equation}
 ~\newline
 \begin{equation}\label{eq:Interslice2}
-{E}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{E}_{\text{i-1}}} +
+{G}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{G}_{\text{i-1}}} +
   \left({{FS}}\right)\;{T_{\text{i}}} -
        {R_{\text{i}}}}{\Phi_{\text{i}}}
 \end{equation}
