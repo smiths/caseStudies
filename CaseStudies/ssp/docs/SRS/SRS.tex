@@ -170,8 +170,6 @@ ${C2_{i}}$ &  N\si{\meter}&Interslice Shear Force Function: the shear force at t
 \\
 $E$ & \si{\pascal} & Elastic Modulus: The ratio of the stress exerted on a body to the resulting strain.
 \\
-$E$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices for interslice index i
-\\
 $F$ &\si{\newton} & Force: An interaction that tends to produce change in the motion of an object 
 \\
 ${F_{x}}$ & \si{\newton} &$x$-component of the net force
@@ -183,6 +181,8 @@ $f$ & & Scaling Function: magnitude of interslice forces as a function of the x 
 $FS$ & &Factor of Safety: The global stability of a surface in a slope  
 \\
 ${FS_{Loc,i}}$ & & Local Factor of Safety: for slice index i  
+\\
+$G$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices for interslice index i
 \\
 $H$ & \si{\newton} &Interslice Water Force: exerted in the x-ordinate direction between adjacent slices for interslice index i
 \\
@@ -889,7 +889,7 @@ instance models.
       {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}}
+      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
       - H_{\text{i}} + H_{\text{i-1}} +
       {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
@@ -936,7 +936,7 @@ instance models.
       {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}}
+      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
       - H_{\text{i}} + H_{\text{i-1}} +
       {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
@@ -1049,11 +1049,11 @@ instance models.
   \hline Label&\bf Interslice Normal/Shear Relationship\\
   
   \hline Equation& \( X = \lambda \cdot f \cdot
-  E \) \\
+  G \) \\
 
   \hline Description & The assumption for the Morgenstern Price method
   (\aref{A_Base}) that the interslice shear force $X$ is
-  proportional to the interslice normal force $E$ by a
+  proportional to the interslice normal force $G$ by a
   proportionality constant $\lambda$, and a predetermined scaling
   function $f$, that changes the proportionality as a function of the
   $x$-ordinate position of the interslice. $f$ is typically either a
@@ -1086,9 +1086,9 @@ instance models.
   
   \hline Label&\bf Moment Equilibrium\\
   
-  \hline Equation& \( 0 = \begin{array}{l} - {E}_{\text{i}} \left[
+  \hline Equation& \( 0 = \begin{array}{l} - {G}_{\text{i}} \left[
       {z_{\text{i}}} + \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] + {E}_{\text{i-1}}
+        \tan\left(\alpha_{\text{i}}\right)} \right] + {G}_{\text{i-1}}
     \left[ {z_{\text{i-1}}} - \frac{b_{\text{i}}}{2} {
         \tan\left(\alpha_{\text{i}}\right)} \right] -
     H_{\text{i}}\left[ z_{\text{w,i}} + \frac{b_{\text{i}}}{2} {
@@ -1174,7 +1174,7 @@ instance models.
 
   \hline Description & These equations show the net sum of the forces acting on a slice for the RFEM model and the forces that create an applied load on the slice. ${F_{x}}$ refers to the load in the direction perpendicular to the direction of the force of gravity for slice $i$, while ${F_{y}}$ refers to the load in the direction parallel to the force of gravity for slice $i$. Forces are found in the free body diagram of \fref{Fig_Forces} in section~\ref{sec_system}. In
   this model the elements are not exerting forces on each other, so
-  the interslice forces $E$ and $X$ are not a part of the model. Index
+  the interslice forces $G$ and $X$ are not a part of the model. Index
   $\text{i}$ refers to the values of the properties for
   slice/interslices following convention in \fref{Fig_Index} in
   section~\ref{sec_system}. Force variable definitions can be found in
@@ -1705,9 +1705,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_EX}\\
 
 \hline Label& \bf Interslice ShearForces \\
 
-\hline Equation & $X$ = $\lambda{}f_{i}E_{i}$ \\
+\hline Equation & $X$ = $\lambda{}f_{i}G_{i}$ \\
 
-\hline Description & $X$ is the interslice shear force (N)\newline$\lambda{}$ is the interslice normal/shear force ratio\newline$f$ is the scaling function\newline$i$ is the index\newline$E$ is the interslice normal force (N)
+\hline Description & $X$ is the interslice shear force (N)\newline$\lambda{}$ is the interslice normal/shear force ratio\newline$f$ is the scaling function\newline$i$ is the index\newline$G$ is the interslice normal force (N)
 \\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -1786,7 +1786,7 @@ from \dref{GD_Fy}, Using the effective normal $N'_\text{i}$ of
      {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
      Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
      \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-     {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}} -
+     {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
      H_{\text{i}} + H_{\text{i-1}} +
      {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
      Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
@@ -1795,7 +1795,7 @@ from \dref{GD_Fy}, Using the effective normal $N'_\text{i}$ of
  \end{equation}
 
 \noindent
-The values of the interslice forces $E$ and $X$ in the equation are
+The values of the interslice forces $G$ and $X$ in the equation are
 unknown, while the other values are found from the physical force
 definitions of \ddref{DD_W} to \ddref{DD_EX}.  Consider a force
 equilibrium without the affect of interslice
@@ -1890,7 +1890,7 @@ equation~(\ref{eq:Si}).
       {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}}
+      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
       - H_{\text{i}} + H_{\text{i-1}} +
       {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
@@ -1899,7 +1899,7 @@ equation~(\ref{eq:Si}).
 
 \noindent
 The equation is unsolvable, containing the unknown interslice normal
-force $E$ and shear force $X$.  Consider a force equilibrium without
+force $G$ and shear force $X$.  Consider a force equilibrium without
 the affect of interslice forces, to obtain the mobile shear force
 without the influence of interslice forces $T$, as done in
 equation~(\ref{eq:T}).n
@@ -2182,15 +2182,15 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Stiff}\\
 
 \hline Label& \bf Shear Stiffness \\
 
-\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$ ,
+\hline Input & $G$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$ ,
 $a$ , $A$ , $u$ , $v$\\
 
 \hline
 Output & 
-${K_{bt}}$ = $\frac{E}{2\left(1+\nu{}\right)}\frac{0.1}{b}+\frac{{c'}_{i}-\sigma{}\tan\left({\varphi{}'}_{i}\right)}{|\delta{}u|+a}$
+${K_{bt}}$ = $\frac{G}{2\left(1+\nu{}\right)}\frac{0.1}{b}+\frac{{c'}_{i}-\sigma{}\tan\left({\varphi{}'}_{i}\right)}{|\delta{}u|+a}$
 \\
 
-\hline Description &  ${K_{bt}}$ is the shear stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$E$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$c'$ is the effective cohesion (Pa)\newline$i$ is the index\newline$\sigma{}$ is the normal stress (Pa)\newline$\varphi{}'$ is the effective angle of friction (${}^{\circ}$)\newline$\delta{}u$ is the displacement (m)\newline$a$ is the constant (m)
+\hline Description &  ${K_{bt}}$ is the shear stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$G$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$c'$ is the effective cohesion (Pa)\newline$i$ is the index\newline$\sigma{}$ is the normal stress (Pa)\newline$\varphi{}'$ is the effective angle of friction (${}^{\circ}$)\newline$\delta{}u$ is the displacement (m)\newline$a$ is the constant (m)
 \\
 
 \hline Sources& \cite{StolleGuo}\\
@@ -2212,18 +2212,18 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Stiff}\\
 
 \hline Label& \bf Normal Stiffness \\
 
-\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$
+\hline Input & $G$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$
 $a$ , $A$ , $u$ , $v$\\
 
 \hline
 Output & 
 ${K_{bn}}$ = $\begin{cases}
-\frac{E\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}, & \nu{}<0\\
-0.01\frac{E\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}+\frac{\kappa{}}{\delta{}v+A}, & \nu{}\geq{}0
+\frac{G\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}, & \nu{}<0\\
+0.01\frac{G\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}+\frac{\kappa{}}{\delta{}v+A}, & \nu{}\geq{}0
 \end{cases}$
 \\
 
-\hline Description & ${K_{bn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$E$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$\kappa{}$ is the constant (Pa)\newline$\delta{}v$ is the displacement (m)\newline$A$ is the constant (m)
+\hline Description & ${K_{bn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$G$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$\kappa{}$ is the constant (Pa)\newline$\delta{}v$ is the displacement (m)\newline$A$ is the constant (m)
 \\
 
 \hline Sources& \cite{StolleGuo}\\
@@ -2259,7 +2259,7 @@ force equilibrium allows definitions of all forces in terms of the
 physical properties of \ddref{DD_W} to \ddref{DD_EX}, as done in
 \ddref{DD_R}, \ddref{DD_T}.
 
-~\newline\noindent The values of the interslice normal force $E$ the
+~\newline\noindent The values of the interslice normal force $G$ the
 interslice normal/shear force magnitude ratio $\lambda$, and the
 Factor of Safety $\text{FS}$, are unknown. Equations for the unknowns
 are written in terms of only the values in \ddref{DD_W} to
@@ -2428,16 +2428,16 @@ interslice. \\
  assumption of \dref{GD_X}. Results in equation~(\ref{eq:Moment}).
 
 \begin{equation}\label{eq:Moment}
-  0 = \begin{array}{l} - {E}_{\text{i}} \left[ {z_{\text{i}}} -
+  0 = \begin{array}{l} - {G}_{\text{i}} \left[ {z_{\text{i}}} -
       \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] + {E}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
+      \right] + {G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
       \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
       \right] - H_{\text{i}}\left[ z_{\text{w,i}} -
       \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
       \right] \\[5pt] + H_{\text{i-1}}\left[ z_{\text{w,i-1}} +
       \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] -\lambda \frac{b_{\text{i}}}{2} \left( E_{\text{i}}
-    f_{\text{i}} + E_{\text{i-1}} f_{\text{i-1}} \right) +
+      \right] -\lambda \frac{b_{\text{i}}}{2} \left( G_{\text{i}}
+    f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}} \right) +
     K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} - U_{\text{t,i}}
     \sin\left(\beta_{\text{i}}\right) h_{\text{i}} -
     Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
@@ -2449,10 +2449,10 @@ Rearranging the equation in terms of $\lambda$ leads to equation
 ~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
-  \lambda = \frac { \begin{array}{l} - {E}_{\text{i}} \left[
+  \lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
         {z_{\text{i}}} - \frac{b_{\text{i}}}{2} {
           \tan\left(\alpha_{\text{i}}\right)} \right] +
-      {E}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
+      {G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
         \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
         \right] - H_{\text{i}}\left[ z_{\text{i}} -
         \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
@@ -2462,32 +2462,32 @@ Rearranging the equation in terms of $\lambda$ leads to equation
       U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} -
       Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
       h_{\text{i}} \end{array} } { \frac{b_{\text{i}}}{2} \left[
-      E_{\text{i}} f_{\text{i}} + E_{\text{i-1}} f_{\text{i-1}}
+      G_{\text{i}} f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}}
       \right] }
 \end{equation}
 
 \noindent
 Taking a summation of each slice, and considering the boundary
-conditions that $E_{\text{0}}$ and $E_{\text{n}}$ are equal to zero, a
+conditions that $G_{\text{0}}$ and $G_{\text{n}}$ are equal to zero, a
 general equation for the constant $\lambda$ is developed in
 equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
 
 \begin{equation}\label{eq:Lambda}
 \lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{\text{i}}} \left[
-      \left({{E}_{\text{i}} + {E}_{\text{i-1}}}\right) +
+      \left({{G}_{\text{i}} + {G}_{\text{i-1}}}\right) +
       \left({{H}_{\text{i}} + {H}_{\text{i-1}}}\right)
       \right]{\tan\left(\alpha_{\text{i}}\right)} \\ +
     {{h}_{\text{i}}}\;\left[ {K_{\text{c}}}\;{W_{\text{i}}} -
       {2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} - {2}
       \; Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)} \right] }}
          {\displaystyle\sum_{i=1}^{n} { {{b}_{\text{i}}}\;{\left[{
-                   {f_{i}}{{E}_{\text{i}}} +
-                   {f_{\text{i-1}}}{{E}_{\text{i-1}}} }\right]} }}
+                   {f_{i}}{{G}_{\text{i}}} +
+                   {f_{\text{i-1}}}{{G}_{\text{i-1}}} }\right]} }}
 \end{equation}
 
 \noindent
 Equation~(\ref{eq:Lambda}) for $\lambda$, is a function of the unknown
-interslice normal force $E$ (\iref{IM_E}).
+interslice normal force $G$ (\iref{IM_E}).
 
 ~\newline
 
@@ -2511,14 +2511,14 @@ $\Phi$\\
 \hline
 Output &
 
-\( E_{\text{i}}= \) 
+\( G_{\text{i}}= \) 
 \(  \left\{
 \renewcommand{\arraystretch}{1.75}
 \begin{tabular}{ p{3cm} l} 
 $ \frac{ \left(\text{FS}\right) T_{\text{1}} - R_{\text{1}} }{
     \Phi_{\text{i}} } $ &  $\text{i=1}$ \\
 \noindent\parbox[c]{\hsize} {$ \frac{ \Psi_{\text{i-1}} \cdot
-    E_{\text{i-1}} + \left(\text{FS}\right) \cdot T_{\text{i}} -
+    G_{\text{i-1}} + \left(\text{FS}\right) \cdot T_{\text{i}} -
     R_{\text{i}} }{ \Phi_{\text{i}} } $} & 
 $2\leq\text{i}\leq\text{n-1}$ \\
 \noindent\parbox[c]{\hsize} {$0 $} &  $\text{i=0}$ $\vee$ $\text{i=n}$
@@ -2527,7 +2527,7 @@ $2\leq\text{i}\leq\text{n-1}$ \\
 \right. \) \\
 
 \hline Description & The value of the interslice normal force
-$E_\text{i}$ at interface $\text{i}$. The net force the weight of the
+$G_\text{i}$ at interface $\text{i}$. The net force the weight of the
 slices adjacent to interface $\text{i}$ exert horizontally on each
 other.\\
 
@@ -2553,11 +2553,11 @@ equation~(\ref{eq:F_perp}).
 
 \begin{equation}\label{eq:F_perp}   N'_{\text{i}}  = \begin{array}{l}    
     \left[ W_{\text{i}} - \lambda \cdot f_{\text{i-1}} \cdot
-      E_{\text{i-1}} + \lambda \cdot f_{\text{i}} \cdot E_{\text{i}} +
+      G_{\text{i-1}} + \lambda \cdot f_{\text{i}} \cdot G_{\text{i}} +
       U_{\text{t,i}} {\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}} \cos\left(\omega_{\text{i}}\right)
       \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-      -K_{\text{c}} W_{\text{i}} - E_{\text{i}} + E_{\text{i-1}} -
+      -K_{\text{c}} W_{\text{i}} - G_{\text{i}} + G_{\text{i-1}} -
       H_{\text{i}} + H_{\text{i-1}} + U_{\text{t,i}}
       \sin\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \sin\left(\omega_{\text{i}}\right) \right]
@@ -2580,12 +2580,12 @@ equation~(\ref{eq:F_par}).
       \left[ W_{\text{i}}
        - \lambda \cdot
     
-      f_{\text{i-1}} \cdot E_{\text{i-1}} + \lambda \cdot f_{\text{i}}
-      \cdot E_{\text{i}} + U_{\text{t,i}}
+      f_{\text{i-1}} \cdot G_{\text{i-1}} + \lambda \cdot f_{\text{i}}
+      \cdot G_{\text{i}} + U_{\text{t,i}}
       \cos\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \cos\left(\omega_{\text{i}}\right) \right]
     \sin\left(\alpha_{\text{i}}\right) \\ - \left[ -K_{\text{c}}
-      W_{\text{i}} - E_{\text{i}} + E_{\text{i-1}} - H_{\text{i}} +
+      W_{\text{i}} - G_{\text{i}} + G_{\text{i-1}} - H_{\text{i}} +
       H_{\text{i-1}} + U_{\text{t,i}} \cdot
       \sin\left(\beta_{\text{i}}\right) + Q_{\text{i}}
       \sin\left(\omega_{\text{i}}\right) \right]
@@ -2598,13 +2598,13 @@ equation~(\ref{eq:F_perp}) into equation~(\ref{eq:F_par}) and
 rearranging results in equation~(\ref{eq:Interslice1})
 
 \begin{equation}\label{eq:Interslice1}
-E_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
+G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
     \tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_\text{i}
       \sin\left(\alpha_\text{i}\right) +
       \cos\left(\alpha_\text{i}\right) \right.]
-    \left(\text{FS}\right) \end{array} \right] = E_\text{i-1}
+    \left(\text{FS}\right) \end{array} \right] = G_\text{i-1}
 \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i-1}
       \cos\left(\alpha_\text{i}\right) -
       \sin\left(\alpha_\text{i}\right) \right]
@@ -2618,7 +2618,7 @@ E_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 
 \noindent
 Where $R$ and $T$ are the resistive and mobile shear
-of the slice, without the influence of interslice forces $E$ and $X$,
+of the slice, without the influence of interslice forces $G$ and $X$,
 as defined in \ddref{DD_R} and \ddref{DD_T}.  Making use of the
 constants $\phi$ and $\Psi$ with full equations found below in
 equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) respectively, then
@@ -2646,7 +2646,7 @@ equation ~(\ref{eq:Interslice1}) can be simplified to equation
  \end{aligned}\end{equation}
 ~\newline
 \begin{equation}\label{eq:Interslice2}
-{E}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{E}_{\text{i-1}}} +
+{G}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{G}_{\text{i-1}}} +
   \left({{FS}}\right)\;{T_{\text{i}}} -
        {R_{\text{i}}}}{\Phi_{\text{i}}}
 \end{equation}
@@ -2672,7 +2672,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_RFEM}\\
 
 \hline Label& \bf Force Displacement Equilibrium \\
 
-\hline Input & $E$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$, $a$ , $A$ , $u$ , $v$\\
+\hline Input & $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$, $a$ , $A$ , $u$ , $v$\\
 
 \hline
 Output &
