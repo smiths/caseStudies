@@ -144,7 +144,11 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 \item[\refstepcounter{acnum} \actheacnum \label{acControl}:] How the overall
   control of the calculations is orchestrated.
 \item[\refstepcounter{acnum} \actheacnum \label{acConstants}:] The values of
-  constants and new types.
+  constants.
+\item[\refstepcounter{acnum} \actheacnum \label{acGlassType}:] The
+  implementation of the ``glass type'' type.
+\item[\refstepcounter{acnum} \actheacnum \label{acThickness}:] The
+  implementation of the thickness type.
 \item[\refstepcounter{acnum} \actheacnum \label{acFuncts}:] The data structure
   used to represent a two dimensional function.
 \item[\refstepcounter{acnum} \actheacnum \label{acContours}:] The data structure used
@@ -198,14 +202,16 @@ followed by a number.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
-\item [\refstepcounter{mnum} \mthemnum \label{mParams}:] InputT
+\item [\refstepcounter{mnum} \mthemnum \label{mParams}:] Input
 \item [\refstepcounter{mnum} \mthemnum \label{mLoad}:] LoadASTM
 \item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mCalc}:]  Calc
 \item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
-\item [\refstepcounter{mnum} \mthemnum \label{mConstants}:] ConstantsAndTypes
-\item [\refstepcounter{mnum} \mthemnum \label{mFunctT}:] FunctT
-\item [\refstepcounter{mnum} \mthemnum \label{mContoursT}:] ContoursT
+\item [\refstepcounter{mnum} \mthemnum \label{mConstants}:] Constants
+\item [\refstepcounter{mnum} \mthemnum \label{mGlassType}:] GlassTypeADT
+\item [\refstepcounter{mnum} \mthemnum \label{mThickness}:] ThicknessADT
+\item [\refstepcounter{mnum} \mthemnum \label{mFunctADT}:] FunctADT
+\item [\refstepcounter{mnum} \mthemnum \label{mContoursADT}:] ContoursADT
 \item [\refstepcounter{mnum} \mthemnum \label{mSeqServices}:] SeqServices
 \end{description}
 
@@ -247,19 +253,21 @@ selected.
 {Hardware-Hiding} & ~ \\
 \midrule
 
-\multirow{5}{0.3\textwidth}{Behaviour-Hiding Module} 
-& InputT\\
+\multirow{8}{0.3\textwidth}{Behaviour-Hiding Module} 
+& Input\\
 & LoadASTM\\
 & Output\\
 & Calc\\
 & Control\\
-& ConstantsAndTypes\\
+& GlassTypeADT\\
+& ThicknessADT\\
+& Constants\\
 
 \midrule
 
 \multirow{1}{0.3\textwidth}{Software Decision}
-& FunctT\\
-& ContoursT\\
+& FunctADT\\
+& ContoursADT\\
 & SeqServices\\
 
 \bottomrule
@@ -292,7 +300,7 @@ selected.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{InputT (\mref{mParams})}
+\subsubsection{Input (\mref{mParams})}
 
 \begin{description}
 \item[Secrets:] The data structure for input parameters, how the
@@ -350,11 +358,27 @@ module.
 \item[Implemented By:] Glass-BR
 \end{description}
 
-\subsubsection{ConstantsAndTypes Module (\mref{mConstants})}
+\subsubsection{Constants Module (\mref{mConstants})}
 
 \begin{description}
 \item[Secrets:] The values of constants and new types.
 \item[Services:] Provides constants and types used by other modules.
+\item[Implemented By:] Glass-BR
+\end{description}
+
+\subsubsection{GlassTypeADT Module (\mref{mGlassType})}
+
+\begin{description}
+\item[Secrets:] The implementation of the ``glass type'' type.
+\item[Services:] Defines abstract data type for glass type.
+\item[Implemented By:] Glass-BR
+\end{description}
+
+\subsubsection{ThicknessADT Module (\mref{mThickness})}
+
+\begin{description}
+\item[Secrets:] The implementation of the thickness type.
+\item[Services:]  Defines abstract data type for thickness.
 \item[Implemented By:] Glass-BR
 \end{description}
 
@@ -371,7 +395,7 @@ module.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{FunctT Module (\mref{mFunctT})}
+\subsubsection{FunctADT Module (\mref{mFunctADT})}
 
 \begin{description}
 \item[Secrets:] The data structure used to represent a two dimensional
@@ -383,7 +407,7 @@ module.
 \item[Implemented By:] Glass-BR
 \end{description}
 
-\subsubsection{ContoursT Module (\mref{mContoursT})}
+\subsubsection{ContoursADT Module (\mref{mContoursADT})}
 
 \begin{description}
 \item[Secrets:] The data structure used to represent a
@@ -420,11 +444,11 @@ Python files.
   \textbf{Req.} & \textbf{Modules}\\
   \midrule
   R1 & \mref{mHH}, \mref{mParams}, \mref{mControl}\\
-  R2 & \mref{mParams}\\
+  R2 & \mref{mParams}, \mref{mGlassType}, \mref{mThickness}\\
   R3 & \mref{mParams}, \mref{mConstants}\\
-  R4 & \mref{mOutput}\\
-  R5 & \mref{mLoad}, \mref{mOutput}, \mref{mCalc}, \mref{mConstants}, \mref{mFunctT},
-       \mref{mContoursT}, \mref{mSeqServices}\\
+  R4 & \mref{mOutput}, \mref{mGlassType}, \mref{mThickness}\\
+  R5 & \mref{mLoad}, \mref{mOutput}, \mref{mCalc}, \mref{mConstants}, \mref{mFunctADT},
+       \mref{mContoursADT}, \mref{mSeqServices}\\
   R6 & \mref{mOutput}\\
   \bottomrule
 \end{tabular}
@@ -447,8 +471,10 @@ Python files.
 \acref{acCalc} & \mref{mCalc}\\
 \acref{acControl} & \mref{mControl}\\
 \acref{acConstants} & \mref{mConstants}\\
-\acref{acFuncts} & \mref{mFunctT}\\
-\acref{acContours} & \mref{mContoursT}\\
+\acref{acGlassType} & \mref{mGlassType}\\
+\acref{acThickness} & \mref{mThickness}\\
+\acref{acFuncts} & \mref{mFunctADT}\\
+\acref{acContours} & \mref{mContoursADT}\\
 \acref{acSeqServices} & \mref{mSeqServices}\\
 \bottomrule
 \end{tabular}
@@ -470,7 +496,7 @@ because they use modules from the lower levels.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{GlassBR-UsesHierarchy-FunctT.pdf}
+	\includegraphics[width=0.7\textwidth]{GlassBR-UsesHierarchy-FunctADT.pdf}
 	\caption{Use Hierarchy among Modules}
 	\label{FigUH}
 \end{figure}
