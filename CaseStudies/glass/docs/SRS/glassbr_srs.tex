@@ -955,6 +955,32 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
 \end{minipage}\\
 ~\newline
 
+~\newline
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_SD}\\
+  \hline
+  Label&\bf Stand off Distance (SD)\\
+  \hline
+  Equations & $\mbox{SD} = \sqrt{{\text{SD}_x}^2 + {\text{SD}_y}^2 + {\text{SD}_z}^2}$\\
+  \hline
+  Description 
+  & $\text{SD}$ is the stand off distance and
+    $(\text{SD}_x,\text{SD}_y,\text{SD}_z)$ are the coordinates for this position\\
+  \hline
+  Source &
+  \cite{E1300}\\
+  \hline
+  Ref.\ By & \iref{IM_dem}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+~\newline
+
 \subsubsection{Instance Models}
 \noindent
 \begin{minipage}{\textwidth}
@@ -1025,8 +1051,7 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   & $w_{\text{TNT}}$ is defined as $w_{\text{TNT}}= w \times \text{TNT} $\\
    &$w$ is the charge weight\\
   & $\text{TNT}$ is the TNT equivalent factor\\
-  & $\text{SD}$ is the stand off distance where $\text{SD}=\sqrt{{\text{SD}_x}^2 + {\text{SD}_y}^2 + {\text{SD}_z}^2}$\\
-  & where $(\text{SD}_x,\text{SD}_y,\text{SD}_z)$ are coordinates. \\
+  & $\text{SD}$ is the stand off distance (\ddref{DD_SD})\\
   \hline
   Source &
   \cite{E1300}\\
@@ -1090,7 +1115,7 @@ $\text{SD}_\text{max}$ & 130 \si{\metre}\\
 
 Note: The values for $d_\text{min}$ and $d_\text{max}$ are obtained from Figure~\ref{Fig_ASTM_E1300-09}
 and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm which can be found in the 
-Reference directory. The value for $AR_\text{max}$ is obtained from Figure~\ref{ASTM_F2248-09_BeasonEtAl}
+Reference directory. The value for $\mbox{AR}_\text{max}$ is obtained from Figure~\ref{ASTM_F2248-09_BeasonEtAl}
 and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm.
 The values for $w_\text{min}$, $w_\text{max}$, $\text{SD}_\text{min}$ and $\text{SD}_\text{max}$
 are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm. 
@@ -1162,6 +1187,7 @@ The system shall set the known values as follows:
 \item LSF following \aref{A_LSF}
 \item $h$ from \ddref{DD_thick}
 \item GTF from \ddref{DD_GTF}
+\item SD from \ddref{DD_SD}
 \end{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{Verify}:]
