@@ -170,8 +170,6 @@ ${C2_{i}}$ &  N\si{\meter}&Interslice Shear Force Function: the shear force at t
 \\
 $E$ & \si{\pascal} & Elastic Modulus: The ratio of the stress exerted on a body to the resulting strain.
 \\
-$E$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices for interslice index i
-\\
 $F$ &\si{\newton} & Force: An interaction that tends to produce change in the motion of an object 
 \\
 ${F_{x}}$ & \si{\newton} &$x$-component of the net force
@@ -183,6 +181,8 @@ $f$ & & Scaling Function: magnitude of interslice forces as a function of the x 
 $FS$ & &Factor of Safety: The global stability of a surface in a slope  
 \\
 ${FS_{Loc,i}}$ & & Local Factor of Safety: for slice index i  
+\\
+$G$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices for interslice index i
 \\
 $H$ & \si{\newton} &Interslice Water Force: exerted in the x-ordinate direction between adjacent slices for interslice index i
 \\
@@ -889,7 +889,7 @@ instance models.
       {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}}
+      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
       - H_{\text{i}} + H_{\text{i-1}} +
       {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
@@ -936,7 +936,7 @@ instance models.
       {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - E_{\text{i}} + E_{\text{i-1}}
+      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
       - H_{\text{i}} + H_{\text{i-1}} +
       {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
@@ -1049,11 +1049,11 @@ instance models.
   \hline Label&\bf Interslice Normal/Shear Relationship\\
   
   \hline Equation& \( X = \lambda \cdot f \cdot
-  E \) \\
+  G \) \\
 
   \hline Description & The assumption for the Morgenstern Price method
   (\aref{A_Base}) that the interslice shear force $X$ is
-  proportional to the interslice normal force $E$ by a
+  proportional to the interslice normal force $G$ by a
   proportionality constant $\lambda$, and a predetermined scaling
   function $f$, that changes the proportionality as a function of the
   $x$-ordinate position of the interslice. $f$ is typically either a
@@ -1086,9 +1086,9 @@ instance models.
   
   \hline Label&\bf Moment Equilibrium\\
   
-  \hline Equation& \( 0 = \begin{array}{l} - {E}_{\text{i}} \left[
+  \hline Equation& \( 0 = \begin{array}{l} - {G}_{\text{i}} \left[
       {z_{\text{i}}} + \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] + {E}_{\text{i-1}}
+        \tan\left(\alpha_{\text{i}}\right)} \right] + {G}_{\text{i-1}}
     \left[ {z_{\text{i-1}}} - \frac{b_{\text{i}}}{2} {
         \tan\left(\alpha_{\text{i}}\right)} \right] -
     H_{\text{i}}\left[ z_{\text{w,i}} + \frac{b_{\text{i}}}{2} {
@@ -1174,7 +1174,7 @@ instance models.
 
   \hline Description & These equations show the net sum of the forces acting on a slice for the RFEM model and the forces that create an applied load on the slice. ${F_{x}}$ refers to the load in the direction perpendicular to the direction of the force of gravity for slice $i$, while ${F_{y}}$ refers to the load in the direction parallel to the force of gravity for slice $i$. Forces are found in the free body diagram of \fref{Fig_Forces} in section~\ref{sec_system}. In
   this model the elements are not exerting forces on each other, so
-  the interslice forces $E$ and $X$ are not a part of the model. Index
+  the interslice forces $G$ and $X$ are not a part of the model. Index
   $\text{i}$ refers to the values of the properties for
   slice/interslices following convention in \fref{Fig_Index} in
   section~\ref{sec_system}. Force variable definitions can be found in
@@ -1705,9 +1705,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_EX}\\
 
 \hline Label& \bf Interslice ShearForces \\
 
-\hline Equation & $X$ = $\lambda{}f_{i}E_{i}$ \\
+\hline Equation & $X$ = $\lambda{}f_{i}G_{i}$ \\
 
-\hline Description & $X$ is the interslice shear force (N)\newline$\lambda{}$ is the interslice normal/shear force ratio\newline$f$ is the scaling function\newline$i$ is the index\newline$E$ is the interslice normal force (N)
+\hline Description & $X$ is the interslice shear force (N)\newline$\lambda{}$ is the interslice normal/shear force ratio\newline$f$ is the scaling function\newline$i$ is the index\newline$G$ is the interslice normal force (N)
 \\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
