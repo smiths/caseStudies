@@ -93,6 +93,7 @@ character & char & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+string & $\mathbb{S}$ & all finite sequences of symbols from the ASCII character set\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -113,28 +114,31 @@ To view the Module Hierarchy, see section 3 of the \href{../MG/glassbr_mg.pdf}{M
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{MIS of InputT Module} \label{InputT}
+\section{MIS of Input Module} \label{Input}
 
 The secrets of this module are the data structure for input parameters, how the
 values are input and how the values are verified.  The load and verify secrets
-are isolated to their own access programs.
+are isolated to their own access programs.  This module follows the singelton
+pattern; that is, there is only one instance of this module.
 
 \subsection{Module}
 
-Param
+Input
 
 \subsection{Uses}
 
-SpecParam (Section~\ref{SpecParam})
+Constants (Section~\ref{Constants}), GlassTypeADT (Section~\ref{GlassTypeADT}), ThicknessADT
+(Section~\ref{ThicknessADT})
 
 \subsection{Syntax}
 
-\begin{tabular}{p{3cm} p{1cm} p{1cm} >{\raggedright\arraybackslash}p{9cm}}
+\begin{tabular}{p{3cm} p{1cm} p{3cm} >{\raggedright\arraybackslash}p{7cm}}
 \toprule
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \midrule
 load\_params & string & - &  FileError \\
 verify\_params & - & - & ValueError \\
+% From R1
 $a$ & - & $\mathbb{R}$\\
 $b$ & - & $\mathbb{R}$\\
 $g$ & - & GlassTypeT\\
@@ -143,10 +147,21 @@ $\text{SD}_x$ & - & $\mathbb{R}$\\
 $\text{SD}_y$ & - & $\mathbb{R}$\\
 $\text{SD}_z$ & - & $\mathbb{R}$\\
 $t$ & - & ThicknessT\\
+TNT & - & $\mathbb{R}$\\
 $w$ & - & $\mathbb{R}$\\
+% From R2
+$m$ & - & $\mathbb{R}$\\
+$k$ & - & $\mathbb{R}$\\
+$E$ & - & $\mathbb{R}$\\
 $t_d$ & - & $\mathbb{R}$\\
 LDF & - & $\mathbb{R}$\\
 LSF & - & $\mathbb{R}$\\
+% From DD2
+$h$ & - & $\mathbb{R}$\\
+% From DD6
+GTF & - & $\mathbb{R}$\\
+% From DD10
+SD & - & $\mathbb{R}$\\
 \bottomrule
 \end{tabular}
 
@@ -154,7 +169,7 @@ LSF & - & $\mathbb{R}$\\
 
 \subsubsection{Environment Variables}
 
-inputFile: sequence of string \#\textit{f[i] is the ith string in the text file f}\\ 
+inputFile: sequence of string \#\textit{f[i] is the ith string in the text file f}
 
 \subsubsection{State Variables}
 
@@ -163,18 +178,25 @@ inputFile: sequence of string \#\textit{f[i] is the ith string in the text file 
 \# From R1\\
 $a$: $\mathbb{R}$ \\
 $b$: $\mathbb{R}$ \\
-$g$: glassType \\
+$g$: GlassTypeT \\
 $P_{b_\text{tol}}$: $\mathbb{R}$ \\
 $\text{SD}_x$ : $\mathbb{R}$ \\
 $\text{SD}_y$ : $\mathbb{R}$ \\
 $\text{SD}_z$ : $\mathbb{R}$ \\
-$t$: $\mathbb{R}$ \\
+$t$: ThicknessT \\
+TNT: $\mathbb{R}$ \\
 $w$: $\mathbb{R}$ \\
 ~\\
 \# From R2\\
+$m$: $\mathbb{R}$ \\
+$k$: $\mathbb{R}$ \\
+$E$: $\mathbb{R}$ \\
 $t_d$: $\mathbb{R}$ \\
 LDF: $\mathbb{R}$ \\
 LSF: $\mathbb{R}$ \\
+$h$: $\mathbb{R}$ \\
+GTF: $\mathbb{R}$\\
+SD: $\mathbb{R}$\\
 \end{longtable*}
 
 \subsubsection{Assumptions}
@@ -207,9 +229,9 @@ with a '\#' symbol.
 ...
 ~\newline
 
-\noindent Param.LSF:
+\noindent Param.GTF:
 \begin{itemize}
-\item output: \textit{out} := LSF
+\item output: \textit{out} := GTF
 \item exception: none
 \end{itemize}
 
@@ -219,20 +241,13 @@ with a '\#' symbol.
   modify the state variables using the following procedural specification:
 \begin{enumerate}
 \item Read data sequentially from inputFile to populate the state variables from
-  R1 ($L$ to $\mathit{ConsTol}$).
-\item Calculate the derived quantities (all other state variables) as follows:
+  R1 ($a$ to $w$).
+\item Calculate the derived quantities (all other state variables, from R2) as follows:
 \begin{itemize}
-\item $V_{\text{tank}} := \pi \times L \times (\frac{D}{2}) ^ 2$
-\item $m_W := \rho_w (V_t - V_p)$
-\item $m_P := \rho_p V_p$
-\item $\tau_W := \frac{m_w C_w}{A_c h_c}$
-\item $\eta := \frac{h_p A_p}{h_c A_c}$
-\item $\tau_P^S := \frac{m_p C_{ps}}{h_p A_p}$
-\item $\tau_P^L := \frac{m_p C_{pl}}{h_p A_p}$
-\item $E_{P\text{melt}}^{\text{init}} := C_{ps} m_p (T_{\text{melt}} - T_{\text{init}})$
-\item $E_{P\text{melt}}^{\text{all}} := H_f m_p$
-\item $m_W^{\text{noPCM}} := \rho_w  V_t$
-\item $\tau_W^{\text{noPCM}} := \frac{m_W^{\text{noPCM}} C_w}{h_c A_c}$
+\item $m, k, E, t_d, \mbox{LDF}, \mbox{LSF}$ as defined in Constants (Section~\ref{Constants})
+\item $h = t.\mbox{toMinThick()}$ (Section~\ref{ThicknessADT})
+\item $\mbox{GTF} = g.\mbox{GTF}()$ (Section~\ref{GlassTypeADT})
+\item $\mbox{SD} = \sqrt{{\text{SD}_x}^2 + {\text{SD}_y}^2 + {\text{SD}_z}^2}$
 \end{itemize}
 \item verify\_params()
 \end{enumerate}
@@ -246,55 +261,35 @@ with a '\#' symbol.
 \item out: \textit{out} := none
 \item exception: exc := 
 \end{itemize}
-\noindent \begin{longtable*}[l]{l l} 
-$\neg (L > 0)$ & $\Rightarrow$ badLength\\
-$\neg (L_{\text{min}} \leq L \leq L_{\text{max}})$ & $\Rightarrow$ warnLength\\
-$\neg (D > 0)$ & $\Rightarrow$ badDiam\\
-$\neg ({\frac{D}{L}}_\text{min} \leq \frac{D}{L} \leq {\frac{D}{L}}_\text{max})$ & $\Rightarrow$ warnDiam\\
-$\neg (V_P > 0)$ & $\Rightarrow$ badPCMVolume\\
-$ \neg (V_P \geq \text{minfract} \cdot V_{\text{tank}}(D, L)) $ & $\Rightarrow$ warnPCMVol\\
-$\neg (V_P < V_{\text{tank}}(D, L))$ & $\Rightarrow$ badPCMAndTankVol\\
-$\neg (A_P > 0)$ & $\Rightarrow$ badPCMArea\\
-$\neg (V_P \leq A_P \leq \frac{2}{h_\text{min}} V_P)$ & $\Rightarrow$ warnVolArea\\
-$\neg (\rho_P > 0)$  & $\Rightarrow$ badPCMDensity\\
-$\neg (\rho_P^{\text{min}} < \rho_P < \rho_P^{\text{max}})$ & $\Rightarrow$ warnPCMDensity\\
-%   $T_\text{melt}^{P}$ 	& $0 < T_\text{melt}^{P} < T_C$ (+) & &  44.2 
-% 	\si[per-mode=symbol] {\celsius} & 10\%
-%   \\
-%   $C_P^S$ & $C_P^S > 0$ & $C_{P\text{min}}^S < C_P^S < C_{P\text{max}}^S$ & 1760 
-% 	\si[per-mode=symbol] {\joule\per\kilo\gram\per\celsius} & 10\%
-%   \\
-%   $C_P^L$ & $C_P^L > 0$ & $C_{P\text{min}}^L < C_P^S < C_{P\text{max}}^L$ & 2270 
-% 	\si[per-mode=symbol] {\joule\per\kilo\gram\per\celsius} & 10\%
-%   \\
-%   $H_f$ & $H_f > 0$ & $H_f^{\text{min}} < H_f < H_f^{\text{max}}$ & 211600 
-% 	\si[per-mode=symbol] {\joule\per\kilo\gram} & 10\%
-%   \\
-%   $A_C$ & $A_C > 0$ (*) & $A_C \leq A_C^{\text{max}}$ & 0.12 \si[per-mode=symbol] {\square\metre} & 10\%
-%   \\
-%   $T_C$ & $0 < T_C < 100$ (+)	& & 50 \si[per-mode=symbol] {\celsius} & 10\%
-%   \\
-%   $\rho_W$ & $\rho_W > 0$ & $\rho_W^{\text{min}} < \rho_W \leq \rho_W^{\text{max}}$ 
-% 	& 1000 \si[per-mode=symbol] {\kilo\gram\per\cubic\metre} & 10\%
-%   \\
-%   $C_W$ & $C_W > 0$ & $C_W^{\text{min}} < C_W < C_W^{\text{max}}$ & 4186 
-% 	\si[per-mode=symbol] {\joule\per\kilo\gram\per\celsius} & 10\%
-%   \\
-%   $h_C$ & $h_C > 0$ & $h_C^{\text{min}} \leq h_C \leq h_C^{\text{max}}$ 
-% 	& 1000 \si[per-mode=symbol] {\watt\per\square\metre\per\celsius} & 10\%
-%   \\
-%   $h_P$ & $h_P > 0$ & $h_P^{\text{min}} \leq h_P \leq h_P^{\text{max}}$ 
-% 	& 1000 \si[per-mode=symbol] {\watt\per\square\metre\per\celsius} & 10\%
-%   \\
-%   $T_\text{init}$ & $0 < T_\text{init} < T_\text{melt} $ (+) & & 40 \si[per-mode=symbol] {\celsius} & 10\%
-%   \\
-%   $t_\text{final}$ & $t_\text{final} > 0$ & $t_\text{final} < t_{\text{final}}^{\text{max}}$ (**) 
-% 		& 50000 \si[per-mode=symbol] {\second} & 10\%
-%   \\
-\end{longtable*}
+\noindent \begin{longtable*}[l]{l l}
+  $\neg (a > 0)$ & $\Rightarrow$ ValueError(``dimension $a$ must be positive'')\\
+  $\neg (a/b \geq 0)$ & $\Rightarrow$ ValueError(``$a$ must be equal to, or
+  greater than, $b$'')\\
+  $\neg (d_{\text{min}} \leq a \leq d_{\text{max}})$ & $\Rightarrow$
+  ValueError(``$a$ too
+  large or small'')\\
+  $\neg(a/b< \text{AR}_{\text{max}})$ & $\Rightarrow$ ValueError(``Allowable
+  aspect
+  ratio exceeded'')\\
+  $\neg (b > 0)$ & $\Rightarrow$ ValueError(``dimension $b$ must be positive'')\\
+  $\neg(d_{\text{min}} \leq b \leq d_{\text{max}})$ & $\Rightarrow$
+  ValueError(``$b$ too
+  large or small'')\\
+  $\neg(0 < P_{b_{\text{tol}}} < 1)$ & $\Rightarrow$
+  ValueError(``$P_{b_{\text{tol}}}$
+  must lie between 0 and 1'')\\
+  $\neg (w \geq 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
+  greater
+  or equal to zero'')\\
+  $\neg (w_{\text{min}}<w<w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
+  weight $w$ is too small or too large'')\\
+  $\neg (\mbox{TNT} > 0)$ & $\Rightarrow$ ValueError(``TNT must be positive'')\\
+  $\neg (\mbox{SD} > 0)$ & $\Rightarrow$ ValueError(``stand off distance (SD)
+  must be positive'')\\
+  $\neg (\text{SD}_{\text{min}}<\text{SD}<\text{SD}_{\text{max}})$ &
+  $\Rightarrow$ ValueError(``stand off distance (SD) is too small or too large'')\\
 
-etc.  See Appendix (Section~\ref{Appendix}) for the complete list of exceptions and
-associated error messages.
+\end{longtable*}
 
 \subsection{Considerations}
 
@@ -305,124 +300,157 @@ not changed for the life of the program.
 
 \newpage
 
-% \section{MIS of Input Verification Module} \label{VerifyInput}
-
-% \subsection{Module}
-
-% verify\_params
-
-% \subsection{Uses}
-
-% Param (Section~\ref{Parameters})
-
-% \subsection{Syntax}
-
-% \subsubsection{Exported Access Programs}
-
-% \begin{center}
-% \begin{tabular}{p{3cm} p{1cm} p{1cm} p{9cm}}
-% \hline
-% \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
-% \hline
-% verify\_valid & - & - & badLength, badDiam, badPCMVolume, badPCMAndTankVol,
-%                         badPCMArea, badPCMDensity, badMeltTemp,
-%                         badCoilAndInitTemp, badCoilTemp, badPCMHeatCapSolid,
-%                         badPCMHeatCapLiquid, badHeatFusion, badCoilArea,
-%                         badWaterDensity, badWaterHeatCap, badCoilCoeff,
-%                         badPCMCoeff, badInitTemp, badFinalTime,
-%                         badInitAndMeltTemp \\
-% \hline
-% verify\_recommend & - & - & - \\
-% \hline
-% \end{tabular}
-% \end{center}
-
-% \subsection{Semantics}
-
-% \subsubsection{Environment Variables}
-
-% $win$: 2D array of pixels displayed on the screen.
-
-% \subsubsection{Assumptions}
-
-% All of the fields Param have been assigned values before any of the access
-% routines for this module are called.
-
-% \subsubsection{Access Routine Semantics}
-
-% verify\_valid(): 
-% \begin{itemize}
-% \item transition: none
-% \item exceptions: exc := (\\
-% Param.getL() $\leq 0 \Rightarrow$ badLength $|$\\
-% Param.get\_diam() $\leq 0 \Rightarrow$ badDiam $|$\\
-% Params.get\_Vp() $\leq 0 \Rightarrow$ badPCMVolume $|$\\
-% Params.getVp() $\geq$ Params.Vt $\Rightarrow$ badPCMAndTankVol $|$\\
-% Params.getAp() $\leq 0 \Rightarrow$ badPCMArea $|$\\
-% Params.get\_rho\_p() $\leq 0 \Rightarrow$ badPCMDensity $|$\\
-% Params.getTmelt() $\leq 0 \Rightarrow$ badMeltTemp $|$\\
-% Params.getTmelt() $\geq$ Params.getTc() $\Rightarrow$ badMeltTemp $|$\\
-% Params.getTc() $\leq$ Params.getTinit() $\Rightarrow$ badCoilAndInitTemp $|$\\
-% Params.getTc() $\geq 100 \lor$ Params.getTc() $\leq 0 \Rightarrow$ badCoilTemp $|$\\
-% Params.getC\_ps() $\leq 0 \Rightarrow$ badPCMHeatCapSolid $|$\\
-% Params.getC\_pl() $\leq 0 \Rightarrow$ badPCMHeatCapLiquid $|$\\
-% Params.getHf() $\leq 0 \Rightarrow$ badHeatFusion $|$\\
-% Params.getAc() $\leq 0 \Rightarrow$ badCoilArea $|$\\
-% Params.get\_rho()\_w $\leq 0 \Rightarrow$ badWaterDensity $|$\\
-% Params.getC\_w() $\leq 0 \Rightarrow$ badWaterHeatCap $|$\\
-% Params.get\_hc() $\leq 0 \Rightarrow$ badCoilCoeff $|$\\
-% Params.get\_hp() $\leq 0 \Rightarrow$ badPCMCoeff $|$\\
-% Params.getTinit() $\leq 0 \lor$ Params.getTinit() $\geq 100 \Rightarrow$
-% badInitTemp $|$\\
-% Params.get\_tfinal() $\leq 0 \Rightarrow$ badFinalTime $|$\\
-% Params.getTinit() $\geq$ Params.getTmelt() $\Rightarrow$ badInitAndMeltTemp)  
-% \end{itemize}
-
-% verify\_recommend():
-% \begin{itemize}
-% \item transition: none
-% \item exceptions: exc := (\\
-% Params.getL() $< 0.1 \lor$ Params.getL() $> 50 \Rightarrow$ warnLength $|$\\
-% Params.getdiam() / Params.getL() $< 0.002 \lor$ Params.getdiam() / Params.getL() $> 200
-% \Rightarrow$ warnDiam $|$\\
-% Params.getVp() $<$ Params.getVt() $\times 10 ^ -6 \Rightarrow$ warnPCMVol $|$\\
-% Params.getVp() $>$ Params.getAp() $\lor$ Params.getAp $> (2/0.001) \times$ Params.getVp()
-% $\Rightarrow$ warnVolArea $|$\\
-% (Params.get\_rho\_p() $\leq 500) \lor ($ Params.get\_rho\_p() $\geq 20000) \Rightarrow$
-% warnPCMDensity $|$ ... )\\
-% \# \textit{Need to continue for the rest of the example - tabular form?}
-% \# \textit{Should add a module (Configuration Module) to store symbolic constants}
-%  % Params.getC\_ps \leq 100 \lor Params.getC\_ps \geq 4000 \Rightarrow$
-%  % warnPCMHeatCapSolid $|$\\
-%  % Params.getC\_pl \leq 100 \lor Params.getC\_pl \geq 5000 \Rightarrow$
-%  % warnPCMHeatCapLiquid $|$\\
-%  % Params.getAc > \pi \times (Params.getdiam / 2) ^ 2 \Rightarrow$ warnCoilArea
-%  % $|$\\
-%  % Params.getrho\_w \leq 950 \lor Params.getrho\_w > 1000 \Rightarrow$
-%  % warnWaterDensity $|$\\
-%  % Params.getC\_w \leq 4170 \lor Params.getC\_w \geq 4210 \Rightarrow$
-%  % warnWaterHeatCap $|$\\
-%  % Params.gethc \leq 10 \lor Params.gethc \geq 10000 \Rightarrow$ warnCoilCoeff $|$\\
-%  % Params.gethp \leq 10 \lor Params.gethp \geq 10000 \Rightarrow$ warnPCMCoeff $|$\\
-%  % Params.gettfinal \leq 0 \lor Params.gettfinal \geq 86400 \Rightarrow$ warnFinalTime)
-% \end{itemize}
-
-% \subsection{Considerations}
-
-% See Appendix (Section~\ref{Appendix}) for the complete list of exceptions and
-% associated error messages.
-
-\newpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MIS of LoadASTM Module} \label{LoadASTM}
+
+\subsection* {Module}
+
+LoadASTM
+
+\subsection* {Uses}
+
+FunctADT, ContoursADT
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Constants}
+
+None
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | l |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+LoadTSD & $s: \mbox{string}$ & ContoursT & FileError\\
+\hline
+LoadSDF & $s: \mbox{string}$ & ContoursT & FileError\\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {Environment Variables}
+
+infile: two dimensional sequence of text characters
+
+\subsubsection* {State Variables}
+
+None
+
+\subsubsection* {State Invariant}
+
+None
+
+\subsubsection* {Assumptions}
+
+The input file will match the given specification.
+
+\subsubsection* {Access Routine Semantics}
+
+\noindent LoadTSD($s$)
+\begin{itemize}
+\item output: Create $out$ following the following steps.  read data from the
+  file infile associated with the string s.  Use this data to create a ContoursT
+  object. For each value of $w$ create an object of FunctT and add it to the
+  ContoursT object.  Each of the FunctT objects will consist of $q$ versus SD
+  data.  The first row of the TSD file contains the values of $w$.  The
+  subsequent columns are grouped in pairs.  Each pair corresponds to a column of
+  SD data and a column of $q$ data.  There
+  is a pair of columns in this pattern for each value of $w$.\\
+\item exception: exc := a file name $s$ cannot be found OR the format of
+  inputFile is incorrect $\Rightarrow$  FileError
+\end{itemize}
+
+\noindent LoadSDF($s$)
+\begin{itemize}
+\item output: Create $out$ following the following steps.  read data from the
+  file infile associated with the string s.  Use this data to create a ContoursT
+  object.  For each value of $J$ create an object of Funct T and add it to the
+  ContoursT object.  Each of the FunctT objects will consist of $q^*$ versus AR
+  data.  The first row of the SDF file contains the values of $J$.  The
+  subsequent columns are grouped in pairs.  Each pair corresponds to a column of
+  AR data and a column of $q^*$ data.  There
+  is a pair of columns in this pattern for each value of $J$.\\
+\item exception: exc := a file name $s$ cannot be found OR the format of
+  inputFile is incorrect $\Rightarrow$  FileError
+\end{itemize}
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MIS of Output Module} \label{Output}
+
+\subsection* {Module}
+
+Output
+
+\subsection* {Uses}
+
+Input, ThicknessADT, GlassTypeADT
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Constants}
+
+None
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | p{10cm} | l | l |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+output & $s: \mathbb{S}$, $P_b: \mathbb{R}$, $\mbox{is}_\text{safe1}:
+         \mathbb{B}$, $\mbox{is}_\text{safe2}: \mathbb{B}$, LR$: \mathbb{R}$, $q:
+         \mathbb{R}$,  $h: \mathbb{R}$, LDF: $\mathbb{R}$, $J: \mathbb{R}$, NFL:
+         $\mathbb{R}$, GTF: $\mathbb{R}$, $\hat{q}: \mathbb{R}$,
+         $\hat{q}_{\text{tol}}: \mathbb{R}$, $J_{\text{tol}}: \mathbb{R}$, AR$:
+                                    \mathbb{R}$ & - & -\\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {Environment Variables}
+
+outfile: two dimensional sequence of text characters
+
+\subsubsection* {State Variables}
+
+None
+
+\subsubsection* {State Invariant}
+
+None
+
+\subsubsection* {Assumptions}
+
+None
+
+\subsubsection* {Access Routine Semantics}
+
+\noindent output($s$, $P_b$, $\mbox{is}_\text{safe1}$, $\mbox{is}_\text{safe2}$, LR, $q$,  $h$, LDF, $J$, NFL, GTF, $\hat{q}$,
+         $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$, AR)
+\begin{itemize}
+\item transition: write data to the file outfile associated with the string s.
+  The data to output follows:
+\begin{itemize}
+\item From R4: values from R1 ($a$, $b$, $g$, $P_{b_\text{tol}}$, $\mbox{SD}_x$,
+  $\mbox{SD}_y$, $\mbox{SD}_z$, $t$, TNT, $w$), values from R2 ($m$, $k$, $E$,
+  $t_d$, LDF, LSF, $h$, GTF, SD)
+\item From R5: ($\mbox{is}_\text{safe1} \wedge \mbox{is}_\text{safe2}
+  \Rightarrow$ ``For the given input parameters, the glass is considered safe''
+ $ |$ True $\Rightarrow$ ``For the given input parameters, the glass is NOT
+ considered safe'') 
+\item From R6 ($s$, $P_b$, $\mbox{is}_\text{safe1}$, $\mbox{is}_\text{safe2}$, LR, $q$,  $h$, LDF, $J$, NFL, GTF, $\hat{q}$,
+         $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$, AR)
+\end{itemize}
+\item exception: None
+\end{itemize}
 
 \newpage
 
@@ -442,10 +470,7 @@ main
 
 \subsection{Uses}
 
-Param (Section~\ref{Parameters}), Temperature
-(Section~\ref{Temperature}), Solver
-(Section~\ref{ODE}), Energy (Section~\ref{Energy}), verify\_output (Section~\ref{VerifyOutput}), plot
-(Section~\ref{Plot}), output (Section~\ref{Output})
+Input (Section~\ref{Input}), Output (Section~\ref{Output})
 
 \subsection{Syntax}
 
@@ -483,19 +508,19 @@ None
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{MIS of ConstantsAndTypes Module} \label{Calc}
+\section{MIS Constants Module} \label{Constants}
 
-\subsection*{Module}
+\subsection{Module}
 
-ConstantsAndTypes
+Constants
 
-\subsection* {Uses}
+\subsection {Uses}
 
 N/A
 
-\subsection* {Syntax}
+\subsection {Syntax}
 
-\subsubsection* {Exported Constants}
+\subsubsection {Exported Constants}
 
 \renewcommand{\arraystretch}{1.2}
 \begin{longtable*}[l]{l} 
@@ -515,22 +540,21 @@ ${\text{SD}_{\text{min}}}$ := $6.0$\\
 ${\text{SD}_{\text{max}}}$ := $130.0$\\
 \end{longtable*}
 
-\subsubsection* {Exported Types}
-
-GlassTypeT = \{AN, FT, HS\}\\ 
-ThicknessT = \{2.5, 3.0, 5.0, 8.0, 12.0, 19.0, 2.7, 4.0, 6.0, 10.0, 16.0, 22.0\}
-
-\subsubsection* {Exported Access Programs}
+\subsubsection {Exported Types}
 
 None
 
-\subsection* {Semantics}
-
-\subsubsection* {State Variables}
+\subsubsection {Exported Access Programs}
 
 None
 
-\subsubsection* {State Invariant}
+\subsection {Semantics}
+
+\subsubsection {State Variables}
+
+None
+
+\subsubsection {State Invariant}
 
 None
 
@@ -539,13 +563,175 @@ None
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{MIS of FunctT Module} \label{LoadASTM}
+\section {GlassType ADT Module} \label{GlassTypeADT}
+
+From DD6 (Glass Type Factor (GTF)) %if keep this, should automate
+                                %cross-reference
+
+\subsection{Template Module}
+
+GlassTypeADT
+
+\subsection {Uses}
+
+None
+
+\subsection {Syntax}
+
+\subsubsection {Exported Constants}
+
+None
+
+\subsubsection {Exported Types}
+
+GlassTypeT = ?
+
+\subsubsection {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | p{5cm} |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+new GlassTypeT & $\mathbb{S}$ & GlassTypeT & ValueError\\
+\hline
+GTF & ~ & $\mathbb{R}$ & ~\\
+\hline
+toString & ~ & $\mathbb{S}$ & ~\\
+\hline
+\end{tabular}
+
+\subsection {Semantics}
+
+\subsubsection {State Variables}
+
+$g$: \{AN, FT, HS\}
+
+\subsubsection {State Invariant}
+
+None
+
+\subsubsection {Assumptions}
+
+None
+
+\subsubsection {Access Routine Semantics}
+
+\noindent new GlassTypeT($s$):
+\begin{itemize}
+\item transition: $g := (s = \mbox{``AN''} \Rightarrow \mbox{AN} | s =
+  \mbox{``FT''} \Rightarrow \mbox{FT} | s = \mbox{``HS''} \Rightarrow \mbox{HS})$
+\item output: $out := \mbox{self}$
+\item exception: $(\neg (s \in \{ \mbox{``AN''}, \mbox{``FT''}, \mbox{``HS''} \}) \Rightarrow \mbox{ValueError})$
+\end{itemize}
+
+\noindent GTF():
+\begin{itemize}
+\item output: $out := ( g = \mbox{AN} \Rightarrow 1.0 | g =
+  \mbox{FT} \Rightarrow 4.0 | g = \mbox{HS} \Rightarrow 2.0)$
+\item exception: None
+\end{itemize}
+
+\noindent toString():
+\begin{itemize}
+\item output: $out := (g = \mbox{AN} \Rightarrow \mbox{``AN''} | g =
+  \mbox{FT} \Rightarrow \mbox{``FT''} | g = \mbox{HS} \Rightarrow \mbox{``HS''})$
+\item exception: None
+\end{itemize}
 
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{MIS of ContoursT Module} \label{LoadASTM}
+\section {Thickness ADT Module} \label{ThicknessADT}
+
+From DD2 (Minimum Thickness from Nominal Thickness) %if keep this, should automate
+                                %cross-reference
+
+\subsection{Template Module}
+
+ThicknessADT
+
+\subsection {Uses}
+
+None
+
+\subsection {Syntax}
+
+\subsubsection {Exported Constants}
+
+None
+
+\subsubsection {Exported Types}
+
+ThicknessT = ?
+
+\subsubsection {Exported Access Programs}
+
+\begin{tabular}{| l | l | l | p{5cm} |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+new ThicknessT & $\mathbb{R}$ & ThicknessT & ValueError\\
+\hline
+toMinThick & ~ & $\mathbb{R}$ & ~\\
+\hline
+toFloat & ~ & $\mathbb{R}$ & ~\\
+\hline
+\end{tabular}
+
+\subsection {Semantics}
+
+\subsubsection {State Variables}
+
+$t: T$ where $T = \{2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0, 16.0, 19.0, 22.0 \}$
+
+\subsubsection {State Invariant}
+
+None
+
+\subsubsection {Assumptions}
+
+None
+
+\subsubsection {Access Routine Semantics}
+
+\noindent new ThicknessT($x$):
+\begin{itemize}
+\item transition: $t := x$
+\item output: $out := \mbox{self}$
+\item exception: $(\neg (x \in T) \Rightarrow \mbox{ValueError})$
+\end{itemize}
+
+\noindent toMinThick():
+\begin{itemize}
+\item output: $\begin{array}{rcrc}
+out := ( t  = 2.5 \Rightarrow 2.16 & | & t = 2.7 \Rightarrow 2.59 & |\\
+t = 3.0 \Rightarrow 2.92 & | & t = 4.0 \Rightarrow 3.78 & |\\
+t = 5.0 \Rightarrow 4.57 & | & t = 6.0 \Rightarrow 5.56 & |\\
+t = 8.0 \Rightarrow 7.42 & | & t = 10.0 \Rightarrow 9.02 & |\\
+t = 12.0 \Rightarrow 11.91 & | & t = 16.0 \Rightarrow 15.09 & |\\
+t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
+\end{array}$
+\item exception: None
+\end{itemize}
+
+\noindent toFloat():
+\begin{itemize}
+\item output: $out := t$
+\item exception: None
+\end{itemize}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{MIS of FunctADT Module} \label{LoadASTM}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{MIS of ContoursADT Module} \label{LoadASTM}
 
 \newpage
 
