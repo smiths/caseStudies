@@ -16,6 +16,9 @@
 \usepackage{booktabs}
 \usepackage{caption}
 \usepackage{url}
+\newcounter{ucnum} 
+\newcommand{\ltheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
 %\usepackage{refcheck}
 
 \hypersetup{
@@ -1543,6 +1546,15 @@ This problem is small in size and relatively simple, so performance is not a pri
 \item[LC\refstepcounter{lcnum}\thelcnum \label{LC_htank}:]\aref{A_htank} - Any
   real tank cannot be perfectly insulated and will lose heat.
 
+\end{itemize}
+
+\section{Unlikely Changes}
+If changes were to be made with regards to the following, a different algorithm would be needed.
+
+\begin{itemize}
+\item[\refstepcounter{ucnum}\ltheucnum \label{UC_convCooling}:] Changes related to \aref{A_Newt_coil} are not possible due to the dependency of the calculations on the Heat Flux into the water from the coil.
+\item[\refstepcounter{ucnum}\ltheucnum \label{UC_opRange}:] Changes related to \aref{A_OpRange} are not possible due to \iref{ewat} and \iref{I_HWAT} only applying if \aref{A_OpRange} is true.
+\item[\refstepcounter{ucnum}\ltheucnum \label{UC_intHeat}:] For the derivation of \iref{ewat}, \aref{A_int_heat} must be held as true. 
 \end{itemize}
 
 \bibliographystyle {plain}
