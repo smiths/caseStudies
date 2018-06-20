@@ -106,13 +106,13 @@
 \newcommand{\atheapnum}{L\theapnum}
 \newcommand{\apref}[1]{AP\ap{#1}}
 
-\newcounter{ucnum} %Use Case number
-\newcommand{\utheucnum}{UC\theucnum}
-\newcommand{\ucref}[1]{UC\ref{#1}}
-
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
+
+\newcounter{ucnum} %Unlikely change number
+\newcommand{\utheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
 
 \newcommand{\tclad}{T_\text{CL}}
 \newcommand{\degree}{\ensuremath{^\circ}}
@@ -1270,6 +1270,25 @@ maintainability and portability.
 % \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_output}:] The interface of the
 %   system can be changed according e with respect to the client wishes in the
 %   future.
+
+\end{itemize}
+
+\section{Unlikely Changes}    
+
+\noindent \begin{itemize}
+
+\item[\refstepcounter{ucnum} \utheucnum \label{ucIO}:] Input/Output devices
+  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
+\item[\refstepcounter{ucnum} \utheucnum \label{ucInput}:] There will always be
+  a source of input data external to the software.
+\item[\refstepcounter{ucnum} \utheucnum \label{ucOutput}:] Output data are
+  displayed to the output device.
+\item[\refstepcounter{ucnum} \utheucnum \label{ucGoal}:] The goal of the system
+  is to predict whether the glass slab under consideration can withstand an 
+  explosion of a certain degree.
+\item[\refstepcounter{ucnum} \utheucnum \label{ucODEstructure}:] The 
+equations for safety can be defined using parameters defined in the input parameters 
+module.
 
 \end{itemize}
 
