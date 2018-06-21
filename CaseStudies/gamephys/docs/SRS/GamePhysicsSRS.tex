@@ -73,6 +73,9 @@
 \newcommand{\dr}{\mathrm{d}\mathbf{r}}
 \newcommand{\dpos}{\mathrm{d}\mathbf{p}}
 \newcommand{\dt}{\mathrm{d}t}
+\newcounter{ucnum} %Unlikely change number
+\newcommand{\utheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
 
 \newcommand{\tclad}{T_\text{CL}}
 \newcommand{\degree}{\ensuremath{^\circ}}
@@ -1514,6 +1517,24 @@ This section lists the likely changes to be made to the physics game library.
 	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The library may be expanded to deal with edge-to-edge and vertex-to-vertex collisions (A\ref{A_col}).
 	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_damping}:] The library may be expanded to include motion with damping (A\ref{A_damping}).
 	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_constraints}:] The library may be expanded to include joints and constraints (A\ref{A_constraints}).
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+%   Unlikely Changes
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Unlikely Changes}    
+
+\noindent \begin{itemize}
+	
+	\item[\refstepcounter{ucnum} \utheucnum \label{ucGoal}:] The goal of the system is to simulate the interactions of 2D rigid bodies.
+	\item[\refstepcounter{ucnum} \utheucnum \label{ucInput}:] There will always be a sourse of input data external to the software.
+	\item[\refstepcounter{ucnum} \utheucnum \label{ucCordSystem}:] A Cartesian coordinate system is used.
+	\item[\refstepcounter{ucnum} \utheucnum \label{ucObjType}:] All objects are rigid bodies.
+	\item[\refstepcounter{ucnum} \utheucnum \label{ucObjDims}:] All objects are 2D.
 \end{itemize}
 
 
