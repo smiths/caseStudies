@@ -68,6 +68,9 @@
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
+\newcounter{ucnum} %Unlikely change number
+\newcommand{\ltheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
 \newcommand{\dv}{\mathrm{d}\mathbf{v}}
 \newcommand{\dx}{\mathrm{d}\mathbf{x}}
 \newcommand{\dr}{\mathrm{d}\mathbf{r}}
@@ -200,6 +203,7 @@ their units. More specific instances of these symbols will be described in their
   R & Requirement\\
   SRS & Software Requirements Specification\\
   T & Theoretical Model\\
+  UC & Unlikely Change\\
   2D & Two-dimensional \\
   \bottomrule
 \end{tabular}\\
@@ -387,7 +391,7 @@ velocities of a set of rigid bodies, determine if any of them will collide with 
 % 4.2.1 Assumptions
 \subsubsection{Assumptions}
 \label{sec_assu}
-This section simplifies the original problem and helps in developing the theoretical model by filling in the missing information for the physical system. The numbers given in the square brackets refer to the Theoretical Models [Section~\ref{sec_theoretical}], General Definitions [Section~\ref{sec_gendef}], Data Definitions [Section~\ref{sec_datadef}], Instance Models [Section~\ref{sec_instance}], or Likely Changes [Section~\ref{sec_likechan}], in which the respective assumption is used.
+This section simplifies the original problem and helps in developing the theoretical model by filling in the missing information for the physical system. The numbers given in the square brackets refer to the Theoretical Models [Section~\ref{sec_theoretical}], General Definitions [Section~\ref{sec_gendef}], Data Definitions [Section~\ref{sec_datadef}], Instance Models [Section~\ref{sec_instance}], Likely Changes [Section~\ref{sec_likechan}], or Unlikely Changes [Section~\ref{sec_unlikechan}], in which the respective assumption is used.
 
 \begin{itemize}
 \item [A\refstepcounter{assumpnum}\theassumpnum \label{A_rigid}:] All objects are rigid bodies.
@@ -1500,11 +1504,11 @@ understandability, portability, reliability, and maintainability.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %
-%	6.) Likely Changes 
+%	6.) Likely Changes
 %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Likely Changes}    
+\section{Likely Changes}
 \label{sec_likechan}
 
 This section lists the likely changes to be made to the physics game library.
@@ -1517,9 +1521,25 @@ This section lists the likely changes to be made to the physics game library.
 \end{itemize}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 7.) Unlikely Changes
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Unlikely Changes}
+\label{sec_unlikechan}
+
+If changes were to be made with regards to the following, a different algorithm would be needed.
+
+\begin{itemize}
+  \item[UC\refstepcounter{ucnum}\theucnum\label{UC_rigid}:] Changes related to \aref{A_rigid} are not possible due to the dependency in the Instance Models [Section~\ref{sec_instance}] that all bodies have no deformation.
+\end{itemize}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%	7.) Traceability Matrices and Graphs
+%	8.) Traceability Matrices and Graphs
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1585,6 +1605,7 @@ The purpose of traceability matrices is to provide easy references on what has t
 \lcref{LC_collisions}	& & & & &X& & \\ \hline
 \lcref{LC_damping}		& & & & & &X& \\ \hline
 \lcref{LC_constraints}	& & & & & & &X \\ \hline
+\ucref{UC_rigid}   &X& & & & & & \\ \hline
 \end{tabular}
 \bigskip
 \caption{Traceability Matrix showing the connections between Assumptions and other items} \label{ATraceMatrix}
@@ -1664,7 +1685,7 @@ The purpose of the traceability graphs is also to provide easy references on wha
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%	8.) Off the Shelf Solutions
+%	9.) Off the Shelf Solutions
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
