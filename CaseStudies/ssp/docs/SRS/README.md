@@ -3,7 +3,7 @@ software requirements specification of the slope stability program.
 The instance models for both the Morgenstern Price and RFEM analysis methods are derived.
 (The derivation of DD12 should be reviewed.)
 
-Updating "ForceDiagram" image:
+## Updating the "ForceDiagram" image:
 
 If this figure referenced in the SRS needs to be updated, please follow the following steps:
 
