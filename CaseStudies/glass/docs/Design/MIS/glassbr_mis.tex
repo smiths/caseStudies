@@ -461,6 +461,96 @@ None
 
 \section{MIS of Calc Module} \label{Calc}
 
+\subsection* {Module}
+
+Calc
+
+\subsection* {Uses}
+
+Input, Constants, ContoursADT
+
+\subsection* {Syntax}
+
+\subsubsection* {Exported Constants}
+
+None
+
+\subsubsection* {Exported Access Programs}
+
+\begin{tabular}{| l | p{7cm} | l | l |}
+\hline
+\textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
+\hline
+calc\_q\_hat & $q: \mathbb{R}$ & $\mathbb{R}$ & -\\
+calc\_j\_tol & inputs & $\mathbb{R}$ & -\\
+calc\_pb & inputs & $\mathbb{R}$ & -\\
+calc\_nfl & inputs & $\mathbb{R}$ & -\\
+calc\_lr & inputs & $\mathbb{R}$ & -\\
+calc\_is\_safePb & inputs & $\mathbb{R}$ & -\\
+calc\_is\_safeLr & inputs & $\mathbb{R}$ & -\\
+\hline
+\end{tabular}
+
+\subsection* {Semantics}
+
+\subsubsection* {State Variables}
+
+None
+
+\subsubsection* {State Invariant}
+
+None
+
+\subsubsection* {Assumptions}
+
+None
+
+\subsubsection* {Access Routine Semantics}
+
+\noindent calc\_q\_hat($q$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_j\_tol() \textit{\# From SRS DD9 Tolerable Stress Distribution Factor ($J_\text{tol}$)}
+\begin{itemize}
+\item output:  \textit{out} := $=\ln[\ln( \frac{1}{1-P_{b_{\text{tol}}}} )
+				\frac{(\frac{a}{1000}\times\frac{b}{1000})^{m-1}}
+					{k((E \times 1000)(\frac{h}{1000})^2)^m \text{LDF} }]$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_pb($j$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_nfl($\hat{q}_\text{tol}$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_lr($\mathit{nfl}$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_is\_safePb($pb$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
+\noindent calc\_is\_safeLr($lr, q$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\begin{itemize}
+\item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
+\item exception: None
+\end{itemize}
+
 \newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
