@@ -250,11 +250,11 @@ their units.  The symbols are listed in alphabetical order.
 
 Software is helpful to efficiently and correctly predict the blast risk involved
 with the glass slab. The blast under consideration is any type of man-made
-explosion. The software, herein called \progname\ aims to predict the blast risk
+explosion. The software, herein called \progname, aims to predict the blast risk
 involved with the glass slab using an intuitive interface.  The following
 section provides an overview of the Software Requirements Specification (SRS)
 for \progname.  This section explains the purpose the document is designed to
-fulfil, the scope of the requirements and the organization of the document: what
+fulfil, the scope of the requirements, and the organization of the document: what
 the document is based on and intended to portray.
 
 \subsection{Purpose of Document}
@@ -406,7 +406,7 @@ GlassBR & Whether or not the glass slab is safe for the calculated load and supp
 The user provides the inputs to GlassBR for use within the analysis. There are
 two main classes of inputs: glass geometry and blast type. The glass geometry
 based inputs include the glass type and dimensions of the glass plane. The blast
-type input includes parameters like weight of charge, TNT equivalent factor and
+type input includes parameters like weight of charge, TNT equivalent factor, and
 stand off distance from the point of explosion. These parameters describe charge
 weight and stand off blast. Another input the user gives is the tolerable value
 of probability of breakage. GlassBR outputs if the glass slab will be safe by
@@ -415,8 +415,8 @@ resistance calculated and demand is the requirement which is the 3 second
 duration equivalent pressure. The second condition is to check whether the
 calculated probability (${P_{b}}$) is less than the tolerable probability
 (${P_{btol}}$) which is obtained from the user as an input. If both conditions
-return true then it's shown that the glass slab is safe to use, else if both
-return false then the glass slab is considered unsafe. All the supporting
+return true, then it's shown that the glass slab is safe to use, else if both
+return false, then the glass slab is considered unsafe. All the supporting
 calculated values are also displayed as output.
 
 \section{Specific System Description}
@@ -593,7 +593,7 @@ or the instance model, in which the respective assumption is used.
    type considered in \progname{} is flexural.  [\iref{IM_prob}]
 
  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_LDF}:] With reference
-   to A\ref{ass_val} the value of load distribution factor (LDF) is a constant
+   to A\ref{ass_val}, the value of load distribution factor (LDF) is a constant
    in \progname.  It is calculated by the equation:
    $\text{LDF}=(\frac{t_d}{60})^{\frac{m}{16}}$. Using this,
    $\text{LDF} = 0.27$. [\ddref{DD_LDF}]
