@@ -78,7 +78,7 @@ Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
   structures must obtain it by calling access programs belonging to that module.
 \end{itemize}
 
-After completing the first stage of the design, the Software Requirements
+After completing the first stage of the design, which is the Software Requirements
 Specification (SRS), the Module Guide (MG) is developed~\citep{ParnasEtAl1984}. 
 The MG
 specifies the modular structure of the system and is intended to allow both
@@ -93,7 +93,7 @@ potential readers of this document are as follows:
   maintainers' understanding when they need to make changes to the system. It is
   important for a maintainer to update the relevant sections of the document
   after changes have been made.
-\item Designers: Once the module guide has been written, it is can be used to
+\item Designers: Once the module guide has been written, it can be used to
   check for consistency, feasibility and flexibility. Designers can verify the
   system in various ways, such as consistency among modules, feasibility of the
   decomposition, and flexibility of the design.
@@ -161,9 +161,7 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
-The module design should be as general as possible. However, a general system is
-more complex. Sometimes this complexity is not necessary. Fixing some design
-decisions at the system architecture stage can simplify the software design. If
+The module design should be as general as possible. However, generality can introduce complexity, which can, at times, be avoided by explicitly fixing some decision decisions as unlikely changes. If
 these decisions should later need to be changed, then many parts of the design
 will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.  As an example, the equations for calculating the 
