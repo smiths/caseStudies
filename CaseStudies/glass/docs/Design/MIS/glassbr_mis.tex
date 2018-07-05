@@ -482,12 +482,12 @@ None
 \textbf{Routine name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}\\
 \hline
 calc\_q\_hat & $q: \mathbb{R}$ & $\mathbb{R}$ & -\\
-calc\_j\_tol & inputs & $\mathbb{R}$ & -\\
-calc\_pb & inputs & $\mathbb{R}$ & -\\
-calc\_nfl & inputs & $\mathbb{R}$ & -\\
-calc\_lr & inputs & $\mathbb{R}$ & -\\
-calc\_is\_safePb & inputs & $\mathbb{R}$ & -\\
-calc\_is\_safeLr & inputs & $\mathbb{R}$ & -\\
+calc\_j\_tol &  & $\mathbb{R}$ & -\\
+calc\_pb & $J: \mathbb{R}$ & $\mathbb{R}$ & -\\
+calc\_nfl & $\hat{q}_\text{tol}: \mathbb{R}$ & $\mathbb{R}$ & -\\
+calc\_lr & $\mathit{nfl}: \mathbb{R}$ & $\mathbb{R}$ & -\\
+calc\_is\_safePb & $\mathit{pb}: \mathbb{R}$ & $\mathbb{R}$ & -\\
+calc\_is\_safeLr & $: \mathbb{R}$ & $\mathbb{R}$ & -\\
 \hline
 \end{tabular}
 
@@ -521,7 +521,7 @@ None
 \item exception: None
 \end{itemize}
 
-\noindent calc\_pb($j$) \textit{\# From SRS DD7 Dimensionless Load ($\hat{q}$)}
+\noindent calc\_pb($J$) \textit{\# From SRS IM1 Probability of Glass Breakage}
 \begin{itemize}
 \item output:  \textit{out} := $\frac{q(ab)^2}{Eh^4\text{GTF}}$
 \item exception: None
