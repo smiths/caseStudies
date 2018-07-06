@@ -188,9 +188,9 @@ their units.  The symbols are listed in alphabetical order.
   $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
   $g$ & unitless & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
   $h$ & \si{\milli\meter} & Actual thickness\\
-  $\text{is\_safe1}$ & unitless & True when calculated probability is less than
+  $\text{is\_safe1}$ & unitless & Variable that is assigned true when calculated probability is less than
                                   tolerable probability\\
-  $\text{is\_safe2}$ & unitless & True when load resistance (capacity) is
+  $\text{is\_safe2}$ & unitless & Variable that is assigned true when load resistance (capacity) is
                                   greater than load (demand)\\
   $J$ & unitless & Stress distribution factor (Function)\\
   $J_{\text{tol}}$ & unitless & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
@@ -412,7 +412,7 @@ type input includes parameters like weight of charge, TNT equivalent factor, and
 stand off distance from the point of explosion. These parameters describe charge
 weight and stand off blast. Another input the user gives is the tolerable value
 of probability of breakage. GlassBR outputs if the glass slab will be safe by
-comparing whether capacity is greater than demand. Capacity is the the load
+comparing whether capacity is greater than demand. Capacity is the load
 resistance calculated and demand is the requirement which is the 3 second
 duration equivalent pressure. The second condition is to check whether the
 calculated probability (${P_{b}}$) is less than the tolerable probability
