@@ -445,7 +445,7 @@ easier to correctly understand the requirements.  All of the terms are extracted
 from \cite{ASTM2009}.
 
 \begin{enumerate}
-\item \textit{Aspect ratio (AR) -} The ratio of the long dimension of the
+\item \textit{Aspect Ratio (AR) -} The ratio of the long dimension of the
   glass to the short dimension of the glass.  For glass supported on four sides,
   the aspect ratio is always equal to or greater than 1.0. For glass supported
   on three sides, the ratio of the length of one of the supported edges
@@ -596,9 +596,7 @@ or the instance model, in which the respective assumption is used.
 
  \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_LDF}:] With reference
    to A\ref{ass_val}, the value of load distribution factor (LDF) is a constant
-   in \progname.  It is calculated by the equation:
-   $\text{LDF}=(\frac{t_d}{60})^{\frac{m}{16}}$. Using this,
-   $\text{LDF} = 0.27$. [\ddref{DD_LDF}]
+   in \progname.  [\ddref{DD_LDF}]
 
 \end{enumerate}
 
@@ -635,7 +633,6 @@ or the instance model, in which the respective assumption is used.
 \end{tabular}
 \end{minipage}\\
 
-
 ~\newline
 \noindent
 \begin{minipage}{\textwidth}
@@ -667,9 +664,6 @@ or the instance model, in which the respective assumption is used.
 \end{tabular}
 \end{minipage}\\
 ~\newline
-
-
-
 
 \subsubsection{Data Definitions}\label{sec_datadef}
 
@@ -781,13 +775,13 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   \hline
   Label&\bf Stress Distribution Factor $(J)$\\
   \hline
-  Symbols & $J=J(\hat{q}, a/b)$ \\
+  Symbols & $J=J(\hat{q}, \mbox{AR})$ \\
   \hline
   Description  
         & $J$ is the stress distribution factor, which is obtained by
             interpolating from the data shown in Figure~\ref{ASTM_F2248-09_BeasonEtAl}\\
         & $\hat{q}$ is the dimensionless load defined in \ddref{DD_qhat}\\
-        & $a$, $b$ are dimensions of the plate, where $(a>b)$\\
+        & AR is the Aspect Ratio \ddref{DD_AR}\\
   \hline
   Source &
   \cite{ASTM2009}\\
@@ -903,16 +897,16 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   \hline
   Label&\bf Tolerable Pressure ($\hat{q}_{\text{tol}}$)\\
   \hline
-  Equations & $\hat{q}_{\text{tol}} = \hat{q}_{\text{tol}}(J_{\text{tol}}, (a/b))$\\
+  Equations & $\hat{q}_{\text{tol}} = \hat{q}_{\text{tol}}(J_{\text{tol}}, \mbox{AR})$\\
   \hline
   Description 
-  & $\hat{q}_{\text{tol}}$ is the tolerable pressure which is obtained from
-          Figure~\ref{ASTM_F2248-09_BeasonEtAl} using $J_{\text{tol}}$ and aspect ratio
-          $(a/b)$ as parameters using interpolation.  Calculation of $J_{\text{tol}}$
+        & $\hat{q}_{\text{tol}}$ is the tolerable pressure which is obtained from
+          Figure~\ref{ASTM_F2248-09_BeasonEtAl} using $J_{\text{tol}}$ and Aspect Ratio
+          $\mbox{AR}$ (\ddref{DD_AR}) as parameters using interpolation.  Calculation of $J_{\text{tol}}$
           is defined in \ddref{DD_JTOL}.\\
   \hline
   Source &
-  \cite{ASTM2009}\\
+           \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
   Ref.\ By & \ddref{DD_NFL}\\
@@ -977,6 +971,32 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   \cite{ASTM2009}\\
   \hline
   Ref.\ By & \iref{IM_dem}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+~\newline
+
+~\newline
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_AR}\\
+  \hline
+  Label&\bf Aspect Ratio (AR)\\
+  \hline
+  Equations & $\mbox{AR} = a/b$\\
+  \hline
+  Description 
+  & $\text{AR}$ is the Aspect Ratio and $a$, $b$ are dimensions of the plate
+    where $(a \geq b)$\\
+  \hline
+  Source &
+  \cite{ASTM2009}\\
+  \hline
+  Ref.\ By & \ddref{DD_J}, \ddref{DD_qtol}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1072,7 +1092,7 @@ situations.  The column of typical values is intended to provide a feel for a
 common scenario.  The uncertainty column provides an estimate of the confidence
 with which the physical quantities can be measured.  This information would be
 part of the input if one were performing an uncertainty quantification exercise.
-Table~\ref{TblSpecParams} gives the values of the specification parameters used
+Table~\ref{Table:AuxiCons} gives the values of the specification parameters used
 in Table~\ref{TblInputVar}.  $\text{AR}_{\text{max}}$ refers to the maximum
 aspect ratio for the plate of glass.
 
@@ -1083,9 +1103,9 @@ aspect ratio for the plate of glass.
 \toprule
 \textbf{Var} & \textbf{Physical Cons} & \textbf{Software Constraints} & \textbf{Typical Value} & \textbf{Uncertainty} \\
 \midrule 
-$a$&$a > 0 \wedge a/b \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge a/b
+$a$&$a > 0 \wedge \text{AR} \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge \text{AR}
                            < \text{AR}_{\text{max}}$ & 1500 \si[per-mode=symbol] {\milli\metre}& 10\%\\
-$b$&$b > 0 \wedge b < a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge a/b
+$b$&$b > 0 \wedge b < a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge \text{AR}
                            < \text{AR}_{\text{max}}$ & 1200 \si[per-mode=symbol]{\milli\metre}& 10\%\\
 %$t$&$t>0$&--&6\si[per-mode=symbol] {\milli\metre}&10\%\\
 $P_{b_{\text{tol}}}$& $0 < P_{b_{\text{tol}}} < 1$& --& 0.008 &0.1\%\\
@@ -1095,23 +1115,6 @@ $\text{SD}$&$\text{SD}>0$&$\text{SD}_{\text{min}}<\text{SD}<\text{SD}_{\text{max
                                                                                      \si[per-mode=symbol]{\meter}&10\%\\
 \bottomrule
 \end{tabular}
-\end{table}
-
-\begin{table}[!h]
-\caption{Specification Parameter Values} \label{TblSpecParams}
-\renewcommand{\arraystretch}{1.2}
-\begin{center}
-\begin{tabular}{l l l l} 
-\toprule
-\textbf{Var} & \textbf{Value} & \textbf{Var} & \textbf{Value}\\
-\midrule 
-$d_\text{min}$ & 0.1 \si{\metre} & $d_\text{max}$ & 5 \si{\metre}\\
-$\text{AR}_\text{max}$ & 5 & $w_\text{min}$ & 4.5 \si{\kilo\gram}\\  
-$w_\text{max}$ & 910 \si{\kilo\gram} & $\text{SD}_\text{min}$ & 6 \si{\metre}\\ 
-$\text{SD}_\text{max}$ & 130 \si{\metre}\\  
-\bottomrule
-\end{tabular}
-\end{center}
 \end{table}
 
 Note: The values for $d_\text{min}$ and $d_\text{max}$ are obtained from Figure~\ref{Fig_ASTM_E1300-09}
@@ -1184,11 +1187,12 @@ $w$ & \si{\kilo\gram}	& Charge weight\\
 The system shall set the known values as follows:
 \begin{itemize}
 \item $m$, $k$, $E$, $t_d$ following \aref{ass_val}
-\item LDF following \aref{A_LDF}
+\item LDF from \ddref{DD_LDF}
 \item LSF following \aref{A_LSF}
 \item $h$ from \ddref{DD_thick}
 \item GTF from \ddref{DD_GTF}
 \item SD from \ddref{DD_SD}
+\item AR from \ddref{DD_AR}
 \end{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{Verify}:]
@@ -1218,17 +1222,14 @@ The system shall set the known values as follows:
   Output the following quantities:
 \begin{itemize}
 \item Probability of breakage ($P_b$) (\iref{IM_prob})
+\item Risk of Failure ($B$) (\ddref{DD_B})
 \item Load Resistance (LR) (\iref{IM_cap})
 \item Applied load (demand) ($q$) (\iref{IM_dem})
-\item Actual thickness ($h$) (\ddref{DD_thick})
-\item Load Duration Factor (LDF) (\ddref{DD_LDF})
 \item Stress Distribution Factor ($J$) (\ddref{DD_J})
 \item Non Factored Load (NFL) (\ddref{DD_NFL})
-\item Glass Type Factor (GTF) (\ddref{DD_GTF})
 \item Dimensionless load ($\hat{q}$) (\ddref{DD_qhat})
 \item Tolerable load ($\hat{q}_{\text{tol}}$) (\ddref{DD_qtol})
 \item Stress distribution factor based on $P_b$ ($J_{\text{tol}}$) (\ddref{DD_JTOL})
-\item Aspect Ratio ($\text{AR} = a/b$)
 \end{itemize}
 
 \end{itemize}
@@ -1444,7 +1445,9 @@ future work.
 
 \section{Values of Auxiliary Constants}
 \label{Sec:ValuofAuxiCons}
-This section contains the standard values that are used for calculations in GlassBR.
+This section contains the standard values that are used for calculations in
+GlassBR.
+
 \begin{longtabu}{l X[l] l l}
 \toprule
 Symbol & Description & Value & Unit
@@ -1458,13 +1461,11 @@ $E$ & modulus of elasticity of glass & $\left(7.17\right)10^{7}$ & Pa
 \\
 ${t_{d}}$ & duration of load & $3$ & s
 \\
-LDF & load duration factor & $\left(\frac{{t_{d}}}{60}\right)^{\frac{m}{16}}$ & Unitless
-\\
 LSF & load share factor & $1$ & Unitless
 \\
-${d_{max}}$ & maximum value for one of the dimensions of the glass plate & $5.0$ & mm
+${d_{max}}$ & maximum value for one of the dimensions of the glass plate & $5.0$ & m
 \\
-${d_{min}}$ & minimum value for one of the dimensions of the glass plate & $0.1$ & mm
+${d_{min}}$ & minimum value for one of the dimensions of the glass plate & $0.1$ & m
 \\
 ${\text{AR}_{max}}$ & maximum aspect ratio & $5.0$ & Unitless
 \\
