@@ -72,6 +72,9 @@
 \newcounter{assumpnum} %Assumption Number
 \newcommand{\atheassumpnum}{P\theassumpnum}
 \newcommand{\aref}[1]{A\ref{#1}}
+\newcounter{physsysnum} %Physical System Description Number
+\newcommand{\pthephyssysnum}{P\thephyssysnum}
+\newcommand{\psref}[1]{PS\ref{#1}}
 \newcounter{goalnum} %Goal Number
 \newcommand{\gthegoalnum}{P\thegoalnum}
 \newcommand{\gsref}[1]{GS\ref{#1}}
@@ -523,8 +526,8 @@ centroid of a hemispherical high explosive charge.
 The physical system of \progname, as shown in Figure~\ref{Fig_PhysSyst} includes
 the following elements:
 \begin{itemize}
-\item{PS1:} The glass slab.
-\item{PS2:} The point of explosion.  Where the bomb, or any man-made explosive,
+\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The glass slab.
+\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or any man-made explosive,
   is located. The stand off distance is the distance between the point of
   explosion and the glass.
 \end{itemize}
