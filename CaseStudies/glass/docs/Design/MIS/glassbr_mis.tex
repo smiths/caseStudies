@@ -64,7 +64,7 @@ urlcolor=cyan          % color of external links
 \section{Introduction}
 
 The following document details the Module Interface Specifications for the
-implemented modules in a program \progname{}. It is intended to ease navigation
+implemented modules in the program \progname{}. It is intended to ease navigation
 through the program for design and maintenance purposes.  Complementary
 documents include the \href{../SRS/glassbr_srs.pdf}{System Requirement
   Specifications} (SRS) and \href{../MG/glassbr_mg.pdf}{Module Guide} (MG).  The
@@ -99,11 +99,11 @@ string & $\mathbb{S}$ & all finite sequences of symbols from the ASCII character
 \end{center}
 
 \noindent
-The specification of \progname \ uses some derived data types: sequences, strings, and
+The specification of \progname{} uses some derived data types: sequences, strings, and
 tuples. Sequences are lists that represent a countable number of ordered values of the same data type, where 
 the same value may occur more than once. Strings are sequences of characters. 
 Tuples contain a list of values, potentially of different types. 
-In addition, \progname \ uses functions, which
+In addition, \progname{} uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
 described by giving their type signature followed by their specification.
 
@@ -847,8 +847,8 @@ Y_{i+1}, x) )$$  where $i = \mbox{index}(X, x)$
 \subsection{Considerations}
 
 For simplicity the function evaluation is not defined within one step of the
-boundaries.  By considering the special cases it would be possible to get right
-the edge.
+boundaries.  By considering the special cases it would be possible to get right 
+to the edge.
 
 \newpage
 
