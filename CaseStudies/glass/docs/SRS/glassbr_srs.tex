@@ -181,34 +181,27 @@ their units.  The symbols are listed in alphabetical order.
 \renewcommand{\arraystretch}{1.2}
 
 \noindent 
-\begin{longtable}{l l p{12cm}} \toprule
+\begin{tabular}{l l p{12cm}} \toprule
   \textbf{Symbol} & \textbf{Unit} & \textbf{Description}\\
   \midrule
   %$\gamma$& unitless & Shear transfer coefficient\\
   %$A$ & \si{\milli\meter ^2} & Area of glass plate\\
-  $a$ &  \si{\meter} & Plate length (long dimension)\\
-  $\text{AR}_{\text{max}} $ & unitless & Maximum aspect ratio\\
-  $\text{AR} $ & unitless & Aspect ratio\\
-  $b$& \si{\meter}	& Plate width (short dimension)\\
+  $a$ &  \si{\milli\meter} & Plate length (long dimension)\\
   $B$ & unitless & Risk function\\
+  $b$& \si{\milli\meter}	& Plate width (short dimension)\\
   $d_{\text{max}} $& \si{\milli\meter}	& Maximum value for one of the dimensions of the glass plate\\
   $d_{\text{min}} $& \si{\milli\meter}	& Minimum value for one of the dimensions of the glass plate\\
   $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
   $g$ & unitless & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
-  $\text{GTF} $ & unitless & Glass type factor\\
-  $h$ & \si{\meter} & Actual thickness\\
-  $\text{is\_safe1}$ & unitless & Variable that is assigned true when 
-  				  calculated probability is less than tolerable probability\\
+  $h$ & \si{\milli\meter} & Actual thickness\\
+  $\text{is\_safe1}$ & unitless & Variable that is assigned true when calculated probability is less than
+                                  tolerable probability\\
   $\text{is\_safe2}$ & unitless & Variable that is assigned true when load resistance (capacity) is
                                   greater than load (demand)\\
   $J$ & unitless & Stress distribution factor (Function)\\
   $J_{\text{tol}}$ & unitless & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $\text{LDF} $ & unitless & Load duration factor\\
-  $\text{LR} $ & unitless & Load resistance\\
-  $\text{LSF} $ & unitless & Load share factor\\
   $m$ &  \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $\text{NFL} $ & unitless & Non-factored load\\
   $P_b$ & unitless &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & unitless &  Tolerable probability of breakage\\
   $q$ & \si{\kilo\pascal} & Applied load (demand)\\
@@ -228,14 +221,13 @@ their units.  The symbols are listed in alphabetical order.
       &                   &  $t \in
                             \{2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0,
                             12.0, 16.0, 19.0, 22.0\}$\\
-  $t_d$ & s & Duration of load\\
-  $\text{TNT} $ & unitless & TNT equivalent factor\\
+  $t_d$ & second & Duration of load\\
   $w$ & \si{\kilo\gram} & Charge weight\\
   $w_{\text{max}}$ & \si{\kilo\gram} & Maximum permissible input charge weight\\
   $w_{\text{min}}$ & \si{\kilo\gram} & Minimum permissible input charge weight\\
-  $w_{\text{TNT}}$& \si{\kilo\gram} & Explosive mass in equivalent weight of TNT\\
+  $w_{\text{TNT}}$& \si{\kilo\gram} & Explosive Mass in equivalent weight of TNT\\
   \bottomrule
-\end{longtable}
+\end{tabular}
 
 \subsection{Abbreviations and Acronyms}
 
@@ -517,7 +509,7 @@ LR of different glass types, that is, AN, HS, or FT in monolithic glass, LG
 \item \textit{Glass weight load -} The dead load component of the glass weight. 
 \item \textit{Load resistance (LR) -} The uniform lateral load that a glass 
 construction can sustain based upon a given probability of breakage and load 
-duration as defined in \cite{ASTM2009}.
+duration as defined in \cite[(pg. 1, 53)]{ASTM2009}, following \aref{A_N/AGlass} and \aref{A_Glass} respectively.
 \item \textit{Long duration load -} Any load lasting approximately 30 days. 
 \item \textit{Non-factored load (NFL) -} Three second duration uniform load 
 associated with a probability of breakage less than or equal to 8 lites per 1000 
