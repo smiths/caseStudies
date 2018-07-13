@@ -601,16 +601,10 @@ assumption is used.
 \item [A\refstepcounter{assumpnum}\theassumpnum \label{A_External}:] This system
   only considers the external explosion scenario for its calculations.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{ass_val}:] Standard values
-  used for calculation in \progname\ are:
-
-   \begin{enumerate}
-   \item $m=7$
-   \item $k=2.86 \times 10^{-53}$ \si{\newton^{-7}\meter^{12}}
-   \item $E=7.17 \times 10^7$ \si{\kilo\pascal}
-   \item $t_d=3$ \si{\second}
-   \end{enumerate}
-[\iref{IM_prob}, \ddref{DD_LDF}, \ddref{DD_NFL}, \ddref{DD_qhat}, \ddref{DD_JTOL}]
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{ass_val}:] 
+The values provided in Section~\ref{Sec:ValuofAuxiCons} are assumed for 
+the duration of load ($t_d$), and the material properties of $m$, $k$, and $E$.  [\iref{IM_prob}, \ddref{DD_LDF}, 
+\ddref{DD_NFL}, \ddref{DD_qhat}, \ddref{DD_JTOL}]
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_LSF}:] Glass under
   consideration is assumed to be a single lite; hence, the value of LSF is equal
