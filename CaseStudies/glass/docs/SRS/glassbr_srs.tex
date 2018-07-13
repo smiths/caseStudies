@@ -1135,12 +1135,14 @@ Table~\ref{Table:AuxiCons} gives the values of the specification parameters used
 in Table~\ref{TblInputVar}.  $\text{AR}_{\text{max}}$ refers to the maximum
 aspect ratio for the plate of glass.
 
+%``Uncert." stands for ``Uncertainty".
+
 \begin{table}[!h]
 \caption{Input Variables} \label{TblInputVar}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l l l c} 
 \toprule
-\textbf{Var} & \textbf{Physical Cons} & \textbf{Software Constraints} & \textbf{Typical Value} & \textbf{Uncertainty} \\
+\textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} & \textbf{Typical Value} & \textbf{Uncert.} \\
 \midrule 
 $a$&$a > 0 \wedge \text{AR} \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge \text{AR}
                            < \text{AR}_{\text{max}}$ & 1500 \si[per-mode=symbol] {\milli\metre}& 10\%\\
