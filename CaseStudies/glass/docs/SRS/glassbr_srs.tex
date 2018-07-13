@@ -1037,10 +1037,10 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
 ~\newline
 
 \subsubsection{Instance Models}\label{sec_instmod}
-This section transforms the problem defined in [Section~\ref{sec_probdesc}] into one 
-which is expressed in mathematical terms. It uses concrete symbols defined in [Section~\ref{sec_datadef}] 
-to replace the abstract symbols in the models identified in [Section~\ref{sec_theoretical}] 
-and [Section~\ref{sec_gendef}].
+This section transforms the problem defined in Section~\ref{sec_probdesc} into one 
+which is expressed in mathematical terms. It uses concrete symbols defined in Section~\ref{sec_datadef} 
+to replace the abstract symbols in the models identified in Section~\ref{sec_theoretical} 
+and Section~\ref{sec_gendef}.
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1123,19 +1123,16 @@ and [Section~\ref{sec_gendef}].
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}
 
-Table~\ref{TblInputVar} shows the data constraints on the input variables.  The
+Table~\ref{TblInputVar} and Table~\ref{TblOutputVar} show the data constraints on the input and output variables, respectively.  The
 column of physical constraints gives the physical limitations on the range of
-values that can be taken by the variable.  The constraints are conservative, to
+values that can be taken by the variable. The uncertainty column (``Uncert." stands for ``Uncertainty") provides an estimate of the confidence
+with which the physical quantities can be measured.  This information would be
+part of the input if one were performing an uncertainty quantification exercise. The constraints are conservative, to
 give the user of the model the flexibility to experiment with unusual
 situations.  The column of typical values is intended to provide a feel for a
-common scenario.  The uncertainty column provides an estimate of the confidence
-with which the physical quantities can be measured.  This information would be
-part of the input if one were performing an uncertainty quantification exercise.
-Table~\ref{Table:AuxiCons} gives the values of the specification parameters used
-in Table~\ref{TblInputVar}.  $\text{AR}_{\text{max}}$ refers to the maximum
-aspect ratio for the plate of glass.
-
-%``Uncert." stands for ``Uncertainty".
+common scenario.
+Section~\ref{Sec:ValuofAuxiCons} gives the values of the specification parameters used
+in Table~\ref{TblInputVar}.
 
 \begin{table}[!h]
 \caption{Input Variables} \label{TblInputVar}
@@ -1173,8 +1170,6 @@ are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR
     \label{Fig_ASTM_E1300-09}
   \end{center}
 \end{figure}
-
-Table~\ref{TblOutputVar} shows the constraints that must be satisfied by the output.
 
 \begin{table}[!h]
 \caption{Output Variables} \label{TblOutputVar}
