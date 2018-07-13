@@ -441,7 +441,7 @@ view of the problem to be solved.  This is followed by the solution
 characteristics specification, which presents the assumptions, theories and
 definitions that are used for the \progname{} program.
 
-\subsection{Problem Description}
+\subsection{Problem Description}\label{sec_probdesc}
 
 A system is needed to efficiently and correctly predict the blast risk involved
 with the glass. \progname{} is a computer program developed to interpret the
@@ -631,8 +631,8 @@ assumption is used.
 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
 
-% This section focuses on the general equations and laws that \progname{} is based
-% on.
+This section focuses on the general equations and laws that \progname{} is based on.
+
 ~\newline
 \noindent
 \begin{minipage}{\textwidth}
@@ -1037,6 +1037,11 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
 ~\newline
 
 \subsubsection{Instance Models}\label{sec_instmod}
+This section transforms the problem defined in [Section~\ref{sec_probdesc}] into one 
+which is expressed in mathematical terms. It uses concrete symbols defined in [Section~\ref{sec_datadef}] 
+to replace the abstract symbols in the models identified in [Section~\ref{sec_theoretical}] 
+and [Section~\ref{sec_gendef}].
+
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
