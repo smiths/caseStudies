@@ -181,19 +181,22 @@ their units.  The symbols are listed in alphabetical order.
 \renewcommand{\arraystretch}{1.2}
 
 \noindent 
-\begin{tabular}{l l p{12cm}} \toprule
+\begin{longtable}{l l p{12cm}} \toprule
   \textbf{Symbol} & \textbf{Unit} & \textbf{Description}\\
   \midrule
   %$\gamma$& -- & Shear transfer coefficient\\
   %$A$ & \si{\milli\meter ^2} & Area of glass plate\\
-  $a$ &  \si{\milli\meter} & Plate length (long dimension)\\
+  $a$ &  \si{\meter} & Plate length (long dimension)\\
+  $\text{AR} $ & unitless & Aspect ratio\\
+  $\text{AR}_{\text{max}} $ & unitless & Maximum aspect ratio\\
+  $b$& \si{\meter}        & Plate width (short dimension)\\
   $B$ & -- & Risk function\\
-  $b$& \si{\milli\meter}	& Plate width (short dimension)\\
   $d_{\text{max}} $& \si{\milli\meter}	& Maximum value for one of the dimensions of the glass plate\\
   $d_{\text{min}} $& \si{\milli\meter}	& Minimum value for one of the dimensions of the glass plate\\
   $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
   $g$ & -- & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
-  $h$ & \si{\milli\meter} & Minimum thickness\\
+  $\text{GTF} $ & unitless & Glass type factor\\
+  $h$ & \si{\meter} & Minimum thickness\\
   $\text{is\_safe1}$ & -- & Variable that is assigned true when calculated probability is less than
                                   tolerable probability\\
   $\text{is\_safe2}$ & -- & Variable that is assigned true when load resistance (capacity) is
@@ -201,7 +204,11 @@ their units.  The symbols are listed in alphabetical order.
   $J$ & -- & Stress distribution factor (Function)\\
   $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
+  $\text{LDF} $ & unitless & Load duration factor\\
+  $\text{LR} $ & unitless & Load resistance\\
+  $\text{LSF} $ & unitless & Load share factor\\
   $m$ &  \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
+  $\text{NFL} $ & unitless & Non-factored load\\
   $P_b$ & -- &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\kilo\pascal} & Applied load (demand)\\
@@ -221,13 +228,14 @@ their units.  The symbols are listed in alphabetical order.
       &                   &  $t \in
                             \{2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0,
                             12.0, 16.0, 19.0, 22.0\}$\\
-  $t_d$ & second & Duration of load\\
+  $t_d$ & s & Duration of load\\
+  $\text{TNT} $ & unitless & TNT equivalent factor\\
   $w$ & \si{\kilo\gram} & Charge weight\\
   $w_{\text{max}}$ & \si{\kilo\gram} & Maximum permissible input charge weight\\
   $w_{\text{min}}$ & \si{\kilo\gram} & Minimum permissible input charge weight\\
-  $w_{\text{TNT}}$& \si{\kilo\gram} & Explosive Mass in equivalent weight of TNT\\
+  $w_{\text{TNT}}$& \si{\kilo\gram} & Explosive mass in equivalent weight of TNT\\
   \bottomrule
-\end{tabular}
+\end{longtable}
 
 \subsection{Abbreviations and Acronyms}
 
