@@ -184,29 +184,29 @@ their units.  The symbols are listed in alphabetical order.
 \begin{tabular}{l l p{12cm}} \toprule
   \textbf{Symbol} & \textbf{Unit} & \textbf{Description}\\
   \midrule
-  %$\gamma$& unitless & Shear transfer coefficient\\
+  %$\gamma$& -- & Shear transfer coefficient\\
   %$A$ & \si{\milli\meter ^2} & Area of glass plate\\
   $a$ &  \si{\milli\meter} & Plate length (long dimension)\\
-  $B$ & unitless & Risk function\\
+  $B$ & -- & Risk function\\
   $b$& \si{\milli\meter}	& Plate width (short dimension)\\
   $d_{\text{max}} $& \si{\milli\meter}	& Maximum value for one of the dimensions of the glass plate\\
   $d_{\text{min}} $& \si{\milli\meter}	& Minimum value for one of the dimensions of the glass plate\\
   $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
-  $g$ & unitless & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
+  $g$ & -- & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
   $h$ & \si{\milli\meter} & Minimum thickness\\
-  $\text{is\_safe1}$ & unitless & Variable that is assigned true when calculated probability is less than
+  $\text{is\_safe1}$ & -- & Variable that is assigned true when calculated probability is less than
                                   tolerable probability\\
-  $\text{is\_safe2}$ & unitless & Variable that is assigned true when load resistance (capacity) is
+  $\text{is\_safe2}$ & -- & Variable that is assigned true when load resistance (capacity) is
                                   greater than load (demand)\\
-  $J$ & unitless & Stress distribution factor (Function)\\
-  $J_{\text{tol}}$ & unitless & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
+  $J$ & -- & Stress distribution factor (Function)\\
+  $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
   $m$ &  \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $P_b$ & unitless &  Probability of breakage\\
-  $P_{b_{\text{tol}}}$ & unitless &  Tolerable probability of breakage\\
+  $P_b$ & -- &  Probability of breakage\\
+  $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\kilo\pascal} & Applied load (demand)\\
-  $\hat{q}$ & unitless & Dimensionless load\\
-  $\hat{q}_{\text{tol}}$ & unitless & Tolerable load\\  
+  $\hat{q}$ & -- & Dimensionless load\\
+  $\hat{q}_{\text{tol}}$ & -- & Tolerable load\\  
   $\text{SD}$ & \si{\meter} & Stand off distance which is represented in
                               coordinates $(\text{SD}_x , \text{SD}_y ,
                               \text{SD}_z)$\\
@@ -1212,15 +1212,15 @@ that the software is expected to complete.
 \midrule 
 $a$ & \si{\milli\metre}	& Length of the glass slab\\
 $b$ & \si{\milli\metre}	& Breadth of the glass slab\\
-$g$ & unitless & Glass Type, $g \in \{ \text{AN}, \text{HS}, \text{GT} \}$\\
-$P_{b_{\text{tol}}}$ & unitless & Tolerable probability\\
+$g$ & -- & Glass Type, $g \in \{ \text{AN}, \text{HS}, \text{GT} \}$\\
+$P_{b_{\text{tol}}}$ & -- & Tolerable probability\\
 $\text{SD}_x$ & \si{\meter} & Stand off distance ($x$-component)\\
 $\text{SD}_y$ & \si{\metre} & Stand off distance ($y$-component)\\
 $\text{SD}_z$ & \si{\metre} & Stand off distance ($z$-component)\\
 $t$ & \si{\milli\metre}	& Nominal thickness of the glass slab,\newline $t \in
                                   \{2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0,
                                   12.0, 16.0, 19.0, 22.0\}$ \\
-$\text{TNT}$ & unitless & TNT equivalent factor\\
+$\text{TNT}$ & -- & TNT equivalent factor\\
 $w$ & \si{\kilo\gram}	& Charge weight\\
 \bottomrule
 \end{tabular}
@@ -1499,7 +1499,7 @@ This section contains the standard values that are used for calculations in
 Symbol & Description & Value & Unit
 \\
 \midrule
-${\text{AR}_{max}}$ & maximum aspect ratio & $5.0$ & Unitless
+${\text{AR}_{max}}$ & maximum aspect ratio & $5.0$ & --
 \\
 ${d_{max}}$ & maximum value for one of the dimensions of the glass plate & $5.0$ & m
 \\
@@ -1509,7 +1509,7 @@ $E$ & modulus of elasticity of glass & $7.17\times 10^{7}$ & Pa
 \\
 $k$ & surface flaw parameter & $2.86\times 10^{-53}$ & $\frac{\text{m}^{12}}{\text{N}^{7}}$
 \\
-LSF & load share factor & $1$ & Unitless
+LSF & load share factor & $1$ & --
 \\
 $m$ & surface flaw parameter & $7$ & $\frac{\text{m}^{12}}{\text{N}^{7}}$
 \\
