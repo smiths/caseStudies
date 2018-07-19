@@ -648,15 +648,15 @@ This section focuses on the general equations and laws that \progname{} is based
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum \label{prob}\\
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_Pb}\\
   \hline
-  Label&\bf Safety Requirement-1\\
+  Label&\bf Safety Req-Pb\\
   \hline
   Equation& $\text{is\_safe1}= P_b < P_{b_{\text{tol}}}$\\
   \hline
   Description 
   & If $\text{is\_safe1} = \text{True}$, the glass is considered safe.
-    $\text{is\_safe1}$ and $\text{is\_safe2}$ (from \tref{cap}) are either both True or
+    $\text{is\_safe1}$ and $\text{is\_safe2}$ (from \tref{T_LR}) are either both True or
     both False.\\
   & $P_b$ is the probability of breakage, as calculated in \iref{IM_prob}\\
   & $P_{b_{\text{tol}}}$ is the tolerable probability entered by the user\\
@@ -665,7 +665,7 @@ This section focuses on the general equations and laws that \progname{} is based
   \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \tref{cap}\\
+  Ref.\ By & \tref{T_LR}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -677,15 +677,15 @@ This section focuses on the general equations and laws that \progname{} is based
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum \label{cap}\\
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_LR}\\
   \hline
-  Label &\bf Safety Requirement-2\\
+  Label &\bf Safety Req-LR\\
   \hline
   Equation & $\text{is\_safe2}= \text{LR} > q $\\
   \hline
   Description 
   & If $\text{is\_safe2} = \text{True}$, the glass is considered to be safe.
-    $\text{is\_safe1}$ (from \tref{prob}) and $\text{is\_safe2}$ are either both True or
+    $\text{is\_safe1}$ (from \tref{T_Pb}) and $\text{is\_safe2}$ are either both True or
     both False.\\
   & $\text{LR}$ is the Load Resistance (also called capacity), as defined in
     \iref{IM_cap}\\
@@ -696,7 +696,7 @@ This section focuses on the general equations and laws that \progname{} is based
            \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \tref{prob}\\
+  Ref.\ By & \tref{T_Pb}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1068,7 +1068,7 @@ and Section~\ref{sec_gendef}.
   Source &
   \cite{ASTM2009}\\
   \hline
-  Ref.\ By & \tref{prob}\\
+  Ref.\ By & \tref{T_Pb}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1095,7 +1095,7 @@ and Section~\ref{sec_gendef}.
   Source &
            \cite{ASTM2009}\\
   \hline
-  Ref.\ By & \tref{cap}\\
+  Ref.\ By & \tref{T_LR}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1124,7 +1124,7 @@ and Section~\ref{sec_gendef}.
   Source &
   \cite{ASTM2009}\\
   \hline
-  Ref.\ By & \tref{cap}, \ddref{DD_qhat}\\
+  Ref.\ By & \tref{T_LR}, \ddref{DD_qhat}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1264,7 +1264,7 @@ The system shall set the known values as follows:
 %   values of a certain parameter from the graphs. \\
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_ Comparison}:] If
-  $\text{is\_safe1} \wedge \text{is\_safe2}$ (from \tref{prob} and \tref{cap}) are true,
+  $\text{is\_safe1} \wedge \text{is\_safe2}$ (from \tref{T_Pb} and \tref{T_LR}) are true,
   output the message ``For the given input parameters, the glass is considered
   safe.''  If the condition is false, then output the message ``For the given
   input parameters, the glass is NOT considered safe.''
@@ -1357,12 +1357,12 @@ requirements on the assumptions.
 \centering
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{prob} & \tref{cap} & \iref{IM_prob} & \iref{IM_cap}& \iref{IM_dem} & 
+	& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap}& \iref{IM_dem} & 
 	\ddref{DD_B} & \ddref{DD_thick} & \ddref{DD_LDF} & \ddref{DD_J} & \ddref{DD_NFL} & 
 	\ddref{DD_GTF} & \ddref{DD_qhat} & \ddref{DD_qtol} & \ddref{DD_JTOL} \\
 \hline
-\tref{prob}           & & X & X & & & & & & & & & & & \\ \hline
-\tref{cap}             & X & & & X & X & & & & & & & & & \\ \hline
+\tref{T_Pb}           & & X & X & & & & & & & & & & & \\ \hline
+\tref{T_LR}             & X & & & X & X & & & & & & & & & \\ \hline
 \iref{IM_prob}      & & & & & & X & X & X & X & & & & & \\ \hline
 \iref{IM_cap}        & & & & & & & & & & X & X & & & \\ \hline
 \iref{IM_dem}       & & & & & & & & & & & & & & \\ \hline
@@ -1389,7 +1389,7 @@ requirements on the assumptions.
 P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|
 P{0.8cm}|P{0.4cm}|P{0.4cm}|}
 \hline
-	& \tref{prob} & \tref{cap} & \iref{IM_prob} & \iref{IM_cap} &
+	& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap} &
 	\iref{IM_dem} & \ddref{DD_B} & \ddref{DD_thick} & \ddref{DD_LDF} &
 	\ddref{DD_J} & \ddref{DD_NFL} & \ddref{DD_GTF} & \ddref{DD_qhat} &
 	\ddref{DD_qtol} & \ddref{DD_JTOL} & \ref{sec_DataConstraints} &
@@ -1416,8 +1416,8 @@ P{0.8cm}|P{0.4cm}|P{0.4cm}|}
 	& \aref{A_Glass}& \aref{A_N/AGlass}& \aref{A_External}& \aref{ass_val}& 
 	\aref{A_LSF}& \aref{A_BC}& \aref{A_Flex}& \aref{A_LDF}\\
 \hline
-\tref{prob}                 & & & & & & & & \\ \hline
-\tref{cap}                  & & & & & & & & \\ \hline
+\tref{T_Pb}                 & & & & & & & & \\ \hline
+\tref{T_LR}                  & & & & & & & & \\ \hline
 \iref{IM_prob}           & & & & X & & X & X & \\ \hline
 \iref{IM_cap}             & & & & & X & & & \\ \hline
 \iref{IM_dem}            & & & & & & & & \\ \hline
