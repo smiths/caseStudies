@@ -250,7 +250,7 @@ inputFile: sequence of string \#\textit{f[i] is the ith string in the text file 
 
 \renewcommand{\arraystretch}{1.2}
 \begin{longtable*}[l]{l} 
-\# From R1\\
+\# From SRS R1\\
 $a$: $\mathbb{R}$ \\
 $b$: $\mathbb{R}$ \\
 $w$: $\mathbb{R}$ \\
@@ -262,7 +262,7 @@ $\text{SD}_z$ : $\mathbb{R}$ \\
 $g$: GlassTypeT \\
 $t$: ThicknessT \\
 ~\\
-\# From R2\\
+\# From SRS R2\\
 $m$: $\mathbb{R}$ \\
 $k$: $\mathbb{R}$ \\
 $E$: $\mathbb{R}$ \\
@@ -317,8 +317,8 @@ with a '\#' symbol.
   modify the state variables using the following procedural specification:
 \begin{enumerate}
 \item Read data sequentially from inputFile to populate the state variables from
-  R1 ($a$ to $w$).
-\item Calculate the derived quantities (all other state variables, from R2) as follows:
+  SRS R1 ($a$ to $w$).
+\item Calculate the derived quantities (all other state variables, from SRS R2) as follows:
 \begin{itemize}
 \item $m, k, E, t_d, \mbox{LSF}$ as defined in Constants
   (Section~\ref{Constants})
@@ -1114,14 +1114,14 @@ LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
 \item transition: write data to the file outfile associated with the string s.
   The data to output follows:
 \begin{itemize}
-\item From R4: values from R1 ($a$, $b$, $g$, $P_{b_\text{tol}}$, $\mbox{SD}_x$,
-  $\mbox{SD}_y$, $\mbox{SD}_z$, $t$, TNT, $w$), values from R2 ($m$, $k$, $E$,
+\item From SRS R4: values from SRS R1 ($a$, $b$, $g$, $P_{b_\text{tol}}$, $\mbox{SD}_x$,
+  $\mbox{SD}_y$, $\mbox{SD}_z$, $t$, TNT, $w$), values from SRS R2 ($m$, $k$, $E$,
   $t_d$, LDF, LSF, $h$, GTF, SD, AR)
-\item From R5: ($\mbox{is\_safePB} \wedge \mbox{is\_safeLR}
+\item From SRS R5: ($\mbox{is\_safePB} \wedge \mbox{is\_safeLR}
   \Rightarrow$ ``For the given input parameters, the glass is considered safe''
  $ |$ True $\Rightarrow$ ``For the given input parameters, the glass is NOT
  considered safe'') 
-\item From R6 ($P_b$, $B$, LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
+\item From SRS R6 ($P_b$, $B$, LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
 \end{itemize}
 \item exception: None
 \end{itemize}
