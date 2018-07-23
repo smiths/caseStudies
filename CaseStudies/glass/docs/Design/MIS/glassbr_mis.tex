@@ -371,10 +371,9 @@ with a '\#' symbol.
   $\neg(0 < P_{b_{\text{tol}}} < 1)$ & $\Rightarrow$
   ValueError(``$P_{b_{\text{tol}}}$
   must lie between 0 and 1'')\\
-  $\neg (w \geq 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
-  greater
-  or equal to zero'')\\
-  $\neg (w_{\text{min}}<w<w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
+  $\neg (w > 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
+  greater than zero'')\\
+  $\neg (w_{\text{min}} \leq w \leq w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
   weight $w$ is too small or too large'')\\
   $\neg (\mbox{TNT} > 0)$ & $\Rightarrow$ ValueError(``TNT must be positive'')\\
   $\neg (\mbox{SD} > 0)$ & $\Rightarrow$ ValueError(``stand off distance (SD)
