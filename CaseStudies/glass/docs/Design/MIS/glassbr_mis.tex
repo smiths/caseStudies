@@ -529,7 +529,7 @@ None
 \noindent calc\_J\_tol() \textit{\# From SRS DD9 Tolerable Stress Distribution Factor ($J_\text{tol}$)}
 \begin{itemize}
 \item output:  \textit{out} := $\ln[\ln( \frac{1}{1-P_{b_{\text{tol}}}} )
-				\frac{(\text{a}\times\text{b})^{m-1}}
+				\frac{(a \times b)^{m-1}}
 					{k(E h^2)^m \text{LDF} }]$
 \item exception: None
 \end{itemize}
@@ -543,8 +543,7 @@ None
 
 \noindent calc\_B($J$) \textit{\# From SRS DD1 Risk of Failure (B)}
 \begin{itemize}
-\item output:  \textit{out} := $\frac{k}{(\text{a}\times 
-				\text{b})^{m-1}}(E h^2)^m 
+\item output:  \textit{out} := $\frac{k}{(a \times b)^{m-1}}(E h^2)^m 
 					\times \text{LDF} \times e^J$
 \item exception: None
 \end{itemize}
