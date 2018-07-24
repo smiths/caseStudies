@@ -193,7 +193,7 @@ their units.  The symbols are listed in alphabetical order.
   $B$ & -- & Risk function\\
   $d_{\text{max}} $& \si{\milli\meter}	& Maximum value for one of the dimensions of the glass plate\\
   $d_{\text{min}} $& \si{\milli\meter}	& Minimum value for one of the dimensions of the glass plate\\
-  $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
+  $E$ & \si{\pascal} & Modulus of elasticity of glass\\
   $g$ & -- & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
   $\text{GTF} $ & -- & Glass type factor\\
   $h$ & \si{\meter} & Minimum thickness\\
@@ -722,9 +722,8 @@ models.
   \hline
   Label&\bf Risk of Failure (B)\\
   \hline
-  Equation & $B = \frac{k}{(\frac{a}{1000}\times 
-				\frac{b}{1000})^{m-1}}((E \times 1000)(\frac{h}{1000})^2)^m 
-					\times \text{LDF} \times e^J$\\
+  Equation & $B = \frac{k}{(a \times b)^{m-1}}(E h^2)^m 
+		  \times \text{LDF} \times e^J$\\
   \hline
   Description 
   & $B$ is the risk of failure\\
@@ -968,8 +967,8 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   Label&\bf Tolerable Stress Distribution Factor $(J_{\text{tol}})$\\
   \hline
   Symbols & $J_{\text{tol}}=\ln[\ln( \frac{1}{1-P_{b_{\text{tol}}}} )
-				\frac{(\frac{a}{1000}\times\frac{b}{1000})^{m-1}}
-					{k((E \times 1000)(\frac{h}{1000})^2)^m \text{LDF} }]$ \\  
+				\frac{(a \times b)^{m-1}}
+				{k(E h^2)^m \text{LDF} }]$ \\  
   \hline
   Description  &
   $J_{\text{tol}}$ is the stress distribution factor calculated with reference to $P_{b_{\text{tol}}}$\\
@@ -1149,10 +1148,10 @@ in Table~\ref{TblInputVar}.
 \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} & \textbf{Typical Value} & \textbf{Uncert.} \\
 \midrule 
 $a$&$a > 0 \wedge \text{AR} \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge \text{AR}
-                           < \text{AR}_{\text{max}}$ & 1500 \si[per-mode=symbol] {\milli\metre}& 10\%\\
+                           < \text{AR}_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre}& 10\%\\
                            
 $b$&$0 < b \leq a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge \text{AR}
-                           < \text{AR}_{\text{max}}$ & 1200 \si[per-mode=symbol]{\milli\metre}& 10\%\\
+                           < \text{AR}_{\text{max}}$ & 1.2 \si[per-mode=symbol]{\metre}& 10\%\\
                            
 $P_{b_{\text{tol}}}$& $0 < P_{b_{\text{tol}}} < 1$& --& 0.008 &0.1\%\\
 
