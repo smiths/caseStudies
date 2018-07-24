@@ -387,7 +387,7 @@ with a '\#' symbol.
 The value of each state variable can be accessed through its name (getter).  An
 access program is available for each state variable.  There are no setters for
 the state variables, since the values will be set and checked by load params and
-not changed for the life of the program.
+will not be changed for the life of the program.
 
 \newpage
 
@@ -445,7 +445,7 @@ The input file will match the given specification.
 \begin{itemize}
 \item output: Create $out$ following the following steps.  Read data from the
   file infile associated with the string $s$.  Use this data to create a ContoursT
-  object.  For each value of $w$ create an object of FunctT and add it to the
+  object.  For each value of $w$, create an object of FunctT and add it to the
   ContoursT object.  Each of the FunctT objects will consist of $q$ versus SD
   data.  The first row of the TSD file contains the values of $w$.  The
   subsequent columns are grouped in pairs.  Each pair corresponds to a column of
@@ -460,7 +460,7 @@ The input file will match the given specification.
 \begin{itemize}
 \item output: Create $out$ following the following steps.  Read data from the
   file infile associated with the string $s$.  Use this data to create a ContoursT
-  object.  For each value of $J$ create an object of Funct T and add it to the
+  object.  For each value of $J$, create an object of Funct T and add it to the
   ContoursT object.  Each of the FunctT objects will consist of $q^*$ versus AR
   data.  The first row of the SDF file contains the values of $J$.  The
   subsequent columns are grouped in pairs.  Each pair corresponds to a column of
@@ -800,8 +800,8 @@ eval & $x: \mathbb{R}$ & $\mathbb{R}$ & OutOfDomain\\
 
 X: $\mathbb{R}^n$\\
 Y: $\mathbb{R}^n$\\
-minx: $\mathbb{R}$\\
-maxx: $\mathbb{R}$\\
+minX: $\mathbb{R}$\\
+maxX: $\mathbb{R}$\\
 o: $\mathbb{N}$
 
 \subsubsection {State Invariant}
@@ -816,7 +816,7 @@ None
 
 \noindent new FunctT($X_\text{in}, Y_\text{in}, i$):
 \begin{itemize}
-\item transition: $X, Y, \mbox{minx}, \mbox{maxx}, o := X_\text{in}, Y_\text{in}, X_\text{in}[0], X_\text{in}[|X|-1], i$
+\item transition: $X, Y, \mbox{minX}, \mbox{maxX}, o := X_\text{in}, Y_\text{in}, X_\text{in}[0], X_\text{in}[|X|-1], i$
 
 \item output: $out := \mbox{self}$
 \item exception: $(\neg \mbox{isAscending}(X_\text{in}) \Rightarrow
@@ -827,13 +827,13 @@ None
 
 \noindent minD():
 \begin{itemize}
-\item output: $out := \mbox{minx}$
+\item output: $out := \mbox{minX}$
 \item exception: None
 \end{itemize}
 
 \noindent maxD():
 \begin{itemize}
-\item output: $out := \mbox{maxx}$
+\item output: $out := \mbox{maxX}$
 \item exception: None
 \end{itemize}
 
@@ -848,7 +848,7 @@ None
 \item output: $out :=$ $$(o=1 \Rightarrow \mbox{interpLin}(X_i, Y_i,
 X_{i+1}, Y_{i+1}, x) | o = 2 \Rightarrow \mbox{interpQuad}(X_{i-1}, Y_{i-1}, X_i, Y_i, X_{i+1},
 Y_{i+1}, x) )$$  where $i = \mbox{index}(X, x)$
-\item exception: $(\neg(\mbox{minx} \leq x \leq \mbox{maxx}) \Rightarrow
+\item exception: $(\neg(\mbox{minX} \leq x \leq \mbox{maxX}) \Rightarrow
   \mbox{OutOfDomain}) | \neg(1 \leq \mbox{index}(X, x) \leq |X| - 2) \Rightarrow
   \mbox{OutOfDomain})$ \textit{\# first check if within domain, then make sure
     not too close to edge, so quadratic interpolation is defined}
