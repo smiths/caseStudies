@@ -187,15 +187,15 @@ their units.  The symbols are listed in alphabetical order.
   %$\gamma$& -- & Shear transfer coefficient\\
   %$A$ & \si{\milli\meter ^2} & Area of glass plate\\
   $a$ &  \si{\meter} & Plate length (long dimension)\\
-  $\text{AR} $ & unitless & Aspect ratio\\
-  $\text{AR}_{\text{max}} $ & unitless & Maximum aspect ratio\\
+  $\text{AR} $ & -- & Aspect ratio\\
+  $\text{AR}_{\text{max}} $ & -- & Maximum aspect ratio\\
   $b$& \si{\meter}        & Plate width (short dimension)\\
   $B$ & -- & Risk function\\
   $d_{\text{max}} $& \si{\milli\meter}	& Maximum value for one of the dimensions of the glass plate\\
   $d_{\text{min}} $& \si{\milli\meter}	& Minimum value for one of the dimensions of the glass plate\\
   $E$ & \si{\kilo\pascal} & Modulus of elasticity of glass\\
   $g$ & -- & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
-  $\text{GTF} $ & unitless & Glass type factor\\
+  $\text{GTF} $ & -- & Glass type factor\\
   $h$ & \si{\meter} & Minimum thickness\\
   $\text{is\_safe1}$ & -- & Variable that is assigned true when calculated probability is less than
                                   tolerable probability\\
@@ -204,11 +204,11 @@ their units.  The symbols are listed in alphabetical order.
   $J$ & -- & Stress distribution factor (Function)\\
   $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $\text{LDF} $ & unitless & Load duration factor\\
-  $\text{LR} $ & unitless & Load resistance\\
-  $\text{LSF} $ & unitless & Load share factor\\
+  $\text{LDF} $ & -- & Load duration factor\\
+  $\text{LR} $ & -- & Load resistance\\
+  $\text{LSF} $ & -- & Load share factor\\
   $m$ &  \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $\text{NFL} $ & unitless & Non-factored load\\
+  $\text{NFL} $ & -- & Non-factored load\\
   $P_b$ & -- &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\kilo\pascal} & Applied load (demand)\\
@@ -229,7 +229,7 @@ their units.  The symbols are listed in alphabetical order.
                             \{2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0,
                             12.0, 16.0, 19.0, 22.0\}$\\
   $t_d$ & s & Duration of load\\
-  $\text{TNT} $ & unitless & TNT equivalent factor\\
+  $\text{TNT} $ & -- & TNT equivalent factor\\
   $w$ & \si{\kilo\gram} & Charge weight\\
   $w_{\text{max}}$ & \si{\kilo\gram} & Maximum permissible input charge weight\\
   $w_{\text{min}}$ & \si{\kilo\gram} & Minimum permissible input charge weight\\
@@ -262,7 +262,6 @@ their units.  The symbols are listed in alphabetical order.
   SD & Stand Off Distance\\
   SRS & 	Software Requirements Specification\\
   T & Theoretical Model\\
-  TNT & TNT (Trinitrotoluene) Equivalent Factor\\
   UC & Unlikely Change\\
   % SDF & Stress Distribution Factor \\
   % $\text{SDF}_{\text{tol}}$ & Stress Distribution Factor with respect to
@@ -738,7 +737,7 @@ models.
   & $J$ is the stress distribution factor, as defined in \ddref{DD_J}\\  
   \hline
   Source &
-  \cite{ASTM2009}, \cite[Eq.~14]{Campidelli}\\
+  \cite{ASTM2009}, \cite[Eq.~14]{Campidelli}, \cite[Eq.~4-5]{BeasonEtAl1998}\\
   \hline
   Ref.\ By & \iref{IM_prob}\\
   \hline
@@ -907,7 +906,7 @@ t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
   \hline
   Label&\bf Dimensionless Load ($\hat{q}$)\\
   \hline
-  Equation & $\hat{q}=\frac{q(ab)^2}{Eh^4GTF}$\\
+  Equation & $\hat{q}=\frac{q(ab)^2}{Eh^4 \text{GTF}}$\\
   \hline
   Description 
   & $q$ is the 3 second equivalent pressure, as given in \iref{IM_dem}\\
@@ -1066,7 +1065,7 @@ and Section~\ref{sec_gendef}.
   & $B$ is the risk of failure, as defined in \ddref{DD_B}\\
   \hline
   Source &
-  \cite{ASTM2009}\\
+  \cite{ASTM2009, BeasonEtAl1998}\\
   \hline
   Ref.\ By & \tref{T_Pb}\\
   \hline
@@ -1152,7 +1151,7 @@ in Table~\ref{TblInputVar}.
 $a$&$a > 0 \wedge \text{AR} \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge \text{AR}
                            < \text{AR}_{\text{max}}$ & 1500 \si[per-mode=symbol] {\milli\metre}& 10\%\\
                            
-$b$&$0 < b < a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge \text{AR}
+$b$&$0 < b \leq a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge \text{AR}
                            < \text{AR}_{\text{max}}$ & 1200 \si[per-mode=symbol]{\milli\metre}& 10\%\\
                            
 $P_{b_{\text{tol}}}$& $0 < P_{b_{\text{tol}}} < 1$& --& 0.008 &0.1\%\\
@@ -1164,7 +1163,7 @@ $\text{TNT}$&$\text{TNT}>0$&--&1.0&10\%\\
 
 %$t$&$t>0$&--&6\si[per-mode=symbol] {\milli\metre}&10\%\\
 
-$w$&$w \ge 0$ & $w_{\text{min}}<w<w_{\text{max}}$&42 \si[per-mode=symbol]{\kilo\gram}&10\%\\
+$w$&$w > 0$ & $w_{\text{min}} \le w \le w_{\text{max}}$&42 \si[per-mode=symbol]{\kilo\gram}&10\%\\
 
 \bottomrule
 \end{tabular}

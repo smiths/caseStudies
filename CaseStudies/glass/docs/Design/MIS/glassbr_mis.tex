@@ -154,14 +154,27 @@ main & - & - & - \\
 
 \subsubsection{State Variables}
 
-None
+cTSD: ContoursT\\
+cSDF: ContoursT\\
+$q: \mathbb{R}$\\
+$\hat{q}: \mathbb{R}$\\
+$J_\text{tol}: \mathbb{R}$\\
+$J: \mathbb{R}$\\
+$\hat{q}_\text{tol}: \mathbb{R}$\\
+$B: \mathbb{R}$\\
+$P_b: \mathbb{R}$\\
+$\text{NFL}: \mathbb{R}$\\
+$\text{LR}: \mathbb{R}$\\
+$\text{is\_safePb}: \mathbb{B}$\\
+$\text{is\_safeLR}: \mathbb{B}$
 
 \subsubsection{Access Routine Semantics}
 
 \noindent main():
 \begin{itemize}
-\item transition: Modify the state of Param module and the environment variables
-  for the Plot and Output modules by following these steps.
+\item transition: Using the steps below, modify the state variables of this
+  module, the state of the Input module, and the environment variable for the
+  Output module.
 \begin{itemize}
 \item cTSD = LoadASTM.LoadTSD(sTSD)
 \item cSDF = LoadASTM.LoadSDF(sSDF)
@@ -215,14 +228,14 @@ verify\_params & - & - & ValueError \\
 % From R1
 $a$ & - & $\mathbb{R}$\\
 $b$ & - & $\mathbb{R}$\\
-$g$ & - & GlassTypeT\\
+$w$ & - & $\mathbb{R}$\\
 $P_{b_\text{tol}}$ & - & $\mathbb{R}$\\
+TNT & - & $\mathbb{R}$\\
 $\text{SD}_x$ & - & $\mathbb{R}$\\
 $\text{SD}_y$ & - & $\mathbb{R}$\\
 $\text{SD}_z$ & - & $\mathbb{R}$\\
+$g$ & - & GlassTypeT\\
 $t$ & - & ThicknessT\\
-TNT & - & $\mathbb{R}$\\
-$w$ & - & $\mathbb{R}$\\
 % From R2
 $m$ & - & $\mathbb{R}$\\
 $k$ & - & $\mathbb{R}$\\
@@ -250,19 +263,19 @@ inputFile: sequence of string \#\textit{f[i] is the ith string in the text file 
 
 \renewcommand{\arraystretch}{1.2}
 \begin{longtable*}[l]{l} 
-\# From R1\\
+\# From SRS R1\\
 $a$: $\mathbb{R}$ \\
 $b$: $\mathbb{R}$ \\
-$g$: GlassTypeT \\
+$w$: $\mathbb{R}$ \\
 $P_{b_\text{tol}}$: $\mathbb{R}$ \\
+TNT: $\mathbb{R}$ \\
 $\text{SD}_x$ : $\mathbb{R}$ \\
 $\text{SD}_y$ : $\mathbb{R}$ \\
 $\text{SD}_z$ : $\mathbb{R}$ \\
+$g$: GlassTypeT \\
 $t$: ThicknessT \\
-TNT: $\mathbb{R}$ \\
-$w$: $\mathbb{R}$ \\
 ~\\
-\# From R2\\
+\# From SRS R2\\
 $m$: $\mathbb{R}$ \\
 $k$: $\mathbb{R}$ \\
 $E$: $\mathbb{R}$ \\
@@ -317,8 +330,8 @@ with a '\#' symbol.
   modify the state variables using the following procedural specification:
 \begin{enumerate}
 \item Read data sequentially from inputFile to populate the state variables from
-  R1 ($a$ to $w$).
-\item Calculate the derived quantities (all other state variables, from R2) as follows:
+  SRS R1 ($a$ to $w$).
+\item Calculate the derived quantities (all other state variables, from SRS R2) as follows:
 \begin{itemize}
 \item $m, k, E, t_d, \mbox{LSF}$ as defined in Constants
   (Section~\ref{Constants})
@@ -343,7 +356,7 @@ with a '\#' symbol.
 \end{itemize}
 \noindent \begin{longtable*}[l]{l l}
   $\neg (a > 0)$ & $\Rightarrow$ ValueError(``dimension $a$ must be positive'')\\
-  $\neg (\text{AR} \geq 0)$ & $\Rightarrow$ ValueError(``$a$ must be equal to, or
+  $\neg (\text{AR} \geq 1.0)$ & $\Rightarrow$ ValueError(``$a$ must be equal to, or
   greater than, $b$'')\\
   $\neg (d_{\text{min}} \leq a \leq d_{\text{max}})$ & $\Rightarrow$
   ValueError(``$a$ too
@@ -358,10 +371,9 @@ with a '\#' symbol.
   $\neg(0 < P_{b_{\text{tol}}} < 1)$ & $\Rightarrow$
   ValueError(``$P_{b_{\text{tol}}}$
   must lie between 0 and 1'')\\
-  $\neg (w \geq 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
-  greater
-  or equal to zero'')\\
-  $\neg (w_{\text{min}}<w<w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
+  $\neg (w > 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
+  greater than zero'')\\
+  $\neg (w_{\text{min}} \leq w \leq w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
   weight $w$ is too small or too large'')\\
   $\neg (\mbox{TNT} > 0)$ & $\Rightarrow$ ValueError(``TNT must be positive'')\\
   $\neg (\mbox{SD} > 0)$ & $\Rightarrow$ ValueError(``stand off distance (SD)
@@ -528,9 +540,9 @@ None
 
 \noindent calc\_J\_tol() \textit{\# From SRS DD9 Tolerable Stress Distribution Factor ($J_\text{tol}$)}
 \begin{itemize}
-\item output:  \textit{out} := $=\ln[\ln( \frac{1}{1-P_{b_{\text{tol}}}} )
-				\frac{(\frac{a}{1000}\times\frac{b}{1000})^{m-1}}
-					{k((E \times 1000)(\frac{h}{1000})^2)^m \text{LDF} }]$
+\item output:  \textit{out} := $\ln[\ln( \frac{1}{1-P_{b_{\text{tol}}}} )
+				\frac{(a \times b)^{m-1}}
+					{k(E h^2)^m \text{LDF} }]$
 \item exception: None
 \end{itemize}
 
@@ -543,8 +555,7 @@ None
 
 \noindent calc\_B($J$) \textit{\# From SRS DD1 Risk of Failure (B)}
 \begin{itemize}
-\item output:  \textit{out} := $\frac{k}{(\frac{a}{1000}\times 
-				\frac{b}{1000})^{m-1}}((E \times 1000)(\frac{h}{1000})^2)^m 
+\item output:  \textit{out} := $\frac{k}{(a \times b)^{m-1}}(E h^2)^m 
 					\times \text{LDF} \times e^J$
 \item exception: None
 \end{itemize}
@@ -561,13 +572,13 @@ None
 \item exception: None
 \end{itemize}
 
-\noindent calc\_is\_safePb($P_b$) \textit{\# From SRS T1 Safety Requirement-1)}
+\noindent calc\_is\_safePb($P_b$) \textit{\# From SRS T1 Safety Req-Pb)}
 \begin{itemize}
 \item output:  \textit{out} := $P_b < P_{b_{\text{tol}}}$
 \item exception: None
 \end{itemize}
 
-\noindent calc\_is\_safeLR($\text{LR}, q$) \textit{\# From SRS T2 Safety Requirement-2)}
+\noindent calc\_is\_safeLR($\text{LR}, q$) \textit{\# From SRS T2 Safety Req-LR)}
 \begin{itemize}
 \item output:  \textit{out} := $\text{LR} > q$
 \item exception: None
@@ -1114,14 +1125,14 @@ LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
 \item transition: write data to the file outfile associated with the string s.
   The data to output follows:
 \begin{itemize}
-\item From R4: values from R1 ($a$, $b$, $g$, $P_{b_\text{tol}}$, $\mbox{SD}_x$,
-  $\mbox{SD}_y$, $\mbox{SD}_z$, $t$, TNT, $w$), values from R2 ($m$, $k$, $E$,
+\item From SRS R4: values from SRS R1 ($a$, $b$, $g$, $P_{b_\text{tol}}$, $\mbox{SD}_x$,
+  $\mbox{SD}_y$, $\mbox{SD}_z$, $t$, TNT, $w$), values from SRS R2 ($m$, $k$, $E$,
   $t_d$, LDF, LSF, $h$, GTF, SD, AR)
-\item From R5: ($\mbox{is\_safePB} \wedge \mbox{is\_safeLR}
+\item From SRS R5: ($\mbox{is\_safePB} \wedge \mbox{is\_safeLR}
   \Rightarrow$ ``For the given input parameters, the glass is considered safe''
  $ |$ True $\Rightarrow$ ``For the given input parameters, the glass is NOT
  considered safe'') 
-\item From R6 ($P_b$, $B$, LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
+\item From SRS R6 ($P_b$, $B$, LR, $q$, $J$, NFL, $\hat{q}$, $\hat{q}_{\text{tol}}$, $J_{\text{tol}}$)
 \end{itemize}
 \item exception: None
 \end{itemize}
@@ -1148,8 +1159,8 @@ N/A
 \begin{longtable*}[l]{l} 
 \# From Table 8 in SRS\\
 $m$ := 7\\
-$k$ := $\left(2.86\right)10^{-53}$\\
-$E$ := $\left(7.17\right)10^{7}$\\
+$k$ := $2.86\times 10^{-53}$\\
+$E$ := $7.17\times 10^{7}$\\
 ${t_{d}}$ := $3$\\
 LSF := $1$\\
 ${d_{\text{max}}}$ := $5.0$\\
