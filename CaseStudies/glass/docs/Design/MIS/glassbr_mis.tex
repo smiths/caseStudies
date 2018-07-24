@@ -1009,6 +1009,8 @@ None
 \hline
 isAscending & $X: \mathbb{R}^n$ & $\mathbb{B}$ & ~\\
 \hline
+isInBounds & $X: \mathbb{R}^n, x: \mathbb{R}$ & $\mathbb{B}$ & ~\\
+\hline
 interpLin & $x_1: \mathbb{R}, y_1: \mathbb{R}, x_2: \mathbb{R}, y_2: \mathbb{R},
            x: \mathbb{R}$ & $\mathbb{R}$ & ~\\
 \hline
@@ -1044,6 +1046,12 @@ None, unless noted with a particular access program
 \item exception: none
 \end{itemize}
 
+\noindent isInBounds($X, x$) \textit{\# assuming isAscending is True}
+\begin{itemize}
+\item output: $out := X_0 \leq x \leq X_{|X|-1}$
+\item exception: none
+\end{itemize}
+
 \noindent interpLin($x_1, y_1, x_2, y_2, x$) \textit{\# assuming isAscending is True}
 \begin{itemize}
 \item output: $out := \frac{(y_2 - y_1)}{(x_2-x_1)} (x - x_1) + y_1$
@@ -1057,8 +1065,7 @@ None, unless noted with a particular access program
 \item exception: none
 \end{itemize}
 
-\noindent index($X, x$) \textit{\# assuming isAscending is True and that x is
-  within bounds}
+\noindent index($X, x$) \textit{\# assuming isAscending is True and isInBounds is True}
 \begin{itemize}
 \item output: $out := i \mbox{ such that } X_i \leq x < X_{i+1}$
 \item exception: none
