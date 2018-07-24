@@ -355,26 +355,25 @@ with a '\#' symbol.
 \item exception: exc := \textit{\# From the SRS Table 2, R3}
 \end{itemize}
 \noindent \begin{longtable*}[l]{l l}
-  $\neg (a > 0)$ & $\Rightarrow$ ValueError(``dimension $a$ must be positive'')\\
-  $\neg (\text{AR} \geq 1.0)$ & $\Rightarrow$ ValueError(``$a$ must be equal to, or
-  greater than, $b$'')\\
+  $\neg (a > 0)$ & $\Rightarrow$ ValueError(``$a$ must be positive'')\\
+  $\neg (\text{AR} \geq 1.0)$ & $\Rightarrow$ ValueError(``$a$ must be greater than or equal to $b$'')\\
   $\neg (d_{\text{min}} \leq a \leq d_{\text{max}})$ & $\Rightarrow$
   ValueError(``$a$ too
   large or small'')\\
-  $\neg(\text{AR}< \text{AR}_{\text{max}})$ & $\Rightarrow$ ValueError(``Allowable
+  $\neg(\text{AR}< \text{AR}_{\text{max}})$ & $\Rightarrow$ ValueError(``allowable
   aspect
   ratio exceeded'')\\
-  $\neg (b > 0)$ & $\Rightarrow$ ValueError(``dimension $b$ must be positive'')\\
+  $\neg (b > 0)$ & $\Rightarrow$ ValueError(``$b$ must be positive'')\\
   $\neg(d_{\text{min}} \leq b \leq d_{\text{max}})$ & $\Rightarrow$
   ValueError(``$b$ too
   large or small'')\\
   $\neg(0 < P_{b_{\text{tol}}} < 1)$ & $\Rightarrow$
   ValueError(``$P_{b_{\text{tol}}}$
-  must lie between 0 and 1'')\\
-  $\neg (w > 0)$ & $\Rightarrow$ ValueError(``charge weight $w$ must be
+  must be between 0 and 1'')\\
+  $\neg (w > 0)$ & $\Rightarrow$ ValueError(``charge weight ($w$) must be
   greater than zero'')\\
   $\neg (w_{\text{min}} \leq w \leq w_{\text{max}})$ & $\Rightarrow$ ValueError(``charge
-  weight $w$ is too small or too large'')\\
+  weight ($w$) is too small or too large'')\\
   $\neg (\mbox{TNT} > 0)$ & $\Rightarrow$ ValueError(``TNT must be positive'')\\
   $\neg (\mbox{SD} > 0)$ & $\Rightarrow$ ValueError(``stand off distance (SD)
   must be positive'')\\
