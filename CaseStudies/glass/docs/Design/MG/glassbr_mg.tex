@@ -44,9 +44,11 @@ urlcolor=cyan          % color of external links
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
 
+\newcommand{\progname}{GlassBR}
+
 \begin{document}
 
-\title{Module Guide for Glass-BR} 
+\title{Module Guide for \progname} 
 \author{Spencer Smith and Thulasi Jegatheesan}
 \date{\today}
 	
@@ -233,7 +235,7 @@ implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
 system or by standard programming language libraries. If the entry is
 \emph{Python}, this means that the module is provided by Python.  
-\emph{Glass-BR} means the module will be implemented by the Glass-BR software.  
+\emph{\progname} means the module will be implemented by the \progname{} software.  
 % should reference a command for the name, in case it changes
 Only the leaf modules in the
 hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means
@@ -311,7 +313,7 @@ one module one secret rule can be relaxed in this instance.
   error if a parameter violates a physical constraint. Throws a warning if a
   parameter violates a software constraint.  Stored parameters can be read
   individually, but write access is only to redefine the entire set of inputs.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{LoadASTM (\mref{mLoad})}
@@ -324,7 +326,7 @@ one module one secret rule can be relaxed in this instance.
 \item[Services:] Reads the data from each ASTM file and creates an object that
   stores the sequence of functions represented by the data for each table of
   data.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{Output Module (\mref{mOutput})}
@@ -334,7 +336,7 @@ one module one secret rule can be relaxed in this instance.
 \item[Services:] Outputs the results of the calculations, including the input
   parameters, the demand, the capacity, the probability of breakage, and both 
   safety requirements.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description} 
 
 \subsubsection{Calc Module (\mref{mCalc})}
@@ -345,7 +347,7 @@ breakage, capacity, and demand, using the input parameters.
 \item[Services:] Defines the equations for solving for the probability of glass 
 breakage, demand, and capacity using the parameters in the input parameters 
 module.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description} 
  
 \subsubsection{Control Module (\mref{mControl})}
@@ -353,7 +355,7 @@ module.
 \begin{description}
 \item[Secrets:] The algorithm for coordinating the running of the program.
 \item[Services:] Provides the main program.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{Constants Module (\mref{mConstants})}
@@ -361,7 +363,7 @@ module.
 \begin{description}
 \item[Secrets:] The values of constants and new types.
 \item[Services:] Provides constants and types used by other modules.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{GlassTypeADT Module (\mref{mGlassType})}
@@ -369,7 +371,7 @@ module.
 \begin{description}
 \item[Secrets:] The implementation of the ``glass type'' type.
 \item[Services:] Defines abstract data type for glass type.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{ThicknessADT Module (\mref{mThickness})}
@@ -377,7 +379,7 @@ module.
 \begin{description}
 \item[Secrets:] The implementation of the thickness type.
 \item[Services:]  Defines abstract data type for thickness.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsection{Software Decision Module}
@@ -402,7 +404,7 @@ module.
 \item[Services:] Defines the abstract data type for functions, providing a
   constructor and a means to evaluate the function for a given value of the
   independent variable.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{ContoursADT Module (\mref{mContoursADT})}
@@ -414,7 +416,7 @@ module.
 \item[Services:] Defines the abstract data type for a sequence of functions.
   Allows adding/removing functions to/from the sequence.  Provides evaluation of
   the 3d function at values between the contours.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \subsubsection{SeqServices Module (\mref{mSeqServices})}
@@ -423,7 +425,7 @@ module.
 \item[Secrets:] The algorithms for services related to sequences of numbers.
 \item[Services:] Provides functions operating on sequences of numbers, such as
   checks for monotonically increasing values and interpolation.
-\item[Implemented By:] Glass-BR
+\item[Implemented By:] \progname{}
 \end{description}
 
 \section{Traceability Matrix} \label{SecTM}
