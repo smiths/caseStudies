@@ -1,6 +1,5 @@
 import pytest
 from FunctADT import *
-from Data import *
 from SeqServices import *
 
 class TestAll:
