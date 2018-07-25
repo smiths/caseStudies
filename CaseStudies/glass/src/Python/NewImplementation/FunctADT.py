@@ -53,6 +53,6 @@ class FuncT :
             raise OutOfDomain("Out of range!")
 
         if self.__o == 1:
-            return (interpLin (self.__X, self.__Y, self.__X + 1, self.__Y + 1, x))
+            return (interpLin (self.__X[self.__o], self.__Y[self.__o], self.__X[self.__o + 1], self.__Y[self.__o + 1], x))
         elif self.__o == 2:
-            return (interpQuad (self.__X - 1, self.__Y - 1, self.__X, self.__Y, self.__X + 1, self.__Y + 1, x))
+            return (interpQuad (self.__X[self.__o - 1], self.__Y[self.__o - 1], self.__X[self.__o], self.__Y[self.__o], self.__X[self.__o + 1, self.__Y[self.__o + 1], x))
