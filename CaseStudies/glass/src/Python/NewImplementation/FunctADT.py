@@ -4,6 +4,7 @@
 
 import pytest
 from SeqServices import *
+from Exceptions import *
 
 ## @brief An implementation for a CurveADT
 class FuncT :
