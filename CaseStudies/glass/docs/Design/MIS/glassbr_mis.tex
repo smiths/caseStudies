@@ -228,14 +228,14 @@ verify\_params & - & - & ValueError \\
 % From R1
 $a$ & - & $\mathbb{R}$\\
 $b$ & - & $\mathbb{R}$\\
-$w$ & - & $\mathbb{R}$\\
+$g$ & - & GlassTypeT\\
 $P_{b_\text{tol}}$ & - & $\mathbb{R}$\\
-TNT & - & $\mathbb{R}$\\
 $\text{SD}_x$ & - & $\mathbb{R}$\\
 $\text{SD}_y$ & - & $\mathbb{R}$\\
 $\text{SD}_z$ & - & $\mathbb{R}$\\
-$g$ & - & GlassTypeT\\
 $t$ & - & ThicknessT\\
+TNT & - & $\mathbb{R}$\\
+$w$ & - & $\mathbb{R}$\\
 % From R2
 $m$ & - & $\mathbb{R}$\\
 $k$ & - & $\mathbb{R}$\\
@@ -266,14 +266,14 @@ inputFile: sequence of string \#\textit{f[i] is the ith string in the text file 
 \# From SRS R1\\
 $a$: $\mathbb{R}$ \\
 $b$: $\mathbb{R}$ \\
-$w$: $\mathbb{R}$ \\
+$g$: GlassTypeT \\
 $P_{b_\text{tol}}$: $\mathbb{R}$ \\
-TNT: $\mathbb{R}$ \\
 $\text{SD}_x$ : $\mathbb{R}$ \\
 $\text{SD}_y$ : $\mathbb{R}$ \\
 $\text{SD}_z$ : $\mathbb{R}$ \\
-$g$: GlassTypeT \\
 $t$: ThicknessT \\
+TNT: $\mathbb{R}$ \\
+$w$: $\mathbb{R}$ \\
 ~\\
 \# From SRS R2\\
 $m$: $\mathbb{R}$ \\
@@ -330,7 +330,7 @@ with a '\#' symbol.
   modify the state variables using the following procedural specification:
 \begin{enumerate}
 \item Read data sequentially from inputFile to populate the state variables from
-  SRS R1 ($a$ to $w$).
+  SRS R1.
 \item Calculate the derived quantities (all other state variables, from SRS R2) as follows:
 \begin{itemize}
 \item $m, k, E, t_d, \mbox{LSF}$ as defined in Constants
