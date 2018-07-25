@@ -4,9 +4,10 @@
 
 class ThicknessT :
 
-    T = [2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0, 16.0, 19.0, 22.0]
-
     def __init__ ( self, x ):
+
+        T = [2.5, 2.7, 3.0, 4.0, 5.0, 6.0, 8.0, 10.0, 12.0, 16.0, 19.0, 22.0]
+
         if x not in T:
             raise ValueError("invalid input")
 
