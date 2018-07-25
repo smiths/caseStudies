@@ -52,7 +52,9 @@ class FuncT :
         if (not(1 <= index(self.__X, x) <= (len(self.__X) - 2))):
             raise OutOfDomain("Out of range!")
 
+        i = index ( self.__X, x)
+
         if self.__o == 1:
-            return (interpLin (self.__X[self.__o], self.__Y[self.__o], self.__X[self.__o + 1], self.__Y[self.__o + 1], x))
+            return (interpLin (self.__X[i], self.__Y[i], self.__X[i + 1], self.__Y[i + 1], x))
         elif self.__o == 2:
-            return (interpQuad (self.__X[self.__o - 1], self.__Y[self.__o - 1], self.__X[self.__o], self.__Y[self.__o], self.__X[self.__o + 1, self.__Y[self.__o + 1], x))
+            return (interpQuad (self.__X[i - 1], self.__Y[i - 1], self.__X[i], self.__Y[i], self.__X[i + 1], self.__Y[i + 1], x))

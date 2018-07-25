@@ -36,7 +36,7 @@ def interpQuad ( x0 , y0 , x1 , y1 , x2 , y2 , x ):
 ## @brief Determines the best "placement" for a value against a provided list
 #  @details Assumes isAscending is True and isInBounds is True
 #  @param x the real number input which is getting compared to elements in the current sequence
-#  @return The index at which X(i) <= v < X(i+1) holds true
+#  @return The index at which X(i) <= x < X(i+1) holds true
 def index ( X , x ):
     for i in range(0, len(X) - 1):
         if ((X[i] <= x < X[i+1])):
