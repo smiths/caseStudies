@@ -6,7 +6,7 @@ import pytest
 from SeqServices import *
 
 ## @brief An implementation for a CurveADT
-class FunctT :
+class FuncT :
 
     # exported constants
     MAX_ORDER = 2

@@ -20,7 +20,7 @@ class TestAll:
         X = [1, 2, 10]
         Y = [1, 2, 10]
         o = 1
-        self.c1 = Funct(X, Y, o)
+        self.c1 = FuncT(X, Y, o)
 
         X = [0, 5, 9, 13]
         Y = [0, 3, 30, 27]
