@@ -106,9 +106,8 @@ class TestAll:
 
     @staticmethod
     def test_load_params():
-        s = "testInputFile.txt"
+        s = "NewImplementation\\testInputFile.txt"
         assert (load_params(s) == 4.0, 2.0, GlassTypeT("AN"), 0.008,  
                                   0.0, 1.5, 11.0, 2.5, 1.0, 10,
                                   7, 2.86e-53, 7.17e7, 3, 1, 
                                   0.26965, 2.16, 1, 11.1018, 2.0)
-
