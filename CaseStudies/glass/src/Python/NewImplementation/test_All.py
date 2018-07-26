@@ -111,3 +111,5 @@ class TestAll:
                                   0.0, 1.5, 11.0, 2.5, 1.0, 10,
                                   7, 2.86e-53, 7.17e7, 3, 1, 
                                   0.26965, 2.16, 1, 11.1018, 2.0)
+        with pytest.raises(FileNotFoundError):
+            f = load_params("nonExistantDirectory.txt")
