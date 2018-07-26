@@ -106,10 +106,48 @@ class TestAll:
 
     @staticmethod
     def test_load_params():
-        s = "NewImplementation\\testInputFile.txt"
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
         assert (load_params(s) == 4.0, 2.0, GlassTypeT("AN"), 0.008,  
                                   0.0, 1.5, 11.0, 2.5, 1.0, 10,
                                   7, 2.86e-53, 7.17e7, 3, 1, 
                                   0.26965, 2.16, 1, 11.1018, 2.0)
         with pytest.raises(FileNotFoundError):
             f = load_params("nonExistantDirectory.txt")
+
+    @staticmethod
+    def test_verify_params():
+        path = "NewImplementation\\TestFiles\\"
+        with pytest.raises(ValueError):
+            v = load_params(path+"aNegative.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"aSmallerThanB.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"aTooLarge.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"aTooSmall.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"arMaxExceeded.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"bNegative.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"bTooLarge.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"bTooSmall.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"pbTolAboveOne.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"pbTolBelowZero.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"wNegative.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"wTooLarge.txt")
+        with pytest.raises(ValueError):
+            v= load_params(path+"wTooSmall.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"tntNegative.txt")
+        with pytest.raises(ValueError):
+            v = load_params(path+"sdTooLarge.txt")
+        with pytest.raises(ValueError):
+            v= load_params(path+"sdTooSmall.txt")
+
+
