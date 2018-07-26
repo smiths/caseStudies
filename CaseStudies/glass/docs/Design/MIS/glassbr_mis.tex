@@ -360,7 +360,7 @@ with a '\#' symbol.
   $\neg (d_{\text{min}} \leq a \leq d_{\text{max}})$ & $\Rightarrow$
   ValueError(``$a$ too
   large or small'')\\
-  $\neg(\text{AR}< \text{AR}_{\text{max}})$ & $\Rightarrow$ ValueError(``allowable
+  $\neg(\text{AR} \leq \text{AR}_{\text{max}})$ & $\Rightarrow$ ValueError(``allowable
   aspect
   ratio exceeded'')\\
   $\neg (b > 0)$ & $\Rightarrow$ ValueError(``$b$ must be positive'')\\
@@ -377,7 +377,7 @@ with a '\#' symbol.
   $\neg (\mbox{TNT} > 0)$ & $\Rightarrow$ ValueError(``TNT must be positive'')\\
   $\neg (\mbox{SD} > 0)$ & $\Rightarrow$ ValueError(``stand off distance (SD)
   must be positive'')\\
-  $\neg (\text{SD}_{\text{min}}<\text{SD}<\text{SD}_{\text{max}})$ &
+  $\neg (\text{SD}_{\text{min}} \leq \text{SD} \leq \text{SD}_{\text{max}})$ &
   $\Rightarrow$ ValueError(``stand off distance (SD) is too small or too large'')\\
 
 \end{longtable*}
