@@ -1147,11 +1147,13 @@ in Table~\ref{TblInputVar}.
 \toprule
 \textbf{Var} & \textbf{Physical Constraints} & \textbf{Software Constraints} & \textbf{Typical Value} & \textbf{Uncert.} \\
 \midrule 
-$a$&$a > 0 \wedge \text{AR} \geq 1$ & $d_{\text{min}} \leq a \leq d_{\text{max}} \wedge \text{AR}
-                           < \text{AR}_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre}& 10\%\\
+$a$&$a > 0 $ & $d_{\text{min}} \leq a \leq d_{\text{max}}$ 
+                           & 1.5 \si[per-mode=symbol] {\metre}& 10\%\\
+
+$AR$& $AR \geq 1$ & $AR \leq AR_{max}$ & 1.5 & 10\%\\
                            
-$b$&$0 < b \leq a$ & $d_{\text{min}} \leq b \leq d_{\text{max}} \wedge \text{AR}
-                           < \text{AR}_{\text{max}}$ & 1.2 \si[per-mode=symbol]{\metre}& 10\%\\
+$b$&$0 < b \leq a$ & $d_{\text{min}} \leq b \leq d_{\text{max}}$ 
+                           & 1.2 \si[per-mode=symbol]{\metre}& 10\%\\
                            
 $P_{b_{\text{tol}}}$& $0 < P_{b_{\text{tol}}} < 1$& --& 0.008 &0.1\%\\
 
