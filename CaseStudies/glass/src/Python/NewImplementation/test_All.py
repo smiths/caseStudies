@@ -2,7 +2,7 @@ import pytest
 from FunctADT import *
 from SeqServices import *
 from Input import Input
-from GlassTypeADT import GlassTypeT
+from GlassTypeADT import *
 from ThicknessADT import ThicknessT
 
 from math import isclose
@@ -105,6 +105,36 @@ class TestAll:
         assert (self.c1.eval(3) == 3) # order 1 tested
         assert (self.c2.eval(6) == 7.083333333333334) # order 2 tested
 
+# test GlassTypeADT.py
+
+class TestGlassTypeADT:
+
+    # Testing initialization of GlassTypeT and exceptions
+    def test_constructor_GlassTypeT(self):
+        assert (GlassTypeT("AN").g == gtf.AN)
+        assert (GlassTypeT("FT").g == gtf.FT)
+        assert (GlassTypeT("HS").g == gtf.HS)
+        with pytest.raises(ValueError):
+            gt = GlassTypeT("GT").g
+        with pytest.raises(ValueError):
+            gt = GlassTypeT("an").g
+        with pytest.raises(ValueError):
+            gt = GlassTypeT("").g
+        with pytest.raises(ValueError):
+            gt = GlassTypeT(2).g
+
+    #Testing conversion from glass type to GTF
+    def test_GTF(self):
+        assert (GlassTypeT("AN").GTF() == 1.0)
+        assert (GlassTypeT("FT").GTF() == 4.0)
+        assert (GlassTypeT("HS").GTF() == 2.0)
+
+    #Testing getting string
+    def test_toString(self):
+        assert (GlassTypeT("AN").toString() == "AN")
+        assert (GlassTypeT("FT").toString() == "FT")
+        assert (GlassTypeT("HS").toString() == "HS")
+
 # test ThicknessADT.py
 
 class TestThicknessT:
@@ -125,7 +155,7 @@ class TestThicknessT:
         assert (ThicknessT(8.0).toMinThick() == 7.42)
         assert (ThicknessT(22.0).toMinThick() == 21.44)
 
-    # Testing getting t
+    # Testing getting t (float)
 
     def test_toFloat(self):
         assert (ThicknessT(2.5).toFloat() == 2.5)
