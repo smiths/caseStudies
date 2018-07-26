@@ -5,7 +5,6 @@
 import Constants as Con
 from GlassTypeADT import GlassTypeT
 from ThicknessADT import ThicknessT
-import os
 
 ## @brief Loads values from input file, Constraints.py, and calculations
 #  @param s filename
