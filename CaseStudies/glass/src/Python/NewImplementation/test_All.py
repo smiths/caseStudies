@@ -1,8 +1,10 @@
 import pytest
 from FunctADT import *
 from SeqServices import *
-from Input import *
+from Input import Input
 from GlassTypeADT import GlassTypeT
+
+from math import isclose
 
 class TestAll:
 
@@ -102,54 +104,103 @@ class TestAll:
         assert (self.c1.eval(3) == 3) # order 1 tested
         assert (self.c2.eval(6) == 7.083333333333334) # order 2 tested
 
-    # test Input.py
+# test Input.py
 
-    @staticmethod
-    def test_load_params():
+class TestInput:
+
+    # Testing initialization of Input
+    def test_constructor_Input(self):
+        init = Input()
+        assert init.a == 0.0
+        assert init.b == 0.0
+        assert init.g == "AN"
+        assert init.Pbtol == 0.0
+        assert init.SDx == 0.0
+        assert init.SDy == 0.0
+        assert init.SDz == 0.0
+        assert init.t == 2.5
+        assert init.TNT == 0.0
+        assert init.w == 0.0
+        
+        assert init.m == 0.0
+        assert init.k == 0.0
+        assert init.E == 0.0
+        assert init.td == 0.0
+        assert init.LSF == 0.0
+
+        assert init.LDF == 0.0
+        assert init.h == 0.0
+        assert init.GTF == 0.0
+        assert init.SD == 0.0
+        assert init.AR == 0.0
+
+    # Testing loading from file and FileNotFoundError exception
+    def test_load_params_default(self):
         s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
-        assert (load_params(s) == 4.0, 2.0, GlassTypeT("AN"), 0.008,  
-                                  0.0, 1.5, 11.0, 2.5, 1.0, 10,
-                                  7, 2.86e-53, 7.17e7, 3, 1, 
-                                  0.26965, 2.16, 1, 11.1018, 2.0)
-        with pytest.raises(FileNotFoundError):
-            f = load_params("nonExistantDirectory.txt")
+        default = Input()
+        default.load_params(s)
+        assert default.a == 4.0
+        assert default.b == 2.0
+        assert default.g.toString() == "AN"
+        assert default.Pbtol == 0.008
+        assert default.SDx == 0.0
+        assert default.SDy == 1.5
+        assert default.SDz == 11.0
+        assert default.t.toFloat() == 2.5
+        assert default.TNT == 1.0
+        assert default.w == 10
+        
+        assert default.m == 7
+        assert default.k == 2.86e-53
+        assert default.E == 7.17e7
+        assert default.td == 3
+        assert default.LSF == 1
 
-    @staticmethod
-    def test_verify_params():
+        assert isclose(default.LDF, 0.2696, abs_tol=0.0001)
+        assert default.h == 2.16
+        assert default.GTF == 1
+        assert isclose(default.SD, 11.1018, abs_tol=0.0001)
+        assert default.AR == 2.0
+
+        fail = Input()
+        with pytest.raises(FileNotFoundError):
+            fail.load_params("nonExistantDirectory.txt")
+
+    # Testing exceptions of verify_params()
+    def test_verify_params(self):
         path = "NewImplementation\\TestFiles\\"
+        init = Input()
         with pytest.raises(ValueError):
-            v = load_params(path+"aNegative.txt")
+            init.load_params(path+"aNegative.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"aSmallerThanB.txt")
+            init.load_params(path+"aSmallerThanB.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"aTooLarge.txt")
+            init.load_params(path+"aTooLarge.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"aTooSmall.txt")
+            init.load_params(path+"aTooSmall.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"arMaxExceeded.txt")
+            init.load_params(path+"arMaxExceeded.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"bNegative.txt")
+            init.load_params(path+"bNegative.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"bTooLarge.txt")
+            init.load_params(path+"bTooLarge.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"bTooSmall.txt")
+            init.load_params(path+"bTooSmall.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"pbTolAboveOne.txt")
+            init.load_params(path+"pbTolAboveOne.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"pbTolBelowZero.txt")
+            init.load_params(path+"pbTolBelowZero.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"wNegative.txt")
+            init.load_params(path+"wNegative.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"wTooLarge.txt")
+            init.load_params(path+"wTooLarge.txt")
         with pytest.raises(ValueError):
-            v= load_params(path+"wTooSmall.txt")
+            init.load_params(path+"wTooSmall.txt")
         with pytest.raises(ValueError):
-            v = load_params(path+"tntNegative.txt")
+            init.load_params(path+"tntNegative.txt")
         # Cannot create a test case for SD < 0, since it is calculated from
         # positive numbers and will always be positive.
         with pytest.raises(ValueError):
-            v = load_params(path+"sdTooLarge.txt")
+            init.load_params(path+"sdTooLarge.txt")
         with pytest.raises(ValueError):
-            v= load_params(path+"sdTooSmall.txt")
-
-
+            init.load_params(path+"sdTooSmall.txt")
