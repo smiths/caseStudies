@@ -1,50 +1,31 @@
-ifdef ComSpec
-	RM = del /F /Q
-	SEP2 = \\
-	SEP1 = $(strip $(SEP2))
-	COM_SEP = &
-else
-	RM = rm -rf
-	SEP2 = /
-	SEP1 = $(strip $(SEP2))
-	COM_SEP = ;
-endif
-
-# PY = python3.4 #for systems where version 3 is not the default
 PY = py -3
-PYFLAGS = -m
+PYTST = pytest
+PYFLAGS = --cov
+DOXY = doxygen
+DOXYCFG = doxConfig
+
 PYDOC = $(PY) -m pydoc
 PYDOCFLAGS = -w
 
+RMDIR = rm -rf
+
 DOCDIR = doc
 
-MAIN_MOD = Implementation.mainfun
-MAIN_EXE = $(PY) $(PYFLAGS) $(MAIN_MOD)
+.PHONY: test doc clean
 
-SOURCE = $(wildcard Implementation$(SEP1)*.py)
-MODULE = $(patsubst Implementation$(SEP1)%.py, Implementation.%, $(SOURCE))
+test:
+	$(PYTST) $(PYFLAGS)
 
-TEST_SRC = $(wildcard Test$(SEP1)test*$(SEP1)test*.py)
-TEST_MOD = $(subst $(SEP1),.,$(basename $(TEST)))
-TEST_INP = $(wildcard Test$(SEP1)Inputfiles$(SEP1)*.txt)
-TEST_ALL = Test.allTests
-
-.PHONY: all prog doc test clean
-
-prog : $(SOURCE)
-	$(MAIN_EXE) defaultInput.txt
-
-doc :
+doc:
 	mkdir -p $(DOCDIR)
-	$(PYDOC) $(PYDOCFLAGS) $(MODULE)
-	mv *.html $(DOCDIR)
+	$(DOXY) $(DOXYCFG)
+	cd html && mv *.html ../$(DOCDIR)
+	cd latex && $(MAKE) 
+	cd latex && mv *.tex ../$(DOCDIR)
+	cd latex && mv *.pdf ../$(DOCDIR)
 	@echo The generated files have been moved \
-	to a new directory /glass/doc
-
-test :
-	$(PY) $(PYFLAGS) unittest discover Test
-
-all : prog doc test
-
-clean :
-	$(RM) *.pyc $(DOCDIR)
+	to a new directory /$(DOCDIR)
+  
+clean:
+	@- $(RMDIR) html
+	@- $(RMDIR) latex
