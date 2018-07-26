@@ -30,3 +30,5 @@ Main
 *.pyc
 __pycache__
 *.class
+*.coverage
+*.pytest_cache/
