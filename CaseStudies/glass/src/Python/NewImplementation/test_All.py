@@ -3,6 +3,7 @@ from FunctADT import *
 from SeqServices import *
 from Input import Input
 from GlassTypeADT import GlassTypeT
+from ThicknessADT import ThicknessT
 
 from math import isclose
 
@@ -104,10 +105,36 @@ class TestAll:
         assert (self.c1.eval(3) == 3) # order 1 tested
         assert (self.c2.eval(6) == 7.083333333333334) # order 2 tested
 
+# test ThicknessADT.py
+
+class TestThicknessT:
+
+    # Testing initialization of ThicknessT and exceptions
+    def test_constructor_ThicknessT(self):
+        assert (ThicknessT(2.5).t == 2.5)
+        assert (ThicknessT(22.0).t == 22.0)
+        with pytest.raises(ValueError):
+            th = ThicknessT(1.0).t
+        with pytest.raises(ValueError):
+            th = ThicknessT("2.5").t
+
+    # Testing conversion from t to h
+
+    def test_toMinThick(self):
+        assert (ThicknessT(2.5).toMinThick() == 2.16)
+        assert (ThicknessT(8.0).toMinThick() == 7.42)
+        assert (ThicknessT(22.0).toMinThick() == 21.44)
+
+    # Testing getting t
+
+    def test_toFloat(self):
+        assert (ThicknessT(2.5).toFloat() == 2.5)
+        assert (ThicknessT(8.0).toFloat() == 8.0)
+        assert (ThicknessT(22.0).toFloat() == 22.0)
+
 # test Input.py
 
 class TestInput:
-
     # Testing initialization of Input
     def test_constructor_Input(self):
         init = Input()

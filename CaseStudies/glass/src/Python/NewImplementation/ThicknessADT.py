@@ -14,36 +14,36 @@ class ThicknessT :
             raise ValueError("Invalid type")
 
         # state variable
-        self.__t = x
+        self.t = x
 
     ## @brief Gets the nominal thickness value
     # @return the minimum thickness value
     def toMinThick ( self ):
-        if self.__t == 2.5:
+        if self.t == 2.5:
             return 2.16
-        elif self.__t == 2.7:
+        elif self.t == 2.7:
             return 2.59
-        elif self.__t == 3.0:
+        elif self.t == 3.0:
             return 2.92
-        elif self.__t == 4.0:
+        elif self.t == 4.0:
             return 3.78
-        elif self.__t == 5.0:
+        elif self.t == 5.0:
             return 4.57
-        elif self.__t == 6.0:
+        elif self.t == 6.0:
             return 5.56
-        elif self.__t == 8.0:
+        elif self.t == 8.0:
             return 7.42
-        elif self.__t == 10.0:
+        elif self.t == 10.0:
             return 9.02
-        elif self.__t == 12.0:
+        elif self.t == 12.0:
             return 11.91
-        elif self.__t == 16.0:
+        elif self.t == 16.0:
             return 15.09
-        elif self.__t == 19.0:
+        elif self.t == 19.0:
             return 18.26
-        elif self.__t == 22.0:
+        elif self.t == 22.0:
             return 21.44
 
     ## @brief Gets the nominal thickness
     def toFloat ( self ):
-        return self.__t
+        return self.t
