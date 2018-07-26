@@ -759,14 +759,23 @@ models.
   \hline
   Description & 
   $h$ is a function that maps from the nominal thickness ($t$) to the minimum thickness, as follows:\\
-  & $\begin{array}{rcrc}
-h(t) \equiv ( t  = 2.5 \Rightarrow 2.16 & | & t = 2.7 \Rightarrow 2.59 & |\\
-t = 3.0 \Rightarrow 2.92 & | & t = 4.0 \Rightarrow 3.78 & |\\
-t = 5.0 \Rightarrow 4.57 & | & t = 6.0 \Rightarrow 5.56 & |\\
-t = 8.0 \Rightarrow 7.42 & | & t = 10.0 \Rightarrow 9.02 & |\\
-t = 12.0 \Rightarrow 11.91 & | & t = 16.0 \Rightarrow 15.09 & |\\
-t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
-\end{array}$\\
+  & \begin{dmath}
+$h=\frac{1}{1000}$
+\begin{cases}
+2.16, & $t=2.5$\\
+2.59, & $t=2.7$\\
+2.92, & $t=3.0$\\
+3.78, & $t=4.0$\\
+4.57, & $t=5.0$\\
+5.56, & $t=6.0$\\
+7.42, & $t=8.0$\\
+9.02, & $t=10.0$\\
+11.91, & $t=12.0$\\
+15.09, & $t=16.0$\\
+18.26, & $t=19.0$\\
+21.44, & $t=22.0$
+\end{cases}
+    \end{dmath} \\
   \hline
   Source &
   \cite{ASTM2009}\\
