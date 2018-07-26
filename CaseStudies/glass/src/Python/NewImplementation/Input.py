@@ -9,32 +9,32 @@ from ThicknessADT import ThicknessT
 ## @brief Loads values from input file, Constraints.py, and calculations
 #  @param s filename
 def load_params ( s ):
-    infile = open(s, "r")
-    text = infile.readline()
+    inputFile = open(s, "r")
+    text = inputFile.readline()
     # length and width of glass slab
-    a = float(infile.readline())
-    b = float(infile.readline())
-    text = infile.readline()
+    a = float(inputFile.readline())
+    b = float(inputFile.readline())
+    text = inputFile.readline()
     # glass type
-    g = GlassTypeT(infile.readline().rstrip())
-    text = infile.readline()
+    g = GlassTypeT(inputFile.readline().rstrip())
+    text = inputFile.readline()
     # tolerable probability
-    Pbtol = float(infile.readline())
-    text = infile.readline()
+    Pbtol = float(inputFile.readline())
+    text = inputFile.readline()
     # stand off distance coordinates
-    SDx = float(infile.readline())
-    SDy = float(infile.readline())
-    SDz = float(infile.readline())
-    text = infile.readline()
+    SDx = float(inputFile.readline())
+    SDy = float(inputFile.readline())
+    SDz = float(inputFile.readline())
+    text = inputFile.readline()
     # thickness of glass slab
-    t = ThicknessT(float(infile.readline()))
-    text = infile.readline()
+    t = ThicknessT(float(inputFile.readline()))
+    text = inputFile.readline()
     # TNT equivalent factor
-    TNT = float(infile.readline())
-    text = infile.readline()
+    TNT = float(inputFile.readline())
+    text = inputFile.readline()
     # weight of Charge
-    w = float(infile.readline())   
-    infile.close()
+    w = float(inputFile.readline())   
+    inputFile.close()
 
     m, k, E, td, LSF = Con.m, Con.k, Con.E, Con.td, Con.LSF
 
@@ -44,6 +44,7 @@ def load_params ( s ):
     SD = pow(pow(SDx, 2) + pow(SDy, 2) + pow(SDz, 2), 0.5)
     AR = a / b
     verify_params(a, AR, b, Pbtol, w, TNT, SD)
+    return a, b, g, SDx, SDy, SDz, t, w, m, k, E, td, LSF, LDF, h, GTF, SD, AR
 
 ## @brief Loads values from input file, Constraints.py, and calculations
 def verify_params ( a, AR, b, Pbtol, w, TNT, SD ):
