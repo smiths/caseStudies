@@ -52,7 +52,7 @@ def verify_params ( ):
         raise ValueError("a must be greater than or equal to b")
     if a < Con.dmin or a > Con.dmax:
         raise ValueError("a too large or small")
-    if AR >= Con.ARmax:
+    if AR > Con.ARmax:
         raise ValueError("allowable aspect ratio exceeded")
     if b <= 0:
         raise ValueError("b must be positive")
@@ -68,5 +68,5 @@ def verify_params ( ):
         raise ValueError("TNT must be positive")
     if SD <= 0:
         raise ValueError("stand off distance (SD) must be positive")
-    if SD <= Con.SDmin or SD >= Con.SDmax:
+    if SD < Con.SDmin or SD > Con.SDmax:
         raise ValueError("stand off distance (SD) is too small or too large")
