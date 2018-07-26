@@ -62,3 +62,5 @@ To do all of the above in one step: Go to /Python and type "make all" at the pro
 /Python/defaultInput.txt: The default input file that mainfun.py consumes.
 
 /Python/Makefile: Contains the build instructions for running 'make'.
+
+/Python/doxConfig: Configuration file for Doxygen documentation. Please update INPUT tag information in this file as code is implemented. 
