@@ -1,6 +1,8 @@
 import pytest
 from FunctADT import *
 from SeqServices import *
+from Input import *
+from GlassTypeADT import GlassTypeT
 
 class TestAll:
 
@@ -99,4 +101,14 @@ class TestAll:
     def test_eval(self):
         assert (self.c1.eval(3) == 3) # order 1 tested
         assert (self.c2.eval(6) == 7.083333333333334) # order 2 tested
+
+    # test Input.py
+
+    @staticmethod
+    def test_load_params():
+        s = "testInputFile.txt"
+        assert (load_params(s) == 4.0, 2.0, GlassTypeT("AN"), 0.008,  
+                                  0.0, 1.5, 11.0, 2.5, 1.0, 10,
+                                  7, 2.86e-53, 7.17e7, 3, 1, 
+                                  0.26965, 2.16, 1, 11.1018, 2.0)
 

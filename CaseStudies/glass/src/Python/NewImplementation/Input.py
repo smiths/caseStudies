@@ -44,7 +44,7 @@ def load_params ( s ):
     SD = pow(pow(SDx, 2) + pow(SDy, 2) + pow(SDz, 2), 0.5)
     AR = a / b
     verify_params(a, AR, b, Pbtol, w, TNT, SD)
-    return a, b, g, SDx, SDy, SDz, t, w, m, k, E, td, LSF, LDF, h, GTF, SD, AR
+    return a, b, g, Pbtol, SDx, SDy, SDz, t, w, m, k, E, td, LSF, LDF, h, GTF, SD, AR
 
 ## @brief Loads values from input file, Constraints.py, and calculations
 def verify_params ( a, AR, b, Pbtol, w, TNT, SD ):
