@@ -145,6 +145,8 @@ class TestAll:
             v= load_params(path+"wTooSmall.txt")
         with pytest.raises(ValueError):
             v = load_params(path+"tntNegative.txt")
+        # Cannot create a test case for SD < 0, since it is calculated from
+        # positive numbers and will always be positive.
         with pytest.raises(ValueError):
             v = load_params(path+"sdTooLarge.txt")
         with pytest.raises(ValueError):
