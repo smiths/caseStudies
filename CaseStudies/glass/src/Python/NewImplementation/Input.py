@@ -43,9 +43,10 @@ def load_params ( s ):
     GTF = g.GTF()
     SD = pow(pow(SDx, 2) + pow(SDy, 2) + pow(SDz, 2), 0.5)
     AR = a / b
+    verify_params(a, AR, b, Pbtol, w, TNT, SD)
 
 ## @brief Loads values from input file, Constraints.py, and calculations
-def verify_params ( ):
+def verify_params ( a, AR, b, Pbtol, w, TNT, SD ):
     if a <= 0:
         raise ValueError("a must be positive")
     if AR < 1.0:
