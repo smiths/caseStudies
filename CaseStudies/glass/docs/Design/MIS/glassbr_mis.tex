@@ -729,13 +729,22 @@ None
 \noindent toMinThick():
 \begin{itemize}
 \item output: $\begin{array}{rcrc}
-out := ( t  = 2.5 \Rightarrow 2.16 & | & t = 2.7 \Rightarrow 2.59 & |\\
-t = 3.0 \Rightarrow 2.92 & | & t = 4.0 \Rightarrow 3.78 & |\\
-t = 5.0 \Rightarrow 4.57 & | & t = 6.0 \Rightarrow 5.56 & |\\
-t = 8.0 \Rightarrow 7.42 & | & t = 10.0 \Rightarrow 9.02 & |\\
-t = 12.0 \Rightarrow 11.91 & | & t = 16.0 \Rightarrow 15.09 & |\\
-t = 19.0 \Rightarrow 18.26 & | & t = 22.0 \Rightarrow 21.44 & )\\
-\end{array}$
+out := h = \frac{1}{1000}
+\begin{cases}
+t = 2.5 \Rightarrow 2.16 &\\ 
+t = 2.7 \Rightarrow 2.59 &\\
+t = 3.0 \Rightarrow 2.92 &\\
+t = 4.0 \Rightarrow 3.78 &\\
+t = 5.0 \Rightarrow 4.57 &\\
+t = 6.0 \Rightarrow 5.56 &\\
+t = 8.0 \Rightarrow 7.42 &\\ 
+t = 10.0 \Rightarrow 9.02 &\\
+t = 12.0 \Rightarrow 11.91 &\\ 
+t = 16.0 \Rightarrow 15.09 &\\
+t = 19.0 \Rightarrow 18.26 &\\ 
+t = 22.0 \Rightarrow 21.44 &\\
+\end{cases}
+    \end{array}$
 \item exception: None
 \end{itemize}
 
