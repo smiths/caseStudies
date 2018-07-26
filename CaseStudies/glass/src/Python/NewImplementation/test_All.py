@@ -62,7 +62,8 @@ class TestAll:
         assert (index([1, 2, 3, 4, 5.5], 3.12345678) == 2) # i can be found easily
 
     # test FuncTADT.py
-   
+    
+    # Testing exceptions of FuncT and associated methods
     @staticmethod
     def test_FuncT_ssmErr():
         with pytest.raises(SeqSizeMismatch):
@@ -84,9 +85,8 @@ class TestAll:
     def test_FuncT_oodErr(self):
         with pytest.raises(OutOfDomain):
             e = self.c1.eval(100)
-            e = self.c1.dfdx(0)
-            e = self.c2.dfdx(100.607)
 
+    # Testing to ensure that the methods of FuncT functions as intended
     def test_minD(self):
         assert (self.c1.minD() == 1)
 
