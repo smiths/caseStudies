@@ -37,3 +37,10 @@ class InvalidIndex(Exception):
     self.value = value
   def __str__(self):
     return str(self.value)
+
+## @brief An exception class for InvalidIndex
+class TooFewDataPts(Exception):
+  def __init__(self, value):
+    self.value = value
+  def __str__(self):
+    return str(self.value)

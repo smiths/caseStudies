@@ -287,32 +287,49 @@ class TestContoursT:
         with pytest.raises(InvalidInterpOrder):
             ct = ContoursT(0).o
 
+    def setup_method(self):
+        X = [1, 2, 10]
+        Y = [1, 2, 10]
+        o = 1
+        self.c1 = FuncT(X, Y, o)
+
+        X = [0, 5, 9, 13]
+        Y = [0, 3, 30, 27]
+        o = 2
+        self.c2 = FuncT(X, Y, o)
+
+    def teardown_method(self, method):
+        self.c1 = None
+        self.c2 = None
+
     # Testing adding of elements to state variables
     def test_add(self):
         init = ContoursT(1)
-        init.add(1, 1)
-        assert(init.S == [1])
+        init.add(self.c1, 1)
+        assert(init.S == [self.c1])
         assert(init.Z == [1])
-        init.add(3.5, 2)
-        assert(init.S == [1, 3.5])
+        init.add(self.c2, 2)
+        assert(init.S == [self.c1, self.c2])
         assert(init.Z == [1, 2])
         with pytest.raises(IndepVarNotAscending):
-            init.add(5, 0)
+            init.add(self.c1, 0)
         with pytest.raises(IndepVarNotAscending):
-            init.add(5, 2)
+            init.add(self.c1, 2)
 
     # Testing getting an element from S
     def test_getC(self):
         init = ContoursT(1)
-        init.add(1, 1)
-        init.add(3.5, 2)
-        assert(init.getC(0) == 1)
-        assert(init.getC(1) == 3.5)
+        init.add(self.c1, 1)
+        init.add(self.c2, 2)
+        assert(init.getC(0) == self.c1)
+        assert(init.getC(1) == self.c2)
         with pytest.raises(InvalidIndex):
             init.getC(2)
 
     # Testing generating a FuncT class
     def test_slice(self):
         init = ContoursT(1)
+        init.add(self.c1, 1)
+        init.add(self.c2, 2)
         with pytest.raises(OutOfDomain):
             init.slice(0, False)
