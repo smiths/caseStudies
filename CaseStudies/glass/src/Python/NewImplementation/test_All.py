@@ -142,6 +142,8 @@ class TestThicknessT:
     # Testing initialization of ThicknessT and exceptions
     def test_constructor_ThicknessT(self):
         assert (ThicknessT(2.5).t == 2.5)
+        assert (ThicknessT(2.7).t == 2.7)
+        assert (ThicknessT(3.0).t == 3.0)
         assert (ThicknessT(22.0).t == 22.0)
         with pytest.raises(ValueError):
             th = ThicknessT(1.0).t
@@ -152,7 +154,16 @@ class TestThicknessT:
 
     def test_toMinThick(self):
         assert (ThicknessT(2.5).toMinThick() == 2.16)
+        assert (ThicknessT(2.7).toMinThick() == 2.59)
+        assert (ThicknessT(3.0).toMinThick() == 2.92)
+        assert (ThicknessT(4.0).toMinThick() == 3.78)
+        assert (ThicknessT(5.0).toMinThick() == 4.57)
+        assert (ThicknessT(6.0).toMinThick() == 5.56)
         assert (ThicknessT(8.0).toMinThick() == 7.42)
+        assert (ThicknessT(10.0).toMinThick() == 9.02)
+        assert (ThicknessT(12.0).toMinThick() == 11.91)
+        assert (ThicknessT(16.0).toMinThick() == 15.09)
+        assert (ThicknessT(19.0).toMinThick() == 18.26)
         assert (ThicknessT(22.0).toMinThick() == 21.44)
 
     # Testing getting t (float)
