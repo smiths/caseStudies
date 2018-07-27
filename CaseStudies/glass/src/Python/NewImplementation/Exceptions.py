@@ -38,8 +38,15 @@ class InvalidIndex(Exception):
   def __str__(self):
     return str(self.value)
 
-## @brief An exception class for InvalidIndex
+## @brief An exception class for TooFewDataPts
 class TooFewDataPts(Exception):
+  def __init__(self, value):
+    self.value = value
+  def __str__(self):
+    return str(self.value)
+
+## @brief An exception class for InvalidOutput
+class InvalidOutput(Exception):
   def __init__(self, value):
     self.value = value
   def __str__(self):

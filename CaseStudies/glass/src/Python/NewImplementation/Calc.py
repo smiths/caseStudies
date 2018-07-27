@@ -9,19 +9,19 @@ from math import log, exp
 
 ## @brief Calculates the Dimensionless load
 #  @return the unitless load
-def calc_q_hat( q ):
-    upper = q * (a * b) ** 2
-    lower = E * ((h) ** 4) * GTF
+def calc_q_hat( q, params ):
+    upper = q * (params.a * params.b) ** 2
+    lower = params.E * (params.h ** 4) * params.GTF
     return ( upper / lower )
 
 ## @brief Calculates the Stress distribution factor based on Pbtol
 #  @return the unitless stress distribution factor
-def calc_J_tol( ):
+def calc_J_tol( params ):
     upper1 = 1
-    lower1 = 1 - Pbtol
+    lower1 = 1 - params.Pbtol
 
-    upper2 = (a * b) ** (m - 1)
-    lower2 = k * ((E * (h ** 2))** (m)) * LDF
+    upper2 = (params.a * params.b) ** (params.m - 1)
+    lower2 = params.k * ((params.E * (params.h ** 2)) ** (params.m)) * params.LDF
 
     return (log( (log(upper1 / lower1)) * (upper2 / lower2) ))
 
@@ -35,27 +35,27 @@ def calc_Pb( B ):
 
 ## @brief Calculates the Risk of failure
 #  @return unitless risk of failure
-def calc_B( J ):
-    upper = k * ((E * (h) ** 2) ** m) * LDF * exp(J)
-    lower = ((a * b) ** (m - 1))
+def calc_B( J, params ):
+    upper = params.k * ((params.E * (params.h) ** 2) ** params.m) * params.LDF * exp(J)
+    lower = ((params.a * params.b) ** (params.m - 1))
     return ( upper / lower )
 
 ## @brief Calculates the Non-factores load
 #  @return unitless non-factored load
-def calc_NFL( q̂tol ):
-    upper = q̂tol * E * (h ** 4)
-    lower = (a * b) ** 2
+def calc_NFL( q̂tol, params ):
+    upper = q̂tol * params.E * (params.h ** 4)
+    lower = (params.a * params.b) ** 2
     return ( upper / lower )
 
 ## @brief Calculates the Load resistance
 #  @return unitless load resistance
-def calc_LR( NFL ):
-    return ( NFL * GTF * LSF )
+def calc_LR( NFL, params ):
+    return ( NFL * params.GTF * params.LSF )
 
 ## @brief Calculates Safetey constraint 1
 #  @return true if the calculated probability is less than the tolerable probability
-def calc_is_safePb( Pb ):
-    if (Pb < Pbtol):
+def calc_is_safePb( Pb, params ):
+    if (Pb < params.Pbtol):
         return True
     else:
         return False

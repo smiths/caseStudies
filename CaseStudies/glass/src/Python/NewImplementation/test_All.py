@@ -5,6 +5,7 @@ from Input import Input
 from GlassTypeADT import *
 from ThicknessADT import ThicknessT
 from ContoursADT import ContoursT
+from Calc import *
 
 from math import isclose
 
@@ -333,3 +334,46 @@ class TestContoursT:
         init.add(self.c2, 2)
         with pytest.raises(OutOfDomain):
             init.slice(0, False)
+
+# test Calc.py
+
+class TestCalc:
+    s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+    params = Input()
+    params.load_params(s)
+
+    @staticmethod
+    def test_calc_q_hat(params):
+        assert isclose(calc_q_hat(2, params), 8.201e-8, abs_tol=0.00001)
+
+    @staticmethod
+    def test_calc_J_tol(params):
+        assert isclose(calc_J_tol(params), -7.448, abs_tol=0.001)
+
+    @staticmethod
+    def test_calc_Pb():
+        assert isclose(calc_Pb(5), 0.99326, abs_tol=0.00001)
+
+    @staticmethod
+    def test_calc_B(params):
+        assert isclose(calc_B(3, params), 0.9502, abs_tol=0.0001)
+        with pytest.raises(InvalidOutput):
+            calc_B(500, params)
+
+    @staticmethod
+    def test_calc_NFL(params):
+        assert isclose(calc_NFL(8, params), 1.95094e8, abs_tol=100)
+
+    @staticmethod
+    def test_calc_LR(params):
+        assert (calc_LR(5, params) == 5)
+
+    @staticmethod
+    def test_calc_is_safePb(params):
+        assert calc_is_safePb(4, params) == False
+        assert calc_is_safePb(0.0001, params) == True
+
+    @staticmethod
+    def test_calc_is_safeLR():
+        assert calc_is_safeLR(2, 1) == True
+        assert calc_is_safeLR(1, 2) == False
