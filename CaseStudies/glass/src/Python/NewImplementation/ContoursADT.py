@@ -46,17 +46,17 @@ class ContoursT :
 
     ## @brief Generates a FuncT class using the state variable sequences
     #  @return the generated FuncT class
-    def slice( self, c, flip):
+    def slice( self, x, flip):
         Zdef = []
         F = []
-        for i in range(0,(len(self.S)) - 1):
+        for i in range(len(self.S)):
             try:
                 y = self.S[i].eval(x)
                 Zdef.append(self.Z[i])
                 F.append(y)
             except OutOfDomain:
                 pass
-        if (len(Zdef)) > 0:
+        if Zdef:
             if flip:
                 return FuncT(F, Zdef, o)
             else:

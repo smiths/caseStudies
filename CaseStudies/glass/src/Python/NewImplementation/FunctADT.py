@@ -28,7 +28,7 @@ class FuncT :
         self.__X = X
         self.__Y = Y
         self.__minx = X[0]
-        self.__maxx = X[len(X) - 1]
+        self.__maxx = X[-1]
         self.__o = i
 
     ## @brief Gets the minimum independent variable value

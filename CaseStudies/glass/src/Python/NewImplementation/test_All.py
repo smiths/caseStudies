@@ -298,12 +298,10 @@ class TestContoursT:
         assert(init.Z == [1, 2])
         with pytest.raises(IndepVarNotAscending):
             init.add(5, 0)
-            init.Z
         with pytest.raises(IndepVarNotAscending):
             init.add(5, 2)
-            init.Z
 
-    #Testing getting an element from S
+    # Testing getting an element from S
     def test_getC(self):
         init = ContoursT(1)
         init.add(1, 1)
@@ -312,3 +310,9 @@ class TestContoursT:
         assert(init.getC(1) == 3.5)
         with pytest.raises(InvalidIndex):
             init.getC(2)
+
+    # Testing generating a FuncT class
+    def test_slice(self):
+        init = ContoursT(1)
+        with pytest.raises(OutOfDomain):
+            init.slice(0, False)
