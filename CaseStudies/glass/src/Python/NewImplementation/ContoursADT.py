@@ -21,27 +21,27 @@ class ContoursT :
         self.o = i
 
     ## @brief Appends elements to state variable sequences
-    def add( self, s, z):
-        if ((len(self.Z)) > 0) and (z <= self.Z[len(self.Z) - 1]):
+    def add( self, s, z ):
+        if ((len(self.Z)) > 0) and (z <= self.Z[-1]):
             raise IndepVarNotAscending("Independent variables not in ascending order!")
-        self.S = self.S.append(s)
-        self.Z = self.Z.append(z)
+        self.S.append(s)
+        self.Z.append(z)
 
     ## @brief Gets the ith element from the sequence S
     #  @return the ith element from S
-    def getC( self, i):
-        if (not(0 <= i <= len(self.S))):
+    def getC( self, i ):
+        if (not(0 <= i < len(self.S))):
             raise InvalidIndex("Index out of range")
         return self.S[i]
 
     ## @brief Evaluates the FuncT class with respect to input z
     #  @return the calculated FuncT class based on z
-    def eval( self, x, z):
+    def eval( self, x, z ):
         return (self.slice(x,False).eval(z))
 
     ## @brief Evaluates the FuncT class with respect to input y
     #  @return the calculated FuncT class based on y
-    def evaly( self, x, y):
+    def evaly( self, x, y ):
         return (self.slice(x,True).eval(y))
 
     ## @brief Generates a FuncT class using the state variable sequences

@@ -4,6 +4,7 @@ from SeqServices import *
 from Input import Input
 from GlassTypeADT import *
 from ThicknessADT import ThicknessT
+from ContoursADT import ContoursT
 
 from math import isclose
 
@@ -272,3 +273,42 @@ class TestInput:
             init.load_params(path+"sdTooLarge.txt")
         with pytest.raises(ValueError):
             init.load_params(path+"sdTooSmall.txt")
+
+# test ContoursADT.py
+
+class TestContoursT:
+    # Testing initialization of ContoursT and exceptions
+    def test_constructor_ContoursT(self):
+        assert(ContoursT(1).S == [])
+        assert(ContoursT(1).Z == [])
+        assert(ContoursT(2).o == 2)
+        with pytest.raises(InvalidInterpOrder):
+            ct = ContoursT(3).o
+        with pytest.raises(InvalidInterpOrder):
+            ct = ContoursT(0).o
+
+    # Testing adding of elements to state variables
+    def test_add(self):
+        init = ContoursT(1)
+        init.add(1, 1)
+        assert(init.S == [1])
+        assert(init.Z == [1])
+        init.add(3.5, 2)
+        assert(init.S == [1, 3.5])
+        assert(init.Z == [1, 2])
+        with pytest.raises(IndepVarNotAscending):
+            init.add(5, 0)
+            init.Z
+        with pytest.raises(IndepVarNotAscending):
+            init.add(5, 2)
+            init.Z
+
+    #Testing getting an element from S
+    def test_getC(self):
+        init = ContoursT(1)
+        init.add(1, 1)
+        init.add(3.5, 2)
+        assert(init.getC(0) == 1)
+        assert(init.getC(1) == 3.5)
+        with pytest.raises(InvalidIndex):
+            init.getC(2)
