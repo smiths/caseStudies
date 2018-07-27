@@ -50,6 +50,7 @@ class TestAll:
     def test_isInBounds():
         A = [1, 2, 3, 4, 5.5]
         assert (isInBounds(A, 3.4))
+        assert (isInBounds(A, 5.5))
         assert (not(isInBounds(A, 100)))
         assert (not(isInBounds(A, 0)))
     
@@ -65,8 +66,8 @@ class TestAll:
     def test_index():
         A = [1, 2, 3, 4, 5.5]
         assert (index(A, 1) == 0) # x is present in list, checks "=" req
-        assert (index(A, 5.5) == 3) # ensures that x < A[i+1]
-        assert (index([1, 2, 3, 4, 5.5], 3.12345678) == 2) # i can be found easily
+        assert (index(A, 4.5) == 3) # ensures that x < A[i+1]
+        assert (index(A, 3.12345678) == 2) # i can be found easily
 
     # test FuncTADT.py
     
@@ -338,38 +339,53 @@ class TestContoursT:
 # test Calc.py
 
 class TestCalc:
-    s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
-    params = Input()
-    params.load_params(s)
 
     @staticmethod
-    def test_calc_q_hat(params):
+    def test_calc_q_hat():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
         assert isclose(calc_q_hat(2, params), 8.201e-8, abs_tol=0.00001)
 
     @staticmethod
-    def test_calc_J_tol(params):
+    def test_calc_J_tol():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
         assert isclose(calc_J_tol(params), -7.448, abs_tol=0.001)
 
     @staticmethod
     def test_calc_Pb():
         assert isclose(calc_Pb(5), 0.99326, abs_tol=0.00001)
-
-    @staticmethod
-    def test_calc_B(params):
-        assert isclose(calc_B(3, params), 0.9502, abs_tol=0.0001)
         with pytest.raises(InvalidOutput):
-            calc_B(500, params)
+            calc_Pb(500)
 
     @staticmethod
-    def test_calc_NFL(params):
-        assert isclose(calc_NFL(8, params), 1.95094e8, abs_tol=100)
+    def test_calc_B():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
+        assert isclose(calc_B(3, params), 277.010, abs_tol=0.001)
 
     @staticmethod
-    def test_calc_LR(params):
+    def test_calc_NFL():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
+        assert isclose(calc_NFL(8, params), 1.95094e8, abs_tol=1000)
+
+    @staticmethod
+    def test_calc_LR():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
         assert (calc_LR(5, params) == 5)
 
     @staticmethod
-    def test_calc_is_safePb(params):
+    def test_calc_is_safePb():
+        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        params = Input()
+        params.load_params(s)
         assert calc_is_safePb(4, params) == False
         assert calc_is_safePb(0.0001, params) == True
 
