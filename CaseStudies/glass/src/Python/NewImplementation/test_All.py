@@ -207,7 +207,7 @@ class TestInput:
 
     # Testing loading from file and FileNotFoundError exception
     def test_load_params_default(self):
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         default = Input()
         default.load_params(s)
         assert default.a == 4.0
@@ -239,7 +239,7 @@ class TestInput:
 
     # Testing exceptions of verify_params()
     def test_verify_params(self):
-        path = "NewImplementation\\TestFiles\\"
+        path = "NewImplementation/TestFiles/"
         init = Input()
         with pytest.raises(ValueError):
             init.load_params(path+"aNegative.txt")
@@ -342,14 +342,14 @@ class TestCalc:
 
     @staticmethod
     def test_calc_q_hat():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert isclose(calc_q_hat(2, params), 8.201e-8, abs_tol=0.00001)
 
     @staticmethod
     def test_calc_J_tol():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert isclose(calc_J_tol(params), -7.448, abs_tol=0.001)
@@ -362,28 +362,28 @@ class TestCalc:
 
     @staticmethod
     def test_calc_B():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert isclose(calc_B(3, params), 277.010, abs_tol=0.001)
 
     @staticmethod
     def test_calc_NFL():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert isclose(calc_NFL(8, params), 1.95094e8, abs_tol=1000)
 
     @staticmethod
     def test_calc_LR():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert (calc_LR(5, params) == 5)
 
     @staticmethod
     def test_calc_is_safePb():
-        s = "NewImplementation\\TestFiles\\defaultInputFile.txt"
+        s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         params.load_params(s)
         assert calc_is_safePb(4, params) == False
