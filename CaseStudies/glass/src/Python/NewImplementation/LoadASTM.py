@@ -29,11 +29,7 @@ def LoadTSD ( s ):
         for j in range(len(q_list[i])):
             q.append(q_list[i][j])
             SD.append(SD_list[i][j])
-        print("to add:", q, SD, w_list[i])
-        print(out.Z)
         out.add(FuncT(q, SD, 1), w_list[i])
-    print(out)
-
-LoadTSD("TestFiles/defaultLoadASTM.txt")
+    return out
 
 #def LoadSDF ( s ):

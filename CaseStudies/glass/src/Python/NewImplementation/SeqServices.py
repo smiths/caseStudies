@@ -5,7 +5,7 @@
 ## @brief Checks to see if a given list is monotonically increasing
 #  @param X list in question
 def isAscending ( X ):
-    for i in range (len(X)):
+    for i in range (0, len(X) - 1):
         if (X[i+1] <= X[i]):
             return False
     return True
