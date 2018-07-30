@@ -184,12 +184,12 @@ class TestInput:
         Input()
         assert Input.a == 0.0
         assert Input.b == 0.0
-        assert Input.g == "AN"
+        assert Input.g.toString() == "AN"
         assert Input.Pbtol == 0.0
         assert Input.SDx == 0.0
         assert Input.SDy == 0.0
         assert Input.SDz == 0.0
-        assert Input.t == 2.5
+        assert Input.t.toFloat() == 2.5
         assert Input.TNT == 0.0
         assert Input.w == 0.0
         
@@ -212,12 +212,12 @@ class TestInput:
         Input.load_params(s)
         assert Input.a == 4.0
         assert Input.b == 2.0
-        assert Input.g.toString() == "AN"
+        assert Input.g.toString() == "HS"
         assert Input.Pbtol == 0.008
         assert Input.SDx == 0.0
         assert Input.SDy == 1.5
         assert Input.SDz == 11.0
-        assert Input.t.toFloat() == 2.5
+        assert Input.t.toFloat() == 2.7
         assert Input.TNT == 1.0
         assert Input.w == 10
         
@@ -228,8 +228,8 @@ class TestInput:
         assert Input.LSF == 1
 
         assert isclose(Input.LDF, 0.2696, abs_tol=0.0001)
-        assert Input.h == 2.16
-        assert Input.GTF == 1
+        assert Input.h == 2.59
+        assert Input.GTF == 2
         assert isclose(Input.SD, 11.1018, abs_tol=0.0001)
         assert Input.AR == 2.0
 
@@ -345,14 +345,14 @@ class TestCalc:
         s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         Input.load_params(s)
-        assert isclose(calc_q_hat(2, params), 8.201e-8, abs_tol=0.00001)
+        assert isclose(calc_q_hat(2, params), 1.98359e-8, abs_tol=0.00001)
 
     @staticmethod
     def test_calc_J_tol():
         s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         Input.load_params(s)
-        assert isclose(calc_J_tol(params), -7.448, abs_tol=0.001)
+        assert isclose(calc_J_tol(params), -9.99, abs_tol=0.001)
 
     @staticmethod
     def test_calc_Pb():
@@ -365,21 +365,21 @@ class TestCalc:
         s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         Input.load_params(s)
-        assert isclose(calc_B(3, params), 277.010, abs_tol=0.001)
+        assert isclose(calc_B(3, params), 3518.355, abs_tol=0.001)
 
     @staticmethod
     def test_calc_NFL():
         s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         Input.load_params(s)
-        assert isclose(calc_NFL(8, params), 1.95094e8, abs_tol=1000)
+        assert isclose(calc_NFL(8, params), 4.03300e8, abs_tol=5)
 
     @staticmethod
     def test_calc_LR():
         s = "NewImplementation/TestFiles/defaultInputFile.txt"
         params = Input()
         Input.load_params(s)
-        assert (calc_LR(5, params) == 5)
+        assert (calc_LR(5, params) == 10)
 
     @staticmethod
     def test_calc_is_safePb():

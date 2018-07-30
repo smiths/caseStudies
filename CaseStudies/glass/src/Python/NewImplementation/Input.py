@@ -10,12 +10,12 @@ class Input:
 
     a = 0.0
     b = 0.0
-    g = "AN"
+    g = GlassTypeT("AN")
     Pbtol = 0.0
     SDx = 0.0
     SDy = 0.0
     SDz = 0.0
-    t = 2.5
+    t = ThicknessT(2.5)
     TNT = 0.0
     w = 0.0
     
@@ -30,30 +30,6 @@ class Input:
     GTF = 0.0
     SD = 0.0
     AR = 0.0
-
-    def init( ):
-        Input.a = 0.0
-        Input.b = 0.0
-        Input.g = "AN"
-        Input.Pbtol = 0.0
-        Input.SDx = 0.0
-        Input.SDy = 0.0
-        Input.SDz = 0.0
-        Input.t = 2.5
-        Input.TNT = 0.0
-        Input.w = 0.0
-        
-        Input.m = 0.0
-        Input.k = 0.0
-        Input.E = 0.0
-        Input.td = 0.0
-        Input.LSF = 0.0
-
-        Input.LDF = 0.0
-        Input.h = 0.0
-        Input.GTF = 0.0
-        Input.SD = 0.0
-        Input.AR = 0.0
 
     ## @brief Loads values from input file, Constraints.py, and calculations
     #  @param s filename
@@ -91,7 +67,7 @@ class Input:
         Input.td = Con.td
         Input.LSF = Con.LSF
 
-        Input.LDF = pow(Input.td / 60, Input.m / 16)
+        Input.LDF = pow(Input.td / 60.0, Input.m / 16.0)
         Input.h = Input.t.toMinThick()
         Input.GTF = Input.g.GTF()
         Input.SD = pow(pow(Input.SDx, 2) + pow(Input.SDy, 2) + pow(Input.SDz, 2), 0.5)
