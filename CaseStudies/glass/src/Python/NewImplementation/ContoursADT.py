@@ -58,8 +58,8 @@ class ContoursT :
                 pass
         if Zdef:
             if flip:
-                return FuncT(F, Zdef, o)
+                return FuncT(F, Zdef, self.o)
             else:
-                return FuncT(Zdef, F, o)
+                return FuncT(Zdef, F, self.o)
         else:
             raise OutOfDomain("Out of domain!")
