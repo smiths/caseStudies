@@ -6,6 +6,7 @@ from GlassTypeADT import *
 from ThicknessADT import ThicknessT
 from ContoursADT import ContoursT
 from Calc import *
+from LoadASTM import *
 
 from math import isclose
 
@@ -313,10 +314,11 @@ class TestContoursT:
         init.add(self.c2, 2)
         assert(init.S == [self.c1, self.c2])
         assert(init.Z == [1, 2])
+        init.add(self.c1, 2)
+        assert(init.S == [self.c1, self.c2, self.c1])
+        assert(init.Z == [1, 2, 2])
         with pytest.raises(IndepVarNotAscending):
             init.add(self.c1, 0)
-        with pytest.raises(IndepVarNotAscending):
-            init.add(self.c1, 2)
 
     # Testing getting an element from S
     def test_getC(self):
@@ -393,3 +395,21 @@ class TestCalc:
     def test_calc_is_safeLR():
         assert calc_is_safeLR(2, 1) == True
         assert calc_is_safeLR(1, 2) == False
+
+# test LoadASTM.py
+
+class TestLoadASTM:
+
+    @staticmethod
+    def test_LoadTSD():
+        out = LoadTSD("TSD.txt")
+        assert out.Z == [4.5, 9.1, 14, 18, 23, 27, 32, 36, 41, 45, 91, 140, 180, 230, 270, 320, 360, 410, 450, 910]
+        with pytest.raises(FileNotFoundError):
+            LoadTSD("nonExistantDirectory.txt")
+
+    @staticmethod
+    def test_LoadSDF():
+        out = LoadSDF("SDF.txt")
+        assert out.Z == list(range(1, 38))
+        with pytest.raises(FileNotFoundError):
+            LoadSDF("nonExistantDirectory.txt")

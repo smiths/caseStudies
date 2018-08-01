@@ -2,7 +2,6 @@
 #  @brief Implements an ADT for a function
 #  @date 07/25/2018
 
-import pytest
 from SeqServices import *
 from Exceptions import *
 

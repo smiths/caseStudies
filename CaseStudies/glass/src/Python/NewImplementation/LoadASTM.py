@@ -2,7 +2,6 @@
 #  @brief Loads a cTSD and cSDF
 #  @date 08/01/2018
 
-import pytest
 from ContoursADT import ContoursT
 from FunctADT import FuncT
 
@@ -17,7 +16,7 @@ def LoadTSD ( s ):
     w_list = w_list.split(",")[1::2]
     for i in range(len(w_list)):
         w_list[i] = w_list[i].strip("\n")
-        w_list[i] = int(w_list[i])
+        w_list[i] = float(w_list[i])
 
     for i in range(len(qAndSD)):
         qAndSD[i] = "".join(qAndSD[i]).strip().split(",")
