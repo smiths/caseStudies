@@ -23,7 +23,6 @@ def LoadTSD ( s ):
         qAndSD[i] = "".join(qAndSD[i]).strip().split(",")
     q_list, SD_list = [], []
     for i in range(len(qAndSD[0])//2):
-        print(2*i)
         q_entry = [item[2*i] for item in qAndSD]
         SD_entry = [item[2*i+1] for item in qAndSD]
         for j in range(len(q_entry)):
@@ -60,7 +59,6 @@ def LoadSDF ( s ):
         qStarAndAR[i] = "".join(qStarAndAR[i]).strip().split(",")
     qStar_list, AR_list = [], []
     for i in range(len(qStarAndAR[0])//2):
-        print(2*i)
         qStar_entry = [item[2*i] for item in qStarAndAR]
         AR_entry = [item[2*i+1] for item in qStarAndAR]
         for j in range(len(qStar_entry)):

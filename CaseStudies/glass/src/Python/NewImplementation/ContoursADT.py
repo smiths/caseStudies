@@ -22,7 +22,7 @@ class ContoursT :
 
     ## @brief Appends elements to state variable sequences
     def add( self, s, z ):
-        if ((len(self.Z)) > 0) and (z <= self.Z[-1]):
+        if ((len(self.Z)) > 0) and (z < self.Z[-1]):
             raise IndepVarNotAscending("Independent variables not in ascending order!")
         self.S.append(s)
         self.Z.append(z)
