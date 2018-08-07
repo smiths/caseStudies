@@ -1211,6 +1211,8 @@ $P_b$ & $0 < P_b < 1$\\
 \end{table}
   
 \section{Requirements}  
+
+This section provides the functional requirements, the business tasks that the software is expected to complete, and the non-functional requirements, the qualities that the software is expected to exhibit.
   
 \subsection{Functional Requirements} \label{Func}
 
@@ -1219,10 +1221,15 @@ that the software is expected to complete.
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{Input}:] Input the following
-  quantities, which define the glass dimensions, type of glass, tolerable probability of
-  failure and the characteristics of the blast:
+\item[R\refstepcounter{reqnum}\thereqnum \label{Input}:] Input the quantities
+  from Table~\ref{TblReqInput}, which define the glass dimensions, type of glass, tolerable probability of
+  failure and the characteristics of the blast.
 
+\renewcommand{\arraystretch}{1.2}
+
+\begin{table}[!h]
+\caption{R1 Inputs} 
+\label{TblReqInput}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l p{11cm}} 
 \toprule
@@ -1242,6 +1249,7 @@ $\text{TNT}$ & -- & TNT equivalent factor\\
 $w$ & \si{\kilo\gram}	& Charge weight\\
 \bottomrule
 \end{tabular}
+\end{table}
 
 \item [R\refstepcounter{reqnum}\thereqnum \label{KnownValues}:]
 
@@ -1259,8 +1267,8 @@ The system shall set the known values as follows:
 \item[R\refstepcounter{reqnum}\thereqnum \label{Verify}:]
 
   The system shall check the entered input values to ensure that they do not
-  exceed the data constraints mentioned in \ref{sec_DataConstraints}.  If any of
-  the input parameters is out of bounds, an error message is displayed and the
+  exceed the data constraints mentioned in Section~\ref{sec_DataConstraints}.  If any of
+  the input parameters are out of bounds, an error message is displayed and the
   calculations stop.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInput}:]
@@ -1298,12 +1306,12 @@ The system shall set the known values as follows:
 
 \end{itemize}
 
-\subsection{Nonfunctional Requirements}
+\subsection{Non-Functional Requirements}
 
-Given the small size, and relative simplicity, of this problem, performance is
+This problem is small and size and relatively simple, so performance is
 not a priority.  Any reasonable implementation will be very quick and use
-minimal storage.  Rather than performance, the priority nonfunctional
-requirements are correctness, verifiability, understandability, reusability, 
+minimal storage.  Rather than performance, the  non-functional requirement
+priorities are correctness, verifiability, understandability, reusability, 
 maintainability and portability.
 
 \section{Likely Changes} \label{sec_like}
