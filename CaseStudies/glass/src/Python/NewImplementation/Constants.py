@@ -1,10 +1,10 @@
 ## @file Constants.py
 #  @brief Library module that exports required constants.
-#  @date 07/24/2018
+#  @date 08/09/2018
 
 m     = 7
 k     = 2.86e-53
-E     = 7.17e7
+E     = 7.17e10
 td    = 3
 LSF   = 1
 dmax  = 5.0

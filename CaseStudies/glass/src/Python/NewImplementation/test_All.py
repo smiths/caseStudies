@@ -224,7 +224,7 @@ class TestInput:
         
         assert Input.m == 7
         assert Input.k == 2.86e-53
-        assert Input.E == 7.17e7
+        assert Input.E == 7.17e10
         assert Input.td == 3
         assert Input.LSF == 1
 
