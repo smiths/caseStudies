@@ -197,10 +197,10 @@ their units.  The symbols are listed in alphabetical order.
   $g$ & -- & Glass type, $g \in \{ \text{AN}, \text{HS}, \text{FT} \}$\\
   $\text{GTF} $ & -- & Glass type factor\\
   $h$ & \si{\meter} & Minimum thickness\\
-  $\text{is\_safe1}$ & -- & Variable that is assigned true when calculated probability is less than
-                                  tolerable probability\\
-  $\text{is\_safe2}$ & -- & Variable that is assigned true when load resistance (capacity) is
+  $\text{is\_safeLR}$ & -- & Variable that is assigned true when load resistance (capacity) is
                                   greater than load (demand)\\
+  $\text{is\_safePb}$ & -- & Variable that is assigned true when calculated probability is less than
+                                  tolerable probability\\
   $J$ & -- & Stress distribution factor (Function)\\
   $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
@@ -652,11 +652,11 @@ This section focuses on the general equations and laws that \progname{} is based
   \hline
   Label&\bf Safety Req-Pb\\
   \hline
-  Equation& $\text{is\_safe1}= P_b < P_{b_{\text{tol}}}$\\
+  Equation& $\text{is\_safePb}= P_b < P_{b_{\text{tol}}}$\\
   \hline
   Description 
-  & If $\text{is\_safe1} = \text{True}$, the glass is considered safe.
-    $\text{is\_safe1}$ and $\text{is\_safe2}$ (from \tref{T_LR}) are either both True or
+  & If $\text{is\_safePb} = \text{True}$, the glass is considered safe.
+    $\text{is\_safePb}$ and $\text{is\_safeLR}$ (from \tref{T_LR}) are either both True or
     both False.\\
   & $P_b$ is the probability of breakage, as calculated in \iref{IM_prob}\\
   & $P_{b_{\text{tol}}}$ is the tolerable probability entered by the user\\
@@ -681,11 +681,11 @@ This section focuses on the general equations and laws that \progname{} is based
   \hline
   Label &\bf Safety Req-LR\\
   \hline
-  Equation & $\text{is\_safe2}= \text{LR} > q $\\
+  Equation & $\text{is\_safeLR}= \text{LR} > q $\\
   \hline
   Description 
-  & If $\text{is\_safe2} = \text{True}$, the glass is considered to be safe.
-    $\text{is\_safe1}$ (from \tref{T_Pb}) and $\text{is\_safe2}$ are either both True or
+  & If $\text{is\_safeLR} = \text{True}$, the glass is considered to be safe.
+    $\text{is\_safePb}$ (from \tref{T_Pb}) and $\text{is\_safeLR}$ are either both True or
     both False.\\
   & $\text{LR}$ is the Load Resistance (also called capacity), as defined in
     \iref{IM_cap}\\
@@ -1282,7 +1282,7 @@ The system shall set the known values as follows:
 %   values of a certain parameter from the graphs. \\
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_ Comparison}:] If
-  $\text{is\_safe1} \wedge \text{is\_safe2}$ (from \tref{T_Pb} and \tref{T_LR}) are true,
+  $\text{is\_safePb} \wedge \text{is\_safeLR}$ (from \tref{T_Pb} and \tref{T_LR}) are true,
   output the message ``For the given input parameters, the glass is considered
   safe.''  If the condition is false, then output the message ``For the given
   input parameters, the glass is NOT considered safe.''
