@@ -1165,8 +1165,6 @@ $AR$& $AR \geq 1$ & $AR \leq AR_{max}$ & 1.5 & 10\%\\
 $b$&$0 < b \leq a$ & $d_{\text{min}} \leq b \leq d_{\text{max}}$ 
                            & 1.2 \si[per-mode=symbol]{\metre}& 10\%\\
  
-$J$&$J > 0 $ & $J_{\text{min}} \leq J \leq J_{\text{max}}$ & -- & 10\%\\
-                          
 $P_{b_{\text{tol}}}$& $0 < P_{b_{\text{tol}}} < 1$& --& 0.008 &0.1\%\\
 
 $\text{SD}$&$\text{SD}>0$&$\text{SD}_{\text{min}} \leq \text{SD} \leq \text{SD}_{\text{max}}$&45
@@ -1206,6 +1204,7 @@ are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR
 \toprule
 \textbf{Var} & \textbf{Physical Constraints} \\
 \midrule 
+$J$&$1 \leq J \leq 32$\\
 $P_b$ & $0 < P_b < 1$\\
 \bottomrule
 \end{tabular}
@@ -1305,6 +1304,13 @@ The system shall set the known values as follows:
 \item Minimum thickness ($h$) (\ddref{DD_thick})
 \item Aspect Ratio (AR) (\ddref{DD_AR})
 \end{itemize}
+
+\item[R\refstepcounter{reqnum}\thereqnum \label{Verify}:]
+
+  The system shall check the calculated output values to ensure that they do not
+  exceed the data constraints mentioned in Section~\ref{sec_DataConstraints}.  If any of
+  the output values are out of bounds, an error message is displayed and the
+  calculations stop.
 
 \end{itemize}
 
