@@ -202,6 +202,8 @@ their units.  The symbols are listed in alphabetical order.
   $\text{is\_safePb}$ & -- & Variable that is assigned true when calculated probability is less than
                                   tolerable probability\\
   $J$ & -- & Stress distribution factor (Function)\\
+  ${J_{\text{max}}}$ & -- & Maximum value for the stress distribution factor\\
+  ${J_{\text{min}}}$ & -- & Minimum value for the stress distribution factor\\
   $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
   $\text{LDF} $ & -- & Load duration factor\\
@@ -760,23 +762,24 @@ models.
   \hline
   Description & 
   $h$ is a function that maps from the nominal thickness ($t$) to the minimum thickness, as follows:\\
-  & \begin{dmath}
-$h=\frac{1}{1000}$
+  & %\begin{dmath}
+$$h=\frac{1}{1000}
 \begin{cases}
-2.16, & $t=2.5$\\
-2.59, & $t=2.7$\\
-2.92, & $t=3.0$\\
-3.78, & $t=4.0$\\
-4.57, & $t=5.0$\\
-5.56, & $t=6.0$\\
-7.42, & $t=8.0$\\
-9.02, & $t=10.0$\\
-11.91, & $t=12.0$\\
-15.09, & $t=16.0$\\
-18.26, & $t=19.0$\\
-21.44, & $t=22.0$
-\end{cases}
-    \end{dmath} \\
+2.16, & t=2.5\\
+2.59, & t=2.7\\ 
+2.92, & t=3.0\\
+3.78, & t=4.0\\
+4.57, & t=5.0\\
+5.56, & t=6.0\\
+7.42, & t=8.0\\
+9.02, & t=10.0\\
+11.91, & t=12.0\\
+15.09, & t=16.0\\
+18.26, & t=19.0\\
+21.44, & t=22.0
+\end{cases}$$
+    %\end{dmath} 
+\\
   \hline
   Source &
   \cite{ASTM2009}\\
@@ -1204,7 +1207,7 @@ are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR
 \toprule
 \textbf{Var} & \textbf{Physical Constraints} \\
 \midrule 
-$J$&$1 \leq J \leq 32$\\
+$J$&$J_{\text{min}} \leq J \leq J_{\text{max}}$\\
 $P_b$ & $0 < P_b < 1$\\
 \bottomrule
 \end{tabular}
@@ -1276,11 +1279,6 @@ The system shall set the known values as follows:
 
   Output the input quantities from~\rref{Input} and the known quantities
   from~\rref{KnownValues}.
-
-% \item[R\refstepcounter{reqnum}\thereqnum \label{R_Interpolation}:]
-%   Some of the values requires for calculations are present in form of
-%   graphs. Hence the system is expected to do linear interpolation to extract
-%   values of a certain parameter from the graphs. \\
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_ Comparison}:] If
   $\text{is\_safePb} \wedge \text{is\_safeLR}$ (from \tref{T_Pb} and \tref{T_LR}) are true,
@@ -1542,6 +1540,10 @@ ${d_{min}}$ & minimum value for one of the dimensions of the glass plate & $0.1$
 $E$ & modulus of elasticity of glass & $7.17\times 10^{10}$ & Pa
 \\
 $k$ & surface flaw parameter & $2.86\times 10^{-53}$ & $\frac{\text{m}^{12}}{\text{N}^{7}}$
+\\
+${J_{\text{max}}}$ & maximum value for the stress distribution factor & $32.0$ & --
+\\
+${J_{\text{min}}}$ & minimum value for the stress distribution factor & $1.0$ & --
 \\
 LSF & load share factor & $1$ & --
 \\
