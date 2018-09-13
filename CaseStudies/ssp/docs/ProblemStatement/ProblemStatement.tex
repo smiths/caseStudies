@@ -1,18 +1,27 @@
 
 \documentclass[12pt]{article}
 
-\usepackage{fullpage}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\title{Problem Statement\\Slope Stability Analysis}
+\author{Henry Frankis and Brooks MacLachlan}
+\date{\today}
 
 \begin{document}
 
-\title{Slope Stability Analysis}
-\author{Henry Frankis\\ McMaster University\\ Document Driven Design}
-\date{\today}
 \maketitle
 
-\section*{Problem Statement}
-
-\begin{par} \indent \indent
+\begin{table}[hp]
+	\caption{Revision History} \label{TblRevisionHistory}
+	\begin{tabularx}{\textwidth}{llX}
+		\toprule
+		\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+		\midrule
+		09/13/18 & Brooks MacLachlan & Formatting updates\\
+		\bottomrule
+	\end{tabularx}
+\end{table}
 
 The Slope Stability Program (SSP) is intended to be
 an introductory educational tool for demonstration
@@ -37,12 +46,5 @@ surface with the lowest stability metric, including slip surfaces
 of non circular geometry. For the critical slip surface evaluate 
 the displacement of the slope and the local stability
 metric along the critical slip surface.
-
-\end{par}
-
-% ---------------------------------------------- %
-% References
-% Code - 
-
 
 \end{document}
