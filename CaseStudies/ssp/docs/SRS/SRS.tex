@@ -152,7 +152,7 @@ and analyzed at a slice or slice interface composing the total slip mass.
 
 \renewcommand{\arraystretch}{1.6}
 \setlength{\tabcolsep}{20pt}
-\begin{longtable}{  l  l  p{8.5cm}  }
+\begin{longtable*}{  l  l  p{8.5cm}  }
 \hline
 \textbf{Symbol} & \textbf{Unit} & \textbf{Description} \\
 \hline
@@ -271,7 +271,7 @@ ${\ell{}_{b}}$ &  \si{\meter}& Total Base Length of a Slice: for slice index i
 ${\ell{}_{s}}$ &  \si{\meter}& Length of an Interslice Surface: from slip base to slope surface in a vertical line from an interslice vertex for interslice index i \\
 
 \hline
-\end{longtable}
+\end{longtable*}
 \renewcommand{\arraystretch}{1}
 
 
@@ -2163,10 +2163,10 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
 
 \newpage
 
-%\begin{table}[!h]
-%\caption{Input Variables} 
+\begin{table}[!h]
+\caption{Input Variables} 
 \renewcommand{\arraystretch}{1.5}
-\noindent \begin{longtable}{p{2.4cm} p{5.8cm} p{1.2cm} c}
+\noindent \begin{longtable*}{p{2.4cm} p{5.8cm} p{1.2cm} c}
   \toprule  \label{TblInputVar}
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
@@ -2188,25 +2188,25 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
   \\
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9.8 & 10\% \\
   \bottomrule
-\end{longtable}
-%\end{table}
+\end{longtable*}
+\end{table}
 
 \noindent \begin{description}
 \item[(*)] Input coordinates needed for each layer.
 \end{description}
 
-%\begin{table}[!h]
-%\caption{Output Variables} 
+\begin{table}[!h]
+\caption{Output Variables} 
 \renewcommand{\arraystretch}{1.2} 
-\noindent \begin{longtable}{l l} 
+\noindent \begin{longtable*}{l l} 
   \toprule \label{TblOutputVar}
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $FS$ & $FS>0$ \\
   $(x,y)$ Slip vertices' &  Vertices are monotonic \\
   \bottomrule
-\end{longtable}
-%\end{table}
+\end{longtable*}
+\end{table}
 
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
@@ -2231,8 +2231,8 @@ requirements, the qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Read the
-  input file, and store the data. Necessary input data summarized in
-  \tableref{Table:Inputs}. [\aref{A_Input}, \aref{A_Homo}]
+  input file, shown in the table below, and store the data. [\aref{A_Input}, 
+  \aref{A_Homo}]
   
   \renewcommand{\arraystretch}{1.5}
   %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
@@ -2247,56 +2247,44 @@ requirements, the qualities that the software is expected to exhibit.
     $c'$ & $\text{kPa}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
-    $\gamma$ & $\frac{\text{kN}}{\text{m}^3}$ & Unit weight of dry
+    $\gamma$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit weight of dry
     soil / ground layer for each slope layer. \\
-    $\gamma_{\text{Sat}}$ & $\frac{\text{kN}}{\text{m}^3}$ & Unit
+    $\gamma_{\text{Sat}}$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit
     weight of saturated soil / ground layer for each slope
     layer. \\
-    $\gamma_{\text{w}}$ & $\frac{\text{kN}}{\text{m}^3}$ & Unit
+    $\gamma_{\text{w}}$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit
     weight of water. \\ \bottomrule
 \end{longtable}
 
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_KinAdm}:] Verify that the 
+input data lies within physical constraints as shown in 
+Table~\ref{TblInputVar}.
+
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_InitGen}:] Generate
-  potential critical slip surface's for the input slope. 
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_KinAdm}:] Test the
-  slip surfaces to determine if they are physically realizable based
-  on a set of pass or fail criteria. [\aref{A_Concave}]
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Slice}:] Prepare the
-  slip surfaces for a method of slices or limit equilibrium analysis.
+potential critical slip surfaces for the input slope. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_FS}:] Calculate the
-  factors of safety of the slip surfaces.
+  factors of safety of each of the potential critical slip surfaces.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Weight}:] Rank and
-  weight the slopes based on their factor of safety, such that a slip
-  surface with a smaller factor of safety has a larger weighting.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Minimize}:] Compare the 
+factor of safety for each potential critical slip surface to determine the 
+minimum factor of safety, corresponding to the critical slip surface.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_NewGen}:] Generate
-  new potential critical slip surfaces based on previously analysed
-  slip surfaces with low factors of safety.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] Verify that 
+the factor of safety and critical slip surface satisfy the physical constraints 
+shown in Table~\ref{TblOutputVar}.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Minimize}:] Repeat
-  requirements \rref{R_KinAdm} to \rref{R_NewGen} until the
-  minimum factor of safety remains approximately the same over a
-  predetermined number of repetitions. Identify the slip surface that
-  generates the minimum factor of safety as the critical slip surface.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_CritGraph}:] Display
+  the critical slip surface of the 2D slope graphically. 
   
-\bmac{Can we reference requirements in other requirements like this? This reads 
-like a procedure, not a list of requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputFS}:] Display the value 
+of the factor of safety for the critical slip surface.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_PrepOutput}:]
-  Prepare the critical slip surface for method of slices or limit
-  equilibrium analysis.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_NormalGraph}:] Calculate and 
+graphically display the interslice normal forces.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Analyze}:] Calculate
-  the factor of safety of the critical slip surface using the
-  Morgenstern price method.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] Display
-  the critical slip surface graphically. Display the values of the factors of 
-  safety.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_ShearGraph}:] Calculate and 
+graphically display the interslice shear forces.
   
 \end{itemize}
 
