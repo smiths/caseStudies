@@ -14,6 +14,8 @@
 \usepackage{enumitem}
 \usepackage{siunitx}
 \usepackage{graphicx}
+\usepackage{pdflscape}
+\usepackage{afterpage}
 \usepackage{caption}
 
 \definecolor{AFB}{rgb}{0.36, 0.54, 0.66}
@@ -156,11 +158,8 @@ and analyzed at a slice or slice interface composing the total slip mass.
 \hline
 $\{{x_{cs}}{,y_{cs}}\}$ & \si{\meter}& The Set of X and Y Coordinates: describe the vertices of the critical slip surface 
 \\
-$(x,y)$ & \si{\meter}& Cartesian Position Coordinates: y is considered parallel to the direction of the force of gravity and x is considered perpendicular to y
-\\
-$a$ & \si{\meter}& Constant: FIXME: missing description
-\\
-$A$ & \si{\meter}& Constant: FIXME: missing description
+$(x,y)$ & \si{\meter}& Cartesian Position Coordinates: y is considered parallel 
+to the direction of the force of gravity and x is considered perpendicular to y
 \\
 $b$ & \si{\meter}& Base Width of a Slice: in the x-ordinate direction only for slice index i
 \\
@@ -182,8 +181,6 @@ $f$ & & Scaling Function: magnitude of interslice forces as a function of the x 
 \\
 $FS$ & &Factor of Safety: The global stability of a surface in a slope  
 \\
-${FS_{Loc,i}}$ & & Local Factor of Safety: for slice index i  
-\\
 $G$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices for interslice index i
 \\
 $H$ & \si{\newton} &Interslice Water Force: exerted in the x-ordinate direction between adjacent slices for interslice index i
@@ -194,41 +191,20 @@ $h$ &  \si{\meter}&Midpoint Height: distance from the slip base to the slope sur
 \\
 $i$ & & Index: used to show a quantity applies to only one slice 
 \\
-${K_{bA}}$ &\si{\pascal\per\meter} & Effective Base Stiffness a: for rotated coordinates of a slice base surface, for slice index i
-\\
-${K_{bB}}$ &\si{\pascal\per\meter} & Effective Base Stiffness a: for rotated coordinates of a slice base surface, for slice index i
-\\
-$K$ &  \si{\pascal\per\meter} &Stiffness: The extent a body resists strain.
-\\
-${K_{bn}}$ & \si{\pascal\per\meter} & Normal Stiffness: for a slice base surface, without length adjustment for slice index i
-\\
-${K_{bt}}$ & \si{\pascal\per\meter} & Shear Stiffness: for a slice base surface, without length adjustment for slice index i
-\\
-${K_{c}}$ & & Earthquake Load Factor: proportionality factor of force that weight pushes outwards; caused by seismic earth movements 
-\\
-${K_{no}}$ &\si{\pascal\per\meter} & Normal Stiffness: residual strength
-\\
-${K_{sn}}$ &\si{\pascal\per\meter} & Normal Stiffness: for an interslice surface, without length adjustment for interslice index i
-\\
-${K_{st}}$ & \si{\pascal\per\meter} & Shear Stiffness: for interslice surface, without length adjustment for interslice index i
-\\
-${K_{tr}}$ &\si{\pascal\per\meter} & Shear Stiffness: residual strength
+${K_{c}}$ & & Earthquake Load Factor: proportionality factor of force that 
+weight pushes outwards; caused by seismic earth movements 
 \\
 $M$ & N\si{\meter}& Moment: a measure of the tendency of a body to rotate about a specific point or axis
 \\
 $N$ & \si{\newton} & Normal Force: total reactive force for a soil surface subject to a body resting on it
 \\
-$N'$ &\si{\newton} & Effective Normal Force: for a soil surface, subtracting pore water reactive force from total reactive force 
-\\
-$n$ & & Number of Slices: the slip mass has been divided into  
-\\
-$N*$ &\si{\newton} & Effective Normal Force: for a soil surface, without the influence of interslice forces
-\\
-$p$ & \si{\pascal} & Pressure: A force exerted over an area
+$N'$ &\si{\newton} & Effective Normal Force: for a soil surface, subtracting 
+pore water reactive force from total reactive force 
 \\
 $P$ & \si{\newton} & Resistive Shear Force: Mohr Coulomb frictional force that describes the limit of mobilized shear force the slice i can withstand before failure
 \\
-$Q$ & \si{\newton} & Imposed Surface Load: a downward force acting into the surface from midpoint of slice i
+$Q$ & \si{\newton} & Imposed Surface Load: a downward force acting into the 
+surface from midpoint of slice i
 \\
 $R$ & \si{\newton} & Resistive Shear Force: without the influence of interslice forces for slice index i
 \\
@@ -241,10 +217,6 @@ $T$ & \si{\newton} & Mobilized Shear Force: without the influence of interslice 
 ${U_{b}}$ & \si{\newton} & Base Hydrostatic Force: from water pressure within the slice for slice index i
 \\
 ${U_{t}}$ & \si{\newton} & Surface Hydrostatic Force: from water pressure acting into the slice from standing water on the slope surface for slice index i
-\\
-$u$ & & Local Index: used as a bound variable index in calculations
-\\
-$v$ &  &Local Index: used as a bound variable index in calculations
 \\
 $W$ & \si{\newton} &Weight: downward force caused by gravity on slice i
 \\
@@ -276,29 +248,9 @@ ${\gamma{}_{Sat}}$ &  \si{\pascal\per\cubic\newton} &Saturated Unit Weight: The 
 \\
 ${\gamma{}_{w}}$ & \si{\pascal\per\cubic\newton} & Unit Weight of Water: The weight of one cubic meter of water.
 \\
-$\delta{}$ & \si{\meter}& Displacement: generic displacement of a body 
-\\
-$\delta{}n$ & \si{\meter}& Displacement: for the element parallel to the surface for slice index i
-\\
-$\delta{}t$ &  \si{\meter}&Displacement: for the element normal to the surface for slice index i 
-\\
-$\delta{}u$ &  \si{\meter}&Displacement: shear displacement for slice index i 
-\\
-$\delta{}v$ & \si{\meter}& Displacement: normal displacement for slice index i 
-\\
-$\delta{}x$ &  \si{\meter}& Displacement: in the x-ordinate direction for slice index i 
-\\
-$\delta{}y$ &  \si{\meter}& Displacement: in the y-ordinate direction for slice index i 
-\\
-$\varepsilon{}$ & \si{\meter}& Displacement: in rotated coordinate system
-\\
-$\kappa{}$ &\si{\pascal} & Constant: FIXME: missing description
-\\
 $\lambda{}$ & & Interslice Normal/shear Force Ratio: applied to all interslices
 \\
 $\mu{}$ &\si{\pascal} & Pore Pressure: from water within the soil
-\\
-$\nu{}$ & & Poisson's Ratio: The ratio of perpendicular strain to parallel strain. 
 \\
 $\sigma{}$ & \si{\pascal} &Normal Stress: The stress exerted perpendicular to the plane of the object
 \\
@@ -526,6 +478,8 @@ sections and their meaning, with the purpose of reducing ambiguity and
   0. Results when the length of one dimension of the body dominates
   the others. Stresses in the dominant dimensions direction are the
   ones that can be approximated as 0.}
+
+\bmac{I want to add more to this: isotropic, slip surface, etc.}
   
 \end{itemize}
 
@@ -641,7 +595,7 @@ The numbers given in the square brackets refer to the data definition, or the in
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Input}] The
   geometry of the slope, and the material properties of the soil
-  layers are given as inputs. [\iref{IM_RFEM}]
+  layers are given as inputs.
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The
   different layers of the soil are homogeneous, with consistent soil
@@ -1288,7 +1242,8 @@ Equation &
 
 \hline
 Description & $\alpha{}$ is the angle (${}^{\circ}$)\newline${y_{slip}}$
- is the y ordinate (m)\newline$i$ is the index\newline${x_{slip}}$ is the x ordinate (m)
+ is the y ordinate (m)\newline$i$ is the index\newline${x_{slip}}$ is the x 
+ ordinate (m)
 \\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -1371,7 +1326,7 @@ $b$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
 \hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
+DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_lb}\\
 
 \hline Label& \bf Total Base Length of a Slice \\
 
@@ -1397,7 +1352,7 @@ ${\ell{}_{b}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 \begin{tabular}{| p{1.5cm} | p{14cm} |}
   
 \hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
+DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
 
 \hline Label& \bf Length of an Interslice Surface \\
 
@@ -1405,7 +1360,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
 Equation & 
 ${\ell{}_{s}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 
-\hline Description &${\ell{}_{s}}$ is the length of an interslice surface (m)\newline$b$ is the base width of a slice (m)\newline$i$ is the index\newline$\beta{}$ is the angle (${}^{\circ}$)
+\hline Description &${\ell{}_{s}}$ is the length of an interslice surface 
+(m)\newline$b$ is the base width of a slice (m)\newline$i$ is the 
+index\newline$\beta{}$ is the angle (${}^{\circ}$)
 \\
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -2231,6 +2188,18 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
 \end{longtable}
 %\end{table}
 
+\subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
+
+\noindent
+A correct solution must exhibit
+
+\bmac{What to put here? Only numerical output are coordinates of critical slip 
+surface, factor of safety, and interslice forces, so showing that the outputs 
+follow some physical law seems difficult. Static equilibrium?}
+
+\bmac{Or, could this be something along the lines of "Slope of critical slip 
+surface must be monotonically increasing?"}
+
 \section{Requirements}
 
 This section provides the functional requirements, the business tasks
@@ -2256,7 +2225,6 @@ requirements, the qualities that the software is expected to exhibit.
     $E$ & $\text{kPa}$ & Young's modulus for each layer of the
     slope.\\
     $c'$ & $\text{kPa}$ & Cohesion for each slope layer. \\
-    $v$ & $ / $ & Poisson's ratio for each soil layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
     $\gamma$ & $\frac{\text{kN}}{\text{m}^3}$ & Unit weight of dry
@@ -2319,6 +2287,10 @@ like a procedure, not a list of requirements.}
 performance speed are secondary program priorities to correctness,
 understandability, reusability, and maintainability.
 
+\bmac{Can a non-functional requirement refer to the software documentation? Ex. 
+For maintainability, traceability between models, requirements, and assumptions 
+is visible in the SRS?}
+
 \section{Likely Changes}
 
 \noindent \begin{itemize}
@@ -2337,8 +2309,184 @@ a different algorithm would be needed.
 These models do not take into account stress in the z-direction, and therefore cannot be used without manipulation to attempt 3D analysis.
 \end{itemize}
 
+\bmac{This section is not on the template}
+
+\section{Traceability Matrices and Graphs}
+
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed.  Every time a
+component is changed, the items in the column of that component that are marked
+with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows 
+the
+dependencies of theoretical models, general definitions, data definitions, and
+instance models with each other. Table~\ref{Table:R_trace} shows the
+dependencies of instance models, requirements, and data constraints on each
+other. Table~\ref{Table:A_trace} shows the dependencies of theoretical models,
+general definitions, data definitions, instance models, and likely changes on
+the assumptions.
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+& \aref{A_Concave}& \aref{A_Input}& \aref{A_Homo}& 
+\aref{A_Isotropic}& \aref{A_Base}& \aref{A_Interslice}& 
+\aref{A_StressStrain}& \aref{A_2D}& \aref{A_Lin}& \aref{A_Straight}\\
+\hline
+\tref{TM_FS}            & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & & & & & & & & & & \\ \hline
+\dref{GD_Fy}            & & & & & & & & & & \\ \hline
+\dref{GD_P}             & & & & & & & & & & \\ \hline
+\dref{GD_MobShear}      & & & & & & & & & & \\ \hline
+\dref{GD_X}             & & & & & & & & & & \\ \hline
+\dref{GD_M}             & & & & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & & & & & & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & & \\ \hline
+\ddref{DD_Kc}           & & & & & & & & & & \\ \hline
+\ddref{DD_Q}            & & & & & & & & & & \\ \hline
+\ddref{DD_EX}           & & & & & & & & & & \\ \hline
+\ddref{DD_R}            & & & & & & & & & & \\ \hline
+\ddref{DD_T}            & & & & & & & & & & \\ \hline
+\iref{IM_FS}            & & & & & & & & & & \\ \hline
+\iref{IM_Lambda}        & & & & & & & & & & \\ \hline
+\iref{IM_E}             & & & & & & & & & & \\ \hline
+\iref{IM_Min}           & & & & & & & & & & \\ \hline
+\lcref{LC_inhomogeneous}& & & & & & & & & & \\
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Assumptions 
+and Other Items}
+\label{Table:A_trace}
+\end{table}
+\afterpage{
+\begin{landscape}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline        
+& \tref{TM_FS}& \tref{TM_Eqm}& \tref{TM_Fmc}& \tref{TM_EffStress}&
+\dref{GD_Fx}& \dref{GD_Fy} & \dref{GD_P}& \dref{GD_MobShear}& \dref{GD_X}& 
+\dref{GD_M}& \ddref{DD_W}& \ddref{DD_Ub}& \ddref{DD_Ut}& \ddref{DD_H}& 
+\ddref{DD_Angles_alpha}& \ddref{DD_Angles_Beta}& \ddref{DD_b}& \ddref{DD_lb}& 
+\ddref{DD_ls}& \ddref{DD_Kc}& \ddref{DD_Q}& \ddref{DD_EX}& \ddref{DD_R}& 
+\ddref{DD_T}& \iref{IM_FS}& \iref{IM_Lambda}& \iref{IM_E}& \iref{IM_Min} \\
+\hline
+\tref{TM_FS}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\tref{TM_Eqm}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\tref{TM_Fmc}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_Fx}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_Fy}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_P}             & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_MobShear}      & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_X}             & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\dref{GD_M}             & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_W}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Ub}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Ut}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_H}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_b}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_lb}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_ls}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Kc}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_Q}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_EX}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_R}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_T}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\iref{IM_FS}            & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\iref{IM_Lambda}        & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\iref{IM_E}             & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\ \hline
+\iref{IM_Min}           & & & & & & & & & & & & & & & & & & & & & & & & & & & & 
+\\
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Items of Different 
+Sections}
+\label{Table:trace}
+\end{table}
+\end{landscape}
+}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+& \iref{IM_FS}& \iref{IM_Lambda}& \iref{IM_E}& \iref{IM_Min}& 
+\ref{sec_DataConstraints} \\
+\hline
+\rref{R_Inputs}      & & & & & \\ \hline
+\rref{R_InitGen}     & & & & & \\ \hline
+\rref{R_KinAdm}      & & & & & \\ \hline
+\rref{R_Slice}       & & & & & \\ \hline
+\rref{R_FS}          & & & & & \\ \hline 
+\rref{R_Weight}      & & & & & \\ \hline
+\rref{R_NewGen}      & & & & & \\ \hline
+\rref{R_Minimize}    & & & & & \\ \hline
+\rref{R_PrepOutput}  & & & & & \\ \hline
+\rref{R_Analyze}     & & & & & \\ \hline
+\rref{R_OutputGraph} & & & & & \\ 
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Requirements and 
+Instance Models}
+\label{Table:R_trace}
+\end{table}
+
+The purpose of the traceability graphs is also to provide easy references on
+what has to be additionally modified if a certain component is changed.  The
+arrows in the graphs represent dependencies. The component at the tail of an
+arrow is depended on by the component at the head of that arrow. Therefore, if a
+component is changed, the components that it points to should also be
+changed. Figure~\ref{Fig_ATrace} shows the dependencies of theoretical models,
+general definitions, data definitions, instance models, likely changes, and
+assumptions on each other. Figure~\ref{Fig_RTrace} shows the dependencies of
+instance models, requirements, and data constraints on each other.
+
 \section{Values of Auxiliary Constants}
 There are no auxiliary constants.
+
+\bmac{This section is not on the template, unless it's equivalent to symbolic 
+constants in the appendix?}
 
 \newpage
 
