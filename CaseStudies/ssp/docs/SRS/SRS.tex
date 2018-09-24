@@ -479,7 +479,8 @@ sections and their meaning, with the purpose of reducing ambiguity and
   the others. Stresses in the dominant dimensions direction are the
   ones that can be approximated as 0.}
 
-\bmac{I want to add more to this: isotropic, slip surface, etc.}
+\bmac{I want to add more to this: isotropic, slip surface, etc. remove 
+compression and tension}
   
 \end{itemize}
 
@@ -499,6 +500,12 @@ shown in \fref{Fig_Index}.
 \item Slice properties convention is noted by $i$.
 \end{itemize}
 
+\bmac{I want to add some more "big picture" description of the physical system, 
+i.e. slope composed of soil layers and potentially a water table, along with a 
+figure}
+
+\bmac{The information about the slices is related to our solution method. Does 
+it even belong here? If not, where else would it go?}
 
 \begin{figure}[h!] \refstepcounter{fnum}  \label{Fig_Index}
 \begin{center}
@@ -559,18 +566,31 @@ slice is displayed in \fref{Fig_Forces}.
 
 \subsubsection{Goal statements}
 
-Given the geometry of the layers
-composing the plane of a slope, the material properties of the
-layers, and optionally the geometry of a water table, the goal statements are:
+Given the geometry of the soil layers composing the plane of a slope, the 
+material properties of the layers, estimates of feasible slip surface minimum 
+and maximum $x$ and $y$ coordinates, a boolean representing the scaling 
+function to be used, and optionally the geometry of a water table, the goal 
+statements are:
 
 \begin{itemize}
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_FS}]
-  {Evaluate the factor of safety along a given slip
-    surface.}
+  {Evaluate the factors of safety for possible slip surfaces along the slope.}
   
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Critical}]
-  {Identify the critical slip surface for the slope, with the lowest
-    factor of safety.}
+  {Identify the critical slip surface for the slope, with the lowest factor of 
+  safety.}
+
+\item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Normal}]
+  {Determine the interslice normal force between each pair of vertical slices   
+  of the slope.}
+  
+\item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Shear}]
+  {Determine the interslice shear force between each pair of vertical slices of 
+  the slope.} 
+
+\bmac{Is referring to the "interslice forces" too specific, since slicing the 
+slope is related to the numerical algorithm used to solve the equations?}
+  
 \end{itemize}
 
 \subsection{Solution Characteristics Specification}
