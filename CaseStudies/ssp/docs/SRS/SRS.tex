@@ -464,7 +464,6 @@ interface.  The responsibilities of the user and the system are as follows:
     constraints
   \item Identify the most likely failure surface within the possible input range
   \item Find the factor of safety for the slope
-  \item Find the displacement of soil that will occur on the slope
   \end{itemize}
 \end{itemize}
 
@@ -489,8 +488,7 @@ that model the slope. \\
 \subsection{Problem Description} \label{Sec_pd}
 
 \progname\ is a computer program developed to evaluate the factor of safety of a
-slope's slip surface and to calculate the displacement that the slope will
- experience.
+slope's slip surface and identify the critical slip surface of the slope.
 
 \subsubsection{Terminology}
 
@@ -540,11 +538,11 @@ convention for referencing which interslice or slice is being used is
 shown in \fref{Fig_Index}.
 
 \begin{itemize}
-\item Interslice properties convention is noted by $\text{j}$. The end
+\item Interslice properties convention is noted by $j$. The end
   interslice properties are usually not of interest, therefore use the
   interslice properties from $1\leq\text{i}\leq n-1$.
 
-\item Slice properties convention is noted by $\text{i}$.
+\item Slice properties convention is noted by $i$.
 \end{itemize}
 
 
@@ -607,21 +605,18 @@ slice is displayed in \fref{Fig_Forces}.
 
 \subsubsection{Goal statements}
 
-Given the geometry of the water table, the geometry of the layers
-composing the plane of a slope, and the material properties of the
-layers, the goal statements are:
+Given the geometry of the layers
+composing the plane of a slope, the material properties of the
+layers, and optionally the geometry of a water table, the goal statements are:
 
 \begin{itemize}
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_FS}]
-  {Evaluate local and global factors of safety along a given slip
+  {Evaluate the factor of safety along a given slip
     surface.}
   
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Critical}]
   {Identify the critical slip surface for the slope, with the lowest
     factor of safety.}
-  
-\item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Displacement}]
-  {Determine the displacement of the slope.}
 \end{itemize}
 
 \subsection{Solution Characteristics Specification}
@@ -797,7 +792,7 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
   \hline Source & \cite{FredlundKrahn}\\
   
   \hline Ref.\ By & \dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
-  \ddref{DD_T}, \iref{IM_RFEMFS}\\
+  \ddref{DD_T}\\
   
   \hline
 \end{tabular}
@@ -841,41 +836,6 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
 \end{minipage}
 % ----------------------------- %
 %        End TM Effective Stress             %
-% ----------------------------- %
-
-~\newline
-
-% ----------------------------- %
-%      Begin TM Hookes         %
-% ----------------------------- %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
-  
-  \hline Number&
-  T\refstepcounter{theorynum}\thetheorynum \label{TM_Hooke}\\
-  
-  \hline Label&\bf Hooke's Law\\
-  
-  \hline Equation& \( {F}= {K} \cdot {\delta} \) \\
-  
-  \hline Description & Stiffness $K$ is the resistance of a body to deformation by displacement $\delta{}$ when subject to a force $F$, along the 
-same direction. A body with high stiffness will experience little deformation when 
-subject to a force. \\
-
-  \hline Source & \cite{StolleGuo}\\
-
-  \hline Ref.\ By & \dref{GD_NetForce}, \dref{GD_Hookes},
-  \ddref{DD_Stiff}, \iref{IM_RFEM}, \iref{IM_RFEMFS}\\
-  
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-
-% ----------------------------- %
-%        End TM Hookes         %
 % ----------------------------- %
 
 \subsubsection{General Definitions} \label{sec_gendef}
@@ -1134,183 +1094,6 @@ instance models.
 \end{minipage}\\
 % ------------------------------------------ %
 %        End  GD Moment Equilibrium       %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%        Begin GD Net X-Force      %
-% ------------------------------------------ %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
-  
-  \hline  Number&
-  GD\refstepcounter{defnum}\thedefnum \label{GD_NetForce}\\
-  
-  \hline Label&\bf Net X-Component Force\\
-  
-  \hline Equation & \(F_{\text{x,i}} = -\Delta H_\text{i} -K_{\text{c}}
-  \cdot W_\text{i} - U_{\text{b,i}} \sin\left(\alpha_\text{i}\right) +
-  U_{\text{t,i}} \sin\left(\beta_\text{i}\right) + Q_\text{i}
-  \sin\left(\omega_\text{i}\right)\)\\
-
-
-  \hline Description & \\
-
-  \hline Source & \\
-  
-  \hline Ref.\ By & \\
-  
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-~\newline
-
-% ------------------------------------------ %
-%        Begin GD Net Force      %
-% ------------------------------------------ %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
-  
-  \hline  Number&
-  GD\refstepcounter{defnum}\thedefnum \label{GD_NetForce}\\
-  
-  \hline Label&\bf Net Y-Component Force\\
-  
-  \hline Equation &\(F_{\text{y,i}} = -W_\text{i} + U_{\text{b,i}}
-  \cos\left(\alpha_\text{i}\right) - U_{\text{t,i}}
-  \cos\left(\beta_\text{i}\right) - Q_\text{i}
-  \cos\left(\omega_\text{i}\right) \)\\
-
-  \hline Description & These equations show the net sum of the forces acting on a slice for the RFEM model and the forces that create an applied load on the slice. ${F_{x}}$ refers to the load in the direction perpendicular to the direction of the force of gravity for slice $i$, while ${F_{y}}$ refers to the load in the direction parallel to the force of gravity for slice $i$. Forces are found in the free body diagram of \fref{Fig_Forces} in section~\ref{sec_system}. In
-  this model the elements are not exerting forces on each other, so
-  the interslice forces $G$ and $X$ are not a part of the model. Index
-  $\text{i}$ refers to the values of the properties for
-  slice/interslices following convention in \fref{Fig_Index} in
-  section~\ref{sec_system}. Force variable definitions can be found in
-  \ddref{DD_W} to \ddref{DD_Q}.\\
-
-  \hline Source & \cite{ZhuEtAl2005}\\
-  
-  \hline Ref.\ By & \ddref{DD_Eqm},
-  \iref{IM_RFEM}\\
-  
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%        End  GD Net Force       %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%        Begin GD Hookes      %
-% ------------------------------------------ %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{3cm} | p{12.5cm}|}
-  
-  \hline  Number&
-  GD\refstepcounter{defnum}\thedefnum \label{GD_Hookes}\\
-  
-  \hline Label&\bf Hooke's Law 2D\\
-  
-  \hline Equation&
-
-  \( \left[\begin{array}{l} p_\text{i} \\ p_\text{i} \end{array}
-    \right] = \left[ \begin{array}{l l} K_\text{st,i} & 0 \\ 0 &
-      K_\text{bn,i}\end{array} \right] \left[\begin{array}{l} \delta
-      x_\text{i} \\ \delta y_\text{i}
-    \end{array} \right] \) \\
-
-  \hline Description & A 2D component implementation of Hooke's law as
-  seen in \tref{TM_Hooke}. $\delta n_\text{i}$ is the displacement of
-  the element normal to the surface and $\delta t_\text{i}$ is the
-  displacement of the element parallel to the surface. $p_\text{n,i}$,
-  is the net pressure acting normal to the surface, and $p_\text{t,i}$
-  is the net pressure acting parallel to the surface. Pressure is used
-  in place of force as the surface has not been normalized for it's
-  length. The stiffness values $K_\text{n,i}$ and $K_\text{t,i}$ are
-  then the resistance to displacement in the respective directions
-  defined as in \ddref{DD_Stiff}. The pressure forces would be the
-  result of applied loads on the mass, the product of the stiffness
-  elements with the displacement would be the mass's reactive force
-  that creates equilibrium with the applied forces after reaching the
-  equilibrium displacement. \\
-
-  \hline Source & \cite{StolleGuo}\\
-  
-  \hline Ref.\ By & \ddref{DD_KMats},
-  \iref{IM_RFEM}\\
-  
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%        End  GD Hookes       %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%        Begin GD Displacement Vectors      %
-% ------------------------------------------ %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{3cm} | p{12.5cm}|}
-  
-  \hline  Number&
-  GD\refstepcounter{defnum}\thedefnum \label{GD_DispVecs}\\
-  
-  \hline Label&\bf Displacement Vectors\\
-  
-  \hline Equation&
-
- $\varepsilon{}_{i}=\begin{bmatrix}
-{\delta{}u}_{i}\\
-{\delta{}v}_{i}
-\end{bmatrix}=\begin{bmatrix}
-\cos\left(\alpha{}_{i}\right) & \sin\left(\alpha{}_{i}\right)\\
-\left(-\sin\left(\alpha{}_{i}\right)\right) & \cos\left(\alpha{}_{i}\right)
-\end{bmatrix}\delta{}_{i}=\begin{bmatrix}
-\cos\left(\alpha{}_{i}\right) & \sin\left(\alpha{}_{i}\right)\\
-\left(-\sin\left(\alpha{}_{i}\right)\right) & \cos\left(\alpha{}_{i}\right)
-\end{bmatrix}\begin{bmatrix}
-{\delta{}x}_{i}\\
-{\delta{}y}_{i}
-\end{bmatrix}$\\
-
-      \hline Description &  Vectors describing the displacement of slice $i$. $\delta{}$
- is the displacement in the unrotated coordinate system, where $\delta{}x$ is the 
-displacement of the slice perpendicular to the direction of gravity, and $\delta{}y$ 
-is the displacement of the slice parallel to the force of gravity. $\varepsilon{}$ is 
-the displacement in the rotated coordinate system, where $\delta{}u$ is the 
-displacement of the slice parallel to the slice base, and $\delta{}y$ is the 
-displacement of the slice perpendicular to the slice base. $\varepsilon{}$ can also 
-be found by rotating $\delta{}$ clockwise by the base angle, $\alpha{}$ through 
-a rotation matrix as shown.\\
-
-  \hline Source & \cite{StolleGuo}\\
-  
-  \hline Ref.\ By & \ddref{DD_KMats},
-  \iref{IM_RFEM}, \iref{IM_RFEMFS}\\
-  
-  \hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%        End  GD Displacement Vectors       %
 % ------------------------------------------ %
 
 \subsubsection{Data Definition} \label{sec_datadef}
@@ -1937,323 +1720,6 @@ in terms of the known force property values of \ddref{DD_W} to
 
 ~\newline
 
-% ------------------------------------------ %
-%               Begin DD K Mats     %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_KMats}\\
-
-\hline Label& \bf Force \\
-
-\hline Equation & $p$ = $\begin{bmatrix}
-{K_{st,i}} & 0\\
-0 & {K_{bn,i}}
-\end{bmatrix}\begin{bmatrix}
-{\delta{}x}_{i}\\
-{\delta{}y}_{i}
-\end{bmatrix}$
-\\
-
-
-\hline Description & $p$ is the pressure (Pa)\newline${K_{st}}$ is the shear stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$i$ is the index\newline${K_{bn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$\delta{}x$ is the displacement (m)\newline$\delta{}y$ is the displacement (m)
-\\
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEM}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_KMats}\\
-
-\hline Label& \bf Force \\
-
-\hline Equation & $p$ = $\begin{bmatrix}
-{K_{bA,i}} & {K_{bB,i}}\\
-{K_{bB,i}} & {K_{bA,i}}
-\end{bmatrix}\begin{bmatrix}
-{\delta{}x}_{i}\\
-{\delta{}y}_{i}
-\end{bmatrix}$
-\\
-
-
-\hline Description &$p$ is the pressure (Pa)\newline${K_{bA}}$ is the effective base stiffness A ($\frac{\text{Pa}}{\text{m}}$)\newline$i$ is the index\newline${K_{bB}}$ is the effective base stiffness A ($\frac{\text{Pa}}{\text{m}}$)\newline$\delta{}x$ is the displacement (m)\newline$\delta{}y$ is the displacement (m)
-\\ 
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEM}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD K Mats         %
-% ------------------------------------------ %
-
-\subsubsection*{Derivation of Stiffness Matrices}
-\noindent
-Using the force-displacement relationship of \dref{GD_Hookes} to
-define stiffness matrix ${K_\text{st}}$, as seen in
-equation~(\ref{eq:Kmat}).
-
-\begin{equation} \label{eq:Kmat}
-  {K_\text{st,i}} = \left[ \begin{array}{l l}
-      K_\text{st,i} & 0 \\ 0 & K_\text{bn,i}\end{array} \right]
-\end{equation}
-
-\noindent
-For interslice surfaces the stiffness constants and displacements
-refer to an unrotated coordinate system, ${\delta}$ of
-\dref{GD_DispVecs}. The interslice elements are left in their standard
-coordinate system, and therefore are described by the same equation
-from \dref{GD_Hookes}. Seen as ${K}_\text{st}$ in
-\ddref{DD_KMats}. $K_\text{st}$ is the shear element in the matrix,
-and $K_\text{sn}$ is the normal element in the matrix, calculated as
-in \ddref{DD_Stiff}.
-
-~\newline\noindent For basal surfaces the stiffness constants and
-displacements refer to a system rotated for the base angle alpha
-(\ddref{DD_Angles_alpha}). To analyze the effect of force-displacement
-relationships occurring on both basal and interslice surfaces of an
-element $i$ they must reference the same coordinate system. The
-basal stiffness matrix must be rotated counter clockwise to align with
-the angle of the basal surface. The base stiffness counter clockwise
-rotation is applied in equation~(\ref{eq:Krot}) to the new matrix
-$\bar{K^*_\text{i}}$.
-
-
-\begin{equation} \label{eq:Krot}
-  \begin{aligned} \bar{K^*_\text{i}} & = 
-   \left[ \begin{array}{l l} \cos\left(\alpha_\text{i}\right) & -
-       \sin\left(\alpha_\text{i}\right)\\ \sin\left(\alpha_\text{i}\right)
-       & \cos\left(\alpha_\text{i}\right)\end{array} \right]
-   \bar{K_\text{i}}\\ {} & = \left[ \begin{array}{l l} K_\text{bt,i}
-       \cos\left(\alpha_\text{i}\right) & - K_\text{bn,i}
-       \sin\left(\alpha_\text{i}\right)\\ K_\text{bt,i}
-       \sin\left(\alpha_\text{i}\right) & K_\text{bn,i}
-       \cos\left(\alpha_\text{i}\right)\end{array}\right]
-  \end{aligned} \end{equation}
-
-\noindent
-The Hooke's law force displacement relationship of \dref{GD_Hookes}
-applied to the base also references a displacement vector
-$\bar{\epsilon}_\text{i}$ of \dref{GD_DispVecs} rotated for the base
-angle angle of the slice $\alpha_\text{i}$. The basal displacement
-vector $\bar{\epsilon}_\text{i}$ is rotated clockwise to align with
-the interslice displacement vector $\bar{\delta}_\text{i}$, applying
-the definition of $\bar{\epsilon}_\text{i}$ in terms of
-$\bar{\delta}_\text{i}$ as seen in \dref{GD_DispVecs}. Using this with
-base stiffness matrix $\bar{K^*}_\text{i}$, a basal force displacement
-relationship in the same coordinate system as the interslice
-relationship can be derived as done in equation~(\ref{eq:pRot}).
-    
-\begin{equation}\label{eq:pRot} \begin{aligned}
-    \left[ \begin{array}{l} p_\text{bx,i}
-        \\ p_\text{by,i} \end{array}\right]
-    & = \bar{K^*_\text{i}} \; \bar{\epsilon} \\
-      {} & = \left[ \begin{array}{l l} K_\text{bt,i}
-      \cos\left(\alpha_\text{i}\right) & - K_\text{bn,i}
-      \sin\left(\alpha_\text{i}\right)\\  K_\text{bt,i}
-      \sin\left(\alpha_\text{i}\right) & K_\text{bn,i}
-      \cos\left(\alpha_\text{i}\right)\end{array}\right]
-      \left[ \begin{array}{l l} \cos\left(\alpha_\text{i}\right)
-          &\sin\left(\alpha_\text{i}\right)\\
-          -\sin\left(\alpha_\text{i}\right)
-          & \cos\left(\alpha_\text{i}\right)\end{array}\right]
-      \left[ \begin{array}{l} \delta x_\text{i}
-          \\ \delta y_\text{i} \end{array} \right] \\
-      {} & = \left[ \begin{array}{l l}
-          K_\text{bt,i} \cos^2\left(\alpha_\text{i}\right)+
-          K_\text{bn,i} \sin^2\left(\alpha_\text{i}\right)
-          & \left(K_\text{bt,i} - K_\text{bn,i}\right)
-          \sin\left(\alpha_\text{i}\right)
-          \cos\left(\alpha_\text{i}\right)\\
-          \left(K_\text{bt,i} - K_\text{bn,i}\right)
-          \sin\left(\alpha_\text{i}\right)
-          \cos\left(\alpha_\text{i}\right)
-          & K_\text{bt,i} \cos^2\left(\alpha_\text{i}\right)+
-          K_\text{bn,i} \sin^2\left(\alpha_\text{i}\right)
-        \end{array} \right]
-    \left[ \begin{array}{l} \delta x_\text{i}
-        \\ \delta y_\text{i}
-      \end{array} \right]\end{aligned} 
-      \end{equation}
-
-\noindent
-The new effective base stiffness matrix $K'_\text{i}$,as derived in
-equation~(\ref{eq:Krot}) is defined in equation~(\ref{eq:K'}). This is
-seen as matrix $\bar{K}_\text{b,i}$ in
-\dref{DD_KMats}. $K_\text{bt,i}$ is the shear element in the matrix,
-and $K_\text{bn,i}$ is the normal element in the matrix, calculated as
-in \ddref{DD_Stiff}. The notation is simplified by the introduction of
-the constants $K_\text{bA,i}$ and $K_\text{bB,i}$, defined in
-equations~(\ref{eq:KbA}) and (\ref{eq:KbB}) respectively.
-
-\begin{equation} \label{eq:K'}
-  \begin{aligned} & \bar{ K'_\text{i}}
-     = \left[ \begin{array}{l l}
-          K_\text{bt,i} \cos^2\left(\alpha_\text{i}\right)+
-          K_\text{bn,i} \sin^2\left(\alpha_\text{i}\right)
-          & \left(K_\text{bt,i} - K_\text{bn,i}\right)
-          \sin\left(\alpha_\text{i}\right)
-          \cos\left(\alpha_\text{i}\right)\\
-          \left(K_\text{bt,i} - K_\text{bn,i}\right)
-          \sin\left(\alpha_\text{i}\right)
-          \cos\left(\alpha_\text{i}\right)
-          & K_\text{bt,i} \cos^2\left(\alpha_\text{i}\right)+
-          K_\text{bn,i} \sin^2\left(\alpha_\text{i}\right)
-      \end{array} \right] \\
-    & \bar{ K'_\text{i}} = \left[ \begin{array}{l l}
-        K_\text{bA,i} & K_\text{bB,i} \\
-        K_\text{bB,i} & K_\text{bA,i}
-      \end{array} \right] \end{aligned} \end{equation}
-
-
-\begin{equation} \label{eq:KbA}
-  K_\text{bA,i} = K_\text{bt,i} \cos^2\left(\alpha_\text{i}\right)+
-                 K_\text{bn,i} \sin^2\left(\alpha_\text{i}\right)
-\end{equation}
-
-\begin{equation} \label{eq:KbB}
-  K_\text{bB,i} = \left(K_\text{bt,i} - K_\text{bn,i}\right)
-                 \sin\left(\alpha_\text{i}\right)
-                 \cos\left(\alpha_\text{i}\right)
-\end{equation}
-
-
-\noindent
-A force-displacement relationship for an element $\text{i}$ can be
-written in terms of displacements occurring in the unrotated
-coordinate system $\bar{\delta}_\text{i}$ of \dref{GD_DispVecs} using
-the matrix $K_\text{s,i}$, and $K_\text{b,i}$ as seen in
-\ddref{DD_KMats}.
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD Eqm     %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14.25cm} |}
-  
-\hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Eqm}\\
-
-\hline Label& \bf Force \\
-
-\hline Equation &
-$F$ = $\left(-{\ell{}_{s,i-1}}\right){K_{sn,i-1}}\delta{}_{i-1}+\left({\ell{}_{s,i-1}}{K_{sn,i-1}}+{\ell{}_{b,i}}{K_{bn,i}}+{\ell{}_{s,i}}{K_{sn,i}}\right)\delta{}_{i}-{\ell{}_{s,i}}{K_{sn,i}}\delta{}_{i+1}$
-\\
-
-\hline Description & $F$ is the force (N)\newline${\ell{}_{s}}$ is the length of an interslice surface (m)\newline$i$ is the index\newline${K_{sn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$\delta{}$ is the displacement (m)\newline${\ell{}_{b}}$ is the total base length of a slice (m)\newline${K_{bn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)
-\\
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEM}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD Eqm         %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD Soil Stiffness     %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline  Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Stiff}\\
-
-\hline Label& \bf Shear Stiffness \\
-
-\hline Input & $G$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$ ,
-$a$ , $A$ , $u$ , $v$\\
-
-\hline
-Output & 
-${K_{bt}}$ = $\frac{G}{2\left(1+\nu{}\right)}\frac{0.1}{b}+\frac{{c'}_{i}-\sigma{}\tan\left({\varphi{}'}_{i}\right)}{|\delta{}u|+a}$
-\\
-
-\hline Description &  ${K_{bt}}$ is the shear stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$G$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$c'$ is the effective cohesion (Pa)\newline$i$ is the index\newline$\sigma{}$ is the normal stress (Pa)\newline$\varphi{}'$ is the effective angle of friction (${}^{\circ}$)\newline$\delta{}u$ is the displacement (m)\newline$a$ is the constant (m)
-\\
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEM}, \iref{IM_RFEMFS}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Stiff}\\
-
-\hline Label& \bf Normal Stiffness \\
-
-\hline Input & $G$ , $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$
-$a$ , $A$ , $u$ , $v$\\
-
-\hline
-Output & 
-${K_{bn}}$ = $\begin{cases}
-\frac{G\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}, & \nu{}<0\\
-0.01\frac{G\left(1-\nu{}\right)}{\left(1+\nu{}\right)\left(1-2\nu{}+b\right)}+\frac{\kappa{}}{\delta{}v+A}, & \nu{}\geq{}0
-\end{cases}$
-\\
-
-\hline Description & ${K_{bn}}$ is the normal stiffness ($\frac{\text{Pa}}{\text{m}}$)\newline$G$ is the interslice normal force (N)\newline$\nu{}$ is the Poisson's ratio\newline$b$ is the base width of a slice (m)\newline$\kappa{}$ is the constant (Pa)\newline$\delta{}v$ is the displacement (m)\newline$A$ is the constant (m)
-\\
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEM}, \iref{IM_RFEMFS}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD Soil Stiffness         %
-% ------------------------------------------ %
-
-
 \subsubsection{Instance Models} \label{sec_instance}
 
 This section transforms the problem defined in the
@@ -2674,312 +2140,6 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 ~\newline
 
 % ------------------------------------------ %
-%               Begin IM Force Displacement      %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline Number&
-IM\refstepcounter{instnum}\theinstnum \label{IM_RFEM}\\
-
-\hline Label& \bf Force Displacement Equilibrium \\
-
-\hline Input & $\nu$ , $b$ , $c$ , $\sigma$ , $\phi$ , $\kappa$, $a$ , $A$ , $u$ , $v$\\
-
-\hline
-Output &
-
-\textbf{X Equilibrium} ~\newline
- \( \begin{array}{l} -\Delta H_\text{i} -K_{\text{c}} \cdot W_\text{i} -
-U_{\text{b,i}} \sin\left(\alpha_\text{i}\right) \\ + U_{\text{t,i}}
-\sin\left(\beta_\text{i}\right) + Q_\text{i}
-\sin\left(\omega_\text{i}\right) \end{array} =  \begin{array}{l}  
-\left[ \delta x_{\text{i-1}} \right] \left( - \ell_{\text{s,i-1}}
-K_{\text{sn,i-1}} \right) \\ + \left[ \delta x_{\text{i}} \right]
-\left( - \ell_{\text{s,i-1}} K_{\text{sn,i-1}} + \ell_{\text{s,i}}
-K_{\text{sn,i}} + \ell_{\text{b,i}} K_{\text{bA,i}} \right) \\ +
-\left[ \delta x_{\text{i+1}} \right] \left( - \ell_{\text{s,i}}
-K_{\text{sn,i}} \right) + \left[ \delta y_{\text{i}} \right] \left( -
-\ell_{\text{b,i}} K_{\text{bB,i}} \right)
-\end{array} \) ~\newline ~\newline
-\textbf{Y Equilibrium} ~\newline
-\( \begin{array}{l} -W_\text{i} + U_{\text{b,i}}
-\cos\left(\alpha_\text{i}\right)\\ - U_{\text{t,i}}
-\cos\left(\beta_\text{i}\right) - Q_{\text{i}}
-\cos\left(\omega_\text{i}\right)\end{array} = \begin{array}{l}  
-\left[ \delta y_{\text{i-1}} \right] \left( - \ell_{\text{s,i-1}}
-K_{\text{st,i-1}} \right) \\ + \left[ \delta y_{\text{i}} \right]
-\left( - \ell_{\text{s,i-1}} K_{\text{st,i-1}} + \ell_{\text{s,i}}
-K_{\text{st,i}} + \ell_{\text{b,i}} K_{\text{bA,i}} \right) \\ +
-\left[ \delta y_{\text{i+1}} \right] \left( - \ell_{\text{s,i}}
-K_{\text{st,i}} \right) + \left[ \delta x_{\text{i}} \right] \left( -
-\ell_{\text{b,i}} K_{\text{bB,i}} \right) \end{array}\) \\
-
-\hline Description & One set of force displacement equilibrium
-equations in the x and y directions. There is of equations for each
-element. System of equations solved for displacements ($\delta x$, and
-$\delta y$) \\
-& $\Delta H_{\text{i}} = H_{\text{i}}-H_{\text{i-1}}$ is the net
-hydrostatic force across a slice.\\
-& $K_{\text{c}}$ is the earthquake load factor.\\
-& $W_{\text{i}}$ is the weight of the slice.\\
-& $U_{\text{b,i}}$ is the pore water pressure acting on the slice
-base.\\
-& $U_{\text{t,i}}$ is the pore water pressure acting on the slice
-surface. \\
-& $\alpha_{\text{i}}$ is the angle of the base with the horizontal. \\
-& $\beta_{\text{i}}$ is the angle of the surface with the horizontal\\
-& $\delta x_{\text{i}}$ is the x displacement of slice $\text{i}$\\
-& $\delta y_{\text{i}}$ is the y displacement of slice $\text{i}$\\
-& $ \ell_{\text{s,i}}$ is the length of the interslice surface
-$\text{i}$\\
-& $ \ell_{\text{s,i}}$ is the length of the base surface $\text{i}$\\
-& $ K_{\text{st,i}}$ is the interslice shear stiffness at surface
-$\text{i}$.\\
-& $ K_{\text{st,i-1}}$ is the interslice normal stiffness at surface
-$\text{i}$.\\
-& $ K_{\text{bA,i}}$, and $ K_{\text{bB,i}}$ are the base stiffness
-values for slice $\text{i}$.\\
-
-\hline Sources& \cite{StolleGuo}\\
-
-\hline Ref.\ By & \iref{IM_RFEMFS} \\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End IM Force Displacement         %
-% ------------------------------------------ %
-
-\subsubsection*{Rigid Finite Element
-  Displacement Derivation}
-
-Using the net force-displacement equilibrium equation of a slice from
-\ddref{DD_Eqm}, with the definitions of the stiffness matrices from
-\ddref{DD_KMats}, and the force definitions from \dref{GD_NetForce}, a
-broken down force-displacement equilibrium equation can be
-derived. Equation~(\ref{eq:NetFx}) gives the broken down equation in
-the $x$ direction, and equation~(\ref{eq:NetFy}) gives the broken down
-equation in the $y$ direction.
-
-\begin{equation}\label{eq:NetFx}
--\Delta H_\text{i} -K_{\text{c}} \cdot W_\text{i} - U_{\text{b,i}}
-\sin\left(\alpha_\text{i}\right) + U_{\text{t,i}}
-\sin\left(\beta_\text{i}\right) + Q_\text{i}
-\sin\left(\omega_\text{i}\right) = \begin{array}{l} \left[ \delta
-    x_{\text{i-1}} \right] \left( - \ell_{\text{s,i-1}}
-  K_{\text{sn,i-1}} \right) \\ + \left[ \delta x_{\text{i}} \right]
-  \left( - \ell_{\text{s,i-1}} K_{\text{sn,i-1}} + \ell_{\text{s,i}}
-  K_{\text{sn,i}} + \ell_{\text{b,i}} K_{\text{bA,i}} \right) \\ +
-  \left[ \delta x_{\text{i+1}} \right] \left( - \ell_{\text{s,i}}
-  K_{\text{sn,i}} \right) + \left[ \delta y_{\text{i}} \right] \left(
-  - \ell_{\text{b,i}} K_{\text{bB,i}} \right)
-  \end{array}
-\end{equation}
-
-
-\begin{equation}\label{eq:NetFy}
--W_\text{i} + U_{\text{b,i}} \cos\left(\alpha_\text{i}\right) -
-U_{\text{t,i}} \cos\left(\beta_\text{i}\right) - Q_{\text{i}}
-\cos\left(\omega_\text{i}\right) = \begin{array}{l} \left[ \delta
-    y_{\text{i-1}} \right] \left( - \ell_{\text{s,i-1}}
-  K_{\text{st,i-1}} \right) \\ + \left[ \delta y_{\text{i}} \right]
-  \left( - \ell_{\text{s,i-1}} K_{\text{st,i-1}} + \ell_{\text{s,i}}
-  K_{\text{st,i}} + \ell_{\text{b,i}} K_{\text{bA,i}} \right) \\ +
-  \left[ \delta y_{\text{i+1}} \right] \left( - \ell_{\text{s,i}}
-  K_{\text{st,i}} \right) + \left[ \delta x_{\text{i}} \right] \left(
-  - \ell_{\text{b,i}} K_{\text{bB,i}} \right)
- \end{array}
-\end{equation}
-
-\noindent
-Using the known input assumption of \aref{A_Input}, the force variable
-definitions of \ddref{DD_W} to \ddref{DD_Q} on the left side of the
-equations can be solved for. The only unknown in the variables to
-solve for the stiffness values from \ddref{DD_Stiff} is the
-displacements. Therefore taking the equation from each slice a set of
-$2 \cdot n$ equations, with $2 \cdot n$ unknown displacements in the
-$x$ and $y$ directions of each slice can be derived. Solutions for
-the displacements of each slice can then be found. The use of
-displacement in the definition of the stiffness values makes the
-equation implicit, which means an iterative solution method, with an
-initial guess for the displacements in the stiffness values is
-required.
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin IM RFEM FS     %
-% ------------------------------------------ %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
-  
-\hline  Number&
-IM\refstepcounter{instnum}\theinstnum \label{IM_RFEMFS}\\
-
-\hline Label& \bf RFEM Factor of Safety \\
-
-\hline Input & $c$, $\ell_{\text{b}}$, $\delta u$ , $\delta v$,
-$\varphi'$, $K_{\text{bt,i}}$, $K_{\text{bn,i}}$ \\
-
-\hline Output & \( \begin{aligned} & FS_{\text{Loc,i}} = \frac{c -
-    K_{\text{bn,i}} \cdot \delta v_{\text{i}} \cdot
-    \tan\left(\varphi'_{\text{i}}\right)}{K_{\text{bt,i}} \cdot \delta
-    u_{\text{i}}} \\[7.5pt] & FS = \frac{\displaystyle\sum_{i=1}^{n}
-    \ell_{\text{b,i}} \left[ c - K_{\text{bn,i}} \cdot \delta
-      v_{\text{i}} \cdot \tan\left(\varphi'_{\text{i}}\right) \right]}
-  {\displaystyle\sum_{i=1}^{n} \ell_{\text{b,i}} \left[
-      K_{\text{bt,i}} \cdot \delta u_{\text{i}} \right]
-} \end{aligned} \) \\
-
-\hline
-Description 
-& $FS_{\text{Loc,i}}$ Factor of Safety for slice $\text{i}$.\\
-& $FS$ Factor of Safety for the entire slip surface.\\
-& $c$ is the cohesion of slice ${\text{i}}$'s base.\\
-& $\varphi'_{\text{i}}$ is the effective angle of friction of slice
-${\text{i}}$'s base.\\
-& $\delta v_{\text{i}}$ is the normal displacement of slice
-$\text{i}$\\
-& $\delta u_{\text{i}}$ is the shear displacement of slice
-$\text{i}$\\
-& $ \ell_{\text{b,i}}$ is the length of the base of slice $\text{i}$\\
-& $ K_{\text{bt,i}}$ is the base shear stiffness at surface
-$\text{i}$.\\
-& $ K_{\text{bn,i}}$ is the base normal stiffness at surface
-$\text{i}$.\\
-& $ \text{n} $ is the number of slices in the slip surface.\\
-
-\hline Sources& \cite{StolleGuo} \\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End IM RFEM FS         %
-% ------------------------------------------ %
-
-\subsubsection*{Rigid Finite Element
-  Factor of Safety Derivation}
-
-\noindent
-RFEM analysis can also be used to calculate the Factor of safety for
-the slope.  For a slice element $\text{i}$ the displacements $\delta
-x_{\text{i}}$ and $\delta y_{\text{i}}$, are solved from the system of
-equations in \iref{IM_RFEM}. The definition of
-$\bar{\epsilon}_\text{i}$ as the rotation of the displacement vector
-$\bar{\delta}_\text{i}$ is seen in\dref{GD_DispVecs} .
-
-This is used to find the displacements of the slice parallel to the
-base of the slice $\delta u$ in equation~(\ref{eq:DispPar}) and normal
-to the base of the slice $\delta v$ in equation~(\ref{eq:DispPerp}).
-
-\begin{equation}\label{eq:DispPar}
-\delta u_{\text{i}} = \cos\left(\alpha_{\text{i}}\right) \delta
-x_{\text{i}} + \sin\left(\alpha_{\text{i}}\right) \delta y_{\text{i}}
-\end{equation}
-
-\begin{equation}\label{eq:DispPerp}
-\delta v_{\text{i}} = -\sin\left(\alpha_{\text{i}}\right) \delta
-x_{\text{i}} + \cos\left(\alpha_{\text{i}}\right) \delta y_{\text{i}}
-\end{equation}
-
-\noindent
-With the definition of normal stiffness from \ddref{DD_Stiff} to find
-the normal stiffness of the base $K_\text{bn,i}$, and the now known
-base displacement perpendicular to the surface $\delta v_{\text{i}}$
-from equation~(\ref{eq:DispPerp}), the normal base stress can be
-calculated from the force-displacement relationship of
-\tref{TM_Hooke}. Stress $\sigma$ is used in place of force $F$ as the
-stiffness hasn't been normalized for the length of the base. Results in
-equation~(\ref{eq:Sigma}).
-
-\begin{equation}\label{eq:Sigma}
-\sigma_{\text{i}} = K_{\text{bn,i}} \cdot \delta v_{\text{i}}
-\end{equation}
-
-\noindent
-The resistive shear to calculate the factor of safety $FS$ in is found
-from the Mohr Coulomb resistive strength of soil in
-\tref{TM_Fmc}. Using the normal stress $\sigma$ from
-equation~(\ref{eq:Sigma}) as the stress the resistive shear of the
-slice can be calculated from calculated in equation~(\ref{eq:S}).
-
-\begin{equation}\label{eq:S}
-S_{\text{i}} = c - \sigma_{\text{i}} \cdot \tan\left(\varphi'\right)
-\end{equation}
-
-\noindent
-previously the value of the base shear stiffness $K_\text{bt,i}$ as
-seen in equation~(\ref{eq:ShearStiff}) was unsolvable because the
-normal stress $\sigma_\text{i}$ was unknown. With the definition of
-$\sigma_\text{i}$ from equation~(\ref{eq:Sigma}) and the definition of
-displacement shear to the base $\delta u_\text{i}$ from
-equation~(\ref{eq:DispPerp}), the value of $K_\text{bt,i}$ becomes
-solvable.
-
-\begin{equation}\label{eq:ShearStiff}
-K_{\text{bt,i}} = \frac{E_\text{i}}{2 \left[ 1 + \nu_\text{i} \right]}
-\frac{0.1}{b_\text{i}} + \frac { c_\text{i} - \sigma_\text{i} \cdot
-  \tan\left(\phi_\text{i}\right) }{ \left| \delta u_\text{i} \right| +
-  a }
-\end{equation}
-
-\noindent
-With shear stiffness $K_{\text{bt,i}}$ calculated in
-equation~(\ref{eq:ShearStiff}) and shear displacement $\delta
-u_{\text{i}}$ calculated in equation~(\ref{eq:DispPar}) values now
-known the shear stress acting on the base of a slice $\tau$ can be
-calculated using \tref{TM_Hooke}, as done in equation~(\ref{eq:Tau}).
-Again stress $\tau$ is used in place of force $F$ as the stiffness
-hasn't been normalized for the length of the base.
-
-\begin{equation}\label{eq:Tau}
-\tau_{\text{i}} = K_{\text{bt,i}} \cdot \delta u_{\text{i}}
-\end{equation}
-
-\noindent
-The shear stress on the base $\tau$ acts as the mobile shear acting on
-the base. Using the definition Factor of Safety equation from
-\tref{TM_FS}, with the definitions of resistive shear strength of a
-slice $S_\text{i}$ from equation~(\ref{eq:S}) and mobile shear on a
-slice $\tau$ from equation~(\ref{eq:Tau}) the factor of safety for a
-slice $FS_{\text{Loc,i}}$ can be found from as seen in
-equation~(\ref{eq:FSLoc}), and \iref{IM_RFEMFS}.
-
-\begin{equation}\label{eq:FSLoc}
-FS_{\text{Loc,i}} = \frac{S_{\text{i}}}{\tau_{\text{i}}} = \frac{c -
-  K_{\text{bn,i}} \cdot \delta v_{\text{i}} \cdot
-  \tan\left(\varphi'_{\text{i}}\right)}{K_{\text{bt,i}} \cdot \delta
-  u_{\text{i}}}
-\end{equation}
-
-\noindent The global Factor of Safety is then the ratio of the
-summation of the resistive and mobile shears for each slice, with a
-weighting for the length of the slices base. Shown in
-equation~(\ref{eq:FSGlob}), and \iref{IM_RFEMFS}.
-
-\begin{equation}\label{eq:FSGlob}
-FS = \frac{\displaystyle\sum_{i=1}^{n} \ell_{\text{i}} \cdot
-  S_{\text{i}}}{\displaystyle\sum_{i=1}^{n} \ell_{\text{i}} \cdot
-  \tau_{\text{i}}} = \frac{\displaystyle\sum_{i=1}^{n}
-  \ell_{\text{b,i}} \left[ c - K_{\text{bn,i}} \cdot \delta
-    v_{\text{i}} \cdot \tan\left(\varphi'_{\text{i}}\right) \right]}
-{\displaystyle\sum_{i=1}^{n} \ell_{\text{b,i}} \left[ K_{\text{bt,i}}
-    \cdot \delta u_{\text{i}} \right]}
-\end{equation}
-
-~\newline
-
-% ------------------------------------------ %
 %               Begin IM Minimization    %
 % ------------------------------------------ %
 
@@ -3017,6 +2177,8 @@ safety $\text{FS}_\text{Min}$ that results.\\
 % ------------------------------------------ %
 %               End IM Minimization         %
 % ------------------------------------------ %
+
+\bmac{Should this IM exist? It doesn't arise from any T or A}
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}    
 
@@ -3065,8 +2227,6 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on the
   \midrule 
   $FS$ & $FS>0$ \\
   $(x,y)$ Slip vertices' &  Vertices are monotonic \\
-  $\delta x$ &  \\
-  $\delta y$ &  \\
   \bottomrule
 \end{longtable}
 %\end{table}
@@ -3134,6 +2294,9 @@ requirements, the qualities that the software is expected to exhibit.
   minimum factor of safety remains approximately the same over a
   predetermined number of repetitions. Identify the slip surface that
   generates the minimum factor of safety as the critical slip surface.
+  
+\bmac{Can we reference requirements in other requirements like this? This reads 
+like a procedure, not a list of requirements.}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_PrepOutput}:]
   Prepare the critical slip surface for method of slices or limit
@@ -3141,15 +2304,11 @@ requirements, the qualities that the software is expected to exhibit.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Analyze}:] Calculate
   the factor of safety of the critical slip surface using the
-  Morgenstern price method. Also calculate the local and global
-  factors of safety for the critical slip using the RFEM method, and
-  the displacement of the slice elements using the RFEM method.
+  Morgenstern price method.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] Display
-  the critical slip surface and the slice element displacements
-  graphically. Give the values of the factors of safety calculated by
-  both methods, and the local factors of safety calculated by the RFEM
-  method of analysis.
+  the critical slip surface graphically. Display the values of the factors of 
+  safety.
   
 \end{itemize}
 
