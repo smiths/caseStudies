@@ -32,23 +32,8 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
-\newcommand{\NN}[1]{{\color{red}#1}}
-\newcommand{\WSS}[1]{{\color{blue}#1}}
 
-%% Comments
-\newif\ifcomments\commentstrue
-
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
-
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\hf}[1]{\authornote{cyan}{HF}{#1}}
-\newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
+\input{../Comments}
 
 \newcommand{\progname}{SSP}
 
@@ -109,11 +94,26 @@
 \begin{document}
 
 \title{Software Requirements Specification for Slope Stability Analysis}
-\author{Henry Frankis\\McMaster University}
+\author{Henry Frankis and Brooks MacLachlan}
 \date{\today}
 	
 \maketitle
-\tableofcontents
+
+~\newpage
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+	\midrule
+	09/24/18 & 1.0 & Removed RFEM\\
+	09/25/18 & 1.1 & Notes\\
+	\bottomrule
+\end{tabularx}
+
+~\newpage
 
 \section{Reference Material}
 This section records information for easy reference.
@@ -128,23 +128,25 @@ The unit system used throughout is SI (Syst\`{e}me International d'Unit\'{e}s). 
 \setlength{\tabcolsep}{20pt}
 \begin{tabular}{  l  l  l  }
 \hline
-\textbf{Physical Property} & \textbf{Name} & \textbf{Symbol} \\
+\textbf{Symbol} & \textbf{Unit} & \textbf{SI} \\
 \hline
-force & Newton & \si{\newton} \\
-length & meter & \si{\meter}  \\
-pressure & Pascal & $\si{\pascal}=\si{\newton\per\square\meter}$ \\
-angle & degree & \si{\degree}  \\
+\si{\newton} & force & Newton \\
+\si{\meter} & length & meter \\
+$\si{\pascal}=\si{\newton\per\square\meter}$ & pressure & Pascal \\
+\si{\degree} & angle & degree  \\
 \hline
 \end{tabular}
 \renewcommand{\arraystretch}{1}
+
+\bmac{How is it decided which units show derivation information?}
 
 
 \subsection{Table of Symbols}
 
 
 The table that follows summarizes the symbols used in this document along with their units. 
-Throughout the document, values with a subscript $i$ implies that the value will be taken at
- and analyzed at a slice or slice interface composing the total slip mass.
+Throughout the document, the subscript $i$ implies that the value will be taken 
+and analyzed at a slice or slice interface composing the total slip mass.
 
 \renewcommand{\arraystretch}{1.6}
 \setlength{\tabcolsep}{20pt}
@@ -326,7 +328,7 @@ ${\ell{}_{s}}$ &  \si{\meter}& Length of an Interslice Surface: from slip base t
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
   \toprule		
-  \textbf{symbol} & \textbf{description}\\
+  \textbf{Symbol} & \textbf{Description}\\
   \midrule 
   A & Assumption\\
   DD & Data Definition\\
@@ -343,6 +345,14 @@ ${\ell{}_{s}}$ &  \si{\meter}& Length of an Interslice Surface: from slip base t
   UC & Unlikely Change\\
   \bottomrule
 \end{tabular}\\
+
+\newpage
+
+\tableofcontents
+
+~\newpage
+
+\pagenumbering{arabic}
 
 \section{Introduction}
 
