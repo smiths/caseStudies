@@ -107,6 +107,8 @@
 	\midrule
 	09/24/18 & 1.0 & Removed RFEM\\
 	09/25/18 & 1.1 & Traceability matrix work\\
+	09/26/18 & 1.2 & Physical System Description expanded, Non-functional 
+	requirements itemized\\
 	\bottomrule
 \end{tabularx}
 
@@ -329,6 +331,7 @@ index i \\
   GS & Goal Statement\\
   IM & Instance Model\\
   LC & Likely Change\\
+  NFR & Non-Functional Requirement\\
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
@@ -377,6 +380,9 @@ of safety
  intended to
  be used as an educational tool for introducing slope stability issues, and will
  facilitate the analysis and design of a safe slope.
+ 
+\bmac{Need to move or remove the above paragraph. To problem description 
+section? Or introduction?}
 
 This document will be used as a starting point for subsequent development 
 phases, including writing the design specification and the software verification
@@ -398,8 +404,7 @@ The scope of the requirements includes stability analysis of a 2 dimensional
 slope, 
 composed of homogeneous soil layers. Given the appropriate inputs, \progname\ 
 identifies the most likely failure surface within the possible input
- range, and finds the factor of safety for the slope as well as displacement of
- soil that will occur on the slope.
+ range, and finds the factor of safety for the slope.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
@@ -407,6 +412,8 @@ Reviewers of this documentation should have a strong knowledge in solid
 mechanics. The reviewers should also have an understanding of undergraduate 
 level 4 physics. The users of \progname\ can have a lower level of expertise, 
 as explained in Section~\ref{Sec:UserChar}.
+
+\bmac{"Strong knowledge in solid mechanics" should be more specific.}
 
 \subsection{Organization of Document}
 
@@ -536,12 +543,29 @@ sections and their meaning, with the purpose of reducing ambiguity and
   the others. Stresses in the dominant dimensions direction are the
   ones that can be approximated as 0.}
 
-\bmac{I want to add more to this: isotropic, slip surface, etc. remove 
-compression and tension}
+\bmac{I want to add more to this: isotropic, slip surface, water table etc. 
+remove compression and tension}
   
 \end{itemize}
 
 \subsubsection{Physical System Description} \label{sec_system}
+
+The physical system of \progname{}, as shown in \fref{Fig_PhysSyst}, includes 
+the following elements:
+
+\begin{itemize}
+\item[PS1:] A slope comprised of one or more layers of soil.
+\item[PS2:] A water table within the soil layers, which may or may not exist.
+\end{itemize}
+
+\begin{figure}[h!] \refstepcounter{fnum}  \label{Fig_PhysSyst}
+	\begin{center}
+		{
+			\includegraphics[width=0.7\textwidth]{PhysSyst.png}
+		}
+		\caption{An example slope for SSP to analyse}
+	\end{center}
+\end{figure}
 
 Analysis of the slope is performed by looking at properties of the
 slope as a series of slice elements. Some properties are interslice
@@ -556,10 +580,6 @@ shown in \fref{Fig_Index}.
 
 \item Slice properties convention is noted by $i$.
 \end{itemize}
-
-\bmac{I want to add some more "big picture" description of the physical system, 
-i.e. slope composed of soil layers and potentially a water table, along with a 
-figure}
 
 \bmac{The information about the slices is related to our solution method. Does 
 it even belong here? If not, where else would it go?}
@@ -2412,12 +2432,23 @@ graphically display the interslice shear forces.
 \subsection{Nonfunctional Requirements}
 
 \progname\ is intended to be an educational tool, therefore accuracy and
-performance speed are secondary program priorities to correctness,
-understandability, reusability, and maintainability.
+performance speed are secondary program priorities. Instead, the following 
+non-functional requirements are prioritized:
 
-\bmac{Can a non-functional requirement refer to the software documentation? Ex. 
-For maintainability, traceability between models, requirements, and assumptions 
-is visible in the SRS?}
+\begin{itemize}
+\item[NFR1:] Correctness, achieved if the outputs of the code have the 
+properties described 
+in \ref{sec_CorrectSolution}.
+\item[NFR2:] Understandability, achieved if the code is modularized with 
+complete module guide and module interface specification.
+\item[NFR3:] Reusability, achieved if the code is modularized.
+\item[NFR4:] Maintainability, achieved if the traceability between 
+requirements, assumptions, theoretical models, general definitions, data 
+definitions, instance models, likely changes, and modules is completely 
+recorded in traceability matrices in the SRS and module guide
+\end{itemize}
+
+\bmac{Can a non-functional requirement refer to the software documentation?}
 
 \section{Likely Changes}
 
