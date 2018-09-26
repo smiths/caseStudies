@@ -70,9 +70,6 @@
 \newcounter{ucnum} %Unlikely change number
 \newcommand{\ltheucnum}{UC\theucnum}
 \newcommand{\ucref}[1]{UC\ref{#1}}
-\newcounter{fnum} %Figure number
-\newcommand{\fthefnum}{Fig\thefnum}
-\newcommand{\fref}[1]{Fig \ref{#1}}
 \newcounter{tablenum} %Table number
 \newcommand{\tablethetablenum}{Table\thetablenum}
 \newcommand{\tableref}[1]{Table\ref{#1}}
@@ -139,7 +136,6 @@ $\si{\pascal}=\si{\newton\per\square\meter}$ & pressure & Pascal \\
 \end{tabular}
 \renewcommand{\arraystretch}{1}
 
-\bmac{How is it decided which units show derivation information?}
 
 
 \subsection{Table of Symbols}
@@ -398,11 +394,9 @@ way to present the documentation
 
 \subsection{Scope of Requirements} 
 
-The scope of the requirements includes stability analysis of a 2 dimensional 
-slope, 
-composed of homogeneous soil layers. Given the appropriate inputs, \progname\ 
-identifies the most likely failure surface within the possible input
- range, and finds the factor of safety for the slope.
+The scope of the requirements includes stability analysis of a 2-dimensional 
+slope, composed of homogeneous soil layers. Factors which may change the slope 
+properties over time will not be considered.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
@@ -428,8 +422,7 @@ are refined to the theoretical models, and the
 theoretical models (Section \ref{sec_theoretical}) to the instance
 models (Section \ref{sec_instance}). The instance
 models provide the set of algebraic equations that must be solved
-iteratively to perform a Morgenstern Price Analysis, and the system of
-equations that must be solved for Rigid Finite Element Analysis.
+iteratively to perform a Morgenstern Price Analysis.
 
 %\subsection{Intended Audience}
 
@@ -453,7 +446,7 @@ flow between the system and its environment.
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{SystemContextFigure.png}
 		\caption{System Context}
-		\label{Fig_SystemContext} 
+		\label{Fig_SystemContext}
 	\end{center}
 \end{figure}
 
@@ -489,7 +482,8 @@ properties.
 
 \subsection{System Constraints}
 
-There are no system constraints.
+The Morgenstern-Price method, which involves dividing the slope into vertical 
+slices, will be used to derive the equations for analysing the slope. 
 
 \section{Specific System Description}
 
@@ -548,7 +542,8 @@ remove compression and tension}
 
 \subsubsection{Physical System Description} \label{sec_system}
 
-The physical system of \progname{}, as shown in \fref{Fig_PhysSyst}, includes 
+The physical system of \progname{}, as shown in Figure~\ref{Fig_PhysSyst}, 
+includes 
 the following elements:
 
 \begin{itemize}
@@ -556,33 +551,23 @@ the following elements:
 \item[PS2:] A water table within the soil layers, which may or may not exist.
 \end{itemize}
 
-\begin{figure}[h!] \refstepcounter{fnum}  \label{Fig_PhysSyst}
+\begin{figure}[h!]
 	\begin{center}
 		{
 			\includegraphics[width=0.7\textwidth]{PhysSyst.png}
 		}
-		\caption{An example slope for SSP to analyse}
+		\caption{An example slope for analysis by SSP}
+		\label{Fig_PhysSyst}
 	\end{center}
 \end{figure}
 
-Analysis of the slope is performed by looking at properties of the
-slope as a series of slice elements. Some properties are interslice
-properties, and some are slice or slice base properties.  The index
-convention for referencing which interslice or slice is being used is
-shown in \fref{Fig_Index}.
+~\newline\noindent Morgenstern-Price analysis of the slope involves 
+representing the slope as a series of vertical slices. As shown in 
+Figure~\ref{Fig_Index}, the index $i$ is used to denote a value for a single 
+slice, while the index $j$ is used to denote a value that applies to the 
+interface between two adjacent slices, otherwise known as an interslice value.
 
-\begin{itemize}
-\item Interslice properties convention is noted by $j$. The end
-  interslice properties are usually not of interest, therefore use the
-  interslice properties from $1\leq\text{i}\leq n-1$.
-
-\item Slice properties convention is noted by $i$.
-\end{itemize}
-
-\bmac{The information about the slices is related to our solution method. Does 
-it even belong here? If not, where else would it go?}
-
-\begin{figure}[h!] \refstepcounter{fnum}  \label{Fig_Index}
+\begin{figure}[h!]
 \begin{center}
 {
 \setlength{\unitlength}{6cm}
@@ -619,33 +604,29 @@ it even belong here? If not, where else would it go?}
 \put(1.48,0.185){$i=n$}
 \end{picture}
 }
-\caption{Index convention for numbering slice and interslice force
-  variables}
+\caption{Index convention for slice and interslice values}
+\label{Fig_Index}
  \end{center}
 \end{figure}
 
 
-~\newline\noindent A free body diagram of the forces acting on the
-slice is displayed in \fref{Fig_Forces}.
+~\newline\noindent A free body diagram of the forces acting on a
+slice is displayed in Figure~\ref{Fig_Forces}.
 
-\begin{figure}[h!] \refstepcounter{fnum}  \label{Fig_Forces}
+\begin{figure}[h!]
 \begin{center}
 {
  \includegraphics[width=0.7\textwidth]{ForceDiagram.png}
 }
-\caption{Forces acting on a slice}
+\caption{Free body diagram of forces acting on a slice}
+\label{Fig_Forces}
 \end{center}
 \end{figure}
 
-
-
 \subsubsection{Goal statements}
 
-Given the geometry of the soil layers composing the plane of a slope, the 
-material properties of the layers, estimates of feasible slip surface minimum 
-and maximum $x$ and $y$ coordinates, a boolean representing the scaling 
-function to be used, and optionally the geometry of a water table, the goal 
-statements are:
+Given the geometry of the soil layers and water table composing the plane of a 
+slope and the material properties of the layers, the goal statements are:
 
 \begin{itemize}
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_FS}]
@@ -662,10 +643,6 @@ statements are:
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Shear}]
   {Determine the interslice shear force between each pair of vertical slices of 
   the slope.} 
-
-\bmac{Is referring to the "interslice forces" too specific, since slicing the 
-slope is related to the numerical algorithm used to solve the equations?}
-  
 \end{itemize}
 
 \subsection{Solution Characteristics Specification}
@@ -924,10 +901,10 @@ instance models.
   equilibrium to satisfy \tref{TM_Eqm} in the direction perpendicular
   to the base surface of the slice. Rearranged to solve for the normal
   force of the surface $N$. Force equilibrium is derived
-  from the free body diagram of \fref {Fig_Forces} in
+  from the free body diagram of Figure~\ref{Fig_Forces} in
   section~\ref{sec_system}. Index $\text{i}$ refers to the values of
   the properties for slice/interslices following convention in
-  \fref {Fig_Index} in section~\ref{sec_system}. Force variable
+  Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
   definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
@@ -971,10 +948,10 @@ instance models.
   equilibrium to satisfy \tref{TM_Eqm} in the direction parallel to
   the base surface of the slice. Rearranged to solve for the shear
   force acting on the base $S_{\text{i}}$. Force equilibrium is
-  derived from the free body diagram of \fref{Fig_Forces} in
+  derived from the free body diagram of Figure~\ref{Fig_Forces} in
   section~\ref{sec_system}. Index $\text{i}$ refers to the values of
   the properties for slice/interslices following convention in
-  \fref{Fig_Index} in section~\ref{sec_system}. Force variable
+  Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
   definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
@@ -1138,10 +1115,10 @@ instance models.
   \hline Description & For a slice of mass in the slope the moment
   equilibrium to satisfy \tref{TM_Eqm} in the direction perpendicular
   to the base surface of the slice. Moment equilibrium is derived from
-  the free body diagram of \fref{Fig_Forces} in
+  the free body diagram of Figure~\ref{Fig_Forces} in
   section~\ref{sec_system}. Index $\text{i}$ refers to the values of
   the properties for slice/interslices following convention in
-  \fref{Fig_Index} in section~\ref{sec_system}.  Variable
+  Figure~\ref{Fig_Index} in section~\ref{sec_system}.  Variable
   definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
