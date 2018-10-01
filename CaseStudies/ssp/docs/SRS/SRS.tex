@@ -106,6 +106,7 @@
 	09/25/18 & 1.1 & Traceability matrix work\\
 	09/26/18 & 1.2 & Physical System Description expanded, Non-functional 
 	requirements itemized\\
+	10/01/18 & 1.3 & Various improvements throughout\\
 	\bottomrule
 \end{tabularx}
 
@@ -152,163 +153,133 @@ and analyzed at a slice or slice interface composing the total slip mass.
 \hline
 \textbf{Symbol} & \textbf{Unit} & \textbf{Description} \\
 \hline
-$\{{x_{cs}}{,y_{cs}}\}$ & \si{\meter}& The Set of X and Y Coordinates: describe 
-the vertices of the critical slip surface 
+$b$ & \si{\meter}& width of the base of a slice in the \textit{x} direction
 \\
-$(x,y)$ & \si{\meter}& Cartesian Position Coordinates: y is considered parallel 
-to the direction of the force of gravity and x is considered perpendicular to y
+$c'$ & \si{\pascal} & effective cohesion 
 \\
-$b$ & \si{\meter}& Base Width of a Slice: in the x-ordinate direction only for 
-slice index i
+${C1_{i}}$ &  N\si{\meter}& interslice shear force expression used to calculate 
+the numerator of the scaling factor
 \\
-$c'$ & \si{\pascal} & Effective Cohesion: internal pressure that sticks 
-particles of soil together 
+${C2_{i}}$ &  N\si{\meter}& interslice normal force expression used to 
+calculate the denominator of the scaling factor
 \\
-${C1_{i}}$ &  N\si{\meter}&Interslice Normal Force Function: the normal force 
-at the interslice interface for slice i
+$E$ & \si{\pascal} & elastic modulus
 \\
-${C2_{i}}$ &  N\si{\meter}&Interslice Shear Force Function: the shear force at 
-the interslice interface for slice i
+$F$ &\si{\newton} & force
 \\
-$E$ & \si{\pascal} & Elastic Modulus: The ratio of the stress exerted on a body 
-to the resulting strain.
+${F_{x}}$ & \si{\newton} &$x$-component of force
 \\
-$F$ &\si{\newton} & Force: An interaction that tends to produce change in the 
-motion of an object 
+${F_{y}}$ & \si{\newton} &$y$-component of force
 \\
-${F_{x}}$ & \si{\newton} &$x$-component of the net force
+$f$ & & function describing variation of the interslice normal to shear force 
+ratio; can be constant or a half-sine
 \\
-${F_{y}}$ & \si{\newton} &$y$-component of the net force
+$FS$ & & factor of safety
 \\
-$f$ & & Scaling Function: magnitude of interslice forces as a function of the x 
-coordinate for interslice index i; can be constant or a half-sine
+$G$ & \si{\newton} & interslice normal force
 \\
-$FS$ & & Factor of Safety: The global stability metric of a slip surface in a 
-slope  
+$H$ & \si{\newton} & interslice water force
 \\
-$G$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices 
-for interslice index i
+$h$ &  \si{\meter}& height in the \textit{y}-direction from the base of a slice 
+to the slope surface, at the \textit{x}-direction midpoint on the slice
 \\
-$H$ & \si{\newton} &Interslice Water Force: exerted in the x-ordinate direction 
-between adjacent slices for interslice index i
+$i$ & & index representing a single slice 
 \\
-$\Delta{}H$ & \si{\newton} & Difference Between Interslice Forces: exerted in 
-the x-ordinate direction between adjacent slices for interslice index i
+${K_{c}}$ & & horizontal seismic coefficient
 \\
-$h$ &  \si{\meter}&Midpoint Height: distance from the slip base to the slope 
-surface in a vertical line from the midpoint of the slice for slice index i
+$M$ & N \si{\meter}& moment
 \\
-$i$ & & Index: used to show a quantity applies to only one slice 
+$N$ & \si{\newton} & normal force
 \\
-${K_{c}}$ & & Earthquake Load Factor: proportionality factor of force that 
-weight pushes outwards; caused by seismic earth movements 
+$N'$ &\si{\newton} & effective normal force
 \\
-$M$ & N\si{\meter}& Moment: a measure of the tendency of a body to rotate about 
-a specific point or axis
+$P$ & \si{\newton} & resistive shear force
 \\
-$N$ & \si{\newton} & Normal Force: total reactive force for a soil surface 
-subject to a body resting on it
+$Q$ & \si{\newton} & imposed surface load or external force
 \\
-$N'$ &\si{\newton} & Effective Normal Force: for a soil surface, subtracting 
-pore water reactive force from total reactive force 
-\\
-$P$ & \si{\newton} & Resistive Shear Force: Mohr Coulomb frictional force that 
-describes the limit of mobilized shear force the slice i can withstand before 
-failure
-\\
-$Q$ & \si{\newton} & Imposed Surface Load: a downward force acting into the 
-surface from midpoint of slice i
-\\
-$R$ & \si{\newton} & Resistive Shear Force: without the influence of interslice 
-forces for slice index i
-\\
-$S$ & \si{\newton} & Mobilized Shear Force: for slice index i
-\\
-$s$ &\si{\pascal} & Mobilized Shear Stress: acting on the base of a slice
-\\
-$T$ & \si{\newton} & Mobilized Shear Force: without the influence of interslice 
-forces for slice index i
-\\
-${U_{b}}$ & \si{\newton} & Base Hydrostatic Force: from water pressure within 
-the slice for slice index i
-\\
-${U_{t}}$ & \si{\newton} & Surface Hydrostatic Force: from water pressure 
-acting into the slice from standing water on the slope surface for slice index i
-\\
-$W$ & \si{\newton} & Weight: downward force caused by gravity on slice i
-\\
-$x$ & \si{\meter}& X Ordinate: refers to either slice i midpoint, or slice 
-interface i
-\\
-${x_{slip}}$ &  \si{\meter}&X Ordinate: distance of the slip surface at i, 
-refers to either slice i midpoint, or slice interface i
-\\
-${x_{us}}$ &  \si{\meter}&X Ordinate: distance of the edge of the slope at i, 
-refers to either slice i midpoint, or slice interface i
-\\
-$X$ & \si{\newton} & Interslice Shear Force: exerted between adjacent slices 
-for interslice index i
-\\
-$y$ &  \si{\meter}&Y Ordinate: refers to either slice i midpoint, or slice 
-interface i 
-\\
-${y_{slip}}$ & \si{\meter}& Y Ordinate: height of the slip surface at i, refers 
-to either slice i midpoint, or slice interface i 
-\\
-${y_{us}}$ &  \si{\meter}&Y Ordinate: height of the top of the slope at i, 
-refers to either slice i midpoint, or slice interface i 
-\\
-${y_{wt}}$ &  \si{\meter}&Y Ordinate: height of the water table at i, refers to 
-either slice i midpoint, or slice interface i 
-\\
-$z$ & \si{\meter}& Center of Slice Height: the distance from the lowest part of 
-the slice to the height of the centers of slice
-\\
-$\alpha{}$ & ${}^{\circ}$ &Angle: base of the mass relative to the horizontal 
-for slice index i
-\\
-$\beta{}$ &${}^{\circ}$ & Angle: surface of the mass relative to the horizontal 
-for slice index i
-\\
-$\gamma{}$ & \si{\pascal\per\cubic\newton} &Dry Unit Weight: The weight of a 
-dry soil/ground layer divided by the volume of the layer.
-\\
-${\gamma{}_{Sat}}$ &  \si{\pascal\per\cubic\newton} &Saturated Unit Weight: The 
-weight of saturated soil/ground layer divided by the volume of the layer.
-\\
-${\gamma{}_{w}}$ & \si{\pascal\per\cubic\newton} & Unit Weight of Water: The 
-weight of one cubic meter of water.
-\\
-$\lambda{}$ & & Interslice Normal/shear Force Ratio: applied to all interslices
-\\
-$\mu{}$ &\si{\pascal} & Pore Pressure: from water within the soil
-\\
-$\sigma{}$ & \si{\pascal} &Normal Stress: The stress exerted perpendicular to 
-the plane of the object
-\\
-$\tau{}$ & \si{\pascal} & Resistive Shear Stress: acting on the base of a slice
-\\
-$\Upsilon{}$ & & Function: generic minimization function or algorithm 
-\\
-$\varphi{}'$ & ${}^{\circ}$ &Effective Angle of Friction: The angle of 
-inclination with respect to the horizontal axis of the Mohr-Coulomb shear 
-resistance line
-\\
-$\Phi{}$ & \si{\newton} & Constant: converts resistive shear without the 
-influence of interslice forces, to a calculation considering the interslice 
+$R$ & \si{\newton} & resistive shear force without the influence of interslice 
 forces
 \\
-$\Psi{}$ & \si{\newton} & Constant: converts mobile shear without the influence 
-of interslice forces, to a calculation considering the interslice forces
+$S$ & \si{\newton} & mobilized shear force
 \\
-$\omega{}$ & ${}^{\circ}$ & Angle: of imposed surface load acting into the 
-surface relative to the vertical for slice index i
+$s$ &\si{\pascal} & mobilized shear stress
 \\
-${\ell{}_{b}}$ &  \si{\meter}& Total Base Length of a Slice: for slice index i
+$T$ & \si{\newton} & mobilized shear force without the influence of interslice 
+forces
 \\
-${\ell{}_{s}}$ &  \si{\meter}& Length of an Interslice Surface: from slip base 
-to slope surface in a vertical line from an interslice vertex for interslice 
-index i \\
+${U_{b}}$ & \si{\newton} & base hydrostatic force
+\\
+${U_{t}}$ & \si{\newton} & surface hydrostatic force
+\\
+$W$ & \si{\newton} & self-weight
+\\
+$x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian co-ordinate system
+\\
+$x_{cs}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical slip 
+surface
+\\
+${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinateof a point on a slip surface
+\\
+${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
+\\
+$X$ & \si{\newton} & interslice shear force
+\\
+$y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian co-ordinate system
+\\
+$y_{cs}$ & \si{\meter} & \textit{y}-ordinate of a point on the critical slip 
+surface
+\\
+${y_{slip}}$ & \si{\meter}& \textit{y}-ordinate of a point on a slip surface
+\\
+${y_{us}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
+\\
+${y_{wt}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water table
+\\
+$z$ & \si{\meter}& height in the \textit{y}-direction from the base of a slice 
+to the center of the slice
+\\
+$\alpha{}$ & ${}^{\circ}$ & angle between the base of a slice and the horizontal
+\\
+$\beta{}$ &${}^{\circ}$ & angle between the surface of a slice and the 
+horizontal
+\\
+$\gamma{}$ & \si{\pascal\per\cubic\newton} & soil dry unit weight
+\\
+${\gamma{}_{Sat}}$ &  \si{\pascal\per\cubic\newton} & soil saturated unit weight
+\\
+${\gamma{}_{w}}$ & \si{\pascal\per\cubic\newton} & water unit weight
+\\
+$\Delta{}H$ & \si{\newton} & difference between interslice water forces
+\\
+$\lambda{}$ & & scaling factor for the interslice normal to shear force ratio
+\\
+$\mu{}$ &\si{\pascal} & pore pressure from water within the soil
+\\
+$\sigma{}$ & \si{\pascal} & normal stress
+\\
+$\tau{}$ & \si{\pascal} & resistive shear stress
+\\
+$\Upsilon{}$ & & generic minimization function or algorithm 
+\\
+$\varphi{}'$ & ${}^{\circ}$ & effective angle of friction
+\\
+$\Phi{}$ & \si{\newton} & constant to convert resistive shear without the 
+influence of interslice forces to resistive shear with the influence of 
+interslice 
+forces
+\\
+$\Psi{}$ & \si{\newton} & constant to convert mobile shear without the 
+influence of interslice forces to mobile shear with the influence of interslice 
+forces
+\\
+$\omega{}$ & ${}^{\circ}$ & angle between the imposed surface load acting into 
+the surface and the vertical
+\\
+${\ell{}_{b}}$ &  \si{\meter}& base length of a slice in the 
+\textit{x}-direction
+\\
+${\ell{}_{s}}$ &  \si{\meter}& length of an interslice surface from slice base 
+to slope surface in the \textit{y}-direction \\
 
 \hline
 \end{longtable*}
