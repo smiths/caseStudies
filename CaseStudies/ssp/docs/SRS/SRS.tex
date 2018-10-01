@@ -412,8 +412,7 @@ interface.  The responsibilities of the user and the system are as follows:
 \item User Responsibilities:
   \begin{itemize}
   \item Provide the input data related to the soil layer(s) and water table (if 
-  applicable),
-    ensuring no errors in the data entry
+  applicable), ensuring conformation to input data format required by \progname
   \item Ensure that consistent units are used for input variables
   \item Ensure required software assumptions (Section~\ref{Assumptions}) are
     appropriate for any particular problem input to the software
@@ -422,10 +421,11 @@ interface.  The responsibilities of the user and the system are as follows:
   \begin{itemize}
   \item Detect data type mismatch, such as a string of characters input instead
     of a floating point number
-  \item Determine if the inputs satisfy the required physical
-    constraints
+  \item Verify that the inputs satisfy the required physical constraints
   \item Identify the critical slip surface within the possible input range
   \item Find the factor of safety for the slope
+  \item Find the interslice normal and shear forces along the critical slip 
+  surface
   \end{itemize}
 \end{itemize}
 
@@ -433,7 +433,8 @@ interface.  The responsibilities of the user and the system are as follows:
 \label{Sec:UserChar}
 The end user of \progname\ should have an understanding of undergraduate
 Level 1 Calculus and Physics, and be familiar with soil and material
-properties.
+properties, specifically elastic modulus, cohesion, effective angle of 
+friction, and unit weight.
 
 \subsection{System Constraints}
 
@@ -499,8 +500,7 @@ remove compression and tension}
 \subsubsection{Physical System Description} \label{sec_system}
 
 The physical system of \progname{}, as shown in Figure~\ref{Fig_PhysSyst}, 
-includes 
-the following elements:
+includes the following elements:
 
 \begin{itemize}
 \item[PS1:] A slope comprised of one or more layers of soil.
