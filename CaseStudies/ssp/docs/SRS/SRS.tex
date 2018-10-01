@@ -335,9 +335,7 @@ safety.
 The following section provides an overview of the Software Requirements 
 Specification (SRS) for a slope stability analysis problem. The developed 
 program will be referred to as the Slope Stability Analysis Program 
-(\progname), and is intended to be used as an educational tool for introducing 
-slope stability issues, and to facilitate the analysis and design of a safe 
-slope. This section explains the purpose of this document, the 
+(\progname). This section explains the purpose of this document, the 
 scope of the system, the characteristics of the intended readers, and the 
 organization of the document.
 
@@ -452,7 +450,11 @@ that model the slope. \\
 \subsection{Problem Description} \label{Sec_pd}
 
 \progname\ is a computer program developed to evaluate the factors of safety 
-for a slope's slip surfaces and identify the critical slip surface of the slope.
+for a slope's slip surfaces and identify the critical slip surface of the 
+slope, as well as the interslice normal and shear forces along the critical 
+slip surface. It is intended to be used as an educational tool for introducing 
+slope stability issues, and to facilitate the analysis and design of a safe 
+slope.
 
 \subsubsection{Terminology}
 
@@ -464,9 +466,15 @@ sections and their meaning, with the purpose of reducing ambiguity and
 \item {\textit{Factor of safety:} The global stability metric of a slip surface 
 of a slope.}
   
+\item {\textit{Slip surface:} A surface within a slope that has the potential 
+to fail or displace due to load or other forces.}
+
 \item {\textit{Critical slip surface:} Slip surface of the slope that
-  has the lowest global factor of safety, and therefore most likely to
+  has the lowest global factor of safety, and is therefore most likely to
   experience failure.}
+
+\item {\textit{Water table:} The upper boundary of a saturated zone in the 
+ground.}
 
 \item {\textit{Stress:} Forces that are exerted between planes
   internal to a larger body subject to external loading.}
@@ -474,27 +482,24 @@ of a slope.}
 \item {\textit{Strain:} Stress forces that result in deformation of
   the body/plane.}
   
-\item {\textit{Normal Force:} A force applied perpendicular to the
+\item {\textit{Normal force:} A force applied perpendicular to the
   plane of the material.}
   
-\item {\textit{Shear Force:} A force applied parallel to the plane of
+\item {\textit{Shear force:} A force applied parallel to the plane of
   the material.}
   
-\item {\textit{Tension:} A stress that causes displacement of the body
-  away from its center.}
+\item {\textit{Cohesion:} An attractive force between adjacent particles that 
+holds the matter together.}
   
-\item {\textit{Compression:} A stress that causes displacement of the
-  body towards its center.}
+\item {\textit{Isotropic:} A condition where a the value of a property is 
+independent of the direction in which it is measured.}
   
-\item {\textit{Plane Strain:} The resultant stresses in one of the
-  directions of a 3 dimensional material can be approximated as
+\item {\textit{Plane strain:} A condition where the resultant stresses in one 
+of the directions of a 3-dimensional material can be approximated as
   0. Results when the length of one dimension of the body dominates
-  the others. Stresses in the dominant dimensions direction are the
-  ones that can be approximated as 0.}
+  the others. Stresses in the direction of the dominant dimension can be 
+  approximated as 0.}
 
-\bmac{I want to add more to this: isotropic, slip surface, water table etc. 
-remove compression and tension}
-  
 \end{itemize}
 
 \subsubsection{Physical System Description} \label{sec_system}
