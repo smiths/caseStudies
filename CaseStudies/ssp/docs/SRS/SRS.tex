@@ -163,8 +163,6 @@ the numerator of the scaling factor
 ${C2_{i}}$ &  N\si{\meter}& interslice normal force expression used to 
 calculate the denominator of the scaling factor
 \\
-$E$ & \si{\pascal} & elastic modulus
-\\
 $F$ &\si{\newton} & force
 \\
 ${F_{x}}$ & \si{\newton} &$x$-component of force
@@ -213,7 +211,7 @@ ${U_{t}}$ & \si{\newton} & surface hydrostatic force
 \\
 $W$ & \si{\newton} & self-weight
 \\
-$x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian co-ordinate system
+$x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 \\
 $x_{cs}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical slip 
 surface
@@ -224,7 +222,7 @@ ${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
 $X$ & \si{\newton} & interslice shear force
 \\
-$y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian co-ordinate system
+$y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian coordinate system
 \\
 $y_{cs}$ & \si{\meter} & \textit{y}-ordinate of a point on the critical slip 
 surface
@@ -431,7 +429,7 @@ interface.  The responsibilities of the user and the system are as follows:
 \label{Sec:UserChar}
 The end user of \progname\ should have an understanding of undergraduate
 Level 1 Calculus and Physics, and be familiar with soil and material
-properties, specifically elastic modulus, cohesion, effective angle of 
+properties, specifically cohesion, effective angle of 
 friction, and unit weight.
 
 \subsection{System Constraints}
@@ -553,10 +551,10 @@ slice $i$ and adjacent slice \textit{i+1}.
 \put(0.992,0.2938){\line(0,1){0.3401}}
 \put(1.4005,0.1764){\line(0,1){0.19}}
 \put(1.8,0.1){\line(0,1){0}}
-% j LABELS %
+% interslice LABELS %
 \put(0.55,0.92){$i=1$}
 \put(1.3985,0.3863){$i=n-1$}
-% j LABELS %
+% slice LABELS %
 \put(0.38,0.75){$i=1$}
 \put(0.74,0.55){$i=2$}
 \put(1.1,0.34){$i=n-1$}
@@ -613,59 +611,56 @@ so that the instance models can be verified.
 
 \subsubsection{Assumptions}
 \label{Assumptions}
-This section simplifies the original problem and helps in developing
-the theoretical model by filling in the missing information for the
-physical system.
-The numbers given in the square brackets refer to the data definition, or the 
-instance model, in which the respective
- assumption is used.
+This section simplifies the original problem and helps in developing the
+theoretical model by filling in the missing information for the physical
+system. The numbers given in the square brackets refer to the theoretical model
+[T], general definition [GD], data definition [DD], instance model [IM], or
+likely change [LC], in which the respective assumption is used.
 
 \begin{enumerate}[label=A\arabic*:,ref={\arabic*}]
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Concave}] The
   slip surface is concave with respect to the slope surface. The $(x,y)$
-  coordinates of a slip surface follow a concave up function.
+  coordinates of a slip surface follow a concave up function. [\iref{IM_Min}]
 
-\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Input}] The
-  geometry of the slope, and the material properties of the soil
-  layers are given as inputs.
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Constant}] The factor 
+of safety is assumed to be constant across a whole slip surface. 
+[\dref{GD_MobShear}, \iref{IM_FS}, \iref{IM_E}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The
   different layers of the soil are homogeneous, with consistent soil
-  properties throughout, and independent of dry or saturated
-  conditions, with the exception of unit weight.
+  properties throughout. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R}, 
+  \ddref{DD_T}, \lcref{LC_inhomogeneous}]
+  
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Saturated}] The soil 
+properties are independent of dry or saturated conditions, with the exception 
+of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R}, 
+\ddref{DD_T}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Isotropic}]
-  Soil layers are treated as if they have isotropic properties.
+  Soil layers are treated as if they have isotropic properties. [\dref{GD_P}, 
+  \dref{GD_MobShear}, \ddref{DD_R}, \ddref{DD_T}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
   Interslice normal and shear forces have a linear relationship,
   proportional to a constant $\left({\lambda}\right)$ and an
   interslice force function $\left({f}\right)$ depending on x
-  position.
-
-\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Interslice}]
-  Slice to base normal and shear forces have a linear relationship,
-  dependent on the factor of safety $\left({FS}\right)$, and the
-  Coulomb sliding law.
-
-\item
-  [A\refstepcounter{assumpnum}\theassumpnum: \label{A_StressStrain}]
-  The stress-strain curve for interslice relationships is linear with
-  a constant slope.
+  position. [\dref{GD_X}, \ddref{DD_EX}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
   slope and slip surface extends far into and out of the geometry ($z$
   coordinate). This implies plane strain conditions, making 2D
-  analysis appropriate.
+  analysis appropriate. [\tref{TM_Eqm}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Lin}] The
   effective normal stress is large enough that the resistive shear to
   effective normal stress relationship can be approximated as a linear
-  relationship.
+  relationship. [\tref{TM_Fmc}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Straight}]
-  The surface and base of a slice between interslice nodes are
-  approximated as straight lines.
+  The surface and base of a slice are approximated as straight lines 
+  [\ddref{DD_W}, \ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_H}, 
+  \ddref{DD_Angles_alpha}, \ddref{DD_Angles_Beta}, \ddref{DD_b}, \ddref{DD_lb}, 
+  \ddref{DD_ls}].
 \end{enumerate}
 
 \subsubsection{Theoretical Models} \label{sec_theoretical}
@@ -2253,7 +2248,6 @@ is intended to provide a feel for a common scenario.
   $(x,y)$ of slope vertices' (*) & Consecutive vertices have
   increasing x values. All layers start and end vertices' go to the
   same x values. & N/A & 10\% \\
-  $E$ (*) & $E > 0$ & 15000 & 10\%\\
   $c$ (*) & $c >0$ & 10 & 10\%\\
   $v$ (*) & $ 0 < v < 1 $ & 0.4 & 10\%\\
   $\varphi'$ (*) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
@@ -2316,8 +2310,6 @@ requirements, the qualities that the software is expected to exhibit.
     $\left(x,y\right)$ & $\text{m}$ & x and y coordinates for vertices
     of the slope layers, and for the water table if one exists.
     Assumed straight line fits between vertices.\\
-    $E$ & $\text{kPa}$ & Young's modulus for each layer of the
-    slope.\\
     $c'$ & $\text{kPa}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
@@ -2402,14 +2394,13 @@ a different algorithm would be needed.
 
 \begin{itemize}
 \item[\refstepcounter{ucnum}\ltheucnum \label{UC_insf}:] Changes related to 
-\aref{A_Base} and \aref{A_Interslice} are not possible
- due to the dependency of the calculations on the linear relationship between 
- interslice normal and shear forces.
+\aref{A_Base} are not possible due to the dependency of the calculations on the 
+linear relationship between interslice normal and shear forces.
 \item[\refstepcounter{ucnum}\ltheucnum \label{UC_inhomogeneous}:] \aref{A_2D} 
 allows for 2D analysis with these models only because stress along z-direction 
 is zero. 
 These models do not take into account stress in the z-direction, and therefore 
-cannot be used without manipulation to attempt 3D analysis.
+cannot be used without manipulation to attempt 3-dimensional analysis.
 \end{itemize}
 
 \bmac{This section is not on the template}
@@ -2431,41 +2422,41 @@ definitions, instance models, and likely changes on the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline
-& \aref{A_Concave}& \aref{A_Input}& \aref{A_Homo}& 
-\aref{A_Isotropic}& \aref{A_Base}& \aref{A_Interslice}& 
-\aref{A_StressStrain}& \aref{A_2D}& \aref{A_Lin}& \aref{A_Straight}\\
+& \aref{A_Concave}& \aref{A_Constant}& \aref{A_Homo}& \aref{A_Saturated}&
+\aref{A_Isotropic}& \aref{A_Base}& \aref{A_2D}& \aref{A_Lin}& 
+\aref{A_Straight}\\
 \hline
-\tref{TM_FS}            & & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & & & \\ \hline
-\tref{TM_EffStress}     & & & & & & & & & & \\ \hline
-\dref{GD_Fx}            & & & & & & & & & & \\ \hline
-\dref{GD_Fy}            & & & & & & & & & & \\ \hline
-\dref{GD_P}             & & & & & & & & & & \\ \hline
-\dref{GD_MobShear}      & & & & & & & & & & \\ \hline
-\dref{GD_X}             & & & & & & & & & & \\ \hline
-\dref{GD_M}             & & & & & & & & & & \\ \hline
-\ddref{DD_W}            & & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & & \\ \hline
-\ddref{DD_H}            & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & & \\ \hline
-\ddref{DD_b}            & & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & & \\ \hline
-\ddref{DD_Kc}           & & & & & & & & & & \\ \hline
-\ddref{DD_Q}            & & & & & & & & & & \\ \hline
-\ddref{DD_EX}           & & & & & & & & & & \\ \hline
-\ddref{DD_R}            & & & & & & & & & & \\ \hline
-\ddref{DD_T}            & & & & & & & & & & \\ \hline
-\iref{IM_FS}            & & & & & & & & & & \\ \hline
-\iref{IM_Lambda}        & & & & & & & & & & \\ \hline
-\iref{IM_E}             & & & & & & & & & & \\ \hline
-\iref{IM_Min}           & & & & & & & & & & \\ \hline
-\lcref{LC_inhomogeneous}& & & & & & & & & & \\
+\tref{TM_FS}            & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & & & & & & & & & \\ \hline
+\dref{GD_Fy}            & & & & & & & & & \\ \hline
+\dref{GD_P}             & & & & & & & & & \\ \hline
+\dref{GD_MobShear}      & & & & & & & & & \\ \hline
+\dref{GD_X}             & & & & & & & & & \\ \hline
+\dref{GD_M}             & & & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & & & & & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & \\ \hline
+\ddref{DD_Kc}           & & & & & & & & & \\ \hline
+\ddref{DD_Q}            & & & & & & & & & \\ \hline
+\ddref{DD_EX}           & & & & & & & & & \\ \hline
+\ddref{DD_R}            & & & & & & & & & \\ \hline
+\ddref{DD_T}            & & & & & & & & & \\ \hline
+\iref{IM_FS}            & & & & & & & & & \\ \hline
+\iref{IM_Lambda}        & & & & & & & & & \\ \hline
+\iref{IM_E}             & & & & & & & & & \\ \hline
+\iref{IM_Min}           & & & & & & & & & \\ \hline
+\lcref{LC_inhomogeneous}& & & & & & & & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions 
