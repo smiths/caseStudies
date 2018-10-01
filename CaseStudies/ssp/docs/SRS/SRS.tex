@@ -525,8 +525,8 @@ includes the following elements:
 ~\newline\noindent Morgenstern-Price analysis of the slope involves 
 representing the slope as a series of vertical slices. As shown in 
 Figure~\ref{Fig_Index}, the index $i$ is used to denote a value for a single 
-slice, while the index $j$ is used to denote a value that applies to the 
-interface between two adjacent slices, otherwise known as an interslice value.
+slice, and an interslice value at a given index $i$ refers to the value between 
+slice $i$ and adjacent slice \textit{i+1}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -554,10 +554,8 @@ interface between two adjacent slices, otherwise known as an interslice value.
 \put(1.4005,0.1764){\line(0,1){0.19}}
 \put(1.8,0.1){\line(0,1){0}}
 % j LABELS %
-\put(0.15,0.92){$j=0$}
-\put(0.55,0.92){$j=1$}
-\put(1.3985,0.3863){$j=n-1$}
-\put(1.78,0.13){$j=n$}
+\put(0.55,0.92){$i=1$}
+\put(1.3985,0.3863){$i=n-1$}
 % j LABELS %
 \put(0.38,0.75){$i=1$}
 \put(0.74,0.55){$i=2$}
