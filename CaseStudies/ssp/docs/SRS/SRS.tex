@@ -183,7 +183,8 @@ ${F_{y}}$ & \si{\newton} &$y$-component of the net force
 $f$ & & Scaling Function: magnitude of interslice forces as a function of the x 
 coordinate for interslice index i; can be constant or a half-sine
 \\
-$FS$ & &Factor of Safety: The global stability of a surface in a slope  
+$FS$ & & Factor of Safety: The global stability metric of a slip surface in a 
+slope  
 \\
 $G$ & \si{\newton} & Interslice Normal Force: exerted between adjacent slices 
 for interslice index i
@@ -234,7 +235,7 @@ the slice for slice index i
 ${U_{t}}$ & \si{\newton} & Surface Hydrostatic Force: from water pressure 
 acting into the slice from standing water on the slope surface for slice index i
 \\
-$W$ & \si{\newton} &Weight: downward force caused by gravity on slice i
+$W$ & \si{\newton} & Weight: downward force caused by gravity on slice i
 \\
 $x$ & \si{\meter}& X Ordinate: refers to either slice i midpoint, or slice 
 interface i
@@ -469,7 +470,7 @@ interface.  The responsibilities of the user and the system are as follows:
     of a floating point number
   \item Determine if the inputs satisfy the required physical
     constraints
-  \item Identify the most likely failure surface within the possible input range
+  \item Identify the critical slip surface within the possible input range
   \item Find the factor of safety for the slope
   \end{itemize}
 \end{itemize}
@@ -495,8 +496,8 @@ that model the slope. \\
 
 \subsection{Problem Description} \label{Sec_pd}
 
-\progname\ is a computer program developed to evaluate the factor of safety of a
-slope's slip surface and identify the critical slip surface of the slope.
+\progname\ is a computer program developed to evaluate the factors of safety 
+for a slope's slip surfaces and identify the critical slip surface of the slope.
 
 \subsubsection{Terminology}
 
@@ -505,7 +506,8 @@ sections and their meaning, with the purpose of reducing ambiguity and
  making it easier to correctly understand the requirements.
 
 \begin{itemize}
-\item {\textit{Factor of safety:} The global stability of a surface in a slope.}
+\item {\textit{Factor of safety:} The global stability metric of a slip surface 
+of a slope.}
   
 \item {\textit{Critical slip surface:} Slip surface of the slope that
   has the lowest global factor of safety, and therefore most likely to
@@ -664,7 +666,7 @@ instance model, in which the respective
 \begin{enumerate}[label=A\arabic*:,ref={\arabic*}]
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Concave}] The
   slip surface is concave with respect to the slope surface. The $(x,y)$
-  coordinates of the failure surface follow a monotonic function.
+  coordinates of a slip surface follow a concave up function.
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Input}] The
   geometry of the slope, and the material properties of the soil
@@ -1809,7 +1811,7 @@ Sections~\ref{sec_theoretical} and ~\ref{sec_gendef}.
 
 ~\newline\noindent The Morgenstern Price Method is a vertical slice,
 limit equilibrium slope stability analysis method. Analysis is
-performed by breaking the assumed failure surface into a series of
+performed by breaking the assumed slip surface into a series of
 vertical slices of mass. Static equilibrium analysis using two force
 equilibrium, and one moment equation as in \tref{TM_Eqm}. The problem
 is statically indeterminate with only these 3 equations and one
@@ -2379,7 +2381,7 @@ Table~\ref{TblInputVar}.
 potential critical slip surfaces for the input slope. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_FS}:] Calculate the
-  factors of safety of each of the potential critical slip surfaces.
+  factors of safety for each of the potential critical slip surfaces.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Minimize}:] Compare the 
 factor of safety for each potential critical slip surface to determine the 
