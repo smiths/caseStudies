@@ -174,9 +174,9 @@ ratio; can be constant or a half-sine
 \\
 $FS$ & & factor of safety
 \\
-$G$ & \si{\newton} & interslice normal force
+$G$ & \si{\newton\per\meter} & interslice normal force
 \\
-$H$ & \si{\newton} & interslice water force
+$H$ & \si{\newton\per\meter} & interslice water force
 \\
 $h$ &  \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint on the slice
@@ -187,29 +187,31 @@ ${K_{c}}$ & & horizontal seismic coefficient
 \\
 $M$ & N \si{\meter}& moment
 \\
-$N$ & \si{\newton} & normal force
+$N$ & \si{\newton\per\meter} & normal force
 \\
-$N'$ &\si{\newton} & effective normal force
+$N'$ &\si{\newton\per\meter} & effective normal force
 \\
-$P$ & \si{\newton} & resistive shear force
+$P$ & \si{\newton\per\meter} & resistive shear force
 \\
-$Q$ & \si{\newton} & imposed surface load or external force
+$Q$ & \si{\newton\per\meter} & imposed surface load or external force
 \\
-$R$ & \si{\newton} & resistive shear force without the influence of interslice 
+$R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
+interslice 
 forces
 \\
-$S$ & \si{\newton} & mobilized shear force
+$S$ & \si{\newton\per\meter} & mobilized shear force
 \\
 $s$ &\si{\pascal} & mobilized shear stress
 \\
-$T$ & \si{\newton} & mobilized shear force without the influence of interslice 
+$T$ & \si{\newton\per\meter} & mobilized shear force without the influence of 
+interslice 
 forces
 \\
-${U_{b}}$ & \si{\newton} & base hydrostatic force
+${U_{b}}$ & \si{\newton\per\meter} & base hydrostatic force
 \\
-${U_{t}}$ & \si{\newton} & surface hydrostatic force
+${U_{t}}$ & \si{\newton\per\meter} & surface hydrostatic force
 \\
-$W$ & \si{\newton} & self-weight
+$W$ & \si{\newton\per\meter} & self-weight
 \\
 $x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 \\
@@ -220,7 +222,7 @@ ${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinateof a point on a slip surface
 \\
 ${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
-$X$ & \si{\newton} & interslice shear force
+$X$ & \si{\newton\per\meter} & interslice shear force
 \\
 $y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian coordinate system
 \\
@@ -247,7 +249,7 @@ ${\gamma{}_{Sat}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit weight
 \\
 ${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & water unit weight
 \\
-$\Delta{}H$ & \si{\newton} & difference between interslice forces
+$\Delta{}H$ & \si{\newton\per\meter} & difference between interslice forces
 \\
 $\lambda{}$ & & scaling factor for the interslice normal to shear force ratio
 \\
@@ -261,12 +263,12 @@ $\Upsilon{}$ & & generic minimization function or algorithm
 \\
 $\varphi{}'$ & ${}^{\circ}$ & effective angle of friction
 \\
-$\Phi{}$ & \si{\newton} & constant to convert resistive shear without the 
+$\Phi{}$ & & constant to convert resistive shear without the 
 influence of interslice forces to resistive shear with the influence of 
 interslice 
 forces
 \\
-$\Psi{}$ & \si{\newton} & constant to convert mobile shear without the 
+$\Psi{}$ & & constant to convert mobile shear without the 
 influence of interslice forces to mobile shear with the influence of interslice 
 forces
 \\
@@ -1122,7 +1124,9 @@ Equation &
 \end{cases}$
 \\
 
-\hline Description & $W$ is the weight (N)\newline$b$ is the base width of a 
+\hline Description & $W$ is the weight (\si{\newton\per\meter})\newline$b$ is 
+the 
+base width of a 
 slice (m)\newline$i$ is the index\newline${y_{us}}$ is the y ordinate 
 (m)\newline${y_{slip}}$ is the y ordinate (m)\newline${\gamma{}_{Sat}}$ is the 
 saturated unit weight ($\frac{\text{N}}{\text{m}^{3}}$)\newline${y_{wt}}$ is 
@@ -1168,7 +1172,8 @@ ${U_{b}}$ = ${\ell{}_{b,i}}\begin{cases}
 \\
 
 \hline Description & ${U_{b}}$ is the base hydrostatic force
- (N)\newline${\ell{}_{b}}$ is the total base length of a slice (m)\newline$i$ is
+ (\si{\newton\per\meter})\newline${\ell{}_{b}}$ is the total base length of a 
+ slice (m)\newline$i$ is
  the index\newline${y_{wt}}$ is the y ordinate (m)\newline${y_{slip}}$ is the
  y ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water
  ($\frac{\text{N}}{\text{m}^{3}}$)
@@ -1211,7 +1216,8 @@ ${U_{t}}$ = ${\ell{}_{s,i}}\begin{cases}
 \\ 
 
 \hline Description & ${U_{t}}$ is the surface hydrostatic force 
-(N)\newline${\ell{}_{s}}$ is the length of an interslice surface (m)\newline$i$ 
+(\si{\newton\per\meter})\newline${\ell{}_{s}}$ is the length of an interslice 
+surface (m)\newline$i$ 
 is the index\newline${y_{wt}}$ is the y ordinate (m)\newline${y_{us}}$ is the y 
 ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water 
 ($\frac{\text{N}}{\text{m}^{3}}$)
@@ -1255,7 +1261,8 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \end{cases}$
 \\
 
-\hline Description & $H$ is the interslice water force (N)\newline${y_{us}}$ is 
+\hline Description & $H$ is the interslice water force 
+(\si{\newton\per\meter})\newline${y_{us}}$ is 
 the y ordinate (m)\newline$i$ is the index\newline${y_{slip}}$ is the y 
 ordinate (m)\newline${\gamma{}_{Sat}}$ is the saturated unit weight 
 ($\frac{\text{N}}{\text{m}^{3}}$)\newline${y_{wt}}$ is the y ordinate (m)
@@ -1454,7 +1461,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Kc}\\
 \hline Equation & ${K_{c}}$ = ${K_{c}}W_{i}$ \\
 
 \hline Description &${K_{c}}$ is the earthquake load factor\newline$W$ is the 
-weight (N)\newline$i$ is the index
+weight (\si{\newton\per\meter})\newline$i$ is the index
 \\ 
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -1488,7 +1495,8 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Q}\\
 
 \hline Equation & $Q$ = $Q_{i}\omega{}_{i}$\\
 
-\hline Description & $Q$ is the imposed surface load (N)\newline$i$ is the 
+\hline Description & $Q$ is the imposed surface load 
+(\si{\newton\per\meter})\newline$i$ is the 
 index\newline$\omega{}$ is the angle (${}^{\circ}$)  \\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -1522,9 +1530,11 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_EX}\\
 
 \hline Equation & $X$ = $\lambda{}f_{i}G_{i}$ \\
 
-\hline Description & $X$ is the interslice shear force (N)\newline$\lambda{}$ 
+\hline Description & $X$ is the interslice shear force 
+(\si{\newton\per\meter})\newline$\lambda{}$ 
 is the interslice normal/shear force ratio\newline$f$ is the scaling 
-function\newline$i$ is the index\newline$G$ is the interslice normal force (N)
+function\newline$i$ is the index\newline$G$ is the interslice normal force 
+(\si{\newton\per\meter})
 \\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -1572,14 +1582,18 @@ $R \; = \begin{array}{l}
 + c'_{\text{i}} \cdot b_{\text{i}} \cdot
 \sec\left(\alpha_{\text{i}}\right) \end{array} $\\
 
-\hline Description & $R$ is the resistive shear force (N)\newline$W$ is the 
-weight (N)\newline$i$ is the index\newline${U_{t}}$ is the surface hydrostatic 
-force (N)\newline$\beta{}$ is the angle (${}^{\circ}$)\newline$Q$ is the 
-imposed surface load (N)\newline$\omega{}$ is the angle 
+\hline Description & $R$ is the resistive shear force 
+(\si{\newton\per\meter})\newline$W$ is the 
+weight (\si{\newton\per\meter})\newline$i$ is the index\newline${U_{t}}$ is the 
+surface hydrostatic 
+force (\si{\newton\per\meter})\newline$\beta{}$ is the angle 
+(${}^{\circ}$)\newline$Q$ is the 
+imposed surface load (\si{\newton\per\meter})\newline$\omega{}$ is the angle 
 (${}^{\circ}$)\newline$\alpha{}$ is the angle (${}^{\circ}$)\newline${K_{c}}$ 
 is the earthquake load factor\newline$\Delta{}H$ is the difference between 
-interslice forces (N)\newline${U_{b}}$ is the base hydrostatic force 
-(N)\newline$\varphi{}'$ is the effective angle of friction 
+interslice forces (\si{\newton\per\meter})\newline${U_{b}}$ is the base 
+hydrostatic force 
+(\si{\newton\per\meter})\newline$\varphi{}'$ is the effective angle of friction 
 (${}^{\circ}$)\newline$c'$ is the effective cohesion (Pa)\newline$b$ is the 
 base width of a slice (m)
 \\
@@ -1688,13 +1702,16 @@ $T$ =
 $\left(W_{i}+{U_{t,i}}\cos\left(\beta{}_{i}\right)+Q_{i}\cos\left(\omega{}_{i}\right)\right)\sin\left(\alpha{}_{i}\right)-\left(-{K_{c}}W_{i}-{\Delta{}H}_{i}+{U_{t,i}}\sin\left(\beta{}_{i}\right)+Q_{i}\sin\left(\omega{}_{i}\right)\right)\cos\left(\alpha{}_{i}\right)$
 \\ 
 
-\hline Description &  $T$ is the mobilized shear force (N)\newline$W$ is the 
-weight (N)\newline$i$ is the index\newline${U_{t}}$ is the surface hydrostatic 
-force (N)\newline$\beta{}$ is the angle (${}^{\circ}$)\newline$Q$ is the 
-imposed surface load (N)\newline$\omega{}$ is the angle 
+\hline Description &  $T$ is the mobilized shear force 
+(\si{\newton\per\meter})\newline$W$ is the 
+weight (\si{\newton\per\meter})\newline$i$ is the index\newline${U_{t}}$ is the 
+surface hydrostatic 
+force (\si{\newton\per\meter})\newline$\beta{}$ is the angle 
+(${}^{\circ}$)\newline$Q$ is the 
+imposed surface load (\si{\newton\per\meter})\newline$\omega{}$ is the angle 
 (${}^{\circ}$)\newline$\alpha{}$ is the angle (${}^{\circ}$)\newline${K_{c}}$ 
 is the earthquake load factor\newline$\Delta{}H$ is the difference between 
-interslice forces (N)
+interslice forces (\si{\newton\per\meter})
 \\
 
 \hline
