@@ -193,6 +193,8 @@ $N'$ &\si{\newton\per\meter} & effective normal force
 \\
 $P$ & \si{\newton\per\meter} & resistive shear force
 \\
+$P_{st}$ & \si{\pascal} & shear strength
+\\
 $Q$ & \si{\newton\per\meter} & imposed surface load or external force
 \\
 $R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
@@ -253,7 +255,14 @@ $\Delta{}H$ & \si{\newton\per\meter} & difference between interslice forces
 \\
 $\lambda{}$ & & scaling factor for the interslice normal to shear force ratio
 \\
-$\sigma{}$ & \si{\pascal} & normal stress
+$\mu{}$ &\si{\pascal} & pore pressure from water within the soil
+\\
+$\sigma{}$ & \si{\pascal} & the total stress a soil mass needs
+to maintain itself as a rigid collection of particles
+\\
+$\sigma{}_N$ & \si{\pascal} & normal stress
+\\
+$\sigma{}'$ & \si{\pascal} & effective stress provided by the soil skeleton
 \\
 $\tau{}$ & \si{\pascal} & resistive shear stress
 \\
@@ -763,16 +772,16 @@ on.
   
   \hline Label&\bf Mohr-Coulomb Shear Strength\\
   
-  \hline Equation& \( P = \sigma \cdot \tan\left( \varphi' \right) + c'
+  \hline Equation& \( P = \sigma_N \cdot \tan\left( \varphi' \right) + c'
   \) \\
   
-  \hline Description & The $P$
-  versus $\sigma$ relationship is not truly linear, but assuming the
+  \hline Description & The $P_{st}$
+  versus $\sigma_N$ relationship is not truly linear, but assuming the
   effective normal force is strong enough, it can be approximated with
   a linear fit (\aref{A_Lin}), where the cohesion $c'$ represents the
-  $P$ intercept of the fitted line.\\
-  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
-  &$\sigma$ is the normal stress (\si{\pascal}).\\
+  $P_{st}$ intercept of the fitted line.\\
+  &$P_{st}$ is the shear strength (\si{\pascal}).\\
+  &$\sigma_N$ is the normal stress (\si{\pascal}).\\
   &$\varphi$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
 
@@ -786,6 +795,41 @@ on.
 \end{minipage}\\
 % ----------------------------- %
 %        End TM Mohr Coulomb              %
+% ----------------------------- %
+
+~\newline
+
+% ----------------------------- %
+%        Begin TM Effective Stress            %
+% ----------------------------- %
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  
+  \hline \rowcolor[gray]{0.9} Number&
+  T\refstepcounter{theorynum}\thetheorynum \label{TM_EffStress}\\
+  
+  \hline Label&\bf Effective Stress\\
+  
+  \hline Equation& \( \sigma' =\sigma - \mu \) \\
+  
+  \hline Description & $\sigma$ is the total stress a soil mass needs
+  to maintain itself as a rigid collection of particles (\si{\pascal}).\\
+  & $\sigma'$ is the effective stress provided by the soil skeleton  
+  (\si{\pascal}).\\
+  & $\mu$ is the pore pressure from water within the soil .\\
+
+  \hline Source & \cite{FredlundKrahn}\\
+  
+  \hline Ref.\ By & \dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
+  \ddref{DD_T}, \iref{IM_E}\\
+  
+  \hline
+\end{tabular}
+\end{minipage}
+% ----------------------------- %
+%        End TM Effective Stress             %
 % ----------------------------- %
 
 \subsubsection{General Definitions} \label{sec_gendef}
