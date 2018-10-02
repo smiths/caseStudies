@@ -253,8 +253,6 @@ $\Delta{}H$ & \si{\newton\per\meter} & difference between interslice forces
 \\
 $\lambda{}$ & & scaling factor for the interslice normal to shear force ratio
 \\
-$\mu{}$ &\si{\pascal} & pore pressure from water within the soil
-\\
 $\sigma{}$ & \si{\pascal} & normal stress
 \\
 $\tau{}$ & \si{\pascal} & resistive shear stress
@@ -489,7 +487,13 @@ ground.}
   
 \item {\textit{Shear force:} A force applied parallel to the plane of
   the material.}
-  
+
+\item {\textit{Resistive shear force:} Shear force in the direction opposite of 
+the direction of potential motion, thus hindering motion along the plane.}
+	
+\item {\textit{Mobile shear force:} Shear force in the direction of potential 
+motion, thus encouraging motion along the plane.}
+	
 \item {\textit{Cohesion:} An attractive force between adjacent particles that 
 holds the matter together.}
   
@@ -689,10 +693,10 @@ on.
   
   \hline Equation& \( \text{FS} = \frac{P}{S} \) \\
   
-  \hline Description & The stability metric of the slope, known as the
-  factor of safety $\text{FS}$, is determined by the ratio of the
-  shear force at the base of the slope $S$, and
-  the resistive shear $P$. \\
+  \hline Description & $FS$ is the factor of safety, or stability metric of the 
+  slope.\\
+  & $S$ is the mobile shear force (\si{\newton\per\meter}).\\
+  & $P$ is the resistive shear force (\si{\newton\per\meter}). \\
  
   \hline Source & \cite{FredlundKrahn}\\
 
@@ -719,18 +723,18 @@ on.
   T\refstepcounter{theorynum}\thetheorynum \label{TM_Eqm}\\
   
   \hline
-  Label&\bf Equilibrium\\
+  Label&\bf Static Equilibrium\\
   
   \hline Equation& \( \displaystyle\sum {F}_{\text{x}} = 
   \displaystyle\sum F_{\text{y}} = \displaystyle\sum M = 0
   \)\\
 
   \hline Description & For a body in static equilibrium the net
-  forces and net moments acting on the body will cancel out. Assuming
-  a 2D problem (\aref{A_2D}) the x-component of the net force ${F_{x}}$ 
-and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
- and their distance from the chosen point of rotation will create a net
- moment equal to $0$. \\
+  forces and net moments acting on the body will cancel out. This equation 
+  assumes a 2D space (\aref{A_2D}).\\
+  & ${F_{x}}$ is the x-component of the net force (\si{\newton}).\\
+  & ${F_{y}}$ is the y-component of the net force (\si{\newton}).\\
+  & $M$ is the net moment (\si{\newton\meter}).\\
   
   \hline Source & \cite{FredlundKrahn}\\
   
@@ -762,17 +766,15 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
   \hline Equation& \( P = \sigma \cdot \tan\left( \varphi' \right) + c'
   \) \\
   
-  \hline Description & For a soil under stress it will exert a shear
-  resistive strength based on the Coulomb sliding law.  The resistive
-  shear is the maximum amount of shear a surface can experience while
-  remaining rigid, analogous to a maximum normal force.  In this model
-  the shear force $P$ is proportional to the product of the normal
-  stress on the plane $\sigma$ with it's static friction, in the
-  angular form $\tan\left( \varphi' \right)=U_{\text{s}}$.  The $P$
+  \hline Description & The $P$
   versus $\sigma$ relationship is not truly linear, but assuming the
   effective normal force is strong enough, it can be approximated with
   a linear fit (\aref{A_Lin}), where the cohesion $c'$ represents the
   $P$ intercept of the fitted line.\\
+  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
+  &$\sigma$ is the normal stress (\si{\pascal}).\\
+  &$\varphi$ is the effective angle of friction (\si{\degree}).\\
+  &$c'$ is the effective cohesion (\si{\pascal}).\\
 
   \hline Source & \cite{FredlundKrahn}\\
   
@@ -784,43 +786,6 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
 \end{minipage}\\
 % ----------------------------- %
 %        End TM Mohr Coulomb              %
-% ----------------------------- %
-
-~\newline
-
-% ----------------------------- %
-%        Begin TM Effective Stress            %
-% ----------------------------- %
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  
-  \hline \rowcolor[gray]{0.9} Number&
-  T\refstepcounter{theorynum}\thetheorynum \label{TM_EffStress}\\
-  
-  \hline Label&\bf Effective Stress\\
-  
-  \hline Equation& \( \sigma' =\sigma - \mu \) \\
-  
-  \hline Description & $\sigma$ is the total stress a soil mass needs
-  to maintain itself as a rigid collection of particles. The source of
-  the stress can be provided by the soil skeleton $\sigma'$, or by the
-  pore pressure from water within the soil $\mu$. The stress from the
-  soil skeleton is known as the effective stress $\sigma'$ and is the
-  difference between the total stress $\sigma$ and the pore stress
-  $\mu$. \\
-
-  \hline Source & \cite{FredlundKrahn}\\
-  
-  \hline Ref.\ By & \dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
-  \ddref{DD_T}, \iref{IM_E}\\
-  
-  \hline
-\end{tabular}
-\end{minipage}
-% ----------------------------- %
-%        End TM Effective Stress             %
 % ----------------------------- %
 
 \subsubsection{General Definitions} \label{sec_gendef}
