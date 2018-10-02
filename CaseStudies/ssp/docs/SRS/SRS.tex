@@ -317,6 +317,8 @@ parallel to the slope of the surface \\
 
 \pagenumbering{arabic}
 
+\setlength{\tabcolsep}{6pt}
+
 \section{Introduction}
 
 A slope of geological mass, composed of soil and rock and sometimes water, is 
@@ -676,9 +678,9 @@ on.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline Number&
+  \hline \rowcolor[gray]{0.9} Number&
   T\refstepcounter{theorynum}\thetheorynum \label{TM_FS}\\
   
   \hline Label&\bf Factor of Safety\\
@@ -709,9 +711,9 @@ on.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline Number&
+  \hline \rowcolor[gray]{0.9} Number&
   T\refstepcounter{theorynum}\thetheorynum \label{TM_Eqm}\\
   
   \hline
@@ -748,10 +750,10 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
-  
-  \hline  Number&
-  T\refstepcounter{theorynum}\thetheorynum \label{TM_Fmc}\\
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{TM_Fmc}\\
   
   \hline Label&\bf Mohr-Coulomb Shear Strength\\
   
@@ -790,9 +792,9 @@ and y-component of the net force ${F_{y}}$ will be equal to $0$. All forces
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   T\refstepcounter{theorynum}\thetheorynum \label{TM_EffStress}\\
   
   \hline Label&\bf Effective Stress\\
@@ -833,9 +835,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_Fx}\\
   
   \hline Label&\bf Normal Force Equilibrium\\
@@ -880,9 +882,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_Fy}\\
   
   \hline Label&\bf Base Shear Force Equilibrium\\
@@ -927,9 +929,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_P}\\
   
   \hline Label&\bf Resistive Shear Force\\
@@ -969,9 +971,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline \ Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_MobShear}\\
   
   \hline Label&\bf Mobile Shear Force\\
@@ -1006,9 +1008,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_X}\\
   
   \hline Label&\bf Interslice Normal/Shear Relationship\\
@@ -1044,9 +1046,9 @@ instance models.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{1.5cm} | p{14cm}|}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   
-  \hline  Number&
+  \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_M}\\
   
   \hline Label&\bf Moment Equilibrium\\
@@ -1102,9 +1104,9 @@ must be written in terms of \ddref{DD_W} to \ddref{DD_Q} to solve.
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_W}\\
 
 \hline Label& \bf Weight \\
@@ -1150,9 +1152,9 @@ the y ordinate (m)\newline$\gamma{}$ is the dry unit weight
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ub}\\
 
 \hline Label& \bf Base Water Force \\
@@ -1193,9 +1195,9 @@ ${U_{b}}$ = ${\ell{}_{b,i}}\begin{cases}
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 
 \hline Label& \bf Surface Hydrostatic Force \\
@@ -1237,9 +1239,9 @@ ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 
 \hline Label& \bf Interslice Water Force \\
@@ -1280,9 +1282,9 @@ ordinate (m)\newline${\gamma{}_{Sat}}$ is the saturated unit weight
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_alpha}\\
 
 \hline Label& \bf Angle\\
@@ -1310,9 +1312,9 @@ Description & $\alpha{}$ is the angle (${}^{\circ}$)\newline${y_{slip}}$
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_Beta}\\
 
 \hline Label& \bf Angle \\
@@ -1350,9 +1352,9 @@ the y ordinate (m)\newline$i$ is the index\newline${x_{us}}$ is the x ordinate
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
 
 \hline Label& \bf Base Width of a Slice \\
@@ -1377,9 +1379,9 @@ is the x ordinate (m)\newline$i$ is the index
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_lb}\\
 
 \hline Label& \bf Total Base Length of a Slice \\
@@ -1405,9 +1407,9 @@ index\newline$\alpha{}$ is the angle (${}^{\circ}$)
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
 
 \hline Label& \bf Length of an Interslice Surface \\
@@ -1442,9 +1444,9 @@ index\newline$\beta{}$ is the angle (${}^{\circ}$)
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Kc}\\
 
 \hline Label& \bf Earthquake Load Factor\\
@@ -1477,9 +1479,9 @@ weight (N)\newline$i$ is the index
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Q}\\
 
 \hline Label& \bf Imposed Surface Loads \\
@@ -1511,9 +1513,9 @@ index\newline$\omega{}$ is the angle (${}^{\circ}$)  \\
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_EX}\\
 
 \hline Label& \bf Interslice ShearForces \\
@@ -1547,9 +1549,9 @@ function\newline$i$ is the index\newline$G$ is the interslice normal force (N)
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_R}\\
 
 \hline Label& \bf Resistive Shear, Without Interslice Forces \\
@@ -1671,9 +1673,10 @@ R_\text{i} = N^*_\text{i} \tan\left(\varphi'\right) + c'_\text{i}
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
 \hline
+\rowcolor[gray]{0.9}
 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_T}\\
 
 \hline
@@ -1795,9 +1798,9 @@ how the instance models address them}
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 
 \hline Label& \bf Factor of Safety \\
@@ -1864,9 +1867,9 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
 \hline Label& \bf Normal/Shear Force Ratio \\
@@ -2015,9 +2018,9 @@ interslice normal force $G$ (\iref{IM_E}).
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline Number&
+\hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 
 \hline Label& \bf Interslice Forces \\
@@ -2184,9 +2187,9 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{1.5cm} | p{14cm} |}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
   
-\hline  Number&
+\hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Label& \bf Critical Slip Identification \\
