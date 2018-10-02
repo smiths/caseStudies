@@ -852,6 +852,7 @@ instance models.
   GD\refstepcounter{defnum}\thedefnum \label{GD_Fx}\\
   
   \hline Label&\bf Normal Force Equilibrium\\
+  \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation& \( N_{\text{i}} \; = \begin{array}{l} \left[
       W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
@@ -864,15 +865,26 @@ instance models.
       Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
       \right]\sin\left(\alpha_{\text{i}}\right) \end{array} \) \\
  
-  \hline Description & For a slice of mass in the slope the force
-  equilibrium to satisfy \tref{TM_Eqm} in the direction perpendicular
-  to the base surface of the slice. Rearranged to solve for the normal
-  force of the surface $N$. Force equilibrium is derived
-  from the free body diagram of Figure~\ref{Fig_Forces} in
-  section~\ref{sec_system}. Index $\text{i}$ refers to the values of
-  the properties for slice/interslices following convention in
+  \hline Description & This equation satisfies \tref{TM_Eqm} in the normal 
+  direction . Force equilibrium is derived from the free body diagram of 
+  Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
+  to the values of the properties for slice/interslices following convention in
   Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
-  definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
+  mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+  &$N$ is the normal force (\si{\newton\per\meter}). \\
+  &$W$ is the weight (\si{\newton\per\meter}). \\
+  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
+  &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$\beta$ is the angle between the surface of a slice and the 
+  horizontal (\si{\degree}). \\
+  &$Q$ is the external force (\si{\newton\per\meter}). \\
+  &$\omega$ is the angle between the imposed surface load acting into 
+  the surface and the vertical (\si{\degree}). \\
+  &$\alpha$ is the angle between the base of a slice and the 
+  horizontal (\si{\degree}). \\
+  &$K_c$ is the seismic coefficient. \\
+  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force (\si{\newton\per\meter}). \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -898,7 +910,8 @@ instance models.
   \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_Fy}\\
   
-  \hline Label&\bf Base Shear Force Equilibrium\\
+  \hline Label&\bf Shear Force Equilibrium\\
+  \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation& \( S_{\text{i}} = \begin{array}{l} \left[
       W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
@@ -911,15 +924,26 @@ instance models.
       Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
       \right]\cos\left(\alpha_{\text{i}}\right) \end{array} \) \\
   
-  \hline Description & For a slice of mass in the slope the force
-  equilibrium to satisfy \tref{TM_Eqm} in the direction parallel to
-  the base surface of the slice. Rearranged to solve for the shear
-  force acting on the base $S_{\text{i}}$. Force equilibrium is
-  derived from the free body diagram of Figure~\ref{Fig_Forces} in
-  section~\ref{sec_system}. Index $\text{i}$ refers to the values of
-  the properties for slice/interslices following convention in
+  \hline Description & This equation satisfies \tref{TM_Eqm} in the shear 
+  direction . Force equilibrium is derived from the free body diagram of 
+  Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
+  to the values of the properties for slice/interslices following convention in
   Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
-  definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
+  mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+  &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
+  &$W$ is the weight (\si{\newton\per\meter}). \\
+  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
+  &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$\beta$ is the angle between the surface of a slice and the 
+  horizontal (\si{\degree}). \\
+  &$Q$ is the external force (\si{\newton\per\meter}). \\
+  &$\omega$ is the angle between the imposed surface load acting into 
+  the surface and the vertical (\si{\degree}). \\
+  &$\alpha$ is the angle between the base of a slice and the 
+  horizontal (\si{\degree}). \\
+  &$K_c$ is the seismic coefficient. \\
+  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force (\si{\newton\per\meter}). \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -946,6 +970,7 @@ instance models.
   GD\refstepcounter{defnum}\thedefnum \label{GD_P}\\
   
   \hline Label&\bf Resistive Shear Force\\
+  \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation& \( P_{\text{i}} = N'_{\text{i}} \cdot \tan\left(
   \varphi'_{\text{i}} \right) + c' \cdot b_{\text{i}} \cdot
@@ -988,6 +1013,7 @@ instance models.
   GD\refstepcounter{defnum}\thedefnum \label{GD_MobShear}\\
   
   \hline Label&\bf Mobile Shear Force\\
+  \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation & \( S_{\text{i}} = \frac{ P_{\text{i}} }{ \text{FS}
   } = \frac { N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
