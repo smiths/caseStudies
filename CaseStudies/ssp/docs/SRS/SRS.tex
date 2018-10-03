@@ -222,7 +222,7 @@ $x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 $x_{cs}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical slip 
 surface
 \\
-${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinateof a point on a slip surface
+${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinate of a point on a slip surface
 \\
 ${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
@@ -254,7 +254,7 @@ $\gamma{}$ & \si{\newton\per\cubic\meter} & soil dry unit weight
 \\
 ${\gamma{}_{Sat}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit weight
 \\
-${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & water unit weight
+${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 \\
 $\Delta{}H$ & \si{\newton\per\meter} & difference between interslice forces
 \\
@@ -991,6 +991,7 @@ instance models.
   \hline Description & 
  The Mohr-Coulomb resistive shear strength from \tref{TM_Fmc} implemented with 
  forces.\\
+ &$i$ is the index representing a single slice.\\
  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
  &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
@@ -1031,6 +1032,7 @@ instance models.
   
   \hline Description & Mobile shear force as derived from the definition of the 
   factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. \\
+  &$i$ is the index representing a single slice.\\
   &$S$ is the mobile shear force (\si{\newton\per\meter}).\\
   &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
   &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
@@ -1072,6 +1074,7 @@ instance models.
 	\hline Description & Effective normal force as derived from 
 	\tref{TM_EffStress} and implemented with forces. 
 	\\
+	&$i$ is the index representing a single slice.\\
 	&$N'$ is the effective normal force (\si{\newton\per\meter}).\\
 	&$N$ is the normal force (\si{\newton\per\meter}).\\
 	&$U_b$ is the base hydrostatic force (\si{\newton\per\meter}).\\
@@ -1214,6 +1217,8 @@ definitions of \ref{sec_gendef} or build the instance models of
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_W}\\
 
 \hline Label& \bf Weight \\
+\hline Symbol& $W$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation & 
@@ -1226,20 +1231,24 @@ Equation &
 \end{cases}$
 \\
 
-\hline Description & $W$ is the weight (\si{\newton\per\meter})\newline$b$ is 
-the 
-base width of a 
-slice (m)\newline$i$ is the index\newline${y_{us}}$ is the y ordinate 
-(m)\newline${y_{slip}}$ is the y ordinate (m)\newline${\gamma{}_{Sat}}$ is the 
-saturated unit weight ($\frac{\text{N}}{\text{m}^{3}}$)\newline${y_{wt}}$ is 
-the y ordinate (m)\newline$\gamma{}$ is the dry unit weight 
-($\frac{\text{N}}{\text{m}^{3}}$)
+\hline Description &$i$ is the index representing a single slice.\\
+&$W$ is the weight (\si{\newton\per\meter}).\\
+&$b$ is the width of the base of a slice in the \textit{x} direction 
+(\si{\meter}).\\
+&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
+&${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+(\si{\meter}).\\
+&${\gamma{}_{Sat}}$ is the soil saturated unit weight 
+(\si{\newton\per\meter\cubed}).\\
+&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+(\si{\meter}).\\
+&$\gamma{}$ is the soil dry unit weight (\si{\newton\per\meter\cubed}).
 \\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_Fx}, \dref{GD_Fy}, \dref{GD_M}, \ddref{DD_R}, 
+\ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
@@ -1264,6 +1273,8 @@ the y ordinate (m)\newline$\gamma{}$ is the dry unit weight
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ub}\\
 
 \hline Label& \bf Base Water Force \\
+\hline Symbol& $U_b$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation & 
@@ -1273,16 +1284,20 @@ ${U_{b}}$ = ${\ell{}_{b,i}}\begin{cases}
 \end{cases}$
 \\
 
-\hline Description & ${U_{b}}$ is the base hydrostatic force
- (\si{\newton\per\meter})\newline${\ell{}_{b}}$ is the total base length of a 
- slice (m)\newline$i$ is
- the index\newline${y_{wt}}$ is the y ordinate (m)\newline${y_{slip}}$ is the
- y ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water
- ($\frac{\text{N}}{\text{m}^{3}}$)
-\\
+\hline Description &$i$ is the index representing a single slice.\\
+ &${U_{b}}$ is the base hydrostatic force
+ (\si{\newton\per\meter}).\\
+ &${\ell{}_{b}}$ is the base length of a slice in the 
+direction parallel to the slope of the base (\si{\meter}).\\
+ &${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+ (\si{\meter}).\\
+ &${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+ (\si{\meter}).\\
+ &${\gamma{}_{w}}$ is the unit weight of water (\si{\newton\per\meter\cubed}).\\
+ 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
+\hline Ref.\ By & \ddref{DD_R}, \iref{IM_FS},
 \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
@@ -1308,6 +1323,8 @@ ${U_{b}}$ = ${\ell{}_{b,i}}\begin{cases}
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 
 \hline Label& \bf Surface Hydrostatic Force \\
+\hline Symbol& $U_t$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation & 
@@ -1317,18 +1334,19 @@ ${U_{t}}$ = ${\ell{}_{s,i}}\begin{cases}
 \end{cases}$
 \\ 
 
-\hline Description & ${U_{t}}$ is the surface hydrostatic force 
-(\si{\newton\per\meter})\newline${\ell{}_{s}}$ is the length of an interslice 
-surface (m)\newline$i$ 
-is the index\newline${y_{wt}}$ is the y ordinate (m)\newline${y_{us}}$ is the y 
-ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water 
-($\frac{\text{N}}{\text{m}^{3}}$)
-\\
+\hline Description &$i$ is the index representing a single slice.\\
+&${U_{t}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&${\ell{}_{s}}$ is the surface length of a slice in the direction 
+parallel to the slope of the surface (\si{\meter}).\\
+&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water 
+table (\si{\meter}).\\
+&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
+&${\gamma{}_{w}}$ is the unit weight of water (\si{\newton\per\meter\cubed}).\\
 
 \hline Sources & \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_Fx}, \dref{GD_Fy}, \dref{GD_M}, \ddref{DD_R}, 
+\ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
@@ -1353,6 +1371,8 @@ ordinate (m)\newline${\gamma{}_{w}}$ is the unit weight of water
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 
 \hline Label& \bf Interslice Water Force \\
+\hline Symbol& $H$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline Equation & $H$ = $\begin{cases}
 \frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_{Sat}}+\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_{Sat}},
@@ -1363,17 +1383,20 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \end{cases}$
 \\
 
-\hline Description & $H$ is the interslice water force 
-(\si{\newton\per\meter})\newline${y_{us}}$ is 
-the y ordinate (m)\newline$i$ is the index\newline${y_{slip}}$ is the y 
-ordinate (m)\newline${\gamma{}_{Sat}}$ is the saturated unit weight 
-($\frac{\text{N}}{\text{m}^{3}}$)\newline${y_{wt}}$ is the y ordinate (m)
-\\
+\hline Description &$i$ is the index representing a single slice.\\
+&$H$ is the interslice water force (\si{\newton\per\meter}).\\
+&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
+&${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+(\si{\meter}).\\
+&${\gamma{}_{Sat}}$ is the soil saturated unit weight. 
+(\si{\newton\per\meter\cubed}).\\
+&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+(\si{\meter}).\\
 
 \hline Sources & \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_Fx}, \dref{GD_Fy}, \dref{GD_M}, \ddref{DD_R}, 
+\ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
@@ -1386,7 +1409,7 @@ ordinate (m)\newline${\gamma{}_{Sat}}$ is the saturated unit weight
 ~\newline
 
 % ------------------------------------------ %
-%               Begin DD Angles   %
+%               Begin DD Angle Alpha   %
 % ------------------------------------------ %
 \noindent
 \begin{minipage}{\textwidth}
@@ -1397,26 +1420,41 @@ ordinate (m)\newline${\gamma{}_{Sat}}$ is the saturated unit weight
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_alpha}\\
 
 \hline Label& \bf Angle\\
+\hline Symbol& $\alpha$\\
+\hline SI Units& \si{\degree}\\
 
 \hline
 Equation & 
-\( \alpha_\text{i} = \frac{y_\text{slip,i} -
-  y_\text{slip,i-1}}{x_\text{slip,i} - x_\text{slip,i-1}} \)\\
+\( \alpha_\text{i} = \arctan \left( \frac{y_\text{slip,i} -
+  y_\text{slip,i-1}}{x_\text{slip,i} - x_\text{slip,i-1}} \right) \)\\
 
 \hline
-Description & $\alpha{}$ is the angle (${}^{\circ}$)\newline${y_{slip}}$
- is the y ordinate (m)\newline$i$ is the index\newline${x_{slip}}$ is the x 
- ordinate (m)
-\\
+Description &$i$ is the index representing a single slice.\\
+ &$\alpha{}$ is the angle between the base of a slice and the horizontal 
+ (\si{\degree}).\\
+ &${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+ (\si{\meter}).\\
+ &${x_{slip}}$ is the \textit{x}-ordinate of a point on a slip surface 
+ (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_Fx}, \dref{GD_Fy}, \dref{GD_M}, \ddref{DD_lb}, 
+\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
 \end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD Angle Alpha        %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD Angle Beta   %
+% ------------------------------------------ %
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1427,29 +1465,32 @@ Description & $\alpha{}$ is the angle (${}^{\circ}$)\newline${y_{slip}}$
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_Beta}\\
 
 \hline Label& \bf Angle \\
+\hline Symbol& $\beta$\\
+\hline SI Units& \si{\degree}\\
 
 \hline
 Equation & 
-\( \beta_\text{i} = \frac{y_\text{us,i} -
-  y_\text{us,i-1}}{x_\text{us,i} - x_\text{us,i-1}} \)\\
+\( \beta_\text{i} = \arctan \left( \frac{y_\text{us,i} -
+  y_\text{us,i-1}}{x_\text{us,i} - x_\text{us,i-1}} \right) \)\\
 
 \hline
-Description & $\beta{}$ is the angle (${}^{\circ}$)\newline${y_{us}}$ is 
-the y ordinate (m)\newline$i$ is the index\newline${x_{us}}$ is the x ordinate 
-(m)
-\\
+Description &$i$ is the index representing a single slice.\\
+&$\beta{}$ is the angle between the surface of a slice and the 
+horizontal (\si{\degree}).\\
+&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
+&${x_{us}}$ is the \textit{x}-ordinate of a point on the slope (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_Fx}, \dref{GD_Fy}, \dref{GD_M}, \ddref{DD_ls}, 
+\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
 \end{minipage}\\
 
 % ------------------------------------------ %
-%               End DD Angles        %
+%               End DD Angle Beta        %
 % ------------------------------------------ %
 
 ~\newline
@@ -1467,23 +1508,38 @@ the y ordinate (m)\newline$i$ is the index\newline${x_{us}}$ is the x ordinate
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
 
 \hline Label& \bf Base Width of a Slice \\
+\hline Symbol& $b$\\
+\hline SI Units& \si{\meter}\\
 
 \hline
 Equation & 
-$b$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
+$b_i$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
 
-\hline Description & $b$ is the base width of a slice (m)\newline${x_{slip}}$ 
-is the x ordinate (m)\newline$i$ is the index
+\hline Description &$i$ is the index representing a single slice.\\
+&$b$ is the width of the base of a slice in the \textit{x} direction 
+(\si{\meter}).\\
+&${x_{slip}}$ is the \textit{x}-ordinate of a point on a slip surface 
+(\si{\meter}).\\
 \\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_M}, \ddref{DD_W}, \ddref{DD_lb}, \ddref{DD_ls}, 
+\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
 
 \hline
 \end{tabular}
 \end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD b   %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD lb   %
+% ------------------------------------------ %
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1494,24 +1550,38 @@ is the x ordinate (m)\newline$i$ is the index
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_lb}\\
 
 \hline Label& \bf Total Base Length of a Slice \\
+\hline Symbol& $\ell_b$\\
+\hline SI Units& \si{\meter}\\
 
 \hline
 Equation & 
 ${\ell{}_{b}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 
-\hline Description & ${\ell{}_{b}}$ is the total base length of a slice 
-(m)\newline$b$ is the base width of a slice (m)\newline$i$ is the 
-index\newline$\alpha{}$ is the angle (${}^{\circ}$)
-\\ 
+\hline Description &$i$ is the index representing a single slice.\\
+&${\ell{}_{b}}$ is the base length of a slice in the direction parallel to the 
+slope of the base (\si{\meter}).\\
+&$b$ is the width of the base of a slice in the \textit{x} direction 
+(\si{\meter}).\\
+&$\alpha{}$ is the angle between the base of a slice and the horizontal 
+(\si{\degree}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_Ub}\\
 
 \hline
 \end{tabular}
 \end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD lb   %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD ls   %
+% ------------------------------------------ %
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1522,134 +1592,31 @@ index\newline$\alpha{}$ is the angle (${}^{\circ}$)
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
 
 \hline Label& \bf Length of an Interslice Surface \\
+\hline Symbol& $\ell_s$\\
+\hline SI Units& \si{\meter}\\
 
 \hline
 Equation & 
 ${\ell{}_{s}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 
-\hline Description &${\ell{}_{s}}$ is the length of an interslice surface 
-(m)\newline$b$ is the base width of a slice (m)\newline$i$ is the 
-index\newline$\beta{}$ is the angle (${}^{\circ}$)
-\\
-\hline Sources& \cite{FredlundKrahn}\\
-
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD b        %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD Kc  %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
-  
-\hline \rowcolor[gray]{0.9} Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Kc}\\
-
-\hline Label& \bf Earthquake Load Factor\\
-
-\hline Equation & ${K_{c}}$ = ${K_{c}}W_{i}$ \\
-
-\hline Description &${K_{c}}$ is the earthquake load factor\newline$W$ is the 
-weight (\si{\newton\per\meter})\newline$i$ is the index
-\\ 
+\hline Description &$i$ is the index representing a single slice.\\
+&${\ell{}_{s}}$ is the surface length of a slice in the direction parallel to 
+the slope of the surface (\si{\meter}).\\
+&$b$ is the width of the base of a slice in the \textit{x} direction 
+(\si{\meter}).\\
+&$\beta{}$ is the angle between the surface of a slice and the horizontal 
+(\si{\degree}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
+\hline Ref.\ By & \ddref{DD_Ut}\\
 
 \hline
 \end{tabular}
 \end{minipage}\\
 
 % ------------------------------------------ %
-%               End DD Kc        %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD Q  %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
-  
-\hline \rowcolor[gray]{0.9} Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Q}\\
-
-\hline Label& \bf Imposed Surface Loads \\
-
-\hline Equation & $Q$ = $Q_{i}\omega{}_{i}$\\
-
-\hline Description & $Q$ is the imposed surface load 
-(\si{\newton\per\meter})\newline$i$ is the 
-index\newline$\omega{}$ is the angle (${}^{\circ}$)  \\
-
-\hline Sources& \cite{ZhuEtAl2005}\\
-
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD Q        %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD E,X  %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
-  
-\hline \rowcolor[gray]{0.9} Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_EX}\\
-
-\hline Label& \bf Interslice ShearForces \\
-
-\hline Equation & $X$ = $\lambda{}f_{i}G_{i}$ \\
-
-\hline Description & $X$ is the interslice shear force 
-(\si{\newton\per\meter})\newline$\lambda{}$ 
-is the interslice normal/shear force ratio\newline$f$ is the scaling 
-function\newline$i$ is the index\newline$G$ is the interslice normal force 
-(\si{\newton\per\meter})
-\\
-
-\hline Sources& \cite{ZhuEtAl2005}\\
-
-\hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-\iref{IM_Lambda}, \iref{IM_E}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD E,X        %
+%               End DD ls        %
 % ------------------------------------------ %
 
 ~\newline
@@ -1667,6 +1634,8 @@ function\newline$i$ is the index\newline$G$ is the interslice normal force
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_R}\\
 
 \hline Label& \bf Resistive Shear, Without Interslice Forces \\
+\hline Symbol& $R$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation & 
@@ -1685,19 +1654,20 @@ $R \; = \begin{array}{l}
 \sec\left(\alpha_{\text{i}}\right) \end{array} $\\
 
 \hline Description & $R$ is the resistive shear force 
-(\si{\newton\per\meter})\newline$W$ is the 
-weight (\si{\newton\per\meter})\newline$i$ is the index\newline${U_{t}}$ is the 
+(\si{\newton\per\meter}).\\&$W$ is the 
+weight (\si{\newton\per\meter}).\\&$i$ is the index representing a single 
+slice.\\&${U_{t}}$ is the 
 surface hydrostatic 
-force (\si{\newton\per\meter})\newline$\beta{}$ is the angle 
-(${}^{\circ}$)\newline$Q$ is the 
-imposed surface load (\si{\newton\per\meter})\newline$\omega{}$ is the angle 
-(${}^{\circ}$)\newline$\alpha{}$ is the angle (${}^{\circ}$)\newline${K_{c}}$ 
-is the earthquake load factor\newline$\Delta{}H$ is the difference between 
-interslice forces (\si{\newton\per\meter})\newline${U_{b}}$ is the base 
+force (\si{\newton\per\meter}).\\&$\beta{}$ is the angle 
+(${}^{\circ}$).\\&$Q$ is the 
+imposed surface load (\si{\newton\per\meter}).\\&$\omega{}$ is the angle 
+(${}^{\circ}$).\\&$\alpha{}$ is the angle (${}^{\circ}$).\\&${K_{c}}$ 
+is the earthquake load factor.\\&$\Delta{}H$ is the difference between 
+interslice forces (\si{\newton\per\meter}).\\&${U_{b}}$ is the base 
 hydrostatic force 
-(\si{\newton\per\meter})\newline$\varphi{}'$ is the effective angle of friction 
-(${}^{\circ}$)\newline$c'$ is the effective cohesion (Pa)\newline$b$ is the 
-base width of a slice (m)
+(\si{\newton\per\meter}).\\&$\varphi{}'$ is the effective angle of friction 
+(${}^{\circ}$).\\&$c'$ is the effective cohesion (Pa).\\&$b$ is the 
+width of the base of a slice in the \textit{x} direction (\si{\meter})
 \\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -1797,6 +1767,8 @@ Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_T}\\
 
 \hline
 Label& \bf Mobile Shear, Without Interslice Forces \\
+\hline Symbol& $T$\\
+\hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation &
@@ -1805,14 +1777,15 @@ $\left(W_{i}+{U_{t,i}}\cos\left(\beta{}_{i}\right)+Q_{i}\cos\left(\omega{}_{i}\r
 \\ 
 
 \hline Description &  $T$ is the mobilized shear force 
-(\si{\newton\per\meter})\newline$W$ is the 
-weight (\si{\newton\per\meter})\newline$i$ is the index\newline${U_{t}}$ is the 
+(\si{\newton\per\meter}).\\&$W$ is the 
+weight (\si{\newton\per\meter}).\\&$i$ is the index representing a single 
+slice.\\&${U_{t}}$ is the 
 surface hydrostatic 
-force (\si{\newton\per\meter})\newline$\beta{}$ is the angle 
-(${}^{\circ}$)\newline$Q$ is the 
-imposed surface load (\si{\newton\per\meter})\newline$\omega{}$ is the angle 
-(${}^{\circ}$)\newline$\alpha{}$ is the angle (${}^{\circ}$)\newline${K_{c}}$ 
-is the earthquake load factor\newline$\Delta{}H$ is the difference between 
+force (\si{\newton\per\meter}).\\&$\beta{}$ is the angle 
+(${}^{\circ}$).\\&$Q$ is the 
+imposed surface load (\si{\newton\per\meter}).\\&$\omega{}$ is the angle 
+(${}^{\circ}$).\\&$\alpha{}$ is the angle (${}^{\circ}$).\\&${K_{c}}$ 
+is the earthquake load factor.\\&$\Delta{}H$ is the difference between 
 interslice forces (\si{\newton\per\meter})
 \\
 
