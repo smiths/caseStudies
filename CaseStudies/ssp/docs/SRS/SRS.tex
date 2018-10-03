@@ -678,6 +678,14 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
   [\ddref{DD_W}, \ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_H}, 
   \ddref{DD_Angles_alpha}, \ddref{DD_Angles_Beta}, \ddref{DD_b}, \ddref{DD_lb}, 
   \ddref{DD_ls}].
+  
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
+seismic force acting on the slope. [\ddref{DD_R}, \ddref{DD_T}]
+  
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_External}] There is 
+no imposed surface load, and therefore no external force, acting on the slope. 
+[\ddref{DD_R}, \ddref{DD_T}]
+
 \end{enumerate}
 
 \subsubsection{Theoretical Models} \label{sec_theoretical}
@@ -2477,41 +2485,41 @@ definitions, instance models, and likely changes on the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 & \aref{A_Concave}& \aref{A_Constant}& \aref{A_Homo}& \aref{A_Saturated}&
 \aref{A_Isotropic}& \aref{A_Base}& \aref{A_2D}& \aref{A_Lin}& 
-\aref{A_Straight}\\
+\aref{A_Straight}& \aref{A_Seismic}& \aref{A_External} \\
 \hline
-\tref{TM_FS}            & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & & \\ \hline
-\tref{TM_EffStress}     & & & & & & & & & \\ \hline
-\dref{GD_Fx}            & & & & & & & & & \\ \hline
-\dref{GD_Fy}            & & & & & & & & & \\ \hline
-\dref{GD_P}             & & & & & & & & & \\ \hline
-\dref{GD_MobShear}      & & & & & & & & & \\ \hline
-\dref{GD_X}             & & & & & & & & & \\ \hline
-\dref{GD_M}             & & & & & & & & & \\ \hline
-\ddref{DD_W}            & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & \\ \hline
-\ddref{DD_H}            & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & \\ \hline
-\ddref{DD_b}            & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & \\ \hline
-\ddref{DD_Kc}           & & & & & & & & & \\ \hline
-\ddref{DD_Q}            & & & & & & & & & \\ \hline
-\ddref{DD_EX}           & & & & & & & & & \\ \hline
-\ddref{DD_R}            & & & & & & & & & \\ \hline
-\ddref{DD_T}            & & & & & & & & & \\ \hline
-\iref{IM_FS}            & & & & & & & & & \\ \hline
-\iref{IM_Lambda}        & & & & & & & & & \\ \hline
-\iref{IM_E}             & & & & & & & & & \\ \hline
-\iref{IM_Min}           & & & & & & & & & \\ \hline
-\lcref{LC_inhomogeneous}& & & & & & & & & \\
+\tref{TM_FS}            & & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & & & & & & & & & & & \\ \hline
+\dref{GD_Fy}            & & & & & & & & & & & \\ \hline
+\dref{GD_P}             & & & & & & & & & & & \\ \hline
+\dref{GD_MobShear}      & & & & & & & & & & & \\ \hline
+\dref{GD_X}             & & & & & & & & & & & \\ \hline
+\dref{GD_M}             & & & & & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & & & & & & & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & & & \\ \hline
+\ddref{DD_Kc}           & & & & & & & & & & & \\ \hline
+\ddref{DD_Q}            & & & & & & & & & & & \\ \hline
+\ddref{DD_EX}           & & & & & & & & & & & \\ \hline
+\ddref{DD_R}            & & & & & & & & & & & \\ \hline
+\ddref{DD_T}            & & & & & & & & & & & \\ \hline
+\iref{IM_FS}            & & & & & & & & & & & \\ \hline
+\iref{IM_Lambda}        & & & & & & & & & & & \\ \hline
+\iref{IM_E}             & & & & & & & & & & & \\ \hline
+\iref{IM_Min}           & & & & & & & & & & & \\ \hline
+\lcref{LC_inhomogeneous}& & & & & & & & & & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions 
