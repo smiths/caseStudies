@@ -107,6 +107,10 @@
 	09/26/18 & 1.2 & Physical System Description expanded, Non-functional 
 	requirements itemized\\
 	10/01/18 & 1.3 & Various improvements throughout\\
+	10/02/18 & 1.4 & Initial revision of the solution characteristics 
+	specification\\
+	10/03/18 & 1.5 & Completed revision of the solution characteristics 
+	specification and other sections\\
 	\bottomrule
 \end{tabularx}
 
@@ -193,8 +197,6 @@ $N'$ &\si{\newton\per\meter} & effective normal force
 \\
 $P$ & \si{\newton\per\meter} & resistive shear force
 \\
-$P_{st}$ & \si{\pascal} & shear strength
-\\
 $Q$ & \si{\newton\per\meter} & imposed surface load or external force
 \\
 $R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
@@ -240,6 +242,9 @@ ${y_{wt}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water table
 $z$ & \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the center of the slice
 \\
+$z_w$ & (\si{meter})& height in the \textit{y}-direction from the base of a 
+slice halfway to the water table
+\\
 $\alpha{}$ & ${}^{\circ}$ & angle between the base of a slice and the horizontal
 \\
 $\beta{}$ &${}^{\circ}$ & angle between the surface of a slice and the 
@@ -264,7 +269,7 @@ $\sigma{}_N$ & \si{\pascal} & normal stress
 \\
 $\sigma{}'$ & \si{\pascal} & effective stress provided by the soil skeleton
 \\
-$\tau{}$ & \si{\pascal} & resistive shear stress
+$\tau{}$ & \si{\pascal} & shear strength
 \\
 $\Upsilon{}$ & & generic minimization function or algorithm 
 \\
@@ -680,11 +685,12 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
   \ddref{DD_ls}].
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
-seismic force acting on the slope. [\ddref{DD_R}, \ddref{DD_T}]
+seismic force acting on the slope. [\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, 
+\iref{IM_Lambda}, \iref{IM_E}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_External}] There is 
 no imposed surface load, and therefore no external force, acting on the slope. 
-[\ddref{DD_R}, \ddref{DD_T}]
+[\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
 
 \end{enumerate}
 
@@ -780,15 +786,15 @@ on.
   
   \hline Label&\bf Mohr-Coulomb Shear Strength\\
   
-  \hline Equation& \( P = \sigma_N \cdot \tan\left( \varphi' \right) + c'
+  \hline Equation& \( \tau = \sigma_N \cdot \tan\left( \varphi' \right) + c'
   \) \\
   
-  \hline Description & The $P_{st}$
+  \hline Description & The $\tau$
   versus $\sigma_N$ relationship is not truly linear, but assuming the
   effective normal force is strong enough, it can be approximated with
   a linear fit (\aref{A_Lin}), where the cohesion $c'$ represents the
-  $P_{st}$ intercept of the fitted line.\\
-  &$P_{st}$ is the shear strength (\si{\pascal}).\\
+  $\tau$ intercept of the fitted line.\\
+  &$\tau$ is the shear strength (\si{\pascal}).\\
   &$\sigma_N$ is the normal stress (\si{\pascal}).\\
   &$\varphi$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
@@ -826,12 +832,12 @@ on.
   to maintain itself as a rigid collection of particles (\si{\pascal}).\\
   & $\sigma'$ is the effective stress provided by the soil skeleton  
   (\si{\pascal}).\\
-  & $\mu$ is the pore pressure from water within the soil .\\
+  & $\mu$ is the pore pressure from water within the soil.\\
 
   \hline Source & \cite{FredlundKrahn}\\
   
-  \hline Ref.\ By & \dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
-  \ddref{DD_T}, \iref{IM_E}\\
+  \hline Ref.\ By & \dref{GD_EffNormal}, \ddref{DD_R}, \iref{IM_FS},
+  \iref{IM_Lambda}, \iref{IM_E}\\
   
   \hline
 \end{tabular}
@@ -874,7 +880,7 @@ instance models.
       \right]\sin\left(\alpha_{\text{i}}\right) \end{array} \) \\
  
   \hline Description & This equation satisfies \tref{TM_Eqm} in the normal 
-  direction . Force equilibrium is derived from the free body diagram of 
+  direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
   to the values of the properties for slice/interslices following convention in
   Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
@@ -933,7 +939,7 @@ instance models.
       \right]\cos\left(\alpha_{\text{i}}\right) \end{array} \) \\
   
   \hline Description & This equation satisfies \tref{TM_Eqm} in the shear 
-  direction . Force equilibrium is derived from the free body diagram of 
+  direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
   to the values of the properties for slice/interslices following convention in
   Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
@@ -981,20 +987,17 @@ instance models.
   \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation& \( P_{\text{i}} = N'_{\text{i}} \cdot \tan\left(
-  \varphi'_{\text{i}} \right) + c' \cdot b_{\text{i}} \cdot
-  \sec\left(\alpha_{\text{i}}\right) \) \\
+  \varphi'_{\text{i}} \right) + c' \cdot \ell{}_{b,i} \) \\
   
   \hline Description & 
- The Mohr-Coulomb resistive shear strength of a slice $\tau{}$ from 
- \tref{TM_Fmc} is multiplied by the area $b\sec\left(\alpha{}\right)\cdot{}1$ 
- to obtain the resistive shear force $P$. Note the extra $1$ is to represent a 
- unit of width which is multiplied by the total base length of a slice 
- ${\ell{}_{b}}$ of the plane where the normal occurs, where 
- ${\ell{}_{b}}=b\sec\left(\alpha{}\right)$ and $b$ is the x width of the base. 
- This accounts for the effective normal force $N'=N-{U_{b}}$ of a soil from 
- \tref{TM_EffStress} where the normal stress is multiplied by the same area to 
- obtain the effective normal force 
- $\sigma{}b\sec\left(\alpha{}\right)\cdot{}1=N'$.\\
+ The Mohr-Coulomb resistive shear strength from \tref{TM_Fmc} implemented with 
+ forces.\\
+ &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
+ &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
+ &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
+ &$c'$ is the effective cohesion (\si{\pascal}).\\
+ &$\ell_b$ is the width of the base of a slice in the \textit{x} direction 
+ (\si{\meter}).\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -1025,24 +1028,64 @@ instance models.
   
   \hline Equation & \( S_{\text{i}} = \frac{ P_{\text{i}} }{ \text{FS}
   } = \frac { N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
-    \right) + c' \cdot b_{\text{i}} \cdot
-    \sec\left(\alpha_{\text{i}}\right) }{\text{FS}} \) \\
+    \right) + c' \cdot \ell_{b,i} }{\text{FS}} \) \\
   
-  \hline Description & From the definition of the factor of safety in
-  \tref{TM_FS}, and the new definition of $P$, a new
-  relation for the net mobile shear force of the slice $T$
-  is found as the resistive shear $P$ (\dref{GD_P}) divided
-  by the factor of safety $\text{FS}$. \\
+  \hline Description & Mobile shear force as derived from the definition of the 
+  factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. \\
+  &$S$ is the mobile shear force (\si{\newton\per\meter}).\\
+  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
+  &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
+  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
+  &$c'$ is the effective cohesion (\si{\pascal}).\\
+  &$\ell_b$ is the width of the base of a slice in the \textit{x} direction 
+  (\si{\meter}).\\
+  &$FS$ is the factor of safety.\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T} \\
+  \hline Ref.\ By & \ddref{DD_R} \\
   
   \hline
 \end{tabular}
 \end{minipage}\\
 % ----------------------------- %
 %        End GD Mobile Shear             %
+% ----------------------------- %
+
+~\newline
+
+% ----------------------------- %
+%  Begin GD Effective Normal   %
+% ----------------------------- %
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		GD\refstepcounter{defnum}\thedefnum \label{GD_EffNormal}\\
+		
+		\hline Label&\bf Effective Normal Force\\
+		\hline SI Units & \si{\newton\per\meter}\\
+		
+		\hline Equation & \( N'_{i} = N_{i} - U_{b,i} \) \\
+	
+	\hline Description & Effective normal force as derived from 
+	\tref{TM_EffStress} and implemented with forces. 
+	\\
+	&$N'$ is the effective normal force (\si{\newton\per\meter}).\\
+	&$N$ is the normal force (\si{\newton\per\meter}).\\
+	&$U_b$ is the base hydrostatic force (\si{\newton\per\meter}).\\
+	
+	\hline Source & \cite{ZhuEtAl2005}\\
+	
+	\hline Ref.\ By & \ddref{DD_R} \\
+	
+	\hline
+\end{tabular}
+\end{minipage}\\
+% ----------------------------- %
+%        End GD Effective Normal             %
 % ----------------------------- %
 
 ~\newline
@@ -1058,23 +1101,22 @@ instance models.
   \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_X}\\
   
-  \hline Label&\bf Interslice Normal/Shear Relationship\\
+  \hline Label&\bf Interslice Normal and Shear Force Proportionality\\
   
   \hline Equation& \( X = \lambda \cdot f \cdot
   G \) \\
 
-  \hline Description & The assumption for the Morgenstern Price method
-  (\aref{A_Base}) that the interslice shear force $X$ is
-  proportional to the interslice normal force $G$ by a
-  proportionality constant $\lambda$, and a predetermined scaling
-  function $f$, that changes the proportionality as a function of the
-  $x$-ordinate position of the interslice. $f$ is typically either a
-  half-sine along the slip surface, or a constant.  \\
+  \hline Description & Mathematical representation of the primary assumption 
+  for the Morgenstern-Price method (\aref{A_Base}).\\
+  &$X$ is the interslice shear force (\si{\newton\per\meter}).\\
+  &$G$ is the interslice normal force (\si{\newton\per\meter}).\\
+  &$\lambda$ is the proportionality constant.\\
+  &$f$ is a function describing variation of the interslice normal to shear 
+  force ratio; can be constant or a half-sine. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS},
-  \iref{IM_Lambda}, \iref{IM_E}\\
+  \hline Ref.\ By & \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
   
   \hline
 \end{tabular}
@@ -1113,14 +1155,34 @@ instance models.
     Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
     h_{\text{i}} \end{array} \) \\
 
-  \hline Description & For a slice of mass in the slope the moment
-  equilibrium to satisfy \tref{TM_Eqm} in the direction perpendicular
-  to the base surface of the slice. Moment equilibrium is derived from
-  the free body diagram of Figure~\ref{Fig_Forces} in
-  section~\ref{sec_system}. Index $\text{i}$ refers to the values of
-  the properties for slice/interslices following convention in
-  Figure~\ref{Fig_Index} in section~\ref{sec_system}.  Variable
-  definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.  \\
+ \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
+ Force equilibrium is derived from the free body diagram of 
+ Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
+ to the values of the properties for slice/interslices following convention in
+ Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
+ mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+ &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
+ &$z$ is the height in the \textit{y}-direction from the base of a slice 
+ to the center of the slice (\si{\meter}).\\
+ &$b$ is the width of the base of a slice in the \textit{x} direction 
+ (\si{\meter}).\\
+ &$\alpha$ is the angle between the base of a slice and the 
+ horizontal (\si{\degree}). \\
+ &$H$ is the interslice water force (\si{\newton\per\meter}). \\
+ &$z_w$ is the height in the \textit{y}-direction from the base of a slice 
+ halfway to the water table (\si{\meter}).\\
+ &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
+ &$K_c$ is the seismic coefficient. \\
+ &$W$ is the weight (\si{\newton\per\meter}). \\
+ &$h$ is the height in the \textit{y}-direction from the base of a slice 
+ to the slope surface, at the \textit{x}-direction midpoint on the slice 
+ (\si{\meter}).\\
+ &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+ &$\beta$ is the angle between the surface of a slice and the 
+ horizontal (\si{\degree}). \\
+ &$Q$ is the external force (\si{\newton\per\meter}). \\
+ &$\omega$ is the angle between the imposed surface load acting into 
+ the surface and the vertical (\si{\degree}). \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -1824,7 +1886,7 @@ terms. It uses concrete symbols defined in Section~\ref{sec_datadef}
 to replace the abstract symbols in the models identified in the
 Sections~\ref{sec_theoretical} and ~\ref{sec_gendef}.
 
-~\newline\noindent The Morgenstern Price Method is a vertical slice,
+~\newline\noindent The Morgenstern-Price Method is a vertical slice,
 limit equilibrium slope stability analysis method. Analysis is
 performed by breaking the assumed slip surface into a series of
 vertical slices of mass. Static equilibrium analysis using two force
@@ -1983,7 +2045,7 @@ Output &
 
 \hline Description & $\lambda$ is the magnitude ratio between shear
 and normal forces at the interslice interfaces as the assumption of
-the Morgenstern Price method in \dref{GD_X}. The inclination function
+the Morgenstern-Price method in \dref{GD_X}. The inclination function
 $f$ determines the relative magnitude ratio between the different
 interslices, while $\lambda$ determines the magnitude. $\lambda$ uses
 the sum of interslice normal and shear forces taken from each
