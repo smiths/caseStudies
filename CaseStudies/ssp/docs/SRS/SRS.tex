@@ -648,8 +648,9 @@ likely change [LC], in which the respective assumption is used.
 
 \begin{enumerate}[label=A\arabic*:,ref={\arabic*}]
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Concave}] The
-  slip surface is concave with respect to the slope surface. The $(x,y)$
-  coordinates of a slip surface follow a concave up function. [\iref{IM_Min}]
+  slip surface is concave with respect to the slope surface. The 
+  $(x_{slip},y_{slip})$ coordinates of a slip surface follow a concave up 
+  function. [\iref{IM_Min}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Constant}] The factor 
 of safety is assumed to be constant across a whole slip surface. 
@@ -672,8 +673,8 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
   Interslice normal and shear forces have a linear relationship,
   proportional to a constant $\left({\lambda}\right)$ and an
-  interslice force function $\left({f}\right)$ depending on x
-  position. [\dref{GD_X}, \ddref{DD_EX}]
+  interslice force function $\left({f}\right)$ depending on $x$
+  position. [\dref{GD_X}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
   slope and slip surface extends far into and out of the geometry ($z$
@@ -683,7 +684,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Lin}] The
   effective normal stress is large enough that the resistive shear to
   effective normal stress relationship can be approximated as a linear
-  relationship. [\tref{TM_Fmc}]
+  relationship. [\tref{TM_Fmc}, \dref{GD_EffNormal}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Straight}]
   The surface and base of a slice are approximated as straight lines 
@@ -2463,36 +2464,39 @@ requirements, the qualities that the software is expected to exhibit.
 \end{longtable}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_KinAdm}:] Verify that the 
-input data lies within physical constraints as shown in 
-Table~\ref{TblInputVar}.
+input data lies within physical constraints shown in Table~\ref{TblInputVar}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_InitGen}:] Generate
-potential critical slip surfaces for the input slope. 
+potential critical slip surfaces for the input slope (using \iref{IM_Min}). 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_FS}:] Calculate the
-  factors of safety for each of the potential critical slip surfaces.
+  factors of safety for each of the potential critical slip surfaces (using 
+  \iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}).
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Minimize}:] Compare the 
 factor of safety for each potential critical slip surface to determine the 
-minimum factor of safety, corresponding to the critical slip surface.
-
-\bmac{Would R3-R5 be better as a single requirement "Calculate the minimum 
-factor of safety corresponding to the critical slip surface"}
+minimum factor of safety, corresponding to the critical slip surface (using 
+\iref{IM_Min}).
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] Verify that 
-the factor of safety and critical slip surface satisfy the physical constraints 
-shown in Table~\ref{TblOutputVar}.
+the factor of safety, critical slip surface, and interslice forces satisfy the 
+physical constraints shown in Table~\ref{TblOutputVar} and 
+\ref{sec_CorrectSolution}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_CritGraph}:] Display
-  the critical slip surface of the 2D slope graphically. 
+  the critical slip surface of the 2D slope, as determined from \iref{IM_Min}, 
+  graphically. 
   
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputFS}:] Display the value 
-of the factor of safety for the critical slip surface.
+of the factor of safety for the critical slip surface, as determined from 
+\iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_NormalGraph}:] Calculate and 
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_NormalGraph}:] Using 
+\iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}, calculate and 
 graphically display the interslice normal forces.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_ShearGraph}:] Calculate and 
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_ShearGraph}:] Using 
+\iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}, calculate and 
 graphically display the interslice shear forces.
   
 \end{itemize}
@@ -2517,15 +2521,22 @@ definitions, instance models, likely changes, and modules is completely
 recorded in traceability matrices in the SRS and module guide.
 \end{itemize}
 
-\bmac{Can a non-functional requirement refer to the software documentation?}
-
 \section{Likely Changes}
 
 \noindent \begin{itemize}
 \item[\refstepcounter{lcnum}\lthelcnum \label{LC_inhomogeneous}:] The system 
-currently assumes the different layers of the soil are homogeneous.
- In the future, implementation can be added for inconsistent soil properties 
- throughout.
+currently assumes the different layers of the soil are homogeneous 
+(\aref{A_Homo}). In the future, implementation can be added for inconsistent 
+soil properties throughout.
+ 
+\item[\refstepcounter{lcnum}\lthelcnum \label{LC_Seismic}:] The system 
+currently assumes no seismic force (\aref{A_Seismic}). In the future, 
+implementation can be added for the presence of seismic force.
+
+\item[\refstepcounter{lcnum}\lthelcnum \label{LC_External}:] The system 
+currently assumes no external force (\aref{A_External}).
+In the future, implementation can be added for an imposed surface load on the 
+slope.
 \end{itemize}
 
 \section{Unlikely Changes}
