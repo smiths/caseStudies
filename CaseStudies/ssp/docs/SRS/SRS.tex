@@ -178,6 +178,9 @@ ratio; can be constant or a half-sine
 \\
 $FS$ & & factor of safety
 \\
+$FS_{Min}$ & & minimum factor of safety associated with the critical slip 
+surface
+\\
 $G$ & \si{\newton\per\meter} & interslice normal force
 \\
 $H$ & \si{\newton\per\meter} & interslice water force
@@ -198,13 +201,14 @@ $N'$ &\si{\newton\per\meter} & effective normal force
 $N*$ &\si{\newton\per\meter} & effective normal force without the influence of 
 interslice forces
 \\
+$n$ & & the total number of slices
+\\
 $P$ & \si{\newton\per\meter} & resistive shear force
 \\
 $Q$ & \si{\newton\per\meter} & imposed surface load or external force
 \\
 $R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
-interslice 
-forces
+interslice forces
 \\
 $S$ & \si{\newton\per\meter} & mobilized shear force
 \\
@@ -279,13 +283,12 @@ $\Upsilon{}$ & & generic minimization function or algorithm
 \\
 $\varphi{}'$ & \si{\degree} & effective angle of friction
 \\
-$\Phi{}$ & & constant to convert resistive shear without the 
-influence of interslice forces to resistive shear with the influence of 
-interslice 
-forces
+$\Phi{}$ & & first constant to convert shear without the 
+influence of interslice forces to shear with the influence of 
+interslice forces
 \\
-$\Psi{}$ & & constant to convert mobile shear without the 
-influence of interslice forces to mobile shear with the influence of interslice 
+$\Psi{}$ & & second constant to convert shear without the 
+influence of interslice forces to shear with the influence of interslice 
 forces
 \\
 $\omega{}$ & \si{\degree} & angle between the imposed surface load acting into 
@@ -927,7 +930,7 @@ instance models.
   \hline \rowcolor[gray]{0.9} Number&
   GD\refstepcounter{defnum}\thedefnum \label{GD_Fy}\\
   
-  \hline Label&\bf Shear Force Equilibrium\\
+  \hline Label&\bf Base Shear Force Equilibrium\\
   \hline SI Units & \si{\newton\per\meter}\\
   
   \hline Equation& \( S_{\text{i}} = \begin{array}{l} \left[
@@ -1917,23 +1920,30 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 
 \hline Label& \bf Factor of Safety \\
 
-\hline Input & ${\Psi_{\text{v}}}$ , ${\Phi_{\text{v}}}$ ,
-${T_{\text{v}}}$ , ${R_{\text{v}}}$ \\
+\hline Input & ${\Psi_{\text{c}}}$ , ${\Phi_{\text{c}}}$ ,
+${T_{\text{i}}}$ , ${R_{\text{i}}}$ \\
 
 \hline
 Output &
-\( {FS}= \frac{\displaystyle\sum_{v=1}^{n-1} \left[ {R_{v}}
-    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{u}}{\Phi_{u}}
-    }\right] + {R_{n}} }{\displaystyle\sum_{v=1}^{n-1} \left[ {T_{v}}
-    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{u}}{\Phi_{u}}
+\( {FS}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
+    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
+    }\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
+    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
     }\right] + {T_{n}} } \)\\
 
-\hline Description & Equation for the Factor of Safety, the ratio
-between resistive and mobile shear the slip surface. The sum of values
-from each slice is taken to find the total resistive and mobile shear
-for the slip surface. The constants $\Phi$ and $\Psi$ convert the
-resistive and mobile shear without the influence of interslice forces,
-to a calculation considering the interslice forces. \\
+\hline Description & $i$ is the index representing a single slice.\\
+&$n$ is the total number of slices.\\
+&$FS$ is the factor of safety.\\
+&$R$ is the resistive shear force  without the influence of interslice forces 
+(\si{\newton\per\meter}).\\
+&$\Psi$ is the second constant used to convert shear without the 
+influence of interslice forces to shear with the influence of 
+interslice forces.\\
+&$\Phi$ is the first constant used to convert shear without the 
+influence of interslice forces to shear with the influence of 
+interslice forces.\\
+&$T$ is the mobile shear force  without the influence of interslice forces 
+(\si{\newton\per\meter}).\\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
 
@@ -1950,25 +1960,24 @@ to a calculation considering the interslice forces. \\
 \subsubsection*{Factor of Safety Derivation}
 
 \noindent
-Using equation~(\ref{eq:Interslice2}) from
-section~\ref{sec:Ederivation}, rearranging, and applying the boundary
-condition that $E_{\text{0}}$ and $E_{\text{n}}$ are equal to $0$ an
-equation for the factor of safety is found as equation~(\ref{eq:FS}),
+Using the boundary conditions from \iref{IM_E} that $G_{\text{0}}$ and 
+$G_{\text{n}}$ are equal to $0$, one can derive equation~(\ref{eq:FS}),
 also seen in \iref{IM_FS}.
 
 \begin{equation}\label{eq:FS}
-  \text{FS}= \frac{\displaystyle\sum_{v=1}^{n-1} \left[ {R_{v}}
-      \;{\displaystyle\prod_{c=v}^{n-1} \frac{\Psi_{u}}{\Phi_{u}}
-      }\right] + {R_{n}} }{\displaystyle\sum_{v=1}^{n-1} \left[
-      {T_{v}} \;{\displaystyle\prod_{c=v}^{n-1}
-        \frac{\Psi_{u}}{\Phi_{u}} }\right] + {T_{n}} }
+ {FS}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
+ 	\;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
+ 	}\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
+ 	\;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
+ 	}\right] + {T_{n}} }\\
 \end{equation}
 
 \noindent
-The constants $\Psi$ and $\Phi$ described in equations \ref{eq:Psi}
-and \ref{eq:Phi} are functions of the unknowns: the interslice
-normal/shear force ratio $\lambda$ (\iref{IM_Lambda}) and the Factor
-of Safety $\text{FS}$ (\iref{IM_FS}).
+The constants $\Psi$ and $\Phi$, described in equations \ref{eq:Psi}
+and \ref{eq:Phi} of the derivation for \iref{IM_E}, are functions of the 
+unknowns: the interslice normal and shear force proportionality consant, 
+$\lambda$ 
+(\iref{IM_Lambda}), and the factor of safety, $FS$ (\iref{IM_FS}).
 
 ~\newline
 
@@ -1984,12 +1993,11 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 \hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
-\hline Label& \bf Normal/Shear Force Ratio \\
+\hline Label& \bf Normal and Shear Force Proportionality Constant \\
 
-\hline Input & $b_{\text{v}}$ , $E_{\text{v}}$ , $H_{\text{v}}$ ,
-$\alpha_{\text{v}}$ , $h_{\text{v}}$ , $W_{\text{v}}$ ,
-$U_{\text{t,v}}$ , $\beta_{\text{v}}$ , $f_{\text{v}}$ ,
-${K_{\text{c}}}$ \\
+\hline Input & $b_{\text{i}}$ , $G_{\text{i}}$ , $H_{\text{i}}$ ,
+$\alpha_{\text{i}}$ , $h_{\text{i}}$ , $W_{\text{i}}$ ,
+$U_{\text{t,i}}$ , $\beta_{\text{i}}$ , $f_{\text{i}}$ \\
 
 \hline
 Output & 
@@ -1997,18 +2005,18 @@ Output &
 \(  \left\{
 \renewcommand{\arraystretch}{2}
 \begin{tabular}{ p{6.5cm} r} 
-  $ {{b}_{\text{1}}}\left[{{E}_{\text{1}} + {H}_{\text{1}}}
+  $ {{b}_{\text{1}}}\left[{{G}_{\text{1}} + {H}_{\text{1}}}
     \right]{\tan\left(\alpha_{\text{1}}\right) } $ &  $
   \text{i}={\text{1}} $ \\
 \noindent\parbox[c]{\hsize} {$ {{b}_{\text{i}}} \left[
-    \left({{E}_{\text{i}} + {E}_{\text{i-1}}}\right) +
+    \left({{G}_{\text{i}} + {G}_{\text{i-1}}}\right) +
     \left({{H}_{\text{i}} + {H}_{\text{i-1}}}\right)
     \right]{\tan\left(\alpha_{\text{i}}\right)} \\ +
-  {{h}_{\text{i}}}\left( {K_{\text{c}}}\;{W_{\text{i}}} -
-  {2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} -
-  {2}\;{Q_{\text{i}}}\;{\cos\left(\omega_{\text{i}}\right)} \right) $}
+  {{h}_{\text{i}}}\left( 
+  -{2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}
+  \;\right) $}
 &  $ 2\leq\text{i}\leq{\text{n-1}} $ \\ $
-                {{b}_{\text{n}}}\left[{{E}_{\text{n-1}} +
+                {{b}_{\text{n}}}\left[{{G}_{\text{n-1}} +
                     {H}_{\text{n-1}}}\right]{\tan\left(\alpha_{\text{n-1}}\right)
                 } $ &  $ \text{i}=\text{n} $ \\
 \end{tabular} 
@@ -2018,14 +2026,14 @@ Output &
 \( {C2_{\text{i}}}= \)
 \(  \left\{
 \renewcommand{\arraystretch}{2}
-\begin{tabular}{ p{7cm} r} 
-  $ {{b}_{\text{1}}}{{E}_{\text{1}}}{f_{\text{1}}} $ &  $
+\begin{tabular}{ p{6.5cm} r} 
+  $ {{b}_{\text{1}}}{{G}_{\text{1}}}{f_{\text{1}}} $ &  $
   \text{i}=\text{1} $ \\ $ {{b}_{\text{i}}}\;{\left({
-      {f_{\text{i}}}{{E}_{\text{i}}} +
-      {f_{\text{i-1}}}{{E}_{\text{i-1}}} }\right)} $ &  $
+      {f_{\text{i}}}{{G}_{\text{i}}} +
+      {f_{\text{i-1}}}{{G}_{\text{i-1}}} }\right)} $ &  $
   2\leq\text{i}\leq{\text{n-1}} $ \\ $
-  {{b}_{\text{n}}}{{E}_{\text{n-1}}}{f_{\text{n-1}}} $ &  $
-  \text{v}=\text{n} $ \\
+  {{b}_{\text{n}}}{{G}_{\text{n-1}}}{f_{\text{n-1}}} $ &  $
+  \text{i}=\text{n} $ \\
 \end{tabular} 
 \renewcommand{\arraystretch}{1}
 \right. \) 
@@ -2033,13 +2041,23 @@ Output &
 \( \lambda= \frac{ \displaystyle\sum_{i=1}^{n} {C1_{\text{i}}}}
    {\displaystyle\sum_{i=1}^{n} {C2_{\text{i}}}} \) \\
 
-\hline Description & $\lambda$ is the magnitude ratio between shear
-and normal forces at the interslice interfaces as the assumption of
-the Morgenstern-Price method in \dref{GD_X}. The inclination function
-$f$ determines the relative magnitude ratio between the different
-interslices, while $\lambda$ determines the magnitude. $\lambda$ uses
-the sum of interslice normal and shear forces taken from each
-interslice. \\
+\hline Description & $i$ is the index representing a single slice.\\
+&$n$ is the total number of slices.\\
+&$b$ is the width of the base of a slice in the \textit{x} direction 
+(\si{\meter}).\\
+&$G$ is the interslice normal force (\si{\newton\per\meter}).\\
+&$H$ is the interslice water force (\si{\newton\per\meter}). \\
+&$\alpha$ is the angle between the base of a slice and the 
+horizontal (\si{\degree}). \\
+&$h$ is the height in the \textit{y}-direction from the base of a slice 
+to the slope surface, at the \textit{x}-direction midpoint on the slice 
+(\si{\meter}).\\
+&$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&$\beta$ is the angle between the surface of a slice and the 
+horizontal (\si{\degree}). \\
+&$f$ is a function describing variation of the interslice normal to shear 
+force ratio; can be constant or a half-sine. \\
+&$\lambda$ is the proportionality constant.\\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
 
@@ -2055,9 +2073,9 @@ interslice. \\
 
 \subsubsection*{Normal/Shear Force Ratio Derivation}
 
- The last static equation of \tref{TM_Eqm} the moment equilibrium of
- \dref{GD_M} about the midpoint of the base is taken, with the
- assumption of \dref{GD_X}. Results in equation~(\ref{eq:Moment}).
+ From the moment equilibrium of \dref{GD_M}, with the primary assumption for 
+ the Morgenstern-Price method of \aref{A_Base} and associated definition 
+ \dref{GD_X}, equation~(\ref{eq:Moment}) can be derived.
 
 \begin{equation}\label{eq:Moment}
   0 = \begin{array}{l} - {G}_{\text{i}} \left[ {z_{\text{i}}} -
@@ -2077,8 +2095,8 @@ interslice. \\
 \end{equation} 
 
 \noindent
-Rearranging the equation in terms of $\lambda$ leads to equation
-~(\ref{eq:lambda1}).
+Rearranging the equation in terms of $\lambda$ leads to 
+equation~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
   \lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
@@ -2099,19 +2117,19 @@ Rearranging the equation in terms of $\lambda$ leads to equation
 \end{equation}
 
 \noindent
-Taking a summation of each slice, and considering the boundary
-conditions that $G_{\text{0}}$ and $G_{\text{n}}$ are equal to zero, a
-general equation for the constant $\lambda$ is developed in
-equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
+Taking the summation of all slices, considering the boundary
+conditions that $G_{\text{0}}$ and $G_{\text{n}}$ are equal to zero, and 
+removing the seismic and external forces due to \aref{A_Seismic} and 
+\aref{A_External}, respectively, a general equation for the constant $\lambda$ 
+is developed in equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
 
 \begin{equation}\label{eq:Lambda}
 \lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{\text{i}}} \left[
       \left({{G}_{\text{i}} + {G}_{\text{i-1}}}\right) +
       \left({{H}_{\text{i}} + {H}_{\text{i-1}}}\right)
       \right]{\tan\left(\alpha_{\text{i}}\right)} \\ +
-    {{h}_{\text{i}}}\;\left[ {K_{\text{c}}}\;{W_{\text{i}}} -
-      {2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} - {2}
-      \; Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)} \right] }}
+    {{h}_{\text{i}}}\;\left[ 
+    -{2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} \right] }}
          {\displaystyle\sum_{i=1}^{n} { {{b}_{\text{i}}}\;{\left[{
                    {f_{i}}{{G}_{\text{i}}} +
                    {f_{\text{i-1}}}{{G}_{\text{i-1}}} }\right]} }}
@@ -2135,10 +2153,10 @@ interslice normal force $G$ (\iref{IM_E}).
 \hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 
-\hline Label& \bf Interslice Forces \\
+\hline Label& \bf Interslice Normal Forces \\
 
-\hline Input & $\text{FS}$, $T_\text{i}$, $R_\text{i}$, $\Psi$,
-$\Phi$\\
+\hline Input & $\text{FS}$, $T_\text{i}$, $R_\text{i}$, $\Psi_i$,
+$\Phi_i$\\
 
 \hline
 Output &
@@ -2158,10 +2176,21 @@ $2\leq\text{i}\leq\text{n-1}$ \\
 \renewcommand{\arraystretch}{1}
 \right. \) \\
 
-\hline Description & The value of the interslice normal force
-$G_\text{i}$ at interface $\text{i}$. The net force the weight of the
-slices adjacent to interface $\text{i}$ exert horizontally on each
-other.\\
+\hline Description & $i$ is the index representing a single slice.\\
+&$n$ is the total number of slices.\\
+&$G$ is the interslice normal force (\si{\newton\per\meter}).\\
+&$FS$ is the factor of safety.\\
+&$T$ is the mobile shear force  without the influence of interslice forces 
+(\si{\newton\per\meter}).\\
+&$R$ is the resistive shear force  without the influence of interslice forces 
+(\si{\newton\per\meter}).\\
+&$\Phi$ is the first constant used to convert shear without the 
+influence of interslice forces to shear with the influence of 
+interslice forces.\\
+&$\Psi$ is the second constant used to convert shear without the 
+influence of interslice forces to shear with the influence of 
+interslice forces.\\
+
 
 \hline Sources& \cite{ZhuEtAl2005}\\
 
@@ -2177,11 +2206,9 @@ other.\\
 
 \subsubsection*{Interslice Force Derivation} \label{sec:Ederivation}
 
-Taking the perpendicular force equilibrium of \dref{GD_Fx} with the
-effective stress definition from \tref{TM_EffStress} that
-$N_{\text{i}}=N'_{\text{i}} - U_{\text{b,i}}$, and the assumption of
-\dref{GD_X} the equilibrium equation can be rewritten as
-equation~(\ref{eq:F_perp}).
+Substituting the normal force equilibrium of \dref{GD_Fx} and the assumption 
+\aref{A_Base} represented by \dref{GD_X} into the effective normal force 
+definition from \dref{GD_EffNormal} yields equation~(\ref{eq:F_perp}).
 
 \begin{equation}\label{eq:F_perp}   N'_{\text{i}}  = \begin{array}{l}    
     \left[ W_{\text{i}} - \lambda \cdot f_{\text{i-1}} \cdot
@@ -2197,15 +2224,13 @@ equation~(\ref{eq:F_perp}).
 \end{equation}
 
 \noindent
-Taking the base shear force equilibrium of \dref{GD_Fy} with the
-definition of mobilized shear from \dref{GD_MobShear} and the assumption
-of \dref{GD_X}, the equilibrium equation can be rewritten as
-equation~(\ref{eq:F_par}).
-
+Next, substituting the base shear force equilibrium of \dref{GD_Fy} and the 
+assumption of \dref{GD_X} into the definition of mobilized shear from 
+\dref{GD_MobShear} results in equation~(\ref{eq:F_par}).
 
 \begin{equation}  \label{eq:F_par}
   \frac{
-   N_{\text{i}} \tan\left(\varphi'\right._{i}) + c'_{\text{i}} \cdot 
+   N'_{\text{i}} \tan\left(\varphi'\right._{i}) + c'_{\text{i}} \cdot 
    b'_{\text{i}} \cdot \sec\left(\alpha_{\text{i}}\right.) 
   }
     { \text{FS} }
@@ -2226,9 +2251,9 @@ equation~(\ref{eq:F_par}).
 \end{equation}
 
 \noindent
-Substituting the equation for $N'_{\text{i}}$ from
-equation~(\ref{eq:F_perp}) into equation~(\ref{eq:F_par}) and
-rearranging results in equation~(\ref{eq:Interslice1})
+Substituting equation~(\ref{eq:F_perp}), \ddref{DD_R}, and \ddref{DD_T} into 
+equation~(\ref{eq:F_par}) and rearranging results in 
+equation~(\ref{eq:Interslice1})
 
 \begin{equation}\label{eq:Interslice1}
 G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
@@ -2252,11 +2277,9 @@ G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 \noindent
 Where $R$ and $T$ are the resistive and mobile shear
 of the slice, without the influence of interslice forces $G$ and $X$,
-as defined in \ddref{DD_R} and \ddref{DD_T}.  Making use of the
-constants $\phi$ and $\Psi$ with full equations found below in
-equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) respectively, then
-equation ~(\ref{eq:Interslice1}) can be simplified to equation
-~(\ref{eq:Interslice2}), also seen in \iref{IM_E}.
+as defined in \ddref{DD_R} and \ddref{DD_T}. The constants $\Phi$ and $\Psi$ 
+are defined below in equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) 
+respectively.
 
 \begin{equation}\label{eq:Phi} \begin{aligned}
 \Phi_{\text{i}}={} & \left[ \lambda \cdot f_{\text{i}}
@@ -2277,7 +2300,12 @@ equation ~(\ref{eq:Interslice1}) can be simplified to equation
   \cos\left(\alpha_{\text{i+1}}\right) \right] \left( \text{FS}
 \right)
  \end{aligned}\end{equation}
+
 ~\newline
+\noindent These constants can be used to simplify 
+equation~(\ref{eq:Interslice1}) to obtain equation~(\ref{eq:Interslice2}), 
+which can be found in \iref{IM_E}.
+
 \begin{equation}\label{eq:Interslice2}
 {G}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{G}_{\text{i-1}}} +
   \left({{FS}}\right)\;{T_{\text{i}}} -
@@ -2286,9 +2314,8 @@ equation ~(\ref{eq:Interslice1}) can be simplified to equation
 
 \noindent
 The constants $\Psi$ and $\Phi$ in equation~(\ref{eq:Interslice2}) for
-are functions of the unknowns: the interslice normal/shear force ratio 
-$\lambda{}$  (\iref{IM_Lambda}), and the Factor
-of Safety $\text{FS}$ (\iref{IM_FS}).
+are functions of the unknowns: the proportionality constant, $\lambda{}$  
+(\iref{IM_Lambda}), and the factor of safety, $FS$ (\iref{IM_FS}).
 
 ~\newline
 
@@ -2304,22 +2331,24 @@ of Safety $\text{FS}$ (\iref{IM_FS}).
 \hline \rowcolor[gray]{0.9} Number&
 IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
-\hline Label& \bf Critical Slip Identification \\
+\hline Label& \bf Critical Slip Surface Identification \\
 
-\hline Input & The geometry of the water table, the geometry of the
-layers composing the plane of a slope, and the material properties of
-the layers. \\
+\hline Input & $\{(x_\text{us},y_\text{us})\}$ \\
 
-\hline Output & \(  \text{FS}_\text{Min}
- = \Upsilon\left( \left\{x_\text{cs},y_\text{cs}\right\},\text{Input}
- \right) \)
+\hline Output & \(  \left( \text{FS}_\text{Min}, \left\{ 
+\left(x_\text{cs},y_\text{cs}\right)\right\} \right)
+ = \Upsilon\left( \left\{\left(x_\text{us},y_\text{us}\right)\right\} \right)\)
  \\
 
-\hline Description & Given the necessary slope inputs, a minimization
-algorithm or function $\Upsilon$, will identify the critical slip
-surface of the slope, with the critical slip coordinates
-$\left\{x_\text{cs},y_\text{cs}\right\}$ and the minimum factor of
-safety $\text{FS}_\text{Min}$ that results.\\
+\hline Description & $FS_{Min}$ is the minimum factor of safety associated with 
+the critical slip surface.\\
+&$x_{cs}$ is the \textit{x}-ordinate of a point on the critical slip surface 
+(\si{\meter}).\\
+&$x_{cs}$ is the \textit{y}-ordinate of a point on the critical slip surface 
+(\si{\meter}).\\
+&$\Upsilon$ is a minimization algorithm or function.\\
+&$x_{us}$ is the \textit{x}-ordinate of a point on the slope (\si{\meter}).\\
+&$y_{us}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
 
 \hline Sources& \cite{LiEtAl}\\
 
@@ -2331,11 +2360,11 @@ safety $\text{FS}_\text{Min}$ that results.\\
 %               End IM Minimization         %
 % ------------------------------------------ %
 
-\bmac{Should this IM exist? It doesn't arise from any T or A}
+\bmac{Should this IM exist? It doesn't arise from any T}
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}    
 
-Table~\ref{TblInputVar} and \ref{TblOutputVar} shows the data constraints on 
+Tables~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on 
 the input and output variables, respectively. The column for physical 
 constraints gives the physical limitations on the range of values that can be 
 taken by the variable. The uncertainty column provides an estimate of the 
@@ -2350,25 +2379,23 @@ is intended to provide a feel for a common scenario.
 \begin{table}[!h]
 \caption{Input Variables} 
 \renewcommand{\arraystretch}{1.5}
-\noindent \begin{longtable*}{p{2.4cm} p{5.8cm} p{1.2cm} c}
+\noindent \begin{longtable*}{p{3.1cm} p{5.1cm} p{1.2cm} c}
   \toprule  \label{TblInputVar}
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
-  $(x,y)$ of water table vertices' & Consecutive vertices have
-  increasing x values. All layers start and end vertices' go to the
+  $\{(x_{wt},y_{wt})\}$ & Consecutive vertices $x$ values are always increasing 
+  or always decreasing. Starts and ends on the same $x$ values as soil layers.  
+  & N/A & 10\% \\
+  $\{(x_{slip},y_{slip})\}$ for potential slip surface entry and exit points & 
+  Slopes between $x$ values of consecutive vertices are always increasing. & 
+  N/A & 10\% \\
+  $\{(x_{us},y_{us})\}$ (*) & Consecutive vertices $x$ values are always 
+  increasing or always decreasing. All layers start and end on the
   same x values. & N/A & 10\% \\
-  $(x,y)$ of slip vertices' & Consecutive vertices have increasing x
-  values. All layers start and end vertices' go to the same x
-  values. & N/A & 10\% \\
-  $(x,y)$ of slope vertices' (*) & Consecutive vertices have
-  increasing x values. All layers start and end vertices' go to the
-  same x values. & N/A & 10\% \\
-  $c$ (*) & $c >0$ & 10 & 10\%\\
-  $v$ (*) & $ 0 < v < 1 $ & 0.4 & 10\%\\
+  $c'$ (*) & $c >0$ & 10 & 10\%\\
   $\varphi'$ (*) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
   $\gamma$ (*) & $\gamma > 0$ & 20 & 10\% \\
-  $\gamma_{\text{Sat}}$ (*) & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\%
-  \\
+  $\gamma_{\text{Sat}}$ (*) & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\% \\
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9.8 & 10\% \\
   \bottomrule
 \end{longtable*}
@@ -2386,7 +2413,9 @@ is intended to provide a feel for a common scenario.
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $FS$ & $FS>0$ \\
-  $(x,y)$ Slip vertices' &  Vertices are monotonic \\
+  $(x_{cs},y_{cs})$ &  Vertices are monotonically increasing \\
+  $G_i$ & $G_i$ > 0 \\
+  $X_i$ & $X_i$ < 0 \\
   \bottomrule
 \end{longtable*}
 \end{table}
@@ -2394,14 +2423,11 @@ is intended to provide a feel for a common scenario.
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit
-
-\bmac{What to put here? Only numerical output are coordinates of critical slip 
-surface, factor of safety, and interslice forces, so showing that the outputs 
-follow some physical law seems difficult. Static equilibrium?}
-
-\bmac{Or, could this be something along the lines of "Slope of critical slip 
-surface must be monotonically increasing?"}
+A correct solution must exhibit conformation to the system of non-linear 
+equations presented in \iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}. In 
+addition, the factor of safety for the critical slip surface must be lower than 
+the factors of safety calculated for other slip surfaces. The coordinates of 
+the critical slip surface must form a concave up function.
 
 \section{Requirements}
 
@@ -2414,8 +2440,7 @@ requirements, the qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Read the
-  input file, shown in the table below, and store the data. [\aref{A_Input}, 
-  \aref{A_Homo}]
+  input file, shown in the table below, and store the data.
   
   \renewcommand{\arraystretch}{1.5}
   %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
