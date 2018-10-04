@@ -674,7 +674,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
   Interslice normal and shear forces have a linear relationship,
   proportional to a constant $\left({\lambda}\right)$ and an
   interslice force function $\left({f}\right)$ depending on $x$
-  position. [\dref{GD_X}]
+  position. [\dref{GD_X}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
   slope and slip surface extends far into and out of the geometry ($z$
@@ -688,17 +688,17 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Straight}]
   The surface and base of a slice are approximated as straight lines 
-  [\ddref{DD_W}, \ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_H}, 
-  \ddref{DD_Angles_alpha}, \ddref{DD_Angles_Beta}, \ddref{DD_b}, \ddref{DD_lb}, 
-  \ddref{DD_ls}].
+  [\ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_Angles_alpha}, 
+  \ddref{DD_Angles_Beta}, \ddref{DD_lb}, \ddref{DD_ls}].
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
 seismic force acting on the slope. [\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, 
-\iref{IM_Lambda}, \iref{IM_E}]
+\iref{IM_Lambda}, \iref{IM_E}, \lcref{LC_Seismic}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_External}] There is 
 no imposed surface load, and therefore no external force, acting on the slope. 
-[\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
+[\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}, 
+\lcref{LC_External}]
 
 \end{enumerate}
 
@@ -890,8 +890,7 @@ instance models.
   direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
   to the values of the properties for slice/interslices following convention in
-  Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
-  mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+  Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
   &$N$ is the normal force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
@@ -949,8 +948,7 @@ instance models.
   direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
   to the values of the properties for slice/interslices following convention in
-  Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
-  mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+  Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
   &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
@@ -1052,7 +1050,7 @@ instance models.
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \ddref{DD_R} \\
+  \hline Ref.\ By & \ddref{DD_R}, \iref{IM_E} \\
   
   \hline
 \end{tabular}
@@ -1169,8 +1167,7 @@ instance models.
  Force equilibrium is derived from the free body diagram of 
  Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
  to the values of the properties for slice/interslices following convention in
- Figure~\ref{Fig_Index} in section~\ref{sec_system}. Force variable
- mathematical definitions can be found in \ddref{DD_W} to \ddref{DD_EX}.\\
+ Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
  &$z$ is the height in the \textit{y}-direction from the base of a slice 
  to the center of the slice (\si{\meter}).\\
@@ -1528,7 +1525,6 @@ $b_i$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
 (\si{\meter}).\\
 &${x_{slip}}$ is the \textit{x}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
-\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -2441,7 +2437,7 @@ requirements, the qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Read the
-  input file, shown in the table below, and store the data.
+  inputs, shown in the table below, and store the data.
   
   \renewcommand{\arraystretch}{1.5}
   %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
@@ -2449,18 +2445,20 @@ requirements, the qualities that the software is expected to exhibit.
     \refstepcounter{tablenum}  \label{Table:Inputs}
     \textbf{unit} & \textbf{description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & x and y coordinates for vertices
-    of the slope layers, and for the water table if one exists.
-    Assumed straight line fits between vertices.\\
-    $c'$ & $\text{kPa}$ & Cohesion for each slope layer. \\
+    of the slope layers, for the water table if one exists, and for potential 
+    entry and exit points of a slip surface.\\
+    $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
-    $\gamma$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit weight of dry
+    $\gamma$ & $\si{\newton\per\meter\cubed}$ & Unit weight of dry
     soil / ground layer for each slope layer. \\
-    $\gamma_{\text{Sat}}$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit
+    $\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & Unit
     weight of saturated soil / ground layer for each slope
     layer. \\
-    $\gamma_{\text{w}}$ & $\si{\kilo\newton\per\meter\cubed}$ & Unit
-    weight of water. \\ \bottomrule
+    $\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & Unit
+    weight of water. \\
+    N/A & N/A & A boolean decision on which form of the interslice variation 
+    function \textit{f} the user desires: constant or half-sine.\\ \bottomrule
 \end{longtable}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_KinAdm}:] Verify that the 
@@ -2554,7 +2552,7 @@ These models do not take into account stress in the z-direction, and therefore
 cannot be used without manipulation to attempt 3-dimensional analysis.
 \end{itemize}
 
-\bmac{This section is not on the template}
+\bmac{This section is not on the template, not sure if it should be kept}
 
 \section{Traceability Matrices and Graphs}
 
@@ -2580,34 +2578,34 @@ definitions, instance models, and likely changes on the assumptions.
 \aref{A_Straight}& \aref{A_Seismic}& \aref{A_External} \\
 \hline
 \tref{TM_FS}            & & & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & & & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & X& & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & X& & & \\ \hline
 \tref{TM_EffStress}     & & & & & & & & & & & \\ \hline
 \dref{GD_Fx}            & & & & & & & & & & & \\ \hline
 \dref{GD_Fy}            & & & & & & & & & & & \\ \hline
-\dref{GD_P}             & & & & & & & & & & & \\ \hline
-\dref{GD_MobShear}      & & & & & & & & & & & \\ \hline
-\dref{GD_X}             & & & & & & & & & & & \\ \hline
+\dref{GD_P}             & & & X& X& X& & & & & & \\ \hline
+\dref{GD_MobShear}      & & X& X& X& X& & & & & & \\ \hline
+\dref{GD_EffNormal}     & & & & & & & & X& & & \\ \hline
+\dref{GD_X}             & & & & & & X& & & & & \\ \hline
 \dref{GD_M}             & & & & & & & & & & & \\ \hline
 \ddref{DD_W}            & & & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & & & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & X& & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & X& & \\ \hline
 \ddref{DD_H}            & & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & X& & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & X& & \\ \hline
 \ddref{DD_b}            & & & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & & & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & & & \\ \hline
-\ddref{DD_Kc}           & & & & & & & & & & & \\ \hline
-\ddref{DD_Q}            & & & & & & & & & & & \\ \hline
-\ddref{DD_EX}           & & & & & & & & & & & \\ \hline
-\ddref{DD_R}            & & & & & & & & & & & \\ \hline
-\ddref{DD_T}            & & & & & & & & & & & \\ \hline
-\iref{IM_FS}            & & & & & & & & & & & \\ \hline
-\iref{IM_Lambda}        & & & & & & & & & & & \\ \hline
-\iref{IM_E}             & & & & & & & & & & & \\ \hline
-\iref{IM_Min}           & & & & & & & & & & & \\ \hline
-\lcref{LC_inhomogeneous}& & & & & & & & & & & \\
+\ddref{DD_lb}           & & & & & & & & & X& & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & X& & \\ \hline
+\ddref{DD_R}            & & & X& X& X& & & & & X& X\\ \hline
+\ddref{DD_T}            & & & X& X& X& & & & & X& X\\ \hline
+\iref{IM_FS}            & & X& & & & X& & & & X& X\\ \hline
+\iref{IM_Lambda}        & & & & & & X& & & & X& X\\ \hline
+\iref{IM_E}             & & X& & & & X& & & & X& X\\ \hline
+\iref{IM_Min}           & X& & & & & & & & & & \\ \hline
+\lcref{LC_inhomogeneous}& & & X& & & & & & & & \\ \hline
+\lcref{LC_Seismic}      & & & & & & & & & & X& \\ \hline
+\lcref{LC_External}     & & & & & & & & & & & X\\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions 
@@ -2619,40 +2617,38 @@ and Other Items}
 \begin{landscape}
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
 & \tref{TM_FS}& \tref{TM_Eqm}& \tref{TM_Fmc}& \tref{TM_EffStress}&
-\dref{GD_Fx}& \dref{GD_Fy} & \dref{GD_P}& \dref{GD_MobShear}& \dref{GD_X}& 
-\dref{GD_M} \\
+\dref{GD_Fx}& \dref{GD_Fy} & \dref{GD_P}& \dref{GD_MobShear}& 
+\dref{GD_EffNormal}& \dref{GD_X}& \dref{GD_M} \\
 \hline
-\tref{TM_FS}            & & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & & & \\ \hline
-\tref{TM_EffStress}     & & & & & & & & & & \\ \hline
-\dref{GD_Fx}            & & X& & & & & & & & \\ \hline
-\dref{GD_Fy}            & & X& & & & & & & & \\ \hline
-\dref{GD_P}             & & & X& X& & & & & & \\ \hline
-\dref{GD_MobShear}      & X& & X& X& & & X& & & \\ \hline
-\dref{GD_X}             & & & & & & & & & & \\ \hline
-\dref{GD_M}             & & X& & & & & & & & \\ \hline
-\ddref{DD_W}            & & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & & \\ \hline
-\ddref{DD_H}            & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & & \\ \hline
-\ddref{DD_b}            & & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & & \\ \hline
-\ddref{DD_Kc}           & & & & & & & & & & \\ \hline
-\ddref{DD_Q}            & & & & & & & & & & \\ \hline
-\ddref{DD_EX}           & & & & & & & & & & \\ \hline
-\ddref{DD_R}            & & & X& X& X& X& X& X& X& \\ \hline
-\ddref{DD_T}            & & & X& X& X& X& X& X& X& \\ \hline
-\iref{IM_FS}            & X& & & & & & & & X& \\ \hline
-\iref{IM_Lambda}        & & X& & & & & & & X& X\\ \hline
-\iref{IM_E}             & & & & X& X& X& & & X& \\ \hline
-\iref{IM_Min}           & & & & & & & & & & \\
+\tref{TM_FS}            & & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & & X& & & & & & & & & \\ \hline
+\dref{GD_Fy}            & & X& & & & & & & & & \\ \hline
+\dref{GD_P}             & & & X& X& & & & & & & \\ \hline
+\dref{GD_MobShear}      & X& & X& X& & & X& & & & \\ \hline
+\dref{GD_EffNormal}     & & & & X& & & & & & & \\ \hline
+\dref{GD_X}             & & & & & & & & & & & \\ \hline
+\dref{GD_M}             & & X& & & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & & & & & & & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & & & \\ \hline
+\ddref{DD_R}            & & & X& X& X& X& X& X& X& & \\ \hline
+\ddref{DD_T}            & & & X& X& X& X& X& & & & \\ \hline
+\iref{IM_FS}            & X& & & X& & & & & & X& \\ \hline
+\iref{IM_Lambda}        & & X& & X& & & & & & X& X \\ \hline
+\iref{IM_E}             & & & & X& X& X& & X& & X& \\ \hline
+\iref{IM_Min}           & & & & & & & & & & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different 
@@ -2666,46 +2662,44 @@ Sections With Theory Models and General Definitions}
 \begin{landscape}
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
 & \ddref{DD_W}& \ddref{DD_Ub}& \ddref{DD_Ut}& \ddref{DD_H}& 
 \ddref{DD_Angles_alpha}& \ddref{DD_Angles_Beta}& \ddref{DD_b}& \ddref{DD_lb}& 
-\ddref{DD_ls}& \ddref{DD_Kc}& \ddref{DD_Q}& \ddref{DD_EX}& \ddref{DD_R}& 
-\ddref{DD_T}& \iref{IM_FS}& \iref{IM_Lambda}& \iref{IM_E}& \iref{IM_Min} \\
+\ddref{DD_ls}& \ddref{DD_R}& \ddref{DD_T}& \iref{IM_FS}& \iref{IM_Lambda}& 
+\iref{IM_E}& \iref{IM_Min} \\
 \hline
-\tref{TM_FS}            & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & & & & & & & & & & & \\ \hline
-\tref{TM_EffStress}     & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_Fx}            & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_Fy}            & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_P}             & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_MobShear}      & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_X}             & & & & & & & & & & & & & & & & & & \\ \hline
-\dref{GD_M}             & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_W}            & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_H}            & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_b}            & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Kc}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_Q}            & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_EX}           & & & & & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_R}            & X& X& X& X& X& X& X& X& X& X& X& X& & & & & & \\ 
+\tref{TM_FS}            & & & & & & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & & & & & & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & & & & & & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & X& & X& X& X& X& & & & & & & & & \\ \hline
+\dref{GD_Fy}            & X& & X& X& X& X& & & & & & & & & \\ \hline
+\dref{GD_P}             & & & & & & & & X& & & & & & & \\ \hline
+\dref{GD_MobShear}      & & & & & & & & X& & & & & & & \\ \hline
+\dref{GD_EffNormal}     & & & & & & & & & & & & & & & \\ \hline
+\dref{GD_X}             & & & & & & & & & & & & & & & \\ \hline
+\dref{GD_M}             & X& & X& X& X& X& X& & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & X& & & & & & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & X& & & & & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & X& & X& & & & & & & & \\ \hline
+\ddref{DD_ls}           & & & & & & X& X& & & & & & & & \\ \hline
+\ddref{DD_R}            & X& X& X& X& X& X& X& & & & & & & & \\ 
 \hline
-\ddref{DD_T}            & X& X& X& X& X& X& X& X& X& X& X& X& & & & & & \\ 
+\ddref{DD_T}            & X& & X& X& X& X& X& & & & & & & & \\ 
 \hline
-\iref{IM_FS}            & X& X& X& X& X& X& X& X& X& X& X& X& X& X& & X& X& \\ 
+\iref{IM_FS}            & X& X& X& X& X& X& X& & & X& X& & X& X& \\ 
 \hline
-\iref{IM_Lambda}        & X& X& X& X& X& X& X& X& X& X& X& X& & & X& & X& \\ 
+\iref{IM_Lambda}        & X& X& X& X& X& X& X& & & & & X& & X& \\ 
 \hline
-\iref{IM_E}             & X& X& X& X& X& X& X& X& X& X& X& X& & & X& X& & \\ 
+\iref{IM_E}             & X& X& X& X& X& X& X& & & X& & X& X& & \\ 
 \hline
-\iref{IM_Min}           & & & & & & & & & & & & & & & & & & \\
+\iref{IM_Min}           & & & & & & & & & & & & & & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Items of Different 
@@ -2717,21 +2711,25 @@ Sections With Theory Models and General Definitions}
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|}
 \hline
 & \iref{IM_FS}& \iref{IM_Lambda}& \iref{IM_E}& \iref{IM_Min}& 
-\ref{sec_DataConstraints} \\
+\ref{sec_DataConstraints} & \rref{R_Inputs}\\
 \hline
-\rref{R_Inputs}       & & & & & \\ \hline
-\rref{R_KinAdm}       & & & & & \\ \hline
-\rref{R_InitGen}      & & & & & \\ \hline
-\rref{R_FS}           & & & & & \\ \hline 
-\rref{R_Minimize}     & & & & & \\ \hline
-\rref{R_VerifyOutput} & & & & & \\ \hline
-\rref{R_CritGraph}    & & & & & \\ \hline
-\rref{R_OutputFS}     & & & & & \\ \hline
-\rref{R_NormalGraph}  & & & & & \\ \hline
-\rref{R_ShearGraph}   & & & & & \\
+\iref{IM_FS}          & & & & & & X\\ \hline
+\iref{IM_Lambda}      & & & & & & X\\ \hline
+\iref{IM_E}           & & & & & & X\\ \hline
+\iref{IM_Min}         & & & & & & X\\ \hline 
+\rref{R_Inputs}       & & & & & & \\ \hline
+\rref{R_KinAdm}       & & & & & X& \\ \hline
+\rref{R_InitGen}      & & & & X& & \\ \hline
+\rref{R_FS}           & X& X& X& & & \\ \hline 
+\rref{R_Minimize}     & & & & X& & \\ \hline
+\rref{R_VerifyOutput} & & & & & X& \\ \hline
+\rref{R_CritGraph}    & & & & & X& \\ \hline
+\rref{R_OutputFS}     & X& X& X& & & \\ \hline
+\rref{R_NormalGraph}  & X& X& X& & & \\ \hline
+\rref{R_ShearGraph}   & X& X& X& & & \\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Requirements and 
