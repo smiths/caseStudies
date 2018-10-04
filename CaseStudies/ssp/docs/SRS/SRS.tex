@@ -1,3 +1,5 @@
+% !TeX spellcheck = en_US
+
 \documentclass[12pt]{article}
 \usepackage{colortbl}
 \usepackage{tabularx}
@@ -111,6 +113,7 @@
 	specification\\
 	10/03/18 & 1.5 & Completed revision of the solution characteristics 
 	specification and other sections\\
+	10/04/18 & 1.6 & Minor fixes throughout\\
 	\bottomrule
 \end{tabularx}
 
@@ -148,8 +151,6 @@ $\si{\pascal}=\si{\newton\per\square\meter}$ & pressure & Pascal \\
 
 The table that follows summarizes the symbols used in this document along with 
 their units. 
-Throughout the document, the subscript $i$ implies that the value will be taken 
-and analyzed at a slice or slice interface composing the total slip mass.
 
 \renewcommand{\arraystretch}{1.6}
 \setlength{\tabcolsep}{20pt}
@@ -161,13 +162,11 @@ $b$ & \si{\meter}& width of the base of a slice in the \textit{x} direction
 \\
 $c'$ & \si{\pascal} & effective cohesion 
 \\
-${C1_{i}}$ &  N\si{\meter}& interslice shear force expression used to calculate 
+${C1_{i}}$ & \si{\newton}& interslice shear force expression used to calculate 
 the numerator of the scaling factor
 \\
-${C2_{i}}$ &  N\si{\meter}& interslice normal force expression used to 
+${C2_{i}}$ & \si{\newton}& interslice normal force expression used to 
 calculate the denominator of the scaling factor
-\\
-$F$ &\si{\newton} & force
 \\
 ${F_{x}}$ & \si{\newton} &$x$-component of force
 \\
@@ -198,7 +197,7 @@ $N$ & \si{\newton\per\meter} & normal force
 \\
 $N'$ &\si{\newton\per\meter} & effective normal force
 \\
-$N*$ &\si{\newton\per\meter} & effective normal force without the influence of 
+$N^*$ &\si{\newton\per\meter} & effective normal force without the influence of 
 interslice forces
 \\
 $n$ & & the total number of slices
@@ -212,8 +211,6 @@ interslice forces
 \\
 $S$ & \si{\newton\per\meter} & mobilized shear force
 \\
-$s$ &\si{\pascal} & mobilized shear stress
-\\
 $T$ & \si{\newton\per\meter} & mobilized shear force without the influence of 
 interslice 
 forces
@@ -224,6 +221,8 @@ ${U_{t}}$ & \si{\newton\per\meter} & surface hydrostatic force
 \\
 $W$ & \si{\newton\per\meter} & self-weight
 \\
+$X$ & \si{\newton\per\meter} & interslice shear force
+\\
 $x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 \\
 $x_{cs}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical slip 
@@ -233,7 +232,7 @@ ${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinate of a point on a slip surface
 \\
 ${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
-$X$ & \si{\newton\per\meter} & interslice shear force
+${x_{wt}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water table
 \\
 $y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian coordinate system
 \\
@@ -249,7 +248,7 @@ ${y_{wt}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water table
 $z$ & \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the center of the slice
 \\
-$z_w$ & (\si{meter})& height in the \textit{y}-direction from the base of a 
+$z_w$ & (\si{\meter})& height in the \textit{y}-direction from the base of a 
 slice halfway to the water table
 \\
 $\alpha{}$ & \si{\degree} & angle between the base of a slice and the horizontal
@@ -266,7 +265,8 @@ ${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 $\Delta{}H$ & \si{\newton\per\meter} & difference between interslice water 
 forces
 \\
-$\lambda{}$ & & scaling factor for the interslice normal to shear force ratio
+$\lambda{}$ & & proportionality constant for the interslice normal to shear 
+force ratio
 \\
 $\mu{}$ &\si{\pascal} & pore pressure from water within the soil
 \\
@@ -346,7 +346,7 @@ A slope of geological mass, composed of soil and rock and sometimes water, is
 subject to the influence of gravity on the mass. This can cause instability in 
 the form of soil or rock movement. The effects of soil or rock movement can 
 range from inconvenient to seriously hazardous, resulting in significant life 
-and economic losses. Slope stability is of interest both when analyzing natural 
+and economic losses. Slope stability is of interest both when analysing natural 
 slopes, and when designing an excavated slope. Slope stability analysis is the 
 assessment of the safety of a slope, identifying the surface most likely to 
 experience slip and an index of its relative stability known as the factor of 
@@ -378,8 +378,9 @@ way to present the documentation is still to ``fake" a rational design process.
 \subsection{Scope of Requirements} 
 
 The scope of the requirements includes stability analysis of a 2-dimensional 
-slope, composed of homogeneous soil layers. Factors which may change the slope 
-properties over time will not be considered.
+slope, composed of homogeneous soil layers. The analysis will be at an instant 
+in time; factors that may change the slope properties over time will not be 
+considered.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
@@ -412,9 +413,9 @@ characteristics, and lists the system constraints.
 \subsection{System Context}
 
 Figure~\ref{Fig_SystemContext} shows the system context.  A circle represents an
-external entity outside the software, the user in this case.  A rectangle
-represents the software system itself (\progname).  Arrows are used to show the 
-data flow between the system and its environment.
+external entity outside the software.  A rectangle represents the software 
+system itself (\progname).  Arrows are used to show the data flow between the 
+system and its environment.
 
 \begin{figure}[h!]
 	\begin{center}
@@ -424,8 +425,7 @@ data flow between the system and its environment.
 	\end{center}
 \end{figure}
 
-\noindent The interaction between the product and the user is through a user
-interface.  The responsibilities of the user and the system are as follows:
+\noindent The responsibilities of the user and the system are as follows:
 
 \begin{itemize}
 \item User Responsibilities:
@@ -434,7 +434,7 @@ interface.  The responsibilities of the user and the system are as follows:
   applicable), ensuring conformation to input data format required by \progname
   \item Ensure that consistent units are used for input variables
   \item Ensure required software assumptions (Section~\ref{Assumptions}) are
-    appropriate for any particular problem input to the software
+    appropriate for the problem to which the user is applying the software
   \end{itemize}
 \item \progname\ Responsibilities:
   \begin{itemize}
@@ -452,8 +452,7 @@ interface.  The responsibilities of the user and the system are as follows:
 \label{Sec:UserChar}
 The end user of \progname\ should have an understanding of undergraduate
 Level 1 Calculus and Physics, and be familiar with soil and material
-properties, specifically cohesion, effective angle of 
-friction, and unit weight.
+properties, specifically cohesion, effective angle of friction, and unit weight.
 
 \subsection{System Constraints}
 
@@ -465,8 +464,7 @@ slices, will be used to derive the equations for analysing the slope.
 This section first presents the problem description, which gives a
 high-level view of the problem to be solved.  This is followed by the
 solution characteristics specification, which presents the
-assumptions, theories, definitions and finally the instance models
-that model the slope. \\
+assumptions, theories, definitions and finally the instance models.
 
 \subsection{Problem Description} \label{Sec_pd}
 
@@ -491,17 +489,16 @@ of a slope.}
 to fail or displace due to load or other forces.}
 
 \item {\textit{Critical slip surface:} Slip surface of the slope that
-  has the lowest global factor of safety, and is therefore most likely to
+  has the lowest factor of safety, and is therefore most likely to
   experience failure.}
 
 \item {\textit{Water table:} The upper boundary of a saturated zone in the 
 ground.}
 
-\item {\textit{Stress:} Forces that are exerted between planes
-  internal to a larger body subject to external loading.}
+\item {\textit{Stress:} Force applied over an area.}
   
-\item {\textit{Strain:} Stress forces that result in deformation of
-  the body/plane.}
+\item {\textit{Strain:} A measure of deformation of a body or plane under 
+stress.}
   
 \item {\textit{Normal force:} A force applied perpendicular to the
   plane of the material.}
@@ -518,7 +515,7 @@ motion, thus encouraging motion along the plane.}
 \item {\textit{Cohesion:} An attractive force between adjacent particles that 
 holds the matter together.}
   
-\item {\textit{Isotropic:} A condition where a the value of a property is 
+\item {\textit{Isotropic:} A condition where the value of a property is 
 independent of the direction in which it is measured.}
   
 \item {\textit{Plane strain:} A condition where the resultant stresses in one 
@@ -641,7 +638,7 @@ so that the instance models can be verified.
 \subsubsection{Assumptions}
 \label{Assumptions}
 This section simplifies the original problem and helps in developing the
-theoretical model by filling in the missing information for the physical
+theoretical models by filling in the missing information for the physical
 system. The numbers given in the square brackets refer to the theoretical model
 [T], general definition [GD], data definition [DD], instance model [IM], or
 likely change [LC], in which the respective assumption is used.
@@ -671,14 +668,14 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
   \dref{GD_MobShear}, \ddref{DD_R}, \ddref{DD_T}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
-  Interslice normal and shear forces have a linear relationship,
-  proportional to a constant $\left({\lambda}\right)$ and an
-  interslice force function $\left({f}\right)$ depending on $x$
+  Interslice normal and shear forces have a proportional relationship,
+  depending on a proportionality constant $\left({\lambda}\right)$ and an
+  function $\left({f}\right)$ describing variation depending on $x$
   position. [\dref{GD_X}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
-  slope and slip surface extends far into and out of the geometry ($z$
-  coordinate). This implies plane strain conditions, making 2D
+  slope and slip surface extends far into and out of the geometry 
+  ($z$-coordinate). This implies plane strain conditions, making 2D
   analysis appropriate. [\tref{TM_Eqm}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Lin}] The
@@ -840,7 +837,7 @@ on.
   to maintain itself as a rigid collection of particles (\si{\pascal}).\\
   & $\sigma'$ is the effective stress provided by the soil skeleton  
   (\si{\pascal}).\\
-  & $\mu$ is the pore pressure from water within the soil.\\
+  & $\mu$ is the pore pressure from water within the soil (\si{\pascal}).\\
 
   \hline Source & \cite{FredlundKrahn}\\
   
@@ -888,9 +885,8 @@ instance models.
  
   \hline Description & This equation satisfies \tref{TM_Eqm} in the normal 
   direction. Force equilibrium is derived from the free body diagram of 
-  Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
-  to the values of the properties for slice/interslices following convention in
-  Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
+  Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+  &$i$ is the index representing a single slice.\\
   &$N$ is the normal force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
@@ -946,9 +942,8 @@ instance models.
   
   \hline Description & This equation satisfies \tref{TM_Eqm} in the shear 
   direction. Force equilibrium is derived from the free body diagram of 
-  Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
-  to the values of the properties for slice/interslices following convention in
-  Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
+  Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+  &$i$ is the index representing a single slice.\\
   &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
@@ -1165,9 +1160,8 @@ instance models.
 
  \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
  Force equilibrium is derived from the free body diagram of 
- Figure~\ref{Fig_Forces} in section~\ref{sec_system}. Index $\text{i}$ refers 
- to the values of the properties for slice/interslices following convention in
- Figure~\ref{Fig_Index} in section~\ref{sec_system}.\\
+ Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+ &$i$ is the index representing a single slice.\\
  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
  &$z$ is the height in the \textit{y}-direction from the base of a slice 
  to the center of the slice (\si{\meter}).\\
@@ -1691,7 +1685,7 @@ Derivation}
 \noindent
 The resistive shear force of a slice is defined as $P_\text{i}$ in
 \dref{GD_P}, and depends upon the effective normal force.  The definition for 
-normal force in \dref{GD_N} can be substituted into the definition for 
+normal force in \dref{GD_Fx} can be substituted into the definition for 
 effective normal force in \dref{GD_EffNormal} to obtain equation~(\ref{eq:N'}).
 
 \begin{equation} \label{eq:N'}
@@ -1895,7 +1889,7 @@ performed by breaking the assumed slip surface into a series of
 vertical slices of mass. Static equilibrium analysis is performed, using two 
 force equations and one moment equation as in \tref{TM_Eqm}. The problem
 is statically indeterminate with only these 3 equations and one
-constitutive equation (the Mohr Coulomb shear strength of
+constitutive equation (the Mohr-Coulomb shear strength of
 \tref{TM_Fmc}), so the assumption \aref{A_Base} and corresponding equation 
 \dref{GD_X} are used. The force equilibrium equations can be modified to be 
 expressed only in terms of known physical values, as done in \ddref{DD_R} and 
@@ -1972,7 +1966,7 @@ also seen in \iref{IM_FS}.
 \noindent
 The constants $\Psi$ and $\Phi$, described in equations \ref{eq:Psi}
 and \ref{eq:Phi} of the derivation for \iref{IM_E}, are functions of the 
-unknowns: the interslice normal and shear force proportionality consant, 
+unknowns: the interslice normal and shear force proportionality constant, 
 $\lambda$ 
 (\iref{IM_Lambda}), and the factor of safety, $FS$ (\iref{IM_FS}).
 
@@ -2411,8 +2405,8 @@ is intended to provide a feel for a common scenario.
   \midrule 
   $FS$ & $FS>0$ \\
   $(x_{cs},y_{cs})$ &  Vertices are monotonically increasing \\
-  $G_i$ & $G_i$ > 0 \\
-  $X_i$ & $X_i$ < 0 \\
+  $G_i$ & $G_i>0$ \\
+  $X_i$ & $X_i<0$ \\
   \bottomrule
 \end{longtable*}
 \end{table}
@@ -2444,17 +2438,16 @@ requirements, the qualities that the software is expected to exhibit.
   \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
     \refstepcounter{tablenum}  \label{Table:Inputs}
     \textbf{unit} & \textbf{description}\\ \midrule
-    $\left(x,y\right)$ & $\text{m}$ & x and y coordinates for vertices
+    $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
     of the slope layers, for the water table if one exists, and for potential 
     entry and exit points of a slip surface.\\
     $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
     $\gamma$ & $\si{\newton\per\meter\cubed}$ & Unit weight of dry
-    soil / ground layer for each slope layer. \\
+    soil for each slope layer. \\
     $\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & Unit
-    weight of saturated soil / ground layer for each slope
-    layer. \\
+    weight of saturated soil for each slope layer. \\
     $\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & Unit
     weight of water. \\
     N/A & N/A & A boolean decision on which form of the interslice variation 
@@ -2478,7 +2471,7 @@ minimum factor of safety, corresponding to the critical slip surface (using
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] Verify that 
 the factor of safety, critical slip surface, and interslice forces satisfy the 
-physical constraints shown in Table~\ref{TblOutputVar} and 
+physical constraints shown in Table~\ref{TblOutputVar} and Section
 \ref{sec_CorrectSolution}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_CritGraph}:] Display
@@ -2544,12 +2537,12 @@ a different algorithm would be needed.
 \begin{itemize}
 \item[\refstepcounter{ucnum}\ltheucnum \label{UC_insf}:] Changes related to 
 \aref{A_Base} are not possible due to the dependency of the calculations on the 
-linear relationship between interslice normal and shear forces.
+proportional relationship between interslice normal and shear forces.
 \item[\refstepcounter{ucnum}\ltheucnum \label{UC_inhomogeneous}:] \aref{A_2D} 
-allows for 2D analysis with these models only because stress along z-direction 
-is zero. 
-These models do not take into account stress in the z-direction, and therefore 
-cannot be used without manipulation to attempt 3-dimensional analysis.
+allows for 2D analysis with these models only because stress along 
+$z$-direction is zero. These models do not take into account stress in the 
+$z$-direction, and therefore cannot be used without manipulation to attempt 
+3-dimensional analysis.
 \end{itemize}
 
 \bmac{This section is not on the template, not sure if it should be kept}
