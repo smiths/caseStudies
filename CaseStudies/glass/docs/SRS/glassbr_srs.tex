@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{multirow}
+\usepackage{geometry}
 \usepackage{caption}
 \usepackage{bm}
 \usepackage{amsmath}
@@ -33,19 +34,9 @@
     urlcolor=cyan           % colour of external links
 }
 
-%% Comments
-\newif\ifcomments\commentstrue
+\input{../Comments}
 
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
 
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\nk}[1]{\authornote{blue}{NK}{#1}}
 
 \newcommand{\colZwidth}{1.0\textwidth}
 \newcommand{\blt}{- } %used for bullets in a list
@@ -125,11 +116,12 @@
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-\oddsidemargin 0mm
-\evensidemargin 0mm
-\textwidth 160mm
-\textheight 200mm
+%\oddsidemargin 0mm
+%\evensidemargin 0mm
+%\textwidth 160mm
+%\textheight 200mm
 %\usepackage{fullpage}
+\newgeometry{margin=2cm}
 
 \begin{filecontents}{../../refs/References.bib}
 \end{filecontents}
@@ -137,10 +129,27 @@
 \begin{document}
 
 \title{Software Requirements Specification for \progname} 
-\author{Nikitha Krishnan and W. Spencer Smith}
+\author{Vajiheh Motamer and W. Spencer Smith}
 \date{\today}
 
 \maketitle
+
+~\newpage
+
+\pagenumbering{roman}
+\aida{According to the standards `` tableofcontentshould''  be put before all of materials. should not it?}
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+10/08/18 & 1.0 & initial SRS based on new template\\
+
+\bottomrule
+\end{tabularx}
+
+
+\newpage
 
 \tableofcontents
 \newpage
@@ -265,7 +274,7 @@ their units.  The symbols are listed in alphabetical order.
   SRS & 	Software Requirements Specification\\
   T & Theoretical Model\\
   UC & Unlikely Change\\
-  Uncert. & 	Typical Uncertainty\\
+  TU & 	Typical Uncertainty\\
   % SDF & Stress Distribution Factor \\
   % $\text{SDF}_{\text{tol}}$ & Stress Distribution Factor with respect to
   % $P_{b_{\text{tol}}}$\\
@@ -275,8 +284,8 @@ their units.  The symbols are listed in alphabetical order.
 \section{Introduction}
 
 Software is helpful to efficiently and correctly predict the blast risk involved
-with the glass slab. The blast under consideration is any type of man-made
-explosion. The software, herein called \progname, aims to predict the blast risk
+with the glass slab. The blast under consideration is a type of man-made
+blast load. The software, herein called \progname, aims to predict the blast risk
 involved with the glass slab using an intuitive interface.  
 
 The following section provides an overview of the Software Requirements Specification (SRS)
@@ -286,12 +295,11 @@ the intended reader.
 
 \subsection{Purpose of Document}
 
-The main purpose of this document is to predict whether a given glass slab is
-likely to resist a specified blast.  The goals and theoretical models used in
-the \progname{} code are provided, with an emphasis on explicitly identifying
-assumptions and unambiguous definitions.  This document is intended to be used
+ This document is intended to be used
 as a reference to provide all information necessary to understand and verify the
-analysis.  The SRS is abstract because the contents say \emph{what} problem is
+analysis \progname{}. The goals and theoretical models used in
+the \progname{} code are provided, with an emphasis on explicitly identifying
+assumptions and unambiguous definitions.  The SRS is abstract because the contents say \emph{what} problem is
 being solved, but not \emph{how} to solve it.
 
 This document will be used as a starting point for subsequent development
@@ -333,23 +341,10 @@ readers who would like a more bottom up approach, they can start reading the
 data definitions in Section \ref{sec_datadef} and trace back to find any
 additional information they require.
 
-The goal statements are refined to the theoretical models, and theoretical
-models to the instance models. The data definitions are used to support the
+The goal statements (Section \ref{sec_gs}) are refined to the theoretical models  (Section \ref{sec_theoretical}), and theoretical
+models to the instance models (Section \ref{sec_instance}) . The data definitions (Section \ref{sec_datadef}) are used to support the
 definitions of the different models.
 
-\section{Stakeholders}
-
-This section describes the stakeholders: the people who have an interest in the
-product.
-
-\subsection{The Client}
-
-The client for \progname{} is a company named Entuitive. It is developed by
-Dr.\ Manuel Campidelli. The client has the final say on acceptance of the product.
-
-\subsection{The Customer}
-
-The customers are the end users of \progname{}.
 
 \section{General System Description}
 
@@ -388,81 +383,38 @@ interface.  The responsibilities of the user and the system are as follows:
   \begin{itemize}
   \item Detect data type mismatch, such as a string of characters input instead
     of a floating point number
-  \item Determine if the inputs satisfy the required physical and software
-    constraints
+  \item Determine if the inputs satisfy the required physical and data
+    constraints (Section~\ref{sec_DataConstraints})
   \item Predict whether the glass slab is safe to use or not.
   \end{itemize}
 \end{itemize}
 
 \subsection{User Characteristics} 
 \label{sec_userchar}
-\begin{itemize}
-\item The end user of \progname{} is expected to have completed at least the
-  equivalent of the second year of an undergraduate degree in civil or
-  structural engineering.
-\item The end user is expected to have an understanding of theory behind glass
-  breakage and blast risk.
-\item The end user is expected to have basic computer literacy to handle the
-  software.
-\end{itemize}
+The end user of
+\progname{} should have an understanding of undergraduate Level 1 Calculus
+and Physics and to have an understanding of theory the behind Shattering
+Science and Glass Physics.
 
 \subsection{System Constraints}
 
 There are no system constraints.
 
-\section{Scope of the Project}
-
-This section presents the scope of the project. It describes the expected use of
-\progname{} as well as the inputs and outputs of each action.  The use cases are
-input and output, which defines the action of getting the input and displaying
-the output.
-
-\subsection{Product Use Case Table} \label{UseCase}
-
-\begin{longtabu}{l X[l]}
-\toprule
-Actor & Input and Output
-\\
-\midrule
-User & Characteristics of the glass slab and of the blast. Details in Section~\ref{sec_usecasedetails}
-\\
-\progname{} & Whether or not the glass slab is safe for the calculated load and supporting calculated values
-\\
-\bottomrule
-\caption{Use Case Table}
-\label{Table:UseCaseTabl}
-\end{longtabu}
-\subsection{Individual Product Use Cases}\label{sec_usecasedetails} 
-
-The user provides the inputs to \progname{} for use within the analysis. There are
-two main classes of inputs: glass geometry and blast type. The glass geometry
-based inputs include the glass type and dimensions of the glass plane. The blast
-type input includes parameters like weight of charge, TNT equivalent factor, and
-stand off distance from the point of explosion. These parameters describe charge
-weight and stand off blast. Another input the user gives is the tolerable value
-of probability of breakage. \progname{} outputs if the glass slab will be safe by
-comparing whether capacity is greater than demand. Capacity is the load
-resistance calculated and demand is the requirement which is the 3 second
-duration equivalent pressure. The second condition is to check whether the
-calculated probability (${P_{b}}$) is less than the tolerable probability
-(${P_{btol}}$) which is obtained from the user as an input. If both conditions
-return true, then it's shown that the glass slab is safe to use, else if both
-return false, then the glass slab is considered unsafe. All the supporting
-calculated values are also displayed as output.
 
 \section{Specific System Description}
 
 This section first presents the problem description, which gives a high-level
-view of the problem to be solved.  This is followed by the solution
-characteristics specification, which presents the assumptions, theories and
-definitions that are used for the \progname{} program.
+view of the problem to be solved.  This is followed by the solution characteristics
+specification, which presents the assumptions, theories, definitions and finally
+the instance models. 
 
-\subsection{Problem Description}\label{sec_probdesc}
+\subsection{Problem Description}\label{Sec_pd}
 
-A system is needed to efficiently and correctly predict the blast risk involved
-with the glass. \progname{} is a computer program developed to interpret the
-inputs to give out the outputs which predict whether the glass slab can
-withstand the blast under the given conditions.
+\progname\ is a computer program developed to interpret the inputs to give out
+the outputs which predict whether the glass slab can withstand the blast under the given
+conditions. The blast under consideration is a type of man-made blast load. Software is
+helpful to efficiently and correctly predict the blast risk involved with the glass slab using
+an intuitive interface.
 
 %\subsubsection{Background}
 
@@ -470,10 +422,9 @@ withstand the blast under the given conditions.
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
-easier to correctly understand the requirements.  All of the terms are extracted
-from \cite{ASTM2009}.
+easier to correctly understand the requirements:
 
-\begin{enumerate}
+\begin{itemize}
 \item \textit{Aspect Ratio (AR) -} The ratio of the long dimension of the
   glass to the short dimension of the glass.  For glass supported on four sides,
   the aspect ratio is always equal to or greater than 1.0. For glass supported
@@ -488,7 +439,7 @@ against air blast pressure generated by explosions.
 a hemisphere that represents the design explosive threat. 
 
 \item \textit{Glass breakage -} The fracture or breakage of any lite or ply in
-  monolithic, laminated, or insulating glass.
+  monolithic, laminated, or insulating glass.\aida{would be the scope of the project just monolithic ?}
   
 \item \textit{Glass Type:}
 \begin{enumerate}
@@ -510,8 +461,7 @@ greater than 52 MPa (7500 psi), as defined in \cite{ASTM2012a}.
 \end{enumerate}
   
 \item \textit{Glass type factor (GTF) -} A multiplying factor for adjusting the 
-LR of different glass types, that is, AN, HS, or FT in monolithic glass, LG
-(Laminated Glass), or IG (Insulating Glass) constructions.
+LR of different glass types, that is, AN, HS, or FT in the monolithic glass. \aida{Glass type are one of the AN, HS or FT types. So, Would the LG and IG be out of the project and these types should be removed from this document.}
 
 \item \textit{Lateral -} Perpendicular to the glass surface.
 
@@ -529,16 +479,14 @@ duration as defined in \cite[(pg. 1, 53)]{ASTM2009}, following \aref{A_N/AGlass}
 associated with a probability of breakage less than or equal to 8 lites per 1000 
 for monolithic AN glass.
 \item \textit{Short duration load -} Any load lasting 3 seconds or less.
-\item \textit{Specified design load -} The magnitude in Pa (psf), type (for 
-example, wind or snow) and duration of the load given by the specifying authority.
+\item \textit{Specified design load -} The magnitude in Pa (psf), blast load type and duration of the load given by the specifying authority.
 
 
 \end{enumerate}
 
 \item \textit{Load share factor (LSF) -} A multiplying factor derived from the 
 load sharing between the double glazing, of equal or different thicknesses and 
-types (including the layered behaviour of LG under long duration loads), in a 
-sealed IG unit.
+types. \aida{Glass type are one of the AN, HS or FT types. So, Would the LG and IG be out of the project and these types should be removed from this document?}
 
 \item \textit{Probability of breakage ($P_b$) -} The fraction of glass lites or 
 plies that would break at the first occurrence of a specified load and duration, 
@@ -550,9 +498,11 @@ considering appropriate site specific factors to determine the appropriate
 values used to calculate the specified design load, and furnishing other 
 information required to perform this practice.
 
-\item \textit{Stand off distance (SD) -} The distance from the glazing surface to the 
-centroid of a hemispherical high explosive charge. It is represented by the coordinates (${SD_{x}}$, ${SD_{y}}$, ${SD_{z}}$).
-\end{enumerate}
+\item \textit{Stand off distance (SD) -} The distance from the glass surface to the 
+center of a hemispherical high explosive charge. It is represented by the coordinates (${SD_{x}}$, ${SD_{y}}$, ${SD_{z}}$).
+\aida{Should be ``glazing'' word removed and would it be replaced with glass surface?}
+
+\end{itemize}
 
 \subsubsection{Physical System Description}
 
@@ -560,9 +510,9 @@ The physical system of \progname, as shown in Figure~\ref{Fig_PhysSyst} includes
 the following elements:
 \begin{itemize}
 \item[PS\refstepcounter{physsysnum}\thephyssysnum:] The glass slab.
-\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or any man-made explosive,
-  is located. The stand off distance is the distance between the point of
-  explosion and the glass.
+\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or a man-made explosive,
+  is located.\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The stand off distance is the distance between the point of
+  explosion and the glass. 
 \end{itemize}
  
 \begin{figure}[h!]
@@ -572,20 +522,21 @@ the following elements:
     \label{Fig_PhysSyst}
   \end{center}
 \end{figure}
+ \aida{ stand off distance should be shown in the picture.}
 
-\subsubsection{Goal Statements}
+\subsubsection{Goal Statements}\label{sec_gs} 
 
 Given the dimensions of the glass plane, glass type, the characteristics of the explosion, and
 the tolerable probability of breakage, the goal statements are:
 \begin{itemize}
-\item[GS\refstepcounter{goalnum}\thegoalnum:] Analyze and predict whether the
+\item[GS\refstepcounter{goalnum}\thegoalnum: \label{GS_Safe}] Analyze and predict whether the
   glass slab under consideration will be able to withstand the explosion of a
   certain degree which is calculated based on user input.
 \end{itemize}  
 
 \subsection{Solution Characteristics Specification}
 
-The instance models that govern \progname{} are presented in Section~\ref{sec_instmod}. The information
+The instance models that govern \progname{} are presented in Subsection~\ref{sec_instance}. The information
 to understand the meaning of the instance models and their derivation is also presented, so
 that the instance models can be verified.
 
@@ -593,12 +544,9 @@ that the instance models can be verified.
 
 This section simplifies the original problem and helps in developing the
 theoretical model by filling in the missing information for the physical
-system. The numbers given in the square brackets refer to the Theoretical 
-Models [Section~\ref{sec_theoretical}], General Definitions 
-[Section~\ref{sec_gendef}], Data Definitions [Section~\ref{sec_datadef}], Instance
-Models [Section~\ref{sec_instmod}], Likely Changes [Section~\ref{sec_like}],
-or Unlikely Changes [Section~\ref{sec_unlike}], in which the respective 
-assumption is used.
+system. The numbers given in the square brackets refer to the theoretical model
+[T], general definition [GD], data definition [DD], instance model [IM], or
+likely change [LC], in which the respective assumption is used.
 
 \begin{enumerate}
 
@@ -608,7 +556,7 @@ assumption is used.
   two, three, or four edges.  This practice assumes that (1) the supported glass
   edges for two, three, and four-sided support conditions are simply supported
   and free to slip in plane; (2) glass supported on two sides acts as a simply
-  supported beam and (3) glass supported on one side acts as a cantilever.
+  supported beam and (3) glass supported on one side acts as a cantilever.\aida{would be the scope of the project just monolithic ? If yes, It other glasses mush be removed.}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_N/AGlass}:] Following \cite[(pg. 1)]{ASTM2009}, this practice does not apply to
   any form of wired, patterned, etched, sandblasted, drilled, notched, or grooved
@@ -712,7 +660,7 @@ There are no general definitions.
 \subsubsection{Data Definitions}\label{sec_datadef}
 
 This section collects and defines all the data needed to build the instance
-models.
+models. The dimension of each quantity is also given.
 
 ~\newline
 \noindent
@@ -1055,11 +1003,16 @@ $$h=\frac{1}{1000}
 \end{minipage}\\
 ~\newline
 
-\subsubsection{Instance Models}\label{sec_instmod}
-This section transforms the problem defined in Section~\ref{sec_probdesc} into one 
+\subsubsection{Instance Models}\label{sec_instance}
+This section transforms the problem defined in Section~\ref{Sec_pd} into one 
 which is expressed in mathematical terms. It uses concrete symbols defined in Section~\ref{sec_datadef} 
 to replace the abstract symbols in the models identified in Section~\ref{sec_theoretical} 
 and Section~\ref{sec_gendef}.
+
+~\newline\noindent The goal \gsref{GS_Safe} are met by the simultaneous solution of \iref{IM_prob}, 
+\iref{IM_cap} and \iref{IM_dem}.
+
+~\newline
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1142,14 +1095,17 @@ and Section~\ref{sec_gendef}.
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}
 
-Table~\ref{TblInputVar} and Table~\ref{TblOutputVar} show the data constraints on the input and output variables, respectively.  The
-column of physical constraints gives the physical limitations on the range of
-values that can be taken by the variable. The uncertainty column provides an estimate of the confidence
-with which the physical quantities can be measured.  This information would be
-part of the input if one were performing an uncertainty quantification exercise. The constraints are conservative, to
-give the user of the model the flexibility to experiment with unusual
-situations.  The column of typical values is intended to provide a feel for a
-common scenario.
+Table~\ref{TblInputVar} and Table~\ref{TblOutputVar} show the data constraints on the input and output variables, respectively. The column for physical 
+constraints gives the physical limitations on the range of values that can be 
+taken by the variable. The uncertainty column provides an estimate of the 
+confidence with which the physical quantities can be measured. This information 
+would be part of the input if one were performing an uncertainty quantification 
+exercise. The constraints are conservative, to give the user of the model the 
+flexibility to experiment with unusual situations. The column of typical values 
+is intended to provide a feel for a common scenario.
+
+~\newline
+
 Section~\ref{Sec:ValuofAuxiCons} gives the values of the specification parameters used
 in Table~\ref{TblInputVar}.
 
@@ -1214,14 +1170,18 @@ $P_b$ & $0 < P_b < 1$\\
 \end{center}
 \end{table}
   
+  \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
+
+\noindent
+A correct solution must exhibit conformation to the system of non-linear 
+equations presented in \iref{IM_prob}, a system of linear equations presented in  \iref{IM_cap}, and a concave up function for calculation of \iref{IM_dem}.
+
 \section{Requirements}  
 
 This section provides the functional requirements, the business tasks that the software is expected to complete, and the non-functional requirements, the qualities that the software is expected to exhibit.
   
 \subsection{Functional Requirements} \label{Func}
 
-The following section provides the functional requirements, the business tasks
-that the software is expected to complete.
 
 \noindent \begin{itemize}
 
@@ -1314,11 +1274,22 @@ The system shall set the known values as follows:
 
 \subsection{Non-Functional Requirements}
 
-This problem is small and size and relatively simple, so performance is
-not a priority.  Any reasonable implementation will be very quick and use
-minimal storage.  Rather than performance, the  non-functional requirement
-priorities are correctness, verifiability, understandability, reusability, 
-maintainability and portability.
+\progname\ is intended to be an educational tool, therefore accuracy and
+performance speed are secondary program priorities. Instead, the following 
+non-functional requirements are prioritized:
+
+\begin{itemize}
+\item[NFR1:] Correctness, achieved if the outputs of the code have the 
+properties described 
+in \ref{sec_CorrectSolution}.
+\item[NFR2:] Understandability, achieved if the code is modularized with 
+complete module guide and module interface specification.
+\item[NFR3:] Reusability, achieved if the code is modularized.
+\item[NFR4:] Maintainability, achieved if the traceability between 
+requirements, assumptions, theoretical models, general definitions, data 
+definitions, instance models, likely changes, and modules is completely 
+recorded in traceability matrices in the SRS and module guide.
+\end{itemize}
 
 \section{Likely Changes} \label{sec_like}
 
@@ -1521,7 +1492,10 @@ future work.
 	\end{center}
 \end{figure} 
 
+
 \section{Values of Auxiliary Constants}
+\aida{This section is not on the template,Should it be removed?}
+
 \label{Sec:ValuofAuxiCons}
 This section contains the standard values that are used for calculations in
 \progname{}.
