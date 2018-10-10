@@ -1,0 +1,427 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+\usepackage{enumitem}
+
+\usepackage{xr}
+\externaldocument[SRS-]{../../SRS/SRS}
+\newcommand{\rref}[1]{R\ref{#1}}
+
+\newcounter{testnum} %Assumption Number
+\newcommand{\tcthetestnum}{TC\thetestnum}
+\newcommand{\tcref}[1]{TC\ref{#1}}
+
+\input{../../Comments}
+
+\begin{document}
+
+\title{Software Stability Analysis: System Verification and Validation Plan} 
+\author{Brooks MacLachlan}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+10/10/18 & 1.0 & Initial template fill-ins\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+The symbols, abbreviations, and acronyms used in this document include those 
+defined in the table below, as well as any defined in the tables found in 
+Section \ref{SRS-sec_RefMat} of the Software Requirements Specification (SRS) 
+document.
+\newline
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  MIS & Module Interface Specification\\
+  MG & Module Guide\\
+  TC & Test Case\\
+  VnV & Verification and Validation\\
+  \bottomrule
+\end{tabular}\\
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
+
+\noindent This document outlines the system verification and validation plan 
+for the software. General information regarding the system under test and the 
+objectives of the verification and validation activities is provided in Section 
+\ref{sec_GenInfo}. Overviews of verification plans for the SRS, design, and 
+implementation are given in Section \ref{sec_Plan}, along with a summary of the 
+validation plan for the software. Section \ref{sec_System} details specific  
+system test cases for verifying the requirements outlined in Section 
+\ref{SRS-sec_Reqs} of the SRS. A summary of planned static verification 
+activities can be found in Section \ref{sec_Static} of this document.
+
+\section{General Information} \label{sec_GenInfo}
+
+\subsection{Summary}
+
+\noindent The software being tested is the Slope Stability Analysis Program 
+(SSP). Based on user-defined slope geometry and material properties, SSP 
+determines the critical slip surface of the given slope, the corresponding 
+factor of safety, and interslice normal and shear forces along the critical 
+slip surface.
+
+\subsection{Objectives}
+
+\noindent The purpose of the verification and validation activities is to 
+confirm that SSP exhibits desired software qualities. The primary objective is 
+to build confidence in the correctness of the software. The tests described in 
+this document cannot definitively prove correctness, but they can build 
+confidence by verifying that the software is correct for the cases covered by 
+tests. Another important quality to be verified is the understandability or 
+usability of the software.
+
+\subsection{References}
+
+\noindent Extensive information about the purpose and requirements of SSP can 
+be found in the SRS document. This System VnV Plan is complemented by the 
+System VnV Report, where the results of the tests planned in this document are 
+discussed. For more details on test cases specific to the implementation of 
+SSP, consult the Unit VnV Plan document. The latest documentation for SSP can 
+be found 
+on GitHub, at \newline 
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}.
+
+\section{Plan} \label{sec_Plan}
+	
+\subsection{Verification and Validation Team}
+
+\noindent Brooks MacLachlan is responsible for the verification and validation 
+of SSP, though input from various students and the professor, Dr. Spencer 
+Smith, of CAS 741 will also contribute.
+
+\subsection{SRS Verification Plan}
+
+\noindent SRS verification will be carried out by reviews. Brooks MacLachlan 
+will extensively review the SRS, including reviewing the sources to confirm 
+that the theories and models described in the SRS are correct. Any issues 
+identified during this review will be fixed immediately by Brooks MacLachlan. 
+This review will be followed up by additional reviews by Dr. Spencer Smith and 
+Vajiheh Motamer, a student in CAS 741. Any issues identified by these reviewers 
+will be recorded through the issue tracker on GitHub, and addressed by Brooks 
+MacLachlan. Brooks MacLachlan will also informally present the SRS to the 
+entire class of CAS 741. During this presentation, issues with the SRS may be 
+discovered and subsequently fixed by Brooks MacLachlan.
+
+\subsection{Design Verification Plan}
+
+\noindent The design of SSP is outlined in the Module Guide (MG) and Module 
+Interface Specification (MIS) documents. The design will be verified by review 
+of these documents. Brooks MacLachlan will extensively review both documents. 
+Any issues identified during these reviews will be fixed immediately by Brooks 
+MacLachlan. Dr. Spencer Smith will also review both documents. An additional 
+review will be conducted by students in CAS 741: Karol Sekis for the MG and 
+Malavika Srinivasan for the MIS. Any issues identified by these reviews will be 
+recorded through the issue tracker on GitHub, and addressed by Brooks 
+MacLachlan. Brooks MacLachlan will also informally present the MG to the entire 
+class of CAS 741. During this presentation, design issues may be discovered and 
+subsequently fixed by Brooks MacLachlan.
+
+\subsection{Implementation Verification Plan} \label{sec_ImpPlan}
+
+\noindent The implementation of SSP will be verified by review and by testing. 
+Brooks MacLachlan will extensively review the implementation. Any issues 
+identified during these reviews will be fixed immediately by Brooks 
+MacLachlan. This review will be followed up by reviews by Dr. Spencer Smith and 
+Robert White, a student in CAS 741. Any  issues identified by these reviews 
+will be recorded through the issue tracker on GitHub, and addressed by Brooks 
+MacLachlan. Brooks MacLachlan will also informally present the implementation 
+to the entire class of CAS 741. During this presentation, issues with the 
+implementation may be discovered and subsequently fixed by Brooks MacLachlan.
+\newline
+
+\noindent The implementation will also be verified by testing. Specific test 
+cases are outlined in Section \ref{sec_System} of this document. Test cases 
+that are directly dependent on implementation details are outlined in an 
+accompanying document, the Unit VnV Plan. All tests will be written (where 
+applicable), reviewed, executed, and reported on by Brooks MacLachlan.
+
+\subsection{Software Validation Plan}
+
+SSP will be validated by comparison of its output to results reported in 
+literature for some example slope stability problems. These validation tests 
+are further described in Section \ref{sec_System}.
+
+\section{System Test Description} \label{sec_System}
+	
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{User Input Tests}
+		
+\paragraph{Valid User Input}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInDec}] 
+test-valid\_input\_decreasing
+
+Control: Automatic
+					
+Initial State: New session
+					
+Input: A valid input file with 2 slope layers, no water table, and y-values 
+decreasing as x-values increase
+					
+Output: No errors
+
+How test will be performed: Automated integration test
+					
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInInc}] 
+test-valid\_input\_increasing
+
+Control: Automatic
+
+Initial State: New session
+
+Input: A valid input file with 2 slope layers, no water table, and y-values 
+increasing as x-values increase
+
+Output: No errors
+
+How test will be performed: Automated integration test
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInOne}] 
+test-valid\_input\_single
+
+Control: Automatic
+
+Initial State: New session
+
+Input: A valid input file with 1 slope layer and no water table
+Output: No errors
+
+How test will be performed: Automated integration test
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInWT}] 
+test-valid\_input\_watertable
+
+Control: Automatic
+
+Initial State: New session
+
+Input: A valid input file with 2 slope layers, and a water table
+
+Output: No errors
+
+How test will be performed: Automated integration test
+
+\end{enumerate}
+
+\paragraph{Invalid User Input}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInDecInc}] 
+	test-valid\_input\_decreasing\_increasing
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input file where a slope layer's y-values start by decreasing with 
+	increasing x but then start to increase
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInIncDec}] 
+	test-valid\_input\_increasing\_decreasing
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input file where a slope layer's y-values start by increasing with 
+	increasing x but then start to decrease
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: 
+	\label{TC_InvalidInDiffStart}] 
+	test-valid\_input\_diff\_start
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input file with 2 slope layers with different initial x-values
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInDiffEnd}] 
+	test-valid\_input\_diff\_end
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input file with 2 slope layers with different final x-values
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: 
+	\label{TC_InvalidInDiffStartWT}] 
+	test-valid\_input\_diff\_start\_wt
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input with a water table with a different initial x-value than the 
+	slope layers
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+	\item [TC\refstepcounter{testnum}\thetestnum: 
+	\label{TC_InvalidInDiffEndWT}] 
+	test-valid\_input\_diff\_end\_wt
+	
+	Control: Automatic
+	
+	Initial State: New session
+	
+	Input: Input with a water table with a different final x-value than the 
+	slope layers
+	
+	Output: Error
+	
+	How test will be performed: Automated integration test
+	
+\end{enumerate}
+
+\subsubsection{Calculation Tests}
+
+\subsubsection{Output Tests}
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\subsubsection{Correctness tests}
+		
+\paragraph{Title for Test}
+
+\begin{enumerate}
+
+\item{test-id1\\}
+
+Type: 
+					
+Initial State: 
+					
+Input/Condition: 
+					
+Output/Result: 
+					
+How test will be performed: 
+					
+\item{test-id2\\}
+
+Type: Functional, Dynamic, Manual, Static etc.
+					
+Initial State: 
+					
+Input: 
+					
+Output: 
+					
+How test will be performed: 
+
+\end{enumerate}
+
+\subsubsection{Area of Testing2}
+
+...
+
+\subsection{Traceability Between Test Cases and Requirements}
+
+\noindent The purpose of the traceability matrices is to provide easy 
+references on which requirements are verified by which test cases, and which 
+test cases need to be updated if a requirement changes.  If a requirement is 
+changed, the items in the column of that requirement that are marked
+with an ``X'' may have to be modified as well. 
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		& \rref{SRS-R_Inputs}& \rref{SRS-R_KinAdm}& \rref{SRS-R_InitGen}& 
+		\rref{SRS-R_FS}& \rref{SRS-R_Minimize} & \rref{SRS-R_VerifyOutput}& 
+		\rref{SRS-R_CritGraph}& \rref{SRS-R_OutputFS}& 
+		\rref{SRS-R_NormalGraph}& \rref{SRS-R_ShearGraph} \\
+		\hline
+		\tcref{TC_ValidInInc}       & & & & & & & & & & \\ \hline
+		\hline
+	\end{tabular}
+	\caption{Traceability Matrix Showing the Connections Between Requirements 
+	and Test Cases}
+	\label{Table:T_trace}
+\end{table}
+
+\section{Static Verification Techniques} \label{sec_Static}
+
+The reviews described in Section \ref{sec_ImpPlan} will employ the static 
+verification techniques of code walkthroughs and code inspection to attempt to 
+uncover issues with the implementation.
+				
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}
+
+This is where you can place additional information.
+
+\subsection{Symbolic Parameters}
+
+The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.
+
+\subsection{Usability Survey Questions?}
+
+\wss{This is a section that would be appropriate for some projects.}
+
+\end{document}
