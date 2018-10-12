@@ -363,7 +363,18 @@ organization of the document.
 
 \subsection{Purpose of Document}
 
-This document will be used as a starting point for subsequent development 
+The primary purpose of this document is to record the requirements of  
+\progname{} and the models that will be used to meet those requirements. Goals, 
+ assumptions,  theoretical models, definitions, and other model derivation 
+ information are specified, allowing the reader to fully understand and verify 
+ the purpose and scientific basis of \progname. With the exception of system 
+ constraints in Section \ref{sec_SystConstraints}, this SRS will remain 
+ abstract, describing \textit{what} problem is being solved, but not 
+ \textit{how} to solve it.
+~\newline
+
+\noindent This document will be used as a starting point for subsequent 
+development 
 phases, including writing the design specification and the software verification
  and validation plan. The design document will show how the requirements
  are to be realized, including decisions on the numerical algorithms and 
@@ -455,7 +466,7 @@ The end user of \progname\ should have an understanding of undergraduate
 Level 1 Calculus and Physics, and be familiar with soil and material
 properties, specifically cohesion, effective angle of friction, and unit weight.
 
-\subsection{System Constraints}
+\subsection{System Constraints} \label{sec_SystConstraints}
 
 The Morgenstern-Price method, which involves dividing the slope into vertical 
 slices, will be used to derive the equations for analysing the slope. 
