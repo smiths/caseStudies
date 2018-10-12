@@ -410,9 +410,10 @@ of presenting goals, theories, definitions, and assumptions.  For
 readers that would like a more bottom up approach, they can start
 reading the instance models in Section \ref{sec_instance} and trace
 back to find any additional information they require. The goal statements 
-are refined to the theoretical models, and the theoretical models (Section 
-\ref{sec_theoretical}) to the instance models (Section \ref{sec_instance}). The 
-instance models provide the set of algebraic equations that must be solved.
+(Section \ref{sec_Goals}) are refined to the theoretical models, and the 
+theoretical models (Section \ref{sec_theoretical}) to the instance models 
+(Section \ref{sec_instance}). The instance models provide the set of algebraic 
+equations that must be solved.
 
 %\subsection{Intended Audience}
 
@@ -452,7 +453,8 @@ system and its environment.
   \begin{itemize}
   \item Detect data type mismatch, such as a string of characters input instead
     of a floating point number
-  \item Verify that the inputs satisfy the required physical constraints
+  \item Verify that the inputs satisfy the required physical constraints and 
+  other data constraints (Section \ref{sec_DataConstraints})
   \item Identify the critical slip surface within the possible input range
   \item Find the factor of safety for the slope
   \item Find the interslice normal and shear forces along the critical slip 
@@ -618,7 +620,7 @@ slice is displayed in Figure~\ref{Fig_Forces}.
 \end{center}
 \end{figure}
 
-\subsubsection{Goal statements}
+\subsubsection{Goal statements} \label{sec_Goals}
 
 Given the geometry of the soil layers and water table composing the plane of a 
 slope and the material properties of the layers, the goal statements are:
