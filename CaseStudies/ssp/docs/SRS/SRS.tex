@@ -2394,37 +2394,41 @@ is intended to provide a feel for a common scenario.
   \toprule  \label{TblInputVar}
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
-  $\{(x_{wt},y_{wt})\}$ & Consecutive vertices $x$ values are always increasing 
-  or always decreasing. Starts and ends on the same $x$ values as soil layers.  
+  $\{(x_{wt},y_{wt})\}$ (*) & At least two ordered pairs must be specified. 
+  Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
   $\{(x_{slip},y_{slip})\}$ for potential slip surface entry and exit points & 
-  Slopes between $x$ values of consecutive vertices are always increasing. & 
+  $x$ values must be between the minimum and maximum $x$ values of the slope. & 
   N/A & 10\% \\
-  $\{(x_{us},y_{us})\}$ (*) & Consecutive vertices $x$ values are always 
-  increasing or always decreasing. All layers start and end on the
-  same x values. & N/A & 10\% \\
-  $c'$ (*) & $c >0$ & 10 & 10\%\\
-  $\varphi'$ (*) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
-  $\gamma$ (*) & $\gamma > 0$ & 20 & 10\% \\
-  $\gamma_{\text{Sat}}$ (*) & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\% \\
+  $\{(x_{us},y_{us})\}$ (**) & At least two ordered pairs must be specified. 
+  $y$ values of consecutive vertices are always increasing or always 
+  decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
+  $c'$ (**) & $c >0$ & 10 & 10\%\\
+  $\varphi'$ (**) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
+  $\gamma$ (**) & $\gamma > 0$ & 20 & 10\% \\
+  $\gamma_{\text{Sat}}$ (**) & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\% \\
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9.8 & 10\% \\
   \bottomrule
 \end{longtable*}
 \end{table}
 
 \noindent \begin{description}
-\item[(*)] Input coordinates needed for each layer.
+\item[(*)] Optional input.
+\item[(**)] Input must be specified for each layer.
 \end{description}
 
 \begin{table}[!h]
 \caption{Output Variables} 
 \renewcommand{\arraystretch}{1.2} 
-\noindent \begin{longtable*}{l l} 
+\noindent \begin{longtable*}{p{2cm} p{14cm}} 
   \toprule \label{TblOutputVar}
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $FS$ & $FS>0$ \\
-  $(x_{cs},y_{cs})$ &  Vertices are monotonically increasing \\
+  $\{(x_{cs},y_{cs})\}$ &  $x$ values must be between the minimum and maximum 
+  $x$ values of the slope. $y$ values must not exceed the maximum $y$ value of 
+  the slope. The slope between consecutive vertices must be always increasing 
+  as $x$ increases. \\
   $G_i$ & $G_i>0$ \\
   $X_i$ & $X_i<0$ \\
   \bottomrule
@@ -2460,12 +2464,13 @@ requirements, the qualities that the software is expected to exhibit.
 
 \noindent \begin{itemize}
 
+
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] Read the
   inputs, shown in the table below, and store the data.
-  
+  \begin{table}[!h]
   \renewcommand{\arraystretch}{1.5}
-  %\noindent \begin{tabularx}{1.0\textwidth}{l l X}
-  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
+  \noindent \begin{tabularx}{1.0\textwidth}{l l X} \toprule \textbf{symbol} &
+%  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
     \refstepcounter{tablenum}  \label{Table:Inputs}
     \textbf{unit} & \textbf{description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
@@ -2482,7 +2487,8 @@ requirements, the qualities that the software is expected to exhibit.
     weight of water. \\
     N/A & N/A & A boolean decision on which form of the interslice variation 
     function \textit{f} the user desires: constant or half-sine.\\ \bottomrule
-\end{longtable}
+\end{tabularx}
+\end{table}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_KinAdm}:] Verify that the 
 input data lies within physical constraints shown in Table~\ref{TblInputVar}.
