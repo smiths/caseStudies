@@ -234,6 +234,18 @@ surface
 \\
 ${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinate of a point on a slip surface
 \\
+${x_{slip}^{maxEnd}}$ &  \si{\meter}& maximum potential \textit{x}-ordinate of 
+the ending point of a slip surface
+\\
+${x_{slip}^{maxStart}}$ &  \si{\meter}& maximum potential \textit{x}-ordinate 
+of the starting point of a slip surface
+\\
+${x_{slip}^{minEnd}}$ &  \si{\meter}& minimum potential \textit{x}-ordinate of 
+the ending point of a slip surface
+\\
+${x_{slip}^{minStart}}$ &  \si{\meter}& minimum potential \textit{x}-ordinate 
+of the starting point of a slip surface
+\\
 ${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
 ${x_{wt}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water table
@@ -244,6 +256,12 @@ $y_{cs}$ & \si{\meter} & \textit{y}-ordinate of a point on the critical slip
 surface
 \\
 ${y_{slip}}$ & \si{\meter}& \textit{y}-ordinate of a point on a slip surface
+\\
+${y_{slip}^{max}}$ &  \si{\meter}& minimum potential \textit{y}-ordinate of the 
+of a point on a slip surface
+\\
+${y_{slip}^{min}}$ &  \si{\meter}& maximum potential \textit{y}-ordinate of the 
+of a point on a slip surface
 \\
 ${y_{us}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
 \\
@@ -2398,12 +2416,19 @@ is intended to provide a feel for a common scenario.
   $\{(x_{wt},y_{wt})\}$ (*) & At least two ordered pairs must be specified. 
   Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
-  $\{(x_{slip},y_{slip})\}$ for potential slip surface entry and exit points & 
-  $x$ values must be between the minimum and maximum $x$ values of the slope. & 
-  N/A & 10\% \\
   $\{(x_{us},y_{us})\}$ (**) & At least two ordered pairs must be specified. 
   $y$ values of consecutive vertices are always increasing or always 
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
+  ${x_{slip}^{maxEnd}}$ & ${x_{slip}^{maxEnd}} > {x_{slip}^{minEnd}}$ and must 
+  be less than the maximum $x$ value of the slope. & N/A & 10\% \\
+  ${x_{slip}^{minEnd}}$ & ${x_{slip}^{minEnd}} > {x_{slip}^{maxStart}}$ & N/A & 
+  10\% \\
+  ${x_{slip}^{maxStart}}$ & ${x_{slip}^{maxStart}} > {x_{slip}^{minStart}}$ & 
+  N/A & 10\% \\
+  ${x_{slip}^{minStart}}$ & must be greater than the minimum $x$ value of the 
+  slope. & N/A & 10\% \\
+  ${y_{slip}^{max}}$ & ${y_{slip}^{max}} > {y_{slip}^{min}}$ & N/A & 10\% \\
+  ${y_{slip}^{min}}$ & ${y_{slip}^{min}} < {y_{slip}^{max}}$ & N/A & 10\% \\
   $c'$ (**) & $c >0$ & 10 & 10\%\\
   $\varphi'$ (**) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
   $\gamma$ (**) & $\gamma > 0$ & 20 & 10\% \\
@@ -2476,7 +2501,7 @@ requirements, the qualities that the software is expected to exhibit.
     \textbf{unit} & \textbf{description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
     of the slope layers, for the water table if one exists, and for potential 
-    entry and exit points of a slip surface.\\
+    start and end points of a slip surface.\\
     $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
