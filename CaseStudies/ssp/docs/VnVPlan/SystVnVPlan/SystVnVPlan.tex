@@ -241,6 +241,14 @@ input parameter that should have a different value than specified by the table.
 		
 \paragraph{Valid User Input}
 
+~\newline \noindent The following set of test cases is intended to cover 
+different forms 
+of valid user input. Valid user input includes: slopes with or without a water 
+table, slopes with one layer or multiple layers, slopes that increase or 
+decrease as $x$ increases, slopes described by the minimum number of points, 2, 
+or more than the minimum number of points, and slopes solved with $f$ as a 
+constant or as a half-sine.
+
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInDec}] 
@@ -250,10 +258,9 @@ Control: Automatic
 					
 Initial State: New session
 					
-Input: A valid input file with 2 slope layers, no water table, and y-values 
-decreasing as x-values increase
+Input: As described in Table~\ref{ExValidInputs}.
 					
-Output: No errors
+Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated integration test
 					
@@ -264,35 +271,70 @@ Control: Automatic
 
 Initial State: New session
 
-Input: A valid input file with 2 slope layers, no water table, and y-values 
-increasing as x-values increase
+Input: As described in Table~\ref{ExValidInputs}, except with slope coordinates 
+$\{\left(x_{us},y_{us}\right)\}$ increasing as $x$ increases, as follows: \{(0, 
+15), (30, 15), (40, 20), (50, 25), (70, 25)\}.
 
-Output: No errors
+Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated integration test
 
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInOne}] 
-test-valid\_input\_single
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInMultiple}] 
+test-valid\_input\_multiple
 
 Control: Automatic
 
 Initial State: New session
 
-Input: A valid input file with 1 slope layer and no water table
-Output: No errors
+Input: As described in Table~\ref{ExValidInputs}, except with an additional 
+slope layer described by the following coordinates: \{(0, 20), (36, 17), (40, 
+15), (70, 15)\}.
+
+Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated integration test
 
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInWT}] 
-test-valid\_input\_watertable
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInNoWT}] 
+test-valid\_input\_noWT
 
 Control: Automatic
 
 Initial State: New session
 
-Input: A valid input file with 2 slope layers, and a water table
+Input: As described in Table~\ref{ExValidInputs}, except with no water table 
+vertices $\{\left(x_{wt},y_{wt}\right)\}$.
 
-Output: No errors
+Output: \progname{} runs to completion with no errors
+
+How test will be performed: Automated integration test
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInMin}] 
+test-valid\_input\_minimal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with  except with only 
+2 slope coordinates $\{\left(x_{us},y_{us}\right)\}$, as follows: \{(0, 
+25), (20, 25). Also, with no water table vertices 
+$\{\left(x_{wt},y_{wt}\right)\}$.
+
+Output: \progname{} runs to completion with no errors
+
+How test will be performed: Automated integration test
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInConstant}] 
+test-valid\_input\_fConstant
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with $f$ as a 
+constant. This is accomplished by setting the Boolean-type input to 1.
+
+Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated integration test
 
