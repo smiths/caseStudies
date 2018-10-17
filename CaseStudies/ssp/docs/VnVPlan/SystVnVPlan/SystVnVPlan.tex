@@ -1,11 +1,19 @@
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xr}
+\usepackage{siunitx}
+\usepackage{caption}
 \usepackage{hyperref}
+\usepackage[numbib,nottoc]{tocbibind}
 \hypersetup{
     colorlinks,
-    citecolor=black,
+    citecolor=green,
     filecolor=black,
     linkcolor=red,
     urlcolor=blue
@@ -191,6 +199,41 @@ applicable), reviewed, executed, and reported on by Brooks MacLachlan.
 There is no validation plan for \progname{}.
 
 \section{System Test Description} \label{sec_System}
+
+The values in Table~\ref{ExValidInputs} will be used as input for 
+many of the test cases described throughout this section. These values were 
+taken from the User's Guide for this project by \cite{UserGuide}. Individual 
+test cases will reference the table as input but specify new values for any 
+input parameter that should have a different value than specified by the table.
+
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		$\{\left(x_{us},y_{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
+		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
+		$\{\left(x_{wt},y_{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
+		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
+		14), (70, 14)\}\\
+		${x_{slip}^{minStart}}$ & $\text{m}$ & 10\\
+		${x_{slip}^{maxStart}}$ & $\text{m}$ & 24\\
+		${x_{slip}^{minEnd}}$ & $\text{m}$ & 34\\
+		${x_{slip}^{maxEnd}}$ & $\text{m}$ & 53\\
+		${y_{slip}^{min}}$ & $\text{m}$ & 5\\
+		${y_{slip}^{max}}$ & $\text{m}$ & 26\\
+		$c'$ & $\si{\pascal}$ & 5000 \\
+		$\varphi'$ & \si{\degree} & 20\\
+		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 9.8 \\
+		Boolean representing the form of the interslice variation function $f$. 
+		1 means $f$ is constant, 0 means $f$ is a half-sine & N/A & 0\\ 
+		\bottomrule
+	\end{tabularx}
+	\caption{Input to be used for test cases}
+	\label{ExValidInputs}
+\end{table}
 	
 \subsection{Tests for Functional Requirements}
 
@@ -390,13 +433,14 @@ How test will be performed:
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-\noindent The purpose of the traceability matrices is to provide easy 
+\noindent The purpose of the traceability matrix shown in 
+Table~\ref{Table:T_trace} is to provide easy 
 references on which requirements are verified by which test cases, and which 
 test cases need to be updated if a requirement changes.  If a requirement is 
 changed, the items in the column of that requirement that are marked
 with an ``X'' may have to be modified as well. 
 
-\begin{table}[h!]
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 		\hline
@@ -419,9 +463,10 @@ The reviews described in Section \ref{sec_ImpPlan} will employ the static
 verification techniques of code walkthroughs and code inspection to attempt to 
 uncover issues with the implementation.
 				
-\bibliographystyle{plainnat}
+\newpage
 
-\bibliography{SRS}
+\bibliographystyle {plainnat}
+\bibliography {../../../refs/References}
 
 \newpage
 
