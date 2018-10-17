@@ -2368,6 +2368,10 @@ the critical slip surface.\\
 
 \bmac{Should this IM exist? It doesn't arise from any T}
 
+\wss{We need something to explain that we pick the slip surface with the minimum
+  factor of safety.  I'll give this some further thought on whether this is the
+  best way to say it.}
+
 \subsubsection{Data Constraints} \label{sec_DataConstraints}    
 
 Tables~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on 
@@ -2435,6 +2439,11 @@ addition, the factor of safety for the critical slip surface must be lower than
 the factors of safety calculated for other slip surfaces compared by 
 \iref{IM_Min}. The coordinates of the critical slip surface must form a concave 
 up function.
+
+\wss{It seems to me that the content of this section could all be deleted,
+  except for the last sentence.  Saying that the solution agrees with the
+ instance models is covered by the requirements.  The shape of the critical slip
+ surface seems to be the only new information here.  What do you think BM?}
 
 \section{Requirements} \label{sec_Reqs}
 
@@ -2562,6 +2571,10 @@ $z$-direction, and therefore cannot be used without manipulation to attempt
 \end{itemize}
 
 \bmac{This section is not on the template, not sure if it should be kept}
+
+\wss{I'm going to think about adding this section to the template.  It is a way
+  to show that some of the assumptions are critical to the identity of the
+  problem.}
 
 \section{Traceability Matrices and Graphs}
 
@@ -2901,6 +2914,9 @@ There are no auxiliary constants.
 
 \bmac{This section is not on the template, unless it's equivalent to symbolic 
 constants in the appendix?}
+
+\wss{Yes, this section is equivalent to the symbolic constants section in the
+  appendix.  Could you please modify it to match the template.}
 
 \newpage
 
