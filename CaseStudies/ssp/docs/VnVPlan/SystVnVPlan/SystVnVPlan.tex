@@ -23,6 +23,8 @@
 
 \input{../../Comments}
 
+\newcommand{\progname}{SSP}
+
 \begin{document}
 
 \title{Software Stability Analysis: System Verification and Validation Plan} 
@@ -90,30 +92,29 @@ activities can be found in Section \ref{sec_Static} of this document.
 \subsection{Summary}
 
 \noindent The software being tested is the Slope Stability Analysis Program 
-(SSP). Based on user-defined slope geometry and material properties, SSP 
-determines the critical slip surface of the given slope, the corresponding 
-factor of safety, and interslice normal and shear forces along the critical 
-slip surface.
+(\progname{}). Based on user-defined slope geometry and material properties, 
+\progname{} determines the critical slip surface of the given slope, the 
+corresponding factor of safety, and interslice normal and shear forces along 
+the critical slip surface.
 
 \subsection{Objectives}
 
 \noindent The purpose of the verification and validation activities is to 
-confirm that SSP exhibits desired software qualities. The primary objective is 
-to build confidence in the correctness of the software. The tests described in 
-this document cannot definitively prove correctness, but they can build 
-confidence by verifying that the software is correct for the cases covered by 
-tests. Another important quality to be verified is the understandability or 
-usability of the software.
+confirm that \progname{} exhibits desired software qualities. The primary 
+objective is to build confidence in the correctness of the software. The tests 
+described in this document cannot definitively prove correctness, but they can 
+build confidence by verifying that the software is correct for the cases 
+covered by tests. Other important qualities to be verified are the 
+understandability, maintainability, and reusability of the software.
 
 \subsection{References}
 
-\noindent Extensive information about the purpose and requirements of SSP can 
-be found in the SRS document. This System VnV Plan is complemented by the 
-System VnV Report, where the results of the tests planned in this document are 
-discussed. For more details on test cases specific to the implementation of 
-SSP, consult the Unit VnV Plan document. The latest documentation for SSP can 
-be found 
-on GitHub, at \newline 
+\noindent Extensive information about the purpose and requirements of 
+\progname{} can be found in the SRS document. This System VnV Plan is 
+complemented by the System VnV Report, where the results of the tests planned 
+in this document are discussed. For more details on test cases specific to the 
+implementation of \progname{}, consult the Unit VnV Plan document. The latest 
+documentation for \progname{} can be found on GitHub, at \newline 
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}.
 
 \section{Plan} \label{sec_Plan}
@@ -121,7 +122,8 @@ on GitHub, at \newline
 \subsection{Verification and Validation Team}
 
 \noindent Brooks MacLachlan is responsible for the verification and validation 
-of SSP, though input from various students and the professor, Dr. Spencer 
+of \progname{}, though input from various students and the professor, Dr. 
+Spencer 
 Smith, of CAS 741 will also contribute.
 
 \subsection{SRS Verification Plan}
@@ -134,34 +136,48 @@ This review will be followed up by additional reviews by Dr. Spencer Smith and
 Vajiheh Motamer, a student in CAS 741. Any issues identified by these reviewers 
 will be recorded through the issue tracker on GitHub, and addressed by Brooks 
 MacLachlan. Brooks MacLachlan will also informally present the SRS to the 
-entire class of CAS 741. During this presentation, issues with the SRS may be 
-discovered and subsequently fixed by Brooks MacLachlan.
+entire class of CAS 741. Any issues discovered during this presentation will be 
+subsequently fixed by Brooks MacLachlan. A focus of these reviews will be to 
+verify the non-functional requirements of correctness and understandability by 
+identifying information in the SRS that is incorrect or ambiguous.
 
 \subsection{Design Verification Plan}
 
-\noindent The design of SSP is outlined in the Module Guide (MG) and Module 
-Interface Specification (MIS) documents. The design will be verified by review 
-of these documents. Brooks MacLachlan will extensively review both documents. 
-Any issues identified during these reviews will be fixed immediately by Brooks 
-MacLachlan. Dr. Spencer Smith will also review both documents. An additional 
-review will be conducted by students in CAS 741: Karol Sekis for the MG and 
-Malavika Srinivasan for the MIS. Any issues identified by these reviews will be 
-recorded through the issue tracker on GitHub, and addressed by Brooks 
+\noindent The design of \progname{} is outlined in the Module Guide (MG) and 
+Module Interface Specification (MIS) documents. The design will be verified by 
+review of these documents. Brooks MacLachlan will extensively review both 
+documents. To verify correctness, part of this review will be to ensure that 
+every module traces to a requirement and that every requirement is traced to by 
+a module. To evaluate the modularity of the design, "uses" relationships 
+between modules will be examined to ensure modules do not mutually use each 
+other. The review will also check that each module hides exactly one secret. 
+Ensuring the program is well-modularized contributes to verification of the 
+non-functional requirements of maintainability and reusability. Any issues 
+identified during these reviews will be fixed immediately by Brooks MacLachlan. 
+Dr. Spencer Smith will also review both documents. An additional review will be 
+conducted by students in CAS 741: Karol Serkis for the MG and Malavika 
+Srinivasan for the MIS. Any issues identified by these reviews will be recorded 
+through the issue tracker on GitHub, and addressed by Brooks 
 MacLachlan. Brooks MacLachlan will also informally present the MG to the entire 
-class of CAS 741. During this presentation, design issues may be discovered and 
-subsequently fixed by Brooks MacLachlan.
+class of CAS 741. Any design issues discovered during this presentation will be 
+subsequently fixed by Brooks MacLachlan. Reviews of these design documents will 
+also focus on ensuring understandability by identifying descriptions and 
+specifications that are ambiguous.
 
 \subsection{Implementation Verification Plan} \label{sec_ImpPlan}
 
-\noindent The implementation of SSP will be verified by review and by testing. 
-Brooks MacLachlan will extensively review the implementation. Any issues 
-identified during these reviews will be fixed immediately by Brooks 
+\noindent The implementation of \progname{} will be verified by review and by 
+testing. Brooks MacLachlan will extensively review the implementation. Any 
+issues identified during these reviews will be fixed immediately by Brooks 
 MacLachlan. This review will be followed up by reviews by Dr. Spencer Smith and 
 Robert White, a student in CAS 741. Any  issues identified by these reviews 
 will be recorded through the issue tracker on GitHub, and addressed by Brooks 
 MacLachlan. Brooks MacLachlan will also informally present the implementation 
-to the entire class of CAS 741. During this presentation, issues with the 
-implementation may be discovered and subsequently fixed by Brooks MacLachlan.
+to the entire class of CAS 741. Any implementation issues discovered during 
+this presentation will be subsequently fixed by Brooks MacLachlan. These 
+reviews will contribute to verifying correctness and understandability of the 
+software by identifying code that is not traceable to any specifications 
+described in the SRS, MG, or MIS.
 \newline
 
 \noindent The implementation will also be verified by testing. Specific test 
@@ -172,9 +188,7 @@ applicable), reviewed, executed, and reported on by Brooks MacLachlan.
 
 \subsection{Software Validation Plan}
 
-SSP will be validated by comparison of its output to results reported in 
-literature for some example slope stability problems. These validation tests 
-are further described in Section \ref{sec_System}.
+There is no validation plan for \progname{}.
 
 \section{System Test Description} \label{sec_System}
 	
