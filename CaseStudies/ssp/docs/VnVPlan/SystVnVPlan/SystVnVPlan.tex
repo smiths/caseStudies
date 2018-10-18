@@ -242,12 +242,11 @@ input parameter that should have a different value than specified by the table.
 \paragraph{Valid User Input}
 
 ~\newline \noindent The following set of test cases is intended to cover 
-different forms 
-of valid user input. Valid user input includes: slopes with or without a water 
-table, slopes with one layer or multiple layers, slopes that increase or 
-decrease as $x$ increases, slopes described by the minimum number of points, 2, 
-or more than the minimum number of points, and slopes solved with $f$ as a 
-constant or as a half-sine.
+different forms of valid user input. Valid user input includes: slopes with or 
+without a water table, slopes with one layer or multiple layers, slopes that 
+increase or decrease as $x$ increases, slopes described by the minimum number 
+of points, 2, or more than the minimum number of points, and slopes solved with 
+$f$ as a constant or as a half-sine.
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 
@@ -342,21 +341,29 @@ How test will be performed: Automated integration test
 
 \paragraph{Invalid User Input}
 
+~\newline \noindent The test cases described in Table~\ref{FaultyInputTests} 
+are intended to cover all invalid input possibilities. Invalid input is input 
+that defies the data constraints described in Section 
+\ref{SRS-sec_DataConstraints} of the SRS. These test cases are identical to 
+each other with the exception of their input. The input for each is specified 
+in Table~\ref{FaultyInputTests}. For each test case, the inputs not specified 
+in this table are specified in Table~\ref{ExValidInputs}. The control method 
+for these test cases is automatic. The initial state for each is a new session. 
+The expected output is the generation of an exception. The tests will be 
+performed as automated integration tests.
+
+\begin{longtable*}{  l  p{5cm}  l  p{5cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Input} & \textbf{Value} \\
+	\hline
+	TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidSlopeDecToInc} & 
+	test-invalid\_slope\_decToInc & 
+	$\{\left(x_{us},y_{us}\right)\}$ & \{(0, 25), 
+	(20, 25), (30, 20), (40, 25), (70, 25)\}\\
+	\hline
+\end{longtable*}
+
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInDecInc}] 
-	test-valid\_input\_decreasing\_increasing
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input file where a slope layer's y-values start by decreasing with 
-	increasing x but then start to increase
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
 	
 	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInIncDec}] 
 	test-valid\_input\_increasing\_decreasing
