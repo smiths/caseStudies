@@ -1,0 +1,226 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\input{../../Comments}
+
+\begin{document}
+
+\title{Project Title: System Verification and Validation Plan} 
+\author{Author Name}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Date 1 & 1.0 & Notes\\
+Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  T & Test\\
+  \bottomrule
+\end{tabular}\\
+
+\wss{symbols, abbreviations or acronyms -- you can simply reference the SRS
+  tables, if appropriate}
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document ... \wss{provide an introductory blurb and roadmap of the
+  Verification and Validation plan}
+
+\section{General Information}
+
+\subsection{Summary}
+
+\wss{Say what software is being tested.  Give its name and a brief overview of
+  its general functions.}
+
+\subsection{Objectives}
+
+\wss{State what is intended to be accomplished.  The objective will be around
+  the qualities that are most important for your project.  You might have
+  something like: ``build confidence in the software correctness,''
+  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
+  just those that are most important.}
+
+\subsection{References}
+
+\wss{Reference relevant documentation.  This will definitely include your SRS}
+
+\section{Plan}
+	
+\subsection{Verification and Validation Team}
+
+\wss{Probably just you.  :-)}
+
+\subsection{SRS Verification Plan}
+
+\wss{List any approaches you intend to use for SRS verification.  This may just
+  be ad hoc feedback from reviewers, like your classmates, or you may have
+  something more rigorous/systematic in mind..}
+
+\subsection{Design Verification Plan}
+
+\wss{Plans for design verification}
+
+\subsection{Implementation Verification Plan}
+
+\wss{You should at least point to the tests listed in this document and the unit
+  testing plan.}
+
+\subsection{Software Validation Plan}
+
+\wss{If there is any external data that can be used for validation, you should
+  point to it here.  If there are no plans for validation, you should state that
+  here.}
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+
+\wss{Subsets of the tests may be in related, so this section is divided into
+  different areas.  If there are no identifiable subsets for the tests, this
+  level of document structure can be removed.}
+
+\subsubsection{Area of Testing1}
+		
+\paragraph{Title for Test}
+
+\begin{enumerate}
+
+\item{test-id1\\}
+
+Control: Manual versus Automatic
+					
+Initial State: 
+					
+Input: 
+					
+Output: 
+					
+How test will be performed: 
+					
+\item{test-id2\\}
+
+Control: Manual versus Automatic
+					
+Initial State: 
+					
+Input: 
+					
+Output: 
+					
+How test will be performed: 
+
+\end{enumerate}
+
+\subsubsection{Area of Testing2}
+
+...
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\subsubsection{Area of Testing1}
+		
+\paragraph{Title for Test}
+
+\begin{enumerate}
+
+\item{test-id1\\}
+
+Type: 
+					
+Initial State: 
+					
+Input/Condition: 
+					
+Output/Result: 
+					
+How test will be performed: 
+					
+\item{test-id2\\}
+
+Type: Functional, Dynamic, Manual, Static etc.
+					
+Initial State: 
+					
+Input: 
+					
+Output: 
+					
+How test will be performed: 
+
+\end{enumerate}
+
+\subsubsection{Area of Testing2}
+
+...
+
+\subsection{Traceability Between Test Cases and Requirements}
+
+\wss{Provide a table that shows which test cases are supporting which
+  requirements.}
+
+\section{Static Verification Techniques}
+
+\wss{In this section give the details of any plans for static verification of
+  the implementation.  Potential techniques include code walkthroughs, code
+  inspection, static analyzers, etc.}
+				
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}
+
+This is where you can place additional information.
+
+\subsection{Symbolic Parameters}
+
+The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.
+
+\subsection{Usability Survey Questions?}
+
+\wss{This is a section that would be appropriate for some projects.}
+
+\end{document}
