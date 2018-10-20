@@ -211,22 +211,22 @@ input parameter that should have a different value than specified by the table.
 	\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
 		\toprule \textbf{Input} &
 		\textbf{Unit} & \textbf{Value}\\ \midrule
-		$\{\left(x_{us},y_{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
+		$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
 		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
-		$\{\left(x_{wt},y_{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
+		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
 		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
 		14), (70, 14)\}\\
-		${x_{slip}^{minStart}}$ & $\text{m}$ & 10\\
-		${x_{slip}^{maxStart}}$ & $\text{m}$ & 24\\
-		${x_{slip}^{minEnd}}$ & $\text{m}$ & 34\\
-		${x_{slip}^{maxEnd}}$ & $\text{m}$ & 53\\
-		${y_{slip}^{min}}$ & $\text{m}$ & 5\\
-		${y_{slip}^{max}}$ & $\text{m}$ & 26\\
+		${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 53\\
+		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
+		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
 		$c'$ & $\si{\pascal}$ & 5000 \\
 		$\varphi'$ & \si{\degree} & 20\\
 		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
 		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
-		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 9.8 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 9800 \\
 		Boolean representing the form of the interslice variation function $f$. 
 		1 means $f$ is constant, 0 means $f$ is a half-sine & N/A & 0\\ 
 		\bottomrule
@@ -261,7 +261,7 @@ Input: As described in Table~\ref{ExValidInputs}.
 					
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
 					
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInInc}] 
 test-valid\_input\_increasing
@@ -271,12 +271,13 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with slope coordinates 
-$\{\left(x_{us},y_{us}\right)\}$ increasing as $x$ increases, as follows: \{(0, 
+$\{\left(x_\text{us},y_\text{us}\right)\}$ increasing as $x$ increases, as 
+follows: \{(0, 
 15), (30, 15), (40, 20), (50, 25), (70, 25)\}.
 
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInMultiple}] 
 test-valid\_input\_multiple
@@ -291,7 +292,7 @@ slope layer described by the following coordinates: \{(0, 20), (36, 17), (40,
 
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInNoWT}] 
 test-valid\_input\_noWT
@@ -301,11 +302,11 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with no water table 
-vertices $\{\left(x_{wt},y_{wt}\right)\}$.
+vertices $\{\left(x_\text{wt},y_\text{wt}\right)\}$.
 
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInMin}] 
 test-valid\_input\_minimal
@@ -315,13 +316,14 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with  except with only 
-2 slope coordinates $\{\left(x_{us},y_{us}\right)\}$, as follows: \{(0, 
+2 slope coordinates $\{\left(x_\text{us},y_\text{us}\right)\}$, as follows: 
+\{(0, 
 25), (20, 25). Also, with no water table vertices 
-$\{\left(x_{wt},y_{wt}\right)\}$.
+$\{\left(x_\text{wt},y_\text{wt}\right)\}$.
 
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInConstant}] 
 test-valid\_input\_fConstant
@@ -335,7 +337,35 @@ constant. This is accomplished by setting the Boolean-type input to 1.
 
 Output: \progname{} runs to completion with no errors
 
-How test will be performed: Automated integration test
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMinStartEqual}] 
+test-valid\_input\_xMinStartEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with 
+${x_\text{slip}^\text{minStart}}$ set to 0.
+
+Output: \progname{} runs to completion with no errors
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMaxEndEqual}] 
+test-valid\_input\_xMaxEndEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with 
+${x_\text{slip}^\text{maxEnd}}$ set to 70.
+
+Output: \progname{} runs to completion with no errors
+
+How test will be performed: Automated test on unit testing framework
 
 \end{enumerate}
 
@@ -350,93 +380,119 @@ in Table~\ref{FaultyInputTests}. For each test case, the inputs not specified
 in this table are specified in Table~\ref{ExValidInputs}. The control method 
 for these test cases is automatic. The initial state for each is a new session. 
 The expected output is the generation of an exception. The tests will be 
-performed as automated integration tests.
+performed as automated tests on a unit testing framework.
 
-\begin{longtable*}{  l  p{5cm}  l  p{5cm}  }
+\begin{longtable}{  l  p{5cm}  l  p{5cm}  }
 	\hline
 	\textbf{Test Case} & \textbf{Test Name} & \textbf{Input} & \textbf{Value} \\
 	\hline
-	TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidSlopeDecToInc} & 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDecToInc} & 
 	test-invalid\_slope\_decToInc & 
-	$\{\left(x_{us},y_{us}\right)\}$ & \{(0, 25), 
-	(20, 25), (30, 20), (40, 25), (70, 25)\}\\
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 25), (20, 25), (30, 20), 
+	(40, 25), 
+	(70, 25)\}\\ 
 	\hline
-\end{longtable*}
-
-\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInIncDec}] 
-	test-valid\_input\_increasing\_decreasing
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input file where a slope layer's y-values start by increasing with 
-	increasing x but then start to decrease
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: 
-	\label{TC_InvalidInDiffStart}] 
-	test-valid\_input\_diff\_start
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input file with 2 slope layers with different initial x-values
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_InvalidInDiffEnd}] 
-	test-valid\_input\_diff\_end
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input file with 2 slope layers with different final x-values
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: 
-	\label{TC_InvalidInDiffStartWT}] 
-	test-valid\_input\_diff\_start\_wt
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input with a water table with a different initial x-value than the 
-	slope layers
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
-	
-	\item [TC\refstepcounter{testnum}\thetestnum: 
-	\label{TC_InvalidInDiffEndWT}] 
-	test-valid\_input\_diff\_end\_wt
-	
-	Control: Automatic
-	
-	Initial State: New session
-	
-	Input: Input with a water table with a different final x-value than the 
-	slope layers
-	
-	Output: Error
-	
-	How test will be performed: Automated integration test
-	
-\end{enumerate}
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeIncToDec} & 
+	test-invalid\_slope\_incToDec & 
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	(40, 15), 
+	(70, 15)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStart} & 
+	test-invalid\_slope\_diffStart & 
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	(40, 25), 
+	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (70, 25)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffEnd} & 
+	test-invalid\_slope\_diffEnd & 
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	(40, 25), 
+	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (60, 25)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePt} & 
+	test-invalid\_slope\_onePt & 
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStartWT} & 
+	test-invalid\_slope\_diffStartWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(10, 22), (10.87, 21.28), 
+	(21.14, 
+	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (70, 14)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffEndWT} & 
+	test-invalid\_slope\_diffEndWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22), (10.87, 21.28), 
+	(21.14, 
+	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (60, 14)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePtWT} & 
+	test-invalid\_slope\_onePtWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinStart} & 
+	test-invalid\_slip\_xMinStart & ${x_\text{slip}^\text{minStart}}$ & -5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxStart} & 
+	test-invalid\_slip\_xMaxStart & ${x_\text{slip}^\text{maxStart}}$ & 5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinEnd} & 
+	test-invalid\_slip\_xMinEnd & ${x_\text{slip}^\text{minStart}}$ & 20\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEnd} & 
+	test-invalid\_slip\_xMaxEnd & ${x_\text{slip}^\text{minStart}}$ & 30\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEndOut} & 
+	test-invalid\_slip\_xMaxEndOut & ${x_\text{slip}^\text{minStart}}$ & 75\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYMin} & 
+	test-invalid\_slip\_yMin & ${y_\text{slip}^\text{min}}$ & 30\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYMax} & 
+	test-invalid\_slip\_yMax & ${y_\text{slip}^\text{min}}$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYEqual} & 
+	test-invalid\_slip\_yEqual & ${y_\text{slip}^\text{min}}$ & 5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidCohesion0} & 
+	test-invalid\_cohesion\_0 & $c'$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidCohesionNegative} & 
+	test-invalid\_cohesion\_negative & $c'$ & -5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidAngFric0} & 
+	test-invalid\_angFric\_0 & $\varphi'$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidAngFricNegative} & 
+	test-invalid\_angFric\_negative & $\varphi'$ & -5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidAngFric90} & 
+	test-invalid\_angFric\_90 & $\varphi'$ & 90\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidAngFricObtuse} & 
+	test-invalid\_angFric\_obtuse & $\varphi'$ & 100\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWt0} & 
+	test-invalid\_unitWt\_0 & $\gamma$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWtNegative} & 
+	test-invalid\_unitWt\_negative & $\gamma$ & -5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWtSat0} & 
+	test-invalid\_unitWtSat\_0 & $\gamma_\text{Sat}$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWtSatNegative} & 
+	test-invalid\_unitWtSat\_negative & $\gamma_\text{Sat}$ & -5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWtWater0} & 
+	test-invalid\_unitWtWater\_0 & $\gamma_\text{w}$ & 0\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidUnitWtWaterNegative} 
+	& test-invalid\_unitWtWater\_negative & $\gamma_\text{w}$ & -5\\ 
+	\hline
+	\caption{Faulty Input Test Cases}
+	\label{FaultyInputTests}
+\end{longtable}
 
 \subsubsection{Calculation Tests}
 
