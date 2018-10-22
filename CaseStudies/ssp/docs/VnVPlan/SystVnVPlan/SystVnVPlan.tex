@@ -694,6 +694,10 @@ How test will be performed: Automated test on unit testing framework
 
 \end{enumerate}
 
+\bmac{I wanted to add tests for the correctness NFR in Section 
+\ref{sec_NFRTests} but felt that it was already covered by these functional 
+requirement test cases. Is that true?}
+
 \subsubsection{Output Tests}
 
 \paragraph{Output Delivery Tests}
@@ -832,7 +836,7 @@ How test will be performed: Automated test on unit testing framework
 	
 \end{enumerate}
 
-\subsection{Tests for Nonfunctional Requirements}
+\subsection{Tests for Nonfunctional Requirements} \label{sec_NFRTests}
 
 \subsubsection{Maintainability test}
 
@@ -843,7 +847,7 @@ test-maintainability
 
 Type: Manual
 					
-Initial State:
+Initial State: Test subject has a completed MG for \progname{}
 					
 Input/Condition: MG for \progname{} and the following question "If you were 
 tasked with modifying \progname{} to accept an imposed surface load as an input 
@@ -851,8 +855,14 @@ and incorporate this additional force into the computation, which module(s)
 would you change?"
 					
 Output/Result: Input Module, Input Verification Module, Calculation Module
+
+\bmac{Subject to change since design has not been completed yet}
 					
-How test will be performed: 
+How test will be performed: Test subject will be asked the question described 
+in "Input/Condition" and must answer only by consulting the MG. Their answer 
+will be recorded and compared with the correct answer outlined in 
+"Output/Result". A correct answer increases confidence in the maintainability 
+of \progname{}.
 					
 \end{enumerate}
 
