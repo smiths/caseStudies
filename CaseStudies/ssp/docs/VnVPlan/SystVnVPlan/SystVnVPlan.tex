@@ -67,6 +67,7 @@ document.
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  $j$ & index representing a single coordinate\\
   MIS & Module Interface Specification\\
   MG & Module Guide\\
   TC & Test Case\\
@@ -697,10 +698,8 @@ How test will be performed: Automated test on unit testing framework
 
 \paragraph{Output Delivery Tests}
 
-~\newline \noindent The test cases described in this section are intended to 
-verify that all expected outputs are delivered by \progname{}, and that the 
-output obeys the physical constraints described in Section 
-\ref{SRS-sec_DataConstraints} of the SRS.
+~\newline \noindent The following set of test cases are intended to 
+verify that all expected outputs are delivered by \progname{}.
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 	
@@ -717,41 +716,144 @@ Output: \progname{} reports a value for the factor of safety of the critical
 slip surface
 
 How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutSlip}] 
+test-output\_slip
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: \progname{} reports the coordinates of the critical slip surface for 
+the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutNormal}] 
+test-output\_normal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: \progname{} reports the interslice normal force along the critical slip 
+surface for the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutShear}] 
+test-output\_shear
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: \progname{} reports the interslice shear force along the critical slip 
+surface for the slope.
+
+How test will be performed: Automated test on unit testing framework
+	
+\end{enumerate}
+
+\paragraph{Output Verification Tests}
+
+~\newline \noindent The following set of test cases are intended to 
+verify that that the output of \progname{} obeys the physical constraints 
+described in Section \ref{SRS-sec_DataConstraints} of the SRS.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutFS}] 
+test-valid\_output\_FS
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: The factor of safety reported by \progname{} is greater than 0.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutSlip}] 
+test-valid\_output\_slip
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: The slope between consecutive coordinates of the critical slip surface 
+are always increasing. In mathematical terms, if $j$ is an index representing a 
+single coordinate and $j+1$ represents the consecutive coordinate in the 
+positive $x$-direction, \newline
+$\left(\frac{y_{\text{cs}_{j+2}}-y_{\text{cs}_{j+1}}}{x_{\text{cs}_{j+2}}-
+		x_{\text{cs}_{j+1}}}\right)-\left(\frac{y_{\text{cs}_{j+1}}-
+			y_{\text{cs}_{j}}}{x_{\text{cs}_{j+1}}-
+				x_{\text{cs}_{j}}}\right) > 0$.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutNormal}] 
+test-valid\_output\_normal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: The interslice normal forces reported by \progname{} are always greater 
+than 0 across the entire critical slip surface.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutShear}] 
+test-valid\_output\_shear
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: The interslice shear forces reported by \progname{} are always less 
+than 0 across the entire critical slip surface.
+
+How test will be performed: Automated test on unit testing framework
 	
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\subsubsection{Correctness tests}
-		
-\paragraph{Title for Test}
+\subsubsection{Maintainability test}
 
-\begin{enumerate}
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_Maintainability}] 
+test-maintainability
 
-\item{test-id1\\}
-
-Type: 
+Type: Manual
 					
-Initial State: 
+Initial State:
 					
-Input/Condition: 
+Input/Condition: MG for \progname{} and the following question "If you were 
+tasked with modifying \progname{} to accept an imposed surface load as an input 
+and incorporate this additional force into the computation, which module(s) 
+would you change?"
 					
-Output/Result: 
+Output/Result: Input Module, Input Verification Module, Calculation Module
 					
 How test will be performed: 
 					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
 \end{enumerate}
 
 \subsubsection{Area of Testing2}
