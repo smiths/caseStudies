@@ -496,6 +496,91 @@ performed as automated tests on a unit testing framework.
 
 \subsubsection{Calculation Tests}
 
+The tests in this section verify that \progname{} correctly determines critical 
+slip surfaces and calculates factors of safety by comparing results obtained 
+from \progname{} to results reported in literature for some specific example 
+problems. In each test case, the literature sources to compare to will be given.
+
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+	\toprule \textbf{Input} &
+	\textbf{Unit} & \textbf{Value}\\ \midrule
+	$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 5), 
+	(5, 5), (15, 10), (25, 10)\}\\
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & N/A\\
+	${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 0\\
+	${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 10\\
+	${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 10\\
+	${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 20\\
+	${y_\text{slip}^\text{min}}$ & $\text{m}$ & 0\\
+	${y_\text{slip}^\text{max}}$ & $\text{m}$ & 12\\
+	$c'$ & $\si{\pascal}$ & 9800 \\
+	$\varphi'$ & \si{\degree} & 10\\
+	$\gamma$ & $\si{\newton\per\meter\cubed}$ & 17640 \\
+	$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 17640 \\
+	$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & N/A \\
+	Boolean representing the form of the interslice variation function $f$. 
+	1 means $f$ is constant, 0 means $f$ is a half-sine & N/A & 0\\ 
+	\bottomrule
+\end{tabularx}
+\caption{Input to be used for literature comparison test cases}
+\label{Ex1Input}
+\end{table}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_Ex1FS}] test-ex1\_FS
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Ex1Input}.
+
+Output: Relative error between factor of safety calculated by \progname{} and 
+factor of safety from literature, as described below. \newline
+\begin{tabularx}{1.0\textwidth}{p{7cm} l}
+	\toprule \textbf{Source} & \textbf{Factor of Safety}\\ \midrule
+	\cite{Greco1996} & 1.3270\\
+	\cite{MalkawiEtAl} & 1.2380\\
+	\cite{ChengEtAl} & 1.3250\\
+	\cite{LiEtAl} & 1.3270\\
+	\bottomrule
+\end{tabularx}
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_Ex1Slip}] test-ex1\_slip
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Ex1Input}.
+
+Output: Distance error between critical slip surface determined by \progname{} 
+and critical slip surfaces from from literature. Distance error is calculated 
+by dividing the critical slip surfaces into 10 evenly spaced vertices, 
+calculating the distance between respective vertices from \progname{} and from 
+literature, and adding the distance for all 10 vertices together. For brevity, 
+the table below gives only the starting and ending $x$ values of the critical 
+slip surfaces from literature. More complete descriptions of the slip surface 
+can be found by referring to the source. \newline
+\begin{tabularx}{1.0\textwidth}{l p{3.5cm} p{3.5cm}}
+	\toprule \textbf{Source} & \textbf{Starting $x$ value} & 
+	\textbf{Ending $x$ value}\\ \midrule
+	\cite{Greco1996} & 4.8077 & 18.2911\\
+	\cite{MalkawiEtAl} & 3.5400 & 20.1419\\
+	\cite{ChengEtAl} & 4.5258 & 18.3943\\
+	\cite{LiEtAl} & 4.6000 & 18.5300\\
+	\bottomrule
+\end{tabularx}
+
+How test will be performed: Automated test on unit testing framework
+
+\end{enumerate}
+
 \subsubsection{Output Tests}
 
 \subsection{Tests for Nonfunctional Requirements}
