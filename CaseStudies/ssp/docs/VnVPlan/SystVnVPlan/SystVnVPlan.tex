@@ -9,6 +9,7 @@
 \usepackage{xr}
 \usepackage{siunitx}
 \usepackage{caption}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage[numbib,nottoc]{tocbibind}
 \hypersetup{
@@ -498,8 +499,9 @@ performed as automated tests on a unit testing framework.
 
 The tests in this section verify that \progname{} correctly determines critical 
 slip surfaces and calculates factors of safety by comparing results obtained 
-from \progname{} to results reported in literature for some specific example 
-problems. In each test case, the literature sources to compare to will be given.
+from \progname{} to results reported in literature or results obtained by the 
+original version of \progname{} for some specific example problems. In each 
+test case, the sources to compare to are specified.
 
 \begin{table}[h!]
 \renewcommand{\arraystretch}{1.5}
@@ -579,9 +581,144 @@ can be found by referring to the source. \newline
 
 How test will be performed: Automated test on unit testing framework
 
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OrigProgFS}] 
+test-origProg\_FS
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with an additional 
+slope layer described by the following coordinates: \{(0, 20), (36, 17), (40, 
+15), (70, 15)\}.
+
+Output: Relative error between the factor of safety calculated by \progname{} 
+and the factor of safety calculated by the original version of \progname{}, 
+1.3937, which is assumed to be correct and can be found at \newline
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OrigProgSlip}] 
+test-origProg\_slip
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with an additional 
+slope layer described by the following coordinates: \{(0, 20), (36, 17), (40, 
+15), (70, 15)\}.
+
+Output: Distance error between the critical slip surface calculated by 
+\progname{} and the critical slip surface calculated by the original version of 
+\progname{}, which is assumed to be correct and can be found at \newline
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. 
+Distance error is calculated by dividing the critical slip surfaces into 10 
+evenly spaced vertices, calculating the distance between respective vertices 
+from \progname{} and from the original \progname{}, and adding the distance for 
+all 10 vertices together. The critical slip surface calculated by the original 
+version of SSP is shown in Figure~\ref{OrigProgSlip}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{OrigProgSlip.png}
+		\caption{The critical slip surface for \tcref{TC_OrigProgSlip} 
+		calculated by the original version of \progname{}}
+		\label{OrigProgSlip}
+	\end{center}
+\end{figure}
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OrigProgNormal}] 
+test-origProg\_normal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with an additional 
+slope layer described by the following coordinates: \{(0, 20), (36, 17), (40, 
+15), (70, 15)\}.
+
+Output: Relative error between the interslice normal force calculated by 
+\progname{} and the interslice normal force calculated by the original version 
+of \progname{}, which is assumed to be correct and can be found at 
+\newline
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be calculated at 10 evenly spaced points spanning the 
+critical slip surface and averaged to obtain the relative error to consider for 
+this test case.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OrigProgShear}] 
+test-origProg\_shear
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}, except with an additional 
+slope layer described by the following coordinates: \{(0, 20), (36, 17), (40, 
+15), (70, 15)\}.
+
+Output: Relative error between the interslice shear force calculated by 
+\progname{} and the interslice shear force calculated by the original version 
+of \progname{}, which is assumed to be correct and can be found at 
+\newline
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be calculated at 10 evenly spaced points spanning the 
+critical slip surface and averaged to obtain the relative error to consider for 
+this test case.
+
+How test will be performed: Automated test on unit testing framework
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[width=1.0\textwidth]{OrigProgForces.png}
+		\caption{The interslice normal and shear forces for 
+			\tcref{TC_OrigProgNormal} and \tcref{TC_OrigProgShear} calculated 
+			by the original version of \progname{}, where $N_\text{MP}$ is the 
+			interslice normal force and $T_\text{MP}$ is the interslice shear 
+			force}
+		\label{OrigProgForces}
+	\end{center}
+\end{figure}
+
 \end{enumerate}
 
 \subsubsection{Output Tests}
+
+\paragraph{Output Delivery Tests}
+
+~\newline \noindent The test cases described in this section are intended to 
+verify that all expected outputs are delivered by \progname{}, and that the 
+output obeys the physical constraints described in Section 
+\ref{SRS-sec_DataConstraints} of the SRS.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutFS}] 
+test-output\_FS
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: \progname{} reports a value for the factor of safety of the critical 
+slip surface
+
+How test will be performed: Automated test on unit testing framework
+	
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
