@@ -861,14 +861,38 @@ Output/Result: Input Module, Input Verification Module, Calculation Module
 How test will be performed: Test subject will be asked the question described 
 in "Input/Condition" and must answer only by consulting the MG. Their answer 
 will be recorded and compared with the correct answer outlined in 
-"Output/Result". A correct answer increases confidence in the maintainability 
-of \progname{}.
+"Output/Result". If the subject answers correctly, the test passes and 
+confidence in the maintainability of \progname{} is increased. If the subject 
+answers incorrectly, the test fails and the documentation or implementation of 
+\progname{} must be updated to be more maintainable.
 					
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Reusability test}
 
-...
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_Reusability}] 
+test-reusability
+
+Type: Manual
+
+Initial State: There is a completed implementation of \progname{}
+	
+Input/Condition: Code that prompts the user for command-line inputs related to 
+slope stability analysis.
+
+Output/Result: An alternative version of \progname{} that uses the input code. 
+All modules in the alternative version should be identical to the existing 
+\progname{} modules, with the exception of the Input Module.
+
+How test will be performed: The alternative version of \progname{} will be 
+developed by Brooks MacLachlan. If only the Input Module is changed from the 
+existing version, then the test passes and confidence in the reusability of 
+\progname{}'s modules is increased. If other modules need to be changed, the 
+test fails and the other modules must be modified to be completely reusable.
+	
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
