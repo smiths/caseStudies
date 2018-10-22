@@ -653,7 +653,8 @@ of \progname{}, which is assumed to be correct and can be found at
 {https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
 relative error will be calculated at 10 evenly spaced points spanning the 
 critical slip surface and averaged to obtain the relative error to consider for 
-this test case.
+this test case. The interslice normal forces along the critical slip surface 
+calculated by the original \progname{} are shown in Figure~\ref{OrigProgForces}.
 
 How test will be performed: Automated test on unit testing framework
 
@@ -676,7 +677,8 @@ of \progname{}, which is assumed to be correct and can be found at
 {https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
 relative error will be calculated at 10 evenly spaced points spanning the 
 critical slip surface and averaged to obtain the relative error to consider for 
-this test case.
+this test case. The interslice shear forces along the critical slip surface 
+calculated by the original \progname{} are shown in Figure~\ref{OrigProgForces}.
 
 How test will be performed: Automated test on unit testing framework
 
@@ -912,7 +914,26 @@ with an ``X'' may have to be modified as well.
 		\rref{SRS-R_CritGraph}& \rref{SRS-R_OutputFS}& 
 		\rref{SRS-R_NormalGraph}& \rref{SRS-R_ShearGraph} \\
 		\hline
-		\tcref{TC_ValidInInc}       & & & & & & & & & & \\ \hline
+		\tcref{TC_ValidInDec} - \tcref{TC_ValidInXMaxEndEqual}                 
+		& X& & & & & & & & & \\ \hline
+		\tcref{TC_InvalidSlopeDecToInc} - \tcref{TC_InvalidUnitWtWaterNegative} 
+		& & X& & & & & & & & \\ \hline
+		\tcref{TC_Ex1FS} - \tcref{TC_OrigProgSlip}                             
+		& & & X& X& X& & & & & \\ \hline
+		\tcref{TC_OrigProgNormal}                                              
+		& & & & & & & & & X& \\ \hline
+		\tcref{TC_OrigProgShear}                                               
+		& & & & & & & & & & X\\ \hline
+		\tcref{TC_OutFS}                                                       
+		& & & & & & & X& & & \\ \hline
+		\tcref{TC_OutSlip}                                                     
+		& & & & & & & & X& & \\ \hline
+		\tcref{TC_OutNormal}                                                   
+		& & & & & & & & & X& \\ \hline
+		\tcref{TC_OutShear}                                                    
+		& & & & & & & & & & X\\ \hline
+		\tcref{TC_ValidOutFS} - \tcref{TC_ValidOutShear}                        
+		& & & & & & X& & & & \\
 		\hline
 	\end{tabular}
 	\caption{Traceability Matrix Showing the Connections Between Requirements 
@@ -931,19 +952,19 @@ uncover issues with the implementation.
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
 
-\newpage
+%\newpage
 
-\section{Appendix}
-
-This is where you can place additional information.
-
-\subsection{Symbolic Parameters}
-
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
-
-\subsection{Usability Survey Questions?}
-
-\wss{This is a section that would be appropriate for some projects.}
+%\section{Appendix}
+%
+%This is where you can place additional information.
+%
+%\subsection{Symbolic Parameters}
+%
+%The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
+%Their values are defined in this section for easy maintenance.
+%
+%\subsection{Usability Survey Questions?}
+%
+%\wss{This is a section that would be appropriate for some projects.}
 
 \end{document}
