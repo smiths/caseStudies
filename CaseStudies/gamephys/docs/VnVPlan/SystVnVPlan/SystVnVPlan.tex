@@ -16,8 +16,8 @@
 
 \begin{document}
 
-\title{Project Title: System Verification and Validation Plan} 
-\author{Author Name}
+\title{TamiasMini2D: System Verification and Validation Plan} 
+\author{Oluwaseun Owojaiye}
 \date{\today}
 	
 \maketitle
@@ -29,26 +29,28 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+2018-10-15 & 1.0 & Initial draft\\
+%Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
 
 ~\newpage
 
 \section{Symbols, Abbreviations and Acronyms}
-
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  IM & Instance Model\\
+  R & Requirement\\
   T & Test\\
-  \bottomrule
+2D & Two-dimensional\\
+SRS & System Requirement Specification\\
+   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can simply reference the SRS
-  tables, if appropriate}
+%\wss{symbols, abbreviations or acronyms -- you can simply reference the %SRS tables, if appropriate}
 
 \newpage
 
@@ -62,62 +64,69 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+This document provides a high-level verification and validation plan for TamiasMini2D - a 2D rigid body physics library. This document is based on the System Requirement Specification Document(SRS) located in the following project repository link: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}. It discusses the verification and validation requirements for TM2D, and describes the test strategy and methods that will be used to evaluate the software. The verification and validation of the software utilizes review, analysis, and testing method to determine whether a software product complies with the specifed requirements. These requirements include both functional and non-functional.
+%This document ... \wss{provide an introductory blurb and roadmap of the
+ % Verification and Validation plan}
 
 \section{General Information}
 
 \subsection{Summary}
-
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+The software being tested is TamiasMini2D. It is a 2D rigid body physics library designed to simulate the interaction between rigid bodies. Since physics libraries are an important part of video game development, game developers will be able to make use of this library in their products.
+%\wss{Say what software is being tested.  Give its name and a brief %overview of its general functions.}
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
+The purpose of verification and validation activities are to find bugs and defects in the TM2D physics library software and also to determine if it has met all the required functionality. It is also to verify that software meets the required standard and that the end product conforms with the software requirements based on the SRS. The objectives of VnV activities for TM2D are to:
+  \begin{itemize}
+	\item Build confidence in software correctness and performance.
+	\item Verify the degree maintainability of the software.
+	  based of efficiency by which this product can be enhanced, modified
+	  and reused.
+	\item Verify and demonstrate the ease of use and learning of the software.
+  \end{itemize}
+	
+
+%\wss{State what is intended to be accomplished.  The objective will be %around the qualities that are most important for your project.  You might %have something like: ``build confidence in the software correctness,''
+%``demonstrate adequate usability.'' etc.  You won't list all of the %qualities,just those that are most important.}
 
 \subsection{References}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS}
+\begin{itemize}
+	\item[1.] \url {https://github.com/smiths/caseStudies/blob/GamePhy_Olu/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+\end{itemize}
+
+%\wss{Reference relevant documentation.  This will definitely include your SRS}
 
 \section{Plan}
 	
 \subsection{Verification and Validation Team}
-
-\wss{Probably just you.  :-)}
+The verification and validation team consists of a one member team: Olu Owojaiye
+%\wss{Probably just you.  :-)}
 
 \subsection{SRS Verification Plan}
+The SRS for the project will be reviewed by Dr. Smith and coursemates and feedback will be provided.Some SRS feedback for this project have been provided and addressed using github issue tracker. Also once the software has been implemented, the SRS will be reviewed to ensure that software has met all the specified requirements in SRS and more feedback will be provided via github.
 
-\wss{List any approaches you intend to use for SRS verification.  This may just
-  be ad hoc feedback from reviewers, like your classmates, or you may have
-  something more rigorous/systematic in mind..}
+%\wss{List any approaches you intend to use for SRS verification. This may %just be ad hoc feedback from reviewers, like your classmates, or you may %have something more rigorous/systematic in mind..}
 
 \subsection{Design Verification Plan}
-
-\wss{Plans for design verification}
+To ensure that the Design Specification has been properly specified and meets software requirements, Dr. Smith and my coursemates will be verifying the software design.The Module Guide and Module Interface Specification will contain information about the software design. Feedback is expected to be rovided by reviewers via github issue tracker.
+%\wss{Plans for design verification}
 
 \subsection{Implementation Verification Plan}
-
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
+ The implementation of TM2D will involve inspection of the software to ensure that all the required features have been implemented successfully and are functional. Once the development activities are completed, Dr Smith and my some of CAS761 coursemates will perform the implementation verification activities. The software will be installed by the testers and system test cases specified in Section 5 will be run. Reviewers are expected to verify both functional and non-functional requirements specified below. Exploratory testing should also be performed by testers.
+ Any implementation verification issues will be reported and tracked via github issue tracker and these issues will be resolved in order of severity by myself. After the issues raised have been fixed, they will be sent back to reviewrs for re-verification.
+%\wss{You should at least point to the tests listed in this document and %the unit testing plan.}
 
 \subsection{Software Validation Plan}
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
+	There is currently no software validation plan for TM2D.
+%\wss{If there is any external data that can be used for validation, you %should point to it here.  If there are no plans for validation, you %should state that here.}
 
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+%\wss{Subsets of the tests may be in related, so this section is divided %into different areas.  If there are no identifiable subsets for the %tests, this level of document structure can be removed.}
 
 \subsubsection{Area of Testing1}
 		
