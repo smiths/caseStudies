@@ -50,7 +50,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-10/10/27 & 1.0 & Initial Draft\\
+10/26/18 & 1.0 & Initial Draft\\
 
 \bottomrule
 \end{tabularx}
@@ -60,7 +60,7 @@
 \section{Symbols, Abbreviations and Acronyms}
 The symbols, abbreviations, and acronyms used in this document include those 
 defined in the table below, as well as any defined in the tables found in 
-Section \ref{SRS-sec_RefMat} of the Software Requirements Specification (SRS) 
+Section \ref{SRS-sec_abbrev} of the Software Requirements Specification (SRS) 
 document.
 \newline
 
@@ -69,8 +69,7 @@ document.
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
-  $j$ & index representing a single coordinate\\
-   TC & Test Case\\
+    TC & Test Case\\
   VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
@@ -81,13 +80,11 @@ document.
 
 \listoftables
 
-\listoffigures
-
 \newpage
 
 \pagenumbering{arabic}
 
-\noindent This document outlines the system verification and validation plan 
+\noindent This document presents the system verification and validation plan 
 for the software. General information regarding the system under test and the 
 objectives of the verification and validation activities is provided in Section 
 \ref{sec_GenInfo}. Overviews of verification plans for the SRS, design, and 
@@ -132,20 +129,27 @@ documentation for \progname{} can be found on GitHub, at \newline
 	
 \subsection{Verification and Validation Team}
 
-
+\noindent Responsible member for the verification and validation 
+of \progname{} is Vajiheh Motamer
 
 \subsection{SRS Verification Plan}
 
-\noindent The verification and validation team consists of one member: Vajiheh Motamer.
+\noindent The SRS for the project will be reviewed by Dr. Smith and some of the class mates in CAS741.
+So, feedback will be provided. Some SRS feedback for this project have been
+provided and addressed using github issue tracker. Besides, during preparing of all steps SRS will be reviewed and if would be required, the changes would be made.
 
 \subsection{Design Verification Plan}
 
 \noindent The design of \progname{} s  documents will be verified by getting feedback from Dr.
-Spencer Smith and my CAS 741 classmates.
+Spencer Smith and my CAS 741 classmates.The Module Guide and Module Interface Specification will
+contain information about the software design. Feedback is expected to be
+provided by reviewers via github issue tracker.
 
 \subsection{Implementation Verification Plan} \label{sec_ImpPlan}
 
-
+The implementation of the\progname{} program will be verified  by performing statically code review with Dr. Spencer Smith and the classmates in CAS741 and
+dynamically by executing the test cases detailed in this plan and the unit
+VnV plan using Pyton testing frameworks.
 
 
 \subsection{Software Validation Plan}
@@ -545,43 +549,43 @@ The tests will be performed as automated tests on the PyUnit.
 \textbf{Test Case} & \textbf{Test Name} & \textbf{Significant Input} & \textbf{Expected Output} \\
 \hline
 \hline
-TC8 & checkAPositiveTest  & a = -1600 & InputError: a and b must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkAPositiveTest}  & checkAPositiveTest  & a = -1600 & InputError: a and b must be greater than 0 
 \\
-TC9 & checkBPositiveTest &  b = -1500 & InputError: a and b must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkBPositiveTest} & checkBPositiveTest &  b = -1500 & InputError: a and b must be greater than 0 
 \\
-TC10 & checkSmallAspectRTest & b = 2000 & (a/b=0.8\textless1); InputError: a/b must be between 1 and 5 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkSmallAspectRTest} & checkSmallAspectRTest & b = 2000 & (a/b=0.8\textless1); InputError: a/b must be between 1 and 5 
 \\
-TC11 & checkLargeAspectRTest & b = 200 & (a/b=8\textgreater5); InputError: a/b must be between 1 and 5 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkLargeAspectRTest} & checkLargeAspectRTest & b = 200 & (a/b=8\textgreater5); InputError: a/b must be between 1 and 5 
 \\
-TC12 & checkValidThicknessTest & t = 7 & InputError: t must be in {[}2.5,2.7,3.0,4.0,5.0,6.0,8.0, 10.0,12.0,16.0,19.0,22.0{]}  
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkValidThicknessTest} & checkValidThicknessTest & t = 7 & InputError: t must be in {[}2.5,2.7,3.0,4.0,5.0,6.0,8.0, 10.0,12.0,16.0,19.0,22.0{]}  
 \\
-TC13 & checkLowerConstrOnWTest  & w = 3 & InputError: wtnt must be between 4.5 and 910 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkLowerConstrOnWTest} & checkLowerConstrOnWTest  & w = 3 & InputError: wtnt must be between 4.5 and 910 
 \\
-TC14 & checkUpperConstrOnWTest & w = 1000 & InputError: wtnt must be between 4.5 and 910 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ checkUpperConstrOnWTest} & checkUpperConstrOnWTest & w = 1000 & InputError: wtnt must be between 4.5 and 910 
 \\
-TC15 & checkTNTPositiveTest & tnt = -2 & InputError: TNT must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkTNTPositiveTest} & checkTNTPositiveTest & tnt = -2 & InputError: TNT must be greater than 0 
 \\
-TC16 & checkLowerConstrOnSDTest & sdx = 0; sdy = 1.0; sdz = 2.0 & InputError: SD must be between 6 and 130 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkLowerConstrOnSDTest } & checkLowerConstrOnSDTest & sdx = 0; sdy = 1.0; sdz = 2.0 & InputError: SD must be between 6 and 130 
 \\
-TC17 & checkUpperConstrOnSDTest &  sdx = 0; sdy = 200; sdz = 100 & InputError: SD must be between 6 and 130 
+TC\refstepcounter{testnum}\thetestnum \label{TC_checkUpperConstrOnSDTest} & checkUpperConstrOnSDTest &  sdx = 0; sdy = 200; sdz = 100 & InputError: SD must be between 6 and 130 
 \\
-TC18 & incorrectA0Test & a = 0 & InputError: a and b must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectA0Test } & incorrectA0Test & a = 0 & InputError: a and b must be greater than 0 
 \\
-TC19 & incorrectB0Test  & b = 0 & InputError: a and b must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectB0Test} & incorrectB0Test  & b = 0 & InputError: a and b must be greater than 0 
 \\
-TC20 & incorrectTNT0Test & tnt = 0 & InputError: TNT must be greater than 0 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectTNT0Test} & incorrectTNT0Test & tnt = 0 & InputError: TNT must be greater than 0 
 \\
-TC21 & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectAspectREqLwrBndTest } & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  "Encountered an unexpected exception" 
 \\
-TC22 & incorrectAspectREqUpprBndTest & a = 7500; b = 1500 & (a/b = 5); "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectAspectREqUpprBndTest} & incorrectAspectREqUpprBndTest & a = 7500; b = 1500 & (a/b = 5); "Encountered an unexpected exception" 
 \\
-TC23 & incorrectWEqLwrBndTest & w = 4.5 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqLwrBndTest } & incorrectWEqLwrBndTest & w = 4.5 & "Encountered an unexpected exception" 
 \\
-TC24 & incorrectWEqUpprBndTest & w = 910 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest & w = 910 & "Encountered an unexpected exception" 
 \\
-TC25 & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectSDEqLwrBndTest} & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & "Encountered an unexpected exception" 
 \\
-TC26 & incorrectWEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest } & incorrectWEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & "Encountered an unexpected exception" 
 \\
 \hline
 \end{tabular}
@@ -607,11 +611,11 @@ verify initial inputs have been correctly converted into derived quantities. The
 \textbf{Test Case} & \textbf{Test Name} &  \textbf{Input Table} & \textbf{AR Expected}  & \textbf{SD Expected} & \textbf{LDF Expected} &\textbf{wTNT Expected}& \textbf{h Expected} & \textbf{GTF Expected}\\
 \hline
 \hline
-TC27 & TstDrvdVals\_HSGlTy  &  Table \ref{defaultInputTBL} & 1.0666666666666667 & 11.10180165558726 & 0.2696493494752911 & 10.0 & 9.02 & 2
+TC\refstepcounter{testnum}\thetestnum \label{TstDrvdValsHSGlTy}  &  Table \ref{defaultInputTBL} & 1.0666666666666667 & 11.10180165558726 & 0.2696493494752911 & 10.0 & 9.02 & 2
 \\ 
-TC28 & TstDrvdVals\_ANGlTy & Table \ref{SmallDimensionTBL}  & 1.2 & 10.198039027185569 & 0.2696493494752911 & 10.0 & 7.42 & 1
+TC\refstepcounter{testnum}\thetestnum \label{TstDrvdValsANGlTy} & Table \ref{SmallDimensionTBL}  & 1.2 & 10.198039027185569 & 0.2696493494752911 & 10.0 & 7.42 & 1
 \\
-TC29 & TstDrvdVals\_FTGlTy & Table \ref{LargeDimensionTBL} & 1.25 & 9.093404203047394 & 0.2696493494752911 & 15.0 & 9.02 & 4
+TC\refstepcounter{testnum}\thetestnum \label{TstDrvdValsFTGlTy} & Table \ref{LargeDimensionTBL} & 1.25 & 9.093404203047394 & 0.2696493494752911 & 15.0 & 9.02 & 4
 \\  
 \hline             
 
@@ -679,31 +683,24 @@ with an ``X'' may have to be modified as well.
 
 \begin{table}[!h]
 	\centering
-	\begin{tabular}{|c|c|c|c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|c|c|}
 		\hline
-		& \rref{SRS-KnownValues}& \rref{SRS-Verify}& \rref{SRS-R_OutputInput}& 
+		& \rref{SRS-Input}& \rref{SRS-KnownValues}& \rref{SRS-Verify}& \rref{SRS-R_OutputInput}& 
 		\rref{SRS-R_ Comparison}& \rref{SRS-R_Output}\\
 		\hline
 		\tcref{TC_defultInput} - \tcref{TC_LowThicknessInput}                 
-		& X& & & &  \\ \hline
-		\tcref{TC_8} - \tcref{TC_InvalidUnitWtWaterNegative} 
-		& & X& & & \\ \hline
-		\tcref{TC_Ex1FS} - \tcref{TC_OrigProgSlip}                             
-		& & & X& X&   \\ \hline
-		\tcref{TC_OrigProgNormal}                                              
-		& & & & &  \\ \hline
-		\tcref{TC_OrigProgShear}                                               
-		& & & & & \\ \hline
-		\tcref{TC_OutFS}                                                       
-		& & & & &   \\ \hline
-		\tcref{TC_OutSlip}                                                     
-		& & & & &  \\ \hline
-		\tcref{TC_OutNormal}                                                   
-		& & & & & \\ \hline
-		\tcref{TC_OutShear}                                                    
-		& & & & & \\ \hline
-		\tcref{TC_ValidOutFS} - \tcref{TC_ValidOutShear}                        
-		& & & & & X \\
+		& X& & & & &  \\ \hline
+		\tcref{TC_defultInput} - \tcref{TC_LowThicknessInput}                 
+		& &X & & & &  \\ \hline
+		\tcref{TC_checkAPositiveTest} - \tcref{TC_ incorrectWEqUpprBndTest} 
+		& & & X& & & \\ \hline
+		\tcref{TC_defultInput} - \tcref{TC_LowThicknessInput}                             
+		& & & &X& &   \\ \hline
+		\tcref{TC_defultInput} - \tcref{TC_LowThicknessInput}                              
+		& & & & &X &   \\ \hline
+		\tcref{TstDrvdValsHSGlTy} - \tcref{TstDrvdValsFTGlTy}                                                
+		& & & & & &X  \\ \hline
+		
 		\hline
 	\end{tabular}
 	\caption{Traceability Matrix Showing the Connections Between Requirements 
@@ -713,7 +710,7 @@ with an ``X'' may have to be modified as well.
 
 \section{Static Verification Techniques} \label{sec_Static}
 
-Static verification of the\progname{} library implementation will performed using
+Static verification of the \progname{} library implementation will performed using
 code review with Dr. Spencer Smith and my CAS 741 classmates.
 				
 \newpage
