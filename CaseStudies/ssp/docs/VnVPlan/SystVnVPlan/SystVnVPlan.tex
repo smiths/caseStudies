@@ -25,6 +25,7 @@
 \usepackage{xr}
 \externaldocument[SRS-]{../../SRS/SRS}
 \newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
 
 \newcounter{testnum} %Assumption Number
 \newcommand{\tcthetestnum}{TC\thetestnum}
@@ -902,7 +903,7 @@ test fails and the other modules must be modified to be completely reusable.
 \subsection{Traceability Between Test Cases and Requirements}
 
 \noindent The purpose of the traceability matrix shown in 
-Table~\ref{Table:T_trace} is to provide easy 
+Table~\ref{Table:T_trace} and Table~\ref{Table:NFR_trace} is to provide easy 
 references on which requirements are verified by which test cases, and which 
 test cases need to be updated if a requirement changes.  If a requirement is 
 changed, the items in the column of that requirement that are marked
@@ -934,14 +935,34 @@ with an ``X'' may have to be modified as well.
 		\tcref{TC_OutNormal}                                                   
 		& & & & & & & & & X& \\ \hline
 		\tcref{TC_OutShear}                                                    
-		& & & & & & & & & & X\\ \hline
+		& & & & & & & & & & X \\ \hline
 		\tcref{TC_ValidOutFS} - \tcref{TC_ValidOutShear}                        
 		& & & & & & X& & & & \\
 		\hline
 	\end{tabular}
-	\caption{Traceability Matrix Showing the Connections Between Requirements 
-	and Test Cases}
+	\caption{Traceability Matrix Showing the Connections Between Functional 
+	Requirements and Test Cases}
 	\label{Table:T_trace}
+\end{table}
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		& \nfrref{SRS-NFR_Correctness}& \nfrref{SRS-NFR_Understandability}& 
+		\nfrref{SRS-NFR_Reusability}& \nfrref{SRS-NFR_Maintainability} \\
+		\hline
+		\tcref{TC_Ex1FS} - \tcref{TC_OrigProgShear}                             
+		& X& & & \\ \hline
+		\tcref{TC_Maintainability}                                            
+		& & X& &X \\ \hline
+		\tcref{TC_Reusability}                     
+		& & X& X& \\
+		\hline
+	\end{tabular}
+	\caption{Traceability Matrix Showing the Connections Between Non-Functional 
+	Requirements and Test Cases}
+	\label{Table:NFR_trace}
 \end{table}
 
 \section{Static Verification Techniques} \label{sec_Static}
