@@ -1947,32 +1947,61 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 
 \hline Label& \bf Factor of Safety \\
 
-\hline Input & ${\Psi_{\text{c}}}$ , ${\Phi_{\text{c}}}$ ,
-${T_{\text{i}}}$ , ${R_{\text{i}}}$ \\
+\hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
+$\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
+y_{\text{slip}}\right)\}$ from \iref{IM_Min} \\
 
 \hline
 Output &
 \( {FS}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
-    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
+    \;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
     }\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
-    \;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
+    \;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
     }\right] + {T_{n}} } \)\\
 
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
+&$c$ is a locally bound index representing a single slice. (required?)\\ 
 &$FS$ is the factor of safety.\\
-&$R$ is the resistive shear force  without the influence of interslice forces 
-(\si{\newton\per\meter}).\\
-&$\Psi$ is the second constant used to convert shear without the 
-influence of interslice forces to shear with the influence of 
-interslice forces.\\
-&$\Phi$ is the first constant used to convert shear without the 
-influence of interslice forces to shear with the influence of 
-interslice forces.\\
-&$T$ is the mobile shear force  without the influence of interslice forces 
-(\si{\newton\per\meter}).\\
+&$R_i \; = \begin{array}{l}
+\left( \begin{array}{l}
+\left[ W_{\text{i}} + U_{\text{t,i}}
+\cos\left(\beta_{\text{i}}\right) \right]
+\cos\left(\alpha_{\text{i}}\right) \\
++ \left[ - \Delta H_{\text{i}} +
+U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) \right]
+\sin\left(\alpha_{\text{i}}\right) - U_{\text{b,i}} \end{array}
+\right) \cdot \tan\left(\varphi'\right)
++ c'_{\text{i}} \cdot b_{\text{i}} \cdot
+\sec\left(\alpha_{\text{i}}\right) \end{array} $ is the resistive shear force 
+without the influence of interslice forces (\si{\newton\per\meter}).\\
+&$\frac{\Psi_{\text{c-1}} ={} \left[ \lambda \cdot f_{\text{c-1}}
+\cos\left(\alpha_{\text{c}}\right) -
+\sin\left(\alpha_{\text{c}}\right) \right]\left[
+\tan\left(\varphi'\right) \right] - \left[ \lambda \cdot
+f_{\text{c-1}} \sin\left(\alpha_{\text{c}}\right) +
+\cos\left(\alpha_{\text{c}}\right) \right] \left( \text{FS}
+\right)}{\Phi_{\text{c-1}}}$ is the first function used to convert shear 
+without the influence of 
+interslice forces to shear with the influence of interslice forces.\\
+&$\Phi_{\text{c}}={} \left[ \lambda \cdot f_{\text{c}}
+\cos\left(\alpha_{\text{c}}\right) -
+\sin\left(\alpha_{\text{c}}\right) \right]\left[
+\tan\left({\varphi'_{\text{c}}}\right) \right] - \left[ \lambda
+\cdot f_{\text{c}} \sin\left(\alpha_{\text{c}}\right) +
+\cos\left(\alpha_{\text{c}}\right) \right]\left(\text{FS}\right)$ is the second 
+function used to convert shear without the influence of interslice forces to 
+shear with the influence of interslice forces.\\
+&$T_i$ = 
+$\left(W_{i}+{U_{t,i}}\cos\left(\beta{}_{i}\right)\right)\sin\left(\alpha{}_{i}
+\right)-\left(-{\Delta{}H}_{i}+{U_{t,i}}\sin\left(\beta{}_{i}\right)
+\right)\cos\left(\alpha{}_{i}\right)$ is the mobile shear force without the 
+influence of interslice forces (\si{\newton\per\meter}).\\
+&Descriptions of defining variables for $R$, $T$, $\Phi$, and $\Psi$ can be 
+found in the data definitions section.\\
 
-\hline Sources& \cite{ZhuEtAl2005}\\
+\hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
 
 \hline Ref.\ By & \iref{IM_Lambda}, \iref{IM_E}\\
 
@@ -1980,31 +2009,22 @@ interslice forces.\\
 \end{tabular}
 \end{minipage}\\
 
+\bmac{should c be in table of symbols?}\\
+\bmac{Does $\Delta$H need to be defined mathematically somewhere (DD?) or is it 
+known by convention?}\\
+\bmac{I used SSP inputs as the inputs for this IM, should I have instead used 
+W, U, H, $\alpha$, $\beta$?}
 % ------------------------------------------ %
 %               End IM Factor of Safety         %
 % ------------------------------------------ %
 
 \subsubsection*{Factor of Safety Derivation}
 
-\noindent
-Using the boundary conditions from \iref{IM_E} that $G_{\text{0}}$ and 
-$G_{\text{n}}$ are equal to $0$, one can derive equation~(\ref{eq:FS}),
-also seen in \iref{IM_FS}.
-
-\begin{equation}\label{eq:FS}
- {FS}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
- 	\;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
- 	}\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
- 	\;{\displaystyle\prod_{c=i}^{n-1} \frac{\Psi_{c}}{\Phi_{c}}
- 	}\right] + {T_{n}} }\\
-\end{equation}
-
-\noindent
-The constants $\Psi$ and $\Phi$, described in equations \ref{eq:Psi}
-and \ref{eq:Phi} of the derivation for \iref{IM_E}, are functions of the 
-unknowns: the interslice normal and shear force proportionality constant, 
-$\lambda$ 
-(\iref{IM_Lambda}), and the factor of safety, $FS$ (\iref{IM_FS}).
+\bmac{R derivation here}\\
+\bmac{T derivation here}\\
+\bmac{FS derivation here, using new assumption that interslice forces at outer 
+slices are 0}\\
+\bmac{Phi and psi derivation here?}
 
 ~\newline
 
