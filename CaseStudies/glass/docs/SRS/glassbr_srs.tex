@@ -145,6 +145,7 @@
 \midrule
 10/08/18 & 1.0 & initial SRS based on new template\\
 10/20/18 & 1.1 & Minor changes\\
+10/29/18 & 1.2 & Minor fixes based on feedback\\
 
 \bottomrule
 \end{tabularx}
@@ -271,6 +272,7 @@ their units.  The symbols are listed in alphabetical order.
   R & Requirement\\
   SD & Stand Off Distance\\
   SRS & 	Software Requirements Specification\\
+  \progname\ & Glass Breakage Analysis Program\\
   T & Theoretical Model\\
   UC & Unlikely Change\\
   TU & 	Typical Uncertainty\\
@@ -326,12 +328,12 @@ the documentation is still to ``fake" a rational design process.
 \subsection{Scope of Requirements} 
 
 The scope of the requirements includes getting all input parameters related to
-the glass slab and also the parameters related to blast type. Given the appropriate inputs,
-\progname{} predicts whether a glass slab is safe or not.
+the glass slab and also the parameters related to blast type.
+\progname{} predicts whether a glass slab under the given conditions is safe or not.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
-Reviewers of this documentation should have a strong knowledge in theory behind
+Reviewers of this documentation should have a strong knowledge of the theory behind
 glass breakage and blast risk. The reviewers should also have an understanding
 of second year calculus, structural mechanics, and computer applications in
 civil engineering. In addition, reviewers should be familiar with the applicable
@@ -402,7 +404,7 @@ interface.  The responsibilities of the user and the system are as follows:
 \label{sec_userchar}
 The end user of
 \progname{} should have an understanding of undergraduate Level 1 Calculus
-and Physics and to have an understanding of theory the behind Shattering
+and Physics and to have an understanding of theory behind Shattering
 Science and Glass Physics.
 
 \subsection{System Constraints}
@@ -420,7 +422,7 @@ the instance models.
 \subsection{Problem Description}\label{Sec_pd}
 
 \progname\ is a computer program developed to interpret the inputs to give out
-the outputs which predict whether the glass slab can withstand the blast under the given
+the outputs which predicts whether the glass slab can withstand the blast under the given
 conditions. The blast under consideration is a type of man-made blast load. Software is
 helpful to efficiently and correctly predict the blast risk involved with the glass slab using
 an intuitive interface.
@@ -1194,7 +1196,7 @@ This section provides the functional requirements, the business tasks that the s
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{Input}:] Input the quantities
+\item[R\refstepcounter{reqnum}\thereqnum \label{Input}:] User must input the quantities
   from Table~\ref{TblReqInput}, which define the glass dimensions, type of glass, tolerable probability of
   failure and the characteristics of the blast.
 
