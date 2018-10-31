@@ -131,6 +131,11 @@ Our design follows the rules laid out by \citet{ParnasEtAl1984}, as follows:
   to that module.
 \end{itemize}
 
+\bmac{There is an item here in the template saying "each data structure is used 
+in only one module", which just seems wrong to me. Maybe each data structure is 
+implemented by a dedicated module, but then many other modules can still use 
+that data structure (module).}
+
 In a rational design process, the Module Guide (MG) is developed after 
 completing the Software Requirements Specification (SRS) 
 \citep{ParnasEtAl1984}. The MG specifies the modular
@@ -168,8 +173,8 @@ relation between anticipated changes and the modules. Section
 
 \hspace{3ex}This section lists possible changes to the
 system. According to the likeliness of the change, the possible
-changes are classified into two categories. Anticipated changes are
-listed in Section \ref{SecAchange}, and unlikely changes are listed in
+changes are classified into two categories. Each Anticipated Change (AC) is
+listed in Section \ref{SecAchange}, and each Unlikely Change (UC) is listed in
 Section \ref{SecUchange}.
 
 \subsection{Anticipated Changes} \label{SecAchange}
@@ -178,8 +183,7 @@ Section \ref{SecUchange}.
 is to be hidden inside the modules. Ideally, changing one of the
 anticipated changes will only require changing the one module that
 hides the associated decision. The approach adapted here is called
-design for change. Anticipated changes are numbered by \textbf{AC}
-followed by a number.
+design for change.
 
 \begin{description}
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_hardware}:] The
@@ -220,20 +224,16 @@ complexity is not necessary. Fixing some design decisions at the
 system architecture stage can simplify the software design. If these
 decision should later need to be changed, then many parts of the
 design will potentially need to be modified. Hence, it is not intended
-that these decisions will be changed.  As an example, the model is
-assumed to follow the definition in the SRS.  If a new model is used,
-this will mean a change to the input format, fit parameters module,
-control, and output format modules. Unlikely changes are numbered by \textbf{UC} followed by a number.
+that these decisions will be changed.
 
 \begin{description}
 \item [\refstepcounter{ucnum}UC\theucnum \label{UC_IO}:] Input/Output
-  devices (Input: File and/or Keyboard, Output: File, Memory, and/or
-  Screen).
-\item [\refstepcounter{ucnum}UC\theucnum \label{UC_inputsource}:]
-  There will always be a source of input data external to the
-  software.
-\item [\refstepcounter{ucnum}UC\theucnum \label{UC_output}:] Output
-  data are displayed to the output device.
+  devices (Input: File and/or keyboard, Output: File, memory, and/or
+  screen).
+\item [\refstepcounter{ucnum}UC\theucnum \label{UC_SSPGoal}:] The goals of 
+\progname{}, to determine a slope's critical slip surface and corresponding 
+factor of safety, will not change.
+ 
 \end{description}
 
 
@@ -370,9 +370,8 @@ on the programming language selected.
 \subsubsection{Control Module (\mref{mControl})}
 
 \begin{description}
-\item[Secrets:] The algorithm for coordinating the running of the
-  program.
-\item[Services:] Provides the main program.
+\item[Secrets:] The algorithm for coordinating how the program runs.
+\item[Services:] Drives the program through the required tasks.
 \item[Implemented By:] \progname
 \end{description}
 
@@ -381,15 +380,14 @@ on the programming language selected.
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
-\item[Services:] Reads the input data from an input file, and/or
-  prompted command line inputs. Input data includes the x,y
-  coordinates of the slope, with a set of coordinates for each
-  layer. For each layer its soil properties of effective angle of
-  friction, effective cohesion, dry unit weight, and saturated unit
-  weight are stored in vectors of soil properties. If a piezometric surface 
-  exists in the slope, its coordinates and the unit weight of water are also 
-  included in the input. Lastly an expected range for the entrance and exit 
-  points of the critical slip surface are inputted.
+\item[Services:] Read, verify, and store the input data. This includes a set of 
+  coordinates for each slope layer, soil properties for each layer, 
+  specifically effective angle of friction, effective cohesion, dry unit 
+  weight, and saturated unit weight, and the coordinates and unit weight of 
+  water for a water table, if one exists. This also includes an expected range 
+  for the start and end points of the critical slip surface and a decision on 
+  whether to use a half-sine or the constant 1 for the interslice normal to 
+  shear force ratio variability function.
 \item[Implemented By:] \progname
 \end{description}
 
@@ -455,7 +453,7 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Morgenstern Price Solver Module (\mref{mMorgPrice})}
+\subsubsection{Morgenstern Price Calculation Module (\mref{mMorgPrice})}
 
 \begin{description}
 \item[Secrets:] The factor of safety of a given slip surface.
@@ -590,11 +588,12 @@ offers a testable and usable subset of the system, and modules in the
 higher level of the hierarchy are essentially simpler because they use
 modules from the lower levels.
 
+\bmac{Want to combine slice, sorter, M-P}
 % ------ %
 \begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram3.png}
+ \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram.png}
 }
 \caption{Use Hierarchy Diagram}
 \label{Fig_Use}
