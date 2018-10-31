@@ -1,14 +1,15 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, titlepage]{article}
+
 \usepackage{fullpage}
 \usepackage[round]{natbib}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage{caption}
-\usepackage{geometry}
-\usepackage{comment}
+%\usepackage{geometry}
 
 \usepackage{xr}
 \usepackage{hyperref}
@@ -23,20 +24,7 @@
  urlcolor=cyan   % color of external links
 }
 
-%% Comments
-\newif\ifcomments\commentstrue
-
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
-
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\hf}[1]{\authornote{cyan}{HF}{#1}}
-\newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
+\input{../../Comments}
 
 \newcommand{\progname}{SSP}
 
@@ -52,16 +40,7 @@
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
 
-
-\newcounter{fnum}
-\newcommand{\fthefnum}{Fig\thefnum}
-\newcommand{\fref}[1]{Fig\ref{#1}}
-
-\newcounter{tablenum}
-\newcommand{\tablethetablenum}{Table\thetablenum}
-\newcommand{\tableref}[1]{Table\ref{#1}}
-
-\newgeometry{margin=2cm}
+%\newgeometry{margin=2cm}
 
 % define "struts", as suggested by Claudio Beccari in
 %    a piece in TeX and TUG News, Vol. 2, 1993.
@@ -73,12 +52,21 @@
 \begin{document}
 
 \title{Module Guide for Slope Stability Analysis Program} 
-\author{Henry Frankis}
+\author{Henry Frankis and Brooks MacLachlan}
 \date{\today}
-	
+
 \maketitle
 
-\tableofcontents
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+	\midrule
+	31/10/2018 & 1.0 & Initial template updates\\
+	\bottomrule
+\end{tabularx}
 
 \newpage
 
@@ -88,22 +76,37 @@ This section records information for easy reference.
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
-  \toprule		
-  \textbf{Symbol} & \textbf{Description}\\
-  \midrule 
-  AC & Anticipated Change\\
-  DAG & Directed Acyclic Graph \\
-  M & Module \\
-  MG & Module Guide \\
-  OS & Operating System \\
-  R & Requirement\\
-  RFEM & Rigid Finite Element \\
-  SC & Scientific Computing \\
-  SRS & Software Requirements Specification\\
-  \progname & Slope Stability Analysis Program\\
-  UC & Unlikely Change \\
-  \bottomrule
+	\toprule		
+	\textbf{Symbol} & \textbf{Description}\\
+	\midrule 
+	AC & Anticipated Change\\
+	DAG & Directed Acyclic Graph \\
+	M & Module \\
+	MG & Module Guide \\
+	OS & Operating System \\
+	R & Requirement\\
+	RFEM & Rigid Finite Element \\
+	SC & Scientific Computing \\
+	SRS & Software Requirements Specification\\
+	\progname & Slope Stability Analysis Program\\
+	UC & Unlikely Change \\
+	\bottomrule
 \end{tabular}\\
+
+\bmac{This section is not on the template but I think that it should be since 
+this document introduces many new acronyms}
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
 
 \section{Introduction}
 
@@ -128,7 +131,9 @@ Our design follows the rules laid out by \citet{ParnasEtAl1984}, as follows:
   to that module.
 \end{itemize}
 
-In a rational design process~\citep{ParnasEtAl1984}, the Module Guide (MG) is developed after completing the Software Requirements Specification (SRS). The MG specifies the modular
+In a rational design process, the Module Guide (MG) is developed after 
+completing the Software Requirements Specification (SRS) 
+\citep{ParnasEtAl1984}. The MG specifies the modular
 structure of the system and is intended to allow both designers and
 maintainers to easily identify the parts of the software.  The
 potential readers of this document are as follows:
@@ -141,11 +146,10 @@ potential readers of this document are as follows:
   improves the maintainers' understanding when they need to make
   changes to the system. It is important for a maintainer to update
   the relevant sections of the document after changes have been made.
-\item Designers: Once the module guide has been written, it is can be
-  used to check for consistency, feasibility and
-  flexibility. Designers can verify the system in various ways, such
-  as consistency among modules, feasibility of the decomposition, and
-  flexibility of the design.
+\item Designers: Once the module guide has been written, it can be
+  used to check for consistency, feasibility, and flexibility. Designers can 
+  verify the system in various ways, such as consistency among modules, 
+  feasibility of the decomposition, and flexibility of the design.
 \end{itemize}
 
 The rest of the document is organized as follows. Section
@@ -239,7 +243,7 @@ control, and output format modules. Unlikely changes are numbered by \textbf{UC}
 
 \hspace{3ex}This section provides an overview of the module
 design. Modules are summarized in a hierarchy decomposed by secrets
-in~\tableref{Table:Decomp}. The modules listed below are the modules
+in Table~\ref{Table:Decomp}. The modules listed below are the modules
 that will actually be implemented. Modules are numbered by \textbf{M}
 followed by a number.
 
@@ -278,7 +282,7 @@ Note that \mref{mHH} is a commonly used module and is already
 implemented by the operating system.
 
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:Decomp}
+\label{Table:Decomp}
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.4\textwidth} }
 \toprule
@@ -315,7 +319,7 @@ Sequence Data Structure Module\Tstrut \\
 \hspace{3ex}The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
-modules is listed in \tableref{Table:Req}. The program implements two
+modules is listed in Table~\ref{Table:Req}. The program implements two
 distinct solution methods of calculating the factor of safety of the
 slope, the Morgenstern Price method and the Rigid Finite Element
 (RFEM) method, both developed in the SRS. The Morgenstern Price solver
@@ -547,11 +551,11 @@ selected.
 \section{Traceability Matrix} \label{SecTM}
 
 \hspace{3ex}This section shows two traceability matrices: between the
-modules and the requirements \tableref{Table:Req} and between the
-modules and the anticipated changes \tableref{Table:AC}.
+modules and the requirements Table~\ref{Table:Req} and between the
+modules and the anticipated changes Table~\ref{Table:AC}.
 
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:Req}
+\label{Table:Req}
 \centering
 \begin{tabular}{ll}
 \toprule
@@ -575,7 +579,7 @@ R11 & \mref{mOutput} \mref{mPlot}\\
 
 
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:AC}
+\label{Table:AC}
 \centering
 \begin{tabular}{ll}
 \toprule
@@ -608,16 +612,14 @@ provided. \cite{Parnas1978} said of two programs A and B that A {\em
 the task described in its specification. That is, A {\em uses} B if
 there exist situations in which the correct functioning of A depends
 upon the availability of a correct implementation of B. 
-\fref{Fig_Use} illustrates the use hierarchy between the modules. The
+Figure~\ref{Fig_Use} illustrates the use hierarchy between the modules. The
 graph is a directed acyclic graph (DAG). Each level of the hierarchy
 offers a testable and usable subset of the system, and modules in the
 higher level of the hierarchy are essentially simpler because they use
 modules from the lower levels.
 
-\newpage
-
 % ------ %
-\begin{figure}[h!]  \refstepcounter{fnum} \label{Fig_Use}
+\begin{figure}[h!] \label{Fig_Use}
 \begin{center}
 {
  \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram3.png}
@@ -626,8 +628,8 @@ modules from the lower levels.
 \end{center}
 \end{figure}
 % ------ %
-\newpage
+~\newpage
 \bibliographystyle {plainnat}
-\bibliography {Bib_SSP}
+\bibliography {../../../refs/References}
 
 \end{document}
