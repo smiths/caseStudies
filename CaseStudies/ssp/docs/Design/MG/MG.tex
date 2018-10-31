@@ -247,31 +247,23 @@ followed by a number.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
-  Module
 \item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
-  Module
-\item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input Format
-  Module
-\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output Format
-  Module
+\item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mGenAlg}:] Genetic
-  Algorithm Module
+  Algorithm
 \item [\refstepcounter{mnum} \mthemnum \label{mKinAdm}:] Kinematic
-  Admissibility Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSlipSlicer}:] Slip
-  Slicer Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSlipWeight}:] Slip
-  Weighting Module
+  Admissibility
+\item [\refstepcounter{mnum} \mthemnum \label{mSlipWeight}:] Slip Weighting
+\item [\refstepcounter{mnum} \mthemnum \label{mSlipSlicer}:] Slip Slicing
 \item [\refstepcounter{mnum} \mthemnum \label{mMorgPrice}:]
-  Morgenstern Price Solver Module
+  Morgenstern-Price Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{mSliceProperty}:] Slice
-  Property Sorter Module
-\item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence
-  Data Structure Module
-\item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random
-  Number Generator Module
+  Property Calculation
+\item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Array Data Structure
+\item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random Number     
+Generation
 \item [\refstepcounter{mnum} \mthemnum \label{mPlot}:] Plotting
-  Module
 \end{description}
 
 Note that \mref{mHH} is a commonly used module and is already
@@ -284,25 +276,25 @@ implemented by the operating system.
 \textbf{Level 1} & \textbf{Level 2} \\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding} & ~ \\
 \midrule
 
-\multirow{8}{0.3\textwidth}{Behaviour-Hiding Module} &
-Control Module \\
-& Input Format Module \\
-& Output Format Module \\
-& Genetic Algorithm Module \\
-& Kinematic Admissibility Module \\
-& Slip Slicer Module \\
-& Slip Weighting Module \\
-& Morgenstern Price Solver Module \\
-& Slice Property Sorter Module \\
+\multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
+Control \\
+& Input Format \\
+& Output Format \\
+& Genetic Algorithm \\
+& Kinematic Admissibility \\
+& Slip Weighting \\
+& Slip Slicing \\
+& Morgenstern Price Calculation \\
+& Slice Property Calculation \\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} &
-Sequence Data Structure Module \\
-& Random Number Generating Module \\
-& Plotting Module \\
+\multirow{3}{0.3\textwidth}{Software Decision} &
+Array Data Structure \\
+& Random Number Generation \\
+& Plotting \\
 \bottomrule
 
 \end{tabular}
@@ -342,7 +334,7 @@ dash (\emph{--}) is shown, this means that the module is not a leaf and will
 not have to be implemented. Whether or not this module is implemented depends 
 on the programming language selected.
 
-\subsection{Hardware-Hiding Modules (\mref{mHH})}
+\subsection{Hardware-Hiding (\mref{mHH})}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the
@@ -354,7 +346,7 @@ on the programming language selected.
 \item[Implemented By:] OS
 \end{description}
 
-\subsection{Behaviour-Hiding Module}
+\subsection{Behaviour-Hiding}
 
 \begin{description}
 \item[Secrets:]The contents of the required behaviors.
@@ -367,7 +359,7 @@ on the programming language selected.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Control Module (\mref{mControl})}
+\subsubsection{Control (\mref{mControl})}
 
 \begin{description}
 \item[Secrets:] The algorithm for coordinating how the program runs.
@@ -376,7 +368,7 @@ on the programming language selected.
 \end{description}
 
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Input Format (\mref{mInput})}
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
@@ -391,7 +383,7 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description}
 
-\subsubsection{Output Format Module (\mref{mOutput})}
+\subsubsection{Output Format (\mref{mOutput})}
 
 \begin{description}
 \item[Secrets:] The format and structure of the output data.
@@ -403,7 +395,7 @@ on the programming language selected.
 \end{description} 
 
 
-\subsubsection{Genetic Algorithm Module (\mref{mGenAlg})}
+\subsubsection{Genetic Algorithm (\mref{mGenAlg})}
 
 \begin{description}
 \item[Secrets:] Algorithm to identify the slip surface that has the
@@ -414,7 +406,7 @@ on the programming language selected.
 \end{description}
 
 
-\subsubsection{Kinematic Admissibility Module (\mref{mKinAdm})}
+\subsubsection{Kinematic Admissibility (\mref{mKinAdm})}
 
 \begin{description}
 \item[Secrets:] Algorithm to determine if a given slip surface passes
@@ -429,7 +421,7 @@ on the programming language selected.
 \end{description} 
 
 
-\subsubsection{Slip Slicer Module (\mref{mSlipSlicer})}
+\subsubsection{Slip Slicing (\mref{mSlipSlicer})}
 
 \begin{description}
 \item[Secrets:] Algorithm to determine the coordinates of where the
@@ -440,7 +432,7 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Slip Weighting Module (\mref{mSlipWeight})}
+\subsubsection{Slip Weighting (\mref{mSlipWeight})}
 
 \begin{description}
 \item[Secrets:] The weighting for each slip surface in a set of slip
@@ -453,7 +445,7 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Morgenstern Price Calculation Module (\mref{mMorgPrice})}
+\subsubsection{Morgenstern-Price Calculation (\mref{mMorgPrice})}
 
 \begin{description}
 \item[Secrets:] The factor of safety of a given slip surface.
@@ -463,7 +455,7 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Slice Property Sorter Module (\mref{mSliceProperty})}
+\subsubsection{Slice Property Calculation (\mref{mSliceProperty})}
 \begin{description}
 \item[Secrets:] Algorithm to assigns soil properties to slices based
   on the location of the slice with respect to the different soil
@@ -478,7 +470,7 @@ on the programming language selected.
 \end{description} 
 
 
-\subsection{Software Decision Module}
+\subsection{Software Decision}
 
 \begin{description}
 \item[Secrets:] The design decision based on mathematical theorems,
@@ -490,7 +482,7 @@ on the programming language selected.
 \end{description}
 
 
-\subsubsection{Sequence Data Structure Module (\mref{mArrayOps})}
+\subsubsection{Array Data Structure (\mref{mArrayOps})}
 
 \begin{description}
 \item[Secrets:] The data structure for a sequence data type.
@@ -500,7 +492,7 @@ on the programming language selected.
 \end{description}
 
 
-\subsubsection{Random Number Generator Module (\mref{mRandNum})}
+\subsubsection{Random Number Generation (\mref{mRandNum})}
 
 \begin{description}
 \item[Secrets:] Pseudo-random numbers between 0 and 1.
@@ -511,7 +503,7 @@ on the programming language selected.
 \end{description}
 
 
-\subsubsection{Plotting Module (\mref{mPlot})}
+\subsubsection{Plotting (\mref{mPlot})}
 
 \begin{description}
 \item[Secrets:] The data structures and algorithms for plotting data
@@ -588,7 +580,7 @@ offers a testable and usable subset of the system, and modules in the
 higher level of the hierarchy are essentially simpler because they use
 modules from the lower levels.
 
-\bmac{Want to combine slice, sorter, M-P}
+\bmac{Want to combine M-P, slice property (slicing too?)}
 % ------ %
 \begin{figure}[h!]
 \begin{center}
