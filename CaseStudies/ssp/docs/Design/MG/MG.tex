@@ -86,7 +86,6 @@ This section records information for easy reference.
 	MG & Module Guide \\
 	OS & Operating System \\
 	R & Requirement\\
-	RFEM & Rigid Finite Element \\
 	SC & Scientific Computing \\
 	SRS & Software Requirements Specification\\
 	\progname & Slope Stability Analysis Program\\
@@ -202,8 +201,6 @@ followed by a number.
   weighting scheme for comparing slip surfaces factors of safety.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
   algorithm for implementation of the Morgenstern Price Solver.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_RFEM}:] The
-  algorithm for implementation of the RFEM Solver.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
   algorithm for assigning soil properties to slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
@@ -267,8 +264,6 @@ followed by a number.
   Weighting Module
 \item [\refstepcounter{mnum} \mthemnum \label{mMorgPrice}:]
   Morgenstern Price Solver Module
-\item [\refstepcounter{mnum} \mthemnum \label{mRFEM}:] Rigid Finite
-  Element Method Solver Module
 \item [\refstepcounter{mnum} \mthemnum \label{mSliceProperty}:] Slice
   Property Sorter Module
 \item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence
@@ -301,7 +296,6 @@ Control Module \\
 & Slip Slicer Module \\
 & Slip Weighting Module \\
 & Morgenstern Price Solver Module \\
-& RFEM Solver Module \\
 & Slice Property Sorter Module \\
 \midrule
 
@@ -321,17 +315,14 @@ Sequence Data Structure Module \\
 \hspace{3ex}The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
-modules is listed in Table~\ref{Table:Req}. The program implements two
-distinct solution methods of calculating the factor of safety of the
-slope, the Morgenstern Price method and the Rigid Finite Element
-(RFEM) method, both developed in the SRS. The Morgenstern Price solver
-is implemented by \mref{mMorgPrice}, further information on the
-Morgenstern Price algorithm can be found in \cite{ZhuEtAl2005}. The RFEM solver
-is implemented by \mref{mRFEM}, further information on the RFEM
-algorithm can be found in \cite{StolleGuo}. The critical slip identification
-goal (G2,IM4 in SRS) is implemented by use of a genetic algorithm
-\mref{mGenAlg}, further information on use of a genetic algorithm in
-relation to a slope stability problem can be found in \cite{LiEtAl}.
+modules is listed in Table~\ref{Table:Req}. The program uses the 
+Morgenstern-Price method to calculate the factor of safety, which is implemented
+by \mref{mMorgPrice}. Further information on the Morgenstern Price algorithm 
+can be found in \cite{ZhuEtAl2005}. A genetic algorithm is used to generate 
+potential slip surfaces to compare to find the critical slip surface, 
+implemented in \mref{mGenAlg}. Further information on use of a genetic 
+algorithm in relation to a slope stability problem can be found in 
+\cite{LiEtAl}.
 
 
 \section{Module Decomposition} \label{SecMD}
@@ -345,8 +336,9 @@ specifies \emph{what} the module will do without documenting
 implementing software is given under the \emph{Implemented By}
 title. If the entry is \emph{OS}, this means that the module is
 provided by the operating system or by standard programming language
-libraries. \emph{\progname} means the module will be implemented by
-the \progname. Only the leaf modules in the hierarchy have
+libraries. \emph{\progname} means the module will be implemented by \progname. 
+
+Only the leaf modules in the hierarchy have
 to be implemented. If a dash (\emph{--}) is shown, this means that the
 module is not a leaf and will not have to be implemented. Whether or
 not this module is implemented depends on the programming language
