@@ -85,7 +85,7 @@
 \title{Software Requirements Specification for Solar Water Heating Systems} 
 \author{Thulasi Jegatheesan and Spencer Smith}
 \date{\today}
-	
+  
 \maketitle
 
 \tableofcontents
@@ -103,18 +103,18 @@ The unit system used throughout is SI (Syst\`{e}me International d'Unit\'{e}s). 
 \renewcommand{\arraystretch}{1.2}
 %\begin{table}[ht]
   \noindent \begin{tabular}{l l l} 
-    \toprule		
+    \toprule    
     \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
     \midrule 
     \si{\meter} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
+    \si{\kilogram} & mass & kilogram\\
     \si{\second} & time & second\\
     \si{\celsius} & temperature & centigrade\\
      \si{\joule} & energy & Joule\\
      \si{\watt} & power & Watt (W = \si{\joule\per\second})\\
     \bottomrule
   \end{tabular}
-  %	\caption{Provide a caption}
+  % \caption{Provide a caption}
 %\end{table}
 
 \subsection{Table of Symbols}
@@ -286,7 +286,7 @@ systems.  The symbols are listed in alphabetical order.
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
-  \toprule		
+  \toprule    
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   A & Assumption\\
@@ -519,7 +519,7 @@ and, material properties, the goal statements are:
 
 % \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_ptemp}:] predict the PCM 
 % temperature over time;
-	
+  
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_wenergy}:] predict the 
 change in heat energy in the water over time
 
@@ -548,14 +548,14 @@ likely change {[}Section~\ref{sec_likelychgs}{]}, in which the respective assump
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OnlyThermalEnergy}:] The
   only form of energy that is relevant for this problem is thermal energy.  All
   other forms of energy, such as mechanical energy, are assumed to be
-  negligible [\tref{T_COE}].
+  negligible.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_hcoeff}:] All heat
-  transfer coefficients are constant over time [\dref{NL}].
+  transfer coefficients are constant over time.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_mixed}:] The water in
   the tank is fully mixed, so the temperature is the same throughout the entire
-  tank [\dref{ROCT}].%, \ddref{FluxPCM}].
+  tank .%, \ddref{FluxPCM}].
 
 % \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tpcm}:] The PCM has the
 %   same temperature throughout [\dref{ROCT}, \ddref{FluxPCM}, \lcref{LC_tpcm}].
@@ -564,23 +564,23 @@ likely change {[}Section~\ref{sec_likelychgs}{]}, in which the respective assump
   of the water
 % and PCM have no
 has no spatial variation; that is, it is
-  constant over the entire volume [\dref{ROCT}, \lcref{LC_tcoil}].
+  constant over the entire volume [\lcref{LC_tcoil}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_const_C}:] The specific heat
   capacity of the water 
 %and PCM 
 has no spatial variation; that is, it is
- constant over the entire volume [\dref{ROCT}].
+ constant over the entire volume.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Newt_coil}:] Newton's
-  law of convective cooling applies between the heating coil and the water [\ddref{FluxCoil}].
-	
+  law of convective cooling applies between the heating coil and the water.
+  
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tcoil}:] The temperature
-  of the heating coil is constant over time [\ddref{FluxCoil}, \lcref{LC_tcoil}].
-	
+  of the heating coil is constant over time [\lcref{LC_tcoil}].
+  
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tlcoil}:] The
   temperature of the heating coil does not vary along its
-  length [\ddref{FluxCoil}, \lcref{LC_tlcoil}].
+  length [\lcref{LC_tlcoil}].
 
 % \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Newt_pcm}:] Newton's law
 %   of convective cooling applies between the water and the PCM [\ddref{FluxPCM}].
@@ -592,7 +592,7 @@ has no spatial variation; that is, it is
   can only increase, or remain constant; it cannot decrease.
   This implies that the initial temperature % (\aref{A_InitTemp})
   is less than (or
-  equal to) the temperature of the coil [\iref{ewat}, \lcref{LC_charge}].
+  equal to) the temperature of the coil [\lcref{LC_charge}].
 
 % \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_InitTemp}:] The
 %   initial temperature of the water and the PCM is the same [\iref{ewat},
@@ -604,18 +604,18 @@ has no spatial variation; that is, it is
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OpRange}:] The operating
   temperature range of the system is such that the water is always in liquid
   state.  That is, the temperature will not drop below the melting point of water, or rise
-  above its boiling point temperature [\iref{ewat}, \iref{I_HWAT}].
+  above its boiling point temperature.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_htank}:] The tank is
-  perfectly insulated so that there is no heat loss from the tank [\iref{ewat},
+  perfectly insulated so that there is no heat loss from the tank [
   \lcref{LC_htank}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_int_heat}:] No internal
   heat is generated by the water;
 % or the PCM
   therefore, the volumetric
-  heat generation per unit volume is zero [\iref{ewat}].%, \iref{epcm}].
-	
+  heat generation per unit volume is zero.%, \iref{epcm}].
+  
 % \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_vpcm}:] The volume
 %   change of the PCM due to melting is negligible [\iref{epcm}].
 
@@ -624,12 +624,12 @@ has no spatial variation; that is, it is
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tk_prssr}:] The pressure
   in the tank is atmospheric, so the melting and boiling points of water are
-  $0^o\text{C}$ and $100^o\text{C}$, respectively [\iref{ewat}, \iref{I_HWAT}].
+  $0^o\text{C}$ and $100^o\text{C}$, respectively.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_VolCoil}:] When
   considering the volume of water in the tank, the volume of the coil is assumed
   to be negligible.
-	
+  
 \end{itemize}
 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
@@ -696,7 +696,7 @@ on.
 %   \hline
 %   Description & $E$ is the change in sensible heat energy (J).\\
 %   & $C^S$, $C^L$, $C^V$ are the specific heat capacities of a solid, liquid, 
-% 	and vapour, respectively.\\
+%   and vapour, respectively.\\
 %   & $m$ is the mass.\\
 %   & $T$ is the temperature, and $\Delta T$ is the change in temperature.\\
 %   & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling points, respectively.\\
@@ -778,7 +778,7 @@ in temperatures between the body and its surroundings.
 \\
 & $q(t)$ is the thermal flux (\si{\watt\per\square\metre}).\\
 & $h$ is the heat transfer coefficient, assumed independent of $T$ (\aref{A_hcoeff})
-	(\si{\watt\per\square\metre\per\celsius}).\\
+  (\si{\watt\per\square\metre\per\celsius}).\\
 &$\Delta T(t)$= $T(t) - T_{\text{env}}(t)$ is the time-dependent thermal gradient
 between the environment and the object (\si{\celsius}).
 \\
@@ -805,7 +805,9 @@ between the environment and the object (\si{\celsius}).
   Equation&$m C \frac{dT}{dt} = q_{\mathrm{in}} A_{\mathrm{in}} - 
   q_{\mathrm{out}} A_{\mathrm{out}} + g V$  \\
   \hline
-  Description & The basic equation governing the rate of change of temperature,
+  Description &
+  This General definition requires \aref{A_mixed}, \aref{A_const_density} and \aref{A_const_C}.\\
+  & The basic equation governing the rate of change of temperature,
   for a given volume $V$, with time.\\
   & $m$ is the mass (kg).\\
   & $C$ is the specific heat capacity (\si{\joule \per\kilogram \per\celsius}).\\
@@ -896,6 +898,7 @@ SI Units & \si{\watt\per\square\metre}\\
 Equation&$q_C = h_C (T_C - T_W(t))$, over area $A_C$\\
 \hline
 Description & 
+This Data Definition requires \aref{A_Newt_coil}, \aref{A_tcoil} and \aref{A_tlcoil}.\newline
 ${q_{C}}$ is the heat flux into the water from the coil ($\frac{\text{W}}{\text{m}^{2}}$)\newline${h_{C}}$ is the convective heat transfer coefficient between coil and water ($\frac{\text{W}}{(\text{m}^{2}{}^{\circ}C)}$)\newline${T_{C}}$ is the temperature of the heating coil (${}^{\circ}C$)\newline${T_{W}}$ is the temperature of the water (${}^{\circ}C$)\newline$t$ is the time (s)
 \\
 \hline
@@ -1042,7 +1045,9 @@ identified in the Sections~\ref{sec_theoretical} and ~\ref{sec_gendef}.
   &$\frac{dT_W}{dt} = \frac{1}{\tau_W} (T_C - T_W(t))$,\\
   &$T_W(0) = T_\text{init}$\\% (\aref{A_InitTemp})\\
   \hline
-  Description&$T_W$ is the water temperature (\si{\celsius}).\\
+  Description&
+  This Instance Model requires \aref{A_tk_prssr}.\\
+  &$T_W$ is the water temperature (\si{\celsius}).\\
   %&$T_P$ is the PCM temperature (\si{\celsius}).\\
   &$T_C$ is the coil temperature (\si{\celsius}).\\
   &$\tau_W = \frac{m_W C_W}{h_C A_C}$ is a constant (\si{\second}).\\
@@ -1253,7 +1258,9 @@ Equation~(\ref{eq:3}) can be written in its final form as:
   Output&$E_W(t)$, $0 \leq t \leq t_\text{final}$, such that\\
   &$E_W(t)$ = $C_W m_W (T_W(t) - T_\text{init})$\\
   \hline
-  Description & The above equation is derived using \tref{T_SHE}.  $E_W$ is the 
+  Description &
+  This Instance Model requires \aref{A_tk_prssr}.\newline
+  The above equation is derived using \tref{T_SHE}.  $E_W$ is the 
   change in thermal energy of the liquid water relative to the energy at the initial 
   temperature ($T_\text{init}$).  $C_W$ is the specific heat capacity of liquid water and $m_W$ is 
   the mass of the water.  The change in temperature is the difference between 
@@ -1347,7 +1354,7 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on the 
   $L$ & $L > 0$ & $L_{\text{min}} \leq L \leq L_{\text{max}}$ & 1.5 \si[per-mode=symbol] {\metre} & 10\%
   \\
   $D$ & $D > 0$ & ${\frac{D}{L}}_\text{min} \leq \frac{D}{L} \leq {\frac{D}{L}}_\text{max}$ 
-	& 0.412 \si[per-mode=symbol] {\metre} & 10\%
+  & 0.412 \si[per-mode=symbol] {\metre} & 10\%
   \\
   % $V_P$ & $V_P > 0$ (*) & $ V_P \geq \text{minfract} \cdot V_{\text{tank}}(D, L) $ &
   %       0.05 \si[per-mode=symbol] {\cubic\metre} & 10\%
@@ -1360,7 +1367,7 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on the 
   % $\rho_P$ & $\rho_P > 0$ & $\rho_P^{\text{min}} < \rho_P < \rho_P^{\text{max}}$ & 1007 \si[per-mode=symbol]
   %                           {\kilogram\per\cubic\metre} & 10\%
   % \\
-  % $T_\text{melt}^{P}$ 	& $0 < T_\text{melt}^{P} < T_C$ & &  44.2 
+  % $T_\text{melt}^{P}$   & $0 < T_\text{melt}^{P} < T_C$ & &  44.2 
   %       \si[per-mode=symbol] {\celsius} & 10\%
   % \\
   % $C_P^S$ & $C_P^S > 0$ & $C_{P\text{min}}^S < C_P^S < C_{P\text{max}}^S$ & 1760 
@@ -1374,16 +1381,16 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on the 
   % \\
   $A_C$ & $A_C > 0$ (*) & $A_C \leq A_C^{\text{max}}$ & 0.12 \si[per-mode=symbol] {\square\metre} & 10\%
   \\
-  $T_C$ & $0 < T_C < 100$ (+)	& & 50.0 \si[per-mode=symbol] {\celsius} & 10\%
+  $T_C$ & $0 < T_C < 100$ (+) & & 50.0 \si[per-mode=symbol] {\celsius} & 10\%
   \\
   $\rho_W$ & $\rho_W > 0$ & $\rho_W^{\text{min}} < \rho_W \leq \rho_W^{\text{max}}$ 
-	& 1000 \si[per-mode=symbol] {\kilo\gram\per\cubic\metre} & 10\%
+  & 1000 \si[per-mode=symbol] {\kilo\gram\per\cubic\metre} & 10\%
   \\
   $C_W$ & $C_W > 0$ & $C_W^{\text{min}} < C_W < C_W^{\text{max}}$ & 4186 
-	\si[per-mode=symbol] {\joule\per\kilo\gram\per\celsius} & 10\%
+  \si[per-mode=symbol] {\joule\per\kilo\gram\per\celsius} & 10\%
   \\
   $h_C$ & $h_C > 0$ & $h_C^{\text{min}} \leq h_C \leq h_C^{\text{max}}$ 
-	& 1000.0 \si[per-mode=symbol] {\watt\per\square\metre\per\celsius} & 10\%
+  & 1000.0 \si[per-mode=symbol] {\watt\per\square\metre\per\celsius} & 10\%
   \\
   % $h_P$ & $h_P > 0$ & $h_P^{\text{min}} \leq h_P \leq h_P^{\text{max}}$ 
   %       & 1000 \si[per-mode=symbol] {\watt\per\square\metre\per\celsius} & 10\%
@@ -1391,7 +1398,7 @@ Table~\ref{TblInputVar} and \ref{TblOutputVar} show the data constraints on the 
   $T_\text{init}$ & $0 < T_\text{init} < 100 $ (+) & & 40.0 \si[per-mode=symbol] {\celsius} & 10\%
   \\
   $t_\text{final}$ & $t_\text{final} > 0$ & $t_\text{final} < t_{\text{final}}^{\text{max}}$ (**) 
-		& 50000.0 \si[per-mode=symbol] {\second} & 10\%
+    & 50000.0 \si[per-mode=symbol] {\second} & 10\%
   \\
   \bottomrule
 \end{longtable*}
