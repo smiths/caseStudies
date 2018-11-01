@@ -223,10 +223,10 @@ their units.  The symbols are listed in alphabetical order.
   $J_{\text{tol}}$ & -- & Stress distribution factor (Function) based on $P_{b_{\text{tol}}}$\\
   $k$ & \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
   $\text{LDF} $ & -- & Load duration factor\\
-  $\text{LR} $ & -- & Load resistance\\
+  $\text{LR} $ & -- & Load resistance \wss{Please update to give LR units of Pa}\\
   $\text{LSF} $ & -- & Load share factor\\
   $m$ &  \si{\newton ^{-7}\meter ^{12} } & Surface flaw parameter\\
-  $\text{NFL} $ & -- & Non-factored load\\
+  $\text{NFL} $ & -- & Non-factored load \wss{Please update to give LR units of Pa}\\
   $P_b$ & -- &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\pascal} & Applied load (demand)\\
@@ -407,11 +407,10 @@ interface.  The responsibilities of the user and the system are as follows:
   \end{itemize}
 \end{itemize}
 
-\subsection{User Characteristics} 
-\label{sec_userchar}
-The end user of
-\progname{} should have an understanding of undergraduate Level 1 Calculus
-and Physics and to have an understanding of theory behind Shattering
+\subsection{User Characteristics}  \label{sec_userchar}
+
+The end user of \progname{} should have an understanding of undergraduate Level
+1 Calculus and Physics and to have an understanding of theory behind Shattering
 Science and Glass Physics.
 
 \subsection{System Constraints}
@@ -630,6 +629,27 @@ the duration of load ($t_d$), and the material properties of $m$, $k$, and $E$. 
 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
 
+\wss{This project should have these two theoretical models as instanced models
+  and it should introduce two new theoretical models.  The new theoretical models
+  should be abstraction of the two chunks currently called theoretical
+  models.  The concept of safety is something that should generalize from the
+  GlassBR example.  The theoretical model should be reusable in other contexts.
+  The concept of safety would also make sense in the SSP example.  There should
+  be two new theoretical models:
+\begin{enumerate}
+\item $\text{is\_safeProb} = P_\text{fail} < P_\text{tolerable}$
+\item $\text{is\_safeLoad} = \text{capacity} > \text{load}$
+\end{enumerate}
+For the first equation, the probability of failure is below the tolerable
+threshold.  This can be used in any context where there is some probability of
+something bad happening.  A nuclear reactor has a tiny probability of failure,
+and this number is less than society's accepted threshold.  For the second
+equation, the capacity and load need to be in the same units, but they don't
+have to be forces.  The capacity for SSP is expressed as shear stress.  In
+another problem it might be tolerable torque.
+Please add the two new theoretical models and move the existing TMs to be IMs.
+}
+
 This section focuses on the general equations and laws that \progname{} is based on.
 
 ~\newline
@@ -679,7 +699,8 @@ This section focuses on the general equations and laws that \progname{} is based
     $\text{is\_safePb}$ (from \tref{T_Pb}) and $\text{is\_safeLR}$ are either both True or
     both False.\\
   & $\text{LR}$ is the Load Resistance (also called capacity), as defined in
-    \iref{IM_cap}\\
+    \iref{IM_cap} \wss{LR has to have units of Pa, or the comparison to $q$
+    doesn't make sense}\\
   & $q$ (also referred as the demand) is the 3 second equivalent pressure, as
     defined in \iref{IM_dem}\\
   \hline
@@ -1045,6 +1066,7 @@ $$h=\frac{1}{1000}
 ~\newline
 
 \subsubsection{Instance Models}\label{sec_instance}
+
 This section transforms the problem defined in Section~\ref{Sec_pd} into one 
 which is expressed in mathematical terms. It uses concrete symbols defined in Section~\ref{sec_datadef} 
 to replace the abstract symbols in the models identified in Section~\ref{sec_theoretical} 
@@ -1063,7 +1085,8 @@ and Section~\ref{sec_gendef}.
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_prob} \\
   \hline
-  Label&\bf Probability of Glass Breakage\\
+  Label&\bf Probability of Glass Breakage \wss{This should be made a data
+         definition, not an instance model}\\
   \hline
   Equation& $P_b = 1-e^{-B}$\\
 \hline
@@ -1087,7 +1110,8 @@ and Section~\ref{sec_gendef}.
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_cap} \\
   \hline
-  Label&\bf Calculation of Capacity (LR)\\
+  Label&\bf Calculation of Capacity (LR) \wss{This should be made a data
+         definition, not an instance model}\\
   \hline
   Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\ 
 \hline
@@ -1114,7 +1138,8 @@ and Section~\ref{sec_gendef}.
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_dem} \\
   \hline
-  Label&\bf Calculation of Demand ($q$)\\
+  Label&\bf Calculation of Demand ($q$) \wss{This should be made a data
+         definition, not an instance model}\\
   \hline
   Equation& $q=q(w_{\text{TNT}}, \text{SD}$)\\ 
 \hline
@@ -1136,19 +1161,19 @@ and Section~\ref{sec_gendef}.
 
 \subsubsection{Data Constraints} \label{sec_DataConstraints}
 
-Table~\ref{TblInputVar} and Table~\ref{TblOutputVar} show the data constraints on the input and output variables, respectively. The column for physical 
-constraints gives the physical limitations on the range of values that can be 
-taken by the variable. The uncertainty column provides an estimate of the 
-confidence with which the physical quantities can be measured. This information 
-would be part of the input if one were performing an uncertainty quantification 
-exercise. The constraints are conservative, to give the user of the model the 
-flexibility to experiment with unusual situations. The column of typical values 
-is intended to provide a feel for a common scenario.
+Table~\ref{TblInputVar} shows the data constraints on the input variables. The
+column for physical constraints gives the physical limitations on the range of
+values that can be taken by the variable.  The column for software constraints
+restricts the range of inputs to reasonable values.  The uncertainty column
+provides an estimate of the confidence with which the physical quantities can be
+measured. This information would be part of the input if one were performing an
+uncertainty quantification exercise. The constraints are conservative, to give
+the user of the model the flexibility to experiment with unusual situations. The
+column of typical values is intended to provide a feel for a common scenario.
 
-~\newline
-
-Section~\ref{Sec:ValuofAuxiCons} gives the values of the specification parameters used
-in Table~\ref{TblInputVar}.
+Section~\ref{Sec:ValuofAuxiCons} \wss{Update this to point to the Appendix}
+gives the values of the specification parameters used in
+Table~\ref{TblInputVar}.
 
 \begin{table}[!h]
 \caption{Input Variables} \label{TblInputVar}
@@ -1195,6 +1220,11 @@ are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR
     \label{Fig_ASTM_E1300-09}
   \end{center}
 \end{figure}
+  
+\subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
+
+Table~\ref{TblOutputVar} shows the properties that must be exhibited by the
+calculated output variables.
 
 \begin{table}[!h]
 \caption{Output Variables} \label{TblOutputVar}
@@ -1210,19 +1240,14 @@ $P_b$ & $0 < P_b < 1$\\
 \end{tabular}
 \end{center}
 \end{table}
-  
-  \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
-
-\noindent
-A correct solution must exhibit conformation to the system of non-linear 
-equations presented in \iref{IM_prob}, a system of linear equations presented in  \iref{IM_cap}, and a concave up function for calculation of \iref{IM_dem}.
 
 \section{Requirements} \label{sec_Reqs}  
 
-This section provides the functional requirements, the business tasks that the software is expected to complete, and the non-functional requirements, the qualities that the software is expected to exhibit.
+This section provides the functional requirements, the business tasks that the
+software is expected to complete, and the non-functional requirements, the
+qualities that the software is expected to exhibit.
   
 \subsection{Functional Requirements} \label{Func}
-
 
 \noindent \begin{itemize}
 
@@ -1304,8 +1329,6 @@ The system shall set the known values as follows:
 \item Aspect Ratio (AR) (\ddref{DD_AR})
 \end{itemize}
 
-
-
 \end{itemize}
 
 \subsection{Non-Functional Requirements}
@@ -1315,16 +1338,29 @@ performance speed are secondary program priorities. Instead, the following
 non-functional requirements are prioritized:
 
 \begin{itemize}
-\item[NFR1:] Correctness, achieved if the outputs of the code have the 
-properties described 
-in \ref{sec_CorrectSolution}.
-\item[NFR2:] Portability, achieved if \progname{} is installed on two operating system MAC and Windows with processors and instruction sets.
+\item[NFR1:] Correctness, achieved if the outputs of the code have the
+  properties described in \ref{sec_CorrectSolution}. \wss{No, this is not
+    correct.  Correctness depends on meeting the requirements.  This doesn't
+    make sense as a separate NFR.  What you are likely intending to refer to is
+    accuracy.  Accuracy is a difficult requirement to state in a measurable way.
+    I think what you could say here is that accuracy is important, but it cannot
+    reasonably be specified \emph{a priori}.  What we will do instead is measure
+    the accuracy \emph{a posterior} by comparing the output to an existing
+    implementation for GlassBR.}
+\item[NFR2:] Portability, achieved if \progname{} is installed on two operating
+  system MAC and Windows with processors and instruction sets. \wss{Installing
+    it doesn't make it portable.  What you want is to measure the difference in
+    the calculated values and ensure that they are within an acceptable tolerance.}
  
-\item[NFR3:] Reusability, achieved if the code is modularized.
+\item[NFR3:] Reusability, achieved if the code is modularized. \wss{Not
+    necessarily}
+
 \item[NFR4:] Maintainability, achieved if the traceability between 
 requirements, assumptions, theoretical models, general definitions, data 
 definitions, instance models, likely changes, and modules is completely 
-recorded in traceability matrices in the SRS and module guide.
+recorded in traceability matrices in the SRS and module guide. \wss{Again, this
+  may help with maintainability, but it doesn't ensure it is achieved.}
+
 \end{itemize}
 
 \section{Likely Changes} \label{sec_like}
@@ -1367,11 +1403,14 @@ recorded in traceability matrices in the SRS and module guide.
 \item[\refstepcounter{ucnum} \utheucnum \label{ucGoal}:] The goal of the system
   is to predict whether the glass slab under consideration can withstand an 
   explosion of a certain degree.
-\item[\refstepcounter{ucnum} \utheucnum \label{ucN/AGlass}:] \aref{A_N/AGlass} requires that the glass is not altered in any way. Therefore, this cannot be used on altered glass.
+\item[\refstepcounter{ucnum} \utheucnum \label{ucN/AGlass}:] \aref{A_N/AGlass}
+  requires that the glass is not altered in any way. Therefore, this cannot be
+  used on altered glass.
 
 \end{itemize}
 
 \section{Traceability Matrices and Graphs}
+
 The purpose of the traceability matrices is to provide easy references on what 
 has to be additionally modified if a certain component is changed.  Every time a 
 component is changed, the items in the column of that component that are 
