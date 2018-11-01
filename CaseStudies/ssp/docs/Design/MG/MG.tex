@@ -197,20 +197,22 @@ design for change.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_GenAlg}:] Algorithm
   for determining the critical slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Kin}:] Criteria for
-  a slip surface to be considered physically realistic/ kinematically
-  admissible.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
-  algorithm for creating the slice points for slip surface analysis.
+  a slip surface to be considered physically realistic.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_FSweight}:] The
   weighting scheme for comparing slip surfaces factors of safety.
+\newline\bmac{AC5-AC7 are all related to the genetic algorithm}
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
+  algorithm for dividing a slip surface into slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
-  algorithm for implementation of the Morgenstern Price Solver.
+  algorithm for implementation of the Morgenstern-Price method.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
-  algorithm for assigning soil properties to slices.
+  algorithm for calculating soil properties of and forces on slices.
+\newline\bmac{AC8-AC10 are all related to the Morgenstern-Price method}
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
   implementation for the sequence (array) data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
   of generating pseudo-random numbers.
+\newline\bmac{Also related to genetic algorithm}
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Plot}:] The method
   of displaying the final output.
 \end{description}
@@ -549,8 +551,8 @@ R11 & \mref{mOutput} \mref{mPlot}\\
 \acref{AC_output}& \mref{mOutput}\\
 \acref{AC_GenAlg}& \mref{mGenAlg}\\
 \acref{AC_Kin}& \mref{mKinAdm}\\
-\acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
+\acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_MP} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
