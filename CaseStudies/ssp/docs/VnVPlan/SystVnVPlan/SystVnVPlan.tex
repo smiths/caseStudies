@@ -54,6 +54,7 @@
 10/17/18 & 1.1 & Added initial test cases\\
 10/20/18 & 1.2 & Added faulty input test cases\\
 10/22/18 & 1.3 & Added remaining test cases\\
+11/01/18 & 1.4 & Updates based on feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -500,7 +501,7 @@ performed as automated tests on a unit testing framework.
 	\label{FaultyInputTests}
 \end{longtable}
 
-\subsubsection{Calculation Tests}
+\subsubsection{Calculation Tests} \label{sec_CalcTCs}
 
 The tests in this section verify that \progname{} correctly determines critical 
 slip surfaces and calculates factors of safety by comparing results obtained 
@@ -844,7 +845,7 @@ How test will be performed: Automated test on unit testing framework
 
 \subsection{Tests for Nonfunctional Requirements} \label{sec_NFRTests}
 
-\subsubsection{Maintainability test}
+\subsubsection{Maintainability Test} \label{sec_Maintainability}
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 	
@@ -874,7 +875,7 @@ answers incorrectly, the test fails and the documentation or implementation of
 					
 \end{enumerate}
 
-\subsubsection{Reusability test}
+\subsubsection{Reusability Test} \label{sec_Reusability}
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 	
@@ -899,6 +900,17 @@ existing version, then the test passes and confidence in the reusability of
 test fails and the other modules must be modified to be completely reusable.
 	
 \end{enumerate}
+
+\subsubsection{Correctness Tests}
+The correctness NFR is covered by the functional requirement test cases for 
+calculations, found in 
+Section~\ref{sec_CalcTCs}.
+
+\subsubsection{Understandability Tests}
+Understandability is a contributing factor to maintainability and reusability. 
+Therefore, the understandability NFR is covered by the test cases for 
+maintainability and reusability, found in Section~\ref{sec_Maintainability} and 
+Section~\ref{sec_Reusability}, respectively.
 
 \subsection{Traceability Between Test Cases and Requirements}
 
