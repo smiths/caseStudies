@@ -29,12 +29,6 @@
     urlcolor=cyan           % color of external links
 }
 
-
-
-\newcommand{\NN}[1]{{\color{red}#1}}
-\newcommand{\WSS}[1]{{\color{blue}#1}}
-\newcommand{\OO}[1]{{\color{red}#1}}
-
 \input{../Comments}
 
 \newcommand{\colZwidth}{1.0\textwidth}
@@ -94,7 +88,7 @@
 \begin{document}
 
 \title{Software Requirements Specification for TamiasMini2D} 	    \olu {added project name}
-\author{Alex Halliwushka and Luthfi Mawarid and Olu Owojaiye}  \olu {added name}
+\author{Alex Halliwushka, Luthfi Mawarid and Olu Owojaiye}  \olu {added name}
 \date{\today}
 	
 \maketitle
@@ -292,11 +286,13 @@ acted on by forces.
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec_CharofInteRead}
-Reviewers of this documentation should have a strong knowledge of Physics, which is at the level covered in a second year engineering
-mechanics course. The reviewers should also have an understanding of Calculus 1 which is at the level covered in first year 
-engineering or science calculus. The users of \progname{} can have a lower level of expertise, as explained in Section~\ref{Sec_UserChar}.
+Reviewers of this documentation should have a strong knowledge of Physics, which
+is at the level covered in a second year engineering mechanics course. The
+reviewers should also have an understanding of Calculus 1 which is at the level
+covered in first year engineering or science calculus. The users of \progname{}
+can have a lower level of expertise, as explained in Section~\ref{Sec_UserChar}.
 \olu{reformatted paragraph}
-%2.3 Organization of Document
+
 \subsection{Organization of Document}
 The organization of this document follows the template for an SRS for scientific
 computing software proposed by~\cite{Koothoor2013} and \cite{SmithAndLai2005}.
@@ -304,17 +300,10 @@ The presentation follows the standard pattern of presenting goals, theories,
 definitions, and assumptions.  For readers that would like a more bottom-up
 approach, they can start reading the instance models in Section
 \ref{sec_instance} and trace back to find any additional information they
-require. \\
-\newline
+require.
+
 The goal statements are refined to the theoretical models, and theoretical
 models to the instance models.  
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	3.) General System Description
-%
-%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{General System Description}
 
@@ -322,7 +311,6 @@ This section provides general information about the system including identifying
 the interfaces between the system and its environment (system context), describing
 the user characteristics and listing the system constraints.
 
-%3.1 System Context
 \subsection{System Context}
 Figure~\ref{Fig_SystemContext} shows the system context. A circle represents an
 external entity outside the software, the user in this case. A rectangle
@@ -428,8 +416,6 @@ before the collision.
 This project is to implement a set of physics libraries. Hence a physical system description might not be applicable???
 \olu{Not sure if I need to have any information in this section, since it is about implementing a set of libraries}
 
-
-% 4.1.2 Goal Statements
 \subsubsection{Goal Statements}
 Given the kinematic properties, and forces (including any collision forces) applied on a set of rigid bodies: 
 
@@ -442,7 +428,7 @@ period of time (IM\ref{IM_FT})(IM\ref{IM_C}).
 %and velocities, and forces applied on a set of rigid bodies, determine their new positions and velocities over a 
 %period of time (IM\ref{IM_FT}) 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{G_angular}:] Determine their new orientations and angular 
-velocities over a period of time.(IM\ref{IM_FR}) (IM\ref{IM_C}).
+velocities over a period of time (IM\ref{IM_FR}) (IM\ref{IM_C}).
  
 %Given the physical properties, initial orientations
  %and angular velocities, and forces applied on a set of rigid bodies, determine their new orientations and angular 
@@ -482,7 +468,9 @@ or Likely Changes [Section~\ref{sec_likechan}], in which the respective assumpti
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_col}:] All rigid body collisions are vertex-to-edge collisions.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_damping}:] There is no damping involved throughout the simulation.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_damping}:] There is no
+  damping involved throughout the simulation.  \wss{Add another sentence: ``This
+    implies that there are no friction forces.''}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_constraints}:] There are no constraints and joints involved throughout the simulation.
 
@@ -609,7 +597,8 @@ library is based on. \\
 	\rowcolor[gray]{0.9}
 	Number & T\refstepcounter{theorynum}\thetheorynum \label{T_CT} \\
 	\hline
-	Label & \bf Chasles' theorem \\
+	Label & \textbf{Chasles' theorem} \wss{Please make this a DD; it isn't
+                abstract, general or fundamental.}\\
 	\hline
 	Equation & $\mathbf{v}_\mathrm{B} = \mathbf{v}_\mathrm{O} + (\boldsymbol{\omega} \times \mathbf{r}_\mathrm{OB})$ \\
 	\hline
@@ -664,7 +653,7 @@ data definitions, which in turn will be used to build the instance models. \\
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_I}\\
   \hline
-  Label&\bf Impulse\\
+  Label&\bf Impulse \wss{Make this a data definition}\\
   \hline
   Units& \si{\newton\second} \\
   \hline
@@ -856,7 +845,8 @@ Thus:
 		\rowcolor[gray]{0.9}
 		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_RV}\\
 		\hline
-		Label&\bf  Relative velocity in collisions \\
+		Label&\bf  Relative velocity in collisions \wss{Make this a data
+          definition}\\
 		\hline
 		Units & \si{\metre\per\second} \\
 		\hline
@@ -887,7 +877,7 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_COR}\\
   \hline
-  Label&\bf Coefficient of restitution \\
+  Label&\bf Coefficient of restitution \wss{Make this a data definition}\\
   \hline
   \rule{0pt}{22pt}Equation & $C_\text{R} = -\displaystyle\frac{\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n}}{\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}}$\\[1.5ex]
   \hline
@@ -918,7 +908,7 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_T}\\
   \hline
-  Label&\bf Torque \\
+  Label&\bf Torque \wss{Make this a data definition} \\
   \hline
   Units & \si{\newton\metre} \\
   \hline
@@ -948,7 +938,7 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_MI}\\
   \hline
-  Label&\bf  Moment of inertia \\
+  Label&\bf  Moment of inertia \wss{Make this a data definition}\\
   \hline
   Units & \si{\kilogram\metre\tothe{2}} \\
   \hline
@@ -1315,7 +1305,9 @@ $$\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\
 \noindent Expanding the relative velocity (GD\ref{GD_RV}) on the left:
 $$(\mathbf{v}^\mathrm{AP}_\mathrm{f} - \mathbf{v}^\mathrm{BP}_\mathrm{f}) \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}$$
 \noindent
-Applying Chasles' Theorem (T\ref{T_CT}) and IM\ref{IM_C} on the left-hand side: 
+Applying Chasles' Theorem (T\ref{T_CT}) and IM\ref{IM_C} on the left-hand side:
+\wss{This step does not make sense.  IM3 comes from this DD.  This makes this
+  circular.  The derivation should follow the game physics papers that I sent to you.}
 
 \begin{equation*}
 \begin{aligned}
@@ -1470,8 +1462,8 @@ Ref.\ By & GS\ref{G_linear}, R\ref{R_Rigid}, R\ref{R_Force} \\
   \hline
   Sources & \\
   \hline
-Ref.\ By & GS\ref{G_linear}, GS\ref{G_angular}, DD\ref{DD_IM}, R\ref{R_Shape}, R\ref{R_Collision} \\
-\olu {removed GS4 as it no longer exists and replaced with GS1 & 2 and GS1 and 2 now covers collision}
+Ref.\ By & GS\ref{G_linear}, GS\ref{G_angular}, DD\ref{DD_IM}, R\ref{R_Shape}, R\ref{R_Collision} \olu {removed GS4 as it no longer exists and replaced with GS1 \& 2 and GS1 and 2 now covers collision}\\
+
   \hline
 \end{tabular}
 \end{minipage}
@@ -1574,15 +1566,16 @@ is intended to provide a feel for a common scenario.
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 A correct solution must exhibit conformation to the system of 
-equations presented in IM\ref{IM_FT}, IM\ref{IM_FR} and IM\ref{IM_C}. 
+equations presented in IM\ref{IM_FT}, IM\ref{IM_FR} and IM\ref{IM_C}.  
+
+\wss{No, this is just stating (in another way) that the software should follow
+  its requirements.  This is a given for any SRS.  Instead, you should state
+  that energy is conserved.  The sum of the potential energies and kinetic
+  energy of all bodies should remain constant or decrease.  (Energy can decrease
+  of the CR is less than 1.0.)  You will have to add the definitions for kinetic
+  and potential energy.}
 
 \olu{Added new section}
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	5.) Requirements 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Requirements}
 
@@ -1596,25 +1589,47 @@ qualities that the software is expected to exhibit.
 \noindent
 \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Space}:] The software shall create a space for all of the rigid bodies in the physical simulation 
-to interact in.  
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rigid}:] The software shall receive the input, initial mass, velocities, positions,
-orientations, angular velocities of, and forces applied on rigid bodies (\iref{IM_FT}, \iref{IM_FR}, \rref{R_CheckInputs}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Shape}:] The software shall receive the surface properties of the bodies, such as friction
-or elasticity (\iref{IM_C}, \rref{R_CheckInputs}),
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckInputs}:] The software shall verify that the inputs satisfy the required physical constraints
- (Section \ref{sec_DataConstraints}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Force}:] The software shall determine the position and velocities over a period of time of the 2D
-rigid bodies acted upon by a force (\iref{IM_FT}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rotation}:] The software shall determine the orientation and angular velocities over a period of time of
-the 2D rigid bodies (\iref{IM_FR}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckCollision}:] The software shall determine if any of the rigid bodies in the space have collided (\rref{R_Space}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Collision}:] The software shall determine the position and velocities over a period of time of 2D rigid
-bodies that have undergone a collision (\iref{IM_C}, \rref{R_CheckCollision}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Space}:] The software shall
+  create a space for all of the rigid bodies in the physical simulation to
+  interact in.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rigid}:] The software shall
+  receive the input, initial mass, velocities, positions, orientations, angular
+  velocities of, and forces applied on rigid bodies (\iref{IM_FT}, \iref{IM_FR},
+  \rref{R_CheckInputs}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Shape}:] The software shall
+  receive the surface properties of the bodies, such as friction \wss{friction
+    should not be included because we do not have damping} or elasticity \wss{is
+    this the coefficient of restitution?  These are rigid bodies, so they do not
+    deform.}
+  (\iref{IM_C}, \rref{R_CheckInputs}),
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckInputs}:] The software
+  shall verify that the inputs satisfy the required physical constraints
+  (Section \ref{sec_DataConstraints}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Force}:] The software shall
+  determine the position and velocities over a period of time of the 2D rigid
+  bodies acted upon by a force (\iref{IM_FT}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rotation}:] The software shall
+  determine the orientation and angular velocities over a period of time of the
+  2D rigid bodies (\iref{IM_FR}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckCollision}:] The software
+  shall determine if any of the rigid bodies in the space have collided
+  (\rref{R_Space}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Collision}:] The software
+  shall determine the position and velocities over a period of time of 2D rigid
+  bodies that have undergone a collision (\iref{IM_C}, \rref{R_CheckCollision}).
 
 \olu{reworded functional requirement items}
 
 \end{itemize} 
+
+\wss{There is information missing. From these requirements.  How is the shape of
+  the rigid bodies defined?  How are collisions defined?  You should decide how
+  to represent the shapes.  For now, I suggest that we make the shapes all
+  rectangles.  (A degenerate rectangle could give us a triangle.)  Also, please
+  add a theoretical model for detecting collision.  A collision will occur
+  between two bodies when any point on both bodies occupies the same location
+  in space.  You could then add a corresponding IM that defines what this means
+  for rectangular bodies.}
 
 %5.2 Nonfunctional Requirements
 \subsection{Nonfunctional Requirements}
@@ -1624,20 +1639,26 @@ understandability, portability, reliability, and maintainability.
 
 \begin{itemize}
 
-\item[1.] Performance:System shall have short response time when perfoming computation.
+\item[1.] Performance: System shall have short response time when performing
+  computation. \wss{This is ambiguous.  How would you make this unambiguous and
+    something that can be measured?}
 
 \item[2.] Correctness: Outputs of the code shall have the 
 properties described in \ref{sec_CorrectSolution}.
 
-\item[3.] Usability: System shall be easy to learn and use.
+\item[3.] Usability: System shall be easy to learn and use. \wss{ambiguous}
 
 \item[4.] Understandability: Code shall be modularized with complete module 
-guide and module interface specification.
+guide and module interface specification. \wss{imposing modularization is
+  actually a design constraint.  It is a good idea, but we don't know for sure
+  if this is required, or the best idea.  Is there a way you can specify
+  understandability without imposing a design solution?}
 
-\item[5.] Reusability:All or parts of the software shall be reusable; achieved by modularized code.
+\item[5.] Reusability:All or parts of the software shall be reusable; achieved
+  by modularized code. \wss{ambiguous}
 
 \item[6.] Maintainability: System shall be easily maintained, defects easy to locate and fix;
-traceability matrix shall be capture accordingly to enhance maintainability
+traceability matrix shall be capture accordingly to enhance maintainability.  \wss{ambiguous}
 
 \end{itemize}
 
@@ -1656,10 +1677,18 @@ This section lists the likely changes to be made to the physics library.
 \olu{fixed sentence}
 
 \begin{itemize}
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal ODE-solving algorithm used by the library may change in the future.
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The library may be expanded to deal with edge-to-edge and vertex-to-vertex collisions (A\ref{A_col}).
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_damping}:] The library may be expanded to include motion with damping (A\ref{A_damping}).
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_constraints}:] The library may be expanded to include joints and constraints (A\ref{A_constraints}).
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal
+          ODE-solving algorithm used by the library may change in the
+          future. \wss{This is a design likely change.  We should focus on
+            likely requirements or assumption changes.}
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The
+          library may be expanded to deal with edge-to-edge and vertex-to-vertex
+          collisions (A\ref{A_col}). 
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_damping}:] The library
+          may be expanded to include motion with damping (A\ref{A_damping}).
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_constraints}:] The
+          library may be expanded to include joints and constraints
+          (A\ref{A_constraints}).
 \end{itemize}
 
 
@@ -1841,15 +1870,9 @@ Requirements, Data Constraints and Instance Models}
 	\end{center}
 \end{figure}
 
-~\pagebreak
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	8.) Off the Shelf Solutions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Off the Shelf Solutions}   \label{sec_otss}
+
+\wss{Add Chipmunk to this section.}
 As mentioned in section \ref{Sec_pd}, there already exist free open source game
 physics libraries. Similar 2D physics libraries are:
 \begin{itemize} 
@@ -1871,5 +1894,10 @@ Free open source 3D game physics libraries include:
 \bibliography {../../refs/Physics_Game_Library}
 
 \olu {not all references are displaying, still troubleshooting issue} 
+
+\wss{What references are not showing?  I see two cite commands in the document
+  and two references in the generated file.  This looks right to me?  Not
+  everything in the bib file should show up.  The only entries in the references
+  section should be those that were actually cited.}
 
 \end{document}
