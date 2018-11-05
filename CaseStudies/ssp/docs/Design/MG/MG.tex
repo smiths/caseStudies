@@ -163,7 +163,7 @@ potential readers of this document are as follows:
 The rest of the document is organized as follows. Section
 \ref{SecChange} lists the anticipated and unlikely changes of the
 software requirements. Section \ref{SecMH} summarizes the module
-decomposition that was constructed according to the likely
+hierarchy that was constructed according to the likely
 changes. Section \ref{SecConnection} specifies the connections between
 the software requirements and the modules. Section \ref{SecMD} gives a
 detailed description of the modules. Section \ref{SecTM} includes two
@@ -174,8 +174,8 @@ relation between anticipated changes and the modules. Section
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
 
-\hspace{3ex}This section lists possible changes to the
-system. According to the likeliness of the change, the possible
+\hspace{3ex}This section lists possible changes to Slope Stability analysis 
+Program (\progname{}). According to the likeliness of the change, the possible
 changes are classified into two categories. Each Anticipated Change (AC) is
 listed in Section \ref{SecAchange}, and each Unlikely Change (UC) is listed in
 Section \ref{SecUchange}.
@@ -219,7 +219,6 @@ constraints on the factor of safety and interslice forces.
   implementation for the array data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
   of generating pseudo-random numbers.
-\newline\bmac{Also related to genetic algorithm}
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Plot}:] The method
   for creating plots.
 \end{description}
@@ -240,8 +239,8 @@ that these decisions will be changed.
   devices (Input: File and/or keyboard, Output: File, memory, and/or
   screen).
 \item [\refstepcounter{ucnum}UC\theucnum \label{UC_SSPGoal}:] The goals of 
-Slope Stability analysis Program (\progname{}), to determine a slope's critical 
-slip surface and corresponding factor of safety, will not change.
+\progname{}, to determine a slope's critical slip surface and corresponding 
+factor of safety, will not change.
  
 \end{description}
 
@@ -296,7 +295,7 @@ Control \\
 & Kinematic Admissibility \\
 & Slip Weighting \\
 & Slip Slicing \\
-& Morgenstern Price Calculation \\
+& Morgenstern-Price Calculation \\
 & Slice Property Calculation \\
 \midrule
 
@@ -318,7 +317,7 @@ requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
 modules is listed in Table~\ref{Table:Req}. The program uses the 
 Morgenstern-Price method to calculate the factor of safety, which is implemented
-by \mref{mMorgPrice}. Further information on the Morgenstern Price algorithm 
+by \mref{mMorgPrice}. Further information on the Morgenstern-Price algorithm 
 can be found in \cite{ZhuEtAl2005}. A genetic algorithm is used to generate 
 potential slip surfaces to compare to find the critical slip surface, 
 implemented in \mref{mGenAlg}. Further information on use of a genetic 
@@ -443,7 +442,7 @@ surface.
 	\item[Secrets:] Algorithm to determine the coordinates of where the
 	slip surface interslice nodes occur.
 	\item[Services:] When preparing a slip surface for analysis by the
-	Morgenstern Price Module (\mref{mMorgPrice}) the x-coordinates defining the 
+	Morgenstern-Price Module (\mref{mMorgPrice}) the x-coordinates defining the 
 	boundaries of the slices are identified and stored in a vector.
 	\item[Implemented By:] \progname
 \end{description} 
