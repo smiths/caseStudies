@@ -37,6 +37,8 @@
 \newcommand{\uctheucnum}{UC\theucnum}
 \newcommand{\uref}[1]{UC\ref{#1}}
 
+\newcommand{\rref}[1]{R\ref{#1}}
+
 \newcounter{mnum}
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
@@ -47,7 +49,7 @@
 %    a piece in TeX and TUG News, Vol. 2, 1993.
 \newcommand{\Tstrut}{\rule{0pt}{2.6ex}}         % = `top' strut
 
-\externaldocument[SRS-]{SRS_SSP}
+\externaldocument[SRS-]{../../SRS/SRS}
 \externaldocument[MIS-]{MIS_SSP}
 
 \begin{document}
@@ -382,8 +384,7 @@ on the programming language selected.
   water for a water table, if one exists. This also includes an expected range 
   for the start and end points of the critical slip surface and a decision on 
   whether to use a half-sine or the constant 1 for the interslice normal to 
-  shear force ratio variability function. Also included are values, related to 
-  the numerical method, which are not user defined, such as error tolerance.
+  shear force ratio variability function.
 \item[Implemented By:] \progname
 \end{description}
 
@@ -521,19 +522,19 @@ modules and the anticipated changes Table~\ref{Table:AC}.
 \centering
 \begin{tabular}{ll}
 \toprule
-\textbf{Req.} & \textbf{Modules}\\
+\textbf{Requirement} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
-R2 & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-R3 & \mref{mKinAdm} \mref{mArrayOps}\\
-R4 & \mref{mGenAlg} \mref{mSlipSlicer} \mref{mArrayOps}\\
-R5 & \mref{mMorgPrice} \mref{mArrayOps}\\
-R6 & \mref{mSlipWeight} \mref{mArrayOps}\\
-R7 & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-R8 & \mref{mGenAlg} \mref{mArrayOps}\\
-R9 & \mref{mControl} \mref{mOutput} \mref{mSlipSlicer} \mref{mArrayOps}\\
-R10 & \mref{mOutput} \mref{mMorgPrice} \mref{mArrayOps}\\
-R11 & \mref{mOutput} \mref{mPlot}\\
+\rref{SRS-R_Inputs} & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
+\rref{SRS-R_VerifyInput} & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
+\rref{SRS-R_InitGen} & \mref{mKinAdm} \mref{mArrayOps}\\
+\rref{SRS-R_FS} & \mref{mGenAlg} \mref{mSlipSlicer} \mref{mArrayOps}\\
+\rref{SRS-R_Minimize} & \mref{mMorgPrice} \mref{mArrayOps}\\
+\rref{SRS-R_VerifyOutput} & \mref{mSlipWeight} \mref{mArrayOps}\\
+\rref{SRS-R_CritGraph} & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
+\rref{SRS-R_OutputFS} & \mref{mGenAlg} \mref{mArrayOps}\\
+\rref{SRS-R_NormalGraph} & \mref{mControl} \mref{mOutput} \mref{mSlipSlicer} 
+\mref{mArrayOps}\\
+\rref{SRS-R_ShearGraph} & \mref{mOutput} \mref{mMorgPrice} \mref{mArrayOps}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
