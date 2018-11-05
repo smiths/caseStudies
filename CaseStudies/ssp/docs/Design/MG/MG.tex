@@ -392,10 +392,10 @@ on the programming language selected.
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
 \item[Services:] Reads, verifies, and stores the input data. This includes a 
-set of coordinates for each slope layer, soil properties for each layer, 
-specifically effective angle of friction, effective cohesion, dry unit 
+  set of coordinates for the slope surface, soil properties, 
+  specifically effective angle of friction, effective cohesion, dry unit 
   weight, and saturated unit weight, and the coordinates and unit weight of 
-  water for a water table, if one exists. This also includes an expected range 
+  water for a water table, if one exists. Input also includes an expected range 
   for the start and end points of the critical slip surface and a decision on 
   whether to use a half-sine or the constant 1 for the interslice normal to 
   shear force ratio variability function.
@@ -471,13 +471,10 @@ slip surface.
 
 \subsubsection{Slice Property Calculation (\mref{mSliceProperty})}
 \begin{description}
-\item[Secrets:] Algorithm to calculate slice properties, such as forces and 
-soil properties, based on the location of the slice with respect to the 
-different soil layers. 
-\item[Services:] Calculates the weight, hydrostatic forces, interslice water 
-forces, and material properties of each slice. Identifies which soil layer the 
-slice is in to assign properties from that soil layer, and uses a weighting 
-scheme when the slice crosses multiple soil layers.
+\item[Secrets:] Algorithm to calculate slice properties, specifically forces 
+acting on the slice. 
+\item[Services:] Calculates the weight, hydrostatic forces, and interslice 
+water forces of each slice.
 \item[Implemented By:] \progname
 \end{description} 
 
