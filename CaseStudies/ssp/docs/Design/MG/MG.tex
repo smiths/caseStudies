@@ -212,7 +212,7 @@ constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
   algorithm for implementation of the Morgenstern-Price method.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_CalcFS}:] The method used to 
-calculate the factor of safety of a slip surface.
+  calculate the factor of safety of a slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
   algorithm for calculating soil properties of and forces on individual slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
@@ -381,9 +381,9 @@ on the programming language selected.
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
-\item[Services:] Read, verify, and store the input data. This includes a set of 
-  coordinates for each slope layer, soil properties for each layer, 
-  specifically effective angle of friction, effective cohesion, dry unit 
+\item[Services:] Reads, verifies, and stores the input data. This includes a 
+set of coordinates for each slope layer, soil properties for each layer, 
+specifically effective angle of friction, effective cohesion, dry unit 
   weight, and saturated unit weight, and the coordinates and unit weight of 
   water for a water table, if one exists. This also includes an expected range 
   for the start and end points of the critical slip surface and a decision on 
@@ -397,8 +397,7 @@ on the programming language selected.
 \begin{description}
 \item[Secrets:] The format and structure of the output data.
 \item[Services:] Outputs the results of the calculations, including
-  the factor of safety for the critical slip calculated by the
-  Morgenstern Price Module (\mref{mMorgPrice}) and a plot of the critical
+  the factor of safety for the critical slip surface and a plot of the critical
   slip surface on the slope geometry. Verifies that the output meets physical 
   constraints. Also outputs input values.
 \item[Implemented By:] \progname
@@ -452,24 +451,26 @@ surface.
 \subsubsection{Morgenstern-Price Calculation (\mref{mMorgPrice})}
 
 \begin{description}
-\item[Secrets:] The factor of safety of a given slip surface.
+\item[Secrets:] The algorithm for calculating the factor of safety of a given 
+slip surface.
 \item[Services:] Calculates the factor of safety of a given slip
-  surface, through implementation of a Morgenstern Price slope
+  surface, through implementation of a Morgenstern-Price slope
   stability analysis method.
 \item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Slice Property Calculation (\mref{mSliceProperty})}
 \begin{description}
-\item[Secrets:] Algorithm to assigns soil properties to slices based
-  on the location of the slice with respect to the different soil
-  layers.
-\item[Services:] When performing slip analysis with the Morgenstern Price Module
-  (\mref{mMorgPrice}), the base and interslice surfaces of each slice
-  in the analysis requires a soil constant. Slice Property Sorter
-  Module identifies which soil layer the surface is in to assign
-  properties from that soil layer, and uses a weighting scheme when
-  the surface crosses multiple soil layers.
+\item[Secrets:] Algorithm to calculate slice properties, such as forces and 
+soil properties, based on the location of the slice with respect to the 
+different soil layers. These slice properties are independent of the solution 
+method used to calculate the factor of safety, thus they are separated to their 
+own module.
+\bmac{Is this the right place for this justification?}
+\item[Services:] Calculates the weight, hydrostatic forces, interslice water 
+forces, and material properties of each slice. Identifies which soil layer the 
+slice is in to assign properties from that soil layer, and uses a weighting 
+scheme when the slice crosses multiple soil layers.
 \item[Implemented By:] \progname
 \end{description} 
 
@@ -489,7 +490,7 @@ surface.
 \subsubsection{Array Data Structure (\mref{mArrayOps})}
 
 \begin{description}
-\item[Secrets:] The data structure for a sequence data type.
+\item[Secrets:] The data structure for an array data type.
 \item[Services:] Provides array manipulation, including building an
   array, accessing a specific entry, slicing an array etc.
 \item[Implemented By:] Matlab
@@ -499,10 +500,9 @@ surface.
 \subsubsection{Random Number Generation (\mref{mRandNum})}
 
 \begin{description}
-\item[Secrets:] Pseudo-random numbers between 0 and 1.
+\item[Secrets:] Algorithm for providing pseudo-random numbers between 0 and 1.
 \item[Services:] Randomly produces numbers between 0 and 1, using a
-  chaotic function with an external seed. Used when generating slip
-  surfaces in the Genetic Algorithm Module \mref{mGenAlg}.
+  chaotic function with an external seed.
 \item[Implemented By:] Matlab
 \end{description}
 
@@ -512,7 +512,7 @@ surface.
 \begin{description}
 \item[Secrets:] The data structures and algorithms for plotting data
   graphically.
-\item[Services:] Provides a plot function.
+\item[Services:] Provides functions for plotting data.
 \item[Implemented By:] Matlab
 \end{description}
 
@@ -554,12 +554,15 @@ modules and the anticipated changes Table~\ref{Table:AC}.
 \acref{AC_hardware} & \mref{mHH}\\
 \acref{AC_Control} & \mref{mControl}\\
 \acref{AC_input} & \mref{mInput}\\
+\acref{AC_inputConstraints} & \mref{mInput}\\
 \acref{AC_output}& \mref{mOutput}\\
+\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_GenAlg}& \mref{mGenAlg}\\
 \acref{AC_Kin}& \mref{mKinAdm}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
 \acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_MP} & \mref{mMorgPrice}\\
+\acref{AC_CalcFS} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
 \acref{AC_Rand} & \mref{mRandNum}\\
@@ -584,7 +587,6 @@ offers a testable and usable subset of the system, and modules in the
 higher level of the hierarchy are essentially simpler because they use
 modules from the lower levels.
 
-\bmac{Want to combine M-P, slice property (slicing too?)}
 % ------ %
 \begin{figure}[h!]
 \begin{center}
