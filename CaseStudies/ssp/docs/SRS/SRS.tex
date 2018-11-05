@@ -2539,6 +2539,31 @@ the factor of safety, critical slip surface, and interslice forces satisfy the
 physical constraints shown in Table~\ref{TblOutputVar} and Section
 \ref{sec_CorrectSolution}.
 
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] Display as 
+output the user-supplied inputs listed in the table below:
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\noindent \begin{tabularx}{1.0\textwidth}{l X} \toprule \textbf{symbol} &
+		%  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
+		\textbf{description}\\ \midrule
+		${x_{slip}^{maxEnd}}$ & maximum potential \textit{x}-ordinate of 
+		the ending point of a slip surface \\
+		${x_{slip}^{minEnd}}$ & minimum potential \textit{x}-ordinate of 
+		the ending point of a slip surface\\
+		${x_{slip}^{maxStart}}$ & maximum potential \textit{x}-ordinate of 
+		the starting point of a slip surface \\
+		${x_{slip}^{minStart}}$ & minimum potential \textit{x}-ordinate of 
+		the starting point of a slip surface \\
+		${y_{slip}^{max}}$ & maximum potential \textit{y}-ordinate of the 
+		of a point on a slip surface\\
+		${y_{slip}^{min}}$ & minimum potential \textit{y}-ordinate of the 
+		of a point on a slip surface \\
+		N/A & A boolean decision on which form of the interslice variation 
+		function \textit{f} the user desires: constant or half-sine.\\ 
+		\bottomrule
+	\end{tabularx}
+\end{table}
+
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_CritGraph}:] Display
   the critical slip surface of the 2D slope, as determined from \iref{IM_Min}, 
   graphically. 
@@ -2788,6 +2813,7 @@ Sections With Theory Models and General Definitions}
 \rref{R_FS}           & X& X& X& & & \\ \hline 
 \rref{R_Minimize}     & & & & X& & \\ \hline
 \rref{R_VerifyOutput} & & & & & X& \\ \hline
+\rref{R_OutputInputs} & & & & & & X \\ \hline
 \rref{R_CritGraph}    & & & & & X& \\ \hline
 \rref{R_OutputFS}     & X& X& X& & & \\ \hline
 \rref{R_NormalGraph}  & X& X& X& & & \\ \hline
