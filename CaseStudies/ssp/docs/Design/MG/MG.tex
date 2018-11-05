@@ -208,7 +208,7 @@ constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_FSweight}:] The
   weighting scheme for comparing slip surface's factors of safety.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
-  algorithm for dividing a slip surface into slices.
+  algorithm for dividing a slip surface into vertical slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
   algorithm for implementation of the Morgenstern-Price method.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_CalcFS}:] The method used to 
@@ -275,7 +275,7 @@ Generation
 \end{description}
 
 Note that \mref{mHH} is a commonly used module and is already
-implemented by the operating system.
+implemented by the Operating System (OS).
 
 \begin{table}[h!]
 \centering
@@ -312,7 +312,14 @@ Array Data Structure \\
 
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
-\hspace{3ex}The design of the system is intended to satisfy the
+\bmac{This section seems to cover the same topic as the traceability matrix in 
+Section \ref{secTM}. I am treating it as a place where I can provide more 
+detailed justification for the design than can be found in a traceability 
+matrix. Was that the intention for this section? My second paragraph here, in 
+particular, might be out of place since it is related to anticipated changes 
+and not requirements? Not sure where else to put it though.}
+
+The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
 modules is listed in Table~\ref{Table:Req}. The program uses the 
@@ -324,6 +331,11 @@ implemented in \mref{mGenAlg}. Further information on use of a genetic
 algorithm in relation to a slope stability problem can be found in 
 \cite{LiEtAl}.
 
+While the division of a slip surface into vertical slices and the calculation 
+of properties of each slice are part of the Morgenstern-Price method, they have 
+been separated into their own modules, \mref{mSlipSlicer} and 
+\mref{mSliceProperty}. This is due to \acref{AC_CalcFS}, as these modules would 
+be common between different methods for calculating the factor of safety.
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -462,10 +474,7 @@ slip surface.
 \begin{description}
 \item[Secrets:] Algorithm to calculate slice properties, such as forces and 
 soil properties, based on the location of the slice with respect to the 
-different soil layers. These slice properties are independent of the solution 
-method used to calculate the factor of safety, thus they are separated to their 
-own module.
-\bmac{Is this the right place for this justification?}
+different soil layers. 
 \item[Services:] Calculates the weight, hydrostatic forces, interslice water 
 forces, and material properties of each slice. Identifies which soil layer the 
 slice is in to assign properties from that soil layer, and uses a weighting 
@@ -480,7 +489,7 @@ scheme when the slice crosses multiple soil layers.
 \item[Secrets:] The design decision based on mathematical theorems,
   physical facts, or programming considerations. The secrets of this
   module are \emph{not} described in the SRS.
-\item[Services:] Includes a data structure and algorithms used in the
+\item[Services:] Includes data structures and algorithms used in the
   system that do not provide direct interaction with the user.
 \item[Implemented By:] --
 \end{description}
