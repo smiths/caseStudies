@@ -240,8 +240,8 @@ that these decisions will be changed.
   devices (Input: File and/or keyboard, Output: File, memory, and/or
   screen).
 \item [\refstepcounter{ucnum}UC\theucnum \label{UC_SSPGoal}:] The goals of 
-\progname{}, to determine a slope's critical slip surface and corresponding 
-factor of safety, will not change.
+Slope Stability analysis Program (\progname{}), to determine a slope's critical 
+slip surface and corresponding factor of safety, will not change.
  
 \end{description}
 
@@ -518,9 +518,9 @@ scheme when the slice crosses multiple soil layers.
 
 \section{Traceability Matrix} \label{SecTM}
 
-\hspace{3ex}This section shows two traceability matrices: between the
-modules and the requirements Table~\ref{Table:Req} and between the
-modules and the anticipated changes Table~\ref{Table:AC}.
+\hspace{3ex}This section shows two traceability matrices: Table~\ref{Table:Req} 
+shows which modules cover each Requirement (R) and Table~\ref{Table:AC} shows 
+how modules map to the anticipated changes.
 
 \begin{table}[h!]
 \centering
@@ -528,17 +528,24 @@ modules and the anticipated changes Table~\ref{Table:AC}.
 \toprule
 \textbf{Requirement} & \textbf{Modules}\\
 \midrule
-\rref{SRS-R_Inputs} & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
-\rref{SRS-R_VerifyInput} & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-\rref{SRS-R_InitGen} & \mref{mKinAdm} \mref{mArrayOps}\\
-\rref{SRS-R_FS} & \mref{mGenAlg} \mref{mSlipSlicer} \mref{mArrayOps}\\
-\rref{SRS-R_Minimize} & \mref{mMorgPrice} \mref{mArrayOps}\\
-\rref{SRS-R_VerifyOutput} & \mref{mSlipWeight} \mref{mArrayOps}\\
-\rref{SRS-R_CritGraph} & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-\rref{SRS-R_OutputFS} & \mref{mGenAlg} \mref{mArrayOps}\\
-\rref{SRS-R_NormalGraph} & \mref{mControl} \mref{mOutput} \mref{mSlipSlicer} 
+\rref{SRS-R_Inputs} & \mref{mHH} \mref{mControl} \mref{mInput} 
 \mref{mArrayOps}\\
-\rref{SRS-R_ShearGraph} & \mref{mOutput} \mref{mMorgPrice} \mref{mArrayOps}\\
+\rref{SRS-R_VerifyInput} & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
+\rref{SRS-R_InitGen} & \mref{mControl} \mref{mGenAlg} \mref{mArrayOps} 
+\mref{mRandNum} \\
+\rref{SRS-R_FS} & \mref{mSlipSlicer} \mref{mMorgPrice} \mref{mSliceProperty} 
+\mref{mArrayOps}\\
+\rref{SRS-R_Minimize} & \mref{mGenAlg} \mref{mSlipWeight} \mref{mArrayOps}\\
+\rref{SRS-R_VerifyOutput} & \mref{mControl} \mref{mKinAdm} \mref{mOutput} 
+\mref{mArrayOps}\\
+\rref{SRS-R_CritGraph} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps} \mref{mPlot}\\
+\rref{SRS-R_OutputFS} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps}\\
+\rref{SRS-R_NormalGraph} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps} \mref{mPlot}\\
+\rref{SRS-R_ShearGraph} & \mref{mHH} \mref{mOutput} \mref{mArrayOps} 
+\mref{mPlot}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
