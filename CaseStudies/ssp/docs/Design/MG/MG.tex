@@ -209,14 +209,12 @@ constraints on the factor of safety and interslice forces.
   weighting scheme for comparing slip surface's factors of safety.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
   algorithm for dividing a slip surface into vertical slices.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
-  algorithm for implementation of the Morgenstern-Price method.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_CalcFS}:] The method used to 
-  calculate the factor of safety of a slip surface.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_CalcFS}:] The algorithm used 
+to calculate the factor of safety for a slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
   algorithm for calculating soil properties of and forces on individual slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
-  implementation for the array data structure.
+  implementation of the array data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
   of generating pseudo-random numbers.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Plot}:] The method
@@ -313,11 +311,12 @@ Array Data Structure \\
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 \bmac{This section seems to cover the same topic as the traceability matrix in 
-Section \ref{secTM}. I am treating it as a place where I can provide more 
+Section \ref{SecTM}. I am treating it as a place where I can provide more 
 detailed justification for the design than can be found in a traceability 
 matrix. Was that the intention for this section? My second paragraph here, in 
 particular, might be out of place since it is related to anticipated changes 
-and not requirements? Not sure where else to put it though.}
+and not requirements? Not sure where else to put it though. Maybe within 
+Section \ref{SecTM} itself?}
 
 The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
@@ -403,7 +402,7 @@ specifically effective angle of friction, effective cohesion, dry unit
 \item[Implemented By:] \progname
 \end{description}
 
-\subsubsection{Output Format (\mref{mOutput})}
+\subsubsection{Output (\mref{mOutput})}
 
 \begin{description}
 \item[Secrets:] The format and structure of the output data.
@@ -528,7 +527,14 @@ scheme when the slice crosses multiple soil layers.
 
 \hspace{3ex}This section shows two traceability matrices: Table~\ref{Table:Req} 
 shows which modules cover each Requirement (R) and Table~\ref{Table:AC} shows 
-how modules map to the anticipated changes.
+how modules map to the anticipated changes. There are two cases where a single 
+module covers multiple anticipated changes. \acref{AC_input} and 
+\acref{AC_inputConstraints} are both covered by \mref{mInput}, and 
+\acref{AC_output} and \acref{AC_outputConstraints} are both covered by 
+\mref{mOutput}. In these cases, the anticipated changes are related to two 
+services that should always happen in tandem. If input is being read, it should 
+always be verified. If output is being delivered, it should always be verified. 
+Thus, it makes sense to combine the two services into a single module.
 
 \begin{table}[h!]
 \centering
@@ -564,7 +570,7 @@ how modules map to the anticipated changes.
 \centering
 \begin{tabular}{ll}
 \toprule
-\textbf{Req.} & \textbf{Modules}\\
+\textbf{Anticipated Change} & \textbf{Modules}\\
 \midrule
 \acref{AC_hardware} & \mref{mHH}\\
 \acref{AC_Control} & \mref{mControl}\\
@@ -576,7 +582,6 @@ how modules map to the anticipated changes.
 \acref{AC_Kin}& \mref{mKinAdm}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
 \acref{AC_Slicer} & \mref{mSlipSlicer}\\
-\acref{AC_MP} & \mref{mMorgPrice}\\
 \acref{AC_CalcFS} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
