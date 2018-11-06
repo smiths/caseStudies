@@ -9,6 +9,7 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{hyperref}
 \usepackage[numbib,nottoc]{tocbibind}
+\usepackage{tabularx}
 
 \hypersetup{
 bookmarks=true,     % show bookmarks bar?
@@ -20,17 +21,9 @@ urlcolor=cyan          % color of external links
 }
 
 %% Comments
-\newif\ifcomments\commentstrue
+\input{../../Comments}
 
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\nk}[1]{\authornote{blue}{NK}{#1}}
+
 
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
@@ -49,14 +42,36 @@ urlcolor=cyan          % color of external links
 \begin{document}
 
 \title{Module Guide for \progname} 
-\author{Spencer Smith and Thulasi Jegatheesan}
+\author{Spencer Smith and Thulasi Jegatheesan \\and\\ Vajiheh Motamer}
 \date{\today}
 	
 \maketitle
 
-\tableofcontents
+\pagenumbering{roman}
 
 \newpage
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+	\midrule
+	11/02/18 & 1.0 & Initial Template\\
+	11/05/18 & 1.1 & Minor changes based on template\\
+	\bottomrule
+\end{tabularx}
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
 
 \section{Introduction}
 
@@ -148,7 +163,8 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 \item[\refstepcounter{acnum} \actheacnum \label{acConstants}:] The values of
   constants.
 \item[\refstepcounter{acnum} \actheacnum \label{acGlassType}:] The
-  implementation of the ``glass type'' type.
+  implementation of the ``glass type'' .\\
+  \aida{Term 'type' after 'glass type' should be removed. Besides, according to DD6 in the SRS, Glass Type Factor is a function which maps from the glass type to a real number, So I think this module should consist of calculation of glass type factor.}
 \item[\refstepcounter{acnum} \actheacnum \label{acThickness}:] The
   implementation of the thickness type.
 \item[\refstepcounter{acnum} \actheacnum \label{acFuncts}:] The data structure
@@ -325,7 +341,8 @@ one module one secret rule can be relaxed in this instance.
   distribution factor ($J$).
 \item[Services:] Reads the data from each ASTM file and creates an object that
   stores the sequence of functions represented by the data for each table of
-  data.
+  data.\\
+  \aida{I am thinking about this module, It is likely to be changed after preparing the MIS and Dr. Smith confirmation}
 \item[Implemented By:] \progname{}
 \end{description}
 
@@ -369,7 +386,8 @@ module.
 \subsubsection{GlassTypeADT Module (\mref{mGlassType})}
 
 \begin{description}
-\item[Secrets:] The implementation of the ``glass type'' type.
+\item[Secrets:] The implementation of the ``glass type'' and 'Glass Type Factor'.
+\aida{Term 'type' after 'glass type' should be removed. Besides, according to DD6 in the SRS, Glass Type Factor is a function which maps from the glass type to a real number, So I think this module should consist of calculation of glass type factor.}
 \item[Services:] Defines abstract data type for glass type.
 \item[Implemented By:] \progname{}
 \end{description}
