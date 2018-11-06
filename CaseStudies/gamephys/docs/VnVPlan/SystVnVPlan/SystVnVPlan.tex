@@ -1,0 +1,467 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\input{../../Comments}
+
+\begin{document}
+
+\title{TamiasMini2D: System Verification and Validation Plan} 
+\author{Oluwaseun Owojaiye}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+2018-10-15 & 1.0 & Initial draft\\
+%Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  IM & Instance Model\\
+  R & Requirement\\
+  T & Test\\
+  TBD & To be determined\\
+2D & Two-dimensional\\
+SRS & System Requirement Specification\\
+   \bottomrule
+\end{tabular}\\
+
+For symbols and their meanings please refer to: https://github.com/smiths/caseStudies/blob/master/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf
+%\wss{symbols, abbreviations or acronyms -- you can simply reference the %SRS tables, if appropriate}
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document provides a high-level verification and validation plan for TamiasMini2D - a 2D rigid body physics library. This document is based on the System Requirement Specification Document(SRS) located in the following project repository link: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}. It discusses the verification and validation requirements for TM2D, and describes the test strategy and methods that will be used to evaluate the software. The verification and validation of the software utilizes review, analysis, and testing method to determine whether a software product complies with the specifed requirements. These requirements include both functional and non-functional.
+%This document ... \wss{provide an introductory blurb and roadmap of the
+ % Verification and Validation plan}
+
+\section{General Information}
+
+\subsection{Summary}
+The software being tested is TamiasMini2D. It is a 2D rigid body physics library designed to simulate the interaction between rigid bodies. Since physics libraries are an important part of video game development, game developers will be able to make use of this library in their products.
+%\wss{Say what software is being tested.  Give its name and a brief %overview of its general functions.}
+
+\subsection{Objectives}
+
+The purpose of verification and validation activities are to find bugs and defects in the TM2D physics library software and also to determine if it has met all the required functionality. It is also to verify that software meets the required standard and that the end product conforms with the software requirements based on the SRS. The objectives of VnV activities for TM2D are to:
+  \begin{itemize}
+	\item Build confidence in software correctness and performance.
+	\item Verify the degree maintainability of the software.
+	  based of efficiency by which this product can be enhanced, modified
+	  and reused.
+	\item Verify and demonstrate the ease of use and learning of the software.
+  \end{itemize}
+	
+
+%\wss{State what is intended to be accomplished.  The objective will be %around the qualities that are most important for your project.  You might %have something like: ``build confidence in the software correctness,''
+%``demonstrate adequate usability.'' etc.  You won't list all of the %qualities,just those that are most important.}
+
+\subsection{References}
+
+\begin{itemize}
+	\item[1.] \url {https://github.com/smiths/caseStudies/blob/GamePhy_Olu/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+\end{itemize}
+
+%\wss{Reference relevant documentation.  This will definitely include your SRS}
+
+\section{Plan}
+	
+\subsection{Verification and Validation Team}
+The verification and validation team consists of a one member team: Olu Owojaiye
+%\wss{Probably just you.  :-)}
+
+\subsection{SRS Verification Plan}
+The SRS for the project will be reviewed by Dr. Smith and coursemates and feedback will be provided.Some SRS feedback for this project have been provided and addressed using github issue tracker. Also once the software has been implemented, the SRS will be reviewed to ensure that software has met all the specified requirements in SRS and more feedback will be provided via github.
+
+%\wss{List any approaches you intend to use for SRS verification. This may %just be ad hoc feedback from reviewers, like your classmates, or you may %have something more rigorous/systematic in mind..}
+
+\subsection{Design Verification Plan}
+To ensure that the Design Specification has been properly specified and meets software requirements, Dr. Smith and my coursemates will be verifying the software design.The Module Guide and Module Interface Specification will contain information about the software design. Feedback is expected to be rovided by reviewers via github issue tracker.
+%\wss{Plans for design verification}
+
+\subsection{Implementation Verification Plan}
+ The implementation of TM2D will involve inspection of the software to ensure that all the required features have been implemented successfully and are functional. Once the development activities are completed, Dr Smith and my some of CAS761 coursemates will perform the implementation verification activities. The software will be installed by the testers and system test cases specified in Section 5 will be run. Reviewers are expected to verify both functional and non-functional requirements specified below. Exploratory testing should also be performed by testers.
+ Any implementation verification issues will be reported and tracked via github issue tracker and these issues will be resolved in order of severity by myself. After the issues raised have been fixed, they will be sent back to reviewrs for re-verification.
+%\wss{You should at least point to the tests listed in this document and %the unit testing plan.}
+
+\subsection{Software Validation Plan}
+
+	There is currently no software validation plan for TM2D.
+%\wss{If there is any external data that can be used for validation, you %should point to it here.  If there are no plans for validation, you %should state that here.}
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+
+%\wss{Subsets of the tests may be in related, so this section is divided %into different areas.  If there are no identifiable subsets for the %tests, this level of document structure can be removed.}
+
+\subsubsection{Translational Motion Testing}
+	
+\paragraph{}
+
+\begin{enumerate}
+
+\item{TC1: Static rigid body velocity-position calculation\\}
+
+Description:Calculate the position and velocity of a 2D rigid body that is static after t secs. Gravity is not applied. The object does not move, hence velocity and position does not change based on IM1.Varying positive input parameters can be used in TC1 for each of the parameters
+
+Control: Automatic
+					
+Initial State: New session - Static 2D rigid body(body is not moving)
+					
+Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 0) ;This is the initial position of body - (x,y) coordinate position\\
+       \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+       \hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 0\\
+       \hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 10\\
+       \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0 (acceleration due to gravity does not apply on a static body)\\
+					
+Output:  $\mathbf{p_i}$$\mathbf{(t)}$ = (0, 0);
+         $\mathbf{v_i}$$\mathbf{(t)}$ = (0, 0); after t secs where t= 3 
+					
+How test will be performed: Unit testing with PyUnit
+					
+\item{TC2: Dynamic 2D rigid body falling from a height velocity-position calculation\\}
+
+Description: Calculation of the new position and velocity of a dynamic body. Force of gravity is in effect and we apply a horizontal force F. The new position and velocity is calculated. This test can be applied to a set of rigid bodies falling from a height at the same different time t.
+ 
+Control: Automatic
+					
+Initial State: New session - see Input below
+					
+Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (20, 20) this is the (x,y) coordinate position\\
+	   \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+	   \hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 10\\
+	   \hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 100\\
+	   \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity)\\
+	   
+	  
+Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (20.9, 20.882);
+		$\mathbf{v_i}$$\mathbf{(t)}$ = (0.3, 0.294); after t secs, where t= 3 
+					
+How test will be performed: Unit testing with PyUnit
+
+\item{TC3: Projectile motion of dynamic 2D rigid velocity-position calculation\\}
+
+Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified in input. In horizontal direction, velocity is constant.
+
+Control: Automatic
+
+Initial State: New session - see Input below
+
+Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 125) this is the (x,y) coordinate position\\
+\hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = (10,0)\\
+\hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 10\\
+\hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 10\\
+\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity)\\
+**Need to doublecheck this calculation\\
+Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (50, 0);
+$\mathbf{v_i}$$\mathbf{(t)}$ = (10, 50); after t secs, where t= 5 
+
+How test will be performed: Unit testing with PyUnit
+
+\end{enumerate}
+
+\subsubsection{Rotation of 2D Rigid Body Simulation}
+This test is to simulate the rotation of a 2D rigid body about its axis.
+\paragraph{}
+\begin{enumerate}
+	
+	\item{TC4: 2D Rigid body rotation about its axis\\}
+	
+	Description: In rotational motion of 2D rigid bodies, Torque $\tau$ is the force which produces rotation. It has magnitude and direction.This test can also be used for multiple set of rigid bodies.(IM2)
+	
+	Control: Automatic
+	
+	Initial State: New session - see Input below
+	
+	Input: $\mathbf{m_i}$$\mathbf{}$ = 100\\
+	\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0\\
+	\hspace*{1.3cm}$\phi$$_i\mathbf{(t_0)}$ = 50\\
+	\hspace*{1.3cm}$\omega$$_i\mathbf{(t_0)}$$ \mathbf{}$ = 0.3\\
+	\hspace*{1.3cm}$\tau$$\mathbf{}$ = 1000 \\
+	\hspace*{1.3cm}$\mathbf{I}$$\mathbf{(i)}$ = 10000
+	
+	Output:  $\phi$$\mathbf{(t)}$ = 50.9;
+	$\omega$$\mathbf{(t)}$ = 0.3; after t secs where t= 3 
+	
+	How test will be performed: Unit testing with PyUnit
+
+
+
+\end{enumerate}
+
+\subsubsection{Rotation of 2D Rigid Body Simulation}
+This test is to simulate the collision of 2D rigid bodies.
+\paragraph{}
+\begin{enumerate}
+	
+	\item{TC5: Dynamic rigid body collision with static body test\\}
+	
+	Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a dynamic object falling from a height with a static object. At collision the static object does not move, the dynamic object's velocity, position, angular velocity, orientation is calculated.Momentum is conserved.
+	
+	Control: Automatic
+	
+	Initial State: New session - see Input below
+	
+	Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
+	\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
+	\hspace*{1.3cm}$\mathbf{v_k}$$\mathbf{(t_0)}$ = TBD\\
+	\hspace*{1.3cm}$\phi$$_k\mathbf{(t_0)}$ = TBD\\
+	\hspace*{1.3cm}$\omega$$_k\mathbf{(t_0)}$$ \mathbf{}$ = TBD\\
+	\hspace*{1.3cm}$\mathbf{C_R}$$\mathbf{}$ = TBD \\
+	
+	
+	Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
+	\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t)}$ = TBD\\
+	\hspace*{1.3cm}$\phi$$_k\mathbf{(t)}$ = TBD\\
+	\hspace*{1.3cm}$\omega$$_k\mathbf{(t)}$$ \mathbf{}$ = TBD\\
+	 after t secs(t, TBD) 
+	 
+	
+	How test will be performed: Unit testing with PyUnit
+	
+	\item{TC6: Dynamic rigid Body collision test(set of bodies)\\}
+
+Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a set of dynamic object falling from a height with a static object. At collision bodies' velocity, position, angular velocity, orientation is calculated. Momentum is conserved. The input and output set generated is determined by the number of bodies added in space.Multiple objects will be simulated to fall at different times fro a height so we can simulate collision.
+
+Control: Automatic
+
+Initial State: New session - see Input below
+
+Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
+\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
+\hspace*{1.3cm}$\mathbf{v_k}$$\mathbf{(t_0)}$ = TBD\\
+\hspace*{1.3cm}$\phi$$_k\mathbf{(t_0)}$ = TBD\\
+\hspace*{1.3cm}$\omega$$_k\mathbf{(t_0)}$$ \mathbf{}$ = TBD\\
+\hspace*{1.3cm}$\mathbf{C_R}$$\mathbf{}$ = TBD \\
+
+
+Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
+\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t)}$ = TBD\\
+\hspace*{1.3cm}$\phi$$_k\mathbf{(t)}$ = TBD\\
+\hspace*{1.3cm}$\omega$$_k\mathbf{(t)}$$ \mathbf{}$ = TBD\\
+after t secs(t, TBD) 
+
+
+How test will be performed: Unit testing with PyUnit
+
+
+
+\end{enumerate}	
+	
+
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\subsubsection{Usability Test for TM2D}
+		
+\paragraph{Usability test}
+
+\begin{enumerate}
+
+\item{TC7\\}
+
+Type: Usability test
+					
+Initial State: 
+					
+Input/Condition: 
+					
+Output/Result: 
+					
+How test will be performed: Users/reviewers of TM2D will be asked to install the library and use it. They will be asked to complete the survey in the Appendix section for Usability. 
+					
+\end{enumerate}
+
+
+\subsubsection{Correctness/Performance Test for TM2D}
+
+\paragraph{Correctness/Performance}
+
+\begin{enumerate}
+
+\item{TC8\\}
+
+Type: Dynamic
+
+Initial State: 
+
+Input: 
+
+Output: 
+
+How test will be performed: Correctness/performance will be measured by comparing output results with ODEs related to each requirement/function.
+\end{enumerate}
+
+\subsubsection{Reusability}
+
+\paragraph{Reusability test}
+
+\begin{enumerate}
+	
+\item{TC9\\}
+
+Type: Dynamic
+
+Initial State: 
+
+Input: 
+
+Output: 
+
+How test will be performed: Users/reviewers will be asked to see if they can extend the library and use for other purposes.
+...
+\end{enumerate}
+
+\subsubsection{Understandability/Maintainability}
+
+\paragraph{Understandability/Maintainability test}
+
+\begin{enumerate}
+	
+	\item{TC9\\}
+	
+	Type: Dynamic
+	
+	Initial State: 
+	
+	Input: 
+	
+	Output: 
+	
+	How test will be performed: Users/reviewers will be asked to see check some see if they are able to find the space module and update the body parameters are desired. Users will be asked on the scale of 1 to 5 how easy it was to find the code, understand it and make changes.
+	...
+\end{enumerate}
+
+
+\subsection{Traceability Between Test Cases and Requirements}
+The purpose of the information in Table 1 below is to provide a mapping between the test cases and the requirements in the SRS for easy reference and verification.
+%\wss{Provide a table that shows which test cases are supporting which %requirements.}
+\begin{table}
+	
+	\caption{Requirements Traceability Matrix}
+	
+	\label{Table:Table_Traceability}  
+	
+	\begin{tabular}{|c|p{5cm}|p{5cm}|}
+		
+		\hline	
+		
+		\textbf{Testcase Number} & \textbf{Instance Models} & \textbf{CA Requirements}\\
+		
+		\hline 
+		
+		TC1& IM1         & R1, R2, R4, R5       \\ \hline
+		
+		TC2& IM1        & R1, R2, R4, R5       \\ \hline
+		
+		TC3& IM1        & R1, R2, R4, R5       \\ \hline
+		
+		
+		
+		TC4& IM2 & R1, R2, R4, R6   \\ \hline
+		
+		TC5& IM3 & R1, R3, R4, R7, R8   \\ \hline
+		
+		
+		
+		TC6& IM3 & R1, R3, R4, R7, R8   \\ \hline
+		
+		TC7&     & NFR3   \\ \hline
+		
+		
+		
+		TC8&       & NFR1, NFR2  \\ \hline
+		
+		TC9&       & NFR5   \\ \hline
+		
+		TC10&       & NFR4, NFR6   \\ \hline
+		
+		
+		
+		
+	\end{tabular}\\
+	
+\end{table}
+
+\section{Static Verification Techniques}
+Code review and inspection will be used as the method for implementation verification.
+%\wss{In this section give the details of any plans for static verification of the implementation.  Potential techniques include code walkthroughs, code inspection, static analyzers, etc.}
+				
+\bibliographystyle{plainnat}
+
+\bibliography {../../../refs/References}
+\begin{itemize}
+\item{http://www.physicstutorials.org/home/mechanics/1d-kinematics/projectile-motion?start=1}
+\item{https://en.wikipedia.org/wiki/Projectile-motion}
+\item{R. A. BROUCKE.  "Equations of motion of a rotating rigid body", Journal of Guidance, Control, and Dynamics, Vol. 13, No. 6 (1990), pp. 1150-1152.}
+\item{https://github.com/smiths/caseStudies/blob/master/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+
+\end{itemize}
+
+
+\newpage
+
+\section{Appendix}
+
+This is where you can place additional information.
+
+\subsection{Symbolic Parameters}
+
+The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.
+
+\subsection{Usability Survey Questions?}
+
+%\wss{This is a section that would be appropriate for some projects.}
+\begin{enumerate}
+
+\item {On the scale of 1 - 5, 1 being very difficult and 5 being very easy, How easy was it to install the program using the installation guide?
+
+Comment on what can be improved:}
+
+\item On a scale of 1 - 5, how easy were you able to update the parameters in a space? e.g change the velocity of a body
+
+\item Did the program return the expected output based on the testcase and input values? 
+
+If no, please add comments explaining issues encountered:
+
+
+\end{enumerate}
+
+\end{document}
