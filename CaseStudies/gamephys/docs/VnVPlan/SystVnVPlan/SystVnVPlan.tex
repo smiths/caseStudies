@@ -3,6 +3,39 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{bm}
+
+\usepackage{amsmath, mathtools}
+
+\usepackage[justification=centering]{caption}
+
+\usepackage{amsfonts}
+
+\usepackage{amssymb}
+
+\usepackage{commath}
+
+\usepackage{graphicx}
+
+\usepackage{pdflscape}
+
+\usepackage{colortbl}
+
+\usepackage{xr}
+
+\usepackage{hyperref}
+
+\usepackage{longtable}
+
+\usepackage{xfrac}
+
+\usepackage{tabularx}
+
+\usepackage{float}
+
+\usepackage[per-mode=reciprocal]{siunitx}
+
+\usepackage{booktabs}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -11,6 +44,51 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\newcommand{\colZwidth}{1.0\textwidth}
+
+\newcommand{\blt}{- } %used for bullets in a list
+
+\newcommand{\colAwidth}{0.13\textwidth}
+
+\newcommand{\colBwidth}{0.82\textwidth}
+
+\newcommand{\colCwidth}{0.1\textwidth}
+
+\newcommand{\colDwidth}{0.05\textwidth}
+
+\newcommand{\colEwidth}{0.8\textwidth}
+
+\newcommand{\colFwidth}{0.17\textwidth}
+
+\newcommand{\colGwidth}{0.5\textwidth}
+
+\newcommand{\colHwidth}{0.28\textwidth}
+
+\newcommand{\tref}[1]{T\ref{#1}}
+
+\newcounter{tablenum} %Table Number
+
+\newcommand{\tbthetablenum}{T\thetablenum}
+
+\newcommand{\rref}[1]{R\ref{#1}}
+
+\newcommand{\lthelcnum}{LC\thelcnum}
+
+\newcommand{\lcref}[1]{LC\ref{#1}}
+
+\newcommand{\dv}{\mathrm{d}\mathbf{v}}
+
+\newcommand{\dx}{\mathrm{d}\mathbf{x}}
+
+\newcommand{\dr}{\mathrm{d}\mathbf{r}}
+
+\newcommand{\dpos}{\mathrm{d}\mathbf{p}}
+
+\newcommand{\dt}{\mathrm{d}t}
+
+\newcommand{\utheucnum}{UC\theucnum}
+
+\newcommand{\ucref}[1]{UC\ref{#1}}
 
 \input{../../Comments}
 
@@ -29,6 +107,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
+2018-11-01 & 1.1 & Updates based on document review and issue tracker\\
 2018-10-15 & 1.0 & Initial draft\\
 %Date 2 & 1.1 & Notes\\
 \bottomrule
@@ -38,20 +117,55 @@
 
 \section{Symbols, Abbreviations and Acronyms}
 \renewcommand{\arraystretch}{1.2}
+
+
+\subsection{Table of Symbols} \label{TblOfSym}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule 
+	\textbf{Symbol} & \textbf{Unit} & \textbf{Description} \\
+	\midrule
+	$\mathbf{a}$ & \si{\metre\per\second\tothe{2}} & Acceleration \\
+	$\alpha$ & \si{\radian\per\second\tothe{2}} & Angular acceleration \\
+	$C_\text{R}$ & unitless & Coefficient of restitution \\
+	$\mathbf{F}$ & \si{\newton} & Force \\
+	 $g$ & \si{\metre\per\second\tothe{2}} & Gravitational acceleration ($9.81$ \si{\metre\per\second\tothe{2}}) \\
+	$G$ & \si{\metre\tothe{3}\per\kilogram\second\tothe{-2}} & Gravitational constant ($6.673 \times 10^{-11}$ \si{\metre\tothe{3}\per\kilogram\second\tothe{-2}}) \\
+	$\mathbf{I}$ & \si{\kilogram\metre\tothe{2}} & Moment of inertia \\
+	$\mathbf{\hat{i}}$ & \si{\metre} & Horizontal unit vector \\
+	$\mathbf{\hat{j}}$ & \si{\metre} & Vertical unit vector \\
+	$j$ & \si{\newton\second} & Impulse (scalar) \\
+	$\mathbf{J}$ & \si{\newton\second} & Impulse (vector) \\
+	$L$ & \si{\metre} & Length \\
+	$m$ & \si{\kilogram} & Mass \\
+	$n$ & unitless & Number of particles in a rigid body \\
+	$\mathbf{n}$ & \si{\metre} & Collision normal vector \\
+	$\boldsymbol{\omega}$ & \si{\radian\per\second} & Angular velocity \\
+	$\mathbf{p}$ & \si{\metre} & Position \\
+	$\boldsymbol{\phi}$ & \si{\radian} & Orientation \\
+	$r$ & \si{\metre} & Distance \\
+	$\mathbf{r}$ & \si{\metre} & Displacement \\
+	$t$ & \si{\second} & Time \\
+	$\tau$ & \si{\newton\metre} & Torque \\
+	$\boldsymbol{\theta}$ & \si{\radian} & Angular displacement \\
+	$\mathbf{v}$ & \si{\metre\per\second} & Velocity \\
+	
+	\bottomrule
+\end{tabularx}
+
+\subsection{Abbreviations and Acronyms}
 \begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  IM & Instance Model\\
-  R & Requirement\\
-  T & Test\\
-  TBD & To be determined\\
-2D & Two-dimensional\\
-SRS & System Requirement Specification\\
-   \bottomrule
+	\toprule		
+	\textbf{Symbol} & \textbf{Description}\\
+	\midrule 
+	IM & Instance Model\\
+	R & Requirement\\
+	T & Test\\
+	TBD & To be determined\\
+	2D & Two-dimensional\\
+	SRS & System Requirement Specification\\
+	\bottomrule
 \end{tabular}\\
 
-For symbols and their meanings please refer to: https://github.com/smiths/caseStudies/blob/master/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf
 %\wss{symbols, abbreviations or acronyms -- you can simply reference the %SRS tables, if appropriate}
 
 \newpage
@@ -142,7 +256,7 @@ Description:Calculate the position and velocity of a 2D rigid body that is stati
 
 Control: Automatic
 					
-Initial State: New session - Static 2D rigid body(body is not moving)
+Initial State: NA
 					
 Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 0) ;This is the initial position of body - (x,y) coordinate position\\
        \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
@@ -161,7 +275,7 @@ Description: Calculation of the new position and velocity of a dynamic body. For
  
 Control: Automatic
 					
-Initial State: New session - see Input below
+Initial State: NA
 					
 Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (20, 20) this is the (x,y) coordinate position\\
 	   \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
@@ -181,7 +295,7 @@ Description:``Projectile motion is a form of motion experienced by an object or 
 
 Control: Automatic
 
-Initial State: New session - see Input below
+Initial State: NA
 
 Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 125) this is the (x,y) coordinate position\\
 \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = (10,0)\\
@@ -207,7 +321,7 @@ This test is to simulate the rotation of a 2D rigid body about its axis.
 	
 	Control: Automatic
 	
-	Initial State: New session - see Input below
+	Initial State: NA
 	
 	Input: $\mathbf{m_i}$$\mathbf{}$ = 100\\
 	\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0\\
@@ -236,7 +350,7 @@ This test is to simulate the collision of 2D rigid bodies.
 	
 	Control: Automatic
 	
-	Initial State: New session - see Input below
+	Initial State: NA
 	
 	Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
 	\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
@@ -261,7 +375,7 @@ Description: This is to test a set of rigid bodies that collide. This test case 
 
 Control: Automatic
 
-Initial State: New session - see Input below
+Initial State: NA
 
 Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
 \hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
