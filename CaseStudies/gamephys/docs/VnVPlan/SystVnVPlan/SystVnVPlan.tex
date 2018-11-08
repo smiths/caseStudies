@@ -184,6 +184,9 @@ This document provides a high-level verification and validation plan for TamiasM
 %This document ... \wss{provide an introductory blurb and roadmap of the
  % Verification and Validation plan}
 
+\wss{The text is better for version control, and for reading in other editors,
+  if you use a hard-wrap at 80 characters}
+
 \section{General Information}
 
 \subsection{Summary}
@@ -206,6 +209,8 @@ The purpose of verification and validation activities are to find bugs and defec
 
 \subsection{References}
 
+\wss{You should introduce the references, not just include a link.}
+
 \begin{itemize}
 	\item[1.] \url {https://github.com/smiths/caseStudies/blob/GamePhy_Olu/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
 \end{itemize}
@@ -219,12 +224,31 @@ The verification and validation team consists of a one member team: Olu Owojaiye
 %\wss{Probably just you.  :-)}
 
 \subsection{SRS Verification Plan}
-The SRS for the project will be reviewed by Dr. Smith and coursemates and feedback will be provided. Some SRS feedback for this project have been provided and addressed using github issue tracker. Also once the software has been implemented, the SRS will be reviewed to ensure that software has met all the specified requirements and more feedback will be provided via github issue tracker.
+The SRS for the project will be reviewed by Dr. Smith \wss{\LaTeX{} has a rule
+  that it inserts two spaces at the end of a sentence.  It detects a sentence as
+  a period followed by a capital letter.  This comes up, for instance, with
+  Dr. Smith.  Since the period after Dr.\ isn't actually the end of a sentence,
+  you need to tell \LaTeX{} to insert one space.  You do this either by Dr.\
+  Smith (if you don't mind a line-break between Dr.\ and Smith), or Dr.~Spencer
+  Smith (to force \LaTeX{} to not insert a line break).} and coursemates and
+feedback will be provided. Some SRS feedback for this project have been provided
+and addressed using github issue tracker. Also once the software has been
+implemented, the SRS will be reviewed to ensure that software has met all the
+specified requirements and more feedback will be provided via github issue
+tracker.
+
+\wss{You can be specific about which classmates are going to review your
+  documents; the specific assignments are in Repos.xlsx.}
 
 %\wss{List any approaches you intend to use for SRS verification. This may %just be ad hoc feedback from reviewers, like your classmates, or you may %have something more rigorous/systematic in mind..}
 
 \subsection{Design Verification Plan}
-To ensure that the Design Specification has been properly specified and meets software requirements, Dr. Smith and my coursemate(s) will be verifying the software design. The Module Guide and Module Interface Specification will contain information about the software design. Feedback is expected to be provided by reviewers via github issue tracker.
+To ensure that the Design Specification has been properly specified and meets
+software requirements, Dr. Smith and my coursemate(s) will be verifying the
+software design. The Module Guide and Module Interface Specification will
+contain information about the software design. Feedback is expected to be
+provided by reviewers via github issue tracker. \wss{You should have links to MG
+  and MIS.}
 %\wss{Plans for design verification}
 
 \subsection{Implementation Verification Plan}
@@ -236,6 +260,9 @@ To ensure that the Design Specification has been properly specified and meets so
 
 	There is currently no software validation plan for TamiasMini2D.
 %\wss{If there is any external data that can be used for validation, you %should point to it here.  If there are no plans for validation, you %should state that here.}
+
+\wss{You should the reason why
+  there is no software validation plan.}
 
 \section{System Test Description}
 	
@@ -288,6 +315,15 @@ Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (20.9, 20.882);
 					
 How test will be performed: Unit testing with PyUnit
 
+\wss{Where did the answers come from?  The reader won't be able to verify what
+  you are saying.  You are verifying for one point in time.  You can accomplish
+  more by verifying the full history of the change in position.  You should
+  provide the closed form solutions for position change under constant
+  acceleration.  You then get can run the simulation until the position is zero
+  and verify that the positions are correct.  To get one number for your test
+  you can use the Euclidean (or other) norm of your vector and then divide by
+  the norm of the expected result.}
+
 \item{TC3: Projectile motion of dynamic 2D rigid velocity-position calculation\\}
 
 Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified in input. In horizontal direction, velocity is constant.
@@ -308,6 +344,17 @@ $\mathbf{v_i}$$\mathbf{(t)}$ = (10, 50); after t secs, where t= 5
 How test will be performed: Unit testing with PyUnit
 
 \end{enumerate}
+
+\wss{Same comment as for previous test.  I believe all of the equations you will
+  need for your closed form solutions are at:
+  \url{https://en.wikipedia.org/wiki/Projectile_motion}}
+
+\wss{You are using $x$ and $y$ in the conventional orientation, but you should
+  also have tests where your projectile is thrown in the opposite direction and
+  when your projectile has a non-zero velocity in the $y$ direction.  You want
+  to make sure that there isn't an error in any of the coordinate directions.
+  If everything is down and to the left you won't notice errors with motion up
+  or down.}
 
 \subsubsection{Rotation of 2D Rigid Body Simulation}
 This test is to simulate the rotation of a 2D rigid body about its axis.
@@ -334,9 +381,10 @@ This test is to simulate the rotation of a 2D rigid body about its axis.
 	
 	How test will be performed: Unit testing with PyUnit
 
-
-
 \end{enumerate}
+
+\wss{Nice to see rotation tests not being forgotten.  As before though, I would
+  like to know how you come up with your output  answers.}
 
 \subsubsection{Rotation of 2D Rigid Body Simulation}
 This test is to simulate the collision of 2D rigid bodies.
@@ -390,14 +438,20 @@ Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
 \hspace*{1.3cm}$\omega$$_k\mathbf{(t)}$$ \mathbf{}$ = TBD\\
 after t secs(t, TBD) 
 
-
 How test will be performed: Unit testing with PyUnit
-
-
 
 \end{enumerate}	
 	
-
+\wss{The TBDs should be filled in.  I get the impression that some of the
+  physics is giving you trouble.  The following resource looks pretty good
+  \url{https://www.myphysicslab.com/engine2D/collision-en.html}.  You could use
+  this calculator
+  \url{https://www.omnicalculator.com/physics/conservation-of-momentum} with
+  your coefficient or restitution set to 1.0.  You just need the objects to not
+  rotate after their collision.  Two spheres colliding should be fine.  You can
+  also play around with problems where one mass is so large that that object
+  will essentially be stationary.  I can also lend you a physics textbook, if
+  that would be helpful.}
 
 \subsection{Tests for Nonfunctional Requirements}
 
@@ -421,6 +475,8 @@ How test will be performed: Users/reviewers of TamiasMini2D will be asked to ins
 					
 \end{enumerate}
 
+\wss{Nice to see a usability test.  It is a bit simplistic, but that is fine for
+  right now.}
 
 \subsubsection{Correctness/Performance}
 
@@ -441,6 +497,9 @@ Output:
 How test will be performed: Correctness/performance will be measured by comparing output results with ODEs related to each requirement/function.
 \end{enumerate}
 
+\wss{This isn't really complete.  For correctness, you can probably refer to
+  your functional tests from the previous section.}
+
 \subsubsection{Reusability}
 
 \paragraph{Reusability test}
@@ -460,6 +519,8 @@ Output:
 How test will be performed: Users/reviewers will be asked to see if they can extend the library and use for other purposes.
 ...
 \end{enumerate}
+
+\wss{A survey is an interesting way to measure this.}
 
 \subsubsection{Understandability/Maintainability}
 
@@ -534,7 +595,11 @@ The purpose of the information in Table 1 below is to provide a mapping between 
 
 \section{Static Verification Techniques}
 Code review and inspection will be used as the method for implementation verification.
-%\wss{In this section give the details of any plans for static verification of the implementation.  Potential techniques include code walkthroughs, code inspection, static analyzers, etc.}
+%\wss{In this section give the details of any plans for static verification of
+%the implementation.  Potential techniques include code walkthroughs, code
+%inspection, static analyzers, etc.}
+\wss{You can remove this section, since the details can be covered in Section
+  4.4.  I've realized that I should remove this section from the template.}
 				
 \bibliographystyle{plainnat}
 
