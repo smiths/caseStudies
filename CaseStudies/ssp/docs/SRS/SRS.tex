@@ -68,6 +68,9 @@
 \newcounter{reqnum} %Requirement Number
 \newcommand{\rthereqnum}{R\thereqnum}
 \newcommand{\rref}[1]{R\ref{#1}}
+\newcounter{nfreqnum} %Non-functional Requirement Number
+\newcommand{\nfrthenfreqnum}{NFR\thenfreqnum}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
 \newcounter{lcnum} %Likely change number
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
@@ -2442,7 +2445,8 @@ is intended to provide a feel for a common scenario.
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
   ${x_{slip}^{maxEnd}}$ & ${x_{slip}^{maxEnd}} > {x_{slip}^{minEnd}}$ and must 
   be less than or equal to the maximum $x$ value of the slope. & N/A & 10\% \\
-  ${x_{slip}^{minEnd}}$ & ${x_{slip}^{minEnd}} > {x_{slip}^{maxStart}}$ & N/A & 
+  ${x_{slip}^{minEnd}}$ & ${x_{slip}^{minEnd}} \geq {x_{slip}^{maxStart}}$ & 
+  N/A & 
   10\% \\
   ${x_{slip}^{maxStart}}$ & ${x_{slip}^{maxStart}} > {x_{slip}^{minStart}}$ & 
   N/A & 10\% \\
@@ -2584,13 +2588,16 @@ performance speed are secondary program priorities. Instead, the following
 non-functional requirements are prioritized:
 
 \begin{itemize}
-\item[NFR1:] Correctness, achieved if the outputs of the code have the 
-properties described 
+\item[NFR\refstepcounter{nfreqnum}\thenfreqnum \label{NFR_Correctness}:] 
+Correctness, achieved if the outputs of the code have the properties described 
 in \ref{sec_CorrectSolution}.
-\item[NFR2:] Understandability, achieved if the code is modularized with 
+\item[NFR\refstepcounter{nfreqnum}\thenfreqnum \label{NFR_Understandability}:] 
+Understandability, achieved if the code is modularized with 
 complete module guide and module interface specification.
-\item[NFR3:] Reusability, achieved if the code is modularized.
-\item[NFR4:] Maintainability, achieved if the traceability between 
+\item[NFR\refstepcounter{nfreqnum}\thenfreqnum \label{NFR_Reusability}:] 
+Reusability, achieved if the code is modularized.
+\item[NFR\refstepcounter{nfreqnum}\thenfreqnum \label{NFR_Maintainability}:] 
+Maintainability, achieved if the traceability between 
 requirements, assumptions, theoretical models, general definitions, data 
 definitions, instance models, likely changes, and modules is completely 
 recorded in traceability matrices in the SRS and module guide.
