@@ -37,7 +37,8 @@
 
 \begin{document}
 
-\title{Glass Breakage Analysis: System Verification and Validation Plan} 
+\title{Glass Breakage Analysis: System Verification and Validation Plan
+  \wss{Include the name GlassBR here}} 
 \author{Vajiheh Motamer}
 \date{\today}
 	
@@ -117,20 +118,21 @@ portability and reusability of the software.
 
 \subsection{References}
 
-\noindent Extensive information about the purpose and requirements of 
-\progname{} can be found in the SRS document. This System VnV Plan is 
-complemented by the System VnV Report, where the results of the tests planned 
-in this document are discussed. For more details on test cases specific to the 
-implementation of \progname{}, consult the Unit VnV Plan document. The latest 
-documentation for \progname{} can be found on GitHub, at \newline 
-\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}.
+\noindent Extensive information about the purpose and requirements of
+\progname{} can be found in the SRS document. This System VnV Plan is
+complemented by the System VnV Report, where the results of the tests planned in
+this document are discussed. For more details on test cases specific to the
+implementation of \progname{}, consult the Unit VnV Plan document. The latest
+documentation for \progname{} can be found on GitHub, at \newline
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}. \wss{Good!}
 
 \section{Plan} \label{sec_Plan}
 	
 \subsection{Verification and Validation Team}
 
 \noindent Responsible member for the verification and validation 
-of \progname{} is Vajiheh Motamer
+of \progname{} is Vajiheh Motamer.
 
 \subsection{SRS Verification Plan}
 
@@ -143,41 +145,46 @@ provided and addressed using github issue tracker. Besides, during preparing of 
 \noindent The design of \progname{} s  documents will be verified by getting feedback from Dr.
 Spencer Smith and my CAS 741 classmates.The Module Guide and Module Interface Specification will
 contain information about the software design. Feedback is expected to be
-provided by reviewers via github issue tracker.
+provided by reviewers via github issue tracker. \wss{You can be more descriptive
+  here, since you know the names of who is going to review each of your
+  documents (through Repos.xlsx)}
 
 \subsection{Implementation Verification Plan} \label{sec_ImpPlan}
 
-The implementation of the\progname{} program will be verified  by performing statically code review with Dr. Spencer Smith and the classmates in CAS741 and
-dynamically by executing the test cases detailed in this plan and the unit
-VnV plan using Pyton testing frameworks.
-
+The implementation of the\progname{} program will be verified by performing
+statically code review with Dr. Spencer Smith \wss{\LaTeX{} has a rule that it
+  inserts two spaces at the end of a sentence.  It detects a sentence as a
+  period followed by a capital letter.  This comes up, for instance, with
+  Dr. Smith.  Since the period after Dr.\ isn't actually the end of a sentence,
+  you need to tell \LaTeX{} to insert one space.  You do this either by Dr.\
+  Smith (if you don't mind a line-break between Dr.\ and Smith), or Dr.~Spencer
+  Smith (to force \LaTeX{} to not insert a line break).}  and the classmates in
+CAS741 and dynamically by executing the test cases detailed in this plan and the
+unit VnV plan using Pyton \wss{spell check!} testing frameworks.
 
 \subsection{Software Validation Plan}
 
-There is no validation plan for \progname{}.
+There is no validation plan for \progname{}.  \wss{You should the reason why
+  there is no software validation plan.}
 
 \section{System Test Description} \label{sec_System}
 
 System testing for the \progname{} ensures that the correct inputs produce
 the correct outputs. The test cases in this section are derived from the
 instance models and the requirements detailed in the tool’s SRS. These values were 
-taken from the' Test Documentation' for this project . Individual 
+taken from the' Test Documentation' \wss{proof read!} for this project . Individual 
 test cases will reference the table as input but specify new values for any 
 input parameter that should have a different value than specified by the table.
 
-
-
-	
 \subsection{Tests for Functional Requirements}
 
 \subsubsection{User Input Tests}
-		
+
 \paragraph{Valid User Input}
 
 ~\newline \noindent The following set of test cases is intended to cover 
-different forms of valid user input. 
-
-
+different forms of valid user input.  \wss{You should say where the values in
+  Table 1 come from.}
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 %BeginTestCase1
@@ -194,13 +201,17 @@ Output: \\
 $\hspace*{2cm} P_b= (1.301524590203718e-04) < P_{b_{\text{tol}}}$ ,\\
 $\hspace*{2cm} Demand (q) = (3.258285992018616e+00) ,\\
 $\hspace*{2cm} $Capacity (LR)=(6.843002155788037e+00) > q$, \\
-$\hspace*{2cm}$\text{$\text{is\_safePb} = \text{True}$ and $\text{is\_safeLR} = \text{True}$, The glass is considered safe.}
-
+$\hspace*{2cm}$\text{$\text{is\_safePb} = \text{True}$ and $\text{is\_safeLR} =
+  \text{True}$, The glass is considered safe.}  \wss{Where did these expected
+  values come from?  You should tell the reader so that they can judge whether
+  these values make sense.} \wss{You don't need brackets around your numbers.}
+\wss{For scientific notation, you don't use the $e$ notation in \LaTeX{}, you
+  can write the multiplication and the power of $10$ explicitly.  For instance,
+  $P_b= 1.301524590203718 \times 10^{-4}$}
 
 How test will be performed: Unit testing using PyUnit.
 
 Test Case Derivation:  \ref{SRS-IM_prob} and \ref{SRS-T_Pb} in SRS.
-
 
 \begin{table}[!h]
 \centering
@@ -219,7 +230,7 @@ Test Case Derivation:  \ref{SRS-IM_prob} and \ref{SRS-T_Pb} in SRS.
 		$\text{SD}_z$ & 11.0 &\si{\metre}\\
 		$\text{t}$ &10.0 & \text{mm}\\
 		$\text{TNT}$ &1.0 & \text{-}\\
-$w$ &10.0	& \si{\kilo\gram}\\
+                $w$ &10.0	& \si{\kilo\gram}\\
 		\bottomrule
 \end{tabular}
 \caption{Inputs for Tst\_Pb\_DefaultValues} 
@@ -227,10 +238,12 @@ $w$ &10.0	& \si{\kilo\gram}\\
 \end{table}
 
 %EndTestCase1
-\newpage
+\newpage \wss{You don't normally need to hard code in newpages}
+
 %BeginTestCase2				
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_SmallDimensionInput}] 
-Tst\_ Pb\_ SmallDimensionValues
+Tst\_ Pb\_ SmallDimensionValues \wss{I don't understand how the dimensions are
+  small values.  They look like regular values.}
 
 Control: Automatic
 					
@@ -526,6 +539,16 @@ $w$ &10.0	& \si{\kilo\gram}\\
 
 \end{enumerate}
 %EndTestCase7
+
+\wss{The input and output values for the above test cases do not seem to follow
+  a discernible pattern.  Multiple values are modified between tests, but I
+  don't know the rationale for the modification.  You would usually hold all
+  values constant and then only modify 1 value (or maybe two values, if they are
+  related like $a$ and $b$).  This approach is more systematic, and it also
+  means you don't have to repeat the entire table every time.  You certainly do
+  want test cases where the glass is safe and where it isn't, but you didn't
+  distinguish the names of any of your test cases based on this.}
+
 \paragraph{Invalid User Input}
 
 ~\newline \noindent The test cases described in Table~\ref{testCheckConstraints} 
@@ -534,7 +557,8 @@ that defies the data constraints described in Section
 \ref{SRS-sec_DataConstraints} of the SRS. These test cases are identical to 
 each other with the exception of their input. The input for each is specified 
 in Table~\ref{testCheckConstraints}. For each test case, the inputs which have not been specified 
-in this table, have been specified in Table~\ref{defaultInputTBL}. Besides,The expected output has been specified for each test case and the control method 
+in this table, have been specified in Table~\ref{defaultInputTBL}. Besides,The
+\wss{proof read} expected output has been specified for each test case and the control method 
 for these test cases is automatic. The initial state for each is a new session. 
 The tests will be performed as automated tests on the PyUnit.
 
@@ -592,12 +616,23 @@ TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest } & inc
 \end{adjustbox}
 \end{table}
 
+\wss{The error messages for the last test cases are all the same ``Encountered
+  an unexpected exception''.  Is this what the SRS says?  We really could have a
+  more descriptive error message, as for the other cases.}
+
+\wss{Use ``uses'' to
+  get the correct opening and closing quotes.}
 
 \subsubsection{Output Tests}
 
 \paragraph{Test Derived Values}
 ~\newline \noindent The following set of test cases are intended to 
-verify initial inputs have been correctly converted into derived quantities. These test cases follow term definitions and equations from Data Definitions in Section \ref{SRS-sec_datadef} of the SRS.. For each test case, one input  column references to the specified input table. Besides,The expected output has been specified for each test case and the control method for these test cases is automatic. The initial state for each is a new session. The tests will be performed as automated tests on the PyUnit.
+verify initial inputs have been correctly converted into derived
+quantities. These test cases follow term definitions and equations from Data
+Definitions in Section \ref{SRS-sec_datadef} of the SRS.. \wss{proof read} For each test case, one input  column references to the specified input table. Besides,The expected output has been specified for each test case and the control method for these test cases is automatic. The initial state for each is a new session. The tests will be performed as automated tests on the PyUnit.
+
+\wss{The text is better for version control, and for reading in other editors,
+  if you use a hard-wrap at 80 characters}
 
 
 %Table 3: testDerivedValues
@@ -644,7 +679,8 @@ Output/Result:-
 
 					
 How test will be performed: Running \progname{} on Mac, Windows and
-Linux operating systems
+Linux operating systems \wss{You can be more specific here.  My suggestion is
+  that you explicitly say that all unit tests will be run on all environments.}
 					
 \end{enumerate}
 
@@ -712,7 +748,15 @@ with an ``X'' may have to be modified as well.
 
 Static verification of the \progname{} library implementation will performed using
 code review with Dr. Spencer Smith and my CAS 741 classmates.
-				
+
+\wss{You can remove this section.}
+
+\wss{Since the system tests for GlassBR are fairly simple, you should be looking
+  at incorporating additional tests in your plan.  For your program a usability
+  survey would be a good addition.  We want it to be easy for users to get their
+  results from GlassBR.  You could put some survey questions in your Appendix
+  and introduce this idea in the main body of your plan.}
+
 \newpage
 
 \bibliographystyle {plainnat}
