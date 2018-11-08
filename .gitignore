@@ -17,6 +17,8 @@ cabal.config
 *.snm
 *.toc
 *.swp
+*.lof
+*.lot
 Main
 .idea
 *.out
