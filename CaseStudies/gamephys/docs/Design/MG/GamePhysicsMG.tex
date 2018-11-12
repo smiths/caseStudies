@@ -300,7 +300,7 @@ this module. Both the parent and the children modules will be implemented.
   the system as specified in the software requirements specification (SRS)
   documents. This module serves as a communication layer between the
   hardware-hiding module and the software decision module. The programs in this module will need to change if there are changes in the SRS.
-\item[Implemented By:] --
+\item[Implemented By:] -- {\progname}
 \end{description}
 
 \subsubsection{Rigid Body Module (\mref{mBody})}
@@ -327,7 +327,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 	\item[Secrets:] The data structure of a circle shape.
 	\item[Services:] Provides operations on circles such as initializing a new circle, calculating moment and area, etc.
-	\item[Implemented By:] TamiasMini2D
+	\item[Implemented By:] {\progname}
 \end{description}
 
 \paragraph{Segment Module (\mref{mSegment})}
@@ -364,7 +364,7 @@ collided and their masses.
 \end{description}
  
 %\subsubsection{Control Module (\mref{mControl})} 
-%removed control module : Olu
+\olu{removed control module}\\
 
 %\begin{description}
 %\item[Secrets:] The algorithm for coordinating the running of the program %and the interface for receiving inputs and sending outputs.
@@ -404,7 +404,7 @@ collided and their masses.
 
 \begin{description}
 	\item[Secrets:] The data structure representing transformation matrices.
-	\item[Services:] Provides constructors for affine transformation matrices, matrix operations such as inverse, transpose, multiplications, %and operations for applying transformations to vectors and bounding boxes.
+	\item[Services:] Provides constructors for affine transformation matrices, matrix operations such as inverse, transpose, multiplications, and operations for applying transformations to vectors and bounding boxes.
 	\item[Implemented By:] {\progname}
 \end{description}
 
@@ -532,7 +532,7 @@ Modules in the lower level of the hierarchy inherit properties from the higher l
 \caption{\label{Fig_Inheritance}Inheritance hierarchy among Modules}
 \end{center}
 \end{figure}
-\olu{This section is not in the MG template but provides more info. aout the Shape module}
+\olu{This section is not in the MG template but provides more info. about the Shape module}
 ~\newpage
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/Physics_Game_Library}
