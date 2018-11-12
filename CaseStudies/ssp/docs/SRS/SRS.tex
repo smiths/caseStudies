@@ -1727,19 +1727,6 @@ The resistive shear force of a slice is defined as $P_\text{i}$ in
 normal force in \dref{GD_Fx} can be substituted into the definition for 
 effective normal force in \dref{GD_EffNormal} to obtain equation~(\ref{eq:N'}).
 
-\begin{equation} \label{eq:N'}
- N'_{\text{i}} \; = \begin{array}{l}
-   \left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
-     {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-     Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-     \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-     {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
-     H_{\text{i}} + H_{\text{i-1}} +
-     {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-     Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-     \right]\sin\left(\alpha_{\text{i}}\right) \\ -
-   U_{\text{b,i}} \end{array}
- \end{equation}
 
 \noindent
 The values of the interslice forces $G$ and $X$ in the equation are
@@ -1953,11 +1940,11 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 \hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
-y_{\text{slip}}\right)\}$ from \iref{IM_Min} \\
+y_{\text{slip}}\right)\}$ \\
 
 \hline
 Output &
-\( {FS}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
+\( {F_\text{S}}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
     \;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
     }\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
     \;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
@@ -1965,44 +1952,17 @@ Output &
 
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
-&$c$ is a locally bound index representing a single slice. (required?)\\ 
-&$FS$ is the factor of safety.\\
-&$R_i \; = \begin{array}{l}
-\left( \begin{array}{l}
-\left[ W_{\text{i}} + U_{\text{t,i}}
-\cos\left(\beta_{\text{i}}\right) \right]
-\cos\left(\alpha_{\text{i}}\right) \\
-+ \left[ - \Delta H_{\text{i}} +
-U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) \right]
-\sin\left(\alpha_{\text{i}}\right) - U_{\text{b,i}} \end{array}
-\right) \cdot \tan\left(\varphi'\right)
-+ c'_{\text{i}} \cdot b_{\text{i}} \cdot
-\sec\left(\alpha_{\text{i}}\right) \end{array} $ is the resistive shear force 
-without the influence of interslice forces (\si{\newton\per\meter}).\\
-&$\frac{\Psi_{\text{c-1}} ={} \left[ \lambda \cdot f_{\text{c-1}}
-\cos\left(\alpha_{\text{c}}\right) -
-\sin\left(\alpha_{\text{c}}\right) \right]\left[
-\tan\left(\varphi'\right) \right] - \left[ \lambda \cdot
-f_{\text{c-1}} \sin\left(\alpha_{\text{c}}\right) +
-\cos\left(\alpha_{\text{c}}\right) \right] \left( \text{FS}
-\right)}{\Phi_{\text{c-1}}}$ is the first function used to convert shear 
-without the influence of 
-interslice forces to shear with the influence of interslice forces.\\
-&$\Phi_{\text{c}}={} \left[ \lambda \cdot f_{\text{c}}
-\cos\left(\alpha_{\text{c}}\right) -
-\sin\left(\alpha_{\text{c}}\right) \right]\left[
-\tan\left({\varphi'_{\text{c}}}\right) \right] - \left[ \lambda
-\cdot f_{\text{c}} \sin\left(\alpha_{\text{c}}\right) +
-\cos\left(\alpha_{\text{c}}\right) \right]\left(\text{FS}\right)$ is the second 
-function used to convert shear without the influence of interslice forces to 
-shear with the influence of interslice forces.\\
-&$T_i$ = 
-$\left(W_{i}+{U_{t,i}}\cos\left(\beta{}_{i}\right)\right)\sin\left(\alpha{}_{i}
-\right)-\left(-{\Delta{}H}_{i}+{U_{t,i}}\sin\left(\beta{}_{i}\right)
-\right)\cos\left(\alpha{}_{i}\right)$ is the mobile shear force without the 
-influence of interslice forces (\si{\newton\per\meter}).\\
-&Descriptions of defining variables for $R$, $T$, $\Phi$, and $\Psi$ can be 
-found in the data definitions section.\\
+&$F_\text{S}$ is the factor of safety.\\
+&$R$ is the resistive shear force without the influence of interslice forces 
+(\si{\newton\per\meter}), defined in \ddref{DD_R}\\
+&$\Psi$ is the first function used to convert shear without the influence of 
+interslice forces to shear with the influence of interslice forces, defined in 
+DDx\\
+&$\Phi$ is the second function used to convert shear without the influence of 
+interslice forces to shear with the influence of interslice forces, defined in 
+DDy\\
+&$T$ is the mobile shear force without the influence of interslice forces 
+(\si{\newton\per\meter}), defined in \ddref{DD_T}\\
 
 \hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
 
@@ -2012,9 +1972,6 @@ found in the data definitions section.\\
 \end{tabular}
 \end{minipage}\\
 
-\bmac{should c be in table of symbols?}\\
-\bmac{Does $\Delta$H need to be defined mathematically somewhere (DD?) or is it 
-known by convention?}\\
 \bmac{I used SSP inputs as the inputs for this IM, should I have instead used 
 W, U, H, $\alpha$, $\beta$?}
 % ------------------------------------------ %
@@ -2023,13 +1980,356 @@ W, U, H, $\alpha$, $\beta$?}
 
 \subsubsection*{Factor of Safety Derivation}
 
-\bmac{R derivation here}\\
-\bmac{T derivation here}\\
-\bmac{FS derivation here, using new assumption that interslice forces at outer 
-slices are 0}\\
-\bmac{Phi and psi derivation here?}
+The mobile shear force defined in \dref{GD_Fy} can be substituted into the 
+definition of mobile shear force based on the factor of safety, from 
+\dref{GD_MobShear}, yielding equation~\ref{eq:MobileShear} below.
+
+\begin{equation} \label{eq:MobileShear}
+\left( \begin{array}{l} \left[
+W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
+{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+\right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
+{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
+- H_{\text{i}} + H_{\text{i-1}} +
+{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right)\\ = \frac { 
+N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
+	\right) + c' \cdot \ell_{b,i} }{\text{FS}}
+\end{equation}
+
+An expression for the effective normal force, $N'_i$, can be derived by 
+substituting the normal force equilibrium from \dref{GD_Fx} into the definition 
+for effective normal force from \dref{GD_EffNormal}. This results in 
+equation~\ref{eq:N'}.
+	
+\begin{equation} \label{eq:N'}
+N'_{\text{i}} \; = \begin{array}{l}
+\left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
+{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+\right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
+{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
+H_{\text{i}} + H_{\text{i-1}} +
+{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
+\right]\sin\left(\alpha_{\text{i}}\right) \\ -
+U_{\text{b,i}} \end{array}
+\end{equation}
+
+Substituting equation~\ref{eq:N'} into equation~\ref{eq:MobileShear} gives
+
+\begin{equation*}
+\begin{array}{l} \left( \begin{array}{l} \left[
+W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
+{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+\right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
+{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
+- H_{\text{i}} + H_{\text{i-1}} +
+{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right)\\ = \frac { 
+	\left( \begin{array}{l}
+	\left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
+	{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+	Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+	\right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
+	{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
+	H_{\text{i}} + H_{\text{i-1}} +
+	{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+	Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
+	\right]\sin\left(\alpha_{\text{i}}\right) -
+	U_{\text{b,i}} \end{array} \right) \cdot \tan\left( \varphi'_{\text{i}}
+	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+\end{equation*}
+
+Since the interslice shear force $X$ and interslice normal force $G$ are 
+unknown, they are separated from the other terms as follows:
+
+\begin{equation*}
+\begin{array}{l} \left( \begin{array}{l} \left[
+		W_{\text{i}} +
+		{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+		Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+		\right]\sin\left(\alpha_{\text{i}}\right) + \left(-X_{\text{i-1}} + 
+		X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)\\ - \left[
+		{-K_{\text{c}}}\;{W_{\text{i}}}
+		- H_{\text{i}} + H_{\text{i-1}} +
+		{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+		Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+		\right]\cos\left(\alpha_{\text{i}}\right) - \left(- G_{\text{i}} + 
+		G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
+		\right)\\ = \frac 
+		{ 
+		\left( \begin{array}{l}
+			\left[ W_{\text{i}} +
+			{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
+			Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
+			\right]\cos\left(\alpha_{\text{i}}\right) + \left(- X_{\text{i-1}} 
+			+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) \\ + \left[
+			{-K_{\text{c}}}\;{W_{\text{i}}} -
+			H_{\text{i}} + H_{\text{i-1}} +
+			{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
+			Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
+			\right]\sin\left(\alpha_{\text{i}}\right) + \left(- G_{\text{i}} + 
+			G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right)\\ -
+			U_{\text{b,i}} \end{array} \right) \cdot \tan\left( 
+			\varphi'_{\text{i}}
+		\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+\end{equation*}
+
+Applying assumptions \aref{A_Seismic} and \aref{A_External}, which state that 
+the seismic coefficient and the external force, respectively, are zero, allows 
+for further simplification as shown below.
+
+\begin{equation*}
+\begin{array}{l} \left( \begin{array}{l} \left[
+W_{\text{i}} +
+{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)}
+\right]\sin\left(\alpha_{\text{i}}\right) + \left(-X_{\text{i-1}} + 
+X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)\\ - \left[
+{- H_{\text{i}} + H_{\text{i-1}} +
+{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}}
+\right]\cos\left(\alpha_{\text{i}}\right)
+ - \left(- G_{\text{i}} + 
+G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
+\right)\\ = \frac 
+{ 
+	\left( \begin{array}{l}
+	\left[ W_{\text{i}} +
+	{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)}
+	\right]\cos\left(\alpha_{\text{i}}\right) + \left(- X_{\text{i-1}} 
+	+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) \\ + \left[
+	{- H_{\text{i}} + H_{\text{i-1}} +
+	{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}}
+	\right]\sin\left(\alpha_{\text{i}}\right) + \left(- G_{\text{i}} + 
+	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) -
+	U_{\text{b,i}} \end{array} \right) \cdot \tan\left( 
+	\varphi'_{\text{i}}
+	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+\end{equation*}
+
+The definitions of \ddref{DD_R} and \ddref{DD_T} are present in this equation, 
+and can thus be replaced by $R_i$ and $T_i$, respectively.
+
+\bmac{DDs referenced here will be changed to GDs as discussed}
+
+\begin{equation*}
+\begin{array}{l} \left( T_{\text{i}} + \left(-X_{\text{i-1}} + 
+X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
+- \left(- G_{\text{i}} + 
+G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
+\right)\\ = \frac 
+{ 
+	R_{\text{i}} + \left(\left(- X_{\text{i-1}} 
+	+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) + \left(- 
+	G_{\text{i}} + 
+	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) \right) \cdot 
+	\tan\left( 
+	\varphi'_{\text{i}}
+	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+\end{equation*}
+
+The interslice shear force $X$ can be expressed in terms of the interslice 
+normal force $G$ using \dref{GD_X}, resulting in
+
+\begin{equation*}
+\begin{array}{l} \left( T_{\text{i}} + \left(-\lambda f_\text{i-1} 
+G_{\text{i-1}} + \lambda f_\text{i} 
+G_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
+- \left(- G_{\text{i}} + 
+G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
+\right)\\ = \frac 
+{ 
+	R_{\text{i}} + \left(\left(-\lambda f_\text{i-1} 
+	G_{\text{i-1}} + \lambda f_\text{i} 
+	G_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) + \left(- 
+	G_{\text{i}} + 
+	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) \right) \cdot 
+	\tan\left( 
+	\varphi'_{\text{i}}
+	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+\end{equation*}
+
+Rearranging yields the following:
+
+\begin{equation*}
+G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
+\cos\left(\alpha_\text{i}\right) -
+\sin\left(\alpha_\text{i}\right) \right]
+\tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_\text{i}
+\sin\left(\alpha_\text{i}\right) +
+\cos\left(\alpha_\text{i}\right) \right.]
+\left(F_\text{S}\right) \end{array} \right] = G_\text{i-1}
+\left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i-1}
+\cos\left(\alpha_\text{i}\right) -
+\sin\left(\alpha_\text{i}\right) \right]
+\tan\left(\varphi'\right._{i}) 
+\\ - \left[ \lambda \cdot f_\text{i-1}
+\sin\left(\alpha_\text{i}\right) +
+\cos\left(\alpha_\text{i}\right) \right]
+\left(F_\text{S}\right) \end{array} \right] +
+\left(F_\text{S}\right) \cdot T_\text{i} - R_\text{i}
+\end{equation*}
+
+The definitions for $Phi$ and $Psi$ from DDx and DDy simplify the above to 
+equation~\ref{eq:Gi}.
+
+\begin{equation} \label{eq:Gi}
+G_\text{i} \Phi_\text{i} = \Psi_\text{i-1} G_\text{i-1} \Phi_\text{i-1} + 
+F_\text{S} 
+T_\text{i} - R_\text{i}
+\end{equation}
+
+Versions of equation~\ref{eq:Gi} instantiated for slices 1 to $n$ are shown 
+below.
+
+\begin{equation*}
+G_\text{1} \Phi_\text{1} = \Psi_\text{0} G_\text{0} \Phi_\text{0} + F_\text{S} 
+T_\text{1} - R_\text{1}
+\end{equation*}
+
+\begin{equation} \label{eq:G2}
+G_\text{2} \Phi_\text{2} = \Psi_\text{1} G_\text{1} \Phi_\text{1} + F_\text{S} 
+T_\text{2} - R_\text{2}
+\end{equation}
+
+\begin{equation} \label{eq:G3}
+G_\text{3} \Phi_\text{3} = \Psi_\text{2} G_\text{2} \Phi_\text{2} + F_\text{S} 
+T_\text{3} - R_\text{3}
+\end{equation}
+\begin{equation*}
+...
+\end{equation*}
+\begin{equation} \label{eq:Gn-2}
+G_\text{n-2} \Phi_\text{n-2} = \Psi_\text{n-3} G_\text{n-3} 
+\Phi_\text{n-3} + F_\text{S} T_\text{n-2} - R_\text{n-2}
+\end{equation}
+
+\begin{equation} \label{eq:Gn-1}
+G_\text{n-1} \Phi_\text{n-1} = \Psi_\text{n-2} G_\text{n-2} 
+\Phi_\text{n-2} + F_\text{S} T_\text{n-1} - R_\text{n-1}
+\end{equation}
+
+\begin{equation*}
+G_\text{n} \Phi_\text{n} = \Psi_\text{n-1} G_\text{n-1} \Phi_\text{n-1} + 
+F_\text{S} T_\text{n} - R_\text{n}
+\end{equation*}
+
+Applying A[new assumption], which says that $G_{0}$ and $G_{n}$ are 0, results 
+in the following special cases: Equation~\ref{eq:G0} for the first slice and 
+equation~\ref{eq:Gn} for the $n$th slice.
+
+\begin{equation} \label{eq:G0}
+G_\text{1} \Phi_\text{1} = F_\text{S} T_\text{1} - R_\text{1}
+\end{equation}
+
+\begin{equation} \label{eq:Gn}
+- \frac{F_\text{S} T_\text{n} - R_\text{n}}{\Psi_\text{n-1} } = G_\text{n-1} 
+\Phi_\text{n-1}
+\end{equation}
+
+Substituting equation~\ref{eq:G0} into equation~\ref{eq:G2} yields 
+equation~\ref{eq:G2sub}, which can be substituted into equation~\ref{eq:G3} to 
+get equation~\ref{eq:G3sub}, and so on until equation~\ref{eq:Gn-1sub} is 
+obtained from equation~\ref{eq:Gn-1}.
+
+\begin{equation} \label{eq:G2sub}
+G_\text{2} \Phi_\text{2} = \Psi_\text{1} \left(F_\text{S} T_\text{1} - 
+R_\text{1} 
+\right) + F_\text{S} T_\text{2} - R_\text{2}
+\end{equation}
+
+\begin{equation} \label{eq:G3sub}
+G_\text{3} \Phi_\text{3} = \Psi_\text{2} \left( \Psi_\text{1} \left(F_\text{S} 
+T_\text{1} - R_\text{1} 
+\right) + F_\text{S} T_\text{2} - R_\text{2} \right) + F_\text{S} 
+T_\text{3} - R_\text{3}
+\end{equation}
+\begin{equation*}
+\dots
+\end{equation*}
+
+\begin{equation} \label{eq:Gn-1sub}
+\begin{split}
+G_\text{n-1} \Phi_\text{n-1} = & \Psi_\text{n-2} \left(
+\Psi_\text{n-3} \left( 
+\dots \left( \Psi_\text{1} \left(F_\text{S} 
+T_\text{1} - R_\text{1} 
+\right) + F_\text{S} T_\text{2} - R_\text{2} \right) \dots \right) + F_\text{S} 
+T_\text{n-2} - R_\text{n-2} \right) \\& + F_\text{S} 
+T_\text{n-1} - R_\text{n-1} 
+\end{split}
+\end{equation}
 
 ~\newline
+
+Equation~\ref{eq:Gn} can then be substituted into the left-hand side of 
+equation~\ref{eq:Gn-1sub}, resulting in:
+
+\begin{equation*}
+\begin{split}
+- \frac{F_\text{S} T_\text{n} - R_\text{n}}{\Psi_\text{n-1} } = & 
+\Psi_\text{n-2} 
+\left(
+\Psi_\text{n-3} \left( 
+\dots \left( \Psi_\text{1} \left(F_\text{S} 
+T_\text{1} - R_\text{1} 
+\right) + F_\text{S} T_\text{2} - R_\text{2} \right) \dots \right) + F_\text{S} 
+T_\text{n-2} - R_\text{n-2} \right) \\& + F_\text{S} 
+T_\text{n-1} - R_\text{n-1} 
+\end{split}
+\end{equation*}
+
+This can be rearranged by multiplying both sides by $\Psi_\text{n-1}$ and then 
+distributing the multiplication of each $\Psi$ over addition to obtain:
+
+\begin{equation*}
+- \left( F_\text{S} T_\text{n} - R_\text{n} \right) = \Psi_\text{n-1} 
+\Psi_\text{n-2} 
+\dots \Psi_\text{1} \left( F_\text{S} T_\text{1} - R_\text{1} \right) + 
+\Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{2} \left( F_\text{S} 
+T_\text{2} - R_\text{2} \right) + \dots + \Psi_\text{n-1} \left( F_\text{S} 
+T_\text{n-1} - R_\text{n-1} \right)
+\end{equation*}
+
+The multiplication of the $\Psi$ terms can be further distributed over the 
+subtractions, resulting in the equation having terms that each either contain 
+an $R$ or a $T$. The equation can then be rearranged so terms containing an $R$ 
+are on one side of the equality, and terms containing a $T$ are on the other. 
+The multiplication by the factor of safety is common to all of the $T$ terms, 
+and thus can be factored out, resulting in:
+
+\begin{equation*}
+\begin{split}
+F_\text{S} \left( \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{1} 
+T_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{2} T_\text{2} + 
+\dots \Psi_\text{n-1} T_\text{n-1} + T_\text{n} \right) &\\= \Psi_\text{n-1} 
+\Psi_\text{n-2} 
+\dots \Psi_\text{1} R_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots 
+\Psi_\text{2} R_\text{2} + \dots + \Psi_\text{n-1} R_\text{n-1} + R_\text{n}
+\end{split}
+\end{equation*}
+
+Isolating the factor of safety on the left-hand side and using compact notation 
+for the products and sums yields equation~\ref{eq:FS}, which can also be seen 
+in \iref{IM_FS}.
+
+\begin{equation} \label{eq:FS}
+{F_\text{S}}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
+	\;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
+	}\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
+	\;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
+	}\right] + {T_{n}} }
+\end{equation}
+
+\bmac{This IM is still kind of long, at just over 3 pages. However I do not 
+think we can shorten it unless we leave out some intermediate steps in the 
+derivation. I tried to include enough steps for anyone to be able to follow 
+along, though, so I'd be hesitant to remove any. I personally think the 
+complexity of this derivation justifies the length.}
 
 % ------------------------------------------ %
 %               Begin IM Lambda      %
