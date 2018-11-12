@@ -4,8 +4,11 @@
 \usepackage[round]{natbib}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{hyperref}
+
 
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
@@ -15,6 +18,8 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
+
+\input{../../Comments}
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
 \newcommand{\acref}[1]{AC\ref{#1}}
@@ -28,27 +33,57 @@
 \newcommand{\mref}[1]{M\ref{#1}}
 
 %% Comments
-\newif\ifcomments\commentstrue
+\newif\ifcomments\commentsfalse
 
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
+%\ifcomments
+%\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
+%\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+%\else
+%\newcommand{\authornote}[3]{}
+%\newcommand{\todo}[1]{}
+%\fi
 
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
+%\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}\\
+\newcommand{\olu}[1]{\authornote{red}{OO}{#1}}
+\newcommand{\progname}{Tamias2D} 
 
 \begin{document}
 
-\title{Module Guide for Chipmunk2D Game Physics Library} 
-\author{Alex Halliwushka and Luthfi Mawarid}
+\title{Module Guide for TamiasMini2D Game Physics Library} 
+%update project name- olu
+\author{Alex Halliwushka and Luthfi Mawarid and Olu Owojaiye}
 \date{\today}
 	
 \maketitle
 
+~\newpage
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+2018-11-12 & 1.2 & Updated document with feedback\\
+2018-11-04 & 1.1 & Updated project name throughout the file\\
+2018-10-30 & 1.0 & Modification to existing file\\
+%Date 2 & 1.1 & Notes\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
 \tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
+
 
 \section{Introduction}
 
@@ -115,22 +150,20 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 \item[\refstepcounter{acnum} \actheacnum \label{acBody}:] The data structure of the
 physical properties of an object such as the object's mass, position and velocity.
 \item[\refstepcounter{acnum} \actheacnum \label{acShape}:] The data structure of the
-surface properties of an object such as the object's friction and elasticity.
+surface properties of an object such as the object's elasticity/ Coefficient of restitution.
 \item[\refstepcounter{acnum} \actheacnum \label{acSpace}:] How all the rigid
 bodies and shapes interact together.
 \item[\refstepcounter{acnum} \actheacnum \label{acCollision}:] The data structure containing collision information such as the objects that collide and their mass. 
-\item[\refstepcounter{acnum} \actheacnum \label{acControl}:] How the overall
-  control of the simulation is orchestrated, including the input and output of data.
+%\item[\refstepcounter{acnum} \actheacnum \label{acControl}:] How the overall
+  %control of the simulation is orchestrated, including the input and output of data.
 \item[\refstepcounter{acnum} \actheacnum \label{acVector}:] The implementation of mathematical vectors.
 \item[\refstepcounter{acnum} \actheacnum \label{acBBox}:] The implementation of bounding box structures.
 \item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] The implementation of transformation matrices.
 \item[\refstepcounter{acnum} \actheacnum \label{acSpatialIndex}:] How the simulation space is spatially indexed.
 \item[\refstepcounter{acnum} \actheacnum \label{acSolver}:] The algorithm used for solving collisions.
-\item[\refstepcounter{acnum} \actheacnum \label{acSeqDS}:] The implementation
-  for the sequence (array) data structure.
+\item[\refstepcounter{acnum} \actheacnum \label{acSeqDS}:] The implementation for the sequence (array) data structure.
 \item[\refstepcounter{acnum} \actheacnum \label{acLinkDS}:] The implementation for the linked (tree) data structure.
-\item[\refstepcounter{acnum} \actheacnum \label{acAssocDS}:] The implementation
-  for the associative (hash table) data structure.
+\item[\refstepcounter{acnum} \actheacnum \label{acAssocDS}:] The implementation for the associative (hash table) data structure.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -144,8 +177,9 @@ decisions will be changed.  Unlikely changes are numbered by \textbf{UC}
 followed by a number.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: Keyboard and/or mouse, Output: Memory and/or Screen).
+%\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
+ % (Input: Keyboard and/or mouse, Output: Memory and/or Screen).
+ % \\olu: removed UC1
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucInput}:] There will always be a source of input data external to the software.
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucOutput}:] Output data are
   displayed to the output device.
@@ -175,7 +209,7 @@ followed by a number.
 \item [\refstepcounter{mnum} \mthemnum \label{mPoly}:] Polygon Module
 \item [\refstepcounter{mnum} \mthemnum \label{mSpace}:] Space Module 
 \item [\refstepcounter{mnum} \mthemnum \label{mCollision}:] Arbiter Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control Module 
+%\item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control Module 
 \item [\refstepcounter{mnum} \mthemnum \label{mVector}:] Vector Module
 \item [\refstepcounter{mnum} \mthemnum \label{mBBox}:] Bounding Box Module
 \item [\refstepcounter{mnum} \mthemnum \label{mTrans}:] Transform Matrix Module
@@ -204,12 +238,13 @@ system.  It will not be reimplemented.
 & \multirow{3}{0.3\textwidth}{Shape Module} 
 & Circle Module \\
 & &Segment Module \\
-& &Polygon Module \\
+& &Polygon Module \\ %changed circle to polygon Module
 & Space Module \\ 
 & Arbiter Module \\
-& Control Module \\
+%& Control Module \\ 
+\olu{removed control module as this is a library, and an external program will be using this software}\\
 \midrule
-\multirow{8}{0.3\textwidth}{Software Decision Module} 
+\multirow{4}{0.3\textwidth}{Software Decision Module} 
 & Vector Module \\
 & Transform Matrix Module \\
 & Bounding Box Module \\
@@ -225,8 +260,9 @@ system.  It will not be reimplemented.
 \label{TblMH}
 \end{table}
 
-\section{Connection Between Requirements and Design} \label{SecConnection}
+~\newpage
 
+\section{Connection Between Requirements and Design} \label{SecConnection}
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table \ref{TblRT}.
@@ -237,8 +273,7 @@ Modules are decomposed according to the principle of ``information hiding''
 proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module
 decomposition is a brief statement of the design decision hidden by the
 module. The \emph{Services} field specifies \emph{what} the module will do
-without documenting \emph{how} to do it. For each module, a suggestion for the implementing software is given under the \emph{Implemented By} title. If the entry is \emph{OS}, this means that the module is provided by the operating system or by standard programming language libraries. If the entry is \emph{Chipmunk}, this means that the module will be implemented by the 
-game physics library.  
+without documenting \emph{how} to do it. For each module, a suggestion for the implementing software is given under the \emph{Implemented By} title. If the entry is \emph{OS}, this means that the module is provided by the operating system or by standard programming language libraries. If the entry is \emph{Tamias2D}, this means that the module will be implemented by the game physics library.  
 % should reference a command for the name, in case it changes
 If a dash (\emph{--}) is shown, this means
 that the module is not a leaf and will not have to be implemented. Whether or
@@ -276,7 +311,7 @@ this module. Both the parent and the children modules will be implemented.
 \item[Services:]Stores the physical properties of an object, such as mass, 
 position, rotation, velocity, etc, and provides operations on rigid bodies, such as setting the mass and velocity of the body.
 
-\item[Implemented By:] Chipmunk
+\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Shape Module (\mref{mShape})}
@@ -284,8 +319,8 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 \item[Secrets:]The data structure of a collision shape.
 \item[Services:]Stores the surface properties of an object, such as friction or elasticity, and provides operations on shapes, such as setting its friction or elasticity.
-\item[Children:] Circle Module, Segment Module, Polygon Module
-\item[Implemented By:] Chipmunk
+\item[Children:] Segment Module, Polygon Module
+\item[Implemented By:] \progname 
 \end{description}
 
 \paragraph{Circle Module (\mref{mCircle})}
@@ -293,7 +328,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 	\item[Secrets:] The data structure of a circle shape.
 	\item[Services:] Provides operations on circles such as initializing a new circle, calculating moment and area, etc.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \paragraph{Segment Module (\mref{mSegment})}
@@ -301,7 +336,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 	\item[Secrets:] The data structure of a segment shape.
 	\item[Services:] Provides operations on segments such as initializing a new segment, calculating moment and area, etc.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \paragraph{Polygon Module (\mref{mPoly})}
@@ -309,7 +344,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 	\item[Secrets:] The data structure of a polygon shape.
 	\item[Services:] Provides operations on polygons such as initializing a new polygon, calculating moment, area and centroid, etc.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Space Module (\mref{mSpace})}
@@ -317,7 +352,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \begin{description}
 	\item[Secrets:] The container for simulating objects.
 	\item[Services:]Controls how all the rigid bodies and shapes interact together.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Arbiter Module (\mref{mCollision})}
@@ -326,17 +361,18 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 \item[Secrets:]The data structure containing collision information.
 \item[Services:]Stores all collision data, such as which bodies 
 collided and their masses.
-\item[Implemented By:] Chipmunk
+\item[Implemented By:] \progname
 \end{description}
  
-\subsubsection{Control Module (\mref{mControl})}
+%\subsubsection{Control Module (\mref{mControl})} 
+%removed control module : Olu
 
-\begin{description}
-\item[Secrets:] The algorithm for coordinating the running of the program and the interface for receiving inputs and sending outputs.
-\item[Services:] Provides the main program.
-\item[Implemented By:] Chipmunk
-\end{description}
-
+%\begin{description}
+%\item[Secrets:] The algorithm for coordinating the running of the program %and the interface for receiving inputs and sending outputs.
+%\item[Services:] Provides the main program.
+%\item[Implemented By:] Chipmunk
+%\end{description}
+%\\olu: removed the above
 \subsection{Software Decision Module}
 
 \begin{description}
@@ -344,8 +380,8 @@ collided and their masses.
   facts, or programming considerations. The secrets of this module are
   \emph{not} described in the SRS.
 \item[Services:] Includes data structure and algorithms used in the system that do not provide direct interaction with the user. 
-  % Changes in these modules are more likely to be motivated by a desire to
-  % improve performance than by externally imposed changes.
+  Changes in these modules are more likely to be motivated by a desire to
+  improve performance than by externally imposed changes.
 \item[Implemented By:] --
 \end{description}
 
@@ -354,7 +390,7 @@ collided and their masses.
 \begin{description}
 	\item[Secrets:] The data structure representing vectors.
 	\item[Services:] Provides vector operations such as addition, scalar and vector multiplication, dot and cross products, rotations, etc.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Bounding Box Module (\mref{mBBox})}
@@ -362,15 +398,15 @@ collided and their masses.
 \begin{description}
 	\item[Secrets:] The data structure for representing bounding boxes.
 	\item[Services:] Provides constructors for bounding boxes and operations such as merging boxes, calculating their centroids and areas, etc.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Transform Matrix Module (\mref{mTrans})}
 
 \begin{description}
 	\item[Secrets:] The data structure representing transformation matrices.
-	\item[Services:] Provides constructors for affine transformation matrices, matrix operations such as inverse, transpose, multiplications, and operations for applying transformations to vectors and bounding boxes.
-	\item[Implemented By:] Chipmunk
+	\item[Services:] Provides constructors for affine transformation matrices, matrix operations such as inverse, transpose, multiplications, %and operations for applying transformations to vectors and bounding boxes.
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Spatial Index Module (\mref{mSpatialIndex})}
@@ -378,7 +414,7 @@ collided and their masses.
 \begin{description}
 	\item[Secrets:] The data structures and algorithms for spatially indexing the simulation space.
 	\item[Services:] Provides spatial indexing operations and tracks the positions of bodies in the simulation space.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Collision Solver Module (\mref{mSolver})}
@@ -386,7 +422,7 @@ collided and their masses.
 \begin{description}
 	\item[Secrets:] The data structures and algorithms for detecting collisions.
 	\item[Services:] Fast collision filtering, primitive shape to shape collision detection.
-	\item[Implemented By:] Chipmunk
+	\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Sequence Data Structure Module (\mref{mSeqDS})}
@@ -394,7 +430,7 @@ collided and their masses.
 \begin{description}
 \item[Secrets:] The data structure for a sequence data type.
 \item[Services:] Provides array manipulation operations, such as building an array, accessing a specific entry, slicing an array, etc.
-\item[Implemented By:] Chipmunk
+\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Linked Data Structure Module (\mref{mLinkDS})}
@@ -402,7 +438,7 @@ collided and their masses.
 \begin{description}
 \item[Secrets:] The data structure for a linked data type.
 \item[Services:] Provides tree manipulation operations, such as building a tree, accessing a specific entry, etc.
-\item[Implemented By:] Chipmunk
+\item[Implemented By:] \progname
 \end{description}
 
 \subsubsection{Associative Data Structure Module (\mref{mAssocDS})}
@@ -410,10 +446,8 @@ collided and their masses.
 \begin{description}
 \item[Secrets:] The data structure for an associative data type.
 \item[Services:] Provides operations on hash tables, such as building a hash table, accessing a specific entry, etc.
-\item[Implemented By:] Chipmunk
+\item[Implemented By:] \progname
 \end{description}
-
-~\newpage
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -428,14 +462,15 @@ requirements, and between the modules and the anticipated changes. We should als
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-	R1 & M\ref{mSpace}, M\ref{mControl}, M\ref{mSeqDS} \\
-	R2 & M\ref{mBody}, M\ref{mControl}, M\ref{mVector}, M\ref{mTrans} \\
-	R3 & M\ref{mShape}, M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mControl}, M\ref{mVector} \\
-	R4 & M\ref{mBody}, M\ref{mShape}, M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mSpace}, M\ref{mControl} \\
+	R1 & M\ref{mSpace}, M\ref{mSeqDS} \\
+	R2 & M\ref{mBody}, M\ref{mVector}, M\ref{mTrans} \\
+	R3 & M\ref{mShape},M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mVector} \\
+	R4 & M\ref{mBody}, M\ref{mShape},M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mSpace} \\
 	R5 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans} \\
 	R6 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans} \\
-	R7 & M\ref{mBody}, M\ref{mSpace}, M\ref{mBBox}, M\ref{mSpatialIndex}, M\ref{mSolver}, M\ref{mLinkDS}, M\ref{mAssocDS} \\
-	R8 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans}, M\ref{mCollision} \\
+	R7 & M\ref{mBody}, M\ref{mSpace}, M\ref{mBBox},M\ref{mSpatialIndex}, M\ref{mLinkDS}, M\ref{mAssocDS} M\ref{mSolver}\\
+	R8 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans},
+	M\ref{mCollision} \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -453,7 +488,7 @@ requirements, and between the modules and the anticipated changes. We should als
 	AC\ref{acShape} & M\ref{mShape}, M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly} \\
 	AC\ref{acSpace} & M\ref{mSpace} \\
 	AC\ref{acCollision} & M\ref{mCollision} \\
-	AC\ref{acControl} & M\ref{mControl} \\
+	%AC\ref{acControl} & M\ref{mControl} \\
 	AC\ref{acVector} & M\ref{mVector} \\
 	AC\ref{acBBox} & M\ref{mBBox} \\
 	AC\ref{acTrans} & M\ref{mTrans} \\
@@ -473,18 +508,19 @@ requirements, and between the modules and the anticipated changes. We should als
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if correct execution of B may be necessary for A to complete the task described in its specification. That is, A {\em uses} B if there exist situations in which the correct functioning of A depends upon the availability of a correct implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between the modules. It can be seen that the graph is a directed acyclic graph (DAG). Each level of the hierarchy offers a testable and usable subset of the system, and modules in the higher level of the hierarchy are essentially simpler because they use modules from the lower levels. As the modules M\ref{mVector}, M\ref{mBBox} and M\ref{mTrans} are used by many other modules, their uses have been color-coded for clarity.
+provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if correct execution of B may be necessary for A to complete the task described in its specification. That is, A {\em uses} B if there exist situations in which the correct functioning of A depends upon the availability of a correct implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between the modules. It can be seen that the graph is a directed acyclic graph (DAG). Each level of the hierarchy offers a testable and usable subset of the system, and modules in the higher level of the hierarchy are essentially simpler because they use modules from the lower levels. As the modules M\ref{mVector} and M\ref{mBBox} are used by many other modules, their uses have been color-coded for clarity.
 
+~\newpage
 \begin{figure}[htbp]
 \begin{center}
 %\rotatebox{-90}
 {
- \includegraphics[width=0.71\textwidth]{uses}
+ \includegraphics[width=0.71\textwidth]{uses1}
 }
 \caption{\label{Fig_uses}Use hierarchy among Modules}
 \end{center}
 \end{figure}
-
+\olu{Replaced figure 1 diagram}
 \section{Inheritance Hierarchy Between Modules} \label{SecInheritance}
 In this section the inheritance hierarchy between modules is provided (Figure \ref{Fig_Inheritance}).
 Modules in the lower level of the hierarchy inherit properties from the higher levels.
@@ -497,7 +533,8 @@ Modules in the lower level of the hierarchy inherit properties from the higher l
 \caption{\label{Fig_Inheritance}Inheritance hierarchy among Modules}
 \end{center}
 \end{figure}
-
+\olu {This section does not exist in the current template}
+~\newpage
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/Physics_Game_Library}
 
