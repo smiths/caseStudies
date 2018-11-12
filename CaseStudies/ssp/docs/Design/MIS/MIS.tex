@@ -1,54 +1,36 @@
-\documentclass[12pt]{article}
-\usepackage{colortbl}
-\usepackage{tabularx}
-\usepackage{longtable}
-\usepackage{comment}
-\usepackage{amsmath}
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{amsmath, mathtools}
+
+\usepackage[round]{natbib}
+\usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{multirow}
-%\usepackage{mathtools}
-\usepackage{geometry}
-\usepackage{booktabs}
-%\usepackage{xr}
-\usepackage{enumitem}
-\usepackage{siunitx}
 \usepackage{graphicx}
-\usepackage{caption}
-\usepackage{color}
-
-\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
-\definecolor{gray}{gray}{0.4}
-\definecolor{AFB}{rgb}{0.36, 0.54, 0.66}
-
+\usepackage{colortbl}
 \usepackage{xr}
 \usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{xfrac}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[section]{placeins}
+\usepackage{caption}
+\usepackage{fullpage}
 
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
-      colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box
-                            % color with linkbordercolor)
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
+	bookmarks=true,     % show bookmarks bar?
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=red,          % color of internal links (change box color with 
+	%linkbordercolor)
+	citecolor=blue,      % color of links to bibliography
+	filecolor=magenta,  % color of file links
+	urlcolor=cyan          % color of external links
 }
-\newcommand{\NN}[1]{{\color{red}#1}}
-\newcommand{\WSS}[1]{{\color{blue}#1}}
 
-%% Comments
-\newif\ifcomments\commentstrue
-
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
-
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\hf}[1]{\authornote{AFB}{HF}{#1}}
-\newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
+\usepackage{array}
 
 \newcounter{tablenum} %Table number
 \newcommand{\tablethetablenum}{Table\thetablenum}
@@ -60,26 +42,68 @@
 \newcommand{\algthealgnum}{NA\thealgnum}
 \newcommand{\algref}[1]{NA\ref{#1}}
 
-\newcommand{\forceindent}{\parindent=1em\indent\parindent=0pt\relax}
+%\newcommand{\forceindent}{\parindent=1em\indent\parindent=0pt\relax}
 
 %\oddsidemargin -1000mm
 %\evensidemargin -1000mm
 %\textwidth 160mm
 %\textheight 300mm
-\newgeometry{margin=2cm}
+%\newgeometry{margin=2cm}
 
-\externaldocument[MG-]{MG_SSP}
-\externaldocument[SRS-]{SRS_SSP}
+\externaldocument[MG-]{../MG/MG}
+\externaldocument[SRS-]{../../SRS/SRS}
+
+\input{../../Comments}
+
 \newcommand{\progname}{SSP}
 
 \begin{document}
 
-\title{Module Interface Specification for Slope Stability Analysis} 
-\author{Henry Frankis\\McMaster University}
+\title{Module Interface Specification for Slope Stability Analysis Program 
+(\progname)} 
+\author{Henry Frankis and Brooks MacLachlan}
 \date{\today}
 	
 \maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+	\midrule
+	11/12/18 & 1.0 & Initial updates based on template\\
+	\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+See Section~\ref{SRS-sec_RefMat} of the SRS Documentation, available in
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/SRS/SRS.pdf}
+{the GitHub repository for the project}.
+
+\newpage
+
 \tableofcontents
+
+\newpage
+
+\pagenumbering{arabic}
+
+\section{Introduction}
+
+The following document details the Module Interface Specifications for
+\progname, a program for determining the critical slip surface and 
+corresponding factor of safety for a given sloped mass of soil.
+
+Complementary documents include the System Requirement Specifications
+and Module Guide.  The full documentation and implementation can be
+found at 
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}
+{the GitHub repository for the project}.
 
 % ---------------------------------------------------------------- %
 % ------------------------ NOTATION ------------------------------ %
@@ -88,6 +112,13 @@
 \newpage
 
 \section{Notation}
+
+The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
+with the addition that template modules have been adapted from
+\cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
+\citet{HoffmanAndStrooper1995}.  For instance, the symbol := is used for a
+multiple assignment statement and conditional rules follow the form $(c_1
+\Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
 The \progname\ uses four data types of: Boolean, Real, String, and
 Sequence. These data types are summarized in the following table. The
@@ -164,10 +195,43 @@ minimized, and the critical slip has been found.
 % --------------------- MODULE GUIDE --------------------------- %
 % ---------------------------------------------------------------- %
 
-\section{Module Guide}
+\section{Module Decomposition}
 
-The module decomposition can be found in table \ref{MG-Table:Decomp},
-and the module use hierarchy in figure \ref{MG-Fig_Use} of the MG.
+The following table is taken directly from the Module Guide document for this 
+project.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth} }
+		\toprule
+		\textbf{Level 1} & \textbf{Level 2} \\
+		\midrule
+		
+		{Hardware-Hiding} & ~ \\
+		\midrule
+		
+		\multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
+		Control \\
+		& Input \\
+		& Output \\
+		& Genetic Algorithm \\
+		& Kinematic Admissibility \\
+		& Slip Weighting \\
+		& Slip Slicing \\
+		& Morgenstern-Price Calculation \\
+		& Slice Property Calculation \\
+		\midrule
+		
+		\multirow{3}{0.3\textwidth}{Software Decision} &
+		Array Data Structure \\
+		& Random Number Generation \\
+		& Plotting \\
+		\bottomrule
+		
+	\end{tabular}
+	\caption{Module Hierarchy}
+	\label{Table:Decomp}
+\end{table}
 
 % ---------------------------------------------------------------- %
 % --------------------- CONTROL MODULE --------------------------- %
@@ -1037,6 +1101,13 @@ element \textit{FLoc\_RFEM\_Final}, and the global factors of safety
 calculated by the Morgenstern Price module \textit{F\_MP\_Final}, and
 by the RFEM module \textit{F\_RFEM\_Final} on the same plot as
 straight lines across each element.
+
+\newpage
+
+\bibliographystyle {plainnat}
+\bibliography {../../../refs/References}
+
+\newpage
 
 % ---------------------------------------------------------------- %
 % ------------------------  APPENDIX --------------------------%
