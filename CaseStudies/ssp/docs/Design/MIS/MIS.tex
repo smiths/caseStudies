@@ -163,19 +163,6 @@ the unknown values: \textit{F\_MP} (IM\ref{SRS-IM_FS}), \textit{Lam}
 solved iterativley, with an initial guess for two of the values,
 typically \textit{F\_MP} and \textit{Lam}.
 
-\subsection*{RFEM (Section \ref{sec:RFEMMod})}
-The non-linear nature of the systems of equations in the RFEM solver
-algorithm, requires that the solution is done iteratively. The
-process implemented in the program is as follows. The stiffness
-constants are calculated as in DD\ref{SRS-DD_Stiff} of the SRS,
-assuming no displacements, and the applied load \textit{gLoad} is
-calculated as in GD\ref{SRS-GD_NetForce} of the SRS. This is used to
-calculate the displacements \textit{gDisp} as in
-IM\ref{SRS-IM_RFEM}. The calculated displacements can then be used to
-recalculate the stifness constants, and the reactive force
-\textit{dLoad} IM\ref{SRS-DD_Eqm}. Calculations repeat until the
-applied load, and the reactive force are in equilibrium.
-
 \subsection*{Genetic Algorithm (Section \ref{sec:GenAlgMod})}
 The uses a genetic algorithm to find the vertex coordinates of the
 slip surface that minimizes the factor of safety, as seen in
@@ -509,132 +496,6 @@ exception cases will output a factor of safety (\textit{F\_MP}) of
   \textit{F\_MP} : $\mathbb{R}$ & The factor of safety of the slope,
   as calculated by the Morgenstern Price solution method, measuring
   the stability of the slope. From IM\ref{SRS-IM_FS} of the SRS.\\
-\end{longtable}
-
-
-
-% ---------------------------------------------------------------- %
-% -------------------- RFEM MODULE ------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the RFEM Solver Module} \label{sec:RFEMMod}
-
-\subsection{Module Name: RFEMSolver.m}
-
-\subsection{Uses}
-
-\subsubsection{Imported Access Programs}
-
-\noindent
-\textbf{Uses} Property Sorter - section \ref{sec:PropSortMod},
-\textbf{Passes} \textit{evalslip}, \textit{params\_layers},
-\textit{params\_piez} \textbf{Receives} \textit{params\_soilInterior},
-\textit{params\_soilBase}, \textit{params\_internalForce},
-\textit{params\_angles}
-
-\subsection{Interface Syntax}
-
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.2\textwidth} | p{0.2\textwidth} |} \hline  
-
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
-
-  RFEM Solver & Sequence; ~\newline struc; ~\newline struc; ~\newline
-  struc; ~\newline struc & Real; ~\newline Sequence; ~\newline Sequence;
-  ~\newline Sequence & Non Converging \\ \hline
-\end{tabular}
-\end{center}
-
-\subsection{Interface Semantics}
-
-\subsubsection{Local Constants}
-
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \textit{F\_MinLim} : $\mathbb{R}$ &  The minimum factor of safety
-  value that the solution must be above to not be considered
-  spurious. [\textit{F\_MinLim}=0.5]\\
-\end{longtable}
-
-\subsubsection{State Variables}
-
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \textit{gLoad} : $[\mathbb{R}]^{1,2n}$ & Sequence of the applied
-  load placed on the slice elements. x-ordinate and y-ordinate value
-  for each slice. Sequence length value \textit{n} is defined by the
-  input \textit{evalslip}. From GD\ref{SRS-GD_NetForce} of SRS.\\
-
-  \textit{dLoad} : $[\mathbb{R}]^{1,2n}$ & Sequence of the internal
-  resistive force exerted by the slice elements that oppose the
-  applied load forces. x-ordinate and y-ordinate value for each
-  slice. Sequence length value \textit{n} is defined by the input
-  \textit{evalslip}. From DD\ref{SRS-DD_Eqm} of SRS.\\
-
-  \textit{gDisp} : $[\mathbb{R}]^{1,2n}$ & Sequence of the total
-  displacement the slice elements have experienced. x-ordinate and
-  y-ordinate value for each slice. Sequence length is defined by the
-  input \textit{evalslip}. From IM\ref{SRS-IM_RFEM} of SRS.\\
-\end{longtable}
-
-\subsubsection{Access Program Semantics}
-
-\textbf{Input:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable} {p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{evalslip} : $[\mathbb{R}]^{2,n+1}$ & Sequence of vertex
-  coordinates for the slip surface being evaluated. Identifies shape
-  of the slope, and slice points. Sequence length value \textit{n} is
-  defined by the Slicer module (section \ref{sec:SlicerMod}). \\
-
-  \textit{params\_layers} : struc\_layers & (Appendix
-  \ref{Tbl:LayerParam})\\
-
-  \textit{params\_piez} : struc\_piez & (Appendix
-  \ref{Tbl:PiezParam})\\
-
-  \textit{params\_soln} : struc\_soln & (Appendix
-  \ref{Tbl:SolnParam})\\
-
-  \textit{params\_load} : struc\_load & (Appendix
-  \ref{Tbl:LoadForceParam})
-\end{longtable}
-
-\noindent \textbf{Exceptions:} ~\newline\noindent A
-calculated global factor of safety of less than \textit{F\_MinLim}, will be
-considered non converging and the factor of safety \textit{F\_RFEM},
-and slice local factors of safety \textit{FLoc\_RFEM} will be set
-equal to 1000, and the displacement vectors \textit{DispX} and
-\textit{DispY} will be set to empty vectors.
-
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.25\textwidth} p{0.75\textwidth}}
-  \textit{F\_RFEM} : $\mathbb{R}$ & The factor of safety of the slip
-  surface as calculated by the RFEM solution method, measuring the
-  stability of the slope. From IM\ref{SRS-IM_RFEMFS}.\\
-
-  \textit{FLoc\_RFEM} : $[\mathbb{R}]^{1,n}$ & Sequence of the factors
-  of safety for the individual slices in the slip surface, identifying
-  the sections of the slope most vulnerable to failure. A value for
-  each slice. Sequence length value \textit{n} is defined by the input
-  \textit{evalslip}. From IM\ref{SRS-IM_RFEMFS} of the SRS.\\
-
-  \textit{DispX} : $[\mathbb{R}]^{1,n}$ & Sequence of the
-  displacements the slice elements of the slope will experience in the
-  $x$-ordinate direction to establish equilibrium. Sequence length
-  \textit{n} is defined by the input \textit{evalslip}. From
-  IM\ref{SRS-IM_RFEM} of the SRS.\\
-
-  \textit{DispY} : $[\mathbb{R}]^{1,n}$ & Sequence of the
-  displacements the slice elements of the slope will experience in the
-  $y$-ordinate direction to establish equilibrium. Sequence length
-  \textit{n} is defined by the input \textit{evalslip}. From
-  IM\ref{SRS-IM_RFEM} of the SRS.
 \end{longtable}
 
 % ---------------------------------------------------------------- %
@@ -1007,13 +868,6 @@ potential exceptions for Slip Weighter.
 \textit{params\_piez}, \textit{params\_load},
 \textit{params\_soln} \textbf{Recieves} \textit{F\_MP\_Final}
 
-~\newline\noindent
-\textbf{Uses} RFEM Module - section \ref{sec:RFEMMod},
-\textbf{Passes} \textit{eval\_cslip}, \textit{params\_layers},
-\textit{params\_piez}, \textit{params\_load},
-\textbf{Receives} \textit{F\_RFEM\_Final}, \textit{FLoc\_RFEM\_Final},
-\textit{DispX\_Final}, \textit{DispY\_Final}
-
 \subsection{Interface Syntax}
 
 \subsubsection{Exported Access Programs}
@@ -1037,31 +891,6 @@ p{0.25\textwidth} | p{0.2\textwidth} |} \hline
   \textit{F\_MP\_Final} : $\mathbb{R}$ & The factor of safety as
   calculated by the Morgenstern Price solution method for the
   critical slip surface, measuring the stability of the slope. \\
-
-  \textit{F\_RFEM\_Final} : $\mathbb{R}$ & The factor of safety as
-  calculated by the RFEM solution method for the critical slip
-  surface, measuring the stability of the slope. \\
-
-  \textit{FLoc\_RFEM\_Final} : $[\mathbb{R}]^{1,n}$ & Sequence of the
-  factors of safety for the individual slices along the critical slip
-  surface, identifying the sections of the slope most vulnerable to
-  failure, as calculated by the RFEM solution method. Sequence length
-  value \textit{n} is defined by the Slicer Module (section
-  \ref{sec:SlicerMod}).\\
-
-  \textit{DispX\_Final} : $[\mathbb{R}]^{1,n}$ & Sequence of the
-  displacement the slice elements of the slope will experience in the
-  $x$-ordinate direction to achieve equilibrium for the critical slip
-  surface, as calculated by the RFEM solution method. Sequence length
-  value \textit{n} is defined by the Slicer Module (section
-  \ref{sec:SlicerMod}).\\
-
-  \textit{DispY\_Final} : $[\mathbb{R}]^{1,n}$ & Sequence of the
-  displacement the slice elements of the slope will experience in the
-  $y$-ordinate direction to achieve equilibrium for the critical slip
-  surface, as calculated by the RFEM solution method. Sequence length
-  value \textit{n}, is defined by the Slicer Module (section
-  \ref{sec:SlicerMod}). \\
 \end{longtable}
 
 \subsubsection{Access Program Semantics}
@@ -1088,13 +917,8 @@ potential exceptions for Output.
 return any values; however, it creates a plot of the critical slip
 surface \textit{cslip} as a part of the slope geometry \textit{strat}
 (from \textit{params\_layers}). The plot also displays the
-displacements the slice elements experience as calculated by the RFEM
-method in \textit{DispX\_Final} and \textit{DispY\_Final}. A second
-plot displaying the value of the local factors of safety at each
-element \textit{FLoc\_RFEM\_Final}, and the global factors of safety
-calculated by the Morgenstern Price module \textit{F\_MP\_Final}, and
-by the RFEM module \textit{F\_RFEM\_Final} on the same plot as
-straight lines across each element.
+the factor of safety calculated by the Morgenstern-Price module 
+\textit{F\_MP\_Final}.
 
 \newpage
 
