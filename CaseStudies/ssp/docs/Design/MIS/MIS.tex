@@ -97,7 +97,9 @@ See Section~\ref{SRS-sec_RefMat} of the SRS Documentation, available in
 
 The following document details the Module Interface Specifications for
 \progname, a program for determining the critical slip surface and 
-corresponding factor of safety for a given sloped mass of soil.
+corresponding factor of safety for a given sloped mass of soil. The document is 
+intended to ease understanding of the design of \progname{} and should be used 
+as a resource for any maintenance of \progname{}.
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
@@ -108,8 +110,6 @@ found at
 % ---------------------------------------------------------------- %
 % ------------------------ NOTATION ------------------------------ %
 % ---------------------------------------------------------------- %
-
-\newpage
 
 \section{Notation}
 
@@ -127,12 +127,11 @@ The following table summarizes the primitive data types used by \progname.
   \hline \textbf{Data Type} & \textbf{Notation} & \textbf{Description}
   \\ \hline
   
-  Character & char & A single symbol or digit\\
+  character & char & a single symbol or digit\\
 
-  Boolean & $\mathbb{B}$ & A value from the set \{true, false\}\\
+  boolean & $\mathbb{B}$ & a value from the set \{true, false\}\\
   
-  Real & $\mathbb{R}$ & Any number in $\left( -\infty, \infty
-  \right)$.\\
+  real & $\mathbb{R}$ & any number in $\left( -\infty, \infty \right)$.\\
   \bottomrule
 \end{tabular}
 
@@ -155,22 +154,27 @@ followed by their specification.
 
 \section{Numerical Algorithms}
 
-\subsection*{Morgenstern Price (Section \ref{sec:MPMod})}
-The non-linear nature of the systems of equations in the Morgenstern
-Price solver algorithm requires that solutions to the equations for
-the unknown values: \textit{F\_MP} (IM\ref{SRS-IM_FS}), \textit{Lam}
-(IM\ref{SRS-IM_Lambda}) and \textit{E\_force} (IM\ref{SRS-IM_E}) are
-solved iterativley, with an initial guess for two of the values,
-typically \textit{F\_MP} and \textit{Lam}.
+\subsection*{Morgenstern-Price (Section \ref{sec:MPMod})}
+The non-linear nature of the systems of equations in the Morgenstern-Price 
+solver algorithm requires that the equations for
+the factor of safety (IM\ref{SRS-IM_FS}), the interslice normal-to-shear force 
+ratio (IM\ref{SRS-IM_Lambda}), and the interslice normal forces 
+(IM\ref{SRS-IM_E}) are solved iteratively, with an initial guess for two of the 
+values, typically the factor of safety and interslice normal-to-shear force 
+ratio.
 
 \subsection*{Genetic Algorithm (Section \ref{sec:GenAlgMod})}
-The uses a genetic algorithm to find the vertex coordinates of the
-slip surface that minimizes the factor of safety, as seen in
-IM\ref{SRS-IM_Min}. The genetic algorithm will generate new slip
-surfaces based on merging and mutating previously known slip surfaces
-with low factors of safety. When a minimum factor of safety cant be
-found after several iterations the factor of safety is considered
-minimized, and the critical slip has been found.
+\progname{} uses a genetic algorithm to find the coordinates of the
+critical slip surface vertices that minimize the factor of safety, as described 
+in IM\ref{SRS-IM_Min}. The genetic algorithm generates a set of initial 
+potential slip surfaces, and subsequent generations are created by merging and 
+mutating slip surfaces with low factors of safety from the previous generation. 
+The minimum factor of safety after several generations is assumed to correspond 
+to the critical slip surface.
+
+\bmac{This section is not on the template. I've left it in for now because the 
+information does seem useful, but maybe this is not the right place for it? 
+Maybe this should go to an appendix?}
 
 % ---------------------------------------------------------------- %
 % --------------------- MODULE GUIDE --------------------------- %
