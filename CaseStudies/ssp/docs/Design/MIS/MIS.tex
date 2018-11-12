@@ -177,7 +177,7 @@ information does seem useful, but maybe this is not the right place for it?
 Maybe this should go to an appendix?}
 
 % ---------------------------------------------------------------- %
-% --------------------- MODULE GUIDE --------------------------- %
+% --------------------- MODULE DECOMPOSITION --------------------- %
 % ---------------------------------------------------------------- %
 
 \section{Module Decomposition}
@@ -224,7 +224,8 @@ project.
 
 \section{MIS of the Control Module}
 
-\subsection{Module Name: Control.m}
+\subsection{Module}
+Control
 
 \subsection{Uses}
 
@@ -248,7 +249,7 @@ project.
 \textit{params\_load}, \textit{params\_soln},
 \textit{cslip}, \textbf{Receives} N/A
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 
@@ -264,7 +265,7 @@ project.
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{State Variables}
 
@@ -313,9 +314,10 @@ data is: Input, Genetic Algorithm, Output.
 
 \section{MIS of the Input Module} \label{sec:InputMod}
 
-\subsection{Module Name: Input.m }
+\subsection{Module}
+Input
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -333,7 +335,7 @@ p{0.15\textwidth} | p{0.15\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Environment Variables}
 
@@ -381,7 +383,8 @@ generate an input file error.
 
 \section{MIS of the Morgenstern Price Solver Module} \label{sec:MPMod}
 
-\subsection{Module Name: MorgPriceSolver.m}
+\subsection{Module}
+MorgPriceSolver
 
 \subsection{Uses}
 
@@ -394,7 +397,7 @@ generate an input file error.
 \textit{params\_soilBase}, \textit{params\_internalForce},
 \textit{params\_angles}
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -411,7 +414,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Local Constants}
 \renewcommand*{\arraystretch}{1.5}
@@ -508,7 +511,8 @@ exception cases will output a factor of safety (\textit{F\_MP}) of
 
 \section{MIS of the Genetic Algorithm Module} \label{sec:GenAlgMod}
 
-\subsection{Module Name: GenAlgModule.m}
+\subsection{Module}
+GenAlgModule
 
 \subsection{Uses}
 
@@ -532,7 +536,7 @@ $\textit{slip}_{i}$
 \ref{sec:WeightMod}, \textbf{Imports} \textit{pool}, \textbf{Receives}
 \textit{pool}
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -548,7 +552,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Local Constants}
 \renewcommand*{\arraystretch}{1.5}
@@ -608,9 +612,10 @@ no potential exceptions for GenAlg.
 
 \section{MIS of the Property Sorter Module} \label{sec:PropSortMod}
 
-\subsection{Module Name: PropertySorter.m}
+\subsection{Module} 
+PropertySorter
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -627,7 +632,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Access Program Semantics}
 \textbf{Input:}
@@ -669,9 +674,10 @@ potential exceptions for Property Sorter.
 
 \section{MIS of the Slip Slicer Module} \label{sec:SlicerMod}
 
-\subsection{Module Name: Slicer.m}
+\subsection{Module}
+Slicer
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -686,7 +692,7 @@ potential exceptions for Property Sorter.
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Local Constants}
 \renewcommand*{\arraystretch}{1.5}
@@ -729,9 +735,10 @@ potential exceptions for Slip Slicer.
 \section{MIS of the Kinematic Admissibility
   Module} \label{sec:KinAdmMod}
 
-\subsection{Module Name: KinAdm.m}
+\subsection{Module}
+KinAdm
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -748,7 +755,7 @@ p{0.15\textwidth} | p{0.15\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Assumption}
 A straight line describing the slip surface is assumed between
@@ -795,9 +802,10 @@ no potential exceptions for KinAdm.
 \section{MIS of the Slip Weighting
   Module} \label{sec:WeightMod}
 
-\subsection{Module Name: SlipWeighter.m}
+\subsection{Module}
+SlipWeighter
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \begin{center}
@@ -813,7 +821,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 \end{tabular}
 \end{center}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{Access Program Semantics}
 \textbf{Input:} 
@@ -857,7 +865,8 @@ potential exceptions for Slip Weighter.
 \section{MIS of the Output
   Module} \label{sec:OutputMod}
 
-\subsection{Module Name: Output.m}
+\subsection{Module}
+Output
 
 \subsection{Uses}
 
@@ -872,7 +881,7 @@ potential exceptions for Slip Weighter.
 \textit{params\_piez}, \textit{params\_load},
 \textit{params\_soln} \textbf{Recieves} \textit{F\_MP\_Final}
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Access Programs}
 \renewcommand*{\arraystretch}{1.5}
@@ -887,7 +896,7 @@ p{0.25\textwidth} | p{0.2\textwidth} |} \hline
 
 \end{tabular}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{State Variables}
 \renewcommand{\arraystretch}{1.5}
