@@ -229,25 +229,8 @@ Control
 
 \subsection{Uses}
 
-\subsubsection{Imported Access Programs}
-
-\noindent
-\textbf{Uses} Input Module - section \ref{sec:InputMod},
-\textbf{Passes} N/A, \textbf{Receives} \textit{params\_layers},
-\textit{params\_piez}, \textit{params\_search},
-\textit{params\_load}, \textit{params\_soln}
-
-~\newline\noindent
-\textbf{Uses} Genetic Algorithm Module - section \ref{sec:GenAlgMod},
-\textbf{Passes} \textit{params\_layers}, \textit{params\_piez},
-\textit{params\_piez}, \textit{params\_load},
-\textit{params\_soln}, \textbf{Receives} \textit{cslip}
-
-~\newline\noindent
-\textbf{Uses} Output Module - section \ref{sec:OutputMod},
-\textbf{Passes} \textit{params\_layers}, \textit{params\_piez},
-\textit{params\_load}, \textit{params\_soln},
-\textit{cslip}, \textbf{Receives} N/A
+Input (Section \ref{sec:InputMod}), GenAlg (Section \ref{sec:GenAlgMod}), 
+Output (Section \ref{sec:OutputMod})
 
 \subsection{Syntax}
 
@@ -257,11 +240,10 @@ Control
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular} {|p{0.15\textwidth}| p{0.15\textwidth}
     |p{0.25\textwidth} |p{0.15\textwidth}|}
-
   \hline \textbf{Name} & \textbf{In} & \textbf{Out} &
   \textbf{Exceptions} \\ \hline
 
-  Control & - & - & - \\ \hline
+  Control & string & - & - \\ \hline
 \end{tabular}
 \end{center}
 
@@ -269,44 +251,19 @@ Control
 
 \subsubsection{State Variables}
 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth}
-    p{0.7\textwidth}}
-  
-  \textit{params\_layers} : struc\_layers & (Appendix
-  \ref{Tbl:LayerParam})\\
+None
 
-  \textit{params\_piez} : struc\_piez & (Appendix
-  \ref{Tbl:PiezParam})\\
+\subsubsection{Assumptions}
 
-  \textit{params\_soln} : struc\_soln & (Appendix
-  \ref{Tbl:SolnParam})\\
+The access program is called with a string parameter.
 
-  \textit{params\_search} : struc\_search & (Appendix
-  \ref{Tbl:SearchParam})\\
+\subsubsection{Access Routine Semantics}
 
-  \textit{params\_load} : struc\_load & (Appendix
-  \ref{Tbl:LoadForceParam})\\
-
-  \textit{cslip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of
-  vertex coordinates describing the geometry of the critical slip
-  surface of the slope. Sequence length value \textit{nslip} is
-  defined by the Genetic Algorithm Module (section
-  \ref{sec:GenAlgMod}).
-\end{longtable}
-
-\subsubsection{Access Program Semantics}
-
-\textbf{Input:} ~\newline Control does not receive any external input.
-
-~\newline\noindent \textbf{Exceptions:} ~\newline There are no
-potential exceptions for control.
-
-~\newline\noindent \textbf{Output:} ~\newline Control does not return
-any values; however, it does control the overall operation of the
-program. This is done through a series of function calls to the
-functions provided by the imported modules.  The basic flow of the
-data is: Input, Genetic Algorithm, Output.
+control(\textit{fname}):
+\begin{itemize}
+	\item transition: Modifies the state of the Input Module, Genetic Algorithm 
+	Module, and Output Module.
+\end{itemize}
 
 % ---------------------------------------------------------------- %
 % ---------------------- INPUT MODULE ---------------------------- %
@@ -346,7 +303,7 @@ p{0.15\textwidth} | p{0.15\textwidth} |} \hline
   \textit{in\_file} : file & \\
 \end{longtable}
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:} ~\newline\noindent Accepts a path to a file name. file
 type is readable by Matlab, and is constructed in the format seen in
 appendix \ref{sec:InFormat}. Command line prompts will control user
@@ -462,7 +419,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
   changing and \textit{Del\_Lam} will be small.\\ 
 \end{longtable}
  
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 
 \textbf{Input:} 
 \renewcommand*{\arraystretch}{1.5}
@@ -578,7 +535,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
   the pools factors of safety ($\mathbb{R}$). \\
 \end{longtable}
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:} 
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
@@ -634,7 +591,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 
 \subsection{Semantics}
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:}
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
@@ -705,7 +662,7 @@ Slicer
 A straight line describing the slip surface is assumed between
 adjacent vertex coordinates given in the input \textit{slip}.
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:} 
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.15\textwidth} p{0.85\textwidth}}
@@ -761,7 +718,7 @@ p{0.15\textwidth} | p{0.15\textwidth} |} \hline
 A straight line describing the slip surface is assumed between
 adjacent vertex coordinates given in the input \textit{slip}.
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:}
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.25\textwidth} p{0.75\textwidth}}
@@ -823,7 +780,7 @@ p{0.2\textwidth} | p{0.2\textwidth} |} \hline
 
 \subsection{Semantics}
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:} 
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.32\textwidth} p{0.68\textwidth}}
@@ -906,7 +863,7 @@ p{0.25\textwidth} | p{0.2\textwidth} |} \hline
   critical slip surface, measuring the stability of the slope. \\
 \end{longtable}
 
-\subsubsection{Access Program Semantics}
+\subsubsection{Access Routine Semantics}
 \textbf{Input:}
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
