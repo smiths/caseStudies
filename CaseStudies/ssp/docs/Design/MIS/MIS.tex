@@ -131,7 +131,10 @@ The following table summarizes the primitive data types used by \progname.
 
   boolean & $\mathbb{B}$ & a value from the set \{true, false\}\\
   
-  real & $\mathbb{R}$ & any number in $\left( -\infty, \infty \right)$.\\
+  real & $\mathbb{R}$ & any number in $\left( -\infty, \infty \right)$\\
+  
+  integer & $\mathbb{Z}$ & a number without a fractional component in $\left( 
+  -\infty, \infty \right)$\\
   \bottomrule
 \end{tabular}
 
@@ -274,65 +277,126 @@ control(\textit{fname}):
 \subsection{Module}
 Input
 
+\subsection{Uses}
+N/A
+
 \subsection{Syntax}
+
+\subsubsection{Exported Data Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+	paramsLayers &=& tuple of (strat : coords, phi : $\mathbb{R}$, coh : 
+	$\mathbb{R}$, gam : $\mathbb{R}$, gams : $\mathbb{R}$) 
+	(Appendix~\ref{Tbl:LayerParam})\\
+	paramsPiez &=& tuple of (piez : coords, gamw : $\mathbb{R}$) 
+	(Appendix~\ref{Tbl:PiezParam}) \\
+	paramsSearch &=& tuple of (Xext, Xetr, Ylim : 
+	[$\mathbb{R}$]\textsuperscript{1x2}) (Appendix~\ref{Tbl:SearchParam}) \\
+	paramsSoln &=& tuple of (ltor, ftype, evenslc, cncvu, obtu : 
+	$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam}) \\
+\end{longtable}
+
 
 \subsubsection{Exported Access Programs}
 \begin{center}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.18\textwidth} | p{0.25\textwidth} | 
-p{0.15\textwidth} | p{0.15\textwidth} |} \hline 
+\begin{tabular}{| p{0.18\textwidth} | p{0.25\textwidth} | p{0.25\textwidth} | 
+p{0.25\textwidth} |} \hline 
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
-   Input & 'string' (file); ~\newline bools; ~\newline reals & struc;
-   ~\newline struc; ~\newline struc; ~\newline struc; ~\newline struc
-   & input file error \\ \hline
+   load\_params & string & paramsLayers, paramsPiez, paramsSearch, paramsSoln & 
+   fileNotExist, badFileExtension, unexpectedInput  \\ \hline
+   verify\_params & paramsLayers, paramsPiez & - & 
+   badSlopeGeometry, badEffAngleFriction, badCohesion, badDryUnitWeight, 
+   badSatUnitWeight, badPiezGeometry, badWatUnitWeight \\ \hline
 
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
+\subsubsection{State Variables}
+
+\textit{params\_layers} : paramsLayers\\
+\textit{params\_piez} : paramsPiez\\
+\textit{params\_search} : paramsSearch\\
+\textit{params\_soln} : paramsSoln\\
+
 \subsubsection{Environment Variables}
 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \textit{board} : keyboard & \\
+\textit{in\_file} : String
+\begin{itemize}
+	\item \textit{in\_file} represents a file stored in the file system of the 
+	hardware running \progname{} \\
+\end{itemize}
 
-  \textit{in\_file} : file & \\
-\end{longtable}
+\subsubsection{Assumptions}
+The guesses for potential minimum and maximum $x$ and $y$ values of the 
+critical slip surface, as described in \textit{in\_file}, lie within the 
+boundaries of the given slope geometry.
 
 \subsubsection{Access Routine Semantics}
-\textbf{Input:} ~\newline\noindent Accepts a path to a file name. file
-type is readable by Matlab, and is constructed in the format seen in
-appendix \ref{sec:InFormat}. Command line prompts will control user
-input values as boolean or real values through the keyboard
-environment.
 
-~\newline\noindent \textbf{Exceptions:} ~\newline\noindent
-An input data file that does not follow intended input format will
-generate an input file error.
+load\_params(\textit{fname}):
+\begin{itemize}
+	\item transition:
+	\begin{itemize}
+		\item[] \textit{params\_layers}, \textit{params\_piez}, 
+		\textit{params\_search}, 
+		\textit{params\_soln} $\coloneqq$  \textit{params\_layers'}, 
+		\textit{params\_piez'}, \textit{params\_search'}, 
+		\textit{params\_soln'}\\ 
+		where \textit{params\_layers'}, 
+		\textit{params\_piez'}, \textit{params\_search'}, and 
+		\textit{params\_soln'}
+		are populated based on the contents of \textit{in\_file}.
+	\end{itemize}
+	
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ [\textit{params\_layers}, 
+		\textit{params\_piez}, \textit{params\_search}, \textit{params\_soln}]
+	\end{itemize}
 
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{params\_layers} : struc\_layers & (Appendix
-  \ref{Tbl:LayerParam})\\
+	\item exceptions:
+	\begin{itemize}
+		\item[] \textit{exc} $\coloneqq$ (\textit{fname} does not exist in file 
+		system $\Rightarrow$ fileNotExist\\
+		$|$ \textit{fname}[($|$\textit{fname}$|$ - 5)..($|$\textit{fname}$|$ - 
+		1)] = ``.out'' $\Rightarrow$ badFileExtension\\
+		$|$ \textit{in\_file} is not formatted correctly $\Rightarrow$ 
+		unexpectedInput)
+	\end{itemize}
+\end{itemize}
 
-  \textit{params\_piez} : struc\_piez & (Appendix
-  \ref{Tbl:PiezParam})\\
-
-  \textit{params\_search} : struc\_search & (Appendix
-  \ref{Tbl:SearchParam})\\
-
-  \textit{params\_soln} : struc\_soln & (Appendix
-  \ref{Tbl:SolnParam})\\
-
-  \textit{params\_load} : struc\_load & (Appendix
-  \ref{Tbl:LoadForceParam})
-\end{longtable}
-
+\noindent verify\_params(\textit{params\_layers}, \textit{params\_piez}):
+\begin{itemize}
+	\item exceptions:
+	\begin{itemize}
+		\item[] \textit{exc} $\coloneqq$ ($\lnot (\forall i \in 
+		[0..|params\_layers.strat|-2])$($params\_layers.strat[i].x -\\ 
+		params\_layers.strat[i+1].x \leq 0)$ 
+		$\Rightarrow$ badSlopeGeometry\\
+		$|$ $\lnot (0 < params\_layers.phi < 90)$ $\Rightarrow$ 
+		badEffAngleFriction\\
+		$|$ $\lnot (0 < params\_layers.coh)$ $\Rightarrow$ 
+		badCohesion\\
+		$|$ $\lnot (0 < params\_layers.gam)$ $\Rightarrow$ 
+		badDryUnitWeight\\
+		$|$ $\lnot (0 < params\_layers.gams)$ $\Rightarrow$ 
+		badSatUnitWeight\\
+		$|$ $\lnot (\forall i \in 
+		[0..|params\_piez.piez|-2])$($params\_piez.piez[i].x -\\ 
+		params\_piez.piez[i+1].x \leq 0)$\\ $\lor params\_piez.piez[0].x \neq 
+		params\_layers.strat[0].x$ \\$\lor 
+		params\_piez.piez[|params\_piez.piez|-1].x$\\ $\neq 
+		params\_layers.strat[|params\_layers.strat|-1].x$ $\Rightarrow$ 
+		badPiezGeometry)\\
+	\end{itemize}
+\end{itemize}
 
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
@@ -1032,31 +1096,6 @@ which the solution method will be approached.
   must have all interior angles greater than a set limit. If false
   then an admissible slip surface does not need to pass this
   criterion.\\ \hline
-\end{longtable}
-\end{center}
-
-\subsubsection{Load Force Parameters} \label{Tbl:LoadForceParam}
-\noindent
-The elements in the structure for parameters relating to the forces
-acting on a slice caused by external sources or loads. $n$ refers to
-the number of slices composing the slip surface.
-
-\begin{center}
-\begin{longtable}{ p{0.2\textwidth}
-    p{0.8\textwidth}}\hline 
-
-  \textbf{Parameter} & \textbf{Description}\\ \hline
-
-  Kc : $\mathbb{R}$ & The seismic load factor. The ratio of the weight
-  force of the slope that be exerted outwards as a result of
-  vibrations of the earth's surface. From DD\ref{SRS-DD_Kc} of the
-  SRS.\\
-
-  Q : ?? & An applied load being exerted into the slope surface. From
-  DD\ref{SRS-DD_Q} of the SRS. \\
-
-  omega : ?? & The angle the applied load is being exerted into the slope
-  surface. From DD\ref{SRS-DD_Q} of the SRS.\\ \hline
 \end{longtable}
 \end{center}
 
