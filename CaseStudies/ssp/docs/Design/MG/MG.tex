@@ -91,7 +91,9 @@ This section records information for easy reference.
 \end{tabular}\\
 
 \bmac{This section is not on the template but I think that it should be since 
-this document introduces many new acronyms}
+  this document introduces many new acronyms}
+
+\wss{Agreed.  I have now added your table to the blank project template.}
 
 \newpage
 
@@ -132,6 +134,8 @@ Our design follows the rules laid out by \citet{ParnasEtAl1984}, as follows:
 in only one module", which just seems wrong to me. Maybe each data structure is 
 implemented by a dedicated module, but then many other modules can still use 
 that data structure (module).}
+
+\wss{Agreed - good catch.  I have updated the blank project template}
 
 In a rational design process, the Module Guide (MG) is developed after 
 completing the Software Requirements Specification (SRS) 
@@ -312,6 +316,16 @@ particular, might be out of place since it is related to anticipated changes
 and not requirements? Not sure where else to put it though. Maybe within 
 Section \ref{SecTM} itself?}
 
+\wss{The intention of this section is to document decisions that are made
+  ``between'' the requirements and the design.  To satisfy some requirements,
+  design decisions need to be made.  Rather than make these decisions implicit,
+  they are explicitly recorded here.  For instance, if a program has security
+  requirements, a specific design decision may be made to satisfy those
+  requirements with a password.  In scientific examples, the choice of algorithm
+could potentially go here, if that is a decision that is exposed by the
+interface.  In your case the choice of genetic algorithm is the concrete choice
+that is made to satisfy the abstract requirement for optimization.}
+
 The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
@@ -487,6 +501,10 @@ water forces of each slice.
 
 \subsubsection{Array Data Structure (\mref{mArrayOps})}
 
+\wss{Rather than call this module ``Array Data Structure'', I suggest ``Sequence
+  Data Structure''.  This is a more general way to say it, and it means that
+  this example will agree with some of the other examples.}
+
 \begin{description}
 \item[Secrets:] The data structure for an array data type.
 \item[Services:] Provides array manipulation, including building an
@@ -526,6 +544,8 @@ module covers multiple anticipated changes. \acref{AC_input} and
 services that should always happen in tandem. If input is being read, it should 
 always be verified. If output is being delivered, it should always be verified. 
 Thus, it makes sense to combine the two services into a single module.
+
+\wss{The makefile worked great for updating this table.  Thanks!}
 
 \begin{table}[h!]
 \centering
@@ -611,6 +631,11 @@ modules from the lower levels.
 \end{center}
 \end{figure}
 % ------ %
+
+\wss{I doubt we'll need them, but we might decide to introduce a module to
+  define new data types for the tuples that define the given slope stability
+  problem. We definitely shouldn't do it now, but if things get complicated
+  looking, we can add it later.}
 ~\newpage
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
