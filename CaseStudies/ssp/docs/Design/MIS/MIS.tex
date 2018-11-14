@@ -248,7 +248,7 @@ N/A
 \begin{center}
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-p{0.35\textwidth} } \hline 
+p{0.45\textwidth} } \hline 
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
   Control & string & - & - \\ \hline
@@ -322,7 +322,7 @@ N/A
 \begin{center}
 \renewcommand*{\arraystretch}{1.5}
 \begin{tabular}{p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth}  
-p{0.35\textwidth} } \hline 
+p{0.45\textwidth} } \hline 
 
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
@@ -371,7 +371,7 @@ p{0.35\textwidth} } \hline
 \textit{in\_file} : String
 \begin{itemize}
 	\item \textit{in\_file} represents a file stored in the file system of the 
-	hardware running \progname{} \\
+	hardware running \progname{}. \\
 \end{itemize}
 
 \subsubsection{Assumptions}
@@ -613,26 +613,29 @@ Output
 
 \subsection{Uses}
 
-Slicer Module (Section \ref{sec:SlicerMod}),
-\textbf{Uses} Morgenstern Price Module - section \ref{sec:MPMod},
-\textbf{Passes} \textit{eval\_cslip}, \textit{params\_layers},
-\textit{params\_piez}, \textit{params\_load},
-\textit{params\_soln} \textbf{Recieves} \textit{F\_MP\_Final}
+Sequence (Section~\ref{sec:SequenceData}), Plot (Section~\ref{sec:Plotting})
 
 \subsection{Syntax}
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
 
 \subsubsection{Exported Access Programs}
+
+\begin{center}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.15\textwidth} | 
-		p{0.25\textwidth} | p{0.2\textwidth} |} \hline 
+\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+p{0.45\textwidth} } \hline 
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 	
-	\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-	\\ \hline
-	
-	Output & Sequence; ~\newline struc; ~\newline struc; ~\newline struc;
-	~\newline struc & - & None \\ \hline
-	
+verify\_output & - & - & \\
+output &  & - & - \\ \hline
 \end{tabular}
+\end{center}
 
 \subsection{Semantics}
 
@@ -1178,7 +1181,7 @@ N/A
 \begin{center}
 	\renewcommand*{\arraystretch}{1.5}
 	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.35\textwidth} } \hline 
+			p{0.45\textwidth} } \hline 
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 		
@@ -1232,6 +1235,81 @@ N/A
 \subsubsection{Local Functions}
 
 N/A
+
+\subsubsection{Considerations}
+This module is the sequence data type and operations on sequences implemented 
+by Matlab.
+
+% ---------------------------------------------------------------- %
+% ------------------------- PLOTTING MODULE ---------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Plotting Module} \label{sec:Plotting}
+
+\subsection{Module}
+Plot
+
+\subsection{Uses}
+
+N/A
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		plot & [$\mathbb{R}$], [$\mathbb{R}$] & - & - \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+N/A
+
+\subsubsection{Environment Variables}
+
+\textit{screen} : [$\mathbb{Z}$]
+\begin{itemize}
+	\item \textit{screen} represents the colour values for each pixel on the 
+	screen of the hardware running \progname{}. \\
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+N/A
+
+\subsubsection{Access Routine Semantics}
+
+plot(\textit{x}, \textit{y}):
+\begin{itemize}
+	\item transition: 
+	\begin{itemize}
+		\item[] Modifies \textit{screen} to display a plot with $x$ on the 
+		horizontal axis and $y$ on the vertical axis.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
+
+\subsubsection{Considerations}
+This module is the plot function implemented by Matlab.
 
 \newpage
 
