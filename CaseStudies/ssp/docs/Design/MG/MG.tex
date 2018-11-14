@@ -1,17 +1,18 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, titlepage]{article}
+
 \usepackage{fullpage}
 \usepackage[round]{natbib}
 \usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{url}
 \usepackage{caption}
-\usepackage{geometry}
-\usepackage{comment}
 
 \usepackage{xr}
 \usepackage{hyperref}
+\usepackage[numbib,nottoc]{tocbibind}
 
 \hypersetup{
  bookmarks=true,   % show bookmarks bar?
@@ -23,20 +24,7 @@
  urlcolor=cyan   % color of external links
 }
 
-%% Comments
-\newif\ifcomments\commentstrue
-
-\ifcomments
-\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
-\else
-\newcommand{\authornote}[3]{}
-\newcommand{\todo}[1]{}
-\fi
-
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\hf}[1]{\authornote{cyan}{HF}{#1}}
-\newcommand{\cjl}[1]{\authornote{green}{CL}{#1}}
+\input{../../Comments}
 
 \newcommand{\progname}{SSP}
 
@@ -48,37 +36,36 @@
 \newcommand{\uctheucnum}{UC\theucnum}
 \newcommand{\uref}[1]{UC\ref{#1}}
 
+\newcommand{\rref}[1]{R\ref{#1}}
+
 \newcounter{mnum}
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
 
-
-\newcounter{fnum}
-\newcommand{\fthefnum}{Fig\thefnum}
-\newcommand{\fref}[1]{Fig\ref{#1}}
-
-\newcounter{tablenum}
-\newcommand{\tablethetablenum}{Table\thetablenum}
-\newcommand{\tableref}[1]{Table\ref{#1}}
-
-\newgeometry{margin=2cm}
-
-% define "struts", as suggested by Claudio Beccari in
-%    a piece in TeX and TUG News, Vol. 2, 1993.
-\newcommand{\Tstrut}{\rule{0pt}{2.6ex}}         % = `top' strut
-
-\externaldocument[SRS-]{SRS_SSP}
+\externaldocument[SRS-]{../../SRS/SRS}
 \externaldocument[MIS-]{MIS_SSP}
 
 \begin{document}
 
-\title{Module Guide for Slope Stability Analysis Program} 
-\author{Henry Frankis}
+\title{Module Guide for Slope Stability Analysis Program (\progname)} 
+\author{Henry Frankis and Brooks MacLachlan}
 \date{\today}
-	
+
 \maketitle
 
-\tableofcontents
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+	\midrule
+	31/10/2018 & 1.0 & Initial template and module updates\\
+	11/01/2018 & 1.1 & Anticipated changes updates\\
+	11/05/2018 & 1.2 & Edits throughout for submission\\
+	11/13/2018 & 1.3 & Various minor updates based on feedback\\
+	\bottomrule
+\end{tabularx}
 
 \newpage
 
@@ -88,22 +75,33 @@ This section records information for easy reference.
 
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
-  \toprule		
-  \textbf{Symbol} & \textbf{Description}\\
-  \midrule 
-  AC & Anticipated Change\\
-  DAG & Directed Acyclic Graph \\
-  M & Module \\
-  MG & Module Guide \\
-  OS & Operating System \\
-  R & Requirement\\
-  RFEM & Rigid Finite Element \\
-  SC & Scientific Computing \\
-  SRS & Software Requirements Specification\\
-  \progname & Slope Stability Analysis Program\\
-  UC & Unlikely Change \\
-  \bottomrule
+	\toprule		
+	\textbf{Symbol} & \textbf{Description}\\
+	\midrule 
+	AC & Anticipated Change\\
+	DAG & Directed Acyclic Graph \\
+	M & Module \\
+	MG & Module Guide \\
+	OS & Operating System \\
+	R & Requirement\\
+	SC & Scientific Computing \\
+	SRS & Software Requirements Specification\\
+	\progname & Slope Stability Analysis Program\\
+	UC & Unlikely Change \\
+	\bottomrule
 \end{tabular}\\
+
+\newpage
+
+\tableofcontents
+
+\listoftables
+
+\listoffigures
+
+\newpage
+
+\pagenumbering{arabic}
 
 \section{Introduction}
 
@@ -123,12 +121,15 @@ Our design follows the rules laid out by \citet{ParnasEtAl1984}, as follows:
 \begin{itemize}  
 \item System details that are likely to change independently should be
   the secrets of separate modules.
+\item Each data structure is implemented in only one module.
 \item Any other program that requires information stored in a module's
   data structures must obtain it by calling access programs belonging
   to that module.
 \end{itemize}
 
-In a rational design process~\citep{ParnasEtAl1984}, the Module Guide (MG) is developed after completing the Software Requirements Specification (SRS). The MG specifies the modular
+In a rational design process, the Module Guide (MG) is developed after 
+completing the Software Requirements Specification (SRS) 
+\citep{ParnasEtAl1984}. The MG specifies the modular
 structure of the system and is intended to allow both designers and
 maintainers to easily identify the parts of the software.  The
 potential readers of this document are as follows:
@@ -141,17 +142,16 @@ potential readers of this document are as follows:
   improves the maintainers' understanding when they need to make
   changes to the system. It is important for a maintainer to update
   the relevant sections of the document after changes have been made.
-\item Designers: Once the module guide has been written, it is can be
-  used to check for consistency, feasibility and
-  flexibility. Designers can verify the system in various ways, such
-  as consistency among modules, feasibility of the decomposition, and
-  flexibility of the design.
+\item Designers: Once the module guide has been written, it can be
+  used to check for consistency, feasibility, and flexibility. Designers can 
+  verify the system in various ways, such as consistency among modules, 
+  feasibility of the decomposition, and flexibility of the design.
 \end{itemize}
 
 The rest of the document is organized as follows. Section
 \ref{SecChange} lists the anticipated and unlikely changes of the
 software requirements. Section \ref{SecMH} summarizes the module
-decomposition that was constructed according to the likely
+hierarchy that was constructed according to the likely
 changes. Section \ref{SecConnection} specifies the connections between
 the software requirements and the modules. Section \ref{SecMD} gives a
 detailed description of the modules. Section \ref{SecTM} includes two
@@ -162,10 +162,10 @@ relation between anticipated changes and the modules. Section
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
 
-\hspace{3ex}This section lists possible changes to the
-system. According to the likeliness of the change, the possible
-changes are classified into two categories. Anticipated changes are
-listed in Section \ref{SecAchange}, and unlikely changes are listed in
+\hspace{3ex}This section lists possible changes to Slope Stability analysis 
+Program (\progname{}). According to the likeliness of the change, the possible
+changes are classified into two categories. Each Anticipated Change (AC) is
+listed in Section \ref{SecAchange}, and each Unlikely Change (UC) is listed in
 Section \ref{SecUchange}.
 
 \subsection{Anticipated Changes} \label{SecAchange}
@@ -174,8 +174,7 @@ Section \ref{SecUchange}.
 is to be hidden inside the modules. Ideally, changing one of the
 anticipated changes will only require changing the one module that
 hides the associated decision. The approach adapted here is called
-design for change. Anticipated changes are numbered by \textbf{AC}
-followed by a number.
+design for change.
 
 \begin{description}
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_hardware}:] The
@@ -184,29 +183,30 @@ followed by a number.
   algorithm for the overall operation procedure of the program.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_input}:] The format
   of the initial input data.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_inputConstraints}:] The       
+constraints on the initial input data.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_output}:] The format
   of the final output data.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_GenAlg}:] Algorithm
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_outputConstraints}:] The     
+constraints on the factor of safety and interslice forces.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_GenAlg}:] The algorithm
   for determining the critical slip surface.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_Kin}:] Criteria for
-  a slip surface to be considered physically realistic/ kinematically
-  admissible.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
-  algorithm for creating the slice points for slip surface analysis.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_Kin}:] The criteria for
+  a slip surface to be considered physically realistic.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_FSweight}:] The
-  weighting scheme for comparing slip surfaces factors of safety.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_MP}:] The
-  algorithm for implementation of the Morgenstern Price Solver.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_RFEM}:] The
-  algorithm for implementation of the RFEM Solver.
+  weighting scheme for comparing slip surface's factors of safety.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_Slicer}:] The
+  algorithm for dividing a slip surface into vertical slices.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_CalcFS}:] The algorithm used 
+to calculate the factor of safety for a slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
-  algorithm for assigning soil properties to slices.
+  algorithm for calculating soil properties of and forces on individual slices.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
-  implementation for the sequence (array) data structure.
+  implementation of the sequence data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
   of generating pseudo-random numbers.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Plot}:] The method
-  of displaying the final output.
+  for creating plots.
 \end{description}
 
 
@@ -218,20 +218,16 @@ complexity is not necessary. Fixing some design decisions at the
 system architecture stage can simplify the software design. If these
 decision should later need to be changed, then many parts of the
 design will potentially need to be modified. Hence, it is not intended
-that these decisions will be changed.  As an example, the model is
-assumed to follow the definition in the SRS.  If a new model is used,
-this will mean a change to the input format, fit parameters module,
-control, and output format modules. Unlikely changes are numbered by \textbf{UC} followed by a number.
+that these decisions will be changed.
 
 \begin{description}
 \item [\refstepcounter{ucnum}UC\theucnum \label{UC_IO}:] Input/Output
-  devices (Input: File and/or Keyboard, Output: File, Memory, and/or
-  Screen).
-\item [\refstepcounter{ucnum}UC\theucnum \label{UC_inputsource}:]
-  There will always be a source of input data external to the
-  software.
-\item [\refstepcounter{ucnum}UC\theucnum \label{UC_output}:] Output
-  data are displayed to the output device.
+  devices (Input: File and/or keyboard, Output: File, memory, and/or
+  screen).
+\item [\refstepcounter{ucnum}UC\theucnum \label{UC_SSPGoal}:] The goals of 
+\progname{}, to determine a slope's critical slip surface and corresponding 
+factor of safety, will not change.
+ 
 \end{description}
 
 
@@ -239,94 +235,79 @@ control, and output format modules. Unlikely changes are numbered by \textbf{UC}
 
 \hspace{3ex}This section provides an overview of the module
 design. Modules are summarized in a hierarchy decomposed by secrets
-in~\tableref{Table:Decomp}. The modules listed below are the modules
+in Table~\ref{Table:Decomp}. The modules listed below are the modules
 that will actually be implemented. Modules are numbered by \textbf{M}
 followed by a number.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
-  Module
 \item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
-  Module
-\item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input Format
-  Module
-\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output Format
-  Module
+\item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mGenAlg}:] Genetic
-  Algorithm Module
+  Algorithm
 \item [\refstepcounter{mnum} \mthemnum \label{mKinAdm}:] Kinematic
-  Admissibility Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSlipSlicer}:] Slip
-  Slicer Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSlipWeight}:] Slip
-  Weighting Module
+  Admissibility
+\item [\refstepcounter{mnum} \mthemnum \label{mSlipWeight}:] Slip Weighting
+\item [\refstepcounter{mnum} \mthemnum \label{mSlipSlicer}:] Slip Slicing
 \item [\refstepcounter{mnum} \mthemnum \label{mMorgPrice}:]
-  Morgenstern Price Solver Module
-\item [\refstepcounter{mnum} \mthemnum \label{mRFEM}:] Rigid Finite
-  Element Method Solver Module
+  Morgenstern-Price Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{mSliceProperty}:] Slice
-  Property Sorter Module
-\item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence
-  Data Structure Module
-\item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random
-  Number Generator Module
+  Property Calculation
+\item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence Data 
+Structure
+\item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random Number     
+Generation
 \item [\refstepcounter{mnum} \mthemnum \label{mPlot}:] Plotting
-  Module
 \end{description}
 
 Note that \mref{mHH} is a commonly used module and is already
-implemented by the operating system.
+implemented by the Operating System (OS).
 
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:Decomp}
 \centering
-\begin{tabular}{p{0.3\textwidth} p{0.4\textwidth} }
+\begin{tabular}{p{0.3\textwidth} p{0.6\textwidth} }
 \toprule
 \textbf{Level 1} & \textbf{Level 2} \\
 \midrule
 
-{Hardware-Hiding Module}\Tstrut  & ~ \\
+{Hardware-Hiding} & ~ \\
 \midrule
-\multirow{8}{0.3\textwidth}{Behaviour-Hiding Module\rule{0pt}{4ex}} &
-Control Module \\
-\cline{2-1} & Input Format Module\Tstrut \\
-\cline{2-1} & Output Format Module\Tstrut \\
-\cline{2-1} & Genetic Algorithm Module\Tstrut \\
-\cline{2-1} & Kinematic Admissibility Module \Tstrut \\
-\cline{2-1} & Slip Slicer Module\Tstrut \\
-\cline{2-1} & Slip Weighting Module\Tstrut \\
-\cline{2-1} & Morgenstern Price Solver Module\Tstrut \\
-\cline{2-1} & RFEM Solver Module\Tstrut \\
-\cline{2-1} & Slice Property Sorter Module\Tstrut \\
+
+\multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
+Control \\
+& Input \\
+& Output \\
+& Genetic Algorithm \\
+& Kinematic Admissibility \\
+& Slip Weighting \\
+& Slip Slicing \\
+& Morgenstern-Price Calculation \\
+& Slice Property Calculation \\
 \midrule
-\multirow{3}{0.3\textwidth}{Software Decision Module\rule{0pt}{4ex}} &
-Sequence Data Structure Module\Tstrut \\
-\cline{2-1} & Random Number Generating Module\Tstrut \\
-\cline{2-1}& Plotting Module\Tstrut \\
+
+\multirow{3}{0.3\textwidth}{Software Decision} &
+Sequence Data Structure \\
+& Random Number Generation \\
+& Plotting \\
 \bottomrule
 
 \end{tabular}
 \caption{Module Hierarchy}
+\label{Table:Decomp}
 \end{table}
 
-\section{Connection Between Requirements
-  and Design} \label{SecConnection}
+\section{Connection Between Requirements and Design} \label{SecConnection}
 
-\hspace{3ex}The design of the system is intended to satisfy the
+The design of the system is intended to satisfy the
 requirements developed in the SRS. In this stage, the system is
 decomposed into modules. The connection between requirements and
-modules is listed in \tableref{Table:Req}. The program implements two
-distinct solution methods of calculating the factor of safety of the
-slope, the Morgenstern Price method and the Rigid Finite Element
-(RFEM) method, both developed in the SRS. The Morgenstern Price solver
-is implemented by \mref{mMorgPrice}, further information on the
-Morgenstern Price algorithm can be found in \cite{ZhuEtAl2005}. The RFEM solver
-is implemented by \mref{mRFEM}, further information on the RFEM
-algorithm can be found in \cite{StolleGuo}. The critical slip identification
-goal (G2,IM4 in SRS) is implemented by use of a genetic algorithm
-\mref{mGenAlg}, further information on use of a genetic algorithm in
-relation to a slope stability problem can be found in \cite{LiEtAl}.
-
+modules is listed in Table~\ref{Table:Req}. To meet the requirements for 
+generating and optimizing potential slip surfaces to find the critical slip 
+surface, \rref{SRS-R_InitGen} and \rref{SRS-R_Minimize}, the design decision to 
+use a genetic algorithm was made. Further information on use of a genetic 
+algorithm in relation to a slope stability problem can be found in 
+\cite{LiEtAl}.
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -339,14 +320,13 @@ specifies \emph{what} the module will do without documenting
 implementing software is given under the \emph{Implemented By}
 title. If the entry is \emph{OS}, this means that the module is
 provided by the operating system or by standard programming language
-libraries. \emph{\progname} means the module will be implemented by
-the \progname. Only the leaf modules in the hierarchy have
-to be implemented. If a dash (\emph{--}) is shown, this means that the
-module is not a leaf and will not have to be implemented. Whether or
-not this module is implemented depends on the programming language
-selected.
+libraries. If the entry is \emph{\progname}, the module will be implemented by 
+\progname. Only the leaf modules in the hierarchy have to be implemented. If a 
+dash (\emph{--}) is shown, this means that the module is not a leaf and will 
+not have to be implemented. Whether or not this module is implemented depends 
+on the programming language selected.
 
-\subsection{Hardware-Hiding Modules (\mref{mHH})}
+\subsection{Hardware-Hiding (\mref{mHH})}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the
@@ -358,7 +338,7 @@ selected.
 \item[Implemented By:] OS
 \end{description}
 
-\subsection{Behaviour-Hiding Module}
+\subsection{Behaviour-Hiding}
 
 \begin{description}
 \item[Secrets:]The contents of the required behaviors.
@@ -371,150 +351,120 @@ selected.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Control Module (\mref{mControl})}
+\subsubsection{Control (\mref{mControl})}
 
 \begin{description}
-\item[Secrets:] The algorithm for coordinating the running of the
-  program.
-\item[Services:] Provides the main program.
+\item[Secrets:] The algorithm for coordinating how the program runs.
+\item[Services:] Drives the program through the required tasks.
 \item[Implemented By:] \progname
 \end{description}
 
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Input (\mref{mInput})}
 
 \begin{description}
 \item[Secrets:]The format and structure of the input data.
-\item[Services:] Reads the input data from an input file, and/or
-  prompted command line inputs. Input data includes the x,y
-  coordinates of the slope, with a set of coordinates for each
-  layer. For each layer its soil properties of effective angle of
-  friction, effective cohesion, dry unit weight, saturated unit
-  weight, elastic modulus, and Poisson's ratio are stored in vectors
-  of soil properties. If a piezometric surface exists in the slope,
-  its coordinates and the unit weight of water are also included in
-  the input. Lastly an expected range for the entrance and exit points
-  of the critical slip surface are inputted.
+\item[Services:] Reads, verifies, and stores the input data. This includes a 
+  set of coordinates for the slope surface, soil properties, 
+  specifically effective angle of friction, effective cohesion, dry unit 
+  weight, and saturated unit weight, and the coordinates and unit weight of 
+  water for a water table, if one exists. Input also includes an expected range 
+  for the start and end points of the critical slip surface and a decision on 
+  whether to use a half-sine or the constant 1 for the interslice normal to 
+  shear force ratio variability function.
 \item[Implemented By:] \progname
 \end{description}
 
-\subsubsection{Output Format Module (\mref{mOutput})}
+\subsubsection{Output (\mref{mOutput})}
 
 \begin{description}
 \item[Secrets:] The format and structure of the output data.
 \item[Services:] Outputs the results of the calculations, including
-  the factor of safety for the critical slip calculated by the
-  Morgenstern Price Module (\mref{mMorgPrice}) and Rigid Finite
-  Element Method Module (\mref{mRFEM}), and a plot of the critical
-  slip surface on the slope geometry, with the showing the element
-  displacements as calculated by the RFEM Module
+  the factor of safety for the critical slip surface and a plot of the critical
+  slip surface on the slope geometry. Verifies that the output meets physical 
+  constraints. Also outputs input values.
 \item[Implemented By:] \progname
 \end{description} 
 
 
-\subsubsection{Genetic Algorithm Module (\mref{mGenAlg})}
+\subsubsection{Genetic Algorithm (\mref{mGenAlg})}
 
 \begin{description}
-\item[Secrets:] Algorithm to identify the slip surface that has the
-  minimum factor of safety, based on the inputs.
-\item[Services:] Searches the slope for the critical slip surface with
-  the minimum factor of safety 
+\item[Secrets:] Algorithm for identifying the critical slip surface with the 
+minimum factor of safety.
+\item[Services:] Generates a set of potential slip surfaces and searches the 
+set for the critical slip surface with the minimum factor of safety.
 \item[Implemented By:] \progname
 \end{description}
 
 
-\subsubsection{Kinematic Admissibility Module (\mref{mKinAdm})}
+\subsubsection{Kinematic Admissibility (\mref{mKinAdm})}
 
 \begin{description}
-\item[Secrets:] Algorithm to determine if a given slip surface passes
-  or fails a set of admissibility criteria.
-\item[Services:] Some slip surfaces are physically unlikely or
-  impossible to occur in a slip surface, such as slip surfaces
-  containing sharp angles, or going above the slope surface. Ensures
-  randomly generated or mutated slopes from the Genetic Algorithm
-  Module (\mref{mGenAlg}) are physically possible according to the
-  criteria of the Kinematic Admissibility Module.
+\item[Secrets:] The kinematic admissibility criteria for determining if a given 
+slip surface is realistic physically.
+\item[Services:] Tests slip surfaces for physically unlikely features including 
+sharp angles, points outside of the soil bed, or downward concavity.
 \item[Implemented By:] \progname
 \end{description} 
 
-
-\subsubsection{Slip Slicer Module (\mref{mSlipSlicer})}
+\subsubsection{Slip Weighting (\mref{mSlipWeight})}
 
 \begin{description}
-\item[Secrets:] Algorithm to determine the coordinates of where the
-  slip surface interslice nodes occur.
-\item[Services:] When preparing a slip surface for analysis by the
-  Morgenstern Price Module (\mref{mMorgPrice}) or the RFEM Module
-  (\mref{mRFEM}), the x-coordinates defining the boundaries of the
-  slices are identified and stored in a vector.
+\item[Secrets:] The criteria for weighting each slip surface in a given set of 
+slip surfaces based on how closely they resemble the critical slip surface.
+\item[Services:] Assigns weights to each slip surface in a given set of slip 
+surfaces based on their factors of safety. A slip surface with a lower factor 
+of safety will have a higher weight as it is closer to the critical slip 
+surface.
 \item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Slip Weighting Module (\mref{mSlipWeight})}
+\subsubsection{Slip Slicing (\mref{mSlipSlicer})}
 
 \begin{description}
-\item[Secrets:] The weighting for each slip surface in a set of slip
-  surfaces, based on each slip surfaces factor of safety.
-\item[Services:] Weights a set of slip surfaces generated by the
-  Genetic Algorithm Module (\mref{mGenAlg}) based on their factors of
-  safety. A slip surface with a low factor of safety will have a high
-  weight as it is more likely to be or to lead to generation of the
-  critical slip surface.
-\item[Implemented By:] \progname
+	\item[Secrets:] Algorithm to determine the coordinates of where the
+	slip surface interslice nodes occur.
+	\item[Services:] When preparing a slip surface for analysis by the
+	Morgenstern-Price Module (\mref{mMorgPrice}) the x-coordinates defining the 
+	boundaries of the slices are identified and stored in a vector.
+	\item[Implemented By:] \progname
 \end{description} 
 
-\subsubsection{Morgenstern Price Solver Module (\mref{mMorgPrice})}
+\subsubsection{Morgenstern-Price Calculation (\mref{mMorgPrice})}
 
 \begin{description}
-\item[Secrets:] The factor of safety of a given slip surface.
+\item[Secrets:] The algorithm for calculating the factor of safety of a given 
+slip surface.
 \item[Services:] Calculates the factor of safety of a given slip
-  surface, through implementation of a Morgenstern Price slope
+  surface, through implementation of a Morgenstern-Price slope
   stability analysis method.
 \item[Implemented By:] \progname
 \end{description} 
 
-
-\subsubsection{RFEM Solver Module (\mref{mRFEM})}
-
+\subsubsection{Slice Property Calculation (\mref{mSliceProperty})}
 \begin{description}
-\item[Secrets:] The algorithm to perform a Rigid Finite Element Method
-  analysis of the slope.
-\item[Services:] Calculate the global factor of safety, local slice
-  factors of safety, and local slice displacements of a given slip
-  surface under given conditions, through implementation of a rigid
-  finite element slope stability analysis method.
-\item[Implemented By:] \progname
-\end{description}
-
-\subsubsection{Slice Property Sorter Module (\mref{mSliceProperty})}
-\begin{description}
-\item[Secrets:] Algorithm to assigns soil properties to slices based
-  on the location of the slice with respect to the different soil
-  layers.
-\item[Services:] When performing slip analysis with the RFEM Solver
-  Module (\mref{mRFEM}) or Morgenstern Price Module
-  (\mref{mMorgPrice}), the base and interslice surfaces of each slice
-  in the analysis requires a soil constant. Slice Property Sorter
-  Module identifies which soil layer the surface is in to assign
-  properties from that soil layer, and uses a weighting scheme when
-  the surface crosses multiple soil layers.
+\item[Secrets:] Algorithm to calculate slice properties, specifically forces 
+acting on the slice. 
+\item[Services:] Calculates the weight, hydrostatic forces, and interslice 
+water forces of each slice.
 \item[Implemented By:] \progname
 \end{description} 
 
 
-\subsection{Software Decision Module}
+\subsection{Software Decision}
 
 \begin{description}
 \item[Secrets:] The design decision based on mathematical theorems,
   physical facts, or programming considerations. The secrets of this
   module are \emph{not} described in the SRS.
-\item[Services:] Includes a data structure and algorithms used in the
+\item[Services:] Includes data structures and algorithms used in the
   system that do not provide direct interaction with the user.
 \item[Implemented By:] --
 \end{description}
 
 
-\subsubsection{Sequence Data Structure Module (\mref{mArrayOps})}
+\subsubsection{Sequence Data Structure (\mref{mArrayOps})}
 
 \begin{description}
 \item[Secrets:] The data structure for a sequence data type.
@@ -524,73 +474,95 @@ selected.
 \end{description}
 
 
-\subsubsection{Random Number Generator Module (\mref{mRandNum})}
+\subsubsection{Random Number Generation (\mref{mRandNum})}
 
 \begin{description}
-\item[Secrets:] Pseudo-random numbers between 0 and 1.
+\item[Secrets:] Algorithm for providing pseudo-random numbers between 0 and 1.
 \item[Services:] Randomly produces numbers between 0 and 1, using a
-  chaotic function with an external seed. Used when generating slip
-  surfaces in the Genetic Algorithm Module \mref{mGenAlg}.
+  chaotic function with an external seed.
 \item[Implemented By:] Matlab
 \end{description}
 
 
-\subsubsection{Plotting Module (\mref{mPlot})}
+\subsubsection{Plotting (\mref{mPlot})}
 
 \begin{description}
 \item[Secrets:] The data structures and algorithms for plotting data
   graphically.
-\item[Services:] Provides a plot function.
+\item[Services:] Provides functions for plotting data.
 \item[Implemented By:] Matlab
 \end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
-\hspace{3ex}This section shows two traceability matrices: between the
-modules and the requirements \tableref{Table:Req} and between the
-modules and the anticipated changes \tableref{Table:AC}.
+\hspace{3ex}This section shows two traceability matrices: Table~\ref{Table:Req} 
+shows which modules cover each Requirement (R) and Table~\ref{Table:AC} shows 
+how modules map to the anticipated changes. There are two cases where a single 
+module covers multiple anticipated changes. \acref{AC_input} and 
+\acref{AC_inputConstraints} are both covered by \mref{mInput}, and 
+\acref{AC_output} and \acref{AC_outputConstraints} are both covered by 
+\mref{mOutput}. In these cases, the anticipated changes are related to two 
+services that should always happen in tandem. If input is being read, it should 
+always be verified. If output is being delivered, it should always be verified. 
+Thus, it makes sense to combine the two services into a single module.
+
+While the division of a slip surface into vertical slices and the calculation 
+of properties of each slice are part of the Morgenstern-Price method, they have 
+been separated into their own modules, \mref{mSlipSlicer} and 
+\mref{mSliceProperty}. This is due to \acref{AC_CalcFS}, as these modules would 
+be common between different methods for calculating the factor of safety. Due 
+to this decision, \mref{mMorgPrice} is the only module associated with 
+\acref{AC_CalcFS}, as can be seen in Table~\ref{Table:AC}.
 
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:Req}
 \centering
 \begin{tabular}{ll}
 \toprule
-\textbf{Req.} & \textbf{Modules}\\
+\textbf{Requirement} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
-R2 & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-R3 & \mref{mKinAdm} \mref{mArrayOps}\\
-R4 & \mref{mGenAlg} \mref{mSlipSlicer} \mref{mArrayOps}\\
-R5 & \mref{mMorgPrice} \mref{mArrayOps}\\
-R6 & \mref{mSlipWeight} \mref{mArrayOps}\\
-R7 & \mref{mGenAlg} \mref{mRandNum} \mref{mArrayOps}\\
-R8 & \mref{mGenAlg} \mref{mArrayOps}\\
-R9 & \mref{mControl} \mref{mOutput} \mref{mSlipSlicer} \mref{mArrayOps}\\
-R10 & \mref{mOutput} \mref{mMorgPrice} \mref{mRFEM} \mref{mArrayOps}\\
-R11 & \mref{mOutput} \mref{mPlot}\\
+\rref{SRS-R_Inputs} & \mref{mHH} \mref{mControl} \mref{mInput} 
+\mref{mArrayOps}\\
+\rref{SRS-R_VerifyInput} & \mref{mControl} \mref{mInput} \mref{mArrayOps}\\
+\rref{SRS-R_InitGen} & \mref{mControl} \mref{mGenAlg} \mref{mArrayOps} 
+\mref{mRandNum} \\
+\rref{SRS-R_FS} & \mref{mSlipSlicer} \mref{mMorgPrice} \mref{mSliceProperty} 
+\mref{mArrayOps}\\
+\rref{SRS-R_Minimize} & \mref{mGenAlg} \mref{mSlipWeight} \mref{mArrayOps}\\
+\rref{SRS-R_VerifyOutput} & \mref{mControl} \mref{mKinAdm} \mref{mOutput} 
+\mref{mArrayOps}\\
+\rref{SRS-R_OutputInputs} & \mref{mHH} \mref{mControl} \mref{mInput} 
+\mref{mOutput} \mref{mArrayOps}\\
+\rref{SRS-R_CritGraph} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps} \mref{mPlot}\\
+\rref{SRS-R_OutputFS} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps}\\
+\rref{SRS-R_NormalGraph} & \mref{mHH} \mref{mControl} \mref{mOutput} 
+\mref{mArrayOps} \mref{mPlot}\\
+\rref{SRS-R_ShearGraph} & \mref{mHH} \mref{mOutput} \mref{mArrayOps} 
+\mref{mPlot}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
+\label{Table:Req}
 \end{table}
 
-
 \begin{table}[h!]
-\refstepcounter{tablenum} \label{Table:AC}
 \centering
 \begin{tabular}{ll}
 \toprule
-\textbf{Req.} & \textbf{Modules}\\
+\textbf{Anticipated Change} & \textbf{Modules}\\
 \midrule
 \acref{AC_hardware} & \mref{mHH}\\
 \acref{AC_Control} & \mref{mControl}\\
 \acref{AC_input} & \mref{mInput}\\
+\acref{AC_inputConstraints} & \mref{mInput}\\
 \acref{AC_output}& \mref{mOutput}\\
+\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_GenAlg}& \mref{mGenAlg}\\
 \acref{AC_Kin}& \mref{mKinAdm}\\
-\acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
-\acref{AC_MP} & \mref{mMorgPrice}\\
-\acref{AC_RFEM} & \mref{mRFEM}\\
+\acref{AC_Slicer} & \mref{mSlipSlicer}\\
+\acref{AC_CalcFS} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
 \acref{AC_Rand} & \mref{mRandNum}\\
@@ -598,6 +570,7 @@ R11 & \mref{mOutput} \mref{mPlot}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
+\label{Table:AC}
 \end{table}
 
 \section{Use Hierarchy Between Modules} \label{SecUse}
@@ -608,26 +581,30 @@ provided. \cite{Parnas1978} said of two programs A and B that A {\em
 the task described in its specification. That is, A {\em uses} B if
 there exist situations in which the correct functioning of A depends
 upon the availability of a correct implementation of B. 
-\fref{Fig_Use} illustrates the use hierarchy between the modules. The
-graph is a directed acyclic graph (DAG). Each level of the hierarchy
+Figure~\ref{Fig_Use} illustrates the use hierarchy between the modules. The
+graph is a Directed Acyclic Graph (DAG). Each level of the hierarchy
 offers a testable and usable subset of the system, and modules in the
 higher level of the hierarchy are essentially simpler because they use
 modules from the lower levels.
 
-\newpage
-
 % ------ %
-\begin{figure}[h!]  \refstepcounter{fnum} \label{Fig_Use}
+\begin{figure}[h!]
 \begin{center}
 {
- \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram3.png}
+ \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram.png}
 }
 \caption{Use Hierarchy Diagram}
+\label{Fig_Use}
 \end{center}
 \end{figure}
 % ------ %
-\newpage
+
+\wss{I doubt we'll need them, but we might decide to introduce a module to
+  define new data types for the tuples that define the given slope stability
+  problem. We definitely shouldn't do it now, but if things get complicated
+  looking, we can add it later.}
+~\newpage
 \bibliographystyle {plainnat}
-\bibliography {Bib_SSP}
+\bibliography {../../../refs/References}
 
 \end{document}

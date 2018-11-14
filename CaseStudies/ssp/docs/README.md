@@ -2,6 +2,8 @@
 
 A Guide to the files in this folder.
 
+Run make to compile all documents.
+
 1. ProblemStatement 
 - The problem statement describing the problem of the slope stability analysis program.
 
