@@ -605,8 +605,7 @@ N/A
 % -------------------- OUTPUT MODULE ----------------------------- %
 % ---------------------------------------------------------------- %
 
-\section{MIS of the Output
-	Module} \label{sec:OutputMod}
+\section{MIS of the Output Module} \label{sec:OutputMod}
 
 \subsection{Module}
 Output
@@ -615,7 +614,6 @@ Output
 
 Sequence (Section~\ref{sec:SequenceData}), Plot (Section~\ref{sec:Plotting})
 
-\subsection{Syntax}
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
@@ -685,25 +683,25 @@ MorgPriceSolver
 
 \subsection{Uses}
 
-\subsubsection{Imported Access Programs}
-
-\noindent
-\textbf{Uses} PropertySorter - section \ref{sec:PropSortMod},
-\textbf{Passes} \textit{evalslip}, \textit{params\_layers},
-\textit{params\_piez} \textbf{Recieves} \textit{params\_soilInterior},
-\textit{params\_soilBase}, \textit{params\_internalForce},
-\textit{params\_angles}
+Input (Section~\ref{sec:InputMod}), PropertySorter (Section 
+\ref{sec:PropSortMod}), Sequence (Section~\ref{sec:SequenceData})
 
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.2\textwidth} | p{0.2\textwidth} |} \hline 
+\subsubsection{Exported Constants}
+N/A
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
 
   Morgenstern Price ~\newline Solver & Sequence; ~\newline struc;
   ~\newline struc; ~\newline struc; ~\newline struc & Real & Non
@@ -809,40 +807,32 @@ exception cases will output a factor of safety (\textit{F\_MP}) of
 \section{MIS of the Genetic Algorithm Module} \label{sec:GenAlgMod}
 
 \subsection{Module}
-GenAlgModule
+GenAlg
 
 \subsection{Uses}
 
 \subsubsection{Imported Access Programs}
-\noindent
-\textbf{Uses} MorgPrice Module - section \ref{sec:MPMod},
-\textbf{Passes} \textit{evalslip}, \textit{params\_layers},
-\textit{params\_piez}, \textit{params\_soln}, 
-\textit{params\_load}, \textbf{Receives} $\textit{F\_MP}_{i}$
-
-~\newline\noindent \textbf{Uses} Slicer Module - section
-\ref{sec:SlicerMod}, \textbf{Imports} $\textit{slip}_{i}$,
-\textbf{Receives} \textit{evalslip}
-
-~\newline\noindent \textbf{Uses} Kin Admissibility Module - section
-\ref{sec:KinAdmMod}, \textbf{Imports} $\textit{slip}_{i}$,
-\textit{strat1}, \textbf{Receives} \textit{KinPass},
-$\textit{slip}_{i}$
-
-~\newline\noindent \textbf{Uses} Slip Weights Module - section
-\ref{sec:WeightMod}, \textbf{Imports} \textit{pool}, \textbf{Receives}
-\textit{pool}
+Input (Section~\ref{sec:InputMod}), MorgPriceSolver (Section \ref{sec:MPMod}), 
+Slicer (Section \ref{sec:SlicerMod}), KinAdm (Section \ref{sec:KinAdmMod}), 
+SlipWeighter (Section \ref{sec:WeightMod}), Sequence 
+(Section~\ref{sec:SequenceData}), Rand (Section~\ref{sec:Random})
 
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.2\textwidth} | p{0.2\textwidth} |} \hline 
+\subsubsection{Exported Constants}
+N/A
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
 
   GenAlg & struc; ~\newline struc; ~\newline struc; ~\newline struc;
   ~\newline struc & Array & None \\ \hline
@@ -912,16 +902,25 @@ no potential exceptions for GenAlg.
 \subsection{Module} 
 PropertySorter
 
+\subsection{Uses}
+Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
+
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.2\textwidth} | p{0.2\textwidth} |} \hline 
+\subsubsection{Exported Constants}
+N/A
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
 
   Property Sorter & Sequence; ~\newline struc; ~\newline
   struc & struc; ~\newline struc; ~\newline struc; ~\newline struc &
@@ -974,16 +973,25 @@ potential exceptions for Property Sorter.
 \subsection{Module}
 Slicer
 
+\subsection{Uses}
+Sequence (Section~\ref{sec:SequenceData})
+
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-  p{0.2\textwidth} | p{0.2\textwidth} |} \hline 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Constants}
+N/A
 
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
   Slicer & Sequence; ~\newline bool & Sequence & None \\ \hline
 
 \end{tabular}
@@ -1035,16 +1043,25 @@ potential exceptions for Slip Slicer.
 \subsection{Module}
 KinAdm
 
+\subsection{Uses}
+Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
+
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.15\textwidth} | p{0.15\textwidth} |} \hline 
+\subsubsection{Exported Constants}
+N/A
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
 
   Kin Adm & Sequence; ~\newline Sequence; ~\newline struc & bool;
   ~\newline Sequence & None \\ \hline
@@ -1102,16 +1119,25 @@ no potential exceptions for KinAdm.
 \subsection{Module}
 SlipWeighter
 
+\subsection{Uses}
+Sequence (Section~\ref{sec:SequenceData})
+
 \subsection{Syntax}
 
-\subsubsection{Exported Access Programs}
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.2\textwidth} | 
-p{0.2\textwidth} | p{0.2\textwidth} |} \hline 
+\subsubsection{Exported Constants}
+N/A
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
 
   Slip Weighting & Sequence; ~\newline Real & Sequence & None
   \\ \hline
