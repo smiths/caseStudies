@@ -84,11 +84,19 @@
 
 \pagenumbering{arabic}
 
-
 \section{Introduction}
 
-Decomposing a system into modules is a commonly accepted approach to developing software.  A module is a work assignment for a programmer or programming team~\citep{ParnasEtAl1984}.  In the best practices for scientific computing, \citet{WilsonEtAl2013} advise a modular design, but are silent on the criteria to use to decompose the software into modules.  We advocate a decomposition based on the principle of information hiding~\citep{Parnas1972a}. This principle supports design for change, because the ``secrets'' that each module hides represent likely future changes.  Design for change is valuable in SC, where modifications are frequent, especially during initial development as the solution space is explored.  \\
-\newline
+Decomposing a system into modules is a commonly accepted approach to developing
+software.  A module is a work assignment for a programmer or programming
+team~\citep{ParnasEtAl1984}.  In the best practices for scientific computing,
+\citet{WilsonEtAl2013} advise a modular design, but are silent on the criteria
+to use to decompose the software into modules.  We advocate a decomposition
+based on the principle of information hiding~\citep{Parnas1972a}. This principle
+supports design for change, because the ``secrets'' that each module hides
+represent likely future changes.  Design for change is valuable in SC, where
+modifications are frequent, especially during initial development as the
+solution space is explored.
+
 Our design follows the rules laid out by \citet{ParnasEtAl1984}, as follows:
 \begin{itemize}
 \item System details that are likely to change independently should be the
@@ -364,7 +372,7 @@ collided and their masses.
 \end{description}
  
 %\subsubsection{Control Module (\mref{mControl})} 
-\olu{removed control module}\\
+\olu{removed control module} \wss{okay}\\
 
 %\begin{description}
 %\item[Secrets:] The algorithm for coordinating the running of the program %and the interface for receiving inputs and sending outputs.
@@ -507,7 +515,17 @@ requirements, and between the modules and the anticipated changes. We should als
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if correct execution of B may be necessary for A to complete the task described in its specification. That is, A {\em uses} B if there exist situations in which the correct functioning of A depends upon the availability of a correct implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between the modules. It can be seen that the graph is a directed acyclic graph (DAG). Each level of the hierarchy offers a testable and usable subset of the system, and modules in the higher level of the hierarchy are essentially simpler because they use modules from the lower levels. As the modules M\ref{mVector} and M\ref{mBBox} are used by many other modules, their uses have been color-coded for clarity.
+provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
+correct execution of B may be necessary for A to complete the task described in
+its specification. That is, A {\em uses} B if there exist situations in which
+the correct functioning of A depends upon the availability of a correct
+implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between
+the modules. It can be seen that the graph is a directed acyclic graph
+(DAG). Each level of the hierarchy offers a testable and usable subset of the
+system, and modules in the higher level of the hierarchy are essentially simpler
+because they use modules from the lower levels. As the modules M\ref{mVector}
+and M\ref{mBBox} are used by many other modules, their uses have been
+color-coded for clarity.
 
 ~\newpage
 \begin{figure}[htbp]
@@ -520,7 +538,11 @@ provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
 \end{center}
 \end{figure}
 
+\wss{As we discussed, remove the implementation design decisions modules.  We
+  can reduce the number of modules and simplify the problem.}
+
 \section{Inheritance Hierarchy Between Modules} \label{SecInheritance}
+
 In this section the inheritance hierarchy between modules is provided (Figure \ref{Fig_Inheritance}).
 Modules in the lower level of the hierarchy inherit properties from the higher levels.
 \begin{figure}[htbp]
