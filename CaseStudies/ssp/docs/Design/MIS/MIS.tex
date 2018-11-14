@@ -237,14 +237,19 @@ Output (Section \ref{sec:OutputMod})
 
 \subsection{Syntax}
 
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
+
 \subsubsection{Exported Access Programs}
 
 \begin{center}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular} {|p{0.15\textwidth}| p{0.15\textwidth}
-    |p{0.25\textwidth} |p{0.15\textwidth}|}
-  \hline \textbf{Name} & \textbf{In} & \textbf{Out} &
-  \textbf{Exceptions} \\ \hline
+\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+p{0.35\textwidth} } \hline 
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
   Control & string & - & - \\ \hline
 \end{tabular}
@@ -282,6 +287,9 @@ N/A
 
 \subsection{Syntax}
 
+\subsubsection{Exported Constants}
+N/A
+
 \subsubsection{Exported Data Types}
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
@@ -298,20 +306,42 @@ N/A
 	$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam}) \\
 \end{longtable}
 
-
 \subsubsection{Exported Access Programs}
+
 \begin{center}
 \renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.18\textwidth} | p{0.25\textwidth} | p{0.25\textwidth} | 
-p{0.25\textwidth} |} \hline 
+\begin{tabular}{p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth}  
+p{0.35\textwidth} } \hline 
 
   \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
-   load\_params & string & paramsLayers, paramsPiez, paramsSearch, paramsSoln & 
-   fileNotExist, badFileExtension, unexpectedInput  \\ \hline
-   verify\_params & paramsLayers, paramsPiez & - & 
+   load\_params & string & - & 
+   fileNotExist, badFileExtension, unexpectedInput  \\
+   
+   verify\_params & - & - & 
    badSlopeGeometry, badEffAngleFriction, badCohesion, badDryUnitWeight, 
-   badSatUnitWeight, badPiezGeometry, badWatUnitWeight \\ \hline
+   badSatUnitWeight, badPiezGeometry, badWatUnitWeight \\
+   
+   strat & - & coords & - \\
+   slopeX & - & [$\mathbb{R}$] & - \\
+   slopeY & - & [$\mathbb{R}$] & - \\
+   phi & - & $\mathbb{R}$ & - \\
+   coh & - & $\mathbb{R}$ & - \\
+   gam & - & $\mathbb{R}$ & - \\
+   gams & - & $\mathbb{R}$ & - \\
+   piez & - & coords & - \\
+   piezX & - & [$\mathbb{R}$] & - \\
+   piezY & - & [$\mathbb{R}$] & - \\
+   gamw & - & $\mathbb{R}$ & - \\
+   Xext & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   Xetr & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   Ylim & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   ltor & - & $\mathbb{B}$ & - \\
+   ftype & - & $\mathbb{B}$ & - \\
+   evenslc & - & $\mathbb{B}$ & - \\
+   cncvu & - & $\mathbb{B}$ & - \\
+   obtu & - & $\mathbb{B}$ & - \\
+   \hline
 
 \end{tabular}
 \end{center}
@@ -334,9 +364,13 @@ p{0.25\textwidth} |} \hline
 \end{itemize}
 
 \subsubsection{Assumptions}
-The guesses for potential minimum and maximum $x$ and $y$ values of the 
-critical slip surface, as described in \textit{in\_file}, lie within the 
-boundaries of the given slope geometry.
+\begin{itemize}
+	\item load\_params is called before any of the other access programs.
+	
+	\item The guesses for potential minimum and maximum $x$ and $y$ values of 
+	the critical slip surface, as described in \textit{in\_file}, lie within 
+	the boundaries of the given slope geometry.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 
@@ -354,12 +388,6 @@ load\_params(\textit{fname}):
 		\textit{params\_soln'}
 		are populated based on the contents of \textit{in\_file}.
 	\end{itemize}
-	
-	\item output:
-	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ [\textit{params\_layers}, 
-		\textit{params\_piez}, \textit{params\_search}, \textit{params\_soln}]
-	\end{itemize}
 
 	\item exceptions:
 	\begin{itemize}
@@ -372,7 +400,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent verify\_params(\textit{params\_layers}, \textit{params\_piez}):
+\noindent verify\_params():
 \begin{itemize}
 	\item exceptions:
 	\begin{itemize}
@@ -395,6 +423,166 @@ load\_params(\textit{fname}):
 		params\_piez.piez[|params\_piez.piez|-1].x$\\ $\neq 
 		params\_layers.strat[|params\_layers.strat|-1].x$ $\Rightarrow$ 
 		badPiezGeometry)\\
+	\end{itemize}
+\end{itemize}
+
+\noindent strat():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.strat}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent slopeX():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $params\_layers.strat[0].x || 
+		params\_layers.strat[1].x ||$\\$ \dots || params\_layers.strat[| 
+		params\_layers.strat|-1].x$\\
+	\end{itemize}
+\end{itemize}
+
+\noindent slopeY():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $params\_layers.strat[0].y || 
+		params\_layers.strat[1].y ||$\\$ \dots || params\_layers.strat[| 
+		params\_layers.strat|-1].y$\\
+	\end{itemize}
+\end{itemize}
+
+\noindent phi():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.phi}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent coh():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.coh}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent gam():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.gam}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent gams():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.gams}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent piez():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_piez.piez}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent piezX():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $params\_layers.piez[0].x || 
+		params\_layers.piez[1].x ||$\\$ \dots || params\_layers.piez[| 
+		params\_layers.piez|-1].x$\\
+	\end{itemize}
+\end{itemize}
+
+\noindent piezY():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $params\_layers.piez[0].y || 
+		params\_layers.piez[1].y ||$\\$ \dots || params\_layers.piez[| 
+		params\_layers.piez|-1].y$\\
+	\end{itemize}
+\end{itemize}
+
+\noindent gamw():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_piez.gamw}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent Xext():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Xext}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent Xetr():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Xetr}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent Ylim():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Ylim}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent ltor():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.ltor}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent ftype():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.ftype}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent evenslc():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.evenslc}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent cncvu():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.cncvu}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent obtu():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.obtu}\\
 	\end{itemize}
 \end{itemize}
 
