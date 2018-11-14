@@ -747,6 +747,32 @@ verify that all expected outputs are delivered by \progname{}.
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 	
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutInputs}] 
+test-output\_inputs
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{ExValidInputs}.
+
+Output: \progname{} reports back the input values listed below.\\
+\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 53\\
+		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
+		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
+		Boolean representing the form of the interslice variation function $f$. 
+		1 means $f$ is constant, 0 means $f$ is a half-sine & N/A & 0\\ 
+		\bottomrule
+\end{tabularx}
+
+How test will be performed: Automated test on unit testing framework
+
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutFS}] 
 test-output\_FS
 
@@ -958,33 +984,36 @@ with an ``X'' may have to be modified as well.
 
 \begin{table}[!h]
 	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
 		\hline
-		& \rref{SRS-R_Inputs}& \rref{SRS-R_KinAdm}& \rref{SRS-R_InitGen}& 
+		& \rref{SRS-R_Inputs}& \rref{SRS-R_VerifyInput}& \rref{SRS-R_InitGen}& 
 		\rref{SRS-R_FS}& \rref{SRS-R_Minimize} & \rref{SRS-R_VerifyOutput}& 
-		\rref{SRS-R_CritGraph}& \rref{SRS-R_OutputFS}& 
+		\rref{SRS-R_OutputInputs}& \rref{SRS-R_CritGraph}& 
+		\rref{SRS-R_OutputFS}& 
 		\rref{SRS-R_NormalGraph}& \rref{SRS-R_ShearGraph} \\
 		\hline
 		\tcref{TC_ValidInDec} - \tcref{TC_ValidInXMaxEndEqual}                 
-		& X& & & & & & & & & \\ \hline
+		& X& & & & & & & & & & \\ \hline
 		\tcref{TC_InvalidSlopeDecToInc} - \tcref{TC_InvalidUnitWtWaterNegative} 
-		& & X& & & & & & & & \\ \hline
+		& & X& & & & & & & & & \\ \hline
 		\tcref{TC_Ex1FS} - \tcref{TC_OrigProgSlip}                             
-		& & & X& X& X& & & & & \\ \hline
+		& & & X& X& X& & & & & & \\ \hline
 		\tcref{TC_OrigProgNormal}                                              
-		& & & & & & & & & X& \\ \hline
+		& & & & & & & & & X& & \\ \hline
 		\tcref{TC_OrigProgShear}                                               
-		& & & & & & & & & & X\\ \hline
+		& & & & & & & & & & X& \\ \hline
+		\tcref{TC_OutInputs}   
+		& & & & & & & X& & & & \\ \hline
 		\tcref{TC_OutFS}                                                       
-		& & & & & & & X& & & \\ \hline
+		& & & & & & & & X& & & \\ \hline
 		\tcref{TC_OutSlip}                                                     
-		& & & & & & & & X& & \\ \hline
+		& & & & & & & & & X& & \\ \hline
 		\tcref{TC_OutNormal}                                                   
-		& & & & & & & & & X& \\ \hline
+		& & & & & & & & & & X& \\ \hline
 		\tcref{TC_OutShear}                                                    
-		& & & & & & & & & & X \\ \hline
+		& & & & & & & & & & & X \\ \hline
 		\tcref{TC_ValidOutFS} - \tcref{TC_ValidOutShear}                        
-		& & & & & & X& & & & \\
+		& & & & & & X& & & & & \\
 		\hline
 	\end{tabular}
 	\caption{Traceability Matrix Showing the Connections Between Functional 
