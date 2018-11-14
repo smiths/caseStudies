@@ -164,7 +164,14 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
   constants.
 \item[\refstepcounter{acnum} \actheacnum \label{acGlassType}:] The
   implementation of the ``glass type'' .\\
-  \aida{Term 'type' after 'glass type' should be removed. Besides, according to DD6 in the SRS, Glass Type Factor is a function which maps from the glass type to a real number, So I think this module should consist of calculation of glass type factor.}
+  \aida{Term 'type' after 'glass type' should be removed. Besides, according to
+    DD6 in the SRS, Glass Type Factor is a function which maps from the glass
+    type to a real number, So I think this module should consist of calculation
+    of glass type factor.} \wss{I'm sorry, but I don't agree.  The glass type is
+    implemented as an ADT.  Have a look at the MIS to see the access programs
+    for this ADT.  If I am missing something, we should look at it from the
+    point of view of the MIS first, since we have the luxury of these details
+    being worked out already.}
 \item[\refstepcounter{acnum} \actheacnum \label{acThickness}:] The
   implementation of the thickness type.
 \item[\refstepcounter{acnum} \actheacnum \label{acFuncts}:] The data structure
@@ -179,17 +186,17 @@ change. Anticipated changes are numbered by \textbf{AC} followed by a number.
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
-The module design should be as general as possible. However, generality can introduce complexity, which can, at times, be avoided by explicitly fixing some decision decisions as unlikely changes. If
-these decisions should later need to be changed, then many parts of the design
-will potentially need to be modified. Hence, it is not intended that these
-decisions will be changed.  As an example, the equations for calculating the 
-blast risk  are assumed to follow the structure given in the SRS; that is,
-even if they need to be modified, the modifications should be possible by
-changing how the input parameters are used in the definition.  If new parameters
-are needed, this will mean a change to both the input parameters module, the
-calculation module and the output module.
- Unlikely changes are numbered by \textbf{UC}
-followed by a number.
+The module design should be as general as possible. However, generality can
+introduce complexity, which can, at times, be avoided by explicitly fixing some
+decision decisions as unlikely changes. If these decisions should later need to
+be changed, then many parts of the design will potentially need to be
+modified. Hence, it is not intended that these decisions will be changed.  As an
+example, the equations for calculating the blast risk are assumed to follow the
+structure given in the SRS; that is, even if they need to be modified, the
+modifications should be possible by changing how the input parameters are used
+in the definition.  If new parameters are needed, this will mean a change to
+both the input parameters module, the calculation module and the output module.
+Unlikely changes are numbered by \textbf{UC} followed by a number.
 
 \begin{description}
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
