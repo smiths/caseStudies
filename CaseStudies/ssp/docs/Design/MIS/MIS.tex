@@ -211,7 +211,7 @@ project.
 		\midrule
 		
 		\multirow{3}{0.3\textwidth}{Software Decision} &
-		Array Data Structure \\
+		Sequence Data Structure \\
 		& Random Number Generation \\
 		& Plotting \\
 		\bottomrule
@@ -232,8 +232,8 @@ Control
 
 \subsection{Uses}
 
-Input (Section \ref{sec:InputMod}), GenAlg (Section \ref{sec:GenAlgMod}), 
-Output (Section \ref{sec:OutputMod})
+Input (Section \ref{sec:InputMod}), Output (Section \ref{sec:OutputMod}), 
+GenAlg (Section \ref{sec:GenAlgMod}), Sequence (Section~\ref{sec:SequenceData})
 
 \subsection{Syntax}
 
@@ -259,7 +259,11 @@ p{0.35\textwidth} } \hline
 
 \subsubsection{State Variables}
 
-None
+N/A
+
+\subsubsection{Environment Variables}
+
+N/A
 
 \subsubsection{Assumptions}
 
@@ -269,9 +273,16 @@ The access program is called with a string parameter.
 
 control(\textit{fname}):
 \begin{itemize}
-	\item transition: Modifies the state of the Input Module, Genetic Algorithm 
-	Module, and Output Module.
+	\item transition: 
+	\begin{itemize}
+		\item[] Modifies the state of the Input Module, Genetic Algorithm 
+		Module, and Output Module.
+	\end{itemize}
 \end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
 
 % ---------------------------------------------------------------- %
 % ---------------------- INPUT MODULE ---------------------------- %
@@ -283,7 +294,7 @@ control(\textit{fname}):
 Input
 
 \subsection{Uses}
-N/A
+Sequence (Section~\ref{sec:SequenceData})
 
 \subsection{Syntax}
 
@@ -585,6 +596,80 @@ load\_params(\textit{fname}):
 		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.obtu}\\
 	\end{itemize}
 \end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
+
+% ---------------------------------------------------------------- %
+% -------------------- OUTPUT MODULE ----------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Output
+	Module} \label{sec:OutputMod}
+
+\subsection{Module}
+Output
+
+\subsection{Uses}
+
+Slicer Module (Section \ref{sec:SlicerMod}),
+\textbf{Uses} Morgenstern Price Module - section \ref{sec:MPMod},
+\textbf{Passes} \textit{eval\_cslip}, \textit{params\_layers},
+\textit{params\_piez}, \textit{params\_load},
+\textit{params\_soln} \textbf{Recieves} \textit{F\_MP\_Final}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Access Programs}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{0.2\textwidth} | p{0.15\textwidth} | 
+		p{0.25\textwidth} | p{0.2\textwidth} |} \hline 
+	
+	\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
+	\\ \hline
+	
+	Output & Sequence; ~\newline struc; ~\newline struc; ~\newline struc;
+	~\newline struc & - & None \\ \hline
+	
+\end{tabular}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
+	\textit{F\_MP\_Final} : $\mathbb{R}$ & The factor of safety as
+	calculated by the Morgenstern Price solution method for the
+	critical slip surface, measuring the stability of the slope. \\
+\end{longtable}
+
+\subsubsection{Access Routine Semantics}
+\textbf{Input:}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
+	\textit{cslip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of
+	vertex coordinates for the critical slip surface of the slope. \\
+	
+	\textit{params\_layers} : struc\_layers & (Appendix \ref{Tbl:LayerParam})\\
+	
+	\textit{params\_piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})\\
+	
+	\textit{params\_soln} : struc\_soln & (Appendix \ref{Tbl:SolnParam})\\
+	
+	\textit{params\_load} : struc\_load & (Appendix
+	\ref{Tbl:LoadForceParam})\\
+\end{longtable}
+
+\noindent \textbf{Exceptions:} ~\newline\noindent There are no
+potential exceptions for Output.
+
+~\newline\noindent \textbf{Output:} ~\newline\noindent Output does not
+return any values; however, it creates a plot of the critical slip
+surface \textit{cslip} as a part of the slope geometry \textit{strat}
+(from \textit{params\_layers}). The plot also displays the
+the factor of safety calculated by the Morgenstern-Price module 
+\textit{F\_MP\_Final}.
 
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
@@ -1066,81 +1151,87 @@ potential exceptions for Slip Weighter.
   the sequence reordered in terms of ascending factors of safety. \\
 \end{longtable}
 
-
 % ---------------------------------------------------------------- %
-% -------------------- OUTPUT MODULE ------------------------- %
+% ---------------- SEQUENCE DATA STRUCTURE MODULE ---------------- %
 % ---------------------------------------------------------------- %
 
-\section{MIS of the Output
-  Module} \label{sec:OutputMod}
+\section{MIS of the Sequence Data Structure Module} \label{sec:SequenceData}
 
 \subsection{Module}
-Output
+Sequence
 
 \subsection{Uses}
 
-\subsubsection{Imported Access Programs}
-\textbf{Uses} Slicer Module - section \ref{sec:SlicerMod},
-\textbf{Passes} \textit{cslip}, \textit{evnslc}, \textbf{Receives}
-\textit{eval\_cslip}
-
-~\newline\noindent
-\textbf{Uses} Morgenstern Price Module - section \ref{sec:MPMod},
-\textbf{Passes} \textit{eval\_cslip}, \textit{params\_layers},
-\textit{params\_piez}, \textit{params\_load},
-\textit{params\_soln} \textbf{Recieves} \textit{F\_MP\_Final}
+N/A
 
 \subsection{Syntax}
 
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+
+[T] = sequence of T, where T is any type
+
 \subsubsection{Exported Access Programs}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{0.2\textwidth} | p{0.15\textwidth} | 
-p{0.25\textwidth} | p{0.2\textwidth} |} \hline 
 
-  \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions}
-  \\ \hline
-
-  Output & Sequence; ~\newline struc; ~\newline struc; ~\newline struc;
-  ~\newline struc & - & None \\ \hline
-
-\end{tabular}
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.35\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		[\_] & Any number of values of type T & [T] & - \\ 
+		\_[\_] & [T], $\mathbb{Z}$ & T & \\
+		\_[\_..\_] & [T], $\mathbb{Z}$, $\mathbb{Z}$ & [T] & - \\\hline
+	\end{tabular}
+\end{center}
 
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-\renewcommand{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{F\_MP\_Final} : $\mathbb{R}$ & The factor of safety as
-  calculated by the Morgenstern Price solution method for the
-  critical slip surface, measuring the stability of the slope. \\
-\end{longtable}
+
+N/A
+
+\subsubsection{Environment Variables}
+
+N/A
+
+\subsubsection{Assumptions}
+
+N/A
 
 \subsubsection{Access Routine Semantics}
-\textbf{Input:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{cslip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of
-  vertex coordinates for the critical slip surface of the slope. \\
-  
-  \textit{params\_layers} : struc\_layers & (Appendix \ref{Tbl:LayerParam})\\
-  
-  \textit{params\_piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})\\
 
-  \textit{params\_soln} : struc\_soln & (Appendix \ref{Tbl:SolnParam})\\
-  
-  \textit{params\_load} : struc\_load & (Appendix
-  \ref{Tbl:LoadForceParam})\\
-\end{longtable}
+[\_](Any number of values):
+\begin{itemize}
+	\item output: 
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ A sequence containing the arguments 
+		passed to the function.
+	\end{itemize}
+\end{itemize}
 
-\noindent \textbf{Exceptions:} ~\newline\noindent There are no
-potential exceptions for Output.
+\noindent \_[\_](\textit{list}, \textit{int}):
+\begin{itemize}
+	\item output: 
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $list$[\textit{int}]	
+	\end{itemize}
+\end{itemize}
 
-~\newline\noindent \textbf{Output:} ~\newline\noindent Output does not
-return any values; however, it creates a plot of the critical slip
-surface \textit{cslip} as a part of the slope geometry \textit{strat}
-(from \textit{params\_layers}). The plot also displays the
-the factor of safety calculated by the Morgenstern-Price module 
-\textit{F\_MP\_Final}.
+\noindent \_[\_..\_](\textit{list}, \textit{int1}, \textit{int2}):
+\begin{itemize}
+	\item output: 
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ $list$[\textit{int1}..\textit{int2}]
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+N/A
 
 \newpage
 
