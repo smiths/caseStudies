@@ -1972,8 +1972,6 @@ DDy\\
 \end{tabular}
 \end{minipage}\\
 
-\bmac{I used SSP inputs as the inputs for this IM, should I have instead used 
-W, U, H, $\alpha$, $\beta$?}
 % ------------------------------------------ %
 %               End IM Factor of Safety         %
 % ------------------------------------------ %
@@ -1982,7 +1980,7 @@ W, U, H, $\alpha$, $\beta$?}
 
 The mobile shear force defined in \dref{GD_Fy} can be substituted into the 
 definition of mobile shear force based on the factor of safety, from 
-\dref{GD_MobShear}, yielding equation~\ref{eq:MobileShear} below.
+\dref{GD_MobShear}, yielding Equation~\ref{eq:MobileShear} below.
 
 \begin{equation} \label{eq:MobileShear}
 \left( \begin{array}{l} \left[
@@ -1996,13 +1994,13 @@ Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
 Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
 \right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right)\\ = \frac { 
 N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{\text{FS}}
+	\right) + c' \cdot \ell_{b,i} }{F_\text{S}}
 \end{equation}
 
 An expression for the effective normal force, $N'_i$, can be derived by 
 substituting the normal force equilibrium from \dref{GD_Fx} into the definition 
 for effective normal force from \dref{GD_EffNormal}. This results in 
-equation~\ref{eq:N'}.
+Equation~\ref{eq:N'}.
 	
 \begin{equation} \label{eq:N'}
 N'_{\text{i}} \; = \begin{array}{l}
@@ -2018,7 +2016,7 @@ Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
 U_{\text{b,i}} \end{array}
 \end{equation}
 
-Substituting equation~\ref{eq:N'} into equation~\ref{eq:MobileShear} gives
+Substituting Equation~\ref{eq:N'} into Equation~\ref{eq:MobileShear} gives
 
 \begin{equation*}
 \begin{array}{l} \left( \begin{array}{l} \left[
@@ -2030,7 +2028,7 @@ Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
 - H_{\text{i}} + H_{\text{i-1}} +
 {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
 Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right)\\ = \frac { 
+\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right) =\\ \frac { 
 	\left( \begin{array}{l}
 	\left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
 	{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
@@ -2061,7 +2059,7 @@ unknown, they are separated from the other terms as follows:
 		Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
 		\right]\cos\left(\alpha_{\text{i}}\right) - \left(- G_{\text{i}} + 
 		G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
-		\right)\\ = \frac 
+		\right) =\\ \frac 
 		{ 
 		\left( \begin{array}{l}
 			\left[ W_{\text{i}} +
@@ -2095,7 +2093,7 @@ X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)\\ - \left[
 \right]\cos\left(\alpha_{\text{i}}\right)
  - \left(- G_{\text{i}} + 
 G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
-\right)\\ = \frac 
+\right) =\\ \frac 
 { 
 	\left( \begin{array}{l}
 	\left[ W_{\text{i}} +
@@ -2121,7 +2119,7 @@ and can thus be replaced by $R_i$ and $T_i$, respectively.
 X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
 - \left(- G_{\text{i}} + 
 G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
-\right)\\ = \frac 
+\right) =\\ \frac 
 { 
 	R_{\text{i}} + \left(\left(- X_{\text{i-1}} 
 	+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) + \left(- 
@@ -2141,7 +2139,7 @@ G_{\text{i-1}} + \lambda f_\text{i}
 G_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
 - \left(- G_{\text{i}} + 
 G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
-\right)\\ = \frac 
+\right) =\\ \frac 
 { 
 	R_{\text{i}} + \left(\left(-\lambda f_\text{i-1} 
 	G_{\text{i-1}} + \lambda f_\text{i} 
@@ -2174,8 +2172,8 @@ G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 \left(F_\text{S}\right) \cdot T_\text{i} - R_\text{i}
 \end{equation*}
 
-The definitions for $Phi$ and $Psi$ from DDx and DDy simplify the above to 
-equation~\ref{eq:Gi}.
+The definitions for $\Phi$ and $\Psi$ from DDx and DDy simplify the above to 
+Equation~\ref{eq:Gi}.
 
 \begin{equation} \label{eq:Gi}
 G_\text{i} \Phi_\text{i} = \Psi_\text{i-1} G_\text{i-1} \Phi_\text{i-1} + 
@@ -2183,7 +2181,7 @@ F_\text{S}
 T_\text{i} - R_\text{i}
 \end{equation}
 
-Versions of equation~\ref{eq:Gi} instantiated for slices 1 to $n$ are shown 
+Versions of Equation~\ref{eq:Gi} instantiated for slices 1 to $n$ are shown 
 below.
 
 \begin{equation*}
@@ -2220,7 +2218,7 @@ F_\text{S} T_\text{n} - R_\text{n}
 
 Applying A[new assumption], which says that $G_{0}$ and $G_{n}$ are 0, results 
 in the following special cases: Equation~\ref{eq:G0} for the first slice and 
-equation~\ref{eq:Gn} for the $n$th slice.
+Equation~\ref{eq:Gn} for the $n$th slice.
 
 \begin{equation} \label{eq:G0}
 G_\text{1} \Phi_\text{1} = F_\text{S} T_\text{1} - R_\text{1}
@@ -2231,10 +2229,10 @@ G_\text{1} \Phi_\text{1} = F_\text{S} T_\text{1} - R_\text{1}
 \Phi_\text{n-1}
 \end{equation}
 
-Substituting equation~\ref{eq:G0} into equation~\ref{eq:G2} yields 
-equation~\ref{eq:G2sub}, which can be substituted into equation~\ref{eq:G3} to 
-get equation~\ref{eq:G3sub}, and so on until equation~\ref{eq:Gn-1sub} is 
-obtained from equation~\ref{eq:Gn-1}.
+Substituting Equation~\ref{eq:G0} into Equation~\ref{eq:G2} yields 
+Equation~\ref{eq:G2sub}, which can be substituted into Equation~\ref{eq:G3} to 
+get Equation~\ref{eq:G3sub}, and so on until Equation~\ref{eq:Gn-1sub} is 
+obtained from Equation~\ref{eq:Gn-1}.
 
 \begin{equation} \label{eq:G2sub}
 G_\text{2} \Phi_\text{2} = \Psi_\text{1} \left(F_\text{S} T_\text{1} - 
@@ -2267,7 +2265,7 @@ T_\text{n-1} - R_\text{n-1}
 ~\newline
 
 Equation~\ref{eq:Gn} can then be substituted into the left-hand side of 
-equation~\ref{eq:Gn-1sub}, resulting in:
+Equation~\ref{eq:Gn-1sub}, resulting in:
 
 \begin{equation*}
 \begin{split}
@@ -2306,7 +2304,7 @@ and thus can be factored out, resulting in:
 \begin{split}
 F_\text{S} \left( \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{1} 
 T_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{2} T_\text{2} + 
-\dots \Psi_\text{n-1} T_\text{n-1} + T_\text{n} \right) &\\= \Psi_\text{n-1} 
+\dots \Psi_\text{n-1} T_\text{n-1} + T_\text{n} \right) =&\\ \Psi_\text{n-1} 
 \Psi_\text{n-2} 
 \dots \Psi_\text{1} R_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots 
 \Psi_\text{2} R_\text{2} + \dots + \Psi_\text{n-1} R_\text{n-1} + R_\text{n}
@@ -2314,7 +2312,7 @@ T_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{2} T_\text{2} +
 \end{equation*}
 
 Isolating the factor of safety on the left-hand side and using compact notation 
-for the products and sums yields equation~\ref{eq:FS}, which can also be seen 
+for the products and sums yields Equation~\ref{eq:FS}, which can also be seen 
 in \iref{IM_FS}.
 
 \begin{equation} \label{eq:FS}
@@ -2324,12 +2322,6 @@ in \iref{IM_FS}.
 	\;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
 	}\right] + {T_{n}} }
 \end{equation}
-
-\bmac{This IM is still kind of long, at just over 3 pages. However I do not 
-think we can shorten it unless we leave out some intermediate steps in the 
-derivation. I tried to include enough steps for anyone to be able to follow 
-along, though, so I'd be hesitant to remove any. I personally think the 
-complexity of this derivation justifies the length.}
 
 % ------------------------------------------ %
 %               Begin IM Lambda      %
@@ -2425,7 +2417,7 @@ force ratio; can be constant or a half-sine. \\
 
  From the moment equilibrium of \dref{GD_M}, with the primary assumption for 
  the Morgenstern-Price method of \aref{A_Base} and associated definition 
- \dref{GD_X}, equation~(\ref{eq:Moment}) can be derived.
+ \dref{GD_X}, Equation~(\ref{eq:Moment}) can be derived.
 
 \begin{equation}\label{eq:Moment}
   0 = \begin{array}{l} - {G}_{\text{i}} \left[ {z_{\text{i}}} -
@@ -2446,7 +2438,7 @@ force ratio; can be constant or a half-sine. \\
 
 \noindent
 Rearranging the equation in terms of $\lambda$ leads to 
-equation~(\ref{eq:lambda1}).
+Equation~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
   \lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
@@ -2471,7 +2463,7 @@ Taking the summation of all slices, considering the boundary
 conditions that $G_{\text{0}}$ and $G_{\text{n}}$ are equal to zero, and 
 removing the seismic and external forces due to \aref{A_Seismic} and 
 \aref{A_External}, respectively, a general equation for the constant $\lambda$ 
-is developed in equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
+is developed in Equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
 
 \begin{equation}\label{eq:Lambda}
 \lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{\text{i}}} \left[
@@ -2558,7 +2550,7 @@ interslice forces.\\
 
 Substituting the normal force equilibrium of \dref{GD_Fx} and the assumption 
 \aref{A_Base} represented by \dref{GD_X} into the effective normal force 
-definition from \dref{GD_EffNormal} yields equation~(\ref{eq:F_perp}).
+definition from \dref{GD_EffNormal} yields Equation~(\ref{eq:F_perp}).
 
 \begin{equation}\label{eq:F_perp}   N'_{\text{i}}  = \begin{array}{l}    
     \left[ W_{\text{i}} - \lambda \cdot f_{\text{i-1}} \cdot
@@ -2576,7 +2568,7 @@ definition from \dref{GD_EffNormal} yields equation~(\ref{eq:F_perp}).
 \noindent
 Next, substituting the base shear force equilibrium of \dref{GD_Fy} and the 
 assumption of \dref{GD_X} into the definition of mobilized shear from 
-\dref{GD_MobShear} results in equation~(\ref{eq:F_par}).
+\dref{GD_MobShear} results in Equation~(\ref{eq:F_par}).
 
 \begin{equation}  \label{eq:F_par}
   \frac{
@@ -2601,9 +2593,9 @@ assumption of \dref{GD_X} into the definition of mobilized shear from
 \end{equation}
 
 \noindent
-Substituting equation~(\ref{eq:F_perp}), \ddref{DD_R}, and \ddref{DD_T} into 
-equation~(\ref{eq:F_par}) and rearranging results in 
-equation~(\ref{eq:Interslice1})
+Substituting Equation~(\ref{eq:F_perp}), \ddref{DD_R}, and \ddref{DD_T} into 
+Equation~(\ref{eq:F_par}) and rearranging results in 
+Equation~(\ref{eq:Interslice1})
 
 \begin{equation}\label{eq:Interslice1}
 G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
@@ -2628,7 +2620,7 @@ G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 Where $R$ and $T$ are the resistive and mobile shear
 of the slice, without the influence of interslice forces $G$ and $X$,
 as defined in \ddref{DD_R} and \ddref{DD_T}. The constants $\Phi$ and $\Psi$ 
-are defined below in equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) 
+are defined below in Equations~(\ref{eq:Phi}) and~(\ref{eq:Psi}) 
 respectively.
 
 \begin{equation}\label{eq:Phi} \begin{aligned}
@@ -2653,7 +2645,7 @@ respectively.
 
 ~\newline
 \noindent These constants can be used to simplify 
-equation~(\ref{eq:Interslice1}) to obtain equation~(\ref{eq:Interslice2}), 
+Equation~(\ref{eq:Interslice1}) to obtain Equation~(\ref{eq:Interslice2}), 
 which can be found in \iref{IM_E}.
 
 \begin{equation}\label{eq:Interslice2}
@@ -2663,7 +2655,7 @@ which can be found in \iref{IM_E}.
 \end{equation}
 
 \noindent
-The constants $\Psi$ and $\Phi$ in equation~(\ref{eq:Interslice2}) for
+The constants $\Psi$ and $\Phi$ in Equation~(\ref{eq:Interslice2}) for
 are functions of the unknowns: the proportionality constant, $\lambda{}$  
 (\iref{IM_Lambda}), and the factor of safety, $FS$ (\iref{IM_FS}).
 
