@@ -154,7 +154,7 @@
 10/20/18 & 1.1 & Minor changes\\
 10/29/18 & 1.2 & Minor fixes based on feedback\\
 10/30/18 & 1.3 & Minor fixes based on Dr.Smith 's feedback\\
-11/11/18 & 1.4 & Minor fixes based on Dr.Smith 's feedback\\
+11/11/18 & 1.4 & Major changes based on TM,DD and IM\\
 \bottomrule
 \end{tabularx}
 
@@ -231,8 +231,8 @@ their units.  The symbols are listed in alphabetical order.
   $P_b$ & -- &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\pascal} & Applied load (demand)\\
-  $\hat{q}$ & -- & Dimensionless load\\
-  $\hat{q}_{\text{tol}}$ & -- & Tolerable load\\  
+  $\hat{q}$ & -- & Dimensionless load\aida{According to the change of NFL, LR unit to Pascal, Should'nt the unit of this load be Pascal?}\\
+  $\hat{q}_{\text{tol}}$ & -- & Tolerable load\aida{According to the change of NFL, LR unit to Pascal, Should'nt the unit of this load be Pascal?}\\  
   $\text{SD}$ & \si{\meter} & Stand off distance which is represented in
                               coordinates $(\text{SD}_x , \text{SD}_y ,
                               \text{SD}_z)$\\
@@ -632,7 +632,7 @@ the duration of load ($t_d$), and the material properties of $m$, $k$, and $E$. 
 \subsubsection{Theoretical Models}\label{sec_theoretical}
 
 \wss{This project should have these two theoretical models as instanced models
-  and it should introduce two new theoretical models.  The new theoretical models
+  and it should introduce two new theoretical models. The new theoretical models
   should be abstraction of the two chunks currently called theoretical
   models.  The concept of safety is something that should generalize from the
   GlassBR example.  The theoretical model should be reusable in other contexts.
@@ -663,20 +663,19 @@ This section focuses on the general equations and laws that \progname{} is based
 		\rowcolor[gray]{0.9}
 		Number& T\refstepcounter{theorynum}\thetheorynum \label{T_Pb}\\
 		\hline
-		Label&\bf Safety Req-Pb\\
+		Label&\bf Safety Probability \\
 		\hline
-		Equation& $\text{is\_safePb} = P_\text{fail} <  P_\text{tolerable}$\\
+		Equation& $\text{is\_safeProb} = P_\text{fail} <  P_\text{tolerable}$\\
 		\hline
 		Description 
-	   		& \aida{According to  moving the TM to IM I removed the description. Right?}
-	   		$P_\text{fail}$ is  the probability of failure, as calculated in \ddref{DD_prob}\\
+	   		& $P_\text{fail}$ is the probability of failure.\\
 		& $P_{b_{\text{tol}}}$ is the tolerable threshold entered by the user \\
 		\hline
 		Source &
 		\cite{ASTM2009}\\
 		% The above web link should be replaced with a proper citation to a publication
 		\hline
-		Ref.\ By & \tref{T_LR}\\
+		Ref.\ By & \iref{IM_prob}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -690,22 +689,19 @@ This section focuses on the general equations and laws that \progname{} is based
 		\rowcolor[gray]{0.9}
 		Number& T\refstepcounter{theorynum}\thetheorynum \label{T_LR}\\
 		\hline
-		Label &\bf Safety Req-LR\\
+		Label &\bf Safety Load\\
 		\hline
-		Equation & $\text{is\_safeLR} = \text{capacity} > \text{load}$\\
+		Equation & $\text{is\_safeLoad} = \text{capacity} > \text{load}$\\
 		\hline
 		Description 
-		& \aida{According to moving the TM to IM I removed the description. Right?}\\
-		& $\text{capacity}$ is the Load Resistance (also called capacity), as defined in
-		\ddref{DD_cap}\\
-		& $load$ Applied Load or pressure, as
-		defined in \ddref{DD_dem}\\
+				& $\text{capacity}$ is the Load Resistance (also called capacity).\\
+		& $load$ Applied Load or pressure.\\
 		\hline
 		Source &
 		\cite{ASTM2009}\\
 		% The above web link should be replaced with a proper citation to a publication
 		\hline
-		Ref.\ By & \tref{T_Pb}\\
+		Ref.\ By & \iref{IM_cap}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -749,7 +745,7 @@ models. The dimension of each quantity is also given.
   Source &
   \cite{ASTM2009}, \cite[Eq.~14]{Campidelli}, \cite[Eq.~4-5]{BeasonEtAl1998}\\
   \hline
-  Ref.\ By & \iref{IM_prob}\\
+  Ref.\ By & \ddref{DD_prob}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -792,7 +788,7 @@ $$h=\frac{1}{1000}
   Source &
   \cite{ASTM2009}\\
   \hline
-  Ref.\ By & \iref{IM_prob}, \ddref{DD_JTOL}, \ddref{DD_qhat}, \ddref{DD_NFL}\\
+  Ref.\ By & \ddref{DD_prob}, \ddref{DD_JTOL}, \ddref{DD_qhat}, \ddref{DD_NFL}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -819,7 +815,7 @@ $$h=\frac{1}{1000}
   \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \iref{IM_prob}, \ddref{DD_JTOL}\\
+  Ref.\ By & \ddref{DD_prob}, \ddref{DD_JTOL}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -848,7 +844,7 @@ $$h=\frac{1}{1000}
   \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \iref{IM_prob} \\
+  Ref.\ By & \ddref{DD_prob} \\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -872,13 +868,13 @@ $$h=\frac{1}{1000}
   & $a$, $b$ are the dimensions of the plate where $(a>b)$\\
   & $h$ is the true thickness, which is based on the nominal thickness as shown
     in \ddref{DD_thick}\\
-  & $\hat{q}_{\text{tol}}$ is the tolerable load defined in \ddref{DD_qtol}\\
+  & $\hat{q}_{\text{tol}}$ is the tolerable load defined in \ddref{DD_qtol} \aida{According to the change of NFL unit to Pascal and this equation, Should'nt the unit of this load be Pascal?}\\
   \hline
   Source &
   \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \iref{IM_cap}\\
+  Ref.\ By & \ddref{DD_cap}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -909,7 +905,7 @@ $$h=\frac{1}{1000}
   \cite{ASTM2009}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \ddref{DD_qhat}, \iref{IM_cap}\\
+  Ref.\ By & \ddref{DD_qhat}, \ddref{DD_cap}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -929,7 +925,7 @@ $$h=\frac{1}{1000}
   Equation & $\hat{q}=\frac{q(ab)^2}{Eh^4 \text{GTF}}$\\
   \hline
   Description 
-  & $q$ is the 3 second equivalent pressure, as given in \iref{IM_dem}\\
+  & $q$ is the 3 second equivalent pressure, as given in \ddref{DD_dem}\\
   & $a$, $b$ are dimensions of the plate, where $(a>b)$\\
   & $E$ is the modulus of elasticity \\
   & $h$ is the true thickness, which is based on the nominal thickness as shown
@@ -1031,7 +1027,7 @@ $$h=\frac{1}{1000}
   Source &
   \cite{ASTM2009}\\
   \hline
-  Ref.\ By & \iref{IM_dem}\\
+  Ref.\ By & \ddref{DD_dem}\\
   \hline
 \end{tabular}
 \end{minipage}\\
@@ -1083,7 +1079,7 @@ $$h=\frac{1}{1000}
 		Source &
 		\cite{ASTM2009, BeasonEtAl1998}\\
 		\hline
-		Ref.\ By & \tref{T_Pb}\\
+		Ref.\ By & \iref{IM_prob}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -1100,7 +1096,7 @@ $$h=\frac{1}{1000}
 		Label&\bf Calculation of Capacity (LR) \wss{This should be made a data
 			definition, not an instance model}\\
 		\hline
-		Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\ 
+		Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\
 		\hline
 		Description 
 		& $\text{LR}$ is the Load Resistance, which is also called capacity\\
@@ -1111,7 +1107,7 @@ $$h=\frac{1}{1000}
 		Source &
 		\cite{ASTM2009}\\
 		\hline
-		Ref.\ By & \tref{T_LR}\\
+		Ref.\ By & \iref{IM_cap}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -1141,7 +1137,7 @@ $$h=\frac{1}{1000}
 		Source &
 		\cite{ASTM2009}\\
 		\hline
-		Ref.\ By & \tref{T_LR}, \ddref{DD_qhat}\\
+		Ref.\ By & \iref{IM_cap}, \ddref{DD_qhat}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -1171,16 +1167,16 @@ and Section~\ref{sec_gendef}.
 		\hline
 		Description 
 		& If $\text{is\_safePb} = \text{True}$, the glass is considered safe.
-		$\text{is\_safePb}$ and $\text{is\_safeLR}$ (from \tref{T_LR}) are either both True or
+		$\text{is\_safePb}$ and $\text{is\_safeLR}$ (from \iref{IM_cap}) are either both True or
 		both False.\\
-		& $P_b$ is the probability of breakage, as calculated in \iref{IM_prob}\\
+		& $P_b$ is the probability of breakage, as calculated in \ddref{DD_prob}\\
 		& $P_{b_{\text{tol}}}$ is the tolerable probability entered by the user\\
 		\hline
 		Source &
 		\cite{ASTM2009}\\
 		% The above web link should be replaced with a proper citation to a publication
 		\hline
-		Ref.\ By & \tref{T_LR}\\
+		Ref.\ By & \iref{IM_cap}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -1200,19 +1196,19 @@ and Section~\ref{sec_gendef}.
 		\hline
 		Description 
 		& If $\text{is\_safeLR} = \text{True}$, the glass is considered to be safe.
-		$\text{is\_safePb}$ (from \tref{T_Pb}) and $\text{is\_safeLR}$ are either both True or
+		$\text{is\_safePb}$ (from \iref{IM_prob}) and $\text{is\_safeLR}$ are either both True or
 		both False.\\
 		& $\text{LR}$ is the Load Resistance (also called capacity), as defined in
-		\iref{IM_cap} \wss{LR has to have units of Pa, or the comparison to $q$
+		\ddref{DD_cap} \wss{LR has to have units of Pa, or the comparison to $q$
 			doesn't make sense}\\
 		& $q$ (also referred as the demand) is the 3 second equivalent pressure, as
-		defined in \iref{IM_dem}\\
+		defined in \ddref{DD_dem}\\
 		\hline
 		Source &
 		\cite{ASTM2009}\\
 		% The above web link should be replaced with a proper citation to a publication
 		\hline
-		Ref.\ By & \tref{T_Pb}\\
+		Ref.\ By & \iref{IM_prob}\\
 		\hline
 	\end{tabular}
 \end{minipage}\\
@@ -1378,7 +1374,7 @@ The system shall set the known values as follows:
 \item Probability of breakage ($P_b$) (\iref{IM_prob})
 \item Risk of failure ($B$) (\ddref{DD_B})
 \item Load resistance (LR) (\iref{IM_cap})
-\item Applied load (demand) ($q$) (\iref{IM_dem})
+\item Applied load (demand) ($q$) (\ddref{DD_dem})
 \item Stress distribution factor ($J$) (\ddref{DD_J})
 \item Non-factored load (NFL) (\ddref{DD_NFL})
 \item Glass type factor (GTF) (\ddref{DD_GTF})
