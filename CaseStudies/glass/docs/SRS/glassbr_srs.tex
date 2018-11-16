@@ -8,6 +8,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{colortbl}
+\usepackage{adjustbox}
 \usepackage{xr}
 \usepackage{hyperref}
 \usepackage[all]{hypcap} 
@@ -155,6 +156,7 @@
 10/29/18 & 1.2 & Minor fixes based on feedback\\
 10/30/18 & 1.3 & Minor fixes based on Dr.Smith 's feedback\\
 11/11/18 & 1.4 & Major changes based on TM,DD and IM\\
+11/15/18 & 1.5 & Major changes on Tracebility Tables based on TM,DD and IM, Some fixes based on Initial feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -402,21 +404,34 @@ interface.  The responsibilities of the user and the system are as follows:
   \begin{itemize}
   \item Detect data type mismatch, such as a string of characters input instead
     of a floating point number
-  \item Determine if the inputs satisfy the required physical and data
-    constraints (Section~\ref{sec_DataConstraints})
+  \item  Determine if the inputs satisfy the required physical and software
+  constraints. (Section~\ref{sec_DataConstraints})
   \item Predict whether the glass slab is safe to use or not.
   \end{itemize}
 \end{itemize}
 
-\subsection{User Characteristics}  \label{sec_userchar}
-
-The end user of \progname{} should have an understanding of undergraduate Level
-1 Calculus and Physics and to have an understanding of theory behind Shattering
-Science and Glass Physics.
+\subsection{User Characteristics} 
+\label{sec_userchar}
+\begin{itemize}
+	\item The end user of \progname{} is expected to have completed at least the
+	equivalent of the second year of an undergraduate degree in civil or
+	structural engineering.
+	\item The end user is expected to have an understanding of theory behind glass
+	breakage and blast risk.
+	\item The end user is expected to have basic computer literacy to handle the
+	software.
+\end{itemize}
 
 \subsection{System Constraints}
 
 There are no system constraints.
+
+\section{Scope of the Project}
+
+This section presents the scope of the project. It describes the expected use of
+\progname{} as well as the inputs and outputs of each action.  The use cases are
+input and output, which defines the action of getting the input and displaying
+the output.
 
 
 \section{Specific System Description}
@@ -428,11 +443,10 @@ the instance models.
 
 \subsection{Problem Description}\label{Sec_pd}
 
-\progname\ is a computer program developed to interpret the inputs to give out
-the outputs which predict whether the glass slab can withstand the blast under the given
-conditions. The blast under consideration is a type of man-made blast load. Software is
-helpful to efficiently and correctly predict the blast risk involved with the glass slab using
-an intuitive interface.
+A system is needed to efficiently and correctly predict the blast risk involved
+with the glass. \progname{} is a computer program developed to interpret the
+inputs to give out the outputs which predict whether the glass slab can
+withstand the blast under the given conditions.
 
 %\subsubsection{Background}
 
@@ -440,7 +454,8 @@ an intuitive interface.
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making it
-easier to correctly understand the requirements:
+easier to correctly understand the requirements.  All of the terms are extracted
+from \cite{ASTM2009}.
 
 \begin{itemize}
 \item \textit{Aspect Ratio (AR) -} The ratio of the long dimension of the
@@ -510,7 +525,8 @@ duration as defined in \cite[(pg. 1, 53)]{ASTM2009}, following \aref{A_N/AGlass}
 associated with a probability of breakage less than or equal to 8 lites per 1000 
 for monolithic AN glass.
 \item \textit{Short duration load -} Any load lasting 3 seconds or less.
-\item \textit{Specified design load -} The magnitude in Pa (psf), blast load type and duration of the load given by the specifying authority.
+\item \textit{Specified design load -} The magnitude in Pa (psf), type (for 
+example, wind or snow) and duration of the load given by the specifying authority.
 
 
 \end{enumerate}
@@ -548,10 +564,10 @@ centroid of a hemispherical high explosive charge. It is represented by the coor
 The physical system of \progname, as shown in Figure~\ref{Fig_PhysSyst} includes
 the following elements:
 \begin{itemize}
-\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The glass slab.
-\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or a man-made explosive,
-  is located.\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The stand off distance is the distance between the point of
-  explosion and the glass. 
+	\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The glass slab.
+	\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or any man-made explosive,
+	is located. The stand off distance is the distance between the point of
+	explosion and the glass.
 \end{itemize}
  
 \begin{figure}[h!]
@@ -576,7 +592,7 @@ the tolerable probability of breakage, the goal statements are:
 
 \subsection{Solution Characteristics Specification}
 
-The instance models that govern \progname{} are presented in Subsection~\ref{sec_instance}. The information
+The instance models that govern \progname{} are presented in Section~\ref{sec_instance}. The information
 to understand the meaning of the instance models and their derivation is also presented, so
 that the instance models can be verified.
 
@@ -584,9 +600,12 @@ that the instance models can be verified.
 
 This section simplifies the original problem and helps in developing the
 theoretical model by filling in the missing information for the physical
-system. The numbers given in the square brackets refer to the theoretical model
-[T], general definition [GD], data definition [DD], instance model [IM], or
-likely change [LC], in which the respective assumption is used.
+system. The numbers given in the square brackets refer to the Theoretical 
+Models [Section~\ref{sec_theoretical}], General Definitions 
+[Section~\ref{sec_gendef}], Data Definitions [Section~\ref{sec_datadef}], Instance
+Models [Section~\ref{sec_instance}], Likely Changes [Section~\ref{sec_like}],
+or Unlikely Changes [Section~\ref{sec_unlike}], in which the respective 
+assumption is used.
 
 \begin{enumerate}
 
@@ -650,7 +669,7 @@ equation, the capacity and load need to be in the same units, but they don't
 have to be forces.  The capacity for SSP is expressed as shear stress.  In
 another problem it might be tolerable torque.
 Please add the two new theoretical models and move the existing TMs to be IMs.
-}
+}\aida{Done. Is the TMs 's references right? I changed the labels, If you have better suggestion, Please let me know.}
 
 This section focuses on the general equations and laws that \progname{} is based on.
 
@@ -1069,7 +1088,7 @@ $$h=\frac{1}{1000}
 	 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_prob} \\
 		\hline
 		Label&\bf Probability of Glass Breakage \wss{This should be made a data
-			definition, not an instance model}\\
+			definition, not an instance model}\aida{Done.}\\
 		\hline
 		Equation& $P_b = 1-e^{-B}$\\
 		\hline
@@ -1094,7 +1113,7 @@ $$h=\frac{1}{1000}
 	 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_cap} \\
 		\hline
 		Label&\bf Calculation of Capacity (LR) \wss{This should be made a data
-			definition, not an instance model}\\
+			definition, not an instance model}\aida{Done.}\\
 		\hline
 		Equation& $\text{LR} = \text{NFL} \times \text{GTF} \times \text{LSF}$\\
 		\hline
@@ -1122,7 +1141,7 @@ $$h=\frac{1}{1000}
 		 Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_dem} \\
 		\hline
 		Label&\bf Calculation of Demand ($q$) \wss{This should be made a data
-			definition, not an instance model}\\
+			definition, not an instance model}\aida{Done.}\\
 		\hline
 		Equation& $q=q(w_{\text{TNT}}, \text{SD}$)\\ 
 		\hline
@@ -1200,7 +1219,7 @@ and Section~\ref{sec_gendef}.
 		both False.\\
 		& $\text{LR}$ is the Load Resistance (also called capacity), as defined in
 		\ddref{DD_cap} \wss{LR has to have units of Pa, or the comparison to $q$
-			doesn't make sense}\\
+			doesn't make sense} \aida{I have changed in the Table Of Symbols. Is that enough?}\\
 		& $q$ (also referred as the demand) is the 3 second equivalent pressure, as
 		defined in \ddref{DD_dem}\\
 		\hline
@@ -1227,7 +1246,7 @@ uncertainty quantification exercise. The constraints are conservative, to give
 the user of the model the flexibility to experiment with unusual situations. The
 column of typical values is intended to provide a feel for a common scenario.
 
-Section~\ref{Sec:ValuofAuxiCons} \wss{Update this to point to the Appendix}
+Section Appendix~[\ref{Sec:ValuofAuxiCons}] \wss{Update this to point to the Appendix} \aida{Done.}
 gives the values of the specification parameters used in
 Table~\ref{TblInputVar}.
 
@@ -1349,8 +1368,8 @@ The system shall set the known values as follows:
 \item SD from \ddref{DD_SD}
 \item AR from \ddref{DD_AR}
 \end{itemize}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{Verify}:]
+\aida{Due to the using same label for R3 and R7 in the initial version, in the tracebility tables, R3 had been missed and it was confusing in the connection between Items with eachother. I corrected their label and in the traceability tables as well.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{Verify_IN}:]
 
   The system shall check the entered input values to ensure that they do not
   exceed the data constraints mentioned in Section~\ref{sec_DataConstraints}.  If any of
@@ -1363,7 +1382,7 @@ The system shall set the known values as follows:
   from~\rref{KnownValues}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_ Comparison}:] If
-  $\text{is\_safePb} \wedge \text{is\_safeLR}$ (from \tref{T_Pb} and \tref{T_LR}) are true,
+  $\text{is\_safePb} \wedge \text{is\_safeLR}$ (from \iref{IM_prob} and \iref{IM_cap}) are true,
   output the message ``For the given input parameters, the glass is considered
   safe.''  If the condition is false, then output the message ``For the given
   input parameters, the glass is NOT considered safe.''
@@ -1371,9 +1390,9 @@ The system shall set the known values as follows:
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:]
   Output the following quantities:
 \begin{itemize}
-\item Probability of breakage ($P_b$) (\iref{IM_prob})
+\item Probability of breakage ($P_b$) (\ddref{DD_prob})
 \item Risk of failure ($B$) (\ddref{DD_B})
-\item Load resistance (LR) (\iref{IM_cap})
+\item Load resistance (LR) (\ddref{DD_cap})
 \item Applied load (demand) ($q$) (\ddref{DD_dem})
 \item Stress distribution factor ($J$) (\ddref{DD_J})
 \item Non-factored load (NFL) (\ddref{DD_NFL})
@@ -1385,6 +1404,12 @@ The system shall set the known values as follows:
 \item Aspect Ratio (AR) (\ddref{DD_AR})
 \end{itemize}
 
+\item[R\refstepcounter{reqnum}\thereqnum \label{Verify_OUT}:]
+
+The system shall check the calculated output values to ensure that they do not
+exceed the data constraints mentioned in Section~\ref{sec_DataConstraints}.  If any of
+the output values are out of bounds, an error message is displayed and the
+calculations stop.
 \end{itemize}
 
 \subsection{Non-Functional Requirements}
@@ -1477,58 +1502,79 @@ requirements on theoretical models, instance models, data definitions and
 data constraints. Table~\ref{Table:A_trace} shows the dependencies 
 of theoretical models, instance models, data definitions, likely changes and 
 requirements on the assumptions.
+\aida{Some DDs had been missed in the initial version, I added prior and new DDs and new changes. }
 \newline
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline        
-	& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap}& \iref{IM_dem} & 
+	& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap}&  
 	\ddref{DD_B} & \ddref{DD_thick} & \ddref{DD_LDF} & \ddref{DD_J} & \ddref{DD_NFL} & 
-	\ddref{DD_GTF} & \ddref{DD_qhat} & \ddref{DD_qtol} & \ddref{DD_JTOL} \\
+	\ddref{DD_GTF} & \ddref{DD_qhat} & \ddref{DD_qtol} & \ddref{DD_JTOL} &
+	\ddref{DD_SD} & \ddref{DD_AR} &
+	\ddref{DD_prob} & \ddref{DD_cap} &
+	\ddref{DD_dem}	\\
 \hline
-\tref{T_Pb}           & & X & X & & & & & & & & & & & \\ \hline
-\tref{T_LR}             & X & & & X & X & & & & & & & & & \\ \hline
-\iref{IM_prob}      & & & & & & X & X & X & X & & & & & \\ \hline
-\iref{IM_cap}        & & & & & & & & & & X & X & & & \\ \hline
-\iref{IM_dem}       & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_B}       & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_thick}  & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_LDF}   & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_J}        & & & & & & & & & & & & X & & \\ \hline
-\ddref{DD_NFL}   & & & & & & & X & & & & & & X & \\ \hline
-\ddref{DD_GTF}   & & & & & & & & & & & & & & \\ \hline
-\ddref{DD_qhat}   & & & & & X & & X & & & & X & & & \\ \hline
-\ddref{DD_qtol}    & & & & & & & & & & & & & & X \\ \hline
-\ddref{DD_JTOL} & & & & & & & X & X & & & & & & \\
+\tref{T_Pb}           & & & & & & & & & & & & & & & & & & \\ \hline
+\tref{T_LR}             & & & & & & & & & & & & & & & & & & \\ \hline
+\iref{IM_prob}      & X & & & X & & & & & & & & & & & & X & & \\ \hline
+\iref{IM_cap}        & & X & X & & & & & & & & & & & & & & X & X \\ \hline
+\ddref{DD_B}       & & & & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_thick}  & & & & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_LDF}   & & & & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_J}        & & & & & & & & & & & X & & & & X & & & \\ \hline
+\ddref{DD_NFL}   & & & & & & X & & & & & & X & & & & & & \\ \hline
+\ddref{DD_GTF}   & & & & & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_qhat}   & & & & & & X & & & & X & & & & & & & & X \\ \hline
+\ddref{DD_qtol}    & & & & & & & & & & & & & X & & X & & & \\ \hline
+\ddref{DD_JTOL} & & & & & & X & X & & & & & & & & & & & 
+\\ \hline
+\ddref{DD_SD} & & & & & & & & & & & & & & & & & &
+\\ \hline
+\ddref{DD_AR} & & & & & & & & & & & & & & & & & &
+\\ \hline
+\ddref{DD_prob} & & & & & X & X & X & X & & & & & & & & & &
+\\ \hline
+\ddref{DD_cap} & & & & & & & & & X & X & & & & & & & &
+\\ \hline
+\ddref{DD_dem} & & & & & & & & & & & & & & X & & & &\\
+
 \hline
 \end{tabular}
+\end{adjustbox}
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
+
 \end{table}
 
 \newpage
-
+\aida{Is the connection between T1,T2 and Requirements right? I am not sure.  }
 \begin{table}[h!]
 \centering
-\begin{tabular}{|P{0.4cm}|P{0.4cm}|P{0.4cm}|P{0.6cm}|P{0.6cm}|P{0.6cm}|P{0.65cm}|
-P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|
-P{0.8cm}|P{0.4cm}|P{0.4cm}|}
-\hline
-	& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap} &
-	\iref{IM_dem} & \ddref{DD_B} & \ddref{DD_thick} & \ddref{DD_LDF} &
-	\ddref{DD_J} & \ddref{DD_NFL} & \ddref{DD_GTF} & \ddref{DD_qhat} &
-	\ddref{DD_qtol} & \ddref{DD_JTOL} & \ref{sec_DataConstraints} &
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline        
+& \tref{T_Pb} & \tref{T_LR} & \iref{IM_prob} & \iref{IM_cap}&  
+\ddref{DD_B} & \ddref{DD_thick} & \ddref{DD_LDF} & \ddref{DD_J} & \ddref{DD_NFL} & 
+\ddref{DD_GTF} & \ddref{DD_qhat} & \ddref{DD_qtol} & \ddref{DD_JTOL} &
+\ddref{DD_SD} & \ddref{DD_AR} &
+\ddref{DD_prob} & \ddref{DD_cap} &
+\ddref{DD_dem}	& \ref{sec_DataConstraints} &
 	\rref{Input} & \rref{KnownValues}\\
 \hline
-\rref{Input}                 & & & & & & & & & & & & & & & & & \\ \hline
-\rref{KnownValues}   & & & & & & & & & & & & & & & & & \\ \hline
-\rref{Verify}                & & & & & & & & & & & & & & & X & & \\ \hline
-\rref{R_OutputInput}  & & & & & & & & & & & & & & & & X & X \\ \hline
-\rref{R_ Comparison}  & X & X & & & & & & & & & & & & & & & \\ \hline
-\rref{R_Output}          & & & X & X & X & & X & X & X & X & X & X & X & X & & & \\
+\rref{Input}                 & & & & & & & & & & & & & & & & & & & & & \\ \hline
+\rref{KnownValues}   & & & & & & X & X & & & X & & & & X & X & & & & & & \\ \hline
+\rref{Verify_IN}                & & & & & & & & & & & & & & & & & & & X & & \\ \hline
+\rref{R_OutputInput}  & & & & & & & & & & & & & & & & & & & & X & X \\ \hline
+\rref{R_ Comparison}  & X & X & X & X & & & & & & & & & & & & & & & & &\\ \hline
+\rref{R_Output}          & & & & & X & X & & X & X & X & X & X & X & & X & X & X & X & & &  \\
+\hline
+\rref{Verify_OUT}          & & & & & & & & & & & & & & & & & & & X & & \\
 \hline
 \end{tabular}
+\end{adjustbox}
 \caption{Traceability Matrix Showing the Connections Between Requirements and Other Items.}
 \label{Table:R_trace}
 \end{table}
