@@ -37,8 +37,6 @@
 
 \input{../Comments}
 
-
-
 \newcommand{\colZwidth}{1.0\textwidth}
 \newcommand{\blt}{- } %used for bullets in a list
 \newcommand{\colAwidth}{0.13\textwidth}
@@ -117,12 +115,12 @@
 
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
-%\oddsidemargin 0mm
-%\evensidemargin 0mm
-%\textwidth 160mm
-%\textheight 200mm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 160mm
+\textheight 200mm
 %\usepackage{fullpage}
-\newgeometry{margin=2cm}
+%\newgeometry{margin=2cm}
 
 \begin{filecontents}{../../refs/References.bib}
 \end{filecontents}
@@ -145,6 +143,11 @@
 	could also be included earlier, but standardization is more important than
 	other considerations here.}
 \aida{Yes, you are right, I corrected it in the previous commit.}
+
+\wss{When I made my original comment I didn't realize that the order in the
+  actual case study versions had the table of contents first.  The goal is
+  standardization, so let us standardize on the case study versions.  Please
+  change back to having the table of contents first.  :-)}
 
 \section{Revision History}
 
@@ -233,8 +236,12 @@ their units.  The symbols are listed in alphabetical order.
   $P_b$ & -- &  Probability of breakage\\
   $P_{b_{\text{tol}}}$ & -- &  Tolerable probability of breakage\\
   $q$ & \si{\pascal} & Applied load (demand)\\
-  $\hat{q}$ & -- & Dimensionless load\aida{According to the change of NFL, LR unit to Pascal, Should'nt the unit of this load be Pascal?}\\
-  $\hat{q}_{\text{tol}}$ & -- & Tolerable load\aida{According to the change of NFL, LR unit to Pascal, Should'nt the unit of this load be Pascal?}\\  
+  $\hat{q}$ & -- & Dimensionless load\aida{According to the change of NFL, LR
+                   unit to Pascal, Should'nt the unit of this load be Pascal?}
+                   \wss{Yes, please update}\\
+  $\hat{q}_{\text{tol}}$ & -- & Tolerable load\aida{According to the change of
+                                NFL, LR unit to Pascal, Should'nt the unit of
+                                this load be Pascal?} \wss{Yes, please update}\\  
   $\text{SD}$ & \si{\meter} & Stand off distance which is represented in
                               coordinates $(\text{SD}_x , \text{SD}_y ,
                               \text{SD}_z)$\\
@@ -316,7 +323,7 @@ the intended reader. \aida{I reverted to the origin text.}
 
 \subsection{Purpose of Document}
 
-This document is intended to be used as a reference to provide all information
+This document is used \wss{text removal} as a reference to provide all information
 necessary to understand and verify \progname{}. The goals and theoretical models
 used in the \progname{} code are provided, with an emphasis on explicitly
 identifying assumptions and unambiguous definitions.  The SRS is abstract
@@ -337,9 +344,10 @@ the documentation is still to ``fake" a rational design process.
 
 \subsection{Scope of Requirements} 
 
-The scope of the requirements includes getting all input parameters related to
-the glass slab and also the parameters related to blast type.
-\progname{} predicts whether a glass slab under the given conditions is safe or not.
+The scope of the requirements is a single pane of rectangular glass, without any
+modifications that effect the strength, like etching, drilling, or sandblasting
+etc.  The response type of the glass is assumed to be flexure.  \wss{scope
+  re-written to consist of an abstract view of the assumptions.}
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:CharofInteRead}
@@ -362,10 +370,10 @@ readers who would like a more bottom up approach, they can start reading the
 data definitions in Section \ref{sec_datadef} and trace back to find any
 additional information they require.
 
-The goal statements (Section \ref{sec_gs}) are refined to the theoretical models  (Section \ref{sec_theoretical}), and theoretical
-models to the instance models (Section \ref{sec_instance}) . The data definitions (Section \ref{sec_datadef}) are used to support the
-definitions of the different models.
-
+The goal statements (Section \ref{sec_gs}) are refined to the theoretical models
+(Section \ref{sec_theoretical}), and theoretical models to the instance models
+(Section \ref{sec_instance}) . The data definitions (Section \ref{sec_datadef})
+are used to support the definitions of the different models.
 
 \section{General System Description}
 
@@ -527,7 +535,6 @@ for monolithic AN glass.
 \item \textit{Short duration load -} Any load lasting 3 seconds or less.
 \item \textit{Specified design load -} The magnitude in Pa (psf), type (for 
 example, wind or snow) and duration of the load given by the specifying authority.
-
 
 \end{enumerate}
 
@@ -691,8 +698,7 @@ This section focuses on the general equations and laws that \progname{} is based
 		& $P_{b_{\text{tol}}}$ is the tolerable threshold entered by the user \\
 		\hline
 		Source &
-		\cite{ASTM2009}\\
-		% The above web link should be replaced with a proper citation to a publication
+		\cite{ASTM2009} \wss{This citation is no longer appropriate for here.}\\
 		\hline
 		Ref.\ By & \iref{IM_prob}\\
 		\hline
@@ -717,7 +723,7 @@ This section focuses on the general equations and laws that \progname{} is based
 		& $load$ Applied Load or pressure.\\
 		\hline
 		Source &
-		\cite{ASTM2009}\\
+		\cite{ASTM2009} \wss{This citation is no longer appropriate here}\\
 		% The above web link should be replaced with a proper citation to a publication
 		\hline
 		Ref.\ By & \iref{IM_cap}\\
@@ -726,11 +732,9 @@ This section focuses on the general equations and laws that \progname{} is based
 \end{minipage}\\
 ~\newline
 
-
 \subsubsection{General Definitions}\label{sec_gendef}
 
 There are no general definitions.
-
 
 \subsubsection{Data Definitions}\label{sec_datadef}
 
@@ -1189,7 +1193,9 @@ and Section~\ref{sec_gendef}.
 		$\text{is\_safePb}$ and $\text{is\_safeLR}$ (from \iref{IM_cap}) are either both True or
 		both False.\\
 		& $P_b$ is the probability of breakage, as calculated in \ddref{DD_prob}\\
-		& $P_{b_{\text{tol}}}$ is the tolerable probability entered by the user\\
+		& $P_{b_{\text{tol}}}$ is the tolerable probability entered by
+                  the user\\
+                & \wss{The connection to the theoretical models should be made here.}\\
 		\hline
 		Source &
 		\cite{ASTM2009}\\
