@@ -28,8 +28,12 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
-\newcommand{\NN}[1]{{\color{red}#1}}
+
+\input{../Comments}
+
+%\newcommand{\NN}[1]{{\color{red}#1}}
 \newcommand{\WSS}[1]{{\color{blue}#1}}
+\newcommand{\OO}[1]{{\color{red}#1}}
 
 \newcommand{\colZwidth}{1.0\textwidth}
 \newcommand{\blt}{- } %used for bullets in a list
@@ -79,20 +83,41 @@
 
 \newcommand{\tclad}{T_\text{CL}}
 \newcommand{\degree}{\ensuremath{^\circ}}
-\newcommand{\progname}{Chipmunk2D}
+
+\newcommand{\progname}{Tamias2D} 
 
 
 \usepackage{fullpage}
 
 \begin{document}
 
-\title{Software Requirements Specification for Chipmunk2D} 
-\author{Alex Halliwushka and Luthfi Mawarid}
+\title{Software Requirements Specification for Tamias2D} 	    \olu {added project name}
+\author{Alex Halliwushka, Luthfi Mawarid and Olu Owojaiye}  \olu {added name}
 \date{\today}
 	
 \maketitle
 
-\tableofcontents
+~\newpage  
+
+\pagenumbering{roman}
+
+\section{Revision History} \olu{added new page for revision history}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Oct. 2, 2018  & 1.0 & Initial updated version\\
+Oct. 4, 2018 & 1.1 & Formated the entire document to match blank template sample\\
+Oct. 8, 2018 & 1.2 & Updates throughout the document\\
+Nov. 2, 2018 & 1.3 & Updated System Context Diagram ; Off the Shelf solution\\
+
+\bottomrule
+\end{tabularx}
+
+
+~\newpage
+
+%\tableofcontents
 
 %% REVISION NOTES (31/5/2016)%%
 % Tidied up the formatting of models and definitions to make it more readable and similar to other SRSs
@@ -108,7 +133,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Reference Material}
+\section{Reference Material} \olu{reformatted entire page to match blank template}
 
 This section records information for easy reference.
 
@@ -118,7 +143,7 @@ This section records information for easy reference.
 
 Throughout this document, SI (Syst\`{e}me International d'Unit\'{e}s) is employed
 as the unit system. For each unit, the symbol is given followed by a
-description of the unit with the SI name. \\
+description of the unit with the SI name. \\  
 
 \begin{longtable*}{l l}
 	\toprule
@@ -203,13 +228,23 @@ their units. More specific instances of these symbols will be described in their
   R & Requirement\\
   SRS & Software Requirements Specification\\
   T & Theoretical Model\\
+  \progname{} & TamiasMini2D\\ \olu{added program name} \olu {added program name}
   2D & Two-dimensional \\
   \bottomrule
 \end{tabular}\\
 
-%% adding new page in case I need to add more symbols later
+\newpage
+
+\tableofcontents 
+\olu{moved TOC to a new page to match blank template}
 
 ~\newpage
+
+\pagenumbering{arabic}
+
+
+%% adding new page in case I need to add more symbols later
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -225,8 +260,9 @@ library that is reliable and free will cut down development costs and lead
 to better quality products. \\
 \newline
 The following section provides an overview of the Software Requirements
-Specification (SRS) for Chipmunk2D, an open source 2D rigid body physics library. It explains the purpose of this document,
-the scope of the system, and the organization of the document.
+Specification (SRS) for \progname{}, an open source 2D rigid body physics library.
+It explains the purpose of this document, the scope of the system, and the organization
+of the document.
 
 %2.1 Purpose of Document
 
@@ -234,7 +270,7 @@ the scope of the system, and the organization of the document.
 
 This document describes the modeling of an open source
 2D rigid body physics library used for games. The goals and theoretical
-models used in Chipmunk2D are provided. This document is intended to be 
+models used in \progname{} are provided. This document is intended to be 
 used as a reference to provide all necessary information to understand and verify
 the model. \\
 \newline
@@ -249,13 +285,20 @@ implementation.
 \subsection{Scope of Requirements} 
 
 The scope of the requirements includes the physical simulation of 2D rigid bodies 
-acted on by forces. Given the appropiate inputs, Chipmunk2D simulates how these rigid bodies interact with one another.
+acted on by forces. 
+%Given the appropiate inputs, \progname{} simulates how these rigid bodies 
+%interact with one another.
+\olu{removed the above sentence due to repitition}
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec_CharofInteRead}
-Reviewers of this documentation should have a strong knowledge, which is at the level covered in a second year engineering mechanics course. The reviewers should also have an understanding of calculus 1 which is at the level covered in first year engineering or science calculus. The users of Chipmunk2D can have a lower level of expertise, as explained in Section~\ref{Sec_UserChar}.
+Reviewers of this documentation should have a strong knowledge of Physics, which
+is at the level covered in a second year engineering mechanics course. The
+reviewers should also have an understanding of Calculus 1 which is at the level
+covered in first year engineering or science calculus. The users of \progname{}
+can have a lower level of expertise, as explained in Section~\ref{Sec_UserChar}.
+\olu{reformatted paragraph}
 
-%2.3 Organization of Document
 \subsection{Organization of Document}
 The organization of this document follows the template for an SRS for scientific
 computing software proposed by~\cite{Koothoor2013} and \cite{SmithAndLai2005}.
@@ -263,17 +306,10 @@ The presentation follows the standard pattern of presenting goals, theories,
 definitions, and assumptions.  For readers that would like a more bottom-up
 approach, they can start reading the instance models in Section
 \ref{sec_instance} and trace back to find any additional information they
-require. \\
-\newline
+require.
+
 The goal statements are refined to the theoretical models, and theoretical
 models to the instance models.  
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	3.) General System Description
-%
-%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{General System Description}
 
@@ -281,7 +317,6 @@ This section provides general information about the system including identifying
 the interfaces between the system and its environment (system context), describing
 the user characteristics and listing the system constraints.
 
-%3.1 System Context
 \subsection{System Context}
 Figure~\ref{Fig_SystemContext} shows the system context. A circle represents an
 external entity outside the software, the user in this case. A rectangle
@@ -290,7 +325,7 @@ flow between the system and its environment.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=0.6\textwidth]{SysCtx.png}
+    \includegraphics[width=0.6\textwidth]{SysCtxV2.png} \olu{updated system context image}
     \caption{System Context}
     \label{Fig_SystemContext}
   \end{center}
@@ -318,9 +353,10 @@ The interaction between the product and the user is through an application progr
 \subsection{User Characteristics}
 \label{Sec_UserChar}
 
-The end user of Chipmunk2D should have an understanding 
-of first year programming concepts and of high school
-physics.
+The end user of \progname{} should have an understanding 
+of first year programming concepts and high school
+Physics.
+\olu {updated with program name, fixed sentence}
 
 %3.3 System Constraints
 \subsection{System Constraints}
@@ -345,9 +381,12 @@ and definitions that are used for the physics library.
 \subsection{Problem Description} \label{Sec_pd}
 
 Creating a gaming physics library is a difficult task. Games need 
-physics libraries that can simulate objects acting under various physical conditions, while simultaneously being fast and efficient enough to
-work in soft real-time during the game. Developing a physics library from scratch
-takes a long period of time and is very costly, presenting barriers of entry which make it difficult for game developers to include physics in their products. There are a few free, open-source and high quality physics libraries available to be used for consumer products (Section \ref{sec_otss}). By creating a simple, lightweight, fast, and portable 2D rigid body physics library, game development will be more accessible to the masses and higher quality products will be produced.
+physics libraries that can simulate objects acting under various physical conditions, while simultaneously 
+being fast and efficient enough to work in soft real-time during the game. Developing a physics library from scratch
+takes a long period of time and is very costly, presenting barriers of entry which make it difficult for game developers
+to include physics in their products. There are a few free, open-source and high quality physics libraries available to be
+ used for consumer products (Section \ref{sec_otss}). By creating a simple, lightweight, fast, and portable 2D rigid 
+body physics library, game development will be more accessible to the masses and higher quality products will be produced.
 
 % 4.1.1 Terminology and Definitions
 \subsubsection{Terminology and Definitions}
@@ -367,21 +406,50 @@ before the collision.
 
 \end{itemize}
 
-% 4.1.2 Goal Statements
+\subsubsection{Physical System Description}
+
+%The physical system of \progname{}, as shown in Figure~?,
+%includes the following elements:
+
+%\begin{itemize}
+
+%\item[PS1:] 
+
+%\item[PS2:] ...
+
+%\end{itemize}
+
+This project is to implement a set of physics libraries. Hence a physical system description might not be applicable???
+\olu{Not sure if I need to have any information in this section, since it is about implementing a set of libraries}
+
 \subsubsection{Goal Statements}
+Given the kinematic properties, and forces (including any collision forces) applied on a set of rigid bodies: 
 
 \begin{itemize}
 	
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_linear}:] Given the physical properties, initial positions and velocities, and forces applied on a set of rigid bodies, determine their new positions and velocities over a period of time (IM\ref{IM_FT}).
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_linear}:] Determine their new position and velocities over a 
+period of time (IM\ref{IM_FT})(IM\ref{IM_C}).
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_angular}:] Given the physical properties, initial orientations and angular velocities, and forces applied on a set of rigid bodies, determine their new orientations and angular velocities over a period of time. (IM\ref{IM_FR}).
+%Given the physical properties, initial positions 
+%and velocities, and forces applied on a set of rigid bodies, determine their new positions and velocities over a 
+%period of time (IM\ref{IM_FT}) 
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_angular}:] Determine their new orientations and angular 
+velocities over a period of time (IM\ref{IM_FR}) (IM\ref{IM_C}).
+ 
+%Given the physical properties, initial orientations
+ %and angular velocities, and forces applied on a set of rigid bodies, determine their new orientations and angular 
+%velocities over a period of time. (IM\ref{IM_FR}).
 
-\item[GS\refstepcounter{goalnum}\thegoalnum  \label{G_detectCollision}:] Given the initial positions and
-velocities of a set of rigid bodies, determine if any of them will collide with one another over a period of time.
+%\item[GS\refstepcounter{goalnum}\thegoalnum  \label{G_detectCollision}:] Given the initial positions and
+%velocities of a set of rigid bodies, determine if any of them will collide with one another over a period of time.
 
-\item[GS\refstepcounter{goalnum}\thegoalnum  \label{G_collision}:] Given the physical properties, initial linear and angular positions and velocities, determine the new positions and velocities over a period of time of rigid bodies that have undergone a collision (IM\ref{IM_C}).
+%\item[GS\refstepcounter{goalnum}\thegoalnum  \label{G_collision}:] Given the physical properties, initial
+ %linear and angular positions and velocities, determine the new positions and velocities over a period of 
+%time of rigid bodies that have undergone a collision (IM\ref{IM_C}).
 
 \end{itemize}
+
+\olu{in Goal statement section, GS3 and GS4 were merged into GS1 and GS2}
 
 %4.2 Solution Characteristics Specification
 \subsection{Solution Characteristics Specification}
@@ -389,7 +457,11 @@ velocities of a set of rigid bodies, determine if any of them will collide with 
 % 4.2.1 Assumptions
 \subsubsection{Assumptions}
 \label{sec_assu}
-This section simplifies the original problem and helps in developing the theoretical model by filling in the missing information for the physical system. The numbers given in the square brackets refer to the Theoretical Models [Section~\ref{sec_theoretical}], General Definitions [Section~\ref{sec_gendef}], Data Definitions [Section~\ref{sec_datadef}], Instance Models [Section~\ref{sec_instance}], or Likely Changes [Section~\ref{sec_likechan}], in which the respective assumption is used.
+This section simplifies the original problem and helps in developing the theoretical model by filling in
+the missing information for the physical system. The numbers given in the square brackets refer to the
+Theoretical Models [Section~\ref{sec_theoretical}], General Definitions [Section~\ref{sec_gendef}],
+Data Definitions [Section~\ref{sec_datadef}], Instance Models [Section~\ref{sec_instance}], 
+or Likely Changes [Section~\ref{sec_likechan}], in which the respective assumption is used.
 
 \begin{itemize}
 \item [A\refstepcounter{assumpnum}\theassumpnum \label{A_rigid}:] All objects are rigid bodies.
@@ -402,7 +474,9 @@ This section simplifies the original problem and helps in developing the theoret
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_col}:] All rigid body collisions are vertex-to-edge collisions.
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_damping}:] There is no damping involved throughout the simulation.
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_damping}:] There is no
+  damping involved throughout the simulation.  \wss{Add another sentence: ``This
+    implies that there are no friction forces.''}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_constraints}:] There are no constraints and joints involved throughout the simulation.
 
@@ -529,7 +603,8 @@ library is based on. \\
 	\rowcolor[gray]{0.9}
 	Number & T\refstepcounter{theorynum}\thetheorynum \label{T_CT} \\
 	\hline
-	Label & \bf Chasles' theorem \\
+	Label & \textbf{Chasles' theorem} \wss{Please make this a DD; it isn't
+                abstract, general or fundamental.}\\
 	\hline
 	Equation & $\mathbf{v}_\mathrm{B} = \mathbf{v}_\mathrm{O} + (\boldsymbol{\omega} \times \mathbf{r}_\mathrm{OB})$ \\
 	\hline
@@ -584,7 +659,7 @@ data definitions, which in turn will be used to build the instance models. \\
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_I}\\
   \hline
-  Label&\bf Impulse\\
+  Label&\bf Impulse \wss{Make this a data definition}\\
   \hline
   Units& \si{\newton\second} \\
   \hline
@@ -737,7 +812,11 @@ From Newton's law of universal gravitation (T\ref{T_NUG}), we have:
 \end{equation}
 
 \noindent 
-Equation \ref{grav1} governs the gravitational attraction between two bodies. Suppose that one of the bodies is significantly more massive than the other, so that we concern ourselves with the force the massive body exerts on the lighter body. Further suppose that the coordinate system is chosen such that this force acts on a line which lies along one of the principal axes (\aref{A_2d}). Then our unit vector $\mathbf{\hat{r}} = \frac{\mathbf{r}}{||\mathbf{r}||} = \mathbf{\hat{i}}$ or $\mathbf{\hat{j}}$ for the $x$ or $y$ axes (\aref{A_cartesian}), respectively. \\
+Equation \ref{grav1} governs the gravitational attraction between two bodies. Suppose that one of the bodies is significantly
+more massive than the other, so that we concern ourselves with the force the massive body exerts on the lighter body. Further
+suppose that the coordinate system is chosen such that this force acts on a line which lies along one of the principal axes (\aref{A_2d}).
+Then our unit vector $\mathbf{\hat{r}} = \frac{\mathbf{r}}{||\mathbf{r}||}
+= \mathbf{\hat{i}}$ or $\mathbf{\hat{j}}$ for the $x$ or $y$ axes (\aref{A_cartesian}), respectively. \\
 \newline
 Given the above assumptions, let $M$ and $m$ be the mass of the massive and light body, respectively. Using $\ref{grav1}$ and equating this with Newton's second law (T\ref{T_NSL}) for the force experienced by the light body, we get:
 
@@ -772,7 +851,8 @@ Thus:
 		\rowcolor[gray]{0.9}
 		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_RV}\\
 		\hline
-		Label&\bf  Relative velocity in collisions \\
+		Label&\bf  Relative velocity in collisions \wss{Make this a data
+          definition}\\
 		\hline
 		Units & \si{\metre\per\second} \\
 		\hline
@@ -803,12 +883,14 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_COR}\\
   \hline
-  Label&\bf Coefficient of restitution \\
+  Label&\bf Coefficient of restitution \wss{Make this a data definition}\\
   \hline
   \rule{0pt}{22pt}Equation & $C_\text{R} = -\displaystyle\frac{\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n}}{\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}}$\\[1.5ex]
   \hline
   Description &  
-  The coefficient of restitution  $C_\mathrm{R}$ is a unitless, dimensionless quantity that determines the elasticity of a collision between two bodies. $C_\mathrm{R} = 1$ results in an elastic collision, while $C_\mathrm{R} < 1$ results in an inelastic collision, and $C_\mathrm{R} = 0$ results in a totally inelastic collision. \\
+  The coefficient of restitution  $C_\mathrm{R}$ is a unitless, dimensionless quantity that determines
+ the elasticity of a collision between two bodies. $C_\mathrm{R} = 1$ results in an elastic collision, 
+ while $C_\mathrm{R} < 1$ results in an inelastic collision, and $C_\mathrm{R} = 0$ results in a totally inelastic collision. \\
 	&$C_\mathrm{R}$ is the coefficient of restitution (unitless). \\
 	&$\mathbf{n}$ is the collision normal vector (\si{\metre}). Its signed direction is defined by (\aref{A_right}). \\
 	&$\mathbf{v}^\mathrm{AB}_\mathrm{i}$ is the initial relative velocity (GD\ref{GD_RV}) of body A with respect to body B before collision (\si{\metre\per\second}). \\
@@ -832,7 +914,7 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_T}\\
   \hline
-  Label&\bf Torque \\
+  Label&\bf Torque \wss{Make this a data definition} \\
   \hline
   Units & \si{\newton\metre} \\
   \hline
@@ -862,14 +944,15 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_MI}\\
   \hline
-  Label&\bf  Moment of inertia \\
+  Label&\bf  Moment of inertia \wss{Make this a data definition}\\
   \hline
   Units & \si{\kilogram\metre\tothe{2}} \\
   \hline
   Equation& $\mathbf{I} = \sum_{i=0}^{n}m_ir^{2}_{\text{p}_i}$ \\
   \hline
   Description &  
-	The moment of inertia $\mathbf{I}$ of a body measures how much torque is needed for the body to achieve an angular acceleration about axis of rotation. \\
+	The moment of inertia $\mathbf{I}$ of a body measures how much torque is 
+       needed for the body to achieve an angular acceleration about axis of rotation. \\
 	& $\mathbf{I}$ is the moment of inertia (\si{\kilogram\metre\tothe{2}}). \\ 
 	&$n$ is number of particles of the body. \\
 	&$m_i$ is the mass of the $i$-th particle (\si{\kilogram}). \\
@@ -909,7 +992,8 @@ models. The dimension of each quantity is also given. \\
 		\hline
 		Equation &  $\mathbf{p}_\mathrm{CM} = \frac{\sum_i m_i\mathbf{p}_i}{M}$ \\
 		\hline
-		Description & The center of mass $\mathbf{p}_\mathrm{CM}$ (\si{\metre}) of a rigid body (\aref{A_rigid}) is the mass-weighted average position of all its particles, or the unique point where all of its mass is concentrated. \\
+		Description & The center of mass $\mathbf{p}_\mathrm{CM}$ (\si{\metre}) of a rigid body (\aref{A_rigid})
+            is the mass-weighted average position of all its particles, or the unique point where all of its mass is concentrated. \\
 		& $m_i$ is the mass of the $i$-th particle (\si{\kilogram}). \\
 		& $\mathbf{p}_i$ is the position vector (\aref{A_2d}) of the $i$-th particle (\si{\metre}). \\
 		& $M$ is the total mass of the body (\si{\kilogram}). \\
@@ -941,7 +1025,9 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\mathbf{r}(t) = \frac{\dpos(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\mathbf{r}(t)$ is the linear displacement of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its linear position with respect to time $t$ (\si{\metre}). \\
+		$\mathbf{r}(t)$ is the linear displacement of a body (\aref{A_rigid}, \aref{A_2d}), 
+             without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative 
+             of its linear position with respect to time $t$ (\si{\metre}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -970,7 +1056,8 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\mathbf{v}(t) = \frac{\dr(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\mathbf{v}(t)$ is the linear velocity of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its linear displacement with respect to time $t$ (\si{\metre\per\second}). \\
+		$\mathbf{v}(t)$ is the linear velocity of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}),
+            as a function of time $t$, also equal to the derivative of its linear displacement with respect to time $t$ (\si{\metre\per\second}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -999,7 +1086,9 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\mathbf{a}(t) = \frac{\dv(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\mathbf{a}(t)$ is the linear acceleration of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its linear velocity with respect to time $t$ (\si{\metre\per\second\tothe{2}}). \\
+		$\mathbf{a}(t)$ is the linear acceleration of a body (\aref{A_rigid}, \aref{A_2d}), 
+             without damping (\aref{A_damping}), as a function of time $t$, also equal to the 
+             derivative of its linear velocity with respect to time $t$ (\si{\metre\per\second\tothe{2}}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -1067,7 +1156,8 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\boldsymbol{\theta}(t) = \frac{\text{d}\boldsymbol{\phi}(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\boldsymbol{\theta}(t)$ is the angular displacement of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its angular position with respect to time $t$ (\si{\radian}). \\
+		$\boldsymbol{\theta}(t)$ is the angular displacement of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), 
+             as a function of time $t$, also equal to the derivative of its angular position with respect to time $t$ (\si{\radian}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -1096,7 +1186,9 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\boldsymbol{\omega}(t) = \frac{\text{d}\boldsymbol{\theta}(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\boldsymbol{\omega}(t)$ is the angular velocity of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its angular displacement with respect to time $t$ (\si{\radian\per\second}). \\
+		$\boldsymbol{\omega}(t)$ is the angular velocity of a body (\aref{A_rigid}, \aref{A_2d}), 
+             without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative 
+             of its angular displacement with respect to time $t$ (\si{\radian\per\second}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -1125,7 +1217,9 @@ models. The dimension of each quantity is also given. \\
 		Equation & $\boldsymbol{\alpha}(t) = \frac{\text{d}\boldsymbol{\omega}(t)}{\dt}$ \\
 		\hline
 		Description &
-		$\boldsymbol{\alpha}(t)$ is the angular acceleration of a body (\aref{A_rigid}, \aref{A_2d}), without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of its angular velocity with respect to time $t$ (\si{\radian\per\second\tothe{2}}). \\
+		$\boldsymbol{\alpha}(t)$ is the angular acceleration of a body (\aref{A_rigid}, \aref{A_2d}),
+             without damping (\aref{A_damping}), as a function of time $t$, also equal to the derivative of
+             its angular velocity with respect to time $t$ (\si{\radian\per\second\tothe{2}}). \\
 		\hline
 		Sources & \\
 		\hline
@@ -1217,7 +1311,9 @@ $$\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\
 \noindent Expanding the relative velocity (GD\ref{GD_RV}) on the left:
 $$(\mathbf{v}^\mathrm{AP}_\mathrm{f} - \mathbf{v}^\mathrm{BP}_\mathrm{f}) \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}$$
 \noindent
-Applying Chasles' Theorem (T\ref{T_CT}) and IM\ref{IM_C} on the left-hand side: 
+Applying Chasles' Theorem (T\ref{T_CT}) and IM\ref{IM_C} on the left-hand side:
+\wss{This step does not make sense.  IM3 comes from this DD.  This makes this
+  circular.  The derivation should follow the game physics papers that I sent to you.}
 
 \begin{equation*}
 \begin{aligned}
@@ -1273,11 +1369,15 @@ identified in Sections \ref{sec_theoretical} and \ref{sec_gendef}. \\
   Output & $\mathbf{p}_i(t), \mathbf{v}_i(t)$, such that the following ODE is satisfied: \\
   & $\mathbf{a}_i(t) = \frac{\dv_i(t)}{\dt} = \mathbf{g} + \frac{\mathbf{F}_i(t)}{m_i}$ \\
   \hline                                                                                                                                                                                                                                                                                               
- Description &  The above equation expresses the total acceleration of the rigid body (\aref{A_rigid}, \aref{A_2d}) $i$ as the sum of gravitational acceleration (GD\ref{GD_GA}) and acceleration due to applied force $\mathbf{F}_i(t)$ (T\ref{T_NSL}). The resultant outputs are then obtained from this equation using DD\ref{DD_LD}, DD\ref{DD_LV} and DD\ref{DD_LA}. It is currently assumed that there is no damping (\aref{A_damping}) or constraints (\aref{A_constraints}) involved. \\
+ Description &  The above equation expresses the total acceleration of the rigid body (\aref{A_rigid}, \aref{A_2d}) $i$ as 
+ the sum of gravitational acceleration (GD\ref{GD_GA}) and acceleration due to applied force $\mathbf{F}_i(t)$ (T\ref{T_NSL}).
+The resultant outputs are then obtained from this equation using DD\ref{DD_LD}, DD\ref{DD_LV} and DD\ref{DD_LA}.
+It is currently assumed that there is no damping (\aref{A_damping}) or constraints (\aref{A_constraints}) involved. \\
  & $m_i$ is the mass of the $i$-th rigid body (\si{\kilogram}). \\
  & $\mathbf{g}$ is the acceleration due to gravity (\si{\metre\per\second\tothe{2}}). \\
  & $t$ is a point in time and $t_0$ denotes the initial time (\si{\second}). \\
- & $\mathbf{p}_i(t)$ is the $i$-th body's position (specifically, the position of its center of mass, $\mathbf{p}_\mathrm{CM}(t)$ (DD\ref{DD_CM})) at time $t$ (\si{\metre}). \\
+ & $\mathbf{p}_i(t)$ is the $i$-th body's position (specifically, the position of its center of mass, $\mathbf{p}_\mathrm{CM}(t)$
+ (DD\ref{DD_CM})) at time $t$ (\si{\metre}). \\
  & $\mathbf{a}_i(t)$ is the $i$-th body's acceleration at time $t$ (\si{\metre\per\second\tothe{2}}). \\
  & $\mathbf{v}(t)$ is the $i$-th body's velocity at time $t$ (\si{\metre\per\second}). \\
  & $\mathbf{F}(t)$ is the force applied to the $i$-th body at time $t$ (\si{\newton}). \\
@@ -1309,14 +1409,17 @@ Ref.\ By & GS\ref{G_linear}, R\ref{R_Rigid}, R\ref{R_Force} \\
 		& $\boldsymbol{\alpha}_i(t) = \frac{\mathrm{d}\boldsymbol{\omega}_i(t)}{\dt} = \frac{\boldsymbol{\tau}_i(t)}{\mathbf{I}_i} $ \\
 		\hline
 		Description &                                                                                                                     
-		The above equation for the total angular acceleration of the rigid body (\aref{A_rigid}, \aref{A_2d}) $i$ is derived from T\ref{T_NRM}, and the resultant outputs are then obtained from this equation using DD\ref{DD_AD}, DD\ref{DD_AV} and DD\ref{DD_AA}. It is currently assumed that there is no damping (\aref{A_damping}) or constraints (\aref{A_constraints}) involved. \\
+		The above equation for the total angular acceleration of the rigid body (\aref{A_rigid}, \aref{A_2d}) $i$ is 
+             derived from T\ref{T_NRM}, and the resultant outputs are then obtained from this equation using DD\ref{DD_AD},
+            DD\ref{DD_AV} and DD\ref{DD_AA}. It is currently assumed that there is no damping (\aref{A_damping}) or constraints (\aref{A_constraints}) involved. \\
 		& $m_i$ is the mass of the $i$-th rigid body (\si{\kilogram}). \\
 		& $\mathbf{g}$ is the acceleration due to gravity (\si{\metre\per\second\tothe{2}}). \\
 		& $t$ is a point in time and $t_0$ denotes the initial time (\si{\second}). \\
 		& $\boldsymbol{\phi}_i(t)$ is the $i$-th body's orientation at time $t$ (\si{\radian}). \\
 		& $\boldsymbol{\omega}_i(t)$ is the $i$-th body's angular velocity at time $t$ (\si{\radian\per\second}). \\
 		& $\boldsymbol{\alpha}_i(t)$ is the $i$-th body's angular acceleration at time $t$ (\si{\radian\per\second\tothe{2}}). \\
-		& $\boldsymbol{\tau}_i(t)$ is the torque applied to the $i$-th body at time $t$ (\si{\newton\metre}). Signed direction of torque is defined by (\aref{A_right}). \\
+		& $\boldsymbol{\tau}_i(t)$ is the torque applied to the $i$-th body at time $t$ (\si{\newton\metre}).
+            Signed direction of torque is defined by (\aref{A_right}). \\
 		& $\mathbf{I_i}$ is the moment of inertia of the $i$-th body (\si{\kilogram\metre\tothe{2}}). \\
 		\hline
 		Sources & \\
@@ -1349,7 +1452,8 @@ Ref.\ By & GS\ref{G_linear}, R\ref{R_Rigid}, R\ref{R_Force} \\
   & $\boldsymbol{\omega}_\mathrm{A}(t_c) = \boldsymbol{\omega}_\mathrm{A}(t) + \frac{\mathbf{r}_\mathrm{AP} \times j\mathbf{n}}{\mathbf{I}_\mathrm{A}}$ \\
   & $\boldsymbol{\omega}_\mathrm{B}(t_c) = \boldsymbol{\omega}_\mathrm{B}(t) - \frac{\mathbf{r}_\mathrm{BP} \times j\mathbf{n}}{\mathbf{I}_\mathrm{B}}$ \\
   \hline
-  Description & This instance model is based on our assumptions regarding rigid body (\aref{A_rigid}, \aref{A_2d}) collisions (A\ref{A_col}). Again, this does not take damping (\aref{A_damping}) or constraints (\aref{A_constraints}) into account. \\
+  Description & This instance model is based on our assumptions regarding rigid body (\aref{A_rigid}, \aref{A_2d}) collisions (A\ref{A_col}).
+ Again, this does not take damping (\aref{A_damping}) or constraints (\aref{A_constraints}) into account. \\
   & $m_k$ is the mass of the $k$-th rigid body (\si{\kilogram}). \\
   & $\mathbf{I}_k$ is the moment of inertia of the $k$-th rigid body (\si{\kilogram\metre\tothe{2}}). \\
   & $t$ is a point in time, $t_0$ denotes the initial time, and $t_c$ denotes the time at collision (\si{\second}). \\
@@ -1364,14 +1468,18 @@ Ref.\ By & GS\ref{G_linear}, R\ref{R_Rigid}, R\ref{R_Force} \\
   \hline
   Sources & \\
   \hline
-Ref.\ By & GS\ref{G_collision}, DD\ref{DD_IM}, R\ref{R_Shape}, R\ref{R_Collision} \\
+Ref.\ By & GS\ref{G_linear}, GS\ref{G_angular}, DD\ref{DD_IM}, R\ref{R_Shape}, R\ref{R_Collision} \olu {removed GS4 as it no longer exists and replaced with GS1 \& 2 and GS1 and 2 now covers collision}\\
+
   \hline
 \end{tabular}
 \end{minipage}
 
 \subsubsection*{Collision Diagram}
 
-This section presents an image of a typical collision between two 2D rigid bodies labeled A and B, showing the position of the two objects, the collision normal vector $\mathbf{n}$ and the vectors from the approximate center of mass of each object to the point of collision P, $\mathbf{r}_\mathrm{AP}$ and $\mathbf{r}_\mathrm{BP}$. Note that this figure only presents vertex-to-edge collisions, as per our assumptions (A\ref{A_col}).
+This section presents an image of a typical collision between two 2D rigid bodies labeled A and B, showing
+the position of the two objects, the collision normal vector $\mathbf{n}$ and the vectors from the approximate
+center of mass of each object to the point of collision P, $\mathbf{r}_\mathrm{AP}$ and $\mathbf{r}_\mathrm{BP}$.
+Note that this figure only presents vertex-to-edge collisions, as per our assumptions (A\ref{A_col}).
 
 \begin{figure}[htbp]
 	\begin{center}
@@ -1461,11 +1569,19 @@ is intended to provide a feel for a common scenario.
 \caption{Output Variables} \label{TblOutputVar}
 \end{table}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	5.) Requirements 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
+
+A correct solution must exhibit conformation to the system of 
+equations presented in IM\ref{IM_FT}, IM\ref{IM_FR} and IM\ref{IM_C}.  
+
+\wss{No, this is just stating (in another way) that the software should follow
+  its requirements.  This is a given for any SRS.  Instead, you should state
+  that energy is conserved.  The sum of the potential energies and kinetic
+  energy of all bodies should remain constant or decrease.  (Energy can decrease
+  of the CR is less than 1.0.)  You will have to add the definitions for kinetic
+  and potential energy.}
+
+\olu{Added new section}
 
 \section{Requirements}
 
@@ -1479,20 +1595,47 @@ qualities that the software is expected to exhibit.
 \noindent
 \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Space}:] Create a space for all of the rigid bodies in the physical simulation 
-to interact in.  
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rigid}:] Input the initial mass, velocities, positions, orientations, angular velocities of, and forces applied on rigid bodies (\iref{IM_FT}, \iref{IM_FR}, \rref{R_CheckInputs}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Shape}:] Input the surface properties of the bodies, such as friction or elasticity (\iref{IM_C}, \rref{R_CheckInputs}),
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckInputs}:] Verify that the inputs satisfy the required physical constraints (Section \ref{sec_DataConstraints}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Force}:] Determine the position and velocities over a period of time of the 2D
-rigid bodies acted upon by a force (\iref{IM_FT}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rotation}:] Determine the orientation and angular velocities over a period of time of
-the 2D rigid bodies (\iref{IM_FR}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckCollision}:] Determine if any of the rigid bodies in the space have collided (\rref{R_Space}).
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Collision}:] Determine the position and velocities over a period of time of 2D rigid
-bodies that have undergone a collision (\iref{IM_C}, \rref{R_CheckCollision}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Space}:] The software shall
+  create a space for all of the rigid bodies in the physical simulation to
+  interact in.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rigid}:] The software shall
+  receive the input, initial mass, velocities, positions, orientations, angular
+  velocities of, and forces applied on rigid bodies (\iref{IM_FT}, \iref{IM_FR},
+  \rref{R_CheckInputs}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Shape}:] The software shall
+  receive the surface properties of the bodies, such as friction \wss{friction
+    should not be included because we do not have damping} or elasticity \wss{is
+    this the coefficient of restitution?  These are rigid bodies, so they do not
+    deform.}
+  (\iref{IM_C}, \rref{R_CheckInputs}),
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckInputs}:] The software
+  shall verify that the inputs satisfy the required physical constraints
+  (Section \ref{sec_DataConstraints}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Force}:] The software shall
+  determine the position and velocities over a period of time of the 2D rigid
+  bodies acted upon by a force (\iref{IM_FT}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Rotation}:] The software shall
+  determine the orientation and angular velocities over a period of time of the
+  2D rigid bodies (\iref{IM_FR}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_CheckCollision}:] The software
+  shall determine if any of the rigid bodies in the space have collided
+  (\rref{R_Space}).
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Collision}:] The software
+  shall determine the position and velocities over a period of time of 2D rigid
+  bodies that have undergone a collision (\iref{IM_C}, \rref{R_CheckCollision}).
+
+\olu{reworded functional requirement items}
 
 \end{itemize} 
+
+\wss{There is information missing. From these requirements.  How is the shape of
+  the rigid bodies defined?  How are collisions defined?  You should decide how
+  to represent the shapes.  For now, I suggest that we make the shapes all
+  rectangles.  (A degenerate rectangle could give us a triangle.)  Also, please
+  add a theoretical model for detecting collision.  A collision will occur
+  between two bodies when any point on both bodies occupies the same location
+  in space.  You could then add a corresponding IM that defines what this means
+  for rectangular bodies.}
 
 %5.2 Nonfunctional Requirements
 \subsection{Nonfunctional Requirements}
@@ -1500,6 +1643,32 @@ Games are resource-intensive, so performance is a high priority.
 Other non-functional requirements that are a priority are: correctness,
 understandability, portability, reliability, and maintainability. 
 
+\begin{itemize}
+
+\item[1.] Performance: System shall have short response time when performing
+  computation. \wss{This is ambiguous.  How would you make this unambiguous and
+    something that can be measured?}
+
+\item[2.] Correctness: Outputs of the code shall have the 
+properties described in \ref{sec_CorrectSolution}.
+
+\item[3.] Usability: System shall be easy to learn and use. \wss{ambiguous}
+
+\item[4.] Understandability: Code shall be modularized with complete module 
+guide and module interface specification. \wss{imposing modularization is
+  actually a design constraint.  It is a good idea, but we don't know for sure
+  if this is required, or the best idea.  Is there a way you can specify
+  understandability without imposing a design solution?}
+
+\item[5.] Reusability:All or parts of the software shall be reusable; achieved
+  by modularized code. \wss{ambiguous}
+
+\item[6.] Maintainability: System shall be easily maintained, defects easy to locate and fix;
+traceability matrix shall be capture accordingly to enhance maintainability.  \wss{ambiguous}
+
+\end{itemize}
+
+\olu{updated NonFunctional requirements section}
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -1510,13 +1679,22 @@ understandability, portability, reliability, and maintainability.
 \section{Likely Changes}    
 \label{sec_likechan}
 
-This section lists the likely changes to be made to the physics game library.
+This section lists the likely changes to be made to the physics library.
+\olu{fixed sentence}
 
 \begin{itemize}
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal ODE-solving algorithm used by the library may change in the future.
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The library may be expanded to deal with edge-to-edge and vertex-to-vertex collisions (A\ref{A_col}).
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_damping}:] The library may be expanded to include motion with damping (A\ref{A_damping}).
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_constraints}:] The library may be expanded to include joints and constraints (A\ref{A_constraints}).
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal
+          ODE-solving algorithm used by the library may change in the
+          future. \wss{This is a design likely change.  We should focus on
+            likely requirements or assumption changes.}
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The
+          library may be expanded to deal with edge-to-edge and vertex-to-vertex
+          collisions (A\ref{A_col}). 
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_damping}:] The library
+          may be expanded to include motion with damping (A\ref{A_damping}).
+	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_constraints}:] The
+          library may be expanded to include joints and constraints
+          (A\ref{A_constraints}).
 \end{itemize}
 
 
@@ -1527,7 +1705,7 @@ This section lists the likely changes to be made to the physics game library.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Unlikely Changes}    
-
+\olu{This section does not exist in blank template, should I keep it in here?}
 \noindent \begin{itemize}
 	
 	\item[\refstepcounter{ucnum} \utheucnum \label{ucGoal}:] The goal of the system is to simulate the interactions of rigid bodies.
@@ -1546,7 +1724,14 @@ This section lists the likely changes to be made to the physics game library.
 
 \section{Traceability Matrices and Graphs} \label{sec_tmag}
 
-The purpose of traceability matrices is to provide easy references on what has to be additionally modified if a certain component is changed. Every time a component is changed, the items in the column of that component that are marked with an ``X" should be modified as well. Table \ref{RTraceMatrix} shows the dependencies of goal statements, requirements, instance models and data constraints with each other. Table \ref{ATraceMatrix} shows the dependencies of theoretical models, general definitions, data definitions and instance models on the assumptions. Finally, Table \ref{ITraceMatrix} shows the dependencies of the theoretical models, general definitions, data definitions and instance models on each other. \\
+The purpose of traceability matrices is to provide easy references on what has to be additionally
+modified if a certain component is changed. Every time a component is changed, the items in the
+column of that component that are marked with an ``X" should be modified as well.
+Table \ref{RTraceMatrix} shows the dependencies of goal statements, requirements, instance 
+models and data constraints with each other. Table \ref{ATraceMatrix} shows the dependencies
+of theoretical models, general definitions, data definitions and instance models on the assumptions.
+Finally, Table \ref{ITraceMatrix} shows the dependencies of the theoretical models, general definitions,
+data definitions and instance models on each other. \\
 
 \renewcommand*{\thetable}{3}
 \begin{table}[h!]
@@ -1555,10 +1740,10 @@ The purpose of traceability matrices is to provide easy references on what has t
 \begin{tabular}{|c|c|c|c|c|c|c|c|}
 \hline
 & \iref{IM_FT} & \iref{IM_FR} & \iref{IM_C} & \rref{R_Space} & \rref{R_CheckInputs} & \rref{R_CheckCollision} & Data Constraints (\ref{sec_DataConstraints}) \\ \hline
-\gsref{G_linear}			&X& & & & & & \\ \hline
-\gsref{G_angular} 			& &X& & & & & \\ \hline
-\gsref{G_detectCollision} 	& & & & & & & \\ \hline
-\gsref{G_collision} 		& & &X& & &X& \\ \hline
+\gsref{G_linear}			&X& &X& & &X& \\ \hline
+\gsref{G_angular} 			& &X&X& & &X& \\ \hline
+%\gsref{G_detectCollision} 	& & & & & & & \\ \hline
+%\gsref{G_collision} 		& & &X& & &X& \\ \hline
 \rref{R_Space} 				& & & & & & & \\ \hline
 \rref{R_Rigid} 				&X&X& & &X& & \\ \hline
 \rref{R_Shape} 				& & &X& &X& & \\ \hline
@@ -1571,7 +1756,7 @@ The purpose of traceability matrices is to provide easy references on what has t
 \bigskip
 \caption{Traceability Matrix showing the connections between Goal Statements, Requirements, Data Constraints and Instance Models} \label{RTraceMatrix}
 \end{table}
-
+\olu{updated traceability matrix for merged GS3 and 4}
 \renewcommand*{\thetable}{4}
 \begin{table}[h!]
 \renewcommand*{\arraystretch}{1.2}
@@ -1648,7 +1833,16 @@ The purpose of traceability matrices is to provide easy references on what has t
 \end{landscape}
 
 \noindent
-The purpose of the traceability graphs is also to provide easy references on what has to be additionally modified if a certain component is changed. The arrows in the graphs represent dependencies. The component at the tail of an arrow is depended on by the component at the head of that arrow. Therefore, if a component is changed, the components that it points to should also be changed. Figure \ref{Fig_RTrace} shows the dependencies of goal statements, requirements, instance models and data constraints with each other. Figure \ref{Fig_ATrace} shows the dependencies of theoretical models, general definitions, data definitions and instance models on the assumptions. Finally, Figure \ref{Fig_ITrace} shows the dependencies of the theoretical models, general definitions, data definitions and instance models on each other. Building a tool to automatically generate the graphical representation of the matrix by scanning the label and reference can be future work. \\
+The purpose of the traceability graphs is also to provide easy references on what has to be additionally 
+modified if a certain component is changed. The arrows in the graphs represent dependencies. The 
+component at the tail of an arrow is depended on by the component at the head of that arrow. Therefore,
+if a component is changed, the components that it points to should also be changed. Figure \ref{Fig_RTrace}
+shows the dependencies of goal statements, requirements, instance models and data constraints with
+each other. Figure \ref{Fig_ATrace} shows the dependencies of theoretical models, general definitions,
+data definitions and instance models on the assumptions. Finally, Figure \ref{Fig_ITrace} shows the 
+dependencies of the theoretical models, general definitions, data definitions and instance models 
+on each other. Building a tool to automatically generate the graphical representation of the matrix
+by scanning the label and reference can be future work. \\
 
 \begin{figure}[h!]
 	\begin{center}
@@ -1656,7 +1850,8 @@ The purpose of the traceability graphs is also to provide easy references on wha
 			\includegraphics[width=0.8\textwidth]{RTrace.png}
 		}
 		\bigskip
-		\caption{Traceability Graph showing the connections between Goal Statements, Requirements, Data Constraints and Instance Models}
+		\caption{Traceability Graph showing the connections between Goal Statements, 
+Requirements, Data Constraints and Instance Models}
 		\label{Fig_RTrace}
 	\end{center}
 \end{figure}
@@ -1681,20 +1876,17 @@ The purpose of the traceability graphs is also to provide easy references on wha
 	\end{center}
 \end{figure}
 
-~\pagebreak
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%	8.) Off the Shelf Solutions
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+~\newpage
 \section{Off the Shelf Solutions}   \label{sec_otss}
+
+\wss{Add Chipmunk to this section.}
 As mentioned in section \ref{Sec_pd}, there already exist free open source game
 physics libraries. Similar 2D physics libraries are:
 \begin{itemize} 
 \item Box2D   \url{http://box2d.org/}
 \item Nape Physics Engine  \url{http://napephys.com/}
+\item Chipmunk2D \url{http://chipmunk-physics.net/}
+\item Pymunk \url{www.pymunk.org/}
 \end{itemize}
 
 \noindent
@@ -1705,7 +1897,17 @@ Free open source 3D game physics libraries include:
 \item Newton Game Dynamics  \url{http://newtondynamics.com/}
 \end{itemize}
 
+\olu{Added to Off the Shelf Solutions}
+
 \bibliographystyle {plain}
 \bibliography {../../refs/Physics_Game_Library}
+
+%\olu {not all references are displaying, still troubleshooting issue}
+\olu{References are okay} 
+
+\wss{What references are not showing?  I see two cite commands in the document
+  and two references in the generated file.  This looks right to me?  Not
+  everything in the bib file should show up.  The only entries in the references
+  section should be those that were actually cited.}
 
 \end{document}
