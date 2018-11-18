@@ -110,6 +110,7 @@ Oct. 2, 2018  & 1.0 & Initial updated version\\
 Oct. 4, 2018 & 1.1 & Formated the entire document to match blank template sample\\
 Oct. 8, 2018 & 1.2 & Updates throughout the document\\
 Nov. 2, 2018 & 1.3 & Updated System Context Diagram ; Off the Shelf solution\\
+Nov. 17, 2018 & 1.4 & Updated NonFunctional Requirements\\
 
 \bottomrule
 \end{tabularx}
@@ -1603,8 +1604,8 @@ qualities that the software is expected to exhibit.
   velocities of, and forces applied on rigid bodies (\iref{IM_FT}, \iref{IM_FR},
   \rref{R_CheckInputs}).
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Shape}:] The software shall
-  receive the surface properties of the bodies, such as friction \wss{friction
-    should not be included because we do not have damping} or elasticity \wss{is
+  receive the surface properties of the bodies, such as \wss{friction
+    should not be included because we do not have damping} elasticity which is the coefficient of restitution. \wss{is
     this the coefficient of restitution?  These are rigid bodies, so they do not
     deform.}
   (\iref{IM_C}, \rref{R_CheckInputs}),
@@ -1645,26 +1646,27 @@ understandability, portability, reliability, and maintainability.
 
 \begin{itemize}
 
-\item[1.] Performance: System shall have short response time when performing
-  computation. \wss{This is ambiguous.  How would you make this unambiguous and
+\item[1.] Performance: The execution time for collision detection and collision resolution shall be comparable to an existing 2D physics library on the market(e.g. Pymunk). \wss{This is ambiguous.  How would you make this unambiguous and
     something that can be measured?}
-
+\olu{updated "Performance", is this less abstract than it should be?}
 \item[2.] Correctness: Outputs of the code shall have the 
 properties described in \ref{sec_CorrectSolution}.
 
-\item[3.] Usability: System shall be easy to learn and use. \wss{ambiguous}
+\item[3.] Usability: Software shall be easy to learn and use. Usability shall be measured by how long it takes a user to learn how to use the library to create their software program. Learning to use a module should take no less than 30 to 60 minutes for an intermediate to experienced programmer. \wss{ambiguous}
+\olu{updated usability, hope this makes sense}
 
 \item[4.] Understandability: Code shall be modularized with complete module 
 guide and module interface specification. \wss{imposing modularization is
-  actually a design constraint.  It is a good idea, but we don't know for sure
+  actually a design constraint. It is a good idea, but we don't know for sure
   if this is required, or the best idea.  Is there a way you can specify
   understandability without imposing a design solution?}
+\olu{it might be a bit hard to evaluate, also understandability might be relative to humans, can I take this out from the list of NFR? Understandability can also be measured by the level of documentation maybe, how well the software artifacts are documented?}
 
-\item[5.] Reusability:All or parts of the software shall be reusable; achieved
-  by modularized code. \wss{ambiguous}
+\item[5.] Reusability: All or parts of the software shall be reusable; achieved by modularized code. Sub-modules shall be able to be re-used to add new sub-classes to an existing class. \wss{ambiguous}
+\olu{updated reusability}
 
-\item[6.] Maintainability: System shall be easily maintained, defects easy to locate and fix;
-traceability matrix shall be capture accordingly to enhance maintainability.  \wss{ambiguous}
+\item[6.] Maintainability: Concerns shall be separated into modules. Software code structure shall be flexible enough to allow extensibility as well as to locate and fix defects easily i.e more parameters or properties can be easily added or updated to the modules of the software within a short period of time depending on the size of required change or fixes. The output type of the software shall be easy to modify
+ \wss{ambiguous} \olu{updated "Maintainability"}
 
 \end{itemize}
 
