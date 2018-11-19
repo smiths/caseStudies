@@ -361,10 +361,10 @@ p{0.45\textwidth} } \hline
 
 \subsubsection{State Variables}
 
-\textit{params\_layers} : paramsLayers\\
-\textit{params\_piez} : paramsPiez\\
-\textit{params\_search} : paramsSearch\\
-\textit{params\_soln} : paramsSoln\\
+\textit{slope} : paramsLayers\\
+\textit{piez} : paramsPiez\\
+\textit{search} : paramsSearch\\
+\textit{soln} : paramsSoln\\
 
 \subsubsection{Environment Variables}
 
@@ -389,14 +389,14 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item transition:
 	\begin{itemize}
-		\item[] \textit{params\_layers}, \textit{params\_piez}, 
-		\textit{params\_search}, 
-		\textit{params\_soln} $\coloneqq$  \textit{params\_layers'}, 
-		\textit{params\_piez'}, \textit{params\_search'}, 
-		\textit{params\_soln'}\\ 
-		where \textit{params\_layers'}, 
-		\textit{params\_piez'}, \textit{params\_search'}, and 
-		\textit{params\_soln'}
+		\item[] \textit{slope}, \textit{piez}, 
+		\textit{search}, 
+		\textit{soln} $\coloneqq$  \textit{slope'}, 
+		\textit{piez'}, \textit{search'}, 
+		\textit{soln'}\\ 
+		where \textit{slope'}, 
+		\textit{piez'}, \textit{search'}, and 
+		\textit{soln'}
 		are populated based on the contents of \textit{in\_file}.
 	\end{itemize}
 
@@ -416,23 +416,23 @@ load\_params(\textit{fname}):
 	\item exceptions:
 	\begin{itemize}
 		\item[] \textit{exc} $\coloneqq$ ($\lnot (\forall i \in 
-		[0..|params\_layers.strat|-2])$($params\_layers.strat[i].x -\\ 
-		params\_layers.strat[i+1].x \leq 0)$ 
+		[0..|slope.strat|-2])$($slope.strat[i].x -\\ 
+		slope.strat[i+1].x \leq 0)$ 
 		$\Rightarrow$ badSlopeGeometry\\
-		$|$ $\lnot (0 < params\_layers.phi < 90)$ $\Rightarrow$ 
+		$|$ $\lnot (0 < slope.phi < 90)$ $\Rightarrow$ 
 		badEffAngleFriction\\
-		$|$ $\lnot (0 < params\_layers.coh)$ $\Rightarrow$ 
+		$|$ $\lnot (0 < slope.coh)$ $\Rightarrow$ 
 		badCohesion\\
-		$|$ $\lnot (0 < params\_layers.gam)$ $\Rightarrow$ 
+		$|$ $\lnot (0 < slope.gam)$ $\Rightarrow$ 
 		badDryUnitWeight\\
-		$|$ $\lnot (0 < params\_layers.gams)$ $\Rightarrow$ 
+		$|$ $\lnot (0 < slope.gams)$ $\Rightarrow$ 
 		badSatUnitWeight\\
 		$|$ $\lnot (\forall i \in 
-		[0..|params\_piez.piez|-2])$($params\_piez.piez[i].x -\\ 
-		params\_piez.piez[i+1].x \leq 0)$\\ $\lor params\_piez.piez[0].x \neq 
-		params\_layers.strat[0].x$ \\$\lor 
-		params\_piez.piez[|params\_piez.piez|-1].x$\\ $\neq 
-		params\_layers.strat[|params\_layers.strat|-1].x$ $\Rightarrow$ 
+		[0..|piez.piez|-2])$($piez.piez[i].x -\\ 
+		piez.piez[i+1].x \leq 0)$\\ $\lor piez.piez[0].x \neq 
+		slope.strat[0].x$ \\$\lor 
+		piez.piez[|piez.piez|-1].x$\\ $\neq 
+		slope.strat[|slope.strat|-1].x$ $\Rightarrow$ 
 		badPiezGeometry)\\
 	\end{itemize}
 \end{itemize}
@@ -441,7 +441,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.strat}\\
+		\item[] \textit{out} $\coloneqq$ \textit{slope.strat}\\
 	\end{itemize}
 \end{itemize}
 
@@ -449,9 +449,9 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ $params\_layers.strat[0].x || 
-		params\_layers.strat[1].x ||$\\$ \dots || params\_layers.strat[| 
-		params\_layers.strat|-1].x$\\
+		\item[] \textit{out} $\coloneqq$ $slope.strat[0].x || 
+		slope.strat[1].x ||$\\$ \dots || slope.strat[| 
+		slope.strat|-1].x$\\
 	\end{itemize}
 \end{itemize}
 
@@ -459,9 +459,9 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ $params\_layers.strat[0].y || 
-		params\_layers.strat[1].y ||$\\$ \dots || params\_layers.strat[| 
-		params\_layers.strat|-1].y$\\
+		\item[] \textit{out} $\coloneqq$ $slope.strat[0].y || 
+		slope.strat[1].y ||$\\$ \dots || slope.strat[| 
+		slope.strat|-1].y$\\
 	\end{itemize}
 \end{itemize}
 
@@ -469,7 +469,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.phi}\\
+		\item[] \textit{out} $\coloneqq$ \textit{slope.phi}\\
 	\end{itemize}
 \end{itemize}
 
@@ -477,7 +477,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.coh}\\
+		\item[] \textit{out} $\coloneqq$ \textit{slope.coh}\\
 	\end{itemize}
 \end{itemize}
 
@@ -485,7 +485,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.gam}\\
+		\item[] \textit{out} $\coloneqq$ \textit{slope.gam}\\
 	\end{itemize}
 \end{itemize}
 
@@ -493,7 +493,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_layers.gams}\\
+		\item[] \textit{out} $\coloneqq$ \textit{slope.gams}\\
 	\end{itemize}
 \end{itemize}
 
@@ -501,7 +501,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_piez.piez}\\
+		\item[] \textit{out} $\coloneqq$ \textit{piez.piez}\\
 	\end{itemize}
 \end{itemize}
 
@@ -509,9 +509,9 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ $params\_layers.piez[0].x || 
-		params\_layers.piez[1].x ||$\\$ \dots || params\_layers.piez[| 
-		params\_layers.piez|-1].x$\\
+		\item[] \textit{out} $\coloneqq$ $piez.piez[0].x || 
+		piez.piez[1].x ||$\\$ \dots || piez.piez[| 
+		piez.piez|-1].x$\\
 	\end{itemize}
 \end{itemize}
 
@@ -519,9 +519,9 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ $params\_layers.piez[0].y || 
-		params\_layers.piez[1].y ||$\\$ \dots || params\_layers.piez[| 
-		params\_layers.piez|-1].y$\\
+		\item[] \textit{out} $\coloneqq$ $piez.piez[0].y || 
+		piez.piez[1].y ||$\\$ \dots || piez.piez[| 
+		piez.piez|-1].y$\\
 	\end{itemize}
 \end{itemize}
 
@@ -529,7 +529,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_piez.gamw}\\
+		\item[] \textit{out} $\coloneqq$ \textit{piez.gamw}\\
 	\end{itemize}
 \end{itemize}
 
@@ -537,7 +537,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Xext}\\
+		\item[] \textit{out} $\coloneqq$ \textit{search.Xext}\\
 	\end{itemize}
 \end{itemize}
 
@@ -545,7 +545,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Xetr}\\
+		\item[] \textit{out} $\coloneqq$ \textit{search.Xetr}\\
 	\end{itemize}
 \end{itemize}
 
@@ -553,7 +553,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_search.Ylim}\\
+		\item[] \textit{out} $\coloneqq$ \textit{search.Ylim}\\
 	\end{itemize}
 \end{itemize}
 
@@ -561,7 +561,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.ltor}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.ltor}\\
 	\end{itemize}
 \end{itemize}
 
@@ -569,7 +569,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.ftype}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.ftype}\\
 	\end{itemize}
 \end{itemize}
 
@@ -577,7 +577,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.evenslc}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.evenslc}\\
 	\end{itemize}
 \end{itemize}
 
@@ -585,7 +585,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.cncvu}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.cncvu}\\
 	\end{itemize}
 \end{itemize}
 
@@ -593,7 +593,7 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{params\_soln.obtu}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.obtu}\\
 	\end{itemize}
 \end{itemize}
 
@@ -684,6 +684,220 @@ verify\_output(\textit{Fs}):
 
 \subsubsection{Local Functions}
 N/A
+
+% ---------------------------------------------------------------- %
+% -------------------- GEN ALG MODULE ------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Genetic Algorithm Module} \label{sec:GenAlgMod}
+
+\subsection{Module}
+GenAlg
+
+\subsection{Uses}
+
+\subsubsection{Imported Access Programs}
+Input (Section~\ref{sec:InputMod}), MorgPriceSolver (Section \ref{sec:MPMod}), 
+Slicer (Section \ref{sec:SlicerMod}), KinAdm (Section \ref{sec:KinAdmMod}), 
+SlipWeighter (Section \ref{sec:WeightMod}), Sequence 
+(Section~\ref{sec:SequenceData}), Rand (Section~\ref{sec:Random})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+MIN\_GENS = 100\\
+NUM\_SLIPS = 20\\
+REL\_DIFF = 0.00005\\
+
+\subsubsection{Exported Data Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	slip &=& tuple of (surf : coords, Fs : $\mathbb{R}$, G : coords, X : 
+	coords, wt : $\mathbb{R}$) \\
+	slips &=& [slip] \\
+\end{longtable}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		genetic\_alg & - & $\mathbb{R}$, coords, coords, coords & - \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+N/A
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumptions}
+N/A
+
+\subsubsection{Access Routine Semantics}
+genetic\_alg():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+	\item[] \textit{out} $\coloneqq$ slipWeighter(\textit{MSlip}, 
+	\textit{slip\_surfs})[0].surf, slipWeighter(\textit{MSlip}, 
+	\textit{slip\_surfs})[0].Fs, slipWeighter(\textit{MSlip}, 
+	\textit{slip\_surfs})[0].G, and slipWeighter(\textit{MSlip}, 
+	\textit{slip\_surfs})[0].X, where \textit{slip\_surfs}, of type slips, is 
+	developed by:
+	\begin{itemize}
+		\item using rand to randomly generate coordinates for NUM\_SLIPS 
+		potential slip surfaces, where the entry and exit x-coordinate for each 
+		slip surface are computed according to \textit{generate\_slips(Xetr)} 
+		and \textit{generate\_slips(Xext)}. Corresponding y-coordinates are 
+		determined by interpolating on the slope geometry.
+		\item using kinAdm to verify that the geometry of each potential slip 
+		surface is physically realizable. If any are not, new slip surfaces are 
+		randomly generated until NUM\_SLIPS valid slip surfaces have been 
+		generated,
+		\item using slicer to redefine each slip surface's coordinates based on 
+		the desired number of slices
+		\item using morgPrice to determine the Fs, G, and X fields of each slip 
+		surface
+		\item using slipWeighter to determine the wt field of each slip surface
+		\item using rand to generate a new pool of NUM\_SLIPS slip surfaces by 
+		applying crossovers and mutations to the previous generation, with the 
+		more highly-weighted members having a greater likelihood of 
+		contributing to the subsequent generations
+		\item applying kinAdm, slicer, morgPrice, and slipWeighter to the new 
+		generation
+		\item repeating until at least MIN\_GENS have occured and the relative 
+		difference between subsequent generations is less than REL\_DIFF.
+	\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+generate\_slips() : 
+\begin{equation*}
+generate\_slips(Xrange) = (Xrange[0] + rand()*(Xrange[1] - Xrange[0]))
+\end{equation*}
+
+% ---------------------------------------------------------------- %
+% -------------------- KIN ADM MODULE ------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Kinematic Admissibility
+	Module} \label{sec:KinAdmMod}
+
+\subsection{Module}
+KinAdm
+
+\subsection{Uses}
+Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		kinAdm & slip & $\mathbb{B}$ & - \\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+N/A
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumptions}
+N/A
+
+\subsubsection{Access Routine Semantics}
+kinAdm(\textit{slip\_surf}):
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ ( $\lnot(\forall i \in 
+		[0..|\textit{slip\_surf}.\textit{surf}| - 
+		2])(\textit{slip\_surf}.\textit{surf}[i].x - 
+		\textit{slip\_surf}.\textit{surf}[i+1].x \leq 0) \\
+		\lor \lnot is\_on\_slope(\textit{slip\_surf}.\textit{surf}[0])\\
+		\lor \lnot 
+		is\_on\_slope(\textit{slip\_surf}.\textit{surf}[|\textit{slip\_surf}.\textit{surf}-1|])\\
+		\lor \lnot is\_in\_slope(\textit{slip\_surf}.\textit{surf})\\
+		\lor (cncvu() \land 
+		is\_concave\_up(\textit{slip\_surf}.\textit{surf}))\\
+		\lor (obtu() \land 
+		has\_no\_sharp\_angles(\textit{slip\_surf}.\textit{surf}))\\
+		\Rightarrow false\\
+		| else \Rightarrow true$)
+	\end{itemize}
+\end{itemize}
+
+\bmac{Not sure if I'm allowed to use "else" here but don't know how else to 
+express the "else" case succintly}
+
+\subsubsection{Local Functions}
+linSlope : coord $\times$ coord $\rightarrow$ $\mathbb{R}$\\
+linSlope(\textit{point1}, \textit{point2}) = $\frac{point2.y - 
+point1.y}{point2.x 
+- point1.x}$\\
+
+\noindent is\_on\_slope : coord $\rightarrow$ $\mathbb{B}$\\
+is\_on\_slope(\textit{point}) = $(\exists i \in 
+[0..|slope.strat|-1])(point = slope.strat[i])\\ \lor (\exists i 
+\in [0..|slope.strat|-2])(point.y = linSlope(slope.strat[i], 
+slope.strat[i+1])*point.x + 
+\frac{slope.strat[i].y}{linSlope(slope.strat[i], 
+slope.strat[i+1])*slope.strat[i].x}) $\\
+
+\noindent is\_in\_slope : [coords] $\rightarrow$ $\mathbb{B}$
+is\_in\_slope(\textit{surf}) = $(\forall i \in [1..|\textit{surf}|-2])((\forall 
+j \in 
+[0..|slope.strat|-2] \text{ with } slope.strat[j].x \leq \textit{surf}[i].x < 
+slope.strat[j+1].x)(\textit{surf}[i].y < (slope.strat[j].y + 
+(\textit{surf}[i].x - 
+slope.strat[j].x)*linSlope(slope.strat[j], slope.strat[j+1]))))$\\
+
+\noindent is\_concave\_up : [coords] $\rightarrow$ $\mathbb{B}$\\
+is\_concave\_up(\textit{surf}) = $(\forall i \in 
+[0..|\textit{surf}|-3])(linSlope(\textit{surf}[i+1], \textit{surf}[i+2]) \geq 
+linSlope(\textit{surf}[i], 
+\textit{surf}[i+1]))$\\
+
+\noindent distance : coord $\times$ coord $\rightarrow$ $\mathbb{R}$\\
+distance(\textit{point1}, \textit{point2}) = $\sqrt{(point1.x - point2.x)^2 + 
+(point1.y - point2.y)^2}$\\
+
+\noindent has\_no\_sharp\_angles : [coords] $\rightarrow$ $\mathbb{B}$\\
+has\_no\_sharp\_angles(\textit{surf}) = $(\forall i \in 
+[0..|\textit{surf}|-3])\\
+(\arccos \frac{(distance(\textit{surf}[i], 
+\textit{surf}[i+1]))^2 + 
+(distance(\textit{surf}[i+1], \textit{surf}[i+2]))^2 - 
+(distance(\textit{surf}[i], 
+\textit{surf}[i+2]))^2}{2*distance(\textit{surf}[i], 
+\textit{surf}[i+1])*distance(\textit{surf}[i+1], 
+\textit{surf}[i+2])})$\\
 
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
@@ -783,10 +997,10 @@ N/A
   \textit{params\_layers} : struc\_layers & (Appendix
   \ref{Tbl:LayerParam})\\
 
-  \textit{params\_piez} : struc\_piez & (Appendix
+  \textit{piez} : struc\_piez & (Appendix
   \ref{Tbl:PiezParam})\\
 
-  \textit{params\_soln} : struc\_soln & (Appendix
+  \textit{soln} : struc\_soln & (Appendix
   \ref{Tbl:SolnParam})\\
 
   \textit{params\_load} : struc\_load & (Appendix
@@ -811,99 +1025,6 @@ exception cases will output a factor of safety (\textit{F\_MP}) of
   \textit{F\_MP} : $\mathbb{R}$ & The factor of safety of the slope,
   as calculated by the Morgenstern Price solution method, measuring
   the stability of the slope. From IM\ref{SRS-IM_FS} of the SRS.\\
-\end{longtable}
-
-% ---------------------------------------------------------------- %
-% -------------------- GEN ALG MODULE ------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the Genetic Algorithm Module} \label{sec:GenAlgMod}
-
-\subsection{Module}
-GenAlg
-
-\subsection{Uses}
-
-\subsubsection{Imported Access Programs}
-Input (Section~\ref{sec:InputMod}), MorgPriceSolver (Section \ref{sec:MPMod}), 
-Slicer (Section \ref{sec:SlicerMod}), KinAdm (Section \ref{sec:KinAdmMod}), 
-SlipWeighter (Section \ref{sec:WeightMod}), Sequence 
-(Section~\ref{sec:SequenceData}), Rand (Section~\ref{sec:Random})
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Data Types}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.45\textwidth} } \hline 
-		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
-		\hline
-
-  GenAlg & struc; ~\newline struc; ~\newline struc; ~\newline struc;
-  ~\newline struc & Array & None \\ \hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{Local Constants}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.15\textwidth} p{0.85\textwidth}}
-  \textit{nslip} : $\mathbb{R}$ & The number of vertices the generated
-  slip surfaces will be described by. [nslip=13] \\
-
-  \textit{Mpool} : $\mathbb{R}$ & The number of slip surfaces that
-  will be in the pool of potential critical slip surfaces. [Mpool=40]
-\end{longtable}
-
-\subsubsection{State Variables}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{pool} : $[[\mathbb{R}]^{2,\text{nslip}}, \mathbb{R},
-    \mathbb{R}]^{1,\text{Mpool}}$ & A sequence of data describing the
-  slip surfaces that are currently being considered as possible
-  critical slip surfaces. Contains three data elements describing the
-  slope: A sequence of coordinates describing the geometry of the slip
-  surface ($[\mathbb{R}]^{2,\text{nslip}}$), the factor of safety of
-  the slip surface ($\mathbb{R}$), and a weighting value describing
-  the surfaces factor of safety relative to the other slip surfaces in
-  the pools factors of safety ($\mathbb{R}$). \\
-\end{longtable}
-
-\subsubsection{Access Routine Semantics}
-\textbf{Input:} 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-\textit{params\_layers} : struc\_layers & (Appendix \ref{Tbl:LayerParam})\\
-
-\textit{params\_piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})\\
-
-\textit{params\_search} : struc\_search & (Appendix
-\ref{Tbl:SearchParam})\\
-
-\textit{params\_soln} : struc\_soln & (Appendix
-\ref{Tbl:SolnParam})\\
-
-\textit{params\_load} : struc\_load & (Appendix
-\ref{Tbl:LoadForceParam})\\
-\end{longtable}
-
-\noindent \textbf{Exceptions:} ~\newline\noindent There are
-no potential exceptions for GenAlg.
-
-~\newline\noindent \textbf{Output:}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  cslip : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of vertex
-  coordinates describing the geometry of the critical slip surface of
-  the slope.
 \end{longtable}
 
 % ---------------------------------------------------------------- %
@@ -955,7 +1076,7 @@ N/A
   \textit{params\_layers} : struc\_layers & (Appendix
   \ref{Tbl:LayerParam}) \\
   
-  \textit{params\_piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})
+  \textit{piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})
   \\
 \end{longtable}
 
@@ -1031,7 +1152,7 @@ adjacent vertex coordinates given in the input \textit{slip}.
   coordinates of the slip surface being sliced. \\
 
   \textit{evnslc} : $\mathbb{B}$ & Slicing method switch, an element
-  from the \textit{params\_soln} structure (Appendix
+  from the \textit{soln} structure (Appendix
   \ref{Tbl:SolnParam}).\\
 \end{longtable}
 
@@ -1044,82 +1165,6 @@ potential exceptions for Slip Slicer.
   \textit{evalslip} : $[\mathbb{R}]^{1,n}$ & Sequence of vertex
   coordinates for the slip surface being evaluated. Identifies shape
   of the slope, and slice points. \\
-\end{longtable}
-
-% ---------------------------------------------------------------- %
-% -------------------- KIN ADM MODULE ------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the Kinematic Admissibility
-  Module} \label{sec:KinAdmMod}
-
-\subsection{Module}
-KinAdm
-
-\subsection{Uses}
-Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Data Types}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.45\textwidth} } \hline 
-		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
-		\hline
-
-  Kin Adm & Sequence; ~\newline Sequence; ~\newline struc & bool;
-  ~\newline Sequence & None \\ \hline
-
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{Assumption}
-A straight line describing the slip surface is assumed between
-adjacent vertex coordinates given in the input \textit{slip}.
-
-\subsubsection{Access Routine Semantics}
-\textbf{Input:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.25\textwidth} p{0.75\textwidth}}
-  \textit{slip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of vertex
-  coordinates of the slip surface being tested. Sequence length value
-  \textit{nslip} is defined by the Genetic Algorithm module (section
-  \ref{sec:GenAlgMod}).\\
-  
-  $\textit{strat1}$ : $[\mathbb{R}]^{2,\text{nvtx}}$ & Sequence of
-  the coordinates of the vertexes from the uppermost stratigraphic
-  layer of the slope. Sequence length value \textit{nvtx} is defined
-  by the given input file. \\
-  
-  \textit{params\_soln} : struc & (Appendix
-  \ref{Tbl:SolnParam})
-\end{longtable}
-
-~\newline\noindent \textbf{Exceptions:} ~\newline\noindent There are
-no potential exceptions for KinAdm.
-
-~\newline\noindent \textbf{Output:}
-\renewcommand{\arraystretch}{1.5}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \textit{KinPass} : $\mathbb{B}$ & Identifies if the input slip
-  surface (\textit{slip}) has passed the admissibility criterion for a
-  slip surface. If true than the slip surface has passed. If false
-  than the slip surface has failed. \\
-
-  \textit{slipPass} : $[\mathbb{R}]^{1,\text{nslip}}$ & Sequence of
-  the slip surface given as input (\textit{slip}) with end vertexes
-  adjusted to ensure they are on the slope surface.
 \end{longtable}
 
 % ---------------------------------------------------------------- %
