@@ -630,47 +630,60 @@ N/A
 p{0.45\textwidth} } \hline 
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 	
-verify\_output & - & - & \\
-output &  & - & - \\ \hline
+verify\_output & $\mathbb{R}$ & - & negativeFS \\
+output & $\mathbb{R}$, coords, coords, coords, string & - & - \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-\renewcommand{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-	\textit{F\_MP\_Final} : $\mathbb{R}$ & The factor of safety as
-	calculated by the Morgenstern Price solution method for the
-	critical slip surface, measuring the stability of the slope. \\
-\end{longtable}
+N/A
+
+\subsubsection{Environment Variables}
+
+\textit{out\_file} : String
+\begin{itemize}
+	\item \textit{out\_file} represents a file stored in the file system of the 
+	hardware running \progname{}. \\
+\end{itemize}
+
+\textit{screen} : [$\mathbb{Z}$]
+\begin{itemize}
+	\item \textit{screen} represents the colour values for each pixel on the 
+	screen of the hardware running \progname{}. \\
+\end{itemize}
+
+\subsubsection{Assumptions}
+N/A
 
 \subsubsection{Access Routine Semantics}
-\textbf{Input:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-	\textit{cslip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of
-	vertex coordinates for the critical slip surface of the slope. \\
-	
-	\textit{params\_layers} : struc\_layers & (Appendix \ref{Tbl:LayerParam})\\
-	
-	\textit{params\_piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})\\
-	
-	\textit{params\_soln} : struc\_soln & (Appendix \ref{Tbl:SolnParam})\\
-	
-	\textit{params\_load} : struc\_load & (Appendix
-	\ref{Tbl:LoadForceParam})\\
-\end{longtable}
+verify\_output(\textit{Fs}):
+\begin{itemize}
+	\item exceptions:
+	\begin{itemize}
+		\item[] \textit{exc} $\coloneqq$ $\textit{Fs} < 0$ 
+		$\Rightarrow$ negativeFS\\
+	\end{itemize}
+\end{itemize}
 
-\noindent \textbf{Exceptions:} ~\newline\noindent There are no
-potential exceptions for Output.
+\noindent output(\textit{Fs}, \textit{crit\_slip}, \textit{G}, \textit{X}, 
+\textit{fname}):
+\begin{itemize}
+	\item transition:
+	\begin{itemize}
+		\item[] \textit{out\_file} is created at path $\textit{fname}$ $||$ 
+		``.out''. The outputs of Xetr(), Xext(), Ylim(), ftype(), \textit{Fs}, 
+		\textit{crit\_slip}, \textit{G}, and \textit{X} are written to 
+		\textit{out\_file}.
+		\textit{screen} is modified to display the outputs of 
+		plot(\textit{crit\_slip.x}, \textit{crit\_slip.y}), plot(\textit{G.x}, 
+		\textit{G.y}), and plot(\textit{X.x}, \textit{X.y}).  \\
+	\end{itemize}
+\end{itemize}
 
-~\newline\noindent \textbf{Output:} ~\newline\noindent Output does not
-return any values; however, it creates a plot of the critical slip
-surface \textit{cslip} as a part of the slope geometry \textit{strat}
-(from \textit{params\_layers}). The plot also displays the
-the factor of safety calculated by the Morgenstern-Price module 
-\textit{F\_MP\_Final}.
+\subsubsection{Local Functions}
+N/A
 
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
