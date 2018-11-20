@@ -350,9 +350,9 @@ p{0.45\textwidth} } \hline
    piezX & - & [$\mathbb{R}$] & - \\
    piezY & - & [$\mathbb{R}$] & - \\
    gamw & - & $\mathbb{R}$ & - \\
-   Xext & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
-   Xetr & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
-   Ylim & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   xExt & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   xEtr & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   yLim & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
    ltor & - & $\mathbb{B}$ & - \\
    ftype & - & $\mathbb{B}$ & - \\
    evnslc & - & $\mathbb{B}$ & - \\
@@ -536,7 +536,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent Xext():
+\noindent xExt():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -544,7 +544,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent Xetr():
+\noindent xEtr():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -552,7 +552,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent Ylim():
+\noindent yLim():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -676,7 +676,7 @@ verify\_output(\textit{Fs}):
 	\item transition:
 	\begin{itemize}
 		\item[] \textit{out\_file} is created at path $\textit{fname}$ $||$ 
-		``.out''. The outputs of Xetr(), Xext(), Ylim(), ftype(), \textit{Fs}, 
+		``.out''. The outputs of xEtr(), xExt(), yLim(), ftype(), \textit{Fs}, 
 		\textit{crit\_slip}, \textit{G}, and \textit{X} are written to 
 		\textit{out\_file}.
 		\textit{screen} is modified to display the outputs of 
@@ -759,8 +759,8 @@ genetic\_alg():
 	\begin{itemize}
 		\item using rand to randomly generate coordinates for NUM\_SLIPS 
 		potential slip surfaces, where the entry and exit x-coordinate for each 
-		slip surface are computed according to \textit{generate\_slips(Xetr)} 
-		and \textit{generate\_slips(Xext)}. Corresponding y-coordinates are 
+		slip surface are computed according to \textit{generate\_slips(xEtr)} 
+		and \textit{generate\_slips(xExt)}. Corresponding y-coordinates are 
 		determined by interpolating on the slope geometry.
 		\item using kinAdm to verify that the geometry of each potential slip 
 		surface is physically realizable. If any are not, new slip surfaces are 
@@ -880,7 +880,7 @@ is\_on\_slope(\textit{point}) = $(\exists(i : \mathbb{Z} | i \in
 slope.strat[i+1])*point.x + \frac{slope.strat[i].y}{linSlope(slope.strat[i], 
 slope.strat[i+1])*slope.strat[i].x})) $\\
 
-\noindent is\_in\_slope(\textit{surf}) : coords $\rightarrow$ $\mathbb{B}$
+\noindent is\_in\_slope(\textit{surf}) : coords $\rightarrow$ $\mathbb{B}$\\
 is\_in\_slope(\textit{surf}) = $(\forall(i : \mathbb{Z} | i \in 
 [1..|\textit{surf}|-2] : (\forall(j : \mathbb{Z} | j \in 
 [0..|slope.strat|-2] \land slope.strat[j].x \leq \textit{surf}[i].x < 
@@ -990,7 +990,7 @@ s[|s|-1].Fs)})$\\
 % -------------------- SLICER MODULE ----------------------------- %
 % ---------------------------------------------------------------- %
 
-\section{MIS of the Slip Slicer Module} \label{sec:SlicerMod}
+\section{MIS of the Slip Slicing Module} \label{sec:SlicerMod}
 
 \subsection{Module}
 Slicer
@@ -1079,14 +1079,14 @@ $\forall(i : \mathbb{Z} | i \in [0..n] : subslices[i].x = point1.x +
 % -------------------- MORG PRICE MODULE ------------------------- %
 % ---------------------------------------------------------------- %
 
-\section{MIS of the Morgenstern Price Solver Module} \label{sec:MPMod}
+\section{MIS of the Morgenstern-Price Calculation Module} \label{sec:MPMod}
 
 \subsection{Module}
 MorgPriceSolver
 
 \subsection{Uses}
 
-Input (Section~\ref{sec:InputMod}), PropertySorter (Section 
+Input (Section~\ref{sec:InputMod}), PropertyCalc (Section 
 \ref{sec:PropSortMod}), Sequence (Section~\ref{sec:SequenceData})
 
 \subsection{Syntax}
@@ -1228,10 +1228,10 @@ N/A
 % -------------------- PROPERTY SORTER MODULE -------------------- %
 % ---------------------------------------------------------------- %
 
-\section{MIS of the Property Sorter Module} \label{sec:PropSortMod}
+\section{MIS of the Slice Property Calculation Module} \label{sec:PropSortMod}
 
 \subsection{Module} 
-PropertySorter
+PropertyCalc
 
 \subsection{Uses}
 Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
@@ -1242,7 +1242,13 @@ Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
 N/A
 
 \subsubsection{Exported Data Types}
-N/A
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.22\textwidth} c p{0.8\textwidth}}
+	paramsInternalForce &=& tuple of (Ub, Ut, W, H : [$\mathbb{R}$]) 
+	(Appendix~\ref{Tbl:ForceParam})\\
+	paramsAngles &=& tuple of (alpha, beta : [$\mathbb{R}$]) 
+	(Appendix~\ref{Tbl:AngleParam}) \\
+\end{longtable}
 
 \subsubsection{Exported Access Programs}
 
@@ -1253,47 +1259,141 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 
-  Property Sorter & Sequence; ~\newline struc; ~\newline
-  struc & struc; ~\newline struc; ~\newline struc; ~\newline struc &
-  None \\ \hline
+  prop\_calc & slip & - & - \\ 
+  ub & - & [$\mathbb{R}$] & - \\
+  ut & - & [$\mathbb{R}$] & - \\
+  w & - & [$\mathbb{R}$] & - \\
+  h & - & [$\mathbb{R}$] & - \\
+  alpha & - & [$\mathbb{R}$] & - \\
+  beta & - & [$\mathbb{R}$] & - \\
+  hts & - & [$\mathbb{R}$] & - \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
+\subsubsection{State Variables}
+\textit{force} : paramsInternalForce\\
+\textit{angles} : paramsAngles\\
+\textit{heights} : [$\mathbb{R}$]\\
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumptions}
+\begin{itemize}
+	\item prop\_calc is called before any of the other access programs.
+\end{itemize}
+
 \subsubsection{Access Routine Semantics}
-\textbf{Input:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{evalslip} : $[\mathbb{R}]^{1,n}$ & Sequence of vertex
-  coordinates for the slip surface being evaluated. Identifies shape
-  of the slope, and slice points. Sequence length value \textit{n} is
-  defined by the Slicer module (section \ref{sec:SlicerMod}).  \\
+prop\_calc(\textit{slip\_surf}):
+\begin{itemize}
+	\item transition:
+	\begin{itemize}
+		\item[] The equations used below contain symbols from the SRS 
+		document for this project for the sake of brevity. The SRS should be 
+		consulted for the definitions of these symbols.\\
+		\item[] $\textit{force}, \textit{angles},	\textit{heights} \coloneqq 
+		\textit{force'}, \textit{angles'}, \textit{soil'} \textit{heights'}$ 
+		where \\
+		$\forall(i : \mathbb{Z} | i \in [1..|\textit{slip\_surf}|-1] :\\ 
+		\textit{force}.Ub[i] = 
+		{\ell{}_{b,i}}\begin{cases}
+			\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{w}}, & 
+			{y_{wt,i}}>{y_{slip,i}}\\
+			0, & {y_{wt,i}}\leq{}{y_{slip,i}}
+			\end{cases}\\
+			\land \textit{force}.Ut[i] = {\ell{}_{s,i}}\begin{cases}
+			\left({y_{wt,i}}-{y_{us,i}}\right){\gamma{}_{w}}, & 
+			{y_{wt,i}}>{y_{us,i}}\\
+			0, & {y_{wt,i}}\leq{}{y_{us,i}}
+			\end{cases}\\
+			\land \textit{force}.W[i] = b_{i}\begin{cases}
+			\left({y_{us,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}}, & 
+			{y_{wt,i}}\geq{}{y_{us,i}}\\
+			\left({y_{us,i}}-{y_{wt,i}}\right)\gamma{}+\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}},
+			& {y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
+			\left({y_{us,i}}-{y_{slip,i}}\right)\gamma{}, & 
+			{y_{wt,i}}\leq{}{y_{slip,i}}
+			\end{cases}\\
+			\land \textit{force}.H[i] = \begin{cases}
+			\frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_{Sat}}+\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_{Sat}},
+			& {y_{wt,i}}\geq{}{y_{us,i}}\\
+			\frac{\left[{y_{wt,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_{Sat}}, 
+			& 
+			{y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
+			0, & {y_{wt,i}}\leq{}{y_{slip,i}}
+			\end{cases}\\
+			\land \textit{angles}.\textit{alpha}[i] =
+			\arctan \left( \frac{y_\text{slip,i} -
+				y_\text{slip,i-1}}{x_\text{slip,i} - x_\text{slip,i-1}} \right) 
+				\\
+			\land \textit{angles}.\textit{beta}[i] = \arctan 
+			\left( \frac{y_\text{us,i} -
+				y_\text{us,i-1}}{x_\text{us,i} - x_\text{us,i-1}} \right)\\
+			\land \textit{heights}[i] = 
+			0.5*(({y_{us,i}}-{y_{slip,i}})+({y_{us,i+1}}-{y_{slip,i+1}})))$
+	\end{itemize}
+\end{itemize}
 
-  \textit{params\_layers} : struc\_layers & (Appendix
-  \ref{Tbl:LayerParam}) \\
-  
-  \textit{piez} : struc\_piez & (Appendix \ref{Tbl:PiezParam})
-  \\
-\end{longtable}
+\noindent ub():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{force.Ub}\\
+	\end{itemize}
+\end{itemize}
 
-\noindent \textbf{Exceptions:} ~\newline\noindent There are no
-potential exceptions for Property Sorter.
+\noindent ut():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{force.Ut}\\
+	\end{itemize}
+\end{itemize}
 
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.4\textwidth} p{0.6\textwidth}}
-  \textit{params\_internalForce} : struc\_intForce & (Appendix
-  \ref{Tbl:ForceParam})\\
-  
-  \textit{params\_angles} : struc\_angles & (Appendix \ref{Tbl:AngleParam})\\
+\noindent w():
+\begin{itemize}
+\item output:
+\begin{itemize}
+	\item[] \textit{out} $\coloneqq$ \textit{force.W}\\
+\end{itemize}
+\end{itemize}
 
-  \textit{params\_soilInterior} : struc\_soilInt & (Appendix
-  \ref{Tbl:SoilIntParam})\\
+\noindent h():
+\begin{itemize}
+\item output:
+\begin{itemize}
+	\item[] \textit{out} $\coloneqq$ \textit{force.H}\\
+\end{itemize}
+\end{itemize}
 
-  \textit{params\_soilBase} : struc\_soilBase & (Appendix
-  \ref{Tbl:SoilBaseParam})\\
-\end{longtable}
+\noindent alpha():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{angles.alpha}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent beta():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{angles.beta}\\
+	\end{itemize}
+\end{itemize}
+
+\noindent hts():
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{heights}\\
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
 
 
 % ---------------------------------------------------------------- %
@@ -1336,7 +1436,6 @@ N/A
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-
 N/A
 
 \subsubsection{Environment Variables}
@@ -1718,71 +1817,6 @@ the Property Sorter module (section \ref{sec:PropSortMod}).
   Beta : $[\mathbb{R}]^{1,n}$ & Sequence of the angle that the upper
   surface of the slice makes with the horizontal. Value for each
   slice. From DD\ref{SRS-DD_Angles} of the SRS.\\ \hline
-\end{longtable}
-\end{center}
-
-\subsubsection{Soil Interslice Properties} \label{Tbl:SoilIntParam}
-The elements in the structure for parameters relating to the soil
-properties of the slope, as calculated at the interslice interfaces of
-an evaluation slip. Calculation is based on the ratio of the interface
-that is in different stratigraphic layers, and the values of the
-effective angle of friction in the different layers. Interest is only
-with the interior interslice interfaces therefore for a slope of $n$
-slices, there will be $n-1$ interior interslice interfaces. The value
-\textit{n} is defined by the input \textit{evalslip} given to the
-Property Sorter module (section \ref{sec:PropSortMod}).
-
-
-\begin{center}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \hline \textbf{Parameter} & \textbf{Description} \\ \hline
-    
-  \textit{phi\_IS} : $[\mathbb{R}]^{1,n-1}$ & Sequence of the vector
-  of the effective angle of friction calculated at each interslice
-  interface. \\
-
-  \textit{coh\_IS} := $[\mathbb{R}]^{1,n-1}$ & Sequence of the vector
-  of the effective cohesion calculated at each interslice interface.\\
-
-  \textit{E\_IS} := $[\mathbb{R}]^{1,n-1}$ & Sequence of the vector of
-  the Youngs modulus calculated at each interslice interface.\\
-
-  \textit{nu\_IS} := $[\mathbb{R}]^{1,n-1}$ & Sequence of the vector
-  of the Poisson ratio calculated at each interslice
-  interface. \\ \hline
-\end{longtable}
-\end{center}
-
-\subsubsection{Soil Base Properties} \label{Tbl:SoilBaseParam}
-The elements in the structure for parameters relating to the soil
-properties of the slope, as calculated at the basal surfaces of an
-evaluation slip. Calculation is based on the ratio of the basal
-surface that is in different stratigraphic layers, and the values of
-the effective angle of friction in the different layers. An evaluation
-slip of $n$ slices will have $n$ basal surfaces, and the value of
-\textit{n} is defined by the input \textit{evalslip} given to
-the Property Sorter module (section \ref{sec:PropSortMod}).
-
-
-\begin{center}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \hline \textbf{Parameter} & \textbf{Description} \\ \hline
-
-  \textit{phi\_Base} : $[\mathbb{R}]^{1,n}$ & Sequence of the vector
-  of the effective angle of friction calculated at each slice basal
-  surface in an evaluation slip.\\
-
-  \textit{coh\_Base} : $[\mathbb{R}]^{1,n}$ & Sequence of the vector
-  of the effective cohesion calculated at each slice basal surface in
-  an evaluation slip.\\
-
-  \textit{E\_Base} : $[\mathbb{R}]^{1,n}$ & Sequence of the vector of
-  the Young's modulus calculated at each slice basal surface in an
-  evaluation slip.\\
-
-  \textit{nu\_Base} : $[\mathbb{R}]^{1,n}$ & Sequence of the vector of
-  the Poisson ratio calculated at each slice basal surface in an
-  evaluation slip.  \\ \hline
 \end{longtable}
 \end{center}
 
