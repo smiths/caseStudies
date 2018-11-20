@@ -118,7 +118,9 @@ with the addition that template modules have been adapted from
 \cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
 \citet{HoffmanAndStrooper1995}.  For instance, the symbol $\coloneqq$ is used 
 for a multiple assignment statement and conditional rules follow the form $(c_1
-\Rightarrow r_1 | c_2 \Rightarrow r_2 | \dots | c_n \Rightarrow r_n )$.
+\Rightarrow r_1 | c_2 \Rightarrow r_2 | \dots | c_n \Rightarrow r_n )$. For 
+quantifiers, this document uses the word ``with'' to specify constraints on the 
+bound variable.
 
 The following table summarizes the primitive data types used by \progname.
 
@@ -313,7 +315,7 @@ N/A
 	(Appendix~\ref{Tbl:PiezParam}) \\
 	paramsSearch &=& tuple of (Xext, Xetr, Ylim : 
 	[$\mathbb{R}$]\textsuperscript{1x2}) (Appendix~\ref{Tbl:SearchParam}) \\
-	paramsSoln &=& tuple of (ltor, ftype, evenslc, cncvu, obtu : 
+	paramsSoln &=& tuple of (ltor, ftype, evnslc, cncvu, obtu : 
 	$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam}) \\
 \end{longtable}
 
@@ -349,7 +351,7 @@ p{0.45\textwidth} } \hline
    Ylim & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
    ltor & - & $\mathbb{B}$ & - \\
    ftype & - & $\mathbb{B}$ & - \\
-   evenslc & - & $\mathbb{B}$ & - \\
+   evnslc & - & $\mathbb{B}$ & - \\
    cncvu & - & $\mathbb{B}$ & - \\
    obtu & - & $\mathbb{B}$ & - \\
    \hline
@@ -573,11 +575,11 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent evenslc():
+\noindent evnslc():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{soln.evenslc}\\
+		\item[] \textit{out} $\coloneqq$ \textit{soln.evnslc}\\
 	\end{itemize}
 \end{itemize}
 
@@ -764,9 +766,11 @@ genetic\_alg():
 		generated,
 		\item using slicer to redefine each slip surface's coordinates based on 
 		the desired number of slices
-		\item using morgPrice to determine the Fs, G, and X fields of each slip 
+		\item using morgPrice to determine the \textit{Fs}, \textit{G}, and 
+		\textit{X} fields of each slip 
 		surface
-		\item using slipWeighter to determine the wt field of each slip surface
+		\item using slipWeighter to determine the \textit{wt} field of each 
+		slip surface
 		\item using rand to generate a new pool of NUM\_SLIPS slip surfaces by 
 		applying crossovers and mutations to the previous generation, with the 
 		more highly-weighted members having a greater likelihood of 
@@ -786,7 +790,7 @@ generate\_slips(Xrange) = (Xrange[0] + rand()*(Xrange[1] - Xrange[0]))
 \end{equation*}
 
 % ---------------------------------------------------------------- %
-% -------------------- KIN ADM MODULE ------------------------- %
+% -------------------- KIN ADM MODULE ---------------------------- %
 % ---------------------------------------------------------------- %
 
 \section{MIS of the Kinematic Admissibility
@@ -829,7 +833,11 @@ N/A
 N/A
 
 \subsubsection{Assumptions}
-N/A
+\begin{itemize}
+	\item The \textit{surf} field is populated for every member of the input 
+	sequence of 
+	slip data.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 kinAdm(\textit{slip\_surf}):
@@ -870,7 +878,7 @@ slope.strat[i+1])*point.x +
 \frac{slope.strat[i].y}{linSlope(slope.strat[i], 
 slope.strat[i+1])*slope.strat[i].x}) $\\
 
-\noindent is\_in\_slope : [coords] $\rightarrow$ $\mathbb{B}$
+\noindent is\_in\_slope : coords $\rightarrow$ $\mathbb{B}$
 is\_in\_slope(\textit{surf}) = $(\forall i \in [1..|\textit{surf}|-2])((\forall 
 j \in 
 [0..|slope.strat|-2] \text{ with } slope.strat[j].x \leq \textit{surf}[i].x < 
@@ -878,7 +886,7 @@ slope.strat[j+1].x)(\textit{surf}[i].y < (slope.strat[j].y +
 (\textit{surf}[i].x - 
 slope.strat[j].x)*linSlope(slope.strat[j], slope.strat[j+1]))))$\\
 
-\noindent is\_concave\_up : [coords] $\rightarrow$ $\mathbb{B}$\\
+\noindent is\_concave\_up : coords $\rightarrow$ $\mathbb{B}$\\
 is\_concave\_up(\textit{surf}) = $(\forall i \in 
 [0..|\textit{surf}|-3])(linSlope(\textit{surf}[i+1], \textit{surf}[i+2]) \geq 
 linSlope(\textit{surf}[i], 
@@ -888,7 +896,7 @@ linSlope(\textit{surf}[i],
 distance(\textit{point1}, \textit{point2}) = $\sqrt{(point1.x - point2.x)^2 + 
 (point1.y - point2.y)^2}$\\
 
-\noindent has\_no\_sharp\_angles : [coords] $\rightarrow$ $\mathbb{B}$\\
+\noindent has\_no\_sharp\_angles : coords $\rightarrow$ $\mathbb{B}$\\
 has\_no\_sharp\_angles(\textit{surf}) = $(\forall i \in 
 [0..|\textit{surf}|-3])\\
 (\arccos \frac{(distance(\textit{surf}[i], 
@@ -898,6 +906,153 @@ has\_no\_sharp\_angles(\textit{surf}) = $(\forall i \in
 \textit{surf}[i+2]))^2}{2*distance(\textit{surf}[i], 
 \textit{surf}[i+1])*distance(\textit{surf}[i+1], 
 \textit{surf}[i+2])})$\\
+
+% ---------------------------------------------------------------- %
+% -------------------- SLIP WEIGHTING MODULE ------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Slip Weighting
+	Module} \label{sec:WeightMod}
+
+\subsection{Module}
+SlipWeighter
+
+\subsection{Uses}
+Sequence (Section~\ref{sec:SequenceData})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		slipWeighter & slips & slips & - \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+N/A
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumptions}
+\begin{itemize}
+	\item The \textit{Fs} field is populated for every member of the input 
+	sequence of 
+	slip data.
+\end{itemize}
+
+\subsubsection{Access Routine Semantics}
+slipWeighter(\textit{slip\_surfs}):
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{slip\_surfs} sorted by their 
+		\textit{Fs} field in ascending order and with the \textit{wt} field of 
+		each member populated.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
+
+% ---------------------------------------------------------------- %
+% -------------------- SLICER MODULE ----------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Slip Slicer Module} \label{sec:SlicerMod}
+
+\subsection{Module}
+Slicer
+
+\subsection{Uses}
+Sequence (Section~\ref{sec:SequenceData})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		slicer & coords, $\mathbb{Z}$ & slip & - \\ \hline
+		
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+N/A
+
+\subsubsection{Environment Variables}
+N/A
+
+\subsubsection{Assumption}
+N/A
+
+\subsubsection{Access Routine Semantics}
+slicer(\textit{slip\_surf}, \textit{num\_slices}):
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ ($\textit{evnslc} \Rightarrow$ 
+		\textit{slip\_surf'} obtained by repeatedly applying 
+		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})] $||$ 
+		midpoint(\textit{slip\_surf}[large\_segment(\textit{slip\_surf})], 
+		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1])
+		$||$ \textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1] until 
+		$|\textit{slip\_surf'}| = \textit{num\_slices}$ \\
+		$| \lnot \textit{evnslc} \Rightarrow$ \textit{slip\_surf'} such that 
+		$\forall(i : \mathbb{Z} | i \in [0..|\textit{slip\_surf}|-2] : 
+		\textit{slip\_surf'}[i*\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1}..(i+1)*\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1}] = subslice(\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1}, \textit{slip\_surf}[i], 
+		\textit{slip\_surf}[i+1]))$
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+large\_segment : coords $\rightarrow$ $\mathbb{Z}$\\
+large\_segment(\textit{surf}) = \textit{index} such that\\
+$\forall(i : \mathbb{Z} | i \in [0..|\textit{surf}|-2] : 
+\textit{surf}[\textit{index}+1] - \textit{surf}[\textit{index}] \geq 
+\textit{surf}[i+1] - \textit{surf}[i])$\\
+
+\noindent midpoint : coord $\times$ coord $\rightarrow$ coord\\
+midpoint(\textit{point1}, \textit{point2}) = $< \frac{point1.x + point2.x}{2}, 
+\frac{point1.y + point2.y}{2} >$
+
+\noindent subslice : int $\times$ coord $\times$ coord $\rightarrow$ coords
+subslice(\textit{n}, \textit{point1}, \textit{point2}) = \textit{subslices} 
+such that\\
+$\forall(i : \mathbb{Z} | i \in [0..n] : subslices[i].x = point1.x + 
+\frac{i}{n}*(point2.x - point1.x) \land subslices[i].y = point1.y + 
+\frac{i}{n}*(point2.y - point1.y))$\\
 
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
@@ -1098,145 +1253,6 @@ potential exceptions for Property Sorter.
   \ref{Tbl:SoilBaseParam})\\
 \end{longtable}
 
-% ---------------------------------------------------------------- %
-% -------------------- SLICER MODULE ----------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the Slip Slicer Module} \label{sec:SlicerMod}
-
-\subsection{Module}
-Slicer
-
-\subsection{Uses}
-Sequence (Section~\ref{sec:SequenceData})
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Data Types}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.45\textwidth} } \hline 
-		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
-		\hline
-  Slicer & Sequence; ~\newline bool & Sequence & None \\ \hline
-
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{Local Constants}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.1\textwidth} p{0.9\textwidth}}
-  \textit{n} : $\mathbb{R}$ & The number of slices the slip surface
-  will be broken into for evaluation. [n=36]\\
-\end{longtable}
-
-\subsubsection{Assumption}
-A straight line describing the slip surface is assumed between
-adjacent vertex coordinates given in the input \textit{slip}.
-
-\subsubsection{Access Routine Semantics}
-\textbf{Input:} 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.15\textwidth} p{0.85\textwidth}}
-  \textit{slip} : $[\mathbb{R}]^{2,\text{nslip}}$ & Sequence of vertex
-  coordinates of the slip surface being sliced. \\
-
-  \textit{evnslc} : $\mathbb{B}$ & Slicing method switch, an element
-  from the \textit{soln} structure (Appendix
-  \ref{Tbl:SolnParam}).\\
-\end{longtable}
-
-\noindent \textbf{Exceptions:} ~\newline\noindent There are no
-potential exceptions for Slip Slicer.
-
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.2\textwidth} p{0.8\textwidth}}
-  \textit{evalslip} : $[\mathbb{R}]^{1,n}$ & Sequence of vertex
-  coordinates for the slip surface being evaluated. Identifies shape
-  of the slope, and slice points. \\
-\end{longtable}
-
-% ---------------------------------------------------------------- %
-% -------------------- SLIP WEIGHTING MODULE ------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the Slip Weighting
-  Module} \label{sec:WeightMod}
-
-\subsection{Module}
-SlipWeighter
-
-\subsection{Uses}
-Sequence (Section~\ref{sec:SequenceData})
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Data Types}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.45\textwidth} } \hline 
-		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
-		\hline
-
-  Slip Weighting & Sequence; ~\newline Real & Sequence & None
-  \\ \hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{Access Routine Semantics}
-\textbf{Input:} 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.32\textwidth} p{0.68\textwidth}}
-  \textit{pool\_In} : $[[\mathbb{R}]^{2,\text{nslip}}, \mathbb{R},
-    \mathbb{R}]^{1,\text{Mpool}}$ & A sequence of data sets describing
-  the slip surfaces that are currently being considered as possible
-  critical slip surfaces. Contains three data elements describing the
-  slope: coordinates describing the geometry of the slip surface
-  ($[\mathbb{R}]^{2,\text{nslip}}$),the factor of safety of the slip
-  surface ($\mathbb{R}$), and a weighting value describing the
-  surfaces factor of safety relative to the other slip surfaces in the
-  pools factors of safety ($\mathbb{R}$). Sequence length values
-  \textit{nslip}, and \textit{Mpool} are defined by the Genetic
-  Algorithm Module (section \ref{sec:GenAlgMod}). \\
-
-  \textit{Mpool} : $\mathbb{R}$ & The number of slip surfaces in the
-  pool of possible critical slip surfaces being compared and
-  weighting. constant defined in the Genetic Algorithm module (section
-  \ref{sec:GenAlgMod}).
-\end{longtable}
-
-\noindent \textbf{Exceptions:} ~\newline\noindent There are no
-potential exceptions for Slip Weighter.
-
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.33\textwidth} p{0.65\textwidth}}
-  \textit{pool\_Out} : $[[\mathbb{R}]^{2,\text{nslip}}, \mathbb{R},
-    \mathbb{R}]^{1,\text{Mpool}}$ & The sequence given in
-  \textit{pool\_In}, with the weight data element recalculated, and
-  the sequence reordered in terms of ascending factors of safety. \\
-\end{longtable}
 
 % ---------------------------------------------------------------- %
 % ---------------- SEQUENCE DATA STRUCTURE MODULE ---------------- %
@@ -1270,8 +1286,8 @@ N/A
 		\hline
 		
 		[\_] & Any number of values of type T & [T] & - \\ 
-		\_[\_] & [T], $\mathbb{Z}$ & T & \\
-		\_[\_..\_] & [T], $\mathbb{Z}$, $\mathbb{Z}$ & [T] & - \\\hline
+		\_(\_) & [T], $\mathbb{Z}$ & T & \\
+		\_(\_:\_) & [T], $\mathbb{Z}$, $\mathbb{Z}$ & [T] & - \\\hline
 	\end{tabular}
 \end{center}
 
@@ -1300,7 +1316,7 @@ N/A
 	\end{itemize}
 \end{itemize}
 
-\noindent \_[\_](\textit{list}, \textit{int}):
+\noindent \_(\_)(\textit{list}, \textit{int}):
 \begin{itemize}
 	\item output: 
 	\begin{itemize}
@@ -1308,7 +1324,7 @@ N/A
 	\end{itemize}
 \end{itemize}
 
-\noindent \_[\_..\_](\textit{list}, \textit{int1}, \textit{int2}):
+\noindent \_(\_:\_)(\textit{list}, \textit{int1}, \textit{int2}):
 \begin{itemize}
 	\item output: 
 	\begin{itemize}
