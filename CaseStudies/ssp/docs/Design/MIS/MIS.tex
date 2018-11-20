@@ -53,6 +53,9 @@
 \externaldocument[MG-]{../MG/MG}
 \externaldocument[SRS-]{../../SRS/SRS}
 
+\newcommand{\iref}[1]{IM\ref{#1}}
+\newcommand{\dref}[1]{GD\ref{#1}}
+
 \input{../../Comments}
 
 \newcommand{\progname}{SSP}
@@ -81,7 +84,8 @@
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See Section~\ref{SRS-sec_RefMat} of the SRS Documentation, available in
+See Section~\ref{SRS-sec_RefMat} of the Software Requirements Specification 
+(SRS) document, available in
 \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/SRS/SRS.pdf}
 {the GitHub repository for the project}.
 
@@ -745,12 +749,13 @@ genetic\_alg():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-	\item[] \textit{out} $\coloneqq$ slipWeighter(\textit{MSlip}, 
-	\textit{slip\_surfs})[0].surf, slipWeighter(\textit{MSlip}, 
-	\textit{slip\_surfs})[0].Fs, slipWeighter(\textit{MSlip}, 
-	\textit{slip\_surfs})[0].G, and slipWeighter(\textit{MSlip}, 
-	\textit{slip\_surfs})[0].X, where \textit{slip\_surfs}, of type slips, is 
-	developed by:
+	\item[] \textit{out} $\coloneqq$ 
+	weighter(\textit{slip\_surfs})[0].\textit{surf}, 
+	weighter(\textit{slip\_surfs})[0].\textit{Fs}, 
+	weighter(\textit{slip\_surfs})[0].\textit{G}, 
+	and weighter(\textit{slip\_surfs})[0].\textit{X}, where 
+	\textit{slip\_surfs}, of 
+	type slips, is developed by:
 	\begin{itemize}
 		\item using rand to randomly generate coordinates for NUM\_SLIPS 
 		potential slip surfaces, where the entry and exit x-coordinate for each 
@@ -763,16 +768,16 @@ genetic\_alg():
 		generated,
 		\item using slicer to redefine each slip surface's coordinates based on 
 		the desired number of slices
-		\item using morgPrice to determine the \textit{Fs}, \textit{G}, and 
+		\item using morg\_price to determine the \textit{Fs}, \textit{G}, and 
 		\textit{X} fields of each slip 
 		surface
-		\item using slipWeighter to determine the \textit{wt} field of each 
+		\item using weighter to determine the \textit{wt} field of each 
 		slip surface
 		\item using rand to generate a new pool of NUM\_SLIPS slip surfaces by 
 		applying crossovers and mutations to the previous generation, with the 
 		more highly-weighted members having a greater likelihood of 
 		contributing to the subsequent generations
-		\item applying kinAdm, slicer, morgPrice, and slipWeighter to the new 
+		\item applying kinAdm, slicer, morg\_price, and weighter to the new 
 		generation
 		\item repeating until at least MIN\_GENS have occured and the relative 
 		difference between subsequent generations is less than REL\_DIFF.
@@ -932,7 +937,7 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 		
-		slipWeighter & slips & slips & - \\ \hline
+		weighter & slips & slips & - \\ \hline
 	\end{tabular}
 \end{center}
 
@@ -952,7 +957,7 @@ N/A
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
-slipWeighter(\textit{slip\_surfs}):
+weighter(\textit{slip\_surfs}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -1023,7 +1028,10 @@ N/A
 N/A
 
 \subsubsection{Assumption}
-N/A
+\begin{itemize}
+	\item The integer input to \textit{slicer} is greater than the size of the 
+	slip input to \textit{slicer}.
+\end{itemize}
 
 \subsubsection{Access Routine Semantics}
 slicer(\textit{slip\_surf}, \textit{num\_slices}):
@@ -1084,7 +1092,9 @@ Input (Section~\ref{sec:InputMod}), PropertySorter (Section
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
-N/A
+MAX\_DIFF = 0.000001\\
+MAX\_ITER = 20\\
+MIN\_FS = 0.5\\
 
 \subsubsection{Exported Data Types}
 N/A
@@ -1098,102 +1108,121 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 
-  Morgenstern Price ~\newline Solver & Sequence; ~\newline struc;
-  ~\newline struc; ~\newline struc; ~\newline struc & Real & Non
-  Converging; ~\newline Spurious \textit{F\_MP} \\ \hline
+  morg\_price & slip & slip & - \\ \hline
 \end{tabular}
 \end{center}
 
 \subsection{Semantics}
 
-\subsubsection{Local Constants}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{ p{0.2\textwidth}  p{0.8\textwidth}}
-  \textit{F\_MinLim} : $\mathbb{R}$ & The minimum factor of safety
-  value that the solution must be above to not be considered
-  spurious. [\textit{F\_MinLim}=0.5]\\
-  
-  \textit{max\_iter} : $\mathbb{R}$ & The max number of iterations the
-  algorithm will perform before the solution is considered non
-  converging. [\textit{max\_iter}=20]\\
-
-  \textit{eps\_F} : $\mathbb{R}$ & The value the absolute difference
-  between the factor of safety calculated by the algorithm between
-  consecutive iterations must be below for the answer to be considered
-  converged. [\textit{eps\_F}=1E-6]\\
-
-  \textit{eps\_Lam} : $\mathbb{R}$ & The value the absolute difference
-  between the interslice normal to shear force ratio calculated by the
-  algorithm between consecutive iterations must be below for the
-  answer to be considered converged. [\textit{eps\_Lam}=1E-6]\\
-\end{longtable}
-
 \subsubsection{State Variables}
+N/A
 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{ p{0.2\textwidth}  p{0.8\textwidth}}
-  \textit{Lam} : $\mathbb{R}$ & The interslice normal to shear force
-  ratio. From IM\ref{SRS-IM_Lambda} of the SRS. \\
+\subsubsection{Environment Variables}
+N/A
 
-  \textit{E\_force} : $[\mathbb{R}]^{1,n+1}$ & Sequence of the value
-  of the interslice normal force exerted between slices. A value for
-  each interslice, including ends. Sequence length value \textit{n} is
-  defined by the input \textit{evalslip}. From IM\ref{SRS-IM_E} of the
-  SRS. \\
-
-  \textit{Del\_F} : $\mathbb{R}$ & The difference between the factor
-  of safety of the current iteration and the previous iteration. When
-  converged the value will not be changing and \textit{Del\_F} will be
-  small.\\
-
-  \textit{Del\_Lam} : $\mathbb{R}$ & The difference between the
-  interslice normal to shear force ratio of the current iteration and
-  the previous iteration. When converged the value will not be
-  changing and \textit{Del\_Lam} will be small.\\ 
-\end{longtable}
+\subsubsection{Assumptions}
+N/A
  
 \subsubsection{Access Routine Semantics}
+morg\_price(\textit{slip\_surf}):
+\begin{itemize}
+	\item output:
+	\begin{itemize}
+		\item[] \textit{out} $\coloneqq$ \textit{slip\_surf'} where 
+		\textit{slip\_surf'}.\textit{Fs}, \textit{slip\_surf'}.\textit{G}, and 
+		\textit{slip\_surf'}.\textit{X} satisfy the following system of 
+		equations, taken from the SRS document. The equations are presented 
+		with the symbols from the SRS document for readability, though the 
+		symbols $F_\text{S}$, $G$, and $X$ correspond to 
+		\textit{slip\_surf'}.\textit{Fs}, \textit{slip\_surf'}.\textit{G}, and 
+		\textit{slip\_surf'}.\textit{X}, respectively.\\
+		
+		(\iref{SRS-IM_FS}): \( {F_\text{S}}= 
+		\frac{\displaystyle\sum_{i=1}^{n-1} \left[ 
+		{R_{i}}
+			\;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
+			}\right] + {R_{n}} }{\displaystyle\sum_{i=1}^{n-1} \left[ {T_{i}}
+			\;{\displaystyle\prod_{c=i}^{n-1} \Psi_{c}
+			}\right] + {T_{n}} } \)\\
+		
+		(\iref{SRS-IM_Lambda}): \( {C1_{\text{i}}}= \) 
+		\(  \left\{
+		\renewcommand{\arraystretch}{2}
+		\begin{tabular}{ p{6.5cm} r} 
+		$ {{b}_{\text{1}}}\left[{{G}_{\text{1}} + {H}_{\text{1}}}
+		\right]{\tan\left(\alpha_{\text{1}}\right) } $ &  $
+		\text{i}={\text{1}} $ \\
+		\noindent\parbox[c]{\hsize} {$ {{b}_{\text{i}}} \left[
+			\left({{G}_{\text{i}} + {G}_{\text{i-1}}}\right) +
+			\left({{H}_{\text{i}} + {H}_{\text{i-1}}}\right)
+			\right]{\tan\left(\alpha_{\text{i}}\right)} \\ +
+			{{h}_{\text{i}}}\left( 
+			-{2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}
+			\;\right) $}
+		&  $ 2\leq\text{i}\leq{\text{n-1}} $ \\ $
+		{{b}_{\text{n}}}\left[{{G}_{\text{n-1}} +
+			{H}_{\text{n-1}}}\right]{\tan\left(\alpha_{\text{n-1}}\right)
+		} $ &  $ \text{i}=\text{n} $ \\
+		\end{tabular} 
+		\renewcommand{\arraystretch}{1}
+		\right. \)
+		~\newline~\newline
+		\( {C2_{\text{i}}}= \)
+		\(  \left\{
+		\renewcommand{\arraystretch}{2}
+		\begin{tabular}{ p{6.5cm} r} 
+		$ {{b}_{\text{1}}}{{G}_{\text{1}}}{f_{\text{1}}} $ &  $
+		\text{i}=\text{1} $ \\ $ {{b}_{\text{i}}}\;{\left({
+				{f_{\text{i}}}{{G}_{\text{i}}} +
+				{f_{\text{i-1}}}{{G}_{\text{i-1}}} }\right)} $ &  $
+		2\leq\text{i}\leq{\text{n-1}} $ \\ $
+		{{b}_{\text{n}}}{{G}_{\text{n-1}}}{f_{\text{n-1}}} $ &  $
+		\text{i}=\text{n} $ \\
+		\end{tabular} 
+		\renewcommand{\arraystretch}{1}
+		\right. \) 
+		~\newline
+		\( \lambda= \frac{ \displaystyle\sum_{i=1}^{n} {C1_{\text{i}}}}
+		{\displaystyle\sum_{i=1}^{n} {C2_{\text{i}}}} \) \\
+		
+		(\iref{SRS-IM_E}): \( G_{\text{i}}= \) 
+		\(  \left\{
+		\renewcommand{\arraystretch}{1.75}
+		\begin{tabular}{ p{3cm} l} 
+		$ \frac{ \left(\text{FS}\right) T_{\text{1}} - R_{\text{1}} }{
+			\Phi_{\text{i}} } $ &  $\text{i=1}$ \\
+		\noindent\parbox[c]{\hsize} {$ \frac{ \Psi_{\text{i-1}} \cdot
+				G_{\text{i-1}} + \left(\text{FS}\right) \cdot T_{\text{i}} -
+				R_{\text{i}} }{ \Phi_{\text{i}} } $} & 
+		$2\leq\text{i}\leq\text{n-1}$ \\
+		\noindent\parbox[c]{\hsize} {$0 $} &  $\text{i=0}$ $\vee$ $\text{i=n}$
+		\end{tabular}
+		\renewcommand{\arraystretch}{1}
+		\right. \) \\
+		
+		(\dref{SRS-GD_X}): \( X = \lambda \cdot f \cdot G \) \\
+		
+		The solution method is to start with initial guesses $F_\text{S} = 1$ 
+		and $\lambda = 0$ and use them to compute $F_\text{S}$ using 
+		\iref{SRS-IM_FS} and $G$ using \iref{SRS-IM_E}, then use these values 
+		to compute a new guess for $\lambda$ using \iref{SRS-IM_Lambda}. This 
+		iteration continues until the absolute difference between $F_\text{S}$ 
+		in the current iteration and in the previous iteration is less than 
+		MAX\_DIFF, or until the absolute difference between $\lambda$ in the 
+		current iteration and in the previous iteration is less than MAX\_DIFF. 
+		When this occurs, $X$ is computed using \dref{SRS-GD_X}, and 
+		$\textit{slip\_surf'}.Fs, \textit{slip\_surf'}.G, 
+		\textit{slip\_surf'}.X \coloneqq F_\text{S}, G, X$.
+		If MAX\_ITER iterations occur, the solution is considered to be 
+		non-converging. If the solution converges but $F_\text{S} <$ 
+		MIN\_FS, the solution is considered to be spurious. In either case, 
+		$\textit{slip\_surf'}.Fs, \textit{slip\_surf'}.G, 
+		\textit{slip\_surf'}.X \coloneqq 1000, [], []$.
+	\end{itemize}
+\end{itemize}
 
-\textbf{Input:} 
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.3\textwidth} p{0.7\textwidth}}
-  \textit{evalslip} : $[\mathbb{R}]^{2,n+1}$ & Vertex coordinates for
-  the slip surface being evaluated. Identifies shape of the slope, and
-  slice points. Sequence length value of \textit{n} is defined by the
-  Slicer module (section \ref{sec:SlicerMod}).\\
-
-  \textit{params\_layers} : struc\_layers & (Appendix
-  \ref{Tbl:LayerParam})\\
-
-  \textit{piez} : struc\_piez & (Appendix
-  \ref{Tbl:PiezParam})\\
-
-  \textit{soln} : struc\_soln & (Appendix
-  \ref{Tbl:SolnParam})\\
-
-  \textit{params\_load} : struc\_load & (Appendix
-  \ref{Tbl:LoadForceParam})
-\end{longtable}
-
-\noindent \textbf{Exceptions:} ~\newline\noindent A solution which
-does not converge to a consistent solution, where the change in
-calculated factor of safety (\textit{Del\_F}) between iterations is
-less than \textit{eps\_F}, and the change in interslice normal to
-shear force ratio (\textit{Del\_Lam}) is less than \textit{eps\_Lam},
-in less than \textit{max\_iter} iterations will be considered non
-converging exception case. A solution with a final calculated a factor
-of safety less than \textit{F\_MinLim} will be considered a spurious
-factor of safety exception case. Solutions that trigger these
-exception cases will output a factor of safety (\textit{F\_MP}) of
-1000.
-
-~\newline\noindent \textbf{Output:}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.15\textwidth} p{0.85\textwidth}}
-  \textit{F\_MP} : $\mathbb{R}$ & The factor of safety of the slope,
-  as calculated by the Morgenstern Price solution method, measuring
-  the stability of the slope. From IM\ref{SRS-IM_FS} of the SRS.\\
-\end{longtable}
+\subsubsection{Local Functions}
+N/A
 
 % ---------------------------------------------------------------- %
 % -------------------- PROPERTY SORTER MODULE -------------------- %
