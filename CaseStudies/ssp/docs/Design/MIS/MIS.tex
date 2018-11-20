@@ -417,10 +417,9 @@ load\_params(\textit{fname}):
 \begin{itemize}
 	\item exceptions:
 	\begin{itemize}
-		\item[] \textit{exc} $\coloneqq$ ($\lnot (\forall i \in 
-		[0..|slope.strat|-2])$($slope.strat[i].x -\\ 
-		slope.strat[i+1].x \leq 0)$ 
-		$\Rightarrow$ badSlopeGeometry\\
+		\item[] \textit{exc} $\coloneqq$ ($\lnot (\forall(i : \mathbb{Z} | i 
+		\in [0..|slope.strat|-2] : slope.strat[i].x - slope.strat[i+1].x \leq 
+		0))$ $\Rightarrow$ badSlopeGeometry\\
 		$|$ $\lnot (0 < slope.phi < 90)$ $\Rightarrow$ 
 		badEffAngleFriction\\
 		$|$ $\lnot (0 < slope.coh)$ $\Rightarrow$ 
@@ -429,13 +428,11 @@ load\_params(\textit{fname}):
 		badDryUnitWeight\\
 		$|$ $\lnot (0 < slope.gams)$ $\Rightarrow$ 
 		badSatUnitWeight\\
-		$|$ $\lnot (\forall i \in 
-		[0..|piez.piez|-2])$($piez.piez[i].x -\\ 
-		piez.piez[i+1].x \leq 0)$\\ $\lor piez.piez[0].x \neq 
-		slope.strat[0].x$ \\$\lor 
-		piez.piez[|piez.piez|-1].x$\\ $\neq 
-		slope.strat[|slope.strat|-1].x$ $\Rightarrow$ 
-		badPiezGeometry)\\
+		$|$ $\lnot (\forall(i : \mathbb{Z} | i \in 
+		[0..|piez.piez|-2] : piez.piez[i].x - piez.piez[i+1].x \leq 0))\\ 
+		\lor piez.piez[0].x \neq slope.strat[0].x \\
+		\lor piez.piez[|piez.piez|-1].x \neq slope.strat[|slope.strat|-1].x$\\ 
+		$\Rightarrow$ badPiezGeometry)\\
 	\end{itemize}
 \end{itemize}
 
@@ -784,10 +781,10 @@ genetic\_alg():
 \end{itemize}
 
 \subsubsection{Local Functions}
-generate\_slips() : 
-\begin{equation*}
-generate\_slips(Xrange) = (Xrange[0] + rand()*(Xrange[1] - Xrange[0]))
-\end{equation*}
+generate\_slips(\textit{Xrange}) : [$\mathbb{R}$] $\rightarrow$ $\mathbb{R}$\\
+generate\_slips(\textit{Xrange}) = $(Xrange[0] + rand()*(Xrange[1] - 
+Xrange[0]))$
+
 
 % ---------------------------------------------------------------- %
 % -------------------- KIN ADM MODULE ---------------------------- %
@@ -844,18 +841,18 @@ kinAdm(\textit{slip\_surf}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ ( $\lnot(\forall i \in 
-		[0..|\textit{slip\_surf}.\textit{surf}| - 
-		2])(\textit{slip\_surf}.\textit{surf}[i].x - 
-		\textit{slip\_surf}.\textit{surf}[i+1].x \leq 0) \\
+		\item[] \textit{out} $\coloneqq$ ( $\lnot(\forall(i : \mathbb{Z} | i 
+		\in [0..|\textit{slip\_surf}.\textit{surf}| - 2] : 
+		\textit{slip\_surf}.\textit{surf}[i].x - 
+		\textit{slip\_surf}.\textit{surf}[i+1].x \leq 0)) \\
 		\lor \lnot is\_on\_slope(\textit{slip\_surf}.\textit{surf}[0])\\
 		\lor \lnot 
 		is\_on\_slope(\textit{slip\_surf}.\textit{surf}[|\textit{slip\_surf}.\textit{surf}-1|])\\
 		\lor \lnot is\_in\_slope(\textit{slip\_surf}.\textit{surf})\\
 		\lor (cncvu() \land 
-		is\_concave\_up(\textit{slip\_surf}.\textit{surf}))\\
+		\lnot (is\_concave\_up(\textit{slip\_surf}.\textit{surf})))\\
 		\lor (obtu() \land 
-		has\_no\_sharp\_angles(\textit{slip\_surf}.\textit{surf}))\\
+		\lnot (has\_no\_sharp\_angles(\textit{slip\_surf}.\textit{surf})))\\
 		\Rightarrow false\\
 		| else \Rightarrow true$)
 	\end{itemize}
@@ -865,47 +862,45 @@ kinAdm(\textit{slip\_surf}):
 express the "else" case succintly}
 
 \subsubsection{Local Functions}
-linSlope : coord $\times$ coord $\rightarrow$ $\mathbb{R}$\\
+linSlope(\textit{point1}, \textit{point2}) : coord $\times$ coord $\rightarrow$ 
+$\mathbb{R}$\\
 linSlope(\textit{point1}, \textit{point2}) = $\frac{point2.y - 
 point1.y}{point2.x 
 - point1.x}$\\
 
-\noindent is\_on\_slope : coord $\rightarrow$ $\mathbb{B}$\\
-is\_on\_slope(\textit{point}) = $(\exists i \in 
-[0..|slope.strat|-1])(point = slope.strat[i])\\ \lor (\exists i 
-\in [0..|slope.strat|-2])(point.y = linSlope(slope.strat[i], 
-slope.strat[i+1])*point.x + 
-\frac{slope.strat[i].y}{linSlope(slope.strat[i], 
-slope.strat[i+1])*slope.strat[i].x}) $\\
+\noindent is\_on\_slope(\textit{point}) : coord $\rightarrow$ $\mathbb{B}$\\
+is\_on\_slope(\textit{point}) = $(\exists(i : \mathbb{Z} | i \in 
+[0..|slope.strat|-1] : point = slope.strat[i]))\\ \lor (\exists(i : \mathbb{Z} 
+| i \in [0..|slope.strat|-2] : point.y = linSlope(slope.strat[i], 
+slope.strat[i+1])*point.x + \frac{slope.strat[i].y}{linSlope(slope.strat[i], 
+slope.strat[i+1])*slope.strat[i].x})) $\\
 
-\noindent is\_in\_slope : coords $\rightarrow$ $\mathbb{B}$
-is\_in\_slope(\textit{surf}) = $(\forall i \in [1..|\textit{surf}|-2])((\forall 
-j \in 
-[0..|slope.strat|-2] \text{ with } slope.strat[j].x \leq \textit{surf}[i].x < 
-slope.strat[j+1].x)(\textit{surf}[i].y < (slope.strat[j].y + 
-(\textit{surf}[i].x - 
-slope.strat[j].x)*linSlope(slope.strat[j], slope.strat[j+1]))))$\\
+\noindent is\_in\_slope(\textit{surf}) : coords $\rightarrow$ $\mathbb{B}$
+is\_in\_slope(\textit{surf}) = $(\forall(i : \mathbb{Z} | i \in 
+[1..|\textit{surf}|-2] : (\forall(j : \mathbb{Z} | j \in 
+[0..|slope.strat|-2] \land slope.strat[j].x \leq \textit{surf}[i].x < 
+slope.strat[j+1].x : \textit{surf}[i].y < (slope.strat[j].y +  
+(\textit{surf}[i].x - slope.strat[j].x)*linSlope(slope.strat[j], 
+slope.strat[j+1]))))))$\\
 
-\noindent is\_concave\_up : coords $\rightarrow$ $\mathbb{B}$\\
-is\_concave\_up(\textit{surf}) = $(\forall i \in 
-[0..|\textit{surf}|-3])(linSlope(\textit{surf}[i+1], \textit{surf}[i+2]) \geq 
-linSlope(\textit{surf}[i], 
-\textit{surf}[i+1]))$\\
+\noindent is\_concave\_up(\textit{surf}) : coords $\rightarrow$ $\mathbb{B}$\\
+is\_concave\_up(\textit{surf}) = $(\forall(i : \mathbb{Z} | i \in 
+[0..|\textit{surf}|-3] : linSlope(\textit{surf}[i+1], \textit{surf}[i+2]) \geq 
+linSlope(\textit{surf}[i], \textit{surf}[i+1]))$\\
 
-\noindent distance : coord $\times$ coord $\rightarrow$ $\mathbb{R}$\\
+\noindent distance(\textit{point1}, \textit{point2}) : coord $\times$ coord 
+$\rightarrow$ $\mathbb{R}$\\
 distance(\textit{point1}, \textit{point2}) = $\sqrt{(point1.x - point2.x)^2 + 
 (point1.y - point2.y)^2}$\\
 
-\noindent has\_no\_sharp\_angles : coords $\rightarrow$ $\mathbb{B}$\\
-has\_no\_sharp\_angles(\textit{surf}) = $(\forall i \in 
-[0..|\textit{surf}|-3])\\
-(\arccos \frac{(distance(\textit{surf}[i], 
-\textit{surf}[i+1]))^2 + 
-(distance(\textit{surf}[i+1], \textit{surf}[i+2]))^2 - 
-(distance(\textit{surf}[i], 
+\noindent has\_no\_sharp\_angles(\textit{surf}) : coords $\rightarrow$ 
+$\mathbb{B}$\\
+has\_no\_sharp\_angles(\textit{surf}) = $(\forall(i : \mathbb{Z} | i \in 
+[0..|\textit{surf}|-3] :\\ \arccos \frac{(distance(\textit{surf}[i], 
+\textit{surf}[i+1]))^2 + (distance(\textit{surf}[i+1], \textit{surf}[i+2]))^2 - 
+(distance(\textit{surf}[i],  
 \textit{surf}[i+2]))^2}{2*distance(\textit{surf}[i], 
-\textit{surf}[i+1])*distance(\textit{surf}[i+1], 
-\textit{surf}[i+2])})$\\
+\textit{surf}[i+1])*distance(\textit{surf}[i+1], \textit{surf}[i+2])}))$\\
 
 % ---------------------------------------------------------------- %
 % -------------------- SLIP WEIGHTING MODULE ------------------------- %
@@ -961,14 +956,30 @@ slipWeighter(\textit{slip\_surfs}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{slip\_surfs} sorted by their 
-		\textit{Fs} field in ascending order and with the \textit{wt} field of 
-		each member populated.
+		\item[] \textit{out} $\coloneqq$ \textit{slip\_surfs'} such that 
+		$\textit{slip\_surfs'} = 
+		\textit{assign\_weights}(\textit{sort\_Fs}({\textit{slip\_surfs}}))$
 	\end{itemize}
 \end{itemize}
 
 \subsubsection{Local Functions}
-N/A
+sort\_Fs(\textit{unsorted}) : slips $\rightarrow$ slips
+sort\_Fs(\textit{unsorted}) = \textit{sorted} such that\\
+$\forall(a : \textit{slip} | a \in \textit{unsorted} : \exists(b : 
+\textit{slip} | b \in \textit{sorted} : b = a \land \textit{count}(a, A) = 
+\textit{count}(b, B))) \land \forall(i : \mathbb{Z} | i \in [0..|unsorted|-1] : 
+sorted[i].Fs \leq sorted[i+1].Fs)$\\
+
+\noindent count(\textit{a}, \textit{A}) : slip $\times$ slips $\rightarrow$ 
+$\mathbb{Z}$\\
+count(\textit{a}, \textit{A}) = $+(x : slip | x \in A \land x = a : 1)$\\
+
+\noindent assign\_weights(\textit{s}) : slips $\rightarrow$ slips\\
+assign\_weights(\textit{s}) = $s'$ such that\\
+$s'[0].wt = s[0].Fs - s[|s|-1]$ and \\
+$\forall(i : \mathbb{Z} | i \in [1..|s|-1] : s'[i].wt = s'[i-1].wt + 
+\frac{s[i].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : s[j].Fs - 
+s[|s|-1].Fs)})$\\
 
 % ---------------------------------------------------------------- %
 % -------------------- SLICER MODULE ----------------------------- %
@@ -1037,17 +1048,19 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 \end{itemize}
 
 \subsubsection{Local Functions}
-large\_segment : coords $\rightarrow$ $\mathbb{Z}$\\
+large\_segment(\textit{surf}) : coords $\rightarrow$ $\mathbb{Z}$\\
 large\_segment(\textit{surf}) = \textit{index} such that\\
 $\forall(i : \mathbb{Z} | i \in [0..|\textit{surf}|-2] : 
 \textit{surf}[\textit{index}+1] - \textit{surf}[\textit{index}] \geq 
 \textit{surf}[i+1] - \textit{surf}[i])$\\
 
-\noindent midpoint : coord $\times$ coord $\rightarrow$ coord\\
+\noindent midpoint(\textit{point1}, \textit{point2}) : coord $\times$ coord 
+$\rightarrow$ coord\\
 midpoint(\textit{point1}, \textit{point2}) = $< \frac{point1.x + point2.x}{2}, 
-\frac{point1.y + point2.y}{2} >$
+\frac{point1.y + point2.y}{2} >$\\
 
-\noindent subslice : int $\times$ coord $\times$ coord $\rightarrow$ coords
+\noindent subslice(\textit{n}, \textit{point1}, \textit{point2}) : int $\times$ 
+coord $\times$ coord $\rightarrow$ coords\\
 subslice(\textit{n}, \textit{point1}, \textit{point2}) = \textit{subslices} 
 such that\\
 $\forall(i : \mathbb{Z} | i \in [0..n] : subslices[i].x = point1.x + 
