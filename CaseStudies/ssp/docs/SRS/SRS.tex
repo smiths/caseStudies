@@ -309,11 +309,11 @@ $\Upsilon{}$ & & generic minimization function or algorithm
 \\
 $\varphi{}'$ & \si{\degree} & effective angle of friction
 \\
-$\Phi{}$ & & first constant to convert shear without the 
+$\Phi{}$ & & first function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
 interslice forces
 \\
-$\Psi{}$ & & second constant to convert shear without the 
+$\Psi{}$ & & second function used to convert shear without the 
 influence of interslice forces to shear with the influence of interslice 
 forces
 \\
@@ -1783,6 +1783,124 @@ the slope of the surface (\si{\meter}).\\
 
 ~\newline
 
+% ------------------------------------------ %
+%               Begin DD Phi   %
+% ------------------------------------------ %
+
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.6}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Phi}\\
+		
+		\hline Label& \bf First Function for Incorporating Interslice Forces 
+		into Shear Force\\
+		\hline Symbol& $\Phi$\\
+		\hline SI Units& unitless\\
+		
+		\hline
+		Equation & 
+		$\Phi_{\text{i}}= \left[ \lambda \cdot f_{\text{i}}
+		\cos\left(\alpha_{\text{i}}\right) -
+		\sin\left(\alpha_{\text{i}}\right) \right]\left[
+		\tan\left({\varphi'_{\text{i}}}\right) \right] - \left[ \lambda
+		\cdot f_{\text{i}} \sin\left(\alpha_{\text{i}}\right) +
+		\cos\left(\alpha_{\text{i}}\right) \right]\left(F_\text{S}\right)$\\
+		
+		\hline Description &$i$ is the index representing a single slice.\\
+		&$\Phi$ is the first function used to convert shear without the 
+		influence of interslice forces to shear with the influence of 
+		interslice forces.\\
+		&$\lambda$ is the proportionality constant for the interslice normal to 
+		shear force ratio.\\
+		&$f$ is a function describing variation of the interslice normal to 
+		shear force ratio; can be constant or half-sine.\\
+		&$\alpha$ is the angle between the base of a slice and the horizontal 
+		(\si{\degree}).\\
+		&$\varphi'$ is the effective angle of friction (\si{\degree}).\\
+		&$F_\text{S}$ is the factor of safety.\\
+		
+		&The equation for $\Phi$ arises as part of the derivation for 
+		\iref{IM_FS}, so that derivation should be consulted for information 
+		relating to the derivation of $\Phi$.\\
+		
+		\hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
+		
+		\hline Ref.\ By & \iref{IM_FS}, \iref{IM_E}\\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD Phi        %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD Psi   %
+% ------------------------------------------ %
+
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.6}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Psi}\\
+		
+		\hline Label& \bf Second Function for Incorporating Interslice Forces 
+		into Shear Force\\
+		\hline Symbol& $\Psi$\\
+		\hline SI Units& unitless\\
+		
+		\hline
+		Equation & 
+		$\Psi_{\text{i-1}} = \frac{\left[ \lambda \cdot f_{\text{i-1}}
+		\cos\left(\alpha_{\text{i}}\right) -
+		\sin\left(\alpha_{\text{i}}\right) \right]\left[
+		\tan\left(\varphi'\right) \right] - \left[ \lambda \cdot
+		f_{\text{i-1}} \sin\left(\alpha_{\text{i}}\right) +
+		\cos\left(\alpha_{\text{i}}\right) \right] \left( F_\text{S}
+		\right)}{\Phi_{i-1}}$\\
+		
+		\hline Description &$i$ is the index representing a single slice.\\
+		&$\Psi$ is the second function used to convert shear without the 
+		influence of interslice forces to shear with the influence of 
+		interslice forces.\\
+		&$\lambda$ is the proportionality constant for the interslice normal to 
+		shear force ratio.\\
+		&$f$ is a function describing variation of the interslice normal to 
+		shear force ratio; can be constant or half-sine.\\
+		&$\alpha$ is the angle between the base of a slice and the horizontal 
+		(\si{\degree}).\\
+		&$\varphi'$ is the effective angle of friction (\si{\degree}).\\
+		&$F_\text{S}$ is the factor of safety.\\
+		&$\Phi$ is the first function used to convert shear without the 
+		influence of interslice forces to shear with the influence of 
+		interslice forces.\\
+		
+		&The equation for $\Psi$ arises as part of the derivation for 
+		\iref{IM_FS}, so that derivation should be consulted for information 
+		relating to the derivation of $\Psi$.\\
+		
+		\hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
+		
+		\hline Ref.\ By & \iref{IM_FS}, \iref{IM_E}\\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD Psi                   %
+% ------------------------------------------ %
+
+~\newline
+
 \subsubsection{Instance Models} \label{sec_instance}
 
 This section transforms the problem defined in the
@@ -1809,6 +1927,7 @@ expressed only in terms of known physical values, as done in \dref{GD_R} and
 \dref{GD_T}.
 
 ~\newline
+
 
 % ------------------------------------------ %
 %               Begin IM Factor of safety      %
@@ -1842,12 +1961,9 @@ Output &
 &$F_\text{S}$ is the factor of safety.\\
 &$R$ is the resistive shear force without the influence of interslice forces 
 (\si{\newton\per\meter}), defined in \dref{GD_R}\\
-&$\Psi$ is the first function used to convert shear without the influence of 
+&$\Psi$ is the second function used to convert shear without the influence of 
 interslice forces to shear with the influence of interslice forces, defined in 
-DDx\\
-&$\Phi$ is the second function used to convert shear without the influence of 
-interslice forces to shear with the influence of interslice forces, defined in 
-DDy\\
+\dref{DD_Psi}\\
 &$T$ is the mobile shear force without the influence of interslice forces 
 (\si{\newton\per\meter}), defined in \dref{GD_T}\\
 
@@ -2035,7 +2151,7 @@ G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
 	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) \right) \cdot 
 	\tan\left( 
 	\varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+	\right)}{F_\text{S}} \end{array}
 \end{equation*}
 
 Rearranging yields the following:
@@ -2059,7 +2175,8 @@ G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
 \left(F_\text{S}\right) \cdot T_\text{i} - R_\text{i}
 \end{equation*}
 
-The definitions for $\Phi$ and $\Psi$ from DDx and DDy simplify the above to 
+The definitions for $\Phi$ and $\Psi$ from \dref{DD_Phi} and \dref{DD_Psi} 
+simplify the above to 
 Equation~\ref{eq:Gi}.
 
 \begin{equation} \label{eq:Gi}
