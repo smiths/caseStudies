@@ -572,7 +572,8 @@ The physical system of \progname, as shown in Figure~\ref{Fig_PhysSyst} includes
 the following elements:
 \begin{itemize}
 	\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The glass slab.
-	\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of explosion. Where the bomb, or any man-made explosive,
+	\item[PS\refstepcounter{physsysnum}\thephyssysnum:] The point of
+          explosion.  Where the bomb, or any man-made explosive,
 	is located. The stand off distance is the distance between the point of
 	explosion and the glass.
 \end{itemize}
@@ -585,7 +586,8 @@ the following elements:
   \end{center}
 \end{figure}
  \aida{ stand off distance should be shown in the picture.} \wss{I agree.
-   Please add SD to the figure.}
+   Please add SD to the figure.} \wss{This change to the figure still needs to
+   be made.}
 
 \subsubsection{Goal Statements}\label{sec_gs} 
 
@@ -616,15 +618,17 @@ assumption is used.
 
 \begin{enumerate}
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Glass}:] The standard E1300-09a for
-calculation applies only to monolithic, laminated, or insulating glass
-constructions of rectangular shape with continuous lateral support along one,
-two, three, or four edges.  This practice assumes that (1) the supported glass
-edges for two, three, and four-sided support conditions are simply supported
-and free to slip in plane; (2) glass supported on two sides acts as a simply
-supported beam and (3) glass supported on one side acts as a cantilever.\aida{would be the scope of the project just monolithic ? If yes,
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_Glass}:] The standard
+  E1300-09a for calculation applies only to monolithic, laminated, or insulating
+  glass constructions of rectangular shape with continuous lateral support along
+  one, two, three, or four edges.  This practice assumes that (1) the supported
+  glass edges for two, three, and four-sided support conditions are simply
+  supported and free to slip in plane; (2) glass supported on two sides acts as
+  a simply supported beam and (3) glass supported on one side acts as a
+  cantilever.\aida{would be the scope of the project just monolithic ? If yes,
     It other glasses mush be removed.} \wss{We need to discuss your idea of just
-    making the scope monolithic.  I'm not sure why you are making that suggestion.} \aida{It was solved.}
+    making the scope monolithic.  I'm not sure why you are making that
+    suggestion.} \aida{It was solved.} \wss{great}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_N/AGlass}:] Following \cite[(pg. 1)]{ASTM2009}, this practice does not apply to
   any form of wired, patterned, etched, sandblasted, drilled, notched, or grooved
@@ -695,10 +699,13 @@ This section focuses on the general equations and laws that \progname{} is based
 		\hline
 		Description 
 	   		& $P_\text{fail}$ is the probability of failure.\\
-		& $P_{b_{\text{tol}}}$ is the tolerable threshold entered by the user \\
+		& $P_{b_{\text{tol}}}$ is the tolerable threshold entered by the
+                  user \wss{all new symbols need to be added to the table of
+                  symbols} \wss{Don't mention ``entered by the user.''  This is
+                  a theoretical model, not the input output relation for the software.}\\
 		\hline
 		Source &
-		\cite{ASTM2009} \wss{This citation is no longer appropriate for here.}\\
+		\cite{ASTM2009} \wss{This citation is no longer appropriate here.}\\
 		\hline
 		Ref.\ By & \iref{IM_prob}\\
 		\hline
@@ -731,6 +738,13 @@ This section focuses on the general equations and laws that \progname{} is based
 	\end{tabular}
 \end{minipage}\\
 ~\newline
+
+\wss{I think we need descriptive text for the theoretical models.  The equations
+alone cannot speak for themselves.  We need to add text that describes the
+equations, not just a definition of the terms.  We should follow the current
+Drasil approach for doing this.  I have posted a question to the Drasil repo to
+find the terminology that is currently being used.  We might add something like
+a notes field.}
 
 \subsubsection{General Definitions}\label{sec_gendef}
 
@@ -891,11 +905,15 @@ $$h=\frac{1}{1000}
   & $a$, $b$ are the dimensions of the plate where $(a>b)$\\
   & $h$ is the true thickness, which is based on the nominal thickness as shown
     in \ddref{DD_thick}\\
-  & $\hat{q}_{\text{tol}}$ is the tolerable load defined in \ddref{DD_qtol} \aida{According to the change of NFL unit to Pascal and this equation, Should'nt the unit of this load be Pascal?}\\
+  & $\hat{q}_{\text{tol}}$ is the tolerable load defined in \ddref{DD_qtol}
+    \aida{According to the change of NFL unit to Pascal and this equation,
+    Should'nt the unit of this load be Pascal?}  \wss{No, the units for $E$ are
+    Pa, so $\hat{q}_{\text{tol}}$ needs to be unitless for NFL to have units of
+    Pa.  The hat over the symbol is used to indicate that it is dimensionless.
+    If you look at DD7 the units of q hat are Pa/Pa.} \\
   \hline
   Source &
   \cite{ASTM2009}\\
-  % The above web link should be replaced with a proper citation to a publication
   \hline
   Ref.\ By & \ddref{DD_cap}\\
   \hline
@@ -1225,7 +1243,11 @@ and Section~\ref{sec_gendef}.
 		both False.\\
 		& $\text{LR}$ is the Load Resistance (also called capacity), as defined in
 		\ddref{DD_cap} \wss{LR has to have units of Pa, or the comparison to $q$
-			doesn't make sense} \aida{I have changed in the Table Of Symbols. Is that enough?}\\
+			doesn't make sense} \aida{I have changed in the Table Of
+                  Symbols. Is that enough?}  \wss{Wherever units are mentioned,
+                  they should be mentioned for LR.} \wss{The refinement of the
+                  theoretical model also needs to be mentioned for this instance
+          model.}\\
 		& $q$ (also referred as the demand) is the 3 second equivalent pressure, as
 		defined in \ddref{DD_dem}\\
 		\hline
@@ -1252,7 +1274,8 @@ uncertainty quantification exercise. The constraints are conservative, to give
 the user of the model the flexibility to experiment with unusual situations. The
 column of typical values is intended to provide a feel for a common scenario.
 
-Section Appendix~[\ref{Sec:ValuofAuxiCons}] \wss{Update this to point to the Appendix} \aida{Done.}
+Section Appendix~[\ref{Sec:ValuofAuxiCons}] \wss{Update this to point to the
+  Appendix} \aida{Done.} \wss{Remove the word Section.}
 gives the values of the specification parameters used in
 Table~\ref{TblInputVar}.
 
@@ -1286,13 +1309,15 @@ $w$&$w > 0$ & $w_{\text{min}} \le w \le w_{\text{max}}$&42 \si[per-mode=symbol]{
 \end{tabular}
 \end{table}
 
-Note: The values for $d_\text{min}$ and $d_\text{max}$ are obtained from Figure~\ref{Fig_ASTM_E1300-09}
-and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm which can be found in the 
-Reference directory. The value for $\mbox{AR}_\text{max}$ is obtained from Figure~\ref{ASTM_F2248-09_BeasonEtAl}
-and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm.
-The values for $w_\text{min}$, $w_\text{max}$, $\text{SD}_\text{min}$ and $\text{SD}_\text{max}$
-are obtained from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore BR\textunderscore 0\textunderscore 40b.xslm. 
-\newline
+Note: The values for $d_\text{min}$ and $d_\text{max}$ are obtained from
+Figure~\ref{Fig_ASTM_E1300-09} and the GLASS\textunderscore BR\textunderscore
+0\textunderscore 40b.xslm, which can be found in the Reference directory. The
+value for $\mbox{AR}_\text{max}$ is obtained from
+Figure~\ref{ASTM_F2248-09_BeasonEtAl} and the GLASS\textunderscore
+BR\textunderscore 0\textunderscore 40b.xslm.  The values for $w_\text{min}$,
+$w_\text{max}$, $\text{SD}_\text{min}$ and $\text{SD}_\text{max}$ are obtained
+from Figure~\ref{Fig_ASTM_F2248-09} and the GLASS\textunderscore
+BR\textunderscore 0\textunderscore 40b.xslm.  \newline
 
 \begin{figure}[h!]
   \begin{center}
@@ -1423,6 +1448,10 @@ calculations stop.
 \progname\ is intended to be an educational tool, therefore accuracy and
 performance speed are secondary program priorities. Instead, the following 
 non-functional requirements are prioritized:
+
+\wss{To update your nonfunctional requirements, I suggest that you have a look
+  at what Olu is doing in the Game Physics SRS.  To make the requirements
+  unambiguous, you can reference your System VnV Plan.}
 
 \begin{itemize}
 \item[NFR1:] Correctness, achieved if the outputs of the code have the
