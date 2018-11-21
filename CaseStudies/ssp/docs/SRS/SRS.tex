@@ -727,6 +727,10 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \ddref{DD_R},
   [\ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_Angles_alpha}, 
   \ddref{DD_Angles_Beta}, \ddref{DD_lb}, \ddref{DD_ls}].
   
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_EdgeSlices}] The 
+interslice forces at the \textit{0}th and \textit{n}th interslice interfaces 
+are 0. [\iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}].
+  
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
 seismic force acting on the slope. [\ddref{DD_R}, \ddref{DD_T}, \iref{IM_FS}, 
 \iref{IM_Lambda}, \iref{IM_E}, \lcref{LC_Seismic}]
@@ -2216,7 +2220,8 @@ G_\text{n} \Phi_\text{n} = \Psi_\text{n-1} G_\text{n-1} \Phi_\text{n-1} +
 F_\text{S} T_\text{n} - R_\text{n}
 \end{equation*}
 
-Applying A[new assumption], which says that $G_{0}$ and $G_{n}$ are 0, results 
+Applying \aref{A_EdgeSlices}, which says that $G_{0}$ and $G_{n}$ are 0, 
+results 
 in the following special cases: Equation~\ref{eq:G0} for the first slice and 
 Equation~\ref{eq:Gn} for the $n$th slice.
 
@@ -2977,41 +2982,41 @@ definitions, instance models, and likely changes on the assumptions.
 
 \begin{table}[h!]
 \centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 \hline
 & \aref{A_Concave}& \aref{A_Constant}& \aref{A_Homo}& \aref{A_Saturated}&
 \aref{A_Isotropic}& \aref{A_Base}& \aref{A_2D}& \aref{A_Lin}& 
-\aref{A_Straight}& \aref{A_Seismic}& \aref{A_External} \\
+\aref{A_Straight}& \aref{A_EdgeSlices}& \aref{A_Seismic}& \aref{A_External} \\
 \hline
-\tref{TM_FS}            & & & & & & & & & & & \\ \hline
-\tref{TM_Eqm}           & & & & & & & X& & & & \\ \hline
-\tref{TM_Fmc}           & & & & & & & & X& & & \\ \hline
-\tref{TM_EffStress}     & & & & & & & & & & & \\ \hline
-\dref{GD_Fx}            & & & & & & & & & & & \\ \hline
-\dref{GD_Fy}            & & & & & & & & & & & \\ \hline
-\dref{GD_P}             & & & X& X& X& & & & & & \\ \hline
-\dref{GD_MobShear}      & & X& X& X& X& & & & & & \\ \hline
-\dref{GD_EffNormal}     & & & & & & & & X& & & \\ \hline
-\dref{GD_X}             & & & & & & X& & & & & \\ \hline
-\dref{GD_M}             & & & & & & & & & & & \\ \hline
-\ddref{DD_W}            & & & & & & & & & & & \\ \hline
-\ddref{DD_Ub}           & & & & & & & & & X& & \\ \hline
-\ddref{DD_Ut}           & & & & & & & & & X& & \\ \hline
-\ddref{DD_H}            & & & & & & & & & & & \\ \hline
-\ddref{DD_Angles_alpha} & & & & & & & & & X& & \\ \hline
-\ddref{DD_Angles_Beta}  & & & & & & & & & X& & \\ \hline
-\ddref{DD_b}            & & & & & & & & & & & \\ \hline
-\ddref{DD_lb}           & & & & & & & & & X& & \\ \hline
-\ddref{DD_ls}           & & & & & & & & & X& & \\ \hline
-\ddref{DD_R}            & & & X& X& X& & & & & X& X\\ \hline
-\ddref{DD_T}            & & & X& X& X& & & & & X& X\\ \hline
-\iref{IM_FS}            & & X& & & & X& & & & X& X\\ \hline
-\iref{IM_Lambda}        & & & & & & X& & & & X& X\\ \hline
-\iref{IM_E}             & & X& & & & X& & & & X& X\\ \hline
-\iref{IM_Min}           & X& & & & & & & & & & \\ \hline
-\lcref{LC_inhomogeneous}& & & X& & & & & & & & \\ \hline
-\lcref{LC_Seismic}      & & & & & & & & & & X& \\ \hline
-\lcref{LC_External}     & & & & & & & & & & & X\\
+\tref{TM_FS}            & & & & & & & & & & & & \\ \hline
+\tref{TM_Eqm}           & & & & & & & X& & & & & \\ \hline
+\tref{TM_Fmc}           & & & & & & & & X& & & & \\ \hline
+\tref{TM_EffStress}     & & & & & & & & & & & & \\ \hline
+\dref{GD_Fx}            & & & & & & & & & & & & \\ \hline
+\dref{GD_Fy}            & & & & & & & & & & & & \\ \hline
+\dref{GD_P}             & & & X& X& X& & & & & & & \\ \hline
+\dref{GD_MobShear}      & & X& X& X& X& & & & & & & \\ \hline
+\dref{GD_EffNormal}     & & & & & & & & X& & & & \\ \hline
+\dref{GD_X}             & & & & & & X& & & & & & \\ \hline
+\dref{GD_M}             & & & & & & & & & & & & \\ \hline
+\ddref{DD_W}            & & & & & & & & & & & & \\ \hline
+\ddref{DD_Ub}           & & & & & & & & & X& & & \\ \hline
+\ddref{DD_Ut}           & & & & & & & & & X& & & \\ \hline
+\ddref{DD_H}            & & & & & & & & & & & & \\ \hline
+\ddref{DD_Angles_alpha} & & & & & & & & & X& & & \\ \hline
+\ddref{DD_Angles_Beta}  & & & & & & & & & X& & & \\ \hline
+\ddref{DD_b}            & & & & & & & & & & & & \\ \hline
+\ddref{DD_lb}           & & & & & & & & & X& & & \\ \hline
+\ddref{DD_ls}           & & & & & & & & & X& & & \\ \hline
+\ddref{DD_R}            & & & X& X& X& & & & & & X& X\\ \hline
+\ddref{DD_T}            & & & X& X& X& & & & & & X& X\\ \hline
+\iref{IM_FS}            & & X& & & & X& & & & X& X& X\\ \hline
+\iref{IM_Lambda}        & & & & & & X& & & & X& X& X\\ \hline
+\iref{IM_E}             & & X& & & & X& & & & X& X& X\\ \hline
+\iref{IM_Min}           & X& & & & & & & & & & & \\ \hline
+\lcref{LC_inhomogeneous}& & & X& & & & & & & & & \\ \hline
+\lcref{LC_Seismic}      & & & & & & & & & & & X& \\ \hline
+\lcref{LC_External}     & & & & & & & & & & & & X\\
 \hline
 \end{tabular}
 \caption{Traceability Matrix Showing the Connections Between Assumptions 
