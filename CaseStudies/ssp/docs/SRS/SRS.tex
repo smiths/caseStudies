@@ -168,6 +168,9 @@ their units.
 \hline
 $b$ & \si{\meter}& width of the base of a slice in the \textit{x} direction
 \\
+\textit{const\_f} & & boolean decision on which form of \textit{f} 
+the user desires: constant if true, or half-sine if false
+\\
 $c'$ & \si{\pascal} & effective cohesion 
 \\
 ${C1_{i}}$ & \si{\newton}& interslice shear force expression used to calculate 
@@ -1784,6 +1787,61 @@ the slope of the surface (\si{\meter}).\\
 ~\newline
 
 % ------------------------------------------ %
+%               Begin DD f                   %
+% ------------------------------------------ %
+
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.6}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_f}\\
+		
+		\hline Label& \bf Interslice Normal to Shear Force Ratio Variation 
+		Function\\
+		\hline Symbol& $f$\\
+		\hline SI Units& unitless\\
+		
+		\hline
+		Equation & 
+		
+		\( f_i= \) 
+		\(  \left\{
+		\renewcommand{\arraystretch}{1.75}
+		\begin{tabular}{ p{4cm} l} 
+		$ 1 $ &  $\textit{const\_f}$ \\
+		$ \sin \left( \pi 
+		\frac{x_{\text{slip,}i}-x_\text{slip,0}}{x_{\text{slip,}n}-x_\text{slip,0}}
+		 \right)$ & $\lnot \textit{const\_f}$ \\
+		\end{tabular}
+		\renewcommand{\arraystretch}{1}
+		\right. \) \\
+		
+		\hline Description &$i$ is the index representing a single slice.\\
+		&$f$ is a function describing variation of the interslice normal to 
+		shear force ratio; can be constant or half-sine.\\
+		&\textit{const\_f} is a boolean decision on which form of \textit{f} 
+		the user desires: constant if true, or half-sine if false.\\
+		&$x_\text{slip}$ is the $x$-ordinate of a point on a slip surface 
+		(\si{\meter}).\\
+		
+		\hline Sources& \cite{FredlundKrahn}\\
+		
+		\hline Ref.\ By & \dref{GD_X}, \ddref{DD_Phi}, \ddref{DD_Psi}, 
+		\iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD f                     %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
 %               Begin DD Phi   %
 % ------------------------------------------ %
 
@@ -2834,8 +2892,8 @@ requirements, the qualities that the software is expected to exhibit.
     weight of saturated soil for each slope layer. \\
     $\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & Unit
     weight of water. \\
-    N/A & N/A & A boolean decision on which form of the interslice variation 
-    function \textit{f} the user desires: constant or half-sine.\\ \bottomrule
+    \textit{const\_f} & N/A & Boolean decision on which form of \textit{f} 
+    the user desires: constant if true, or half-sine if false.\\ \bottomrule
 \end{tabularx}
 \end{table}
 
@@ -2867,20 +2925,20 @@ output the user-supplied inputs listed in the table below:
 	\noindent \begin{tabularx}{1.0\textwidth}{l X} \toprule \textbf{symbol} &
 		%  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
 		\textbf{description}\\ \midrule
-		${x_{slip}^{maxEnd}}$ & maximum potential \textit{x}-ordinate of 
+		${x_{slip}^{maxEnd}}$ & Maximum potential \textit{x}-ordinate of 
 		the ending point of a slip surface \\
-		${x_{slip}^{minEnd}}$ & minimum potential \textit{x}-ordinate of 
+		${x_{slip}^{minEnd}}$ & Minimum potential \textit{x}-ordinate of 
 		the ending point of a slip surface\\
-		${x_{slip}^{maxStart}}$ & maximum potential \textit{x}-ordinate of 
+		${x_{slip}^{maxStart}}$ & Maximum potential \textit{x}-ordinate of 
 		the starting point of a slip surface \\
-		${x_{slip}^{minStart}}$ & minimum potential \textit{x}-ordinate of 
+		${x_{slip}^{minStart}}$ & Minimum potential \textit{x}-ordinate of 
 		the starting point of a slip surface \\
-		${y_{slip}^{max}}$ & maximum potential \textit{y}-ordinate of the 
+		${y_{slip}^{max}}$ & Maximum potential \textit{y}-ordinate of the 
 		of a point on a slip surface\\
-		${y_{slip}^{min}}$ & minimum potential \textit{y}-ordinate of the 
+		${y_{slip}^{min}}$ & Minimum potential \textit{y}-ordinate of the 
 		of a point on a slip surface \\
-		N/A & A boolean decision on which form of the interslice variation 
-		function \textit{f} the user desires: constant or half-sine.\\ 
+		\textit{const\_f} & Boolean decision on which form of \textit{f} 
+		the user desires: constant if true, or half-sine if false.\\ 
 		\bottomrule
 	\end{tabularx}
 \end{table}
