@@ -91,8 +91,8 @@
 
 \begin{document}
 
-\title{Software Requirements Specification for Tamias2D} 	    \olu {added project name}
-\author{Alex Halliwushka, Luthfi Mawarid and Olu Owojaiye}  \olu {added name}
+\title{Software Requirements Specification for Tamias2D: A 2D Rigid Body Physics Library} 	    
+\author{Alex Halliwushka, Luthfi Mawarid and Olu Owojaiye}
 \date{\today}
 	
 \maketitle
@@ -111,6 +111,8 @@ Oct. 4, 2018 & 1.1 & Formated the entire document to match blank template sample
 Oct. 8, 2018 & 1.2 & Updates throughout the document\\
 Nov. 2, 2018 & 1.3 & Updated System Context Diagram ; Off the Shelf solution\\
 Nov. 17, 2018 & 1.4 & Updated NonFunctional Requirements\\
+Nov. 20, 2018 & 1.5 & Moved Chasles Theorem from Theoretical model section to Data definition section; updated from T4 to DD9\\
+Nov. 20, 2018 & 1.6 & Moved  from General Definition to Data definition section; updated from GD1 to DD10\\
 
 \bottomrule
 \end{tabularx}
@@ -229,11 +231,11 @@ their units. More specific instances of these symbols will be described in their
   R & Requirement\\
   SRS & Software Requirements Specification\\
   T & Theoretical Model\\
-  \progname{} & TamiasMini2D\\ \olu{added program name} \olu {added program name}
+  \progname{} & Software name \\
   2D & Two-dimensional \\
   \bottomrule
 \end{tabular}\\
-
+ \olu {added program name}
 \newpage
 
 \tableofcontents 
@@ -476,8 +478,9 @@ or Likely Changes [Section~\ref{sec_likechan}], in which the respective assumpti
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_col}:] All rigid body collisions are vertex-to-edge collisions.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_damping}:] There is no
-  damping involved throughout the simulation.  \wss{Add another sentence: ``This
+  damping involved throughout the simulation. This implies that there are no friction forces.  \wss{Add another sentence: ``This
     implies that there are no friction forces.''}
+   \olu{added sentence}
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_constraints}:] There are no constraints and joints involved throughout the simulation.
 
@@ -592,8 +595,10 @@ library is based on. \\
 \end{minipage}
 
 ~\newline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \fi
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Theoretical Model 4 - T4 - Chasles' Theorem
 \noindent
@@ -983,7 +988,7 @@ models. The dimension of each quantity is also given. \\
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number & DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_CM}\\
+		Number & DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_CM}\olu{moved to DD10, comment this out}\\
 		\hline
 		Label & \textbf{Center of mass} \\
 		\hline
@@ -1343,9 +1348,213 @@ Finally, equating the left and right-hand sides back together and rearranging fo
 j = \frac{-(1 + C_\mathrm{R}) \mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}}{\big(\frac{1}{m_\mathrm{A}} + \frac{1}{m_\mathrm{B}}\big)||\mathbf{n}||^2 + \frac{||\mathbf{r}_\mathrm{AP} \times \mathbf{n}||^2}{\mathbf{I}_\mathrm{A}} + \frac{||\mathbf{r}_\mathrm{BP} \times \mathbf{n}||^2}{\mathbf{I}_\mathrm{B}}}
 \end{equation*}
 
-~\newpage
+~\newline
+%Data Definition 9 - DD9 - Chasles' Theorem
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		\hline
+		\rowcolor[gray]{0.9}
+		\hline
+	  Number & DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_CT} \\
+		\hline
+		Label & \textbf{Chasles' theorem} \wss{Please make this a DD; it isn't
+			abstract, general or fundamental.}\\
+		\hline
+			Symbol & $\mathbf{v}$ \\
+		\hline
+		Units & \si{\metre\per\second\tothe{1}} \\
+		\hline
+		Equation & $\mathbf{v}_\mathrm{B} = \mathbf{v}_\mathrm{O} + (\boldsymbol{\omega} \times \mathbf{r}_\mathrm{OB})$ \\
+		\hline
+		Description &
+		The linear velocity $\mathbf{v}_\mathrm{B}$ (\si{\metre\per\second}) of a point $B$ in a rigid body (\aref{A_rigid}) is the sum of the body's linear velocity $\mathbf{v}_\mathrm{O}$ (\si{\metre\per\second}) at the origin (axis of rotation) and the resultant vector from the cross product of the body's angular velocity $\boldsymbol{\omega}$ (\si{\radian\per\second}) and the vector between the origin and point \textit{B}, $\mathbf{r}_\mathrm{OB}$ (\si{\metre}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By & IM\ref{IM_FR} \\
+		\hline
+	\end{tabular}
+\end{minipage}
 
+\olu{moved T4 in Theoretical model section to DD9 in Data Definition section}
 
+%Data Definition 1 -DD1 - Impulse
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_I}\\
+		\hline
+		Label&\bf Impulse \wss{Make this a data definition}\\
+		\hline
+		Symbol & $\mathbf{J}$ \\
+		\hline
+		Units& \si{\newton\second} \\
+		\hline
+		Equation & $\mathbf{J} = \int \mathbf{F} \,\dt = \Delta\mathbf{P}$ = $m\Delta \mathbf{v}$\\
+		\hline
+		Description &  
+		An impulse $\mathbf{J}$ occurs when a force $\mathbf{F}$ acts over an interval of time. \\
+		&$\mathbf{J}$ is the resultant impulse applied on the body (\si{\newton\second}).\\
+		&$\mathbf{F}$ is the force applied on the body (\si{\newton}). \\
+		&$\Delta\mathbf{P}$ is the change in momentum of the body (\si{\newton\second}). \\
+		&$m$ is the mass of the body (\si{\kilogram}). \\
+		&$\Delta\mathbf{v}$ is the change in velocity of the body (\si{\metre\per\second}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By &GD\ref{GD_COM}, DD\ref{DD_IM}, IM\ref{IM_C} \olu{should a DD refer to another DD? Regarding DD8 and DD10, 2 occurrences of impulse, DD8 is specific to collision and references by DD10 that was originally in the GD section, should we have 2 instances of Impulse in DD section?}\\
+		\hline
+	\end{tabular}
+\end{minipage} \\
+    \olu{moved GD1 to DD10}
+%Data Definition 1 - DD1 - Derivation of Impulse
+\subsubsection*{Derivation of Impulse}
+
+Newton's second law of motion (T\ref{T_NSL}) states:
+\begin{equation*}
+\mathbf{F}= m\mathbf{a} = m \frac{\dv}{\dt}
+\end{equation*}
+
+\noindent
+Rearranging: 
+\begin{equation*}
+\int_{t_1}^{t_2} \mathbf{F} \,\dt = m \int_{v_1}^{v_2} \,\dv
+\end{equation*}
+
+\noindent
+Integrating the right hand side: 
+\begin{equation*}
+\int_{t_1}^{t_2} \mathbf{F} \,\dt = m\mathbf{v_2} - m\mathbf{v_1} = m\Delta\mathbf{v}
+\end{equation*}
+
+~\newline
+%General Definition 4 - GD4 - Relative velocity 
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_RV}\\
+		\hline
+		Label&\bf  Relative velocity in collisions \wss{Make this a data
+			definition}\\
+		\hline
+		Units & \si{\metre\per\second} \\
+		\hline
+		Equation& $\mathbf{v}^\mathrm{AB} = \mathbf{v}^\mathrm{AP} - \mathbf{v}^\mathrm{BP}$ \\
+		\hline
+		Description &  
+		In a collision, the velocity of a rigid body A colliding with another body B relative to that body, $\mathbf{v}^\mathrm{AB}$, is the difference between the velocities of A and B at point P. \\
+		& $\mathbf{v}^\mathrm{AB}$ is the velocity of A relative to B (\si{\metre\per\second}). \\ 
+		& P is the common collision point on both bodies (\si{\metre}). \\
+		& $\mathbf{v}^\mathrm{AP}$ is the velocity of point P in body A (\si{\metre\per\second}). \\
+		& $\mathbf{v}^\mathrm{BP}$ is the velocity of point P in body B (\si{\metre\per\second}).\\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By& GD\ref{GD_COR}, DD\ref{DD_IM}\\
+		\hline
+	\end{tabular}
+\end{minipage}
+
+~\newline
+
+%General Definition 5 - GD5 - Coefficient of restitution
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_COR}\\
+		\hline
+		Label&\bf Coefficient of restitution \wss{Make this a data definition}\\
+		\hline
+		\rule{0pt}{22pt}Equation & $C_\text{R} = -\displaystyle\frac{\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n}}{\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}}$\\[1.5ex]
+		\hline
+		Description &  
+		The coefficient of restitution  $C_\mathrm{R}$ is a unitless, dimensionless quantity that determines
+		the elasticity of a collision between two bodies. $C_\mathrm{R} = 1$ results in an elastic collision, 
+		while $C_\mathrm{R} < 1$ results in an inelastic collision, and $C_\mathrm{R} = 0$ results in a totally inelastic collision. \\
+		&$C_\mathrm{R}$ is the coefficient of restitution (unitless). \\
+		&$\mathbf{n}$ is the collision normal vector (\si{\metre}). Its signed direction is defined by (\aref{A_right}). \\
+		&$\mathbf{v}^\mathrm{AB}_\mathrm{i}$ is the initial relative velocity (GD\ref{GD_RV}) of body A with respect to body B before collision (\si{\metre\per\second}). \\
+		&$\mathbf{v}^\mathrm{AB}_\mathrm{f}$ is the final relative velocity (GD\ref{GD_RV}) of body A with respect to body B after collision (\si{\metre\per\second}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By & DD\ref{DD_IM}\\
+		\hline
+	\end{tabular}
+\end{minipage}
+
+~\newline
+
+%General Definition 6 - GD6 - Torque 
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_T}\\
+		\hline
+		Label&\bf Torque \wss{Make this a data definition} \\
+		\hline
+		Units & \si{\newton\metre} \\
+		\hline
+		Equation& $\boldsymbol{\tau} = \mathbf{r} \times \mathbf{F}$ \\
+		\hline
+		Description &  
+		The torque $\boldsymbol{\tau}$ on a body measures the tendency of a force to rotate the body around an axis or pivot. \\
+		& $\boldsymbol{\tau}$ is the torque on the body (\si{\newton\metre}). \\ 
+		&$\mathbf{F}$ is the force applied to the lever arm (\si{\newton}). \\
+		&$\mathbf{r}$ is a position vector of the point where the force is applied, measured from the axis of rotation (\si{\metre}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By & T\ref{T_NRM}, IM\ref{IM_C} \\
+		\hline
+	\end{tabular}
+\end{minipage}
+
+~\newline
+
+%General Definition 7 - GD7 - Moment of inertia 
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_MI}\\
+		\hline
+		Label&\bf  Moment of inertia \wss{Make this a data definition}\\
+		\hline
+		Units & \si{\kilogram\metre\tothe{2}} \\
+		\hline
+		Equation& $\mathbf{I} = \sum_{i=0}^{n}m_ir^{2}_{\text{p}_i}$ \\
+		\hline
+		Description &  
+		The moment of inertia $\mathbf{I}$ of a body measures how much torque is 
+		needed for the body to achieve an angular acceleration about axis of rotation. \\
+		& $\mathbf{I}$ is the moment of inertia (\si{\kilogram\metre\tothe{2}}). \\ 
+		&$n$ is number of particles of the body. \\
+		&$m_i$ is the mass of the $i$-th particle (\si{\kilogram}). \\
+		&$r_{\text{p}_i}$ is the distance between the $i$-th particle and the axis of rotation (\si{\metre}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By& T\ref{T_NRM}, DD\ref{DD_IM}, IM\ref{IM_C}\\
+		\hline
+	\end{tabular}
+\end{minipage}
 %4.2.5 Instance Models
 \subsubsection{Instance Models} \label{sec_instance}    
 
