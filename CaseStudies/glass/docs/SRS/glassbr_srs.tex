@@ -238,10 +238,11 @@ their units.  The symbols are listed in alphabetical order.
   $q$ & \si{\pascal} & Applied load (demand)\\
   $\hat{q}$ & -- & Dimensionless load\aida{According to the change of NFL, LR
                    unit to Pascal, Should'nt the unit of this load be Pascal?}
-                   \wss{Yes, please update}\\
+                   \wss{No, this is a dimensionless load}\\
   $\hat{q}_{\text{tol}}$ & -- & Tolerable load\aida{According to the change of
                                 NFL, LR unit to Pascal, Should'nt the unit of
-                                this load be Pascal?} \wss{Yes, please update}\\  
+                                this load be Pascal?} \wss{No, this is a
+                                dimensionless load}\\  
   $\text{SD}$ & \si{\meter} & Stand off distance which is represented in
                               coordinates $(\text{SD}_x , \text{SD}_y ,
                               \text{SD}_z)$\\
@@ -1597,7 +1598,12 @@ requirements on the assumptions.
 \end{table}
 
 \newpage
-\aida{Is the connection between T1,T2 and Requirements right? I am not sure.  }
+\aida{Is the connection between T1,T2 and Requirements right? I am not sure.}
+
+\wss{The theoretical models shouldn't trace to the requirements at all.  The
+  requirements should trace to the instance models.  The instance models should
+  trace to the theoretical models.}
+
 \begin{table}[h!]
 \centering
 \begin{adjustbox}{max width=\textwidth}
@@ -1715,9 +1721,6 @@ future work.
 		\caption{\label{Fig_ATrace} Traceability Graph Showing the Connections Between Assumptions and Other Items.}
 	\end{center}
 \end{figure} 
-
-
-
 
 \section{Appendix}
 
