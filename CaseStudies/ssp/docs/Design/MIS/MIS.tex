@@ -207,13 +207,13 @@ project.
 		\multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
 		Control \\
 		& Input \\
-		& Output \\
 		& Genetic Algorithm \\
 		& Kinematic Admissibility \\
 		& Slip Weighting \\
 		& Slip Slicing \\
 		& Morgenstern-Price Calculation \\
 		& Slice Property Calculation \\
+		& Output \\
 		\midrule
 		
 		\multirow{3}{0.3\textwidth}{Software Decision} &
@@ -602,90 +602,6 @@ load\_params(\textit{fname}):
 
 \subsubsection{Local Functions}
 
-N/A
-
-% ---------------------------------------------------------------- %
-% -------------------- OUTPUT MODULE ----------------------------- %
-% ---------------------------------------------------------------- %
-
-\section{MIS of the Output Module} \label{sec:OutputMod}
-
-\subsection{Module}
-Output
-
-\subsection{Uses}
-
-Sequence (Section~\ref{sec:SequenceData}), Plot (Section~\ref{sec:Plotting})
-
-\subsection{Syntax}
-
-\subsubsection{Exported Constants}
-N/A
-
-\subsubsection{Exported Data Types}
-N/A
-
-\subsubsection{Exported Access Programs}
-
-\begin{center}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-p{0.45\textwidth} } \hline 
-\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
-	
-verify\_output & $\mathbb{R}$ & - & negativeFS \\
-output & $\mathbb{R}$, coords, coords, coords, string & - & - \\ \hline
-\end{tabular}
-\end{center}
-
-\subsection{Semantics}
-
-\subsubsection{State Variables}
-N/A
-
-\subsubsection{Environment Variables}
-
-\textit{out\_file} : String
-\begin{itemize}
-	\item \textit{out\_file} represents a file stored in the file system of the 
-	hardware running \progname{}. \\
-\end{itemize}
-
-\textit{screen} : [$\mathbb{Z}$]
-\begin{itemize}
-	\item \textit{screen} represents the colour values for each pixel on the 
-	screen of the hardware running \progname{}. \\
-\end{itemize}
-
-\subsubsection{Assumptions}
-N/A
-
-\subsubsection{Access Routine Semantics}
-verify\_output(\textit{Fs}):
-\begin{itemize}
-	\item exceptions:
-	\begin{itemize}
-		\item[] \textit{exc} $\coloneqq$ $\textit{Fs} < 0$ 
-		$\Rightarrow$ negativeFS\\
-	\end{itemize}
-\end{itemize}
-
-\noindent output(\textit{Fs}, \textit{crit\_slip}, \textit{G}, \textit{X}, 
-\textit{fname}):
-\begin{itemize}
-	\item transition:
-	\begin{itemize}
-		\item[] \textit{out\_file} is created at path $\textit{fname}$ $||$ 
-		``.out''. The outputs of xEtr(), xExt(), yLim(), ftype(), \textit{Fs}, 
-		\textit{crit\_slip}, \textit{G}, and \textit{X} are written to 
-		\textit{out\_file}.
-		\textit{screen} is modified to display the outputs of 
-		plot(\textit{crit\_slip.x}, \textit{crit\_slip.y}), plot(\textit{G.x}, 
-		\textit{G.y}), and plot(\textit{X.x}, \textit{X.y}).  \\
-	\end{itemize}
-\end{itemize}
-
-\subsubsection{Local Functions}
 N/A
 
 % ---------------------------------------------------------------- %
@@ -1396,6 +1312,90 @@ prop\_calc(\textit{slip\_surf}):
 \subsubsection{Local Functions}
 N/A
 
+% ---------------------------------------------------------------- %
+% -------------------- OUTPUT MODULE ----------------------------- %
+% ---------------------------------------------------------------- %
+
+\section{MIS of the Output Module} \label{sec:OutputMod}
+
+\subsection{Module}
+Output
+
+\subsection{Uses}
+
+Sequence (Section~\ref{sec:SequenceData}), Plot (Section~\ref{sec:Plotting})
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+N/A
+
+\subsubsection{Exported Data Types}
+N/A
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
+			p{0.45\textwidth} } \hline 
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
+		\hline
+		
+		verify\_output & $\mathbb{R}$ & - & negativeFS \\
+		output & $\mathbb{R}$, coords, coords, coords, string & - & - \\ \hline
+	\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+N/A
+
+\subsubsection{Environment Variables}
+
+\textit{out\_file} : String
+\begin{itemize}
+	\item \textit{out\_file} represents a file stored in the file system of the 
+	hardware running \progname{}. \\
+\end{itemize}
+
+\textit{screen} : [$\mathbb{Z}$]
+\begin{itemize}
+	\item \textit{screen} represents the colour values for each pixel on the 
+	screen of the hardware running \progname{}. \\
+\end{itemize}
+
+\subsubsection{Assumptions}
+N/A
+
+\subsubsection{Access Routine Semantics}
+verify\_output(\textit{Fs}):
+\begin{itemize}
+	\item exceptions:
+	\begin{itemize}
+		\item[] \textit{exc} $\coloneqq$ $\textit{Fs} < 0$ 
+		$\Rightarrow$ negativeFS\\
+	\end{itemize}
+\end{itemize}
+
+\noindent output(\textit{Fs}, \textit{crit\_slip}, \textit{G}, \textit{X}, 
+\textit{fname}):
+\begin{itemize}
+	\item transition:
+	\begin{itemize}
+		\item[] \textit{out\_file} is created at path $\textit{fname}$ $||$ 
+		``.out''. The outputs of xEtr(), xExt(), yLim(), ftype(), \textit{Fs}, 
+		\textit{crit\_slip}, \textit{G}, and \textit{X} are written to 
+		\textit{out\_file}.
+		\textit{screen} is modified to display the outputs of 
+		plot(\textit{crit\_slip.x}, \textit{crit\_slip.y}), plot(\textit{G.x}, 
+		\textit{G.y}), and plot(\textit{X.x}, \textit{X.y}).  \\
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Local Functions}
+N/A
 
 % ---------------------------------------------------------------- %
 % ---------------- SEQUENCE DATA STRUCTURE MODULE ---------------- %

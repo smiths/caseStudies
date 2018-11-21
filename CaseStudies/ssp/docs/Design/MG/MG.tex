@@ -185,10 +185,6 @@ design for change.
   of the initial input data.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_inputConstraints}:] The       
 constraints on the initial input data.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_output}:] The format
-  of the final output data.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_outputConstraints}:] The     
-constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_GenAlg}:] The algorithm
   for determining the critical slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Kin}:] The criteria for
@@ -201,6 +197,10 @@ constraints on the factor of safety and interslice forces.
 to calculate the factor of safety for a slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
   algorithm for calculating soil properties of and forces on individual slices.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_output}:] The format
+  of the final output data.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_outputConstraints}:] The     
+  constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
   implementation of the sequence data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
@@ -243,7 +243,6 @@ followed by a number.
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
 \item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
 \item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input
-\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mGenAlg}:] Genetic
   Algorithm
 \item [\refstepcounter{mnum} \mthemnum \label{mKinAdm}:] Kinematic
@@ -254,6 +253,7 @@ followed by a number.
   Morgenstern-Price Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{mSliceProperty}:] Slice
   Property Calculation
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence Data 
 Structure
 \item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random Number     
@@ -277,13 +277,13 @@ implemented by the Operating System (OS).
 \multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
 Control \\
 & Input \\
-& Output \\
 & Genetic Algorithm \\
 & Kinematic Admissibility \\
 & Slip Weighting \\
 & Slip Slicing \\
 & Morgenstern-Price Calculation \\
 & Slice Property Calculation \\
+& Output \\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision} &
@@ -375,18 +375,6 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description}
 
-\subsubsection{Output (\mref{mOutput})}
-
-\begin{description}
-\item[Secrets:] The format and structure of the output data.
-\item[Services:] Outputs the results of the calculations, including
-  the factor of safety for the critical slip surface and a plot of the critical
-  slip surface on the slope geometry. Verifies that the output meets physical 
-  constraints. Also outputs input values.
-\item[Implemented By:] \progname
-\end{description} 
-
-
 \subsubsection{Genetic Algorithm (\mref{mGenAlg})}
 
 \begin{description}
@@ -449,6 +437,18 @@ acting on the slice.
 \item[Services:] Calculates the weight, hydrostatic forces, and interslice 
 water forces of each slice.
 \item[Implemented By:] \progname
+\end{description} 
+
+\subsubsection{Output (\mref{mOutput})}
+
+\begin{description}
+	\item[Secrets:] The format and structure of the output data.
+	\item[Services:] Outputs the results of the calculations, including
+	the factor of safety for the critical slip surface and a plot of the 
+	critical
+	slip surface on the slope geometry. Verifies that the output meets physical 
+	constraints. Also outputs input values.
+	\item[Implemented By:] \progname
 \end{description} 
 
 
@@ -556,14 +556,14 @@ to this decision, \mref{mMorgPrice} is the only module associated with
 \acref{AC_Control} & \mref{mControl}\\
 \acref{AC_input} & \mref{mInput}\\
 \acref{AC_inputConstraints} & \mref{mInput}\\
-\acref{AC_output}& \mref{mOutput}\\
-\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_GenAlg}& \mref{mGenAlg}\\
 \acref{AC_Kin}& \mref{mKinAdm}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
 \acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_CalcFS} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
+\acref{AC_output}& \mref{mOutput}\\
+\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
 \acref{AC_Rand} & \mref{mRandNum}\\
 \acref{AC_Plot} & \mref{mPlot}\\
