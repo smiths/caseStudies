@@ -173,11 +173,11 @@ the user desires: constant if true, or half-sine if false
 \\
 $c'$ & \si{\pascal} & effective cohesion 
 \\
-${C1_{i}}$ & \si{\newton}& interslice shear force expression used to calculate 
-the numerator of the scaling factor
+${C_{\text{num},i}}$ & \si{\newton}& expression used to calculate the numerator 
+of the interslice normal to shear force proportionality constant
 \\
-${C2_{i}}$ & \si{\newton}& interslice normal force expression used to 
-calculate the denominator of the scaling factor
+${C_{\text{den},i}}$ & \si{\newton}& expression used to calculate the 
+denominator of the interslice normal to shear force proportionality constant
 \\
 ${F_{x}}$ & \si{\newton} &$x$-component of force
 \\
@@ -290,9 +290,6 @@ $\gamma{}$ & \si{\newton\per\cubic\meter} & soil dry unit weight
 ${\gamma{}_{Sat}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit weight
 \\
 ${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & unit weight of water
-\\
-$\Delta{}H$ & \si{\newton\per\meter} & difference between interslice water 
-forces
 \\
 $\lambda{}$ & & proportionality constant for the interslice normal to shear 
 force ratio
@@ -562,9 +559,9 @@ independent of the direction in which it is measured.}
   
 \item {\textit{Plane strain:} A condition where the resultant stresses in one 
 of the directions of a 3-dimensional material can be approximated as
-  0. Results when the length of one dimension of the body dominates
+  zero. Results when the length of one dimension of the body dominates
   the others. Stresses in the direction of the dominant dimension can be 
-  approximated as 0.}
+  approximated as zero.}
 
 \end{itemize}
 
@@ -732,7 +729,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R},
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_EdgeSlices}] The 
 interslice forces at the \textit{0}th and \textit{n}th interslice interfaces 
-are 0. [\iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}].
+are zero. [\iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}].
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
 seismic force acting on the slope. [\dref{GD_R}, \dref{GD_T}, \iref{IM_FS}, 
@@ -1541,9 +1538,10 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \hline SI Units& \si{\newton\per\meter}\\
 
 \hline Equation & $H_i$ = $\begin{cases}
-\frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_{Sat}}+\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_{Sat}},
+\frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
+\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_\text{w}},
  & {y_{wt,i}}\geq{}{y_{us,i}}\\
-\frac{\left[{y_{wt,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_{Sat}}, & 
+\frac{\left[{y_{wt,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}}, & 
 {y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
 0, & {y_{wt,i}}\leq{}{y_{slip,i}}
 \end{cases}$
@@ -2278,7 +2276,7 @@ G_\text{n} \Phi_\text{n} = \Psi_\text{n-1} G_\text{n-1} \Phi_\text{n-1} +
 F_\text{S} T_\text{n} - R_\text{n}
 \end{equation*}
 
-Applying \aref{A_EdgeSlices}, which says that $G_{0}$ and $G_{n}$ are 0, 
+Applying \aref{A_EdgeSlices}, which says that $G_{0}$ and $G_{n}$ are zero, 
 results 
 in the following special cases: Equation~\ref{eq:G0} for the first slice and 
 Equation~\ref{eq:Gn} for the $n$th slice.
@@ -2376,7 +2374,8 @@ T_\text{1} + \Psi_\text{n-1} \Psi_\text{n-2} \dots \Psi_\text{2} T_\text{2} +
 
 Isolating the factor of safety on the left-hand side and using compact notation 
 for the products and sums yields Equation~\ref{eq:FS}, which can also be seen 
-in \iref{IM_FS}.
+in \iref{IM_FS}. $F_\text{S}$ depends on the unknowns $\lambda$ 
+(\iref{IM_Lambda}) and $G$ (\iref{IM_E}).
 
 \begin{equation} \label{eq:FS}
 {F_\text{S}}= \frac{\displaystyle\sum_{i=1}^{n-1} \left[ {R_{i}}
@@ -2400,13 +2399,13 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
 \hline Label& \bf Normal and Shear Force Proportionality Constant \\
 
-\hline Input & $b_{\text{i}}$ , $G_{\text{i}}$ , $H_{\text{i}}$ ,
-$\alpha_{\text{i}}$ , $h_{\text{i}}$ , $W_{\text{i}}$ ,
-$U_{\text{t,i}}$ , $\beta_{\text{i}}$ , $f_{\text{i}}$ \\
+\hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $\gamma_{\text{w}}$, 
+$\{\left(x_{\text{slip}}, y_{\text{slip}}\right)\}$ \\
 
 \hline
 Output & 
-\( {C1_{\text{i}}}= \) 
+\( {C_{\text{num},i}}= \) 
 \(  \left\{
 \renewcommand{\arraystretch}{2}
 \begin{tabular}{ p{6.5cm} r} 
@@ -2428,7 +2427,7 @@ Output &
 \renewcommand{\arraystretch}{1}
 \right. \)
 ~\newline~\newline
-\( {C2_{\text{i}}}= \)
+\( {C_{\text{den},i}}= \)
 \(  \left\{
 \renewcommand{\arraystretch}{2}
 \begin{tabular}{ p{6.5cm} r} 
@@ -2443,8 +2442,8 @@ Output &
 \renewcommand{\arraystretch}{1}
 \right. \) 
 ~\newline
-\( \lambda= \frac{ \displaystyle\sum_{i=1}^{n} {C1_{\text{i}}}}
-   {\displaystyle\sum_{i=1}^{n} {C2_{\text{i}}}} \) \\
+\( \lambda= \frac{ \displaystyle\sum_{i=1}^{n} {C_{\text{num},i}}}
+   {\displaystyle\sum_{i=1}^{n} {C_{\text{den},i}}} \) \\
 
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
@@ -2521,12 +2520,32 @@ Equation~(\ref{eq:lambda1}).
       \right] }
 \end{equation}
 
+\noindent This equation can be simplified by applying assumptions 
+\aref{A_Seismic} and \aref{A_External}, which state that the seismic and 
+external forces, respectively are zero.
+
+\begin{equation*}
+\lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
+	{z_{\text{i}}} - \frac{b_{\text{i}}}{2} {
+		\tan\left(\alpha_{\text{i}}\right)} \right] +
+	{G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
+	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
+	\right] - H_{\text{i}}\left[ z_{\text{i}} -
+	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
+	\right] \\[5pt] + H_{\text{i-1}}\left[ z_{\text{i-1}} +
+	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
+	\right] -
+	U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} \end{array} } 
+	{ \frac{b_{\text{i}}}{2} \left[
+	G_{\text{i}} f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}}
+	\right] }
+\end{equation*}
+
 \noindent
-Taking the summation of all slices, considering the boundary
-conditions that $G_{\text{0}}$ and $G_{\text{n}}$ are equal to zero, and 
-removing the seismic and external forces due to \aref{A_Seismic} and 
-\aref{A_External}, respectively, a general equation for the constant $\lambda$ 
-is developed in Equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
+Taking the summation of all slices, and applying \aref{A_EdgeSlices} to set 
+$G_{\text{0}}$, $G_n$, $H_{\text{0}}$, and $H_n$ equal to zero, a general 
+equation for the constant $\lambda$ is developed in Equation~(\ref{eq:Lambda}), 
+also found in \iref{IM_Lambda}.
 
 \begin{equation}\label{eq:Lambda}
 \lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{\text{i}}} \left[
@@ -2542,7 +2561,8 @@ is developed in Equation~(\ref{eq:Lambda}), also found in \iref{IM_Lambda}.
 
 \noindent
 Equation~(\ref{eq:Lambda}) for $\lambda$, is a function of the unknown
-interslice normal force $G$ (\iref{IM_E}).
+interslice normal force, $G$ (\iref{IM_E}), which itself depends on the unknown 
+factor of safety, $F_\text{S}$ (\iref{IM_FS}).
 
 ~\newline
 
