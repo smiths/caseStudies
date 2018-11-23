@@ -186,10 +186,10 @@ ${F_{y}}$ & \si{\newton} &$y$-component of force
 $f$ & & function describing variation of the interslice normal to shear force 
 ratio; can be constant or a half-sine
 \\
-$FS$ & & factor of safety
+$F_\text{S}$ & & factor of safety
 \\
-$FS_{Min}$ & & minimum factor of safety associated with the critical slip 
-surface
+$F_\text{S}^{\text{Min}}$ & & minimum factor of safety associated with the 
+critical slip surface
 \\
 $G$ & \si{\newton\per\meter} & interslice normal force
 \\
@@ -236,43 +236,57 @@ $X$ & \si{\newton\per\meter} & interslice shear force
 \\
 $x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 \\
-$x_{cs}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical slip 
+$x_{\text{cs}}$ & \si{\meter} & \textit{x}-ordinate of a point on the critical 
+slip 
 surface
 \\
-${x_{slip}}$ &  \si{\meter}& \textit{x}-ordinate of a point on a slip surface
+${x_{\text{slip}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on a slip 
+surface
 \\
-${x_{slip}^{maxEnd}}$ &  \si{\meter}& maximum potential \textit{x}-ordinate of 
-the ending point of a slip surface
+${x_{\text{slip}}^{\text{maxExt}}}$ &  \si{\meter}& maximum potential 
+\textit{x}-ordinate of 
+the exit point of a slip surface
 \\
-${x_{slip}^{maxStart}}$ &  \si{\meter}& maximum potential \textit{x}-ordinate 
-of the starting point of a slip surface
+${x_{\text{slip}}^{\text{maxEtr}}}$ &  \si{\meter}& maximum potential 
+\textit{x}-ordinate 
+of the entry point of a slip surface
 \\
-${x_{slip}^{minEnd}}$ &  \si{\meter}& minimum potential \textit{x}-ordinate of 
-the ending point of a slip surface
+${x_{\text{slip}}^{\text{minExt}}}$ &  \si{\meter}& minimum potential 
+\textit{x}-ordinate of 
+the exit point of a slip surface
 \\
-${x_{slip}^{minStart}}$ &  \si{\meter}& minimum potential \textit{x}-ordinate 
-of the starting point of a slip surface
+${x_{\text{slip}}^{\text{minEtr}}}$ &  \si{\meter}& minimum potential 
+\textit{x}-ordinate 
+of the entry point of a slip surface
 \\
-${x_{us}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
+${x_{\text{us}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
-${x_{wt}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water table
+${x_{\text{wt}}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water 
+table
 \\
 $y$ &  \si{\meter}& \textit{y}-ordinate in the Cartesian coordinate system
 \\
-$y_{cs}$ & \si{\meter} & \textit{y}-ordinate of a point on the critical slip 
+$y_{\text{cs}}$ & \si{\meter} & \textit{y}-ordinate of a point on the critical 
+slip 
 surface
 \\
-${y_{slip}}$ & \si{\meter}& \textit{y}-ordinate of a point on a slip surface
+${y_{\text{slip}}}$ & \si{\meter}& \textit{y}-ordinate of a point on a slip 
+surface
 \\
-${y_{slip}^{max}}$ &  \si{\meter}& minimum potential \textit{y}-ordinate of the 
+${y_{\text{slip}}^{\text{max}}}$ &  \si{\meter}& minimum potential 
+\textit{y}-ordinate 
+of the 
 of a point on a slip surface
 \\
-${y_{slip}^{min}}$ &  \si{\meter}& maximum potential \textit{y}-ordinate of the 
+${y_{\text{slip}}^{\text{min}}}$ &  \si{\meter}& maximum potential 
+\textit{y}-ordinate 
+of the 
 of a point on a slip surface
 \\
-${y_{us}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
+${y_{\text{us}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
 \\
-${y_{wt}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water table
+${y_{\text{wt}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water 
+table
 \\
 $z$ & \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the center of the slice
@@ -287,9 +301,10 @@ horizontal
 \\
 $\gamma{}$ & \si{\newton\per\cubic\meter} & soil dry unit weight
 \\
-${\gamma{}_{Sat}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit weight
+${\gamma{}_{\text{Sat}}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit 
+weight
 \\
-${\gamma{}_{w}}$ & \si{\newton\per\cubic\meter} & unit weight of water
+${\gamma{}_{\text{w}}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 \\
 $\lambda{}$ & & proportionality constant for the interslice normal to shear 
 force ratio
@@ -320,10 +335,11 @@ forces
 $\omega{}$ & \si{\degree} & angle between the imposed surface load acting into 
 the surface and the vertical
 \\
-${\ell{}_{b}}$ &  \si{\meter}& base length of a slice in the 
+${\ell{}_{\text{b}}}$ &  \si{\meter}& base length of a slice in the 
 direction parallel to the slope of the base
 \\
-${\ell{}_{s}}$ &  \si{\meter}& surface length of a slice in the direction 
+${\ell{}_{\text{s}}}$ &  \si{\meter}& surface length of a slice in the 
+direction 
 parallel to the slope of the surface \\
 
 \hline
@@ -685,7 +701,8 @@ likely change [LC], in which the respective assumption is used.
 \begin{enumerate}[label=A\arabic*:,ref={\arabic*}]
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Concave}] The
   slip surface is concave with respect to the slope surface. The 
-  $(x_{slip},y_{slip})$ coordinates of a slip surface follow a concave up 
+  $(x_{\text{slip}},y_{\text{slip}})$ coordinates of a slip surface follow a 
+  concave up 
   function. [\iref{IM_Min}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Constant}] The factor 
@@ -762,9 +779,10 @@ on.
   
   \hline Label&\bf Factor of Safety\\
   
-  \hline Equation& \( \text{FS} = \frac{P}{S} \) \\
+  \hline Equation& \( F_\text{S} = \frac{P}{S} \) \\
   
-  \hline Description & $FS$ is the factor of safety, or stability metric of the 
+  \hline Description & $F_\text{S}$ is the factor of safety, or stability 
+  metric of the 
   slope.\\
   & $S$ is the mobile shear force (\si{\newton\per\meter}).\\
   & $P$ is the resistive shear force (\si{\newton\per\meter}). \\
@@ -915,16 +933,16 @@ instance models.
   \hline Label&\bf Normal Force Equilibrium\\
   \hline SI Units & \si{\newton\per\meter}\\
   
-  \hline Equation& \( N_{\text{i}} \; = \begin{array}{l} \left[
-      W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
-      {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-      Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-      \right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
-      - H_{\text{i}} + H_{\text{i-1}} +
-      {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-      Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-      \right]\sin\left(\alpha_{\text{i}}\right) \end{array} \) \\
+  \hline Equation& \( N_{i} \; = \begin{array}{l} \left[
+      W_{i} - X_{i-1} + X_{i} +
+      {U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+      Q_{i}\;{\cos\left(\omega_{i}\right)}
+      \right]\cos\left(\alpha_{i}\right) \\ + \left[
+      {-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1}
+      - H_{i} + H_{i-1} +
+      {U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+      Q_{i}\;{\sin\left(\omega_{i}\right)}
+      \right]\sin\left(\alpha_{i}\right) \end{array} \) \\
  
   \hline Description & This equation satisfies \tref{TM_Eqm} in the normal 
   direction. Force equilibrium is derived from the free body diagram of 
@@ -972,16 +990,16 @@ instance models.
   \hline Label&\bf Base Shear Force Equilibrium\\
   \hline SI Units & \si{\newton\per\meter}\\
   
-  \hline Equation& \( S_{\text{i}} = \begin{array}{l} \left[
-      W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
-      {U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-      Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-      \right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-      {-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
-      - H_{\text{i}} + H_{\text{i-1}} +
-      {U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-      Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-      \right]\cos\left(\alpha_{\text{i}}\right) \end{array} \) \\
+  \hline Equation& \( S_{i} = \begin{array}{l} \left[
+      W_{i} -X_{i-1} + X_{i} +
+      {U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+      Q_{i}\;{\cos\left(\omega_{i}\right)}
+      \right]\sin\left(\alpha_{i}\right) \\ - \left[
+      {-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1}
+      - H_{i} + H_{i-1} +
+      {U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+      Q_{i}\;{\cos\left(\omega_{i}\right)}
+      \right]\cos\left(\alpha_{i}\right) \end{array} \) \\
   
   \hline Description & This equation satisfies \tref{TM_Eqm} in the shear 
   direction. Force equilibrium is derived from the free body diagram of 
@@ -1029,8 +1047,8 @@ instance models.
   \hline Label&\bf Resistive Shear Force\\
   \hline SI Units & \si{\newton\per\meter}\\
   
-  \hline Equation& \( P_{\text{i}} = N'_{\text{i}} \cdot \tan\left(
-  \varphi'_{\text{i}} \right) + c' \cdot \ell{}_{b,i} \) \\
+  \hline Equation& \( P_{i} = N'_{i} \cdot \tan\left(
+  \varphi'_{i} \right) + c'_i \cdot \ell{}_{\text{b,}i} \) \\
   
   \hline Description & 
  The Mohr-Coulomb resistive shear strength from \tref{TM_Fmc} implemented with 
@@ -1040,7 +1058,8 @@ instance models.
  &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
  &$c'$ is the effective cohesion (\si{\pascal}).\\
- &$\ell_b$ is the width of the base of a slice in the \textit{x} direction 
+ &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
+ direction 
  (\si{\meter}).\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
@@ -1070,9 +1089,9 @@ instance models.
   \hline Label&\bf Mobile Shear Force\\
   \hline SI Units & \si{\newton\per\meter}\\
   
-  \hline Equation & \( S_{\text{i}} = \frac{ P_{\text{i}} }{ \text{FS}
-  } = \frac { N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
-    \right) + c' \cdot \ell_{b,i} }{\text{FS}} \) \\
+  \hline Equation & \( S_{i} = \frac{ P_{i} }{ F_\text{S}
+  } = \frac { N'_{i} \cdot \tan\left( \varphi'_{i}
+    \right) + c'_i \cdot \ell_{\text{b},i} }{F_\text{S}} \) \\
   
   \hline Description & Mobile shear force as derived from the definition of the 
   factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. \\
@@ -1082,9 +1101,10 @@ instance models.
   &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
   &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
-  &$\ell_b$ is the width of the base of a slice in the \textit{x} direction 
+  &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
+  direction 
   (\si{\meter}).\\
-  &$FS$ is the factor of safety.\\
+  &$F_\text{S}$ is the factor of safety.\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -1155,15 +1175,15 @@ instance models.
 		Equation & 
 		$R_i \; = \begin{array}{l}
 		\left( \begin{array}{l}
-		\left[ W_{\text{i}} + U_{\text{t,i}}
-		\cos\left(\beta_{\text{i}}\right) \right]
-		\cos\left(\alpha_{\text{i}}\right) \\
-		+ \left[ - H_{\text{i}} + H_{\text{i-1}} +
-		U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) \right]
-		\sin\left(\alpha_{\text{i}}\right) - U_{\text{b,i}} \end{array}
+		\left[ W_{i} + U_{\text{t,}i}
+		\cos\left(\beta_{i}\right) \right]
+		\cos\left(\alpha_{i}\right) \\
+		+ \left[ - H_{i} + H_{i-1} +
+		U_{\text{t,}i} \sin\left(\beta_{i}\right) \right]
+		\sin\left(\alpha_{i}\right) - U_{\text{b,i}} \end{array}
 		\right) \cdot \tan\left(\varphi'\right)
-		+ c'_{\text{i}} \cdot b_{\text{i}} \cdot
-		\sec\left(\alpha_{\text{i}}\right) \end{array} $\\
+		+ c'_{i} \cdot b_{i} \cdot
+		\sec\left(\alpha_{i}\right) \end{array} $\\
 		
 		\hline Description &$i$ is the index representing a single slice.\\
 		&$R$ is the resistive shear force without the influence of interslice 
@@ -1221,8 +1241,9 @@ instance models.
 		\hline
 		Equation &
 		$T_i$ = 
-		$\left(W_{i}+{U_{t,i}}\cos\left(\beta{}_{i}\right)\right)\sin\left(\alpha{}_{i}
-		\right)-\left(- H_{i} + H_{i-1} +{U_{t,i}}\sin\left(\beta{}_{i}\right)
+		$\left(W_{i}+{U_{\text{t,}i}}\cos\left(\beta{}_{i}\right)\right)\sin\left(\alpha{}_{i}
+		\right)-\left(- H_{i} + H_{i-1} 
+		+{U_{\text{t,}i}}\sin\left(\beta{}_{i}\right)
 		\right)\cos\left(\alpha{}_{i}\right)$
 		\\ 
 		
@@ -1307,20 +1328,20 @@ instance models.
   
   \hline Label&\bf Moment Equilibrium\\
   
-  \hline Equation& \( 0 = \begin{array}{l} - {G}_{\text{i}} \left[
-      {z_{\text{i}}} + \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] + {G}_{\text{i-1}}
-    \left[ {z_{\text{i-1}}} - \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] -
-    H_{\text{i}}\left[ z_{\text{w,i}} + \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] \\[5pt] +
-    H_{\text{i-1}}\left[ z_{\text{w,i-1}} - \frac{b_{\text{i}}}{2} {
-        \tan\left(\alpha_{\text{i}}\right)} \right] +
-    \frac{b_{\text{i}}}{2} \left( X_{\text{i}} + X_{\text{i-1}}
-    \right) - K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} +
-    U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} \\ +
-    Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-    h_{\text{i}} \end{array} \) \\
+  \hline Equation& \( 0 = \begin{array}{l} - {G}_{i} \left[
+      {z_{i}} + \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+    \left[ {z_{i-1}} - \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] -
+    H_{i}\left[ z_{\text{w,i}} + \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] \\[5pt] +
+    H_{i-1}\left[ z_{\text{w,i-1}} - \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] +
+    \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+    \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+    U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+    Q_{i}\;{\sin\left(\omega_{i}\right)}
+    h_{i} \end{array} \) \\
 
  \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
  Force equilibrium is derived from the free body diagram of 
@@ -1386,11 +1407,13 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_W}\\
 \hline
 Equation & 
  $W_i$ = $b_{i}\begin{cases}
-\left({y_{us,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}} & 
-{y_{wt,i}}\geq{}{y_{us,i}}\\
-\left({y_{us,i}}-{y_{wt,i}}\right)\gamma{}+\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}}
- & {y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
-\left({y_{us,i}}-{y_{slip,i}}\right)\gamma{} & {y_{wt,i}}\leq{}{y_{slip,i}}
+\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}} & 
+{y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+\left({y_{\text{us,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+ & {y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+{y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
 \\
 
@@ -1398,12 +1421,13 @@ Equation &
 &$W$ is the weight (\si{\newton\per\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
-&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
-&${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&${\gamma{}_{Sat}}$ is the soil saturated unit weight 
+&${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
+(\si{\meter}).\\
+&${\gamma{}_{\text{Sat}}}$ is the soil saturated unit weight 
 (\si{\newton\per\meter\cubed}).\\
-&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+&${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
 (\si{\meter}).\\
 &$\gamma{}$ is the soil dry unit weight (\si{\newton\per\meter\cubed}).
 \\
@@ -1441,22 +1465,24 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ub}\\
 
 \hline
 Equation & 
-${U_{b,i}}$ = ${\ell{}_{b,i}}\begin{cases}
-\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{w}} & {y_{wt,i}}>{y_{slip,i}}\\
-0 & {y_{wt,i}}\leq{}{y_{slip,i}}
+${U_{b,i}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+\left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}} & 
+{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
  &${U_{b}}$ is the base hydrostatic force
  (\si{\newton\per\meter}).\\
- &${\ell{}_{b}}$ is the base length of a slice in the 
+ &${\ell{}_{\text{b}}}$ is the base length of a slice in the 
 direction parallel to the slope of the base (\si{\meter}).\\
- &${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+ &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
  (\si{\meter}).\\
- &${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+ &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
  (\si{\meter}).\\
- &${\gamma{}_{w}}$ is the unit weight of water (\si{\newton\per\meter\cubed}).\\
+ &${\gamma{}_{\text{w}}}$ is the unit weight of water 
+ (\si{\newton\per\meter\cubed}).\\
  
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -1491,20 +1517,23 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 
 \hline
 Equation & 
-${U_{t,i}}$ = ${\ell{}_{s,i}}\begin{cases}
-\left({y_{wt,i}}-{y_{us,i}}\right){\gamma{}_{w}} & {y_{wt,i}}>{y_{us,i}}\\
-0 & {y_{wt,i}}\leq{}{y_{us,i}}
+${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
+\left({y_{\text{wt,}i}}-{y_{\text{us,}i}}\right){\gamma{}_{\text{w}}} & 
+{y_{\text{wt,}i}}>{y_{\text{us,}i}}\\
+0 & {y_{\text{wt,}i}}\leq{}{y_{\text{us,}i}}
 \end{cases}$
 \\ 
 
 \hline Description &$i$ is the index representing a single slice.\\
 &${U_{t}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
-&${\ell{}_{s}}$ is the surface length of a slice in the direction 
+&${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
 parallel to the slope of the surface (\si{\meter}).\\
-&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water 
+&${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
 table (\si{\meter}).\\
-&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
-&${\gamma{}_{w}}$ is the unit weight of water (\si{\newton\per\meter\cubed}).\\
+&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+(\si{\meter}).\\
+&${\gamma{}_{\text{w}}}$ is the unit weight of water 
+(\si{\newton\per\meter\cubed}).\\
 
 \hline Sources & \cite{FredlundKrahn}\\
 
@@ -1538,23 +1567,25 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \hline SI Units& \si{\newton\per\meter}\\
 
 \hline Equation & $H_i$ = $\begin{cases}
-\frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
-\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_\text{w}}
- & {y_{wt,i}}\geq{}{y_{us,i}}\\
-\frac{\left[{y_{wt,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}} & 
-{y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
-0 & {y_{wt,i}}\leq{}{y_{slip,i}}
+\frac{\left[{y_{\text{us,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
+\left[{y_{\text{wt,}i}}-{y_{\text{us,}i}}\right]^{2}{\gamma{}_\text{w}}
+ & {y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+\frac{\left[{y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}
+ & 
+{y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
 &$H$ is the interslice water force (\si{\newton\per\meter}).\\
-&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
-&${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&${\gamma{}_{Sat}}$ is the soil saturated unit weight. 
+&${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
+(\si{\meter}).\\
+&${\gamma{}_{\text{Sat}}}$ is the soil saturated unit weight. 
 (\si{\newton\per\meter\cubed}).\\
-&${y_{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+&${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
 (\si{\meter}).\\
 
 \hline Sources & \cite{FredlundKrahn}\\
@@ -1589,16 +1620,16 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_alpha}\\
 
 \hline
 Equation & 
-\( \alpha_\text{i} = \arctan \left( \frac{y_\text{slip,i} -
-  y_\text{slip,i-1}}{x_\text{slip,i} - x_\text{slip,i-1}} \right) \)\\
+\( \alpha_i = \arctan \left( \frac{y_{\text{slip,}i} -
+  y_{\text{slip,}i-1}}{x_{\text{slip,}i} - x_{\text{slip,}i-1}} \right) \)\\
 
 \hline
 Description &$i$ is the index representing a single slice.\\
  &$\alpha{}$ is the angle between the base of a slice and the horizontal 
  (\si{\degree}).\\
- &${y_{slip}}$ is the \textit{y}-ordinate of a point on a slip surface 
+ &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
  (\si{\meter}).\\
- &${x_{slip}}$ is the \textit{x}-ordinate of a point on a slip surface 
+ &${x_{\text{slip}}}$ is the \textit{x}-ordinate of a point on a slip surface 
  (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -1634,15 +1665,17 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_Beta}\\
 
 \hline
 Equation & 
-\( \beta_\text{i} = \arctan \left( \frac{y_\text{us,i} -
-  y_\text{us,i-1}}{x_\text{us,i} - x_\text{us,i-1}} \right) \)\\
+\( \beta_i = \arctan \left( \frac{y_{\text{us,}i} -
+  y_{\text{us,}i-1}}{x_{\text{us,}i} - x_{\text{us,}i-1}} \right) \)\\
 
 \hline
 Description &$i$ is the index representing a single slice.\\
 &$\beta{}$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}).\\
-&${y_{us}}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
-&${x_{us}}$ is the \textit{x}-ordinate of a point on the slope (\si{\meter}).\\
+&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+(\si{\meter}).\\
+&${x_{\text{us}}}$ is the \textit{x}-ordinate of a point on the slope 
+(\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -1677,12 +1710,12 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
 
 \hline
 Equation & 
-$b_i$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
+$b_i$ = ${x_{\text{slip,}i}}-{x_{\text{slip,}i-1}}$\\
 
 \hline Description &$i$ is the index representing a single slice.\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
-&${x_{slip}}$ is the \textit{x}-ordinate of a point on a slip surface 
+&${x_{\text{slip}}}$ is the \textit{x}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -1713,15 +1746,16 @@ $b_i$ = ${x_{slip,i}}-{x_{slip,i-1}}$\\
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_lb}\\
 
 \hline Label& \bf Total Base Length of a Slice \\
-\hline Symbol& $\ell_b$\\
+\hline Symbol& $\ell_\text{b}$\\
 \hline SI Units& \si{\meter}\\
 
 \hline
 Equation & 
-${\ell{}_{b,i}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
+${\ell{}_{\text{b,}i}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 
 \hline Description &$i$ is the index representing a single slice.\\
-&${\ell{}_{b}}$ is the base length of a slice in the direction parallel to the 
+&${\ell{}_{\text{b}}}$ is the base length of a slice in the direction parallel 
+to the 
 slope of the base (\si{\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
@@ -1755,15 +1789,16 @@ slope of the base (\si{\meter}).\\
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
 
 \hline Label& \bf Total Surface Length of a Slice\\
-\hline Symbol& $\ell_s$\\
+\hline Symbol& $\ell_\text{s}$\\
 \hline SI Units& \si{\meter}\\
 
 \hline
 Equation & 
-${\ell{}_{s,i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
+${\ell{}_{\text{s,}i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 
 \hline Description &$i$ is the index representing a single slice.\\
-&${\ell{}_{s}}$ is the surface length of a slice in the direction parallel to 
+&${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
+parallel to 
 the slope of the surface (\si{\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
@@ -1858,12 +1893,12 @@ the slope of the surface (\si{\meter}).\\
 		
 		\hline
 		Equation & 
-		$\Phi_{\text{i}}= \left[ \lambda \cdot f_{\text{i}}
-		\cos\left(\alpha_{\text{i}}\right) -
-		\sin\left(\alpha_{\text{i}}\right) \right]\left[
-		\tan\left({\varphi'_{\text{i}}}\right) \right] - \left[ \lambda
-		\cdot f_{\text{i}} \sin\left(\alpha_{\text{i}}\right) +
-		\cos\left(\alpha_{\text{i}}\right) \right]\left(F_\text{S}\right)$\\
+		$\Phi_{i}= \left[ \lambda \cdot f_{i}
+		\cos\left(\alpha_{i}\right) -
+		\sin\left(\alpha_{i}\right) \right]\left[
+		\tan\left({\varphi'_{i}}\right) \right] - \left[ \lambda
+		\cdot f_{i} \sin\left(\alpha_{i}\right) +
+		\cos\left(\alpha_{i}\right) \right]\left(F_\text{S}\right)$\\
 		
 		\hline Description &$i$ is the index representing a single slice.\\
 		&$\Phi$ is the first function used to convert shear without the 
@@ -1915,12 +1950,12 @@ the slope of the surface (\si{\meter}).\\
 		
 		\hline
 		Equation & 
-		$\Psi_{\text{i-1}} = \frac{\left[ \lambda \cdot f_{\text{i-1}}
-		\cos\left(\alpha_{\text{i}}\right) -
-		\sin\left(\alpha_{\text{i}}\right) \right]\left[
+		$\Psi_{i-1} = \frac{\left[ \lambda \cdot f_{i-1}
+		\cos\left(\alpha_{i}\right) -
+		\sin\left(\alpha_{i}\right) \right]\left[
 		\tan\left(\varphi'\right) \right] - \left[ \lambda \cdot
-		f_{\text{i-1}} \sin\left(\alpha_{\text{i}}\right) +
-		\cos\left(\alpha_{\text{i}}\right) \right] \left( F_\text{S}
+		f_{i-1} \sin\left(\alpha_{i}\right) +
+		\cos\left(\alpha_{i}\right) \right] \left( F_\text{S}
 		\right)}{\Phi_{i-1}}$\\
 		
 		\hline Description &$i$ is the index representing a single slice.\\
@@ -2043,17 +2078,17 @@ definition of mobile shear force based on the factor of safety, from
 
 \begin{equation} \label{eq:MobileShear}
 \left( \begin{array}{l} \left[
-W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
-{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
-- H_{\text{i}} + H_{\text{i-1}} +
-{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right)\\ = \frac { 
-N'_{\text{i}} \cdot \tan\left( \varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{F_\text{S}}
+W_{i} -X_{i-1} + X_{i} +
+{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+Q_{i}\;{\cos\left(\omega_{i}\right)}
+\right]\sin\left(\alpha_{i}\right) \\ - \left[
+{-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1}
+- H_{i} + H_{i-1} +
+{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+Q_{i}\;{\cos\left(\omega_{i}\right)}
+\right]\cos\left(\alpha_{i}\right) \end{array} \right)\\ = \frac { 
+N'_{i} \cdot \tan\left( \varphi'_{i}
+	\right) + c'_i \cdot \ell_{b,i} }{F_\text{S}}
 \end{equation}
 
 \noindent An expression for the effective normal force, $N'_i$, can be derived 
@@ -2062,16 +2097,16 @@ definition for effective normal force from \dref{GD_EffNormal}. This results in
 Equation~\ref{eq:N'}.
 	
 \begin{equation} \label{eq:N'}
-N'_{\text{i}} \; = \begin{array}{l}
-\left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
-{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
-H_{\text{i}} + H_{\text{i-1}} +
-{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-\right]\sin\left(\alpha_{\text{i}}\right) \\ -
+N'_{i} \; = \begin{array}{l}
+\left[ W_{i} - X_{i-1} + X_{i} +
+{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+Q_{i}\;{\cos\left(\omega_{i}\right)}
+\right]\cos\left(\alpha_{i}\right) \\ + \left[
+{-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1} -
+H_{i} + H_{i-1} +
+{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+Q_{i}\;{\sin\left(\omega_{i}\right)}
+\right]\sin\left(\alpha_{i}\right) \\ -
 U_{\text{b,i}} \end{array}
 \end{equation}
 
@@ -2080,27 +2115,27 @@ gives
 
 \begin{equation*}
 \begin{array}{l} \left( \begin{array}{l} \left[
-W_{\text{i}} -X_{\text{i-1}} + X_{\text{i}} +
-{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\sin\left(\alpha_{\text{i}}\right) \\ - \left[
-{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}}
-- H_{\text{i}} + H_{\text{i-1}} +
-{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-\right]\cos\left(\alpha_{\text{i}}\right) \end{array} \right) =\\ \frac { 
+W_{i} -X_{i-1} + X_{i} +
+{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+Q_{i}\;{\cos\left(\omega_{i}\right)}
+\right]\sin\left(\alpha_{i}\right) \\ - \left[
+{-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1}
+- H_{i} + H_{i-1} +
+{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+Q_{i}\;{\cos\left(\omega_{i}\right)}
+\right]\cos\left(\alpha_{i}\right) \end{array} \right) =\\ \frac { 
 	\left( \begin{array}{l}
-	\left[ W_{\text{i}} - X_{\text{i-1}} + X_{\text{i}} +
-	{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-	Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-	\right]\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-	{-K_{\text{c}}}\;{W_{\text{i}}} - G_{\text{i}} + G_{\text{i-1}} -
-	H_{\text{i}} + H_{\text{i-1}} +
-	{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-	Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-	\right]\sin\left(\alpha_{\text{i}}\right) -
-	U_{\text{b,i}} \end{array} \right) \cdot \tan\left( \varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+	\left[ W_{i} - X_{i-1} + X_{i} +
+	{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+	Q_{i}\;{\cos\left(\omega_{i}\right)}
+	\right]\cos\left(\alpha_{i}\right) \\ + \left[
+	{-K_{\text{c}}}\;{W_{i}} - G_{i} + G_{i-1} -
+	H_{i} + H_{i-1} +
+	{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+	Q_{i}\;{\sin\left(\omega_{i}\right)}
+	\right]\sin\left(\alpha_{i}\right) -
+	U_{\text{b,i}} \end{array} \right) \cdot \tan\left( \varphi'_{i}
+	\right) + c'_i \cdot \ell_{b,i} }{F_\text{S}} \end{array}
 \end{equation*}
 
 \noindent Since the interslice shear force $X$ and interslice normal force $G$ 
@@ -2108,34 +2143,34 @@ are unknown, they are separated from the other terms as follows:
 
 \begin{equation*}
 \begin{array}{l} \left( \begin{array}{l} \left[
-		W_{\text{i}} +
-		{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-		Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-		\right]\sin\left(\alpha_{\text{i}}\right) + \left(-X_{\text{i-1}} + 
-		X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)\\ - \left[
-		{-K_{\text{c}}}\;{W_{\text{i}}}
-		- H_{\text{i}} + H_{\text{i-1}} +
-		{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-		Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-		\right]\cos\left(\alpha_{\text{i}}\right) - \left(- G_{\text{i}} + 
-		G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
+		W_{i} +
+		{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+		Q_{i}\;{\cos\left(\omega_{i}\right)}
+		\right]\sin\left(\alpha_{i}\right) + \left(-X_{i-1} + 
+		X_{i}\right)\sin\left(\alpha_{i}\right)\\ - \left[
+		{-K_{\text{c}}}\;{W_{i}}
+		- H_{i} + H_{i-1} +
+		{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+		Q_{i}\;{\cos\left(\omega_{i}\right)}
+		\right]\cos\left(\alpha_{i}\right) - \left(- G_{i} + 
+		G_{i-1}\right)\cos\left(\alpha_{i}\right) \end{array} 
 		\right) =\\ \frac 
 		{ 
 		\left( \begin{array}{l}
-			\left[ W_{\text{i}} +
-			{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)} +
-			Q_{\text{i}}\;{\cos\left(\omega_{\text{i}}\right)}
-			\right]\cos\left(\alpha_{\text{i}}\right) + \left(- X_{\text{i-1}} 
-			+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-			{-K_{\text{c}}}\;{W_{\text{i}}} -
-			H_{\text{i}} + H_{\text{i-1}} +
-			{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} +
-			Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-			\right]\sin\left(\alpha_{\text{i}}\right) + \left(- G_{\text{i}} + 
-			G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right)\\ -
+			\left[ W_{i} +
+			{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)} +
+			Q_{i}\;{\cos\left(\omega_{i}\right)}
+			\right]\cos\left(\alpha_{i}\right) + \left(- X_{i-1} 
+			+ X_{i}\right)\cos\left(\alpha_{i}\right) \\ + \left[
+			{-K_{\text{c}}}\;{W_{i}} -
+			H_{i} + H_{i-1} +
+			{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} +
+			Q_{i}\;{\sin\left(\omega_{i}\right)}
+			\right]\sin\left(\alpha_{i}\right) + \left(- G_{i} + 
+			G_{i-1}\right)\sin\left(\alpha_{i}\right)\\ -
 			U_{\text{b,i}} \end{array} \right) \cdot \tan\left( 
-			\varphi'_{\text{i}}
-		\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+			\varphi'_{i}
+		\right) + c'_i \cdot \ell_{b,i} }{F_\text{S}} \end{array}
 \end{equation*}
 
 \noindent Applying assumptions \aref{A_Seismic} and \aref{A_External}, which 
@@ -2144,99 +2179,99 @@ zero, allows for further simplification as shown below.
 
 \begin{equation*}
 \begin{array}{l} \left( \begin{array}{l} \left[
-W_{\text{i}} +
-{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)}
-\right]\sin\left(\alpha_{\text{i}}\right) + \left(-X_{\text{i-1}} + 
-X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)\\ - \left[
-{- H_{\text{i}} + H_{\text{i-1}} +
-{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}}
-\right]\cos\left(\alpha_{\text{i}}\right)
- - \left(- G_{\text{i}} + 
-G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right) \end{array} 
+W_{i} +
+{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)}
+\right]\sin\left(\alpha_{i}\right) + \left(-X_{i-1} + 
+X_{i}\right)\sin\left(\alpha_{i}\right)\\ - \left[
+{- H_{i} + H_{i-1} +
+{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)}}
+\right]\cos\left(\alpha_{i}\right)
+ - \left(- G_{i} + 
+G_{i-1}\right)\cos\left(\alpha_{i}\right) \end{array} 
 \right) =\\ \frac 
 { 
 	\left( \begin{array}{l}
-	\left[ W_{\text{i}} +
-	{U_{\text{t,i}}}\;{\cos\left(\beta_{\text{i}}\right)}
-	\right]\cos\left(\alpha_{\text{i}}\right) + \left(- X_{\text{i-1}} 
-	+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) \\ + \left[
-	{- H_{\text{i}} + H_{\text{i-1}} +
-	{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)}}
-	\right]\sin\left(\alpha_{\text{i}}\right) + \left(- G_{\text{i}} + 
-	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) -
+	\left[ W_{i} +
+	{U_{\text{t,}i}}\;{\cos\left(\beta_{i}\right)}
+	\right]\cos\left(\alpha_{i}\right) + \left(- X_{i-1} 
+	+ X_{i}\right)\cos\left(\alpha_{i}\right) \\ + \left[
+	{- H_{i} + H_{i-1} +
+	{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)}}
+	\right]\sin\left(\alpha_{i}\right) + \left(- G_{i} + 
+	G_{i-1}\right)\sin\left(\alpha_{i}\right) -
 	U_{\text{b,i}} \end{array} \right) \cdot \tan\left( 
-	\varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+	\varphi'_{i}
+	\right) + c'_i \cdot \ell_{b,i} }{F_\text{S}} \end{array}
 \end{equation*}
 
 \noindent The definitions of \dref{GD_R} and \dref{GD_T} are present in this 
 equation, and can thus be replaced by $R_i$ and $T_i$, respectively.
 
 \begin{equation*}
-\begin{array}{l} \left( T_{\text{i}} + \left(-X_{\text{i-1}} + 
-X_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
-- \left(- G_{\text{i}} + 
-G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
+\begin{array}{l} \left( T_{i} + \left(-X_{i-1} + 
+X_{i}\right)\sin\left(\alpha_{i}\right)
+- \left(- G_{i} + 
+G_{i-1}\right)\cos\left(\alpha_{i}\right)
 \right) =\\ \frac 
 { 
-	R_{\text{i}} + \left(\left(- X_{\text{i-1}} 
-	+ X_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) + \left(- 
-	G_{\text{i}} + 
-	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) \right) \cdot 
+	R_{i} + \left(\left(- X_{i-1} 
+	+ X_{i}\right)\cos\left(\alpha_{i}\right) + \left(- 
+	G_{i} + 
+	G_{i-1}\right)\sin\left(\alpha_{i}\right) \right) \cdot 
 	\tan\left( 
-	\varphi'_{\text{i}}
-	\right) + c' \cdot \ell_{b,i} }{F_\text{S}} \end{array}
+	\varphi'_{i}
+	\right) + c'_i \cdot \ell_{b,i} }{F_\text{S}} \end{array}
 \end{equation*}
 
 \noindent The interslice shear force $X$ can be expressed in terms of the 
 interslice normal force $G$ using \dref{GD_X}, resulting in
 
 \begin{equation*}
-\begin{array}{l} \left( T_{\text{i}} + \left(-\lambda f_\text{i-1} 
-G_{\text{i-1}} + \lambda f_\text{i} 
-G_{\text{i}}\right)\sin\left(\alpha_{\text{i}}\right)
-- \left(- G_{\text{i}} + 
-G_{\text{i-1}}\right)\cos\left(\alpha_{\text{i}}\right)
+\begin{array}{l} \left( T_{i} + \left(-\lambda f_{i-1} 
+G_{i-1} + \lambda f_i 
+G_{i}\right)\sin\left(\alpha_{i}\right)
+- \left(- G_{i} + 
+G_{i-1}\right)\cos\left(\alpha_{i}\right)
 \right) =\\ \frac 
 { 
-	R_{\text{i}} + \left(\left(-\lambda f_\text{i-1} 
-	G_{\text{i-1}} + \lambda f_\text{i} 
-	G_{\text{i}}\right)\cos\left(\alpha_{\text{i}}\right) + \left(- 
-	G_{\text{i}} + 
-	G_{\text{i-1}}\right)\sin\left(\alpha_{\text{i}}\right) \right) \cdot 
+	R_{i} + \left(\left(-\lambda f_{i-1} 
+	G_{i-1} + \lambda f_i 
+	G_{i}\right)\cos\left(\alpha_{i}\right) + \left(- 
+	G_{i} + 
+	G_{i-1}\right)\sin\left(\alpha_{i}\right) \right) \cdot 
 	\tan\left( 
-	\varphi'_{\text{i}}
+	\varphi'_{i}
 	\right)}{F_\text{S}} \end{array}
 \end{equation*}
 
 \noindent Rearranging yields the following:
 
 \begin{equation*}
-G_\text{i} \left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i}
-\cos\left(\alpha_\text{i}\right) -
-\sin\left(\alpha_\text{i}\right) \right]
-\tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_\text{i}
-\sin\left(\alpha_\text{i}\right) +
-\cos\left(\alpha_\text{i}\right) \right.]
-\left(F_\text{S}\right) \end{array} \right] = G_\text{i-1}
-\left[ \begin{array}{l} \left[ \lambda \cdot f_\text{i-1}
-\cos\left(\alpha_\text{i}\right) -
-\sin\left(\alpha_\text{i}\right) \right]
+G_i \left[ \begin{array}{l} \left[ \lambda \cdot f_i
+\cos\left(\alpha_i\right) -
+\sin\left(\alpha_i\right) \right]
+\tan\left(\varphi'\right._{i}) \\ - \left[ \lambda \cdot f_i
+\sin\left(\alpha_i\right) +
+\cos\left(\alpha_i\right) \right.]
+\left(F_\text{S}\right) \end{array} \right] = G_{i-1}
+\left[ \begin{array}{l} \left[ \lambda \cdot f_{i-1}
+\cos\left(\alpha_i\right) -
+\sin\left(\alpha_i\right) \right]
 \tan\left(\varphi'\right._{i}) 
-\\ - \left[ \lambda \cdot f_\text{i-1}
-\sin\left(\alpha_\text{i}\right) +
-\cos\left(\alpha_\text{i}\right) \right]
+\\ - \left[ \lambda \cdot f_{i-1}
+\sin\left(\alpha_i\right) +
+\cos\left(\alpha_i\right) \right]
 \left(F_\text{S}\right) \end{array} \right] +
-\left(F_\text{S}\right) \cdot T_\text{i} - R_\text{i}
+\left(F_\text{S}\right) \cdot T_i - R_i
 \end{equation*}
 
 \noindent The definitions for $\Phi$ and $\Psi$ from \ddref{DD_Phi} and 
 \ddref{DD_Psi} simplify the above to Equation~\ref{eq:Gi}.
 
 \begin{equation} \label{eq:Gi}
-G_\text{i} \Phi_\text{i} = \Psi_\text{i-1} G_\text{i-1} \Phi_\text{i-1} + 
+G_i \Phi_i = \Psi_{i-1} G_{i-1} \Phi_{i-1} + 
 F_\text{S} 
-T_\text{i} - R_\text{i}
+T_i - R_i
 \end{equation}
 
 \noindent Versions of Equation~\ref{eq:Gi} instantiated for slices 1 to $n$ are 
@@ -2415,7 +2450,7 @@ i={\text{1}} $ \\
 	\left({{H}_{i} + {H}_{i-1}}\right)
 	\right]{\tan\left(\alpha_{i}\right)} \\ +
 	{{h}_{i}}\left( 
-	-{2}\;{U_{\text{t},i}}\;{\sin\left(\beta_{i}\right)}
+	-{2}\;{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)}
 	\;\right) $}
 &  $ 2\leq i \leq{n-1} $ \\ $
 {{b}_{n}}\left[{{G}_{n-1} +
@@ -2480,20 +2515,20 @@ force ratio; can be constant or a half-sine. \\
  \dref{GD_X}, Equation~(\ref{eq:Moment}) can be derived.
 
 \begin{equation}\label{eq:Moment}
-  0 = \begin{array}{l} - {G}_{\text{i}} \left[ {z_{\text{i}}} -
-      \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] + {G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
-      \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] - H_{\text{i}}\left[ z_{\text{w,i}} -
-      \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] \\[5pt] + H_{\text{i-1}}\left[ z_{\text{w,i-1}} +
-      \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-      \right] -\lambda \frac{b_{\text{i}}}{2} \left( G_{\text{i}}
-    f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}} \right) +
-    K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} - U_{\text{t,i}}
-    \sin\left(\beta_{\text{i}}\right) h_{\text{i}} -
-    Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-    h_{\text{i}} \end{array}
+  0 = \begin{array}{l} - {G}_{i} \left[ {z_{i}} -
+      \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+      \right] + {G}_{i-1} \left[ {z_{i-1}} +
+      \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+      \right] - H_{i}\left[ z_{\text{w,i}} -
+      \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+      \right] \\[5pt] + H_{i-1}\left[ z_{\text{w,i-1}} +
+      \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+      \right] -\lambda \frac{b_{i}}{2} \left( G_{i}
+    f_{i} + G_{i-1} f_{i-1} \right) +
+    K_{\text{c}} W_{i} \frac{h_{i}}{2} - U_{\text{t,}i}
+    \sin\left(\beta_{i}\right) h_{i} -
+    Q_{i}\;{\sin\left(\omega_{i}\right)}
+    h_{i} \end{array}
 \end{equation} 
 
 \noindent
@@ -2501,20 +2536,20 @@ Rearranging the equation in terms of $\lambda$ leads to
 Equation~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
-  \lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
-        {z_{\text{i}}} - \frac{b_{\text{i}}}{2} {
-          \tan\left(\alpha_{\text{i}}\right)} \right] +
-      {G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
-        \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-        \right] - H_{\text{i}}\left[ z_{\text{i}} -
-        \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-        \right] \\[5pt] + H_{\text{i-1}}\left[ z_{\text{i-1}} +
-        \frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-        \right] + K_{\text{c}} W_{\text{i}} \frac{h_{\text{i}}}{2} -
-      U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} -
-      Q_{\text{i}}\;{\sin\left(\omega_{\text{i}}\right)}
-      h_{\text{i}} \end{array} } { \frac{b_{\text{i}}}{2} \left[
-      G_{\text{i}} f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}}
+  \lambda = \frac { \begin{array}{l} - {G}_{i} \left[
+        {z_{i}} - \frac{b_{i}}{2} {
+          \tan\left(\alpha_{i}\right)} \right] +
+      {G}_{i-1} \left[ {z_{i-1}} +
+        \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+        \right] - H_{i}\left[ z_{i} -
+        \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+        \right] \\[5pt] + H_{i-1}\left[ z_{i-1} +
+        \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+        \right] + K_{\text{c}} W_{i} \frac{h_{i}}{2} -
+      U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} -
+      Q_{i}\;{\sin\left(\omega_{i}\right)}
+      h_{i} \end{array} } { \frac{b_{i}}{2} \left[
+      G_{i} f_{i} + G_{i-1} f_{i-1}
       \right] }
 \end{equation}
 
@@ -2523,19 +2558,19 @@ Equation~(\ref{eq:lambda1}).
 external forces, respectively are zero.
 
 \begin{equation*}
-\lambda = \frac { \begin{array}{l} - {G}_{\text{i}} \left[
-	{z_{\text{i}}} - \frac{b_{\text{i}}}{2} {
-		\tan\left(\alpha_{\text{i}}\right)} \right] +
-	{G}_{\text{i-1}} \left[ {z_{\text{i-1}}} +
-	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-	\right] - H_{\text{i}}\left[ z_{\text{i}} -
-	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
-	\right] \\[5pt] + H_{\text{i-1}}\left[ z_{\text{i-1}} +
-	\frac{b_{\text{i}}}{2} { \tan\left(\alpha_{\text{i}}\right)}
+\lambda = \frac { \begin{array}{l} - {G}_{i} \left[
+	{z_{i}} - \frac{b_{i}}{2} {
+		\tan\left(\alpha_{i}\right)} \right] +
+	{G}_{i-1} \left[ {z_{i-1}} +
+	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+	\right] - H_{i}\left[ z_{i} -
+	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
+	\right] \\[5pt] + H_{i-1}\left[ z_{i-1} +
+	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
 	\right] -
-	U_{\text{t,i}} \sin\left(\beta_{\text{i}}\right) h_{\text{i}} \end{array} } 
-	{ \frac{b_{\text{i}}}{2} \left[
-	G_{\text{i}} f_{\text{i}} + G_{\text{i-1}} f_{\text{i-1}}
+	U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \end{array} } 
+	{ \frac{b_{i}}{2} \left[
+	G_{i} f_{i} + G_{i-1} f_{i-1}
 	\right] }
 \end{equation*}
 
@@ -2546,15 +2581,15 @@ equation for the constant $\lambda$ is developed in Equation~(\ref{eq:Lambda}),
 also found in \iref{IM_Lambda}.
 
 \begin{equation}\label{eq:Lambda}
-\lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{\text{i}}} \left[
-      \left({{G}_{\text{i}} + {G}_{\text{i-1}}}\right) +
-      \left({{H}_{\text{i}} + {H}_{\text{i-1}}}\right)
-      \right]{\tan\left(\alpha_{\text{i}}\right)} \\ +
-    {{h}_{\text{i}}}\;\left[ 
-    -{2}\;{U_{\text{t,i}}}\;{\sin\left(\beta_{\text{i}}\right)} \right] }}
-         {\displaystyle\sum_{i=1}^{n} { {{b}_{\text{i}}}\;{\left[{
-                   {f_{i}}{{G}_{\text{i}}} +
-                   {f_{\text{i-1}}}{{G}_{\text{i-1}}} }\right]} }}
+\lambda= \frac{ \displaystyle\sum_{i=1}^{n} { {b_{i}} \left[
+      \left({{G}_{i} + {G}_{i-1}}\right) +
+      \left({{H}_{i} + {H}_{i-1}}\right)
+      \right]{\tan\left(\alpha_{i}\right)} \\ +
+    {{h}_{i}}\;\left[ 
+    -{2}\;{U_{\text{t,}i}}\;{\sin\left(\beta_{i}\right)} \right] }}
+         {\displaystyle\sum_{i=1}^{n} { {{b}_{i}}\;{\left[{
+                   {f_{i}}{{G}_{i}} +
+                   {f_{i-1}}{{G}_{i-1}} }\right]} }}
 \end{equation}
 
 \noindent
@@ -2604,7 +2639,7 @@ $2\leq i \leq n-1$ \\
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
 &$G$ is the interslice normal force (\si{\newton\per\meter}).\\
-&$FS$ is the factor of safety.\\
+&$F_\text{S}$ is the factor of safety.\\
 &$T$ is the mobile shear force  without the influence of interslice forces 
 (\si{\newton\per\meter}).\\
 &$R$ is the resistive shear force  without the influence of interslice forces 
@@ -2635,18 +2670,18 @@ This derivation is identical to the derivation for \iref{IM_FS} up until
 Equation~\ref{eq:Gi}, shown again below.
 
 \begin{equation*}
-G_\text{i} \Phi_\text{i} = \Psi_\text{i-1} G_\text{i-1} \Phi_\text{i-1} + 
+G_i \Phi_i = \Psi_{i-1} G_{i-1} \Phi_{i-1} + 
 F_\text{S} 
-T_\text{i} - R_\text{i}
+T_i - R_i
 \end{equation*}
 
 \noindent A simple rearrangement of Equation~\ref{eq:Gi} leads to 
 Equation~\ref{eq:Interslice}, also seen in \iref{IM_E}.
 
 \begin{equation}\label{eq:Interslice}
-{G}_{\text{i}} = \frac{{\Psi_{\text{i-1}}}\;{{G}_{\text{i-1}}} +
-  F_\text{S}{T_{\text{i}}} -
-       {R_{\text{i}}}}{\Phi_{\text{i}}}
+{G}_{i} = \frac{{\Psi_{i-1}}\;{{G}_{i-1}} +
+  F_\text{S}{T_{i}} -
+       {R_{i}}}{\Phi_{i}}
 \end{equation}
 
 \noindent The cases shown in \iref{IM_E} for when $i=0$, $i=1$, or $i=n$ are 
@@ -2673,20 +2708,25 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Input & $\{(x_\text{us},y_\text{us})\}$ \\
 
-\hline Output & \(  \left( \text{FS}_\text{Min}, \left\{ 
+\hline Output & \(  \left( F_\text{S}^\text{Min}, \left\{ 
 \left(x_\text{cs},y_\text{cs}\right)\right\} \right)
  = \Upsilon\left( \left\{\left(x_\text{us},y_\text{us}\right)\right\} \right)\)
  \\
 
-\hline Description & $FS_{Min}$ is the minimum factor of safety associated with 
+\hline Description & $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
+associated with 
 the critical slip surface.\\
-&$x_{cs}$ is the \textit{x}-ordinate of a point on the critical slip surface 
+&$x_{\text{cs}}$ is the \textit{x}-ordinate of a point on the critical slip 
+surface 
 (\si{\meter}).\\
-&$x_{cs}$ is the \textit{y}-ordinate of a point on the critical slip surface 
+&$x_{\text{cs}}$ is the \textit{y}-ordinate of a point on the critical slip 
+surface 
 (\si{\meter}).\\
 &$\Upsilon$ is a minimization algorithm or function.\\
-&$x_{us}$ is the \textit{x}-ordinate of a point on the slope (\si{\meter}).\\
-&$y_{us}$ is the \textit{y}-ordinate of a point on the slope (\si{\meter}).\\
+&$x_{\text{us}}$ is the \textit{x}-ordinate of a point on the slope 
+(\si{\meter}).\\
+&$y_{\text{us}}$ is the \textit{y}-ordinate of a point on the slope 
+(\si{\meter}).\\
 
 \hline Sources& \cite{LiEtAl}\\
 
@@ -2725,24 +2765,33 @@ is intended to provide a feel for a common scenario.
   \toprule  \label{TblInputVar}
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
-  $\{(x_{wt},y_{wt})\}$ (*) & At least two ordered pairs must be specified. 
+  $\{(x_{\text{wt}},y_{\text{wt}})\}$ (*) & At least two ordered pairs must be 
+  specified. 
   Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
-  $\{(x_{us},y_{us})\}$ (**) & At least two ordered pairs must be specified. 
+  $\{(x_{\text{us}},y_{\text{us}})\}$ (**) & At least two ordered pairs must be 
+  specified. 
   $y$ values of consecutive vertices are always increasing or always 
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
-  ${x_{slip}^{maxEnd}}$ & ${x_{slip}^{maxEnd}} > {x_{slip}^{minEnd}}$ and must 
+  ${x_{\text{slip}}^{\text{maxExt}}}$ & ${x_{\text{slip}}^{\text{maxExt}}} > 
+  {x_{\text{slip}}^{\text{minExt}}}$ and must 
   be less than or equal to the maximum $x$ value of the slope. & N/A & 10\% \\
-  ${x_{slip}^{minEnd}}$ & ${x_{slip}^{minEnd}} \geq {x_{slip}^{maxStart}}$ & 
+  ${x_{\text{slip}}^{\text{minExt}}}$ & ${x_{\text{slip}}^{\text{minExt}}} \geq 
+  {x_{\text{slip}}^{\text{maxEtr}}}$ & 
   N/A & 
   10\% \\
-  ${x_{slip}^{maxStart}}$ & ${x_{slip}^{maxStart}} > {x_{slip}^{minStart}}$ & 
+  ${x_{\text{slip}}^{\text{maxEtr}}}$ & ${x_{\text{slip}}^{\text{maxEtr}}} > 
+  {x_{\text{slip}}^{\text{minEtr}}}$ & 
   N/A & 10\% \\
-  ${x_{slip}^{minStart}}$ & must be greater than or equal to the minimum $x$ 
+  ${x_{\text{slip}}^{\text{minEtr}}}$ & must be greater than or equal to the 
+  minimum 
+  $x$ 
   value of the 
   slope. & N/A & 10\% \\
-  ${y_{slip}^{max}}$ & ${y_{slip}^{max}} > {y_{slip}^{min}}$ & N/A & 10\% \\
-  ${y_{slip}^{min}}$ & ${y_{slip}^{min}} < {y_{slip}^{max}}$ & N/A & 10\% \\
+  ${y_{\text{slip}}^{\text{max}}}$ & ${y_{\text{slip}}^{\text{max}}} > 
+  {y_{\text{slip}}^{\text{min}}}$ & N/A & 10\% \\
+  ${y_{\text{slip}}^{\text{min}}}$ & ${y_{\text{slip}}^{\text{min}}} < 
+  {y_{\text{slip}}^{\text{max}}}$ & N/A & 10\% \\
   $c'$ (**) & $c >0$ & 10 & 10\%\\
   $\varphi'$ (**) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
   $\gamma$ (**) & $\gamma > 0$ & 20 & 10\% \\
@@ -2764,8 +2813,9 @@ is intended to provide a feel for a common scenario.
   \toprule \label{TblOutputVar}
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
-  $FS$ & $FS>0$ \\
-  $\{(x_{cs},y_{cs})\}$ &  $x$ values must be between the minimum and maximum 
+  $F_\text{S}$ & $F_\text{S}>0$ \\
+  $\{(x_{\text{cs}},y_{\text{cs}})\}$ &  $x$ values must be between the minimum 
+  and maximum 
   $x$ values of the slope. $y$ values must not exceed the maximum $y$ value of 
   the slope. The slope between consecutive vertices must be always increasing 
   as $x$ increases. \\
@@ -2815,7 +2865,7 @@ requirements, the qualities that the software is expected to exhibit.
     \textbf{unit} & \textbf{description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
     of the slope layers, for the water table if one exists, and for potential 
-    start and end points of a slip surface.\\
+    entry and exit points of a slip surface.\\
     $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
@@ -2858,17 +2908,27 @@ output the user-supplied inputs listed in the table below:
 	\noindent \begin{tabularx}{1.0\textwidth}{l X} \toprule \textbf{symbol} &
 		%  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
 		\textbf{description}\\ \midrule
-		${x_{slip}^{maxEnd}}$ & Maximum potential \textit{x}-ordinate of 
-		the ending point of a slip surface \\
-		${x_{slip}^{minEnd}}$ & Minimum potential \textit{x}-ordinate of 
-		the ending point of a slip surface\\
-		${x_{slip}^{maxStart}}$ & Maximum potential \textit{x}-ordinate of 
-		the starting point of a slip surface \\
-		${x_{slip}^{minStart}}$ & Minimum potential \textit{x}-ordinate of 
-		the starting point of a slip surface \\
-		${y_{slip}^{max}}$ & Maximum potential \textit{y}-ordinate of the 
+		${x_{\text{slip}}^{\text{maxExt}}}$ & Maximum potential 
+		\textit{x}-ordinate of 
+		the exit point of a slip surface \\
+		${x_{\text{slip}}^{\text{minExt}}}$ & Minimum potential 
+		\textit{x}-ordinate of 
+		the exit point of a slip surface\\
+		${x_{\text{slip}}^{\text{maxEtr}}}$ & Maximum potential 
+		\textit{x}-ordinate 
+		of 
+		the entry point of a slip surface \\
+		${x_{\text{slip}}^{\text{minEtr}}}$ & Minimum potential 
+		\textit{x}-ordinate 
+		of 
+		the entry point of a slip surface \\
+		${y_{\text{slip}}^{\text{max}}}$ & Maximum potential 
+		\textit{y}-ordinate of 
+		the 
 		of a point on a slip surface\\
-		${y_{slip}^{min}}$ & Minimum potential \textit{y}-ordinate of the 
+		${y_{\text{slip}}^{\text{min}}}$ & Minimum potential 
+		\textit{y}-ordinate of 
+		the 
 		of a point on a slip surface \\
 		\textit{const\_f} & Boolean decision on which form of \textit{f} 
 		the user desires: constant if true, or half-sine if false.\\ 
