@@ -226,9 +226,9 @@ $T$ & \si{\newton\per\meter} & mobilized shear force without the influence of
 interslice 
 forces
 \\
-${U_{b}}$ & \si{\newton\per\meter} & base hydrostatic force
+${U_{\text{b}}}$ & \si{\newton\per\meter} & base hydrostatic force
 \\
-${U_{t}}$ & \si{\newton\per\meter} & surface hydrostatic force
+${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force
 \\
 $W$ & \si{\newton\per\meter} & self-weight
 \\
@@ -951,7 +951,7 @@ instance models.
   &$N$ is the normal force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
   &$\beta$ is the angle between the surface of a slice and the 
   horizontal (\si{\degree}). \\
   &$Q$ is the external force (\si{\newton\per\meter}). \\
@@ -1008,7 +1008,7 @@ instance models.
   &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
   &$W$ is the weight (\si{\newton\per\meter}). \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
   &$\beta$ is the angle between the surface of a slice and the 
   horizontal (\si{\degree}). \\
   &$Q$ is the external force (\si{\newton\per\meter}). \\
@@ -1133,7 +1133,7 @@ instance models.
 		\hline Label&\bf Effective Normal Force\\
 		\hline SI Units & \si{\newton\per\meter}\\
 		
-		\hline Equation & \( N'_{i} = N_{i} - U_{b,i} \) \\
+		\hline Equation & \( N'_{i} = N_{i} - U_{\text{b,}i} \) \\
 	
 	\hline Description & Effective normal force as derived from 
 	\tref{TM_EffStress} and implemented with forces. 
@@ -1141,7 +1141,7 @@ instance models.
 	&$i$ is the index representing a single slice.\\
 	&$N'$ is the effective normal force (\si{\newton\per\meter}).\\
 	&$N$ is the normal force (\si{\newton\per\meter}).\\
-	&$U_b$ is the base hydrostatic force (\si{\newton\per\meter}).\\
+	&$U_\text{b}$ is the base hydrostatic force (\si{\newton\per\meter}).\\
 	
 	\hline Source & \cite{ZhuEtAl2005}\\
 	
@@ -1190,13 +1190,14 @@ instance models.
 		forces
 		(\si{\newton\per\meter}).\\
 		&$W$ is the weight (\si{\newton\per\meter}).\\
-		&${U_{t}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+		&${U_{\text{t}}}$ is the surface hydrostatic force 
+		(\si{\newton\per\meter}).\\
 		&$\beta{}$ is the angle between the surface of a slice and the 
 		horizontal (\si{\degree}).\\
 		&$\alpha{}$ is the angle between the base of a slice and the 
 		horizontal (\si{\degree}).\\
 		&$H$ is the interslice water force (\si{\newton\per\meter}).\\
-		&${U_{b}}$ is the base hydrostatic force 
+		&${U_{\text{b}}}$ is the base hydrostatic force 
 		(\si{\newton\per\meter}).\\
 		&$\varphi{}'$ is the effective angle of friction (\si{\degree}).\\
 		&$c'$ is the effective cohesion (Pa).\\
@@ -1252,7 +1253,8 @@ instance models.
 		forces 
 		(\si{\newton\per\meter}).\\
 		&$W$ is the weight (\si{\newton\per\meter}).\\
-		&${U_{t}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\ 
+		&${U_{\text{t}}}$ is the surface hydrostatic force 
+		(\si{\newton\per\meter}).\\ 
 		&$\beta{}$ is the angle between the surface of a slice and the 
 		horizontal 
 		(\si{\degree}).\\
@@ -1363,7 +1365,7 @@ instance models.
  &$h$ is the height in the \textit{y}-direction from the base of a slice 
  to the slope surface, at the \textit{x}-direction midpoint on the slice 
  (\si{\meter}).\\
- &$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+ &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
  &$\beta$ is the angle between the surface of a slice and the 
  horizontal (\si{\degree}). \\
  &$Q$ is the external force (\si{\newton\per\meter}). \\
@@ -1460,12 +1462,12 @@ Equation &
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ub}\\
 
 \hline Label& \bf Base Water Force \\
-\hline Symbol& $U_b$\\
+\hline Symbol& $U_\text{b}$\\
 \hline SI Units& \si{\newton\per\meter}\\
 
 \hline
 Equation & 
-${U_{b,i}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+${U_{\text{b,}i}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
 \left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}} & 
 {y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
 0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
@@ -1473,7 +1475,7 @@ ${U_{b,i}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
- &${U_{b}}$ is the base hydrostatic force
+ &${U_{\text{b}}}$ is the base hydrostatic force
  (\si{\newton\per\meter}).\\
  &${\ell{}_{\text{b}}}$ is the base length of a slice in the 
 direction parallel to the slope of the base (\si{\meter}).\\
@@ -1512,7 +1514,7 @@ direction parallel to the slope of the base (\si{\meter}).\\
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 
 \hline Label& \bf Surface Hydrostatic Force \\
-\hline Symbol& $U_t$\\
+\hline Symbol& $U_\text{t}$\\
 \hline SI Units& \si{\newton\per\meter}\\
 
 \hline
@@ -1525,7 +1527,7 @@ ${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
 \\ 
 
 \hline Description &$i$ is the index representing a single slice.\\
-&${U_{t}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&${U_{\text{t}}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
 parallel to the slope of the surface (\si{\meter}).\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
@@ -2489,7 +2491,7 @@ horizontal (\si{\degree}). \\
 &$h$ is the height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint on the slice 
 (\si{\meter}).\\
-&$U_t$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
 &$\beta$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}). \\
 &$f$ is a function describing variation of the interslice normal to shear 
