@@ -1215,41 +1215,48 @@ prop\_calc(\textit{slip\_surf}):
 		where \\
 		$\forall(i : \mathbb{Z} | i \in [1..|\textit{slip\_surf}|-1] :\\ 
 		\textit{force}.Ub[i] = 
-		{\ell{}_{b,i}}\begin{cases}
-			\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{w}}, & 
-			{y_{wt,i}}>{y_{slip,i}}\\
-			0, & {y_{wt,i}}\leq{}{y_{slip,i}}
-			\end{cases}\\
-			\land \textit{force}.Ut[i] = {\ell{}_{s,i}}\begin{cases}
-			\left({y_{wt,i}}-{y_{us,i}}\right){\gamma{}_{w}}, & 
-			{y_{wt,i}}>{y_{us,i}}\\
-			0, & {y_{wt,i}}\leq{}{y_{us,i}}
+		{\ell{}_{\text{b,}i}}\begin{cases}
+		\left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}} 
+		& 
+		{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+		0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
+		\end{cases}\\
+			\land \textit{force}.Ut[i] = {\ell{}_{\text{s,}i}}\begin{cases}
+			\left({y_{\text{wt,}i}}-{y_{\text{us,}i}}\right){\gamma{}_{\text{w}}}
+			 & 
+			{y_{\text{wt,}i}}>{y_{\text{us,}i}}\\
+			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{us,}i}}
 			\end{cases}\\
 			\land \textit{force}.W[i] = b_{i}\begin{cases}
-			\left({y_{us,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}}, & 
-			{y_{wt,i}}\geq{}{y_{us,i}}\\
-			\left({y_{us,i}}-{y_{wt,i}}\right)\gamma{}+\left({y_{wt,i}}-{y_{slip,i}}\right){\gamma{}_{Sat}},
-			& {y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\
-			\left({y_{us,i}}-{y_{slip,i}}\right)\gamma{}, & 
-			{y_{wt,i}}\leq{}{y_{slip,i}}
+				\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+				 & 
+				{y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+				\left({y_{\text{us,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+				-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+				& {y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+				\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+				{y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 			\end{cases}\\
 			\land \textit{force}.H[i] = \begin{cases}
-			\frac{\left[{y_{us,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
-			\left[{y_{wt,i}}-{y_{us,i}}\right]^{2}{\gamma{}_\text{w}},
-			& {y_{wt,i}}\geq{}{y_{us,i}}\\
-			\frac{\left[{y_{wt,i}}-{y_{slip,i}}\right]^{2}}{2}{\gamma{}_\text{w}},
-			 & {y_{us,i}}>{y_{wt,i}}>{y_{slip,i}}\\ 0, & 
-			{y_{wt,i}}\leq{}{y_{slip,i}}
+			\frac{\left[{y_{\text{us,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
+			\left[{y_{\text{wt,}i}}-{y_{\text{us,}i}}\right]^{2}{\gamma{}_\text{w}}
+			& {y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+			\frac{\left[{y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}
+			& 
+			{y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 			\end{cases}\\
 			\land \textit{angles}.\textit{alpha}[i] =
-			\arctan \left( \frac{y_\text{slip,i} -
-				y_\text{slip,i-1}}{x_\text{slip,i} - x_\text{slip,i-1}} \right) 
+			\arctan \left( \frac{y_{\text{slip,}i} -
+				y_{\text{slip,}i-1}}{x_{\text{slip,}i} - x_{\text{slip,}i-1}} 
+				\right) 
 				\\
-			\land \textit{angles}.\textit{beta}[i] = \arctan 
-			\left( \frac{y_\text{us,i} -
-				y_\text{us,i-1}}{x_\text{us,i} - x_\text{us,i-1}} \right)\\
+			\land \textit{angles}.\textit{beta}[i] = \arctan \left( 
+			\frac{y_{\text{us,}i} -
+				y_{\text{us,}i-1}}{x_{\text{us,}i} - x_{\text{us,}i-1}} 
+				\right)\\
 			\land \textit{heights}[i] = 
-			0.5*(({y_{us,i}}-{y_{slip,i}})+({y_{us,i+1}}-{y_{slip,i+1}})))$
+			0.5*(({y_{\text{us,}i}}-{y_{\text{slip,}i}})+({y_{\text{us,}i+1}}-{y_{\text{slip,}i+1}})))$
 	\end{itemize}
 \end{itemize}
 
