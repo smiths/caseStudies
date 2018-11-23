@@ -50,7 +50,7 @@ urlcolor=cyan % color of external links
 \newcommand{\newfunc}{\\[1.5em]}
 \newcommand{\inquote}[1]{``{#1}"}
 
-\newcommand{\progname}{Chipmunk2D }
+\newcommand{\progname}{Tamias2D }
 \newcommand{\vor}{$\vee$ }
 \newcommand{\B}{$\mathbb{B}$}
 \newcommand{\R}{$\mathbb{R}$}
@@ -90,6 +90,7 @@ urlcolor=cyan % color of external links
 \newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
 \newcommand{\hcf}[1]{\authornote{yellow}{HF}{#1}}
 \newcommand{\cjl}[1]{\authornote{green!60!black}{CL}{#1}}
+\newcommand{\olu}[1]{\authornote{red}{OO}{#1}}
 
 \newcolumntype{x}[1]{>{\raggedright\arraybackslash}m{#1}}
 \newcolumntype{y}{>{\raggedright\arraybackslash}l}
@@ -113,7 +114,7 @@ urlcolor=cyan % color of external links
 
 \begin{document}
 
-\title{Module Interface Specification for Chipmunk2D Game Physics Library} \author{Luthfi Mawarid}
+\title{Module Interface Specification for \progname Game Physics Library} \author{Luthfi Mawarid and Oluwaseun Owojaiye}
 \date{\today}
 
 \maketitle
@@ -123,8 +124,8 @@ urlcolor=cyan % color of external links
 \section{Introduction} \label{SecIntro}
 
 The following document details the Module Interface
-Specifications for the implemented modules in the \progname Game Physics Library.  It is intended to ease navigation through the program for design and
-maintenance purposes.  Complementary documents include the System
+Specifications for the implemented modules in the \progname Game Physics Library. It is intended to ease navigation through the program for design and
+maintenance purposes. Complementary documents include the System
 Requirement Specifications and Module Guide.
 
 \section{Notation} \label{SecNotation}
@@ -1525,19 +1526,19 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 
 %%%%%%%%%%%%%%%%%%%% CONTROL MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
-\section{MIS of the Control Module} \label{MISControl}
+%\section{MIS of the Control Module} \label{MISControl}
 
-\subsection{Module Name: Chipmunk}
-
-\subsection{Uses} \label{SecUControl}
-	This module only uses standard libraries.
-
-\subsection{Interface Syntax}
-
-\subsubsection{Exported Constants} \label{SecECControl}
-	M_PI: \R \\
-	M_PI := 3.14159265358979323846 \\
-	\newline
+%\subsection{Module Name: Chipmunk}
+%
+%\subsection{Uses} \label{SecUControl}
+%	This module only uses standard libraries.
+%
+%\subsection{Interface Syntax}
+%
+%\subsubsection{Exported Constants} \label{SecECControl}
+%	M_PI: \R \\
+%	M_PI := 3.14159265358979323846 \\
+%	\newline
 	VOID_ERR is an empty macro definition. \\
 	\newline
 	PTR_ERR: void* \\
