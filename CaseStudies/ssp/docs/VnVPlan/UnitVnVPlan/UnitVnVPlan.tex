@@ -1,0 +1,395 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xr}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[numbib,nottoc]{tocbibind}
+\hypersetup{
+	colorlinks,
+	citecolor=green,
+	filecolor=black,
+	linkcolor=red,
+	urlcolor=blue
+}
+\usepackage[round]{natbib}
+\usepackage{enumitem}
+
+\externaldocument[SRS-]{../../SRS/SRS}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+
+\externaldocument[MG-]{../../Design/MG/MG}
+\newcommand{\mref}[1]{M\ref{#1}}
+
+\externaldocument[SVnV-]{../SystVnVPlan/SystVnVPlan}
+\newcommand{\tcref}[1]{TC\ref{#1}}
+
+\newcounter{utestnum} %Assumption Number
+\newcommand{\utcthetestnum}{TC\theutestnum}
+\newcommand{\utcref}[1]{TC\ref{#1}}
+
+\input{../../Comments}
+\input{../../Common}
+
+\begin{document}
+
+\title{Slope Stability Analysis: Unit Verification and Validation Plan for 
+\progname{}} 
+\author{Brooks MacLachlan}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+2018/11/26 & 1.0 & Initial template fill-ins\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\tableofcontents
+
+\listoftables
+
+\wss{Do not include if not relevant}
+
+\listoffigures
+
+\wss{Do not include if not relevant}
+
+\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+The symbols, abbreviations, and acronyms used in this document include those 
+defined in the table below, as well as any defined in the tables found in 
+Section \ref{SRS-sec_RefMat} of the Software Requirements Specification (SRS) 
+document.
+\newline
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+	\toprule		
+	\textbf{symbol} & \textbf{description}\\
+	\midrule 
+	$j$ & index representing a single coordinate\\
+	MIS & Module Interface Specification\\
+	MG & Module Guide\\
+	TC & Test Case\\
+	VnV & Verification and Validation\\
+	\bottomrule
+\end{tabular}\\
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document provides the unit Verification and Validation (VnV) plan for the 
+software. General information related to the system under test is given in 
+Section~\ref{sec_Info}. Section~\ref{sec_Plan} outlines at a high level the 
+plan for verifying and validating the software. Section~\ref{sec_Tests} gives 
+more detail about the specific tests that will be used to verify each module.
+
+\section{General Information} \label{sec_Info}
+
+\subsection{Purpose}
+
+\noindent The software being tested is the Slope Stability analysis Program 
+(\progname{}). Based on user-defined slope geometry and material properties, 
+\progname{} determines the critical slip surface of the given slope, the 
+corresponding factor of safety, and interslice normal and shear forces along 
+the critical slip surface.
+
+\noindent The purpose of the unit verification and validation activities is to 
+confirm that every module of \progname{} performs its expected actions 
+correctly. The tests described in this document cannot definitively prove 
+correctness, but they can build confidence by verifying that the software is 
+correct for the cases covered by tests.
+
+\subsection{Scope}
+
+\noindent \mref{MG-mHH} will not be unit tested as it is implemented by the 
+operating system of the hardware on which \progname{} is running, and is 
+assumed to work correctly. \mref{MG-mArrayOps}, \mref{MG-mRandNum}, and 
+\mref{MG-mPlot} 
+will also not be unit tested as they are all implemented by MatLab. 
+Verification of the non-functional requirements is not included in the unit 
+verification plan because they are sufficiently covered by the system tests 
+outlined in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
+{System VnV Plan document}.
+
+\section{Plan} \label{sec_Plan}
+	
+\subsection{Verification and Validation Team}
+
+\noindent Brooks MacLachlan is responsible for the unit verification and 
+validation of \progname{}, though input from various students and the 
+professor, Dr.~Spencer Smith, of CAS 741 will also contribute.
+
+\subsection{Automated Testing and Verification Tools}
+
+\noindent MatLab's built-in unit testing framework will be used to 
+automatically run the unit tests and display the results.
+
+\bmac{Is it inherently better to use a unit testing framework if you already 
+have a lot of tests written without one?}
+
+\subsection{Non-Testing Based Verification}
+
+Not applicable for \progname{}.
+
+\section{Unit Test Description} \label{sec_Tests}
+
+\noindent Test cases have been selected to verify that each module conforms to 
+the specification for the module described in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/Design/MIS/MIS.pdf}
+{Module Interface Specification (MIS) document}. Where the MIS included 
+conditional rules, at least one test case covers each branch of the conditional 
+rule. Test cases are minimal, meaning that each test case verifies only one 
+value. If the MIS for a module includes several results, there is a test case 
+for each result, even if they all cover the same branch of a conditional. 
+Throughout this section, if a test is verifying equality between two numbers, a 
+relative tolerance for difference between the actual and expected values will 
+be allowed. The tolerance will be described after running the tests. 
+
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{Control Module}
+
+\bmac{Should control module be out of scope? All it does is call other modules. 
+Maybe I could unit test that the expected functions were called, but is that 
+valuable?}
+
+\subsubsection{Input Module}
+
+As described in the MIS, the Input module is expected to read in many user 
+inputs from a file. For each value contained in the file, there is a 
+corresponding test case verifying that the value was properly read into the 
+data structure containing the input parameters. In cases where the user input 
+may take different forms, such as the input for when a water table exists and 
+the input for when a water table does not exists, each potential form of input 
+is covered by at least one test case. The input module is also responsible for 
+verifying the input, so for each possible violation of an input constraint, 
+there is a corresponding test case verifying that the correct exception was 
+thrown.
+
+\noindent The values in Table~\ref{Inputs} will be used as input for 
+many of the test cases described throughout this section. These values were 
+taken from the User's Guide for this project by \cite{UserGuide}. Individual 
+test cases will reference the table as input but specify new values for any 
+input parameter that should have a different value than specified by the table.
+
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
+		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
+		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
+		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
+		14), (70, 14)\}\\
+		${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 53\\
+		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
+		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
+		$c'$ & $\si{\pascal}$ & 5000 \\
+		$\varphi'$ & \si{\degree} & 20\\
+		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 9800 \\
+		\textit{const\_f} & N/A & 0\\ 
+		\bottomrule
+	\end{tabularx}
+	\caption{Input to be used for test cases}
+	\label{Inputs}
+\end{table}
+
+\paragraph{Valid User Input}
+
+~\newline \noindent The test cases described in Table~\ref{InputTests} 
+verify that each user input is correctly read. These test cases are identical 
+to each other with the exception of the expected output which they assert. The 
+input for each is a file containing the inputs specified in 
+Table~\ref{ExValidInputs}.\bmac{Should the input be more specific and give the 
+actual name of a file, or is this okay?} The type 
+of these test cases is automatic. The initial state for each is a new session. 
+The expected output for each is given in Table~\ref{InputTests}. The expected 
+output is derived based on the given inputs. The tests will be performed as 
+automated tests on a unit testing framework.
+
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputSlope} & 
+	test-input\_slope &  \textit{slope.strat} = [(0, 25), (20, 25), (30, 20), 
+	(40, 25), (70, 25)]\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputPhi} & 
+	test-input\_phi &  \textit{slope.phi} = 0.34906585\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCoh} & 
+	test-input\_coh &  \textit{slope.coh} = 5000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGam} & 
+	test-input\_gam &  \textit{slope.gam} = 15000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGams} & 
+	test-input\_gams &  \textit{slope.gams} = 15000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputWT} & 
+	test-input\_piez &  \textit{piez.piez} = [(0, 22), 
+	(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
+	14), (70, 14)]\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGamw} & 
+	test-input\_gamw &  \textit{piez.gamw} = 9800\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXextMin} & 
+	test-input\_xExtMin &  \textit{search.Xext}[0] = 34\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXextMax} & 
+	test-input\_xExtMax &  \textit{search.Xext}[1] = 53\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXetrMin} & 
+	test-input\_xEtrMin &  \textit{search.Xetr}[0] = 10\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXetrMax} & 
+	test-input\_xEtrMax &  \textit{search.Xetr}[1] = 24\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputYlimMin} & 
+	test-input\_yLimMin &  \textit{search.Ylim}[0] = 5\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputYlimMax} & 
+	test-input\_yLimMax &  \textit{search.Ylim}[1] = 26\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputLtoR} & 
+	test-input\_ltor &  \textit{soln.ltor} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputFtype} & 
+	test-input\_ftype &  \textit{soln.ftype} = 0\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputEvenslc} & 
+	test-input\_evenslc &  \textit{soln.evenslc} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCncvu} & 
+	test-input\_cncvu &  \textit{soln.cncvu} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputObtu} & 
+	test-input\_obtu &  \textit{soln.obtu} = 1\\ 
+	\hline
+	\caption{Input Test Cases}
+	\label{InputTests}
+\end{longtable}
+
+\bmac{Can I use MIS variable names for expected output?}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputRtoL}] 
+test-input\_rtol
+
+Type: Automatic
+					
+Initial State: New session
+					
+Input: As described in Table~\ref{Inputs}, except with slope coordinates 
+$\{\left(x_\text{us},y_\text{us}\right)\}$ increasing as $x$ increases, as 
+follows: \{(0, 
+15), (30, 15), (40, 20), (50, 25), (70, 25)\}.
+					
+Output: \textit{soln.ltor} = 0.
+
+Test Case Derivation: Based on the given slope stratigraphy, \progname{} should 
+detect that the slope elevation is increasing as $x$ increases, and set 
+\textit{soln.ltor} accordingly.
+
+How test will be performed: Automated test on unit testing framework.
+					
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputNoWTpiez}] 
+test-input\_noWTpiez
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table.
+
+Output: \textit{piez.piez} = [].
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.piez} variable should be the empty sequence.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputNoWTgamw}] 
+test-input\_noWTgamw
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table.
+
+Output: \textit{piez.gamw} = 0.
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.gamw} variable should be 0.
+
+How test will be performed: Automated test on unit testing framework.
+    
+\end{enumerate}
+
+\paragraph{Invalid User Input}
+~\newline \noindent See \tcref{SVnV-TC_InvalidSlopeDecToInc} - 
+\tcref{SVnV-TC_InvalidUnitWtWaterNegative} in the System VnV Plan document.
+
+\bmac{Is this okay? The tests described in the SystVnVPlan are really unit 
+tests}
+
+\subsubsection{Module 2}
+
+...
+
+\subsection{Tests for Nonfunctional Requirements}
+
+Not applicable for any of the modules of \progname{}.
+
+\subsection{Traceability Between Test Cases and Modules}
+
+\wss{Provide evidence that all of the modules have been considered.}
+
+\bibliographystyle{plainnat}
+
+\bibliography{../../../refs/References}
+
+\newpage
+
+\section{Appendix}
+
+\wss{This is where you can place additional information, as appropriate}
+
+\subsection{Symbolic Parameters}
+
+\wss{The definition of the test cases may call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.}
+
+\end{document}
