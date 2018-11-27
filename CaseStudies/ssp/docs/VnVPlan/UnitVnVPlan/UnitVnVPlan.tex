@@ -716,14 +716,46 @@ met.
 \end{enumerate}
 
 \subsubsection{Slip Weighting Module}
+As specified in the MIS for this module, it accepts a list of slip surfaces, 
+sorts them based on their factor of safety, and assigns a weight to each slip 
+surface. To cover this functionality, there is a test case verifying that the 
+slip surfaces get correctly sorted, and a second test case verifying that the 
+weights are calculated correctly. A final test case verifies that the weights 
+are correct in the special case where every slip surface has the same factor of 
+safety.
 
 \subsubsection{Slip Slicing Module}
+The MIS for this module shows that it uses two different slicing algorithms, 
+depending on the value of the boolean \textit{soln.evenslc}. Thus, a test case 
+was selected for each algorithm, to ensure that it slices the given slip 
+surface properly.
 
 \subsubsection{Morgenstern-Price Calculation Module}
+Correct calculation of the factor of safety is covered by \tcref{SVnV-TC_Ex1FS} 
+and \tcref{SVnV-TC_OrigProgFS} in the System VnV Plan document. Correct 
+calculation of the interslice normal forces and interslice shear forces are 
+covered by \tcref{SVnV-TC_OrigProgNormal} and \tcref{SVnV-TC_OrigProgShear}, 
+respectively, in the System VnV Plan document. The additional test cases 
+specified here cover special cases not covered by the System VnV Plan: 
+non-converging and spurious solutions. The MIS states that \progname{} should 
+return a factor of safety of 1000 and empty lists for the interslice forces in 
+both of these cases. For each of these special cases, there are three test 
+case. One covers the factor of safety, one covers the interslice normal force, 
+and one covers the interslice shear force.
 
 \subsubsection{Slice Property Calculation Module}
+The MIS shows that this module is responsible for calculating seven properties 
+for each slice of a slip surface. The calculation of some of these properties 
+is itself dependent on conditions. Test cases have been selected such that each 
+possible calculation is covered by at least one test case. 
 
 \subsubsection{Output Module}
+The verification of the output is covered by \tcref{SVnV-TC_ValidOutFS} in the 
+System VnV Plan document. The delivery of each output is covered by 
+\tcref{SVnV-TC_OutInputs} to \tcref{SVnV-TC_OutShear} in the System VnV Plan 
+document. This document therefore only adds test cases for items not covered by 
+the System VnV Plan document. The test case here verifies that an output file 
+with the correct name is created.
 
 \subsection{Tests for Nonfunctional Requirements}
 
