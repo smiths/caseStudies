@@ -167,27 +167,6 @@ Throughout this section, if a test is verifying equality between two numbers, a
 relative tolerance for difference between the actual and expected values will 
 be allowed. The tolerance will be described after running the tests. 
 
-\subsection{Tests for Functional Requirements}
-
-\subsubsection{Control Module}
-
-\bmac{Should control module be out of scope? All it does is call other modules. 
-Maybe I could unit test that the expected functions were called, but is that 
-valuable?}
-
-\subsubsection{Input Module}
-
-As described in the MIS, the Input module is expected to read in many user 
-inputs from a file. For each value contained in the file, there is a 
-corresponding test case verifying that the value was properly read into the 
-data structure containing the input parameters. In cases where the user input 
-may take different forms, such as the input for when a water table exists and 
-the input for when a water table does not exists, each potential form of input 
-is covered by at least one test case. The input module is also responsible for 
-verifying the input, so for each possible violation of an input constraint, 
-there is a corresponding test case verifying that the correct exception was 
-thrown.
-
 \noindent The values in Table~\ref{Inputs} will be used as input for 
 many of the test cases described throughout this section. These values were 
 taken from the User's Guide for this project by \cite{UserGuide}. Individual 
@@ -196,7 +175,7 @@ input parameter that should have a different value than specified by the table.
 
 \begin{table}[!h]
 	\renewcommand{\arraystretch}{1.5}
-	\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+	\begin{tabularx}{1.0\textwidth}{p{2cm} l X}
 		\toprule \textbf{Input} &
 		\textbf{Unit} & \textbf{Value}\\ \midrule
 		$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
@@ -222,13 +201,34 @@ input parameter that should have a different value than specified by the table.
 	\label{Inputs}
 \end{table}
 
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{Control Module}
+
+\bmac{Should control module be out of scope? All it does is call other modules. 
+Maybe I could unit test that the expected functions were called, but is that 
+valuable?}
+
+\subsubsection{Input Module}
+
+As described in the MIS, the Input module is expected to read in many user 
+inputs from a file. For each value contained in the file, there is a 
+corresponding test case verifying that the value was properly read into the 
+data structure containing the input parameters. In cases where the user input 
+may take different forms, such as the input for when a water table exists and 
+the input for when a water table does not exists, each potential form of input 
+is covered by at least one test case. The input module is also responsible for 
+verifying the input, so for each possible violation of an input constraint, 
+there is a corresponding test case verifying that the correct exception was 
+thrown.
+
 \paragraph{Valid User Input}
 
 ~\newline \noindent The test cases described in Table~\ref{InputTests} 
 verify that each user input is correctly read. These test cases are identical 
-to each other with the exception of the expected output which they assert. The 
-input for each is a file containing the inputs specified in 
-Table~\ref{ExValidInputs}.\bmac{Should the input be more specific and give the 
+to each other with the exception of the expected output on which they assert. 
+The input for each is a file containing the inputs specified in 
+Table~\ref{Inputs}.\bmac{Should the input be more specific and give the 
 actual name of a file, or is this okay?} The type 
 of these test cases is automatic. The initial state for each is a new session. 
 The expected output for each is given in Table~\ref{InputTests}. The expected 
@@ -365,9 +365,365 @@ How test will be performed: Automated test on unit testing framework.
 \bmac{Is this okay? The tests described in the SystVnVPlan are really unit 
 tests}
 
-\subsubsection{Module 2}
+\subsubsection{Genetic Algorithm Module}
 
-...
+~\newline \noindent The test cases described in Table~\ref{GenAlgTests} 
+verify that the critical slip surface returned by the genetic algorithm 
+satisfies certain properties. Since the genetic algorithm includes randomness, 
+it is impossible to verify the exact output. This is why test cases were 
+selected to verify properties of the output instead. These test cases are 
+identical to each other with the exception of the expected output on which they 
+assert. The input for each is nothing; the genetic\_alg method does not take 
+any inputs, it uses state variables instead. The type of these test cases is 
+automatic. As the initial state for each, \textit{slope}, \textit{piez}, 
+\textit{search}, and \textit{soln} state variables are loaded with the inputs 
+from Table~\ref{Inputs}. For each test case, a predicate on the output that is 
+expected to hold true is given for each in Table~\ref{GenAlgTests}. These 
+predicates include a variable called $cslip$, which represents the critical 
+slip surface output by the genetic algorithm. The expected output is derived 
+based on the specification for the genetic algorithm found in the MIS document. 
+The tests will be performed as automated tests on a unit testing framework.
+
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXextMin} & 
+	test-genAlg\_xExtMin &  $\textit{cslip}[|\textit{cslip}|-1].x \geq 
+	\textit{search.Xext}[0]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXextMax} & 
+	test-genAlg\_xExtMax &  $\textit{cslip}[|\textit{cslip}|-1].x \leq 
+	\textit{search.Xext}[1]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXetrMin} & 
+	test-genAlg\_xEtrMin &  $\textit{cslip}[0].x \geq \textit{search.Xetr}[0]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXetrMax} & 
+	test-genAlg\_xEtrMax &  $\textit{cslip}[0].x \leq \textit{search.Xetr}[1]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgYlimMin} & 
+	test-genAlg\_yLimMin &  $\forall(i : \mathbb{Z} | i \in 
+	[0..|\textit{cslip}|-1] : \textit{cslip}[i].y \geq 
+	\textit{search.Ylim}[0])$ \\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgYlimMax} & 
+	test-genAlg\_yLimMax &  $\forall(i : \mathbb{Z} | i \in 
+	[0..|\textit{cslip}|-1] : \textit{cslip}[i].y \leq 
+	\textit{search.Ylim}[1])$ \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgVertices} & 
+	test-genAlg\_vertices &  $+(i : \mathbb{Z} | i \in [0..|\textit{cslip}|-1] 
+	: 1) = 13$ \\
+	\hline
+	\caption{Genetic Algorithm Test Cases}
+	\label{GenAlgTests}
+\end{longtable}
+
+\bmac{This one is tricky because the output of the genetic algorithm has a 
+degree of randomness. I'm open to ideas for other ways to test this...}
+
+\subsubsection{Kinematic Admissibility Module}
+
+Based on the specification for this module in the MIS, there are six conditions 
+under which the module should return false. Thus, test cases have been selected 
+to test each of these six conditions. For each condition, there is one test 
+case verifying the behaviour when the condition is met and another test case 
+verifying the behaviour when the slip surface is on the border of meeting the 
+condition. For example, if the condition is that one value must be strictly 
+less than another, there would be a test case where the two values are equal. 
+Two of the conditions are turned on or off based on a boolean, and so an 
+additional test case was selected for each of those to confirm that if the 
+condition is turned off, the module should return true even if the condition is 
+met. 
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmXDec}] 
+	test-kinAdm\_xDec
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 15), (25, 15), (40, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinates are 
+	not monotonically increasing, so the kinematic admissibility module should 
+	return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmXEq}] 
+	test-kinAdm\_xEq
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 14), (30, 14), (40, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinates are 
+	equal for two adjacent points. This does not violate the condition, so the 
+	kinematic admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXetrOnSlope}] 
+	test-kinAdm\_xEtrOnSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(-10, 25), (30, 15), (35, 12), (40, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface entry is not on the slope, so the kinematic admissibility 
+	module should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXetrOnEdge}] 
+	test-kinAdm\_xEtrOnEdge
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(0, 25), (30, 15), (35, 14), (40, 15)], Fs : 0, G : [], X : 
+	[], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface entry is just on the edge of the slope, so the kinematic 
+	admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXextOnSlope}] 
+	test-kinAdm\_xExtOnSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 15), (35, 12), (80, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface exit is not on the slope, so the kinematic admissibility 
+	module should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXextOnEdge}] 
+	test-kinAdm\_xExtOnEdge
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 15), (35, 12), (70, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface exit is just on the edge of the slope, so the kinematic 
+	admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmInSlope}] 
+	test-kinAdm\_inSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 25), (35, 12), (40, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that one $x$-ordinate of 
+	the slip surface is above the slope, so the kinematic admissibility module 
+	should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmOnSlope}] 
+	test-kinAdm\_onSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
+	
+	Input: (surf : [(20, 25), (30, 15), (34, 18), (38, 15), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that one interior 
+	$x$-ordinate of the slip surface is on the slope. This does not violate the 
+	condition, so the kinematic admissibility module should return true. Note 
+	that \textit{soln.cncvu} and \textit{soln.obtu} were set to 0 to relax the 
+	concave-up condition and obtuse-angles condition, as this test case would 
+	violate those conditions otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUp}] 
+	test-kinAdm\_cncvUp
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the slip surface is 
+	not fully concave-up, so the kinematic admissibility module should return 
+	false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUpOff}] 
+	test-kinAdm\_cncvUpOff
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu} = 
+	0.
+	
+	Input: (surf : [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface is 
+	not fully concave-up, but \textit{cncvu}=0, so the condition is not 
+	enforced, so the kinematic admissibility module should return true. Note 
+	that \textit{soln.obtu} was set to 0 to relax the obtuse-angles condition, 
+	as this test case would violate that condition otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUpEq}] 
+	test-kinAdm\_cncvUpEq
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0.
+	
+	Input: (surf : [(20, 25), (30, 15), (35, 15), (40, 15)], Fs : 0, G : [], X 
+	: [], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	adjacent slopes that are equal. This does not violate the condition, so the 
+	kinematic admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmObtu}] 
+	test-kinAdm\_obtu
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0.
+	
+	Input: (surf : [(20, 25), (30, 15), (31, 5), (40, 15)], Fs : 0, G : [], X : 
+	[], wt : 0).
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	an angle less than 110 degrees, so the kinematic admissibility module 
+	should return false. Note that \textit{soln.cncvu} was set to 0 to relax 
+	the concave-up condition, as this test case would violate that condition 
+	otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmObtuOff}] 
+	test-kinAdm\_obtuOff
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
+	
+	Input: (surf : [(20, 25), (30, 15), (31, 5), (40, 15)], Fs : 0, G : [], X : 
+	[], wt : 0).
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	an angle less than 110 degrees, but \textit{soln.obtu}=0, so the condition 
+	is not enforced, so the kinematic admissibility module should return true. 
+	Note that \textit{soln.cncvu} was set to 0 to relax the concave-up 
+	condition, as this test case would violate that condition otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsubsection{Slip Weighting Module}
+
+\subsubsection{Slip Slicing Module}
+
+\subsubsection{Morgenstern-Price Calculation Module}
+
+\subsubsection{Slice Property Calculation Module}
+
+\subsubsection{Output Module}
 
 \subsection{Tests for Nonfunctional Requirements}
 
