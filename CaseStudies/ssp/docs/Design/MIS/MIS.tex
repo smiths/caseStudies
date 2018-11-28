@@ -350,9 +350,9 @@ p{0.45\textwidth} } \hline
    piezX & - & [$\mathbb{R}$] & - \\
    piezY & - & [$\mathbb{R}$] & - \\
    gamw & - & $\mathbb{R}$ & - \\
-   xExt & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
-   xEtr & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
-   yLim & - & [$\mathbb{R}$]\textsuperscript{1x2} & - \\
+   xExt & - & [$\mathbb{R}$]\textsuperscript{1,2} & - \\
+   xEtr & - & [$\mathbb{R}$]\textsuperscript{1,2} & - \\
+   yLim & - & [$\mathbb{R}$]\textsuperscript{1,2} & - \\
    ltor & - & $\mathbb{B}$ & - \\
    ftype & - & $\mathbb{B}$ & - \\
    evnslc & - & $\mathbb{B}$ & - \\
@@ -383,10 +383,6 @@ p{0.45\textwidth} } \hline
 \subsubsection{Assumptions}
 \begin{itemize}
 	\item load\_params is called before any of the other access programs.
-	
-	\item The guesses for potential minimum and maximum $x$ and $y$ values of 
-	the critical slip surface, as described in \textit{in\_file}, lie within 
-	the boundaries of the given slope geometry.
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
@@ -410,7 +406,7 @@ load\_params(\textit{fname}):
 	\begin{itemize}
 		\item[] \textit{exc} $\coloneqq$ (\textit{fname} does not exist in file 
 		system $\Rightarrow$ fileNotExist\\
-		$|$ \textit{fname}[($|$\textit{fname}$|$ - 5)..($|$\textit{fname}$|$ - 
+		$|$ \textit{fname}[($|$\textit{fname}$|$ - 4)..($|$\textit{fname}$|$ - 
 		1)] = ``.out'' $\Rightarrow$ badFileExtension\\
 		$|$ \textit{in\_file} is not formatted correctly $\Rightarrow$ 
 		unexpectedInput)
@@ -436,7 +432,26 @@ load\_params(\textit{fname}):
 		[0..|piez.piez|-2] : piez.piez[i].x - piez.piez[i+1].x \leq 0))\\ 
 		\lor piez.piez[0].x \neq slope.strat[0].x \\
 		\lor piez.piez[|piez.piez|-1].x \neq slope.strat[|slope.strat|-1].x$\\ 
-		$\Rightarrow$ badPiezGeometry)\\
+		$\Rightarrow$ badPiezGeometry\\
+		$|$ ($\textit{slope.strat}[|\textit{slope.strat}|-1].x > 
+		\textit{slope.strat}[0].x$ $\Rightarrow$ $\forall(i : \mathbb{Z} | i 
+		\in [0..1] :\\
+		\textit{search.Xext}[i] > 
+		\textit{slope.strat}[|\textit{slope.strat}|-1].x \\
+		\lor \textit{search.Xext}[i] < \textit{slope.strat}[0].x \\
+		\lor \textit{search.Xetr}[i] >  
+		\textit{slope.strat}[|\textit{slope.strat}|-1].x\\
+		\lor \textit{search.Xetr}[i] < \textit{slope.strat}[0].x)$\\
+		$|$ $\textit{slope.strat}[|\textit{slope.strat}|-1].x < 
+		\textit{slope.strat}[0].x$ $\Rightarrow$ $\forall(i : \mathbb{Z} | i 
+		\in [0..1] : \\
+		\textit{search.Xext}[i] < 
+		\textit{slope.strat}[|\textit{slope.strat}|-1].x \\
+		\lor \textit{search.Xext}[i] > \textit{slope.strat}[0].x \\
+		\lor \textit{search.Xetr}[i] < 
+		\textit{slope.strat}[|\textit{slope.strat}|-1].x \\
+		\lor \textit{search.Xetr}[i] > \textit{slope.strat}[0].x)$)\\ 
+		$\Rightarrow$ badSlipGuess)\\
 	\end{itemize}
 \end{itemize}
 
@@ -1344,8 +1359,8 @@ N/A
 
 \begin{center}
 	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular} {p{0.18\textwidth}  p{0.15\textwidth}  p{0.15\textwidth} 
-			p{0.45\textwidth} } \hline 
+	\begin{tabular} {p{0.18\textwidth}  p{0.35\textwidth}  p{0.15\textwidth} 
+			p{0.25\textwidth} } \hline 
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 		
@@ -1544,7 +1559,7 @@ rand():
 \begin{itemize}
 	\item output: 
 	\begin{itemize}
-		\item[] \textit{out} $coloneqq$ A random number in the interval (0,1).
+		\item[] \textit{out} $\coloneqq$ A random number in the interval (0,1).
 	\end{itemize}
 \end{itemize}
 
