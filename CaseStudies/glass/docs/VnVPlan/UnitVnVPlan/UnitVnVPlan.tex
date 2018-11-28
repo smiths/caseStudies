@@ -1,0 +1,473 @@
+\documentclass[12pt]{article}
+\usepackage{multirow}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{colortbl}
+\usepackage{adjustbox}
+\usepackage{xr}
+\usepackage{hyperref}
+\usepackage[all]{hypcap} 
+\usepackage{longtable}
+\usepackage{xfrac}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage[toc, page]{appendix}
+\usepackage{url}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{array}
+\usepackage{tabu}
+\usepackage[numbib,nottoc]{tocbibind}
+%\usepackage{refcheck}
+
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: coloured links
+	linkcolor=red,          % colour of internal links (change box colour with
+	% %linkbordercolor)
+	citecolor=blue,        % colour of links to bibliography
+	filecolor=magenta,      % colour of file links
+	urlcolor=cyan           % colour of external links
+}
+
+\input{../../Comments}
+\externaldocument[SRS-]{../../SRS/glassbr_srs}
+
+\externaldocument[MG-]{../../Design/MG/MG}
+\externaldocument[MIS-]{../../Design/MIS/glassbr_mis}
+\externaldocument[SVnV-]{../SystVnVPlan/SystVnVPlan}
+
+
+\newcommand{\colZwidth}{1.0\textwidth}
+\newcommand{\blt}{- } %used for bullets in a list
+\newcommand{\colAwidth}{0.13\textwidth}
+\newcommand{\colBwidth}{0.82\textwidth}
+\newcommand{\colCwidth}{0.1\textwidth}
+\newcommand{\colDwidth}{0.05\textwidth}
+\newcommand{\colEwidth}{0.8\textwidth}
+\newcommand{\colFwidth}{0.17\textwidth}
+\newcommand{\colGwidth}{0.5\textwidth}
+\newcommand{\colHwidth}{0.28\textwidth}
+\newcounter{defnum} %Definition Number
+\newcommand{\dthedefnum}{GD\thedefnum}
+\newcommand{\dref}[1]{GD\ref{#1}}
+\newcounter{datadefnum} %Datadefinition Number
+\newcommand{\ddthedatadefnum}{DD\thedatadefnum}
+\newcommand{\ddref}[1]{DD\ref{#1}}
+\newcounter{theorynum} %Theory Number
+\newcommand{\tthetheorynum}{T\thetheorynum}
+\newcommand{\tref}[1]{T\ref{#1}}
+\newcounter{tablenum} %Table Number
+\newcommand{\tbthetablenum}{T\thetablenum}
+\newcommand{\tbref}[1]{TB\ref{#1}}
+\newcounter{assumpnum} %Assumption Number
+\newcommand{\atheassumpnum}{P\theassumpnum}
+\newcommand{\aref}[1]{A\ref{#1}}
+\newcounter{physsysnum} %Physical System Description Number
+\newcommand{\pthephyssysnum}{P\thephyssysnum}
+\newcommand{\psref}[1]{PS\ref{#1}}
+\newcounter{goalnum} %Goal Number
+\newcommand{\gthegoalnum}{P\thegoalnum}
+\newcommand{\gsref}[1]{GS\ref{#1}}
+\newcounter{instnum} %Instance Number
+\newcommand{\itheinstnum}{IM\theinstnum}
+\newcommand{\iref}[1]{IM\ref{#1}}
+\newcounter{reqnum} %Requirement Number
+\newcommand{\rthereqnum}{P\thereqnum}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcounter{lafnum}
+\newcommand{\lthelafnum}{L\thelafnum}
+\newcommand{\lref}[1]{L\laf{#1}}
+\newcounter{uahnum}
+\newcommand{\utheuahnum}{U\theuahnum}
+\newcommand{\uref}[1]{U\uaf{#1}}
+\newcounter{perfnum}%Appendix
+\newcommand{\ptheperfnum}{AP\theperfnum}
+\newcommand{\perf}[1]{AP\perf{#1}}
+\newcounter{oaenum}
+\newcommand{\otheoaenum}{O\theoaenum}
+\newcommand{\oae}[1]{P\oae{#1}}
+\newcounter{masnum}
+\newcommand{\mthemasnum}{M\themasnum}
+\newcommand{\mas}[1]{P\mas{#1}}
+\newcounter{secunum}
+\newcommand{\sthesecunum}{S\thesecunum}
+\newcommand{\secu}[1]{S\secu{#1}}
+\newcounter{culnum}
+\newcommand{\ctheculnum}{C\theculnum}
+\newcommand{\cul}[1]{P\cul{#1}}
+\newcounter{apnum}
+\newcommand{\atheapnum}{L\theapnum}
+\newcommand{\apref}[1]{AP\ap{#1}}
+
+\newcounter{lcnum} %Likely change number
+\newcommand{\lthelcnum}{LC\thelcnum}
+\newcommand{\lcref}[1]{LC\ref{#1}}
+
+\newcounter{ucnum} %Unlikely change number
+\newcommand{\utheucnum}{UC\theucnum}
+\newcommand{\ucref}[1]{UC\ref{#1}}
+
+\newcommand{\tclad}{T_\text{CL}}
+\newcommand{\degree}{\ensuremath{^\circ}}
+\newcommand{\progname}{GlassBR}
+\newcommand{\euler}{e}
+\newcommand{\complex}{i}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+%\oddsidemargin 0mm
+%\evensidemargin 0mm
+%\textwidth 160mm
+%\textheight 200mm
+%\usepackage{fullpage}
+\newgeometry{margin=2cm}
+
+\begin{filecontents}{../../../refs/References.bib}
+\end{filecontents}
+
+
+\begin{document}
+
+\title{Project Title: Unit Verification and Validation Plan for \progname{}} 
+\author{Vajiheh Motamer}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+27/11/18 & 1.0 & initial UnitVnVPlan based on new template\\
+
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\tableofcontents
+
+\listoftables
+
+\wss{Do not include if not relevant}
+
+\listoffigures
+
+\wss{Do not include if not relevant}
+
+\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+  \toprule		
+  \textbf{symbol} & \textbf{description}\\
+  \midrule 
+  T & Test\\
+  \bottomrule
+\end{tabular}\\
+
+\wss{symbols, abbreviations or acronyms -- you can reference the SRS, MG or MIS
+  tables if needed}
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document ... \wss{provide an introductory blurb and roadmap of the
+  unit V\&V plan}
+
+\section{General Information}
+
+\subsection{Purpose}
+
+\wss{Identify software that is being unit tested (verified).}
+
+\subsection{Scope}
+All introduced modules in MG are inside of the scope to UnitVnVPlan
+
+
+
+\section{Plan}
+	
+\subsection{Verification and Validation Team}
+Responsible member for the verification and validation of GlassBR is Vajiheh Motamer.
+
+
+\subsection{Automated Testing and Verification Tools}
+According to that all test files are going to develop based on Python. The following tools have been considered:
+\begin{itemize}
+	\item Unit Testing Tools :
+	\begin{itemize}
+		\item pytest:  no API. Automatic collection of tests; simple asserts; strong support for test fixture/state management via setup/teardown hooks; strong debugging support via customized traceback. In additional, it is considered as tests runner which Selectivly run tests; Stop on first failure 
+		\item unittest : Strong support for test organization and reuse via test suites 
+		 \end{itemize}
+	 \end{itemize}
+
+
+\subsection{Non-Testing Based Verification}
+This section for \progname is not applicable.
+
+\section{Unit Test Description}
+
+\wss{Reference your MIS and explain your overall philosophy for test case
+  selection.}
+
+\subsection{Tests for Functional Requirements}
+
+\wss{Most of the verification will be through automated unit testing.  If
+  appropriate specific modules can be verified by a non-testing based
+  technique.  That can also be documented in this section.}
+
+\subsubsection{Control Module}
+With reference to Section \ref{MIS-Main} from MIS, this section determines if the main program produces the correct output.
+
+\begin{enumerate}
+
+\item{TstMain\_1}
+
+Type: Automotic
+					
+Initial State: New Session
+					
+Input: defaultInput.txt, output.txt\\ from the following path: https://github.com/smiths/caseStudies/tree/master
+	/CaseStudies/glass/src/Python/Test/Inputfiles
+
+					
+Output: assertEqual(GenOutput.txt, output.txt)
+\aida{Should I use sOut (Exported Constant in MIS) instead of GenOutput.txt? Besides, Should I use "GenOutput.txt, output.txt" for expected output instead of assert?}
+
+Test Case Derivation: \iref{SRS-IM_prob} and \tref{SRS-T_Pb} in SRS.
+
+How test will be performed: Unit testing using PyUnit.
+					
+\item{TstMain\_2\\}
+
+Type: Automotic
+
+Initial State: New Session
+
+Input: TestInput1.txt, output1.txt\\ https://github.com/smiths/caseStudies/tree/master
+/CaseStudies/glass/src/Python/Test/Inputfiles
+
+
+Output: assertEqual(GenOutput1.txt, output1.txt)
+\aida{Should I consider only a test case which consists of a number of inputfile and outputfile instead of seperate test cases with same body and different input and output? }
+
+Test Case Derivation: \iref{SRS-IM_prob} and \tref{SRS-T_Pb} in SRS.
+
+How test will be performed: Unit testing using PyUnit.
+
+
+    
+\end{enumerate}
+
+\begin{enumerate}
+
+\subsubsection{Input Module}
+
+\item{TstCheckConstraints} \\
+Invalid input is input that defies the data constraints described
+in Section~\ref{SRS-sec_datadef} of the SRS. This test case has considered to test verify params routin from MIS \\
+Type: Automotic
+
+Initial State: New Session
+
+Input: Table~\ref{SVnV-testCheckConstraints}  and Table~\ref{SVnV-defaultInputTBL} from SystVnVPlan
+
+
+Output: assertEqual(("Specified Error in the Table~\ref{SVnV-testCheckConstraints} "), "Generated Error by GlassBR")
+\aida{What should I consider instead of "generated error by glassbr"?}
+
+Test Case Derivation: R1 and R2 from SRS.
+
+How test will be performed: Unit testing using PyUnit.
+
+\item{testInputFormat} \\
+The following set of test cases is intended to ensure data is being read in from the input file correctly and it has considered to test of load\_params(s) routin from MIS
+
+Type: Automotic
+
+Initial State: New Session
+
+Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
+/CaseStudies/glass/src/Python/Test/Inputfiles
+
+
+Output: assertEqual(Params as maual( for example for length 1200), readed param from the input file)
+\aida{Do you have  better suggestion for the format of arguments of assertEqual?}
+
+Test Case Derivation: R1 and R2 from SRS.
+
+How test will be performed: Unit testing using PyUnit.
+
+\item{testDerivedValues} \\
+The following set of test cases is intended to ensure value from the derived quantities has been calculated correctly.
+
+Type: Automotic
+
+Initial State: New Session
+
+Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
+/CaseStudies/glass/src/Python/Test/Inputfiles
+
+
+Output: assertEqual(Params as manual( for example for sdExpected 11.10180165558726), readed sd from the input file)
+\aida{Should I have a sperate table for input and outputs similar to SystVnVPlan??}
+
+Test Case Derivation: R2 from SRS.
+
+How test will be performed: Unit testing using PyUnit.
+
+
+
+
+\end{enumerate}
+\begin{enumerate}
+	
+	\subsubsection{Input Module}
+	
+	\item{TstCheckConstraints} \\
+	Invalid input is input that defies the data constraints described
+	in Section~\ref{SRS-sec_datadef} of the SRS. This test case has considered to test verify params routin from MIS \\
+	Type: Automotic
+	
+	Initial State: New Session
+	
+	Input: Table~\ref{SVnV-testCheckConstraints}  and Table~\ref{SVnV-defaultInputTBL} from SystVnVPlan
+	
+	
+	Output: assertEqual(("Specified Error in the Table~\ref{SVnV-testCheckConstraints} "), "Generated Error by GlassBR")
+	\aida{What should I consider instead of "generated error by glassbr"?}
+	
+	Test Case Derivation: R1 and R2 from SRS.
+	
+	How test will be performed: Unit testing using PyUnit.
+	
+	\item{testInputFormat} \\
+	The following set of test cases is intended to ensure data is being read in from the input file correctly and it has considered to test of load\_params(s) routin from MIS
+	
+	Type: Automotic
+	
+	Initial State: New Session
+	
+	Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
+	/CaseStudies/glass/src/Python/Test/Inputfiles
+	
+	
+	Output: assertEqual(Params as maual( for example for length 1200), readed param from the input file)
+	\aida{Do you have  better suggestion for the format of arguments of assertEqual?}
+	
+	Test Case Derivation: R1 and R2 from SRS.
+	
+	How test will be performed: Unit testing using PyUnit.
+	
+	\item{testDerivedValues} \\
+	The following set of test cases is intended to ensure value from the derived quantities has been calculated correctly.
+	
+	Type: Automotic
+	
+	Initial State: New Session
+	
+	Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
+	/CaseStudies/glass/src/Python/Test/Inputfiles
+	
+	
+	Output: assertEqual(Params as manual( for example for sdExpected 11.10180165558726), readed sd from the input file)
+	\aida{Should I have a sperate table for input and outputs similar to SystVnVPlan??}
+	
+	Test Case Derivation: R2 from SRS.
+	
+	How test will be performed: Unit testing using PyUnit.
+	
+\aida{I think this test case covers GlassTypeADT Module and ThicknessADT Module and Constants Module. Do you agree?}	
+	
+	
+\end{enumerate}
+\begin{enumerate}
+	
+	\subsubsection{Calc Module}
+	
+	\item{testCalculations} \\
+	These set of tests are same to  TC1 to TC7 in SystVnVPlan.
+
+	
+	\aida{Is that enough to reference to SystVnVplan?}	
+	
+	
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+
+\wss{If there is a module that needs to be independently assessed for
+  performance, those test cases can go here.  In some projects, planning for
+  nonfunctional tests of units will not be that relevant.}
+
+\wss{These tests may involve collecting performance data from previously
+  mentioned functional tests.}
+
+\subsubsection{Module ?}
+		
+\begin{enumerate}
+
+\item{test-id1\\}
+
+Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+  be automatic}
+					
+Initial State: 
+					
+Input/Condition: 
+					
+Output/Result: 
+					
+How test will be performed: 
+					
+\item{test-id2\\}
+
+Type: Functional, Dynamic, Manual, Static etc.
+					
+Initial State: 
+					
+Input: 
+					
+Output: 
+					
+How test will be performed: 
+
+\end{enumerate}
+
+\subsubsection{Module ?}
+
+...
+
+\subsection{Traceability Between Test Cases and Modules}
+
+\wss{Provide evidence that all of the modules have been considered.}
+
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}
+
+\wss{This is where you can place additional information, as appropriate}
+
+\subsection{Symbolic Parameters}
+
+\wss{The definition of the test cases may call for SYMBOLIC\_CONSTANTS.
+Their values are defined in this section for easy maintenance.}
+
+\end{document}
