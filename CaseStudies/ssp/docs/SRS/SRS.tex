@@ -472,7 +472,7 @@ system and its environment.
 
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[width=0.6\textwidth]{SystemContextFigure.png}
+		\includegraphics[width=0.8\textwidth]{SystemContextFigure.png}
 		\caption{System Context}
 		\label{Fig_SystemContext}
 	\end{center}
@@ -538,7 +538,7 @@ sections and their meaning, with the purpose of reducing ambiguity and
 
 \begin{itemize}
 \item {\textit{Factor of safety:} The global stability metric of a slip surface 
-of a slope.}
+of a slope, defined as the ratio of resistive shear force to mobile shear force}
   
 \item {\textit{Slip surface:} A surface within a slope that has the potential 
 to fail or displace due to load or other forces.}
@@ -561,11 +561,15 @@ stress.}
 \item {\textit{Shear force:} A force applied parallel to the plane of
   the material.}
 
-\item {\textit{Resistive shear force:} Shear force in the direction opposite of 
+\item {\textit{Resistive shear force:} Shear force in the direction opposite to 
 the direction of potential motion, thus hindering motion along the plane.}
 	
 \item {\textit{Mobile shear force:} Shear force in the direction of potential 
 motion, thus encouraging motion along the plane.}
+
+\item{\textit{Effective forces and stresses}: The normal force or stress 
+carried by the soil skeleton. The total normal force or stress is composed of 
+the effective force or stress and the force or stress exerted by water.}
 	
 \item {\textit{Cohesion:} An attractive force between adjacent particles that 
 holds the matter together.}
@@ -574,16 +578,16 @@ holds the matter together.}
 independent of the direction in which it is measured.}
   
 \item {\textit{Plane strain:} A condition where the resultant stresses in one 
-of the directions of a 3-dimensional material can be approximated as
+of the directions of a 3-dimensional body can be approximated as
   zero. Results when the length of one dimension of the body dominates
-  the others. Stresses in the direction of the dominant dimension can be 
-  approximated as zero.}
+  the others, to the point where it can be assumed as infinite. Stresses in the 
+  direction of the dominant dimension can be approximated as zero.}
 
 \end{itemize}
 
 \subsubsection{Physical System Description} \label{sec_system}
 
-The physical system of \progname{}, as shown in Figure~\ref{Fig_PhysSyst}, 
+The Physical System (PS) of \progname{}, as shown in Figure~\ref{Fig_PhysSyst}, 
 includes the following elements:
 
 \begin{itemize}
@@ -596,16 +600,17 @@ includes the following elements:
 		{
 			\includegraphics[width=0.7\textwidth]{PhysSyst.png}
 		}
-		\caption{An example slope for analysis by SSP}
+		\caption{An example slope for analysis by \progname{}, where the dashed 
+		line represents the water table}
 		\label{Fig_PhysSyst}
 	\end{center}
 \end{figure}
 
-~\newline\noindent Morgenstern-Price analysis of the slope involves 
-representing the slope as a series of vertical slices. As shown in 
+~\newline\noindent Morgenstern-Price \citep{MorgPrice} analysis of the slope 
+involves representing the slope as a series of vertical slices. As shown in 
 Figure~\ref{Fig_Index}, the index $i$ is used to denote a value for a single 
 slice, and an interslice value at a given index $i$ refers to the value between 
-slice $i$ and adjacent slice \textit{i+1}.
+slice $i$ and adjacent slice $\textit{i}+1$.
 
 \begin{figure}[h!]
 \begin{center}
@@ -629,16 +634,20 @@ slice $i$ and adjacent slice \textit{i+1}.
 % SLICES %
 \put(0.2,0.9){\line(0,1){0}}
 \put(0.6,0.484){\line(0,1){0.416}}
-\put(0.992,0.2938){\line(0,1){0.3401}}
+\put(0.9,0.33){\line(0,1){0.368}}
+\put(1.05,0.27){\line(0,1){0.333}}
 \put(1.4005,0.1764){\line(0,1){0.19}}
 \put(1.8,0.1){\line(0,1){0}}
 % interslice LABELS %
 \put(0.55,0.92){$i=1$}
+\put(0.85,0.75){$i=2$}
+\put(1.05,0.65){$i=n-2$}
 \put(1.3985,0.3863){$i=n-1$}
 % slice LABELS %
 \put(0.38,0.75){$i=1$}
-\put(0.74,0.55){$i=2$}
-\put(1.1,0.34){$i=n-1$}
+\put(0.7,0.6){$i=2$}
+\put(0.93,0.45){$\dots$}
+\put(1.1,0.3){$i=n-1$}
 \put(1.48,0.185){$i=n$}
 \end{picture}
 }
@@ -648,8 +657,9 @@ slice $i$ and adjacent slice \textit{i+1}.
 \end{figure}
 
 
-~\newline\noindent A free body diagram of the forces acting on a
-slice is displayed in Figure~\ref{Fig_Forces}.
+\noindent A free body diagram of the forces acting on a slice is displayed in 
+Figure~\ref{Fig_Forces}. The specific forces and symbols will be discussed in 
+detail in Sections~\ref{sec_gendef} and \ref{sec_datadef}.
 
 \begin{figure}[h!]
 \begin{center}
@@ -663,16 +673,12 @@ slice is displayed in Figure~\ref{Fig_Forces}.
 
 \subsubsection{Goal statements} \label{sec_Goals}
 
-Given the geometry of the soil layers and water table composing the plane of a 
-slope and the material properties of the layers, the goal statements are:
+Given the shape of a soil mass, the location of a water table, and the material 
+properties of the soil, the goal statements are to:
 
 \begin{itemize}
-\item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_FS}]
-  {Evaluate the factors of safety for possible slip surfaces along the slope.}
-  
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Critical}]
-  {Identify the critical slip surface for the slope, with the lowest factor of 
-  safety.}
+  {Identify the critical slip surface and the corresponding factor of safety.}
 
 \item [GS\refstepcounter{goalnum}\thegoalnum: \label{G_Normal}]
   {Determine the interslice normal force between each pair of vertical slices   
