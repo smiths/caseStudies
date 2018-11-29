@@ -55,7 +55,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-2018/11/26 & 1.0 & Initial template fill-ins\\
+11/26/2018 & 1.0 & Initial template fill-ins\\
+11/29/2018 & 1.1 & Updates based on presentation feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -122,16 +123,18 @@ correct for the cases covered by tests.
 
 \subsection{Scope}
 
-\noindent \mref{MG-mHH} will not be unit tested as it is implemented by the 
-operating system of the hardware on which \progname{} is running, and is 
-assumed to work correctly. \mref{MG-mArrayOps}, \mref{MG-mRandNum}, and 
-\mref{MG-mPlot} 
-will also not be unit tested as they are all implemented by MatLab. 
-Verification of the non-functional requirements is not included in the unit 
-verification plan because they are sufficiently covered by the system tests 
-outlined in the 
+The Hardware-Hiding module, \noindent \mref{MG-mHH}, will not be unit tested as 
+it is implemented by the operating system of the hardware on which \progname{} 
+is running, and is assumed to work correctly. The Sequence Data Structure, 
+Random Number Generation, and Plotting modules (\mref{MG-mArrayOps}, 
+\mref{MG-mRandNum}, and \mref{MG-mPlot}) will also not be unit tested as they 
+are all implemented by MatLab. The Control Module, \mref{MG-mControl}, is out 
+of scope for this document because it is considered to have been sufficiently 
+tested by the system tests outlined in the 
 \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
-{System VnV Plan document}.
+{System VnV Plan document}.Verification of the non-functional requirements is 
+not included in the unit verification plan because they are also sufficiently 
+covered by the System VnV Plan.
 
 \section{Plan} \label{sec_Plan}
 	
@@ -145,9 +148,6 @@ professor, Dr.~Spencer Smith, of CAS 741 will also contribute.
 
 \noindent MatLab's built-in unit testing framework will be used to 
 automatically run the unit tests and display the results.
-
-\bmac{Is it inherently better to use a unit testing framework if you already 
-have a lot of tests written without one?}
 
 \subsection{Non-Testing Based Verification}
 
@@ -166,6 +166,10 @@ for each result, even if they all cover the same branch of a conditional.
 Throughout this section, if a test is verifying equality between two numbers, a 
 relative error for difference between the actual and expected values will 
 be allowed. The error will be described after running the tests. 
+
+~\newline \noindent Many of the tests refer to variables or constants as part 
+of the initial state, input, or expected output. The specifications for these 
+variables and constants can be found in the MIS document for this project.
 
 ~\newline \noindent The values in Table~\ref{Inputs} will be used as input for 
 many of the test cases described throughout this section. These values were 
@@ -203,12 +207,6 @@ input parameter that should have a different value than specified by the table.
 
 \subsection{Tests for Functional Requirements}
 
-\subsubsection{Control Module}
-
-\bmac{Should control module be out of scope? All it does is call other modules. 
-Maybe I could unit test that the expected functions were called, but is that 
-valuable?}
-
 \subsubsection{Input Module}
 
 As described in the MIS, the Input module is expected to read in many user 
@@ -228,12 +226,11 @@ thrown.
 verify that each user input is correctly read. These test cases are identical 
 to each other with the exception of the expected output on which they assert. 
 The input for each is a file containing the inputs specified in 
-Table~\ref{Inputs}.\bmac{Should the input be more specific and give the 
-actual name of a file, or is this okay?} The type 
-of these test cases is automatic. The initial state for each is a new session. 
-The expected output for each is given in Table~\ref{InputTests}. The expected 
-output is derived based on the given inputs. The tests will be performed as 
-automated tests on a unit testing framework.
+Table~\ref{Inputs}. The type of these test cases is automatic. The initial 
+state for each is a new session. The expected output for each is given in 
+Table~\ref{InputTests}. The expected output is derived based on the given 
+inputs. The tests will be performed as automated tests on a unit testing 
+framework.
 
 \begin{longtable}{  l  p{4cm}  p{6cm}  }
 	\hline
@@ -300,8 +297,6 @@ automated tests on a unit testing framework.
 	\label{InputTests}
 \end{longtable}
 
-\bmac{Can I use MIS variable names for expected output?}
-
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 
 \item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputRtoL}] 
@@ -362,9 +357,6 @@ How test will be performed: Automated test on unit testing framework.
 ~\newline \noindent See \tcref{SVnV-TC_InvalidSlopeDecToInc} - 
 \tcref{SVnV-TC_InvalidUnitWtWaterNegative} in the System VnV Plan document.
 
-\bmac{Is this okay? The tests described in the SystVnVPlan are really unit 
-tests}
-
 \subsubsection{Genetic Algorithm Module}
 
 ~\newline \noindent The test cases described in Table~\ref{GenAlgTests} 
@@ -413,15 +405,13 @@ The tests will be performed as automated tests on a unit testing framework.
 	\textit{search.Ylim}[1])$ \\
 	\hline
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgVertices} & 
-	test-genAlg\_vertices &  $+(i : \mathbb{Z} | i \in [0..|\textit{cslip}|-1] 
-	: 1) = 13$ \\
+	test-genAlg\_vertices &  $|\textit{cslip}| = 
+	(\text{INIT\_NUM\_VERTICES}*(2^\text{NUM\_ADDS}))-(2^\text{NUM\_ADDS}-1)$ 
+	\\
 	\hline
 	\caption{Genetic Algorithm Test Cases}
 	\label{GenAlgTests}
 \end{longtable}
-
-\bmac{This one is tricky because the output of the genetic algorithm has a 
-degree of randomness. I'm open to ideas for other ways to test this...}
 
 \subsubsection{Kinematic Admissibility Module}
 
