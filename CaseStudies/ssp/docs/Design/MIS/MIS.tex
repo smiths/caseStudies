@@ -78,6 +78,8 @@
 	\midrule
 	11/12/18 & 1.0 & Initial updates based on template\\
 	11/21/18 & 1.1 & Finished updating all of the modules\\
+	11/29/18 & 1.2 & Added additional constants to the genetic algorithm module 
+	for the adding of vertices to slip surfaces\\
 	\bottomrule
 \end{tabularx}
 
@@ -642,6 +644,8 @@ SlipWeighter (Section \ref{sec:WeightMod}), Sequence
 MIN\_GENS = 100\\
 NUM\_SLIPS = 20\\
 REL\_DIFF = 0.00005\\
+INIT\_NUM\_VERTICES = 4\\
+NUM\_ADDS = 2\\
 
 \subsubsection{Exported Data Types}
 \renewcommand*{\arraystretch}{1.5}
@@ -692,7 +696,8 @@ genetic\_alg():
 		potential slip surfaces, where the entry and exit x-coordinate for each 
 		slip surface are computed according to \textit{generate\_slips(xEtr)} 
 		and \textit{generate\_slips(xExt)}. Corresponding y-coordinates are 
-		determined by interpolating on the slope geometry.
+		determined by interpolating on the slope geometry. The total number of 
+		coordinates for each slip surface is INIT\_NUM\_VERTICES.
 		\item using kinAdm to verify that the geometry of each potential slip 
 		surface is physically realizable. If any are not, new slip surfaces are 
 		randomly generated until NUM\_SLIPS valid slip surfaces have been 
@@ -710,6 +715,11 @@ genetic\_alg():
 		contributing to the subsequent generations
 		\item applying kinAdm, slicer, morg\_price, and weighter to the new 
 		generation
+		\item repeating the above two steps, but every time 
+		$\frac{\text{MIN\_GENS}}{\text{NUM\_ADDS}+1}$ generations have occured, 
+		vertices are added to the pool of slip surfaces halfway between each of 
+		the existing vertices, so that the new slip surfaces each have 
+		$(\text{INIT\_NUM\_VERTICES} * 2) - 1$ vertices. 
 		\item repeating until at least MIN\_GENS have occured and the relative 
 		difference between subsequent generations is less than REL\_DIFF.
 	\end{itemize}
