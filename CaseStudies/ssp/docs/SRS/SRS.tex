@@ -169,7 +169,7 @@ their units.
 $b$ & \si{\meter}& width of the base of a slice in the \textit{x} direction
 \\
 \textit{const\_f} & & boolean decision on which form of \textit{f} 
-the user desires: constant if true, or half-sine if false
+the user desires: constant if true, or a half-sine if false
 \\
 $c'$ & \si{\pascal} & effective cohesion 
 \\
@@ -179,12 +179,12 @@ of the interslice normal to shear force proportionality constant
 ${C_{\text{den},i}}$ & \si{\newton}& expression used to calculate the 
 denominator of the interslice normal to shear force proportionality constant
 \\
-${F_{x}}$ & \si{\newton} &$x$-component of force
+${F_{x}}$ & \si{\newton} & $x$-component of force
 \\
-${F_{y}}$ & \si{\newton} &$y$-component of force
+${F_{y}}$ & \si{\newton} & $y$-component of force
 \\
-$f$ & & function describing variation of the interslice normal to shear force 
-ratio; can be constant or a half-sine
+$f$ & & variation of the interslice normal to shear force ratio as a function 
+of distance in the $x$-direction
 \\
 $F_\text{S}$ & & factor of safety
 \\
@@ -196,20 +196,23 @@ $G$ & \si{\newton\per\meter} & interslice normal force
 $H$ & \si{\newton\per\meter} & interslice water force
 \\
 $h$ &  \si{\meter}& height in the \textit{y}-direction from the base of a slice 
-to the slope surface, at the \textit{x}-direction midpoint on the slice
+to the slope surface, at the \textit{x}-direction midpoint of the slice
 \\
+$h_{\text{z}}$ & \si{\meter}& height in the \textit{y}-direction from the base 
+of a slice to the center of the slice
+\\
+$h_\text{z,w}$ & \si{\meter}& height in the \textit{y}-direction from the base 
+of a slice halfway to the water table
+\\ 
 $i$ & & index representing a single slice 
 \\
-${K_{c}}$ & & horizontal seismic coefficient
+${K_{\text{c}}}$ & & horizontal seismic coefficient
 \\
 $M$ & N \si{\meter}& moment
 \\
 $N$ & \si{\newton\per\meter} & normal force
 \\
 $N'$ &\si{\newton\per\meter} & effective normal force
-\\
-$N^*$ &\si{\newton\per\meter} & effective normal force without the influence of 
-interslice forces
 \\
 $n$ & & the total number of slices
 \\
@@ -229,6 +232,8 @@ forces
 ${U_{\text{b}}}$ & \si{\newton\per\meter} & base hydrostatic force
 \\
 ${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force
+\\
+$u$ &\si{\pascal} & pore water pressure
 \\
 $W$ & \si{\newton\per\meter} & self-weight
 \\
@@ -259,7 +264,7 @@ ${x_{\text{slip}}^{\text{minEtr}}}$ &  \si{\meter}& minimum potential
 \textit{x}-ordinate 
 of the entry point of a slip surface
 \\
-${x_{\text{us}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
+${x_{\text{sl}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
 ${x_{\text{wt}}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water 
 table
@@ -273,26 +278,18 @@ surface
 ${y_{\text{slip}}}$ & \si{\meter}& \textit{y}-ordinate of a point on a slip 
 surface
 \\
-${y_{\text{slip}}^{\text{max}}}$ &  \si{\meter}& minimum potential 
-\textit{y}-ordinate 
-of the 
-of a point on a slip surface
+${y_{\text{slip}}^{\text{max}}}$ &  \si{\meter}& maximum potential 
+\textit{y}-ordinate of a point on a slip surface
 \\
-${y_{\text{slip}}^{\text{min}}}$ &  \si{\meter}& maximum potential 
-\textit{y}-ordinate 
-of the 
-of a point on a slip surface
+${y_{\text{slip}}^{\text{min}}}$ &  \si{\meter}& minimum potential 
+\textit{y}-ordinate of a point on a slip surface
 \\
-${y_{\text{us}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
+${y_{\text{sl}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
 \\
 ${y_{\text{wt}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water 
 table
 \\
-$z$ & \si{\meter}& height in the \textit{y}-direction from the base of a slice 
-to the center of the slice
-\\
-$z_w$ & (\si{\meter})& height in the \textit{y}-direction from the base of a 
-slice halfway to the water table
+$z$ & \si{\meter} & $z$-ordinate in the Cartesian coordinate system
 \\
 $\alpha{}$ & \si{\degree} & angle between the base of a slice and the horizontal
 \\
@@ -309,14 +306,11 @@ ${\gamma{}_{\text{w}}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 $\lambda{}$ & & proportionality constant for the interslice normal to shear 
 force ratio
 \\
-$\mu{}$ &\si{\pascal} & pore pressure from water within the soil
-\\
-$\sigma{}$ & \si{\pascal} & the total stress a soil mass needs
-to maintain itself as a rigid collection of particles
+$\sigma{}$ & \si{\pascal} & total stress 
 \\
 $\sigma{}_N$ & \si{\pascal} & normal stress
 \\
-$\sigma{}'$ & \si{\pascal} & effective stress provided by the soil skeleton
+$\sigma{}'$ & \si{\pascal} & effective stress
 \\
 $\tau{}$ & \si{\pascal} & shear strength
 \\
@@ -332,8 +326,8 @@ $\Psi{}$ & & second function used to convert shear without the
 influence of interslice forces to shear with the influence of interslice 
 forces
 \\
-$\omega{}$ & \si{\degree} & angle between the imposed surface load acting into 
-the surface and the vertical
+$\omega{}$ & \si{\degree} & angle between the imposed surface load and the 
+vertical
 \\
 ${\ell{}_{\text{b}}}$ &  \si{\meter}& base length of a slice in the 
 direction parallel to the slope of the base
@@ -345,7 +339,10 @@ parallel to the slope of the surface \\
 \hline
 \end{longtable*}
 \renewcommand{\arraystretch}{1}
-
+\bmac{The two symbols $h_\text{z}$ and $h_\text{z,w}$ were originally $z$ and 
+$z_w$. You commented "Why use z?". The reason is because they are z in the 
+literature. However, since z is also used for coordinates, I changed these 
+symbols and reserved z for coordinates}
 
 \subsection{Abbreviations and Acronyms}
 
@@ -365,7 +362,7 @@ parallel to the slope of the surface \\
   PS & Physical System Description\\
   R & Requirement\\
   SRS & Software Requirements Specification\\
-  \progname\ & Slope Stability Analysis Program\\
+  \progname\ & Slope Stability analysis Program\\
   T & Theoretical Model\\
   TU & Typical Uncertainty\\
   UC & Unlikely Change\\
@@ -397,7 +394,7 @@ safety.
 ~\newline
 The following section provides an overview of the Software Requirements 
 Specification (SRS) for a slope stability analysis problem. The developed 
-program will be referred to as the Slope Stability Analysis Program 
+program will be referred to as the Slope Stability analysis Program 
 (\progname). This section explains the purpose of this document, the 
 scope of the system, the characteristics of the intended readers, and the 
 organization of the document.
@@ -725,7 +722,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R},
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
   Interslice normal and shear forces have a proportional relationship,
-  depending on a proportionality constant $\left({\lambda}\right)$ and an
+  depending on a proportionality constant $\left({\lambda}\right)$ and a
   function $\left({f}\right)$ describing variation depending on $x$
   position. [\dref{GD_X}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
   
@@ -892,13 +889,11 @@ on.
   
   \hline Label&\bf Effective Stress\\
   
-  \hline Equation& \( \sigma' =\sigma - \mu \) \\
+  \hline Equation& \( \sigma' =\sigma - u \) \\
   
-  \hline Description & $\sigma$ is the total stress a soil mass needs
-  to maintain itself as a rigid collection of particles (\si{\pascal}).\\
-  & $\sigma'$ is the effective stress provided by the soil skeleton  
-  (\si{\pascal}).\\
-  & $\mu$ is the pore pressure from water within the soil (\si{\pascal}).\\
+  \hline Description & $\sigma$ is the total stress (\si{\pascal}).\\
+  & $\sigma'$ is the effective stress (\si{\pascal}).\\
+  & $u$ is the pore water pressure (\si{\pascal}).\\
 
   \hline Source & \cite{FredlundKrahn}\\
   
@@ -1301,8 +1296,8 @@ instance models.
   &$X$ is the interslice shear force (\si{\newton\per\meter}).\\
   &$G$ is the interslice normal force (\si{\newton\per\meter}).\\
   &$\lambda$ is the proportionality constant.\\
-  &$f$ is a function describing variation of the interslice normal to shear 
-  force ratio; can be constant or a half-sine. \\
+  &$f$ is the variation of the interslice normal to shear force ratio as a 
+  function of distance in the $x$-direction. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
@@ -1331,13 +1326,13 @@ instance models.
   \hline Label&\bf Moment Equilibrium\\
   
   \hline Equation& \( 0 = \begin{array}{l} - {G}_{i} \left[
-      {z_{i}} + \frac{b_{i}}{2} {
+      {h_{\text{z,}i}} + \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
-    \left[ {z_{i-1}} - \frac{b_{i}}{2} {
+    \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] -
-    H_{i}\left[ z_{\text{w,i}} + \frac{b_{i}}{2} {
+    H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] \\[5pt] +
-    H_{i-1}\left[ z_{\text{w,i-1}} - \frac{b_{i}}{2} {
+    H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] +
     \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
     \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
@@ -1350,20 +1345,20 @@ instance models.
  Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
  &$i$ is the index representing a single slice.\\
  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
- &$z$ is the height in the \textit{y}-direction from the base of a slice 
- to the center of the slice (\si{\meter}).\\
+ &$h_\text{z}$ is the height in the \textit{y}-direction from the base of a 
+ slice to the center of the slice (\si{\meter}).\\
  &$b$ is the width of the base of a slice in the \textit{x} direction 
  (\si{\meter}).\\
  &$\alpha$ is the angle between the base of a slice and the 
  horizontal (\si{\degree}). \\
  &$H$ is the interslice water force (\si{\newton\per\meter}). \\
- &$z_w$ is the height in the \textit{y}-direction from the base of a slice 
- halfway to the water table (\si{\meter}).\\
+ &$h_\text{z,w}$ is the height in the \textit{y}-direction from the base of a 
+ slice halfway to the water table (\si{\meter}).\\
  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
  &$K_c$ is the seismic coefficient. \\
  &$W$ is the weight (\si{\newton\per\meter}). \\
  &$h$ is the height in the \textit{y}-direction from the base of a slice 
- to the slope surface, at the \textit{x}-direction midpoint on the slice 
+ to the slope surface, at the \textit{x}-direction midpoint of the slice 
  (\si{\meter}).\\
  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
  &$\beta$ is the angle between the surface of a slice and the 
@@ -1423,7 +1418,7 @@ Equation &
 &$W$ is the weight (\si{\newton\per\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
-&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
@@ -1532,7 +1527,7 @@ ${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
 parallel to the slope of the surface (\si{\meter}).\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
 table (\si{\meter}).\\
-&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${\gamma{}_{\text{w}}}$ is the unit weight of water 
 (\si{\newton\per\meter\cubed}).\\
@@ -1581,7 +1576,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 
 \hline Description &$i$ is the index representing a single slice.\\
 &$H$ is the interslice water force (\si{\newton\per\meter}).\\
-&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
@@ -1674,9 +1669,9 @@ Equation &
 Description &$i$ is the index representing a single slice.\\
 &$\beta{}$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}).\\
-&${y_{\text{us}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&${x_{\text{us}}}$ is the \textit{x}-ordinate of a point on the slope 
+&${x_{\text{sl}}}$ is the \textit{x}-ordinate of a point on the slope 
 (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -1854,8 +1849,8 @@ the slope of the surface (\si{\meter}).\\
 		\right. \) \\
 		
 		\hline Description &$i$ is the index representing a single slice.\\
-		&$f$ is a function describing variation of the interslice normal to 
-		shear force ratio; can be constant or half-sine.\\
+		&$f$ is the variation of the interslice normal to shear force ratio as 
+		a function of distance in the $x$-direction.\\
 		&\textit{const\_f} is a boolean decision on which form of \textit{f} 
 		the user desires: constant if true, or half-sine if false.\\
 		&$x_\text{slip}$ is the $x$-ordinate of a point on a slip surface 
@@ -1908,8 +1903,8 @@ the slope of the surface (\si{\meter}).\\
 		interslice forces.\\
 		&$\lambda$ is the proportionality constant for the interslice normal to 
 		shear force ratio.\\
-		&$f$ is a function describing variation of the interslice normal to 
-		shear force ratio; can be constant or half-sine.\\
+		&$f$ is the variation of the interslice normal to shear force ratio as 
+		a function of distance in the $x$-direction.\\
 		&$\alpha$ is the angle between the base of a slice and the horizontal 
 		(\si{\degree}).\\
 		&$\varphi'$ is the effective angle of friction (\si{\degree}).\\
@@ -1966,8 +1961,8 @@ the slope of the surface (\si{\meter}).\\
 		interslice forces.\\
 		&$\lambda$ is the proportionality constant for the interslice normal to 
 		shear force ratio.\\
-		&$f$ is a function describing variation of the interslice normal to 
-		shear force ratio; can be constant or half-sine.\\
+		&$f$ is the variation of the interslice normal to shear force ratio as 
+		a function of distance in the $x$-direction.\\
 		&$\alpha$ is the angle between the base of a slice and the horizontal 
 		(\si{\degree}).\\
 		&$\varphi'$ is the effective angle of friction (\si{\degree}).\\
@@ -2036,7 +2031,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 
 \hline Label& \bf Factor of Safety \\
 
-\hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}$ \\
@@ -2434,7 +2429,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
 \hline Label& \bf Normal and Shear Force Proportionality Constant \\
 
-\hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $\gamma_{\text{w}}$, 
 $\{\left(x_{\text{slip}}, y_{\text{slip}}\right)\}$ \\
 
@@ -2489,13 +2484,13 @@ i=n $ \\
 &$\alpha$ is the angle between the base of a slice and the 
 horizontal (\si{\degree}). \\
 &$h$ is the height in the \textit{y}-direction from the base of a slice 
-to the slope surface, at the \textit{x}-direction midpoint on the slice 
+to the slope surface, at the \textit{x}-direction midpoint of the slice 
 (\si{\meter}).\\
 &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
 &$\beta$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}). \\
-&$f$ is a function describing variation of the interslice normal to shear 
-force ratio; can be constant or a half-sine. \\
+&$f$ is the variation of the interslice normal to shear force ratio as a 
+function of distance in the $x$-direction. \\
 &$\lambda$ is the proportionality constant.\\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -2517,13 +2512,13 @@ force ratio; can be constant or a half-sine. \\
  \dref{GD_X}, Equation~(\ref{eq:Moment}) can be derived.
 
 \begin{equation}\label{eq:Moment}
-  0 = \begin{array}{l} - {G}_{i} \left[ {z_{i}} -
+  0 = \begin{array}{l} - {G}_{i} \left[ {h_{\text{z,}i}} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] + {G}_{i-1} \left[ {z_{i-1}} +
+      \right] + {G}_{i-1} \left[ {h_{\text{z,}i-1}} +
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] - H_{i}\left[ z_{\text{w,i}} -
+      \right] - H_{i}\left[ h_{\text{z,w,}i} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] \\[5pt] + H_{i-1}\left[ z_{\text{w,i-1}} +
+      \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
       \right] -\lambda \frac{b_{i}}{2} \left( G_{i}
     f_{i} + G_{i-1} f_{i-1} \right) +
@@ -2539,13 +2534,13 @@ Equation~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
   \lambda = \frac { \begin{array}{l} - {G}_{i} \left[
-        {z_{i}} - \frac{b_{i}}{2} {
+        {h_{\text{z,}i}} - \frac{b_{i}}{2} {
           \tan\left(\alpha_{i}\right)} \right] +
-      {G}_{i-1} \left[ {z_{i-1}} +
+      {G}_{i-1} \left[ {h_{\text{z,}i-1}} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] - H_{i}\left[ z_{i} -
+        \right] - H_{i}\left[ h_{\text{z,}i} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] \\[5pt] + H_{i-1}\left[ z_{i-1} +
+        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,}i-1} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
         \right] + K_{\text{c}} W_{i} \frac{h_{i}}{2} -
       U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} -
@@ -2561,13 +2556,13 @@ external forces, respectively are zero.
 
 \begin{equation*}
 \lambda = \frac { \begin{array}{l} - {G}_{i} \left[
-	{z_{i}} - \frac{b_{i}}{2} {
+	{h_{\text{z,}i}} - \frac{b_{i}}{2} {
 		\tan\left(\alpha_{i}\right)} \right] +
-	{G}_{i-1} \left[ {z_{i-1}} +
+	{G}_{i-1} \left[ {h_{\text{z,}i-1}} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] - H_{i}\left[ z_{i} -
+	\right] - H_{i}\left[ h_{\text{z,}i} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] \\[5pt] + H_{i-1}\left[ z_{i-1} +
+	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,}i-1} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
 	\right] -
 	U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \end{array} } 
@@ -2615,7 +2610,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 
 \hline Label& \bf Interslice Normal Forces \\
 
-\hline Input & $\{\left(x_{\text{us}}, y_{\text{us}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}$\\
@@ -2646,10 +2641,10 @@ $2\leq i \leq n-1$ \\
 (\si{\newton\per\meter}).\\
 &$R$ is the resistive shear force  without the influence of interslice forces 
 (\si{\newton\per\meter}).\\
-&$\Phi$ is the first constant used to convert shear without the 
+&$\Phi$ is the first function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
 interslice forces.\\
-&$\Psi$ is the second constant used to convert shear without the 
+&$\Psi$ is the second function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
 interslice forces.\\
 
@@ -2708,11 +2703,11 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Label& \bf Critical Slip Surface Identification \\
 
-\hline Input & $\{(x_\text{us},y_\text{us})\}$ \\
+\hline Input & $\{(x_\text{sl},y_\text{sl})\}$ \\
 
 \hline Output & \(  \left( F_\text{S}^\text{Min}, \left\{ 
 \left(x_\text{cs},y_\text{cs}\right)\right\} \right)
- = \Upsilon\left( \left\{\left(x_\text{us},y_\text{us}\right)\right\} \right)\)
+ = \Upsilon\left( \left\{\left(x_\text{sl},y_\text{sl}\right)\right\} \right)\)
  \\
 
 \hline Description & $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
@@ -2725,9 +2720,9 @@ surface
 surface 
 (\si{\meter}).\\
 &$\Upsilon$ is a minimization algorithm or function.\\
-&$x_{\text{us}}$ is the \textit{x}-ordinate of a point on the slope 
+&$x_{\text{sl}}$ is the \textit{x}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&$y_{\text{us}}$ is the \textit{y}-ordinate of a point on the slope 
+&$y_{\text{sl}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 
 \hline Sources& \cite{LiEtAl}\\
@@ -2771,7 +2766,7 @@ is intended to provide a feel for a common scenario.
   specified. 
   Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
-  $\{(x_{\text{us}},y_{\text{us}})\}$ (**) & At least two ordered pairs must be 
+  $\{(x_{\text{sl}},y_{\text{sl}})\}$ (**) & At least two ordered pairs must be 
   specified. 
   $y$ values of consecutive vertices are always increasing or always 
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
