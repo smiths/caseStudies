@@ -233,7 +233,7 @@ ${U_{\text{b}}}$ & \si{\newton\per\meter} & base hydrostatic force
 \\
 ${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force
 \\
-$u$ &\si{\pascal} & pore water pressure
+$u$ &\si{\pascal} & pore pressure from water within the soil
 \\
 $W$ & \si{\newton\per\meter} & self-weight
 \\
@@ -264,7 +264,7 @@ ${x_{\text{slip}}^{\text{minEtr}}}$ &  \si{\meter}& minimum potential
 \textit{x}-ordinate 
 of the entry point of a slip surface
 \\
-${x_{\text{sl}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
+${x_{\text{slope}}}$ &  \si{\meter}& \textit{x}-ordinate of a point on the slope
 \\
 ${x_{\text{wt}}}$ & \si{\meter} & \textit{x}-ordinate of a point on the water 
 table
@@ -284,7 +284,8 @@ ${y_{\text{slip}}^{\text{max}}}$ &  \si{\meter}& maximum potential
 ${y_{\text{slip}}^{\text{min}}}$ &  \si{\meter}& minimum potential 
 \textit{y}-ordinate of a point on a slip surface
 \\
-${y_{\text{sl}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the slope 
+${y_{\text{slope}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the 
+slope 
 \\
 ${y_{\text{wt}}}$ &  \si{\meter}& \textit{y}-ordinate of a point on the water 
 table
@@ -306,11 +307,12 @@ ${\gamma{}_{\text{w}}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 $\lambda{}$ & & proportionality constant for the interslice normal to shear 
 force ratio
 \\
-$\sigma{}$ & \si{\pascal} & total stress 
+$\sigma{}$ & \si{\pascal} & total stress on the soil mass, where stress is 
+force divided by area 
 \\
-$\sigma{}_N$ & \si{\pascal} & normal stress
+$\sigma{}_N'$ & \si{\pascal} & effective normal stress
 \\
-$\sigma{}'$ & \si{\pascal} & effective stress
+$\sigma{}'$ & \si{\pascal} & effective stress provided by the soil skeleton
 \\
 $\tau{}$ & \si{\pascal} & shear strength
 \\
@@ -712,7 +714,7 @@ likely change [LC], in which the respective assumption is used.
   function. [\iref{IM_Min}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Constant}] The factor 
-of safety is assumed to be constant across a whole slip surface. 
+of safety is assumed to be constant across the entire slip surface. 
 [\dref{GD_MobShear}, \iref{IM_FS}, \iref{IM_E}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The
@@ -730,10 +732,11 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R},
   \dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
-  Interslice normal and shear forces have a proportional relationship,
-  depending on a proportionality constant $\left({\lambda}\right)$ and a
-  function $\left({f}\right)$ describing variation depending on $x$
-  position. [\dref{GD_X}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}]
+  Following the assumption of \cite{MorgPrice}, interslice normal and shear 
+  forces have a proportional relationship, depending on a proportionality 
+  constant $\left({\lambda}\right)$ and a function $\left({f}\right)$ 
+  describing variation depending on $x$ position. [\dref{GD_X}, \iref{IM_FS}, 
+  \iref{IM_Lambda}, \iref{IM_E}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
   slope and slip surface extends far into and out of the geometry 
@@ -858,17 +861,17 @@ on.
   
   \hline Label&\bf Mohr-Coulomb Shear Strength\\
   
-  \hline Equation& \( \tau = \sigma_N \cdot \tan\left( \varphi' \right) + c'
+  \hline Equation& \( \tau = \sigma_N' \cdot \tan\left( \varphi' \right) + c'
   \) \\
   
   \hline Description & The $\tau$
-  versus $\sigma_N$ relationship is not truly linear, but assuming the
+  versus $\sigma_N'$ relationship is not truly linear, but assuming the
   effective normal force is strong enough, it can be approximated with
   a linear fit (\aref{A_Lin}), where the cohesion $c'$ represents the
   $\tau$ intercept of the fitted line.\\
   &$\tau$ is the shear strength (\si{\pascal}).\\
-  &$\sigma_N$ is the normal stress (\si{\pascal}).\\
-  &$\varphi$ is the effective angle of friction (\si{\degree}).\\
+  &$\sigma_N'$ is the effective normal stress (\si{\pascal}).\\
+  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
 
   \hline Source & \cite{FredlundKrahn}\\
@@ -900,9 +903,11 @@ on.
   
   \hline Equation& \( \sigma' =\sigma - u \) \\
   
-  \hline Description & $\sigma$ is the total stress (\si{\pascal}).\\
-  & $\sigma'$ is the effective stress (\si{\pascal}).\\
-  & $u$ is the pore water pressure (\si{\pascal}).\\
+  \hline Description & $\sigma$ is the total stress on the soil mass, where 
+  stress is force divided by area (\si{\pascal}).\\
+  & $\sigma'$ is the effective stress provided by the soil skeleton 
+  (\si{\pascal}).\\
+  & $u$ is the pore pressure from water within the soil (\si{\pascal}).\\
 
   \hline Source & \cite{FredlundKrahn}\\
   
@@ -950,26 +955,28 @@ instance models.
  
   \hline Description & This equation satisfies \tref{TM_Eqm} in the normal 
   direction. Force equilibrium is derived from the free body diagram of 
-  Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+  Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
   &$i$ is the index representing a single slice.\\
   &$N$ is the normal force (\si{\newton\per\meter}). \\
-  &$W$ is the weight (\si{\newton\per\meter}). \\
+  &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+  defined in \ddref{DD_Ut}. \\
   &$\beta$ is the angle between the surface of a slice and the 
-  horizontal (\si{\degree}). \\
+  horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
   &$Q$ is the external force (\si{\newton\per\meter}). \\
   &$\omega$ is the angle between the imposed surface load acting into 
   the surface and the vertical (\si{\degree}). \\
   &$\alpha$ is the angle between the base of a slice and the 
-  horizontal (\si{\degree}). \\
-  &$K_c$ is the seismic coefficient. \\
+  horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
+  &$K_\text{c}$ is the seismic coefficient. \\
   &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
-  &$H$ is the interslice water force (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+  \ddref{DD_H}. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \dref{GD_R}, \dref{GD_T}, \iref{IM_E}\\
+  \hline Ref.\ By & \iref{IM_FS}\\
   
   \hline
 \end{tabular}
@@ -1007,26 +1014,28 @@ instance models.
   
   \hline Description & This equation satisfies \tref{TM_Eqm} in the shear 
   direction. Force equilibrium is derived from the free body diagram of 
-  Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+  Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
   &$i$ is the index representing a single slice.\\
   &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
-  &$W$ is the weight (\si{\newton\per\meter}). \\
+  &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
   &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+  defined in \ddref{DD_Ut}. \\
   &$\beta$ is the angle between the surface of a slice and the 
-  horizontal (\si{\degree}). \\
+  horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
   &$Q$ is the external force (\si{\newton\per\meter}). \\
   &$\omega$ is the angle between the imposed surface load acting into 
   the surface and the vertical (\si{\degree}). \\
   &$\alpha$ is the angle between the base of a slice and the 
-  horizontal (\si{\degree}). \\
-  &$K_c$ is the seismic coefficient. \\
+  horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
+  &$K_\text{c}$ is the seismic coefficient. \\
   &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
-  &$H$ is the interslice water force (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+  \ddref{DD_H}. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \dref{GD_R}, \dref{GD_T},\iref{IM_E}\\
+  \hline Ref.\ By & \iref{IM_FS}\\
   
   \hline
 \end{tabular}
@@ -1055,20 +1064,21 @@ instance models.
   \varphi'_{i} \right) + c'_i \cdot \ell{}_{\text{b,}i} \) \\
   
   \hline Description & 
- The Mohr-Coulomb resistive shear strength from \tref{TM_Fmc} implemented with 
- forces.\\
+ Derived from the Mohr-Coulomb resistive shear strength, \tref{TM_Fmc}, by 
+ multiplying both sides of the equation by the length of the slice in the shear 
+ direction, which converts the stresses to forces per meter in the 
+ $z$-direction.\\
  &$i$ is the index representing a single slice.\\
  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
  &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
  &$c'$ is the effective cohesion (\si{\pascal}).\\
  &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
- direction 
- (\si{\meter}).\\
+ direction (\si{\meter}), defined in \ddref{DD_lb}.\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}\\
+  \hline Ref.\ By & \dref{GD_MobShear}\\
   
   \hline
 \end{tabular}
@@ -1106,13 +1116,12 @@ instance models.
   &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
   &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
-  direction 
-  (\si{\meter}).\\
+  direction (\si{\meter}), defined in \ddref{DD_lb}.\\
   &$F_\text{S}$ is the factor of safety.\\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \dref{GD_R}, \iref{IM_E} \\
+  \hline Ref.\ By & \iref{IM_FS} \\
   
   \hline
 \end{tabular}
@@ -1139,17 +1148,19 @@ instance models.
 		
 		\hline Equation & \( N'_{i} = N_{i} - U_{\text{b,}i} \) \\
 	
-	\hline Description & Effective normal force as derived from 
-	\tref{TM_EffStress} and implemented with forces. 
+	\hline Description & Derived from \tref{TM_EffStress} by multiplying both 
+	sides of the equation by the length of the slice in the shear direction, 
+	which converts the stresses to forces per meter in the $z$-direction. 
 	\\
 	&$i$ is the index representing a single slice.\\
 	&$N'$ is the effective normal force (\si{\newton\per\meter}).\\
 	&$N$ is the normal force (\si{\newton\per\meter}).\\
-	&$U_\text{b}$ is the base hydrostatic force (\si{\newton\per\meter}).\\
+	&$U_\text{b}$ is the base hydrostatic force (\si{\newton\per\meter}), 
+	defined in \ddref{DD_Ub}.\\
 	
 	\hline Source & \cite{ZhuEtAl2005}\\
 	
-	\hline Ref.\ By & \dref{GD_R} \\
+	\hline Ref.\ By & \iref{IM_FS} \\
 	
 	\hline
 \end{tabular}
@@ -1193,20 +1204,21 @@ instance models.
 		&$R$ is the resistive shear force without the influence of interslice 
 		forces
 		(\si{\newton\per\meter}).\\
-		&$W$ is the weight (\si{\newton\per\meter}).\\
+		&$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
 		&${U_{\text{t}}}$ is the surface hydrostatic force 
-		(\si{\newton\per\meter}).\\
+		(\si{\newton\per\meter}), defined in \ddref{DD_Ut}.\\
 		&$\beta{}$ is the angle between the surface of a slice and the 
-		horizontal (\si{\degree}).\\
+		horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}.\\
 		&$\alpha{}$ is the angle between the base of a slice and the 
-		horizontal (\si{\degree}).\\
-		&$H$ is the interslice water force (\si{\newton\per\meter}).\\
+		horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
+		&$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+		\ddref{DD_H}.\\
 		&${U_{\text{b}}}$ is the base hydrostatic force 
-		(\si{\newton\per\meter}).\\
+		(\si{\newton\per\meter}), defined in \ddref{DD_Ub}.\\
 		&$\varphi{}'$ is the effective angle of friction (\si{\degree}).\\
 		&$c'$ is the effective cohesion (Pa).\\
 		&$b$ is the width of the base of a slice in the \textit{x} direction 
-		(\si{\meter}).\\
+		(\si{\meter}), defined in \ddref{DD_b}.\\
 		&This equation for $R$ arises as part of the derivation for 
 		\iref{IM_FS}, so that derivation should be consulted for information 
 		relating to the derivation of $R$.\\
@@ -1254,17 +1266,16 @@ instance models.
 		
 		\hline Description &$i$ is the index representing a single slice.\\ 
 		&$T$ is the mobilized shear force without the influence of interslice 
-		forces 
-		(\si{\newton\per\meter}).\\
-		&$W$ is the weight (\si{\newton\per\meter}).\\
+		forces (\si{\newton\per\meter}).\\
+		&$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
 		&${U_{\text{t}}}$ is the surface hydrostatic force 
-		(\si{\newton\per\meter}).\\ 
+		(\si{\newton\per\meter}), defined in \ddref{DD_Ut}.\\ 
 		&$\beta{}$ is the angle between the surface of a slice and the 
-		horizontal 
-		(\si{\degree}).\\
+		horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}.\\
 		&$\alpha{}$ is the angle between the base of a slice and the horizontal 
-		(\si{\degree}).\\
-		&$H$ is the interslice water force (\si{\newton\per\meter}).\\
+		(\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
+		&$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+		\ddref{DD_H}.\\
 		&This equation for $T$ arises as part of the derivation for 
 		\iref{IM_FS}, so that derivation should be consulted for information 
 		relating to the derivation of $T$.\\
@@ -1306,11 +1317,11 @@ instance models.
   &$G$ is the interslice normal force (\si{\newton\per\meter}).\\
   &$\lambda$ is the proportionality constant.\\
   &$f$ is the variation of the interslice normal to shear force ratio as a 
-  function of distance in the $x$-direction. \\
+  function of distance in the $x$-direction, defined in \ddref{DD_f}. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
   
-  \hline Ref.\ By & \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}\\
+  \hline Ref.\ By & \iref{IM_FS}, \iref{IM_Lambda}\\
   
   \hline
 \end{tabular}
@@ -1351,27 +1362,29 @@ instance models.
 
  \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
  Force equilibrium is derived from the free body diagram of 
- Figure~\ref{Fig_Forces} in section~\ref{sec_system}.\\
+ Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
  &$i$ is the index representing a single slice.\\
  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
  &$h_\text{z}$ is the height in the \textit{y}-direction from the base of a 
  slice to the center of the slice (\si{\meter}).\\
  &$b$ is the width of the base of a slice in the \textit{x} direction 
- (\si{\meter}).\\
+ (\si{\meter}), defined in \ddref{DD_b}.\\
  &$\alpha$ is the angle between the base of a slice and the 
- horizontal (\si{\degree}). \\
- &$H$ is the interslice water force (\si{\newton\per\meter}). \\
+ horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
+ &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+ \ddref{DD_H}. \\
  &$h_\text{z,w}$ is the height in the \textit{y}-direction from the base of a 
  slice halfway to the water table (\si{\meter}).\\
  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
- &$K_c$ is the seismic coefficient. \\
- &$W$ is the weight (\si{\newton\per\meter}). \\
+ &$K_\text{c}$ is the seismic coefficient. \\
+ &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
  &$h$ is the height in the \textit{y}-direction from the base of a slice 
  to the slope surface, at the \textit{x}-direction midpoint of the slice 
  (\si{\meter}).\\
- &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}). \\
+ &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+ defined in \ddref{DD_Ut}. \\
  &$\beta$ is the angle between the surface of a slice and the 
- horizontal (\si{\degree}). \\
+ horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
  &$Q$ is the external force (\si{\newton\per\meter}). \\
  &$\omega$ is the angle between the imposed surface load acting into 
  the surface and the vertical (\si{\degree}). \\
@@ -1427,7 +1440,7 @@ Equation &
 &$W$ is the weight (\si{\newton\per\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
 (\si{\meter}).\\
-&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
@@ -1536,7 +1549,7 @@ ${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
 parallel to the slope of the surface (\si{\meter}).\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
 table (\si{\meter}).\\
-&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${\gamma{}_{\text{w}}}$ is the unit weight of water 
 (\si{\newton\per\meter\cubed}).\\
@@ -1585,7 +1598,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 
 \hline Description &$i$ is the index representing a single slice.\\
 &$H$ is the interslice water force (\si{\newton\per\meter}).\\
-&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
@@ -1678,9 +1691,9 @@ Equation &
 Description &$i$ is the index representing a single slice.\\
 &$\beta{}$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}).\\
-&${y_{\text{sl}}}$ is the \textit{y}-ordinate of a point on the slope 
+&${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&${x_{\text{sl}}}$ is the \textit{x}-ordinate of a point on the slope 
+&${x_{\text{slope}}}$ is the \textit{x}-ordinate of a point on the slope 
 (\si{\meter}).\\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -2040,7 +2053,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 
 \hline Label& \bf Factor of Safety \\
 
-\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}$ \\
@@ -2438,7 +2451,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
 \hline Label& \bf Normal and Shear Force Proportionality Constant \\
 
-\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $\gamma_{\text{w}}$, 
 $\{\left(x_{\text{slip}}, y_{\text{slip}}\right)\}$ \\
 
@@ -2619,7 +2632,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 
 \hline Label& \bf Interslice Normal Forces \\
 
-\hline Input & $\{\left(x_{\text{sl}}, y_{\text{sl}}\right)\}$, 
+\hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}$\\
@@ -2712,11 +2725,12 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Label& \bf Critical Slip Surface Identification \\
 
-\hline Input & $\{(x_\text{sl},y_\text{sl})\}$ \\
+\hline Input & $\{(x_\text{slope},y_\text{slope})\}$ \\
 
 \hline Output & \(  \left( F_\text{S}^\text{Min}, \left\{ 
 \left(x_\text{cs},y_\text{cs}\right)\right\} \right)
- = \Upsilon\left( \left\{\left(x_\text{sl},y_\text{sl}\right)\right\} \right)\)
+ = \Upsilon\left( \left\{\left(x_\text{slope},y_\text{slope}\right)\right\} 
+ \right)\)
  \\
 
 \hline Description & $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
@@ -2729,9 +2743,9 @@ surface
 surface 
 (\si{\meter}).\\
 &$\Upsilon$ is a minimization algorithm or function.\\
-&$x_{\text{sl}}$ is the \textit{x}-ordinate of a point on the slope 
+&$x_{\text{slope}}$ is the \textit{x}-ordinate of a point on the slope 
 (\si{\meter}).\\
-&$y_{\text{sl}}$ is the \textit{y}-ordinate of a point on the slope 
+&$y_{\text{slope}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 
 \hline Sources& \cite{LiEtAl}\\
@@ -2775,7 +2789,8 @@ is intended to provide a feel for a common scenario.
   specified. 
   Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
-  $\{(x_{\text{sl}},y_{\text{sl}})\}$ (**) & At least two ordered pairs must be 
+  $\{(x_{\text{slope}},y_{\text{slope}})\}$ (**) & At least two ordered pairs 
+  must be 
   specified. 
   $y$ values of consecutive vertices are always increasing or always 
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
