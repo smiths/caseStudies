@@ -179,10 +179,11 @@ input parameter that should have a different value than specified by the table.
 
 \begin{table}[!h]
 	\renewcommand{\arraystretch}{1.5}
-	\begin{tabularx}{1.0\textwidth}{p{2cm} l X}
+	\begin{tabularx}{1.0\textwidth}{p{3cm} l X}
 		\toprule \textbf{Input} &
 		\textbf{Unit} & \textbf{Value}\\ \midrule
-		$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
+		$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(0, 
+		25), 
 		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
 		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
 		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
@@ -987,8 +988,155 @@ specified here cover special cases not covered by the System VnV Plan:
 non-converging and spurious solutions. The MIS states that \progname{} should 
 return a factor of safety of 1000 and empty lists for the interslice forces in 
 both of these cases. For each of these special cases, there are three test 
-case. One covers the factor of safety, one covers the interslice normal force, 
+cases. One covers the factor of safety, one covers the interslice normal force, 
 and one covers the interslice shear force.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingFs}] 
+	test-morgPrice\_nonConvergingFs
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.Fs} = 1000$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return a factor of safety of 
+	1000.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingG}] 
+	test-morgPrice\_nonConvergingG
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.G} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return an empty list of 
+	interslice normal forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingX}] 
+	test-morgPrice\_nonConvergingX
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.X} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return an empty list of 
+	interslice shear forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousFs}] 
+	test-morgPrice\_spuriousFs
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.Fs} = 1000$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return a factor of safety of 1000.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousG}] 
+	test-morgPrice\_spuriousG
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.G} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return an empty list of interslice shear 
+	forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousX}] 
+	test-morgPrice\_spuriousX
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
+	G : [], X : [], wt : 0).
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$\textit{slip'.X} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return an empty list of interslice shear 
+	forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
 
 \subsubsection{Slice Property Calculation Module}
 The MIS shows that this module is responsible for calculating seven properties 
