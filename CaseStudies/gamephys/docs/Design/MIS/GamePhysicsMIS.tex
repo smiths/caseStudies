@@ -377,7 +377,7 @@ N/A
 	\item $|\text{Body.angular_accler}| \in \mathbb{R}$  
 	\item $|\text{Body.torque}| \in \mathbb{R}$
 	\end{itemize}
-\subsection{Environment Variables}	\label{SecEVBody}
+\subsubsection{Environment Variables}	\label{SecEVBody}
 N/A
 \subsubsection{Assumptions} \label{SecABody}
 %	bodyAlloc, or newBody, or newStaticBody are called before any 
@@ -1012,7 +1012,7 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 \subsection{Uses} \label{SecUSpace}
 	\Body, \Shape, \Vector, \Collision
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Constants} \label{SecECSpace}
 	collisionHandlerDoNothing: CollisionHandler \\
@@ -1771,7 +1771,7 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 \subsection{Uses} \label{SecUVector}
 	This module only uses standard libraries.
 
-\subsection{Interface Syntax}
+\subsection{Syntax}
 
 \subsubsection{Exported Constants} \label{SecECVector}
 	VECT_ERR, zeroVect: Vector \\
@@ -1871,21 +1871,21 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 	& \textbf{Transition:} & None. \\
 	& \textbf{Output:} & vectCross calculates the cross product of the input Vectors and returns the \textit{z}-component of the product as a double.  \newfunc
 	
-	\textbf{vectPerp:} & \textbf{Input:} & vectPerp accepts a Vector as input. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None.  \\
-	& \textbf{Output:} & vectPerp rotates the input Vector by 90 degrees clockwise and returns the resultant Vector as output.  \newfunc
-	
-	\textbf{vectRPerp:} & \textbf{Input:} & vectRPerp accepts a Vector as input. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectRPerp rotates the input Vector by 90 degrees anticlockwise and returns the resultant Vector as output.  \newfunc
-	
-	\textbf{vectProject:} & \textbf{Input:} & vectProject accepts two Vectors as inputs. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectProject projects the first input Vector onto the second and returns the resultant Vector as output.  \newfunc
-	
+%	\textbf{vectPerp:} & \textbf{Input:} & vectPerp accepts a Vector as input. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None.  \\
+%	& \textbf{Output:} & vectPerp rotates the input Vector by 90 degrees clockwise and returns the resultant Vector as output.  \newfunc
+%	
+%	\textbf{vectRPerp:} & \textbf{Input:} & vectRPerp accepts a Vector as input. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectRPerp rotates the input Vector by 90 degrees anticlockwise and returns the resultant Vector as output.  \newfunc
+%	
+%	\textbf{vectProject:} & \textbf{Input:} & vectProject accepts two Vectors as inputs. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectProject projects the first input Vector onto the second and returns the resultant Vector as output.  \newfunc
+%	
 	\textbf{vectForAngle:} & \textbf{Input:} & vectForAngle accepts a double as input. \\
 	& \textbf{Exceptions:} & None.\\
 	& \textbf{Transition:} & None. \\
@@ -1901,40 +1901,40 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 	& \textbf{Transition:} & None. \\
 	& \textbf{Output:} & vectRotate rotates the first input Vector by the second using complex multiplication returns the resultant Vector as output.  \newfunc
 	
-	\textbf{vectUnrotate:} & \textbf{Input:} & vectUnrotate accepts two Vectors as inputs. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectUnrotate is the inverse operation of vectRotate; it returns the original Vector before it was rotated by another Vector using vectRotate.  \newfunc
+%	\textbf{vectUnrotate:} & \textbf{Input:} & vectUnrotate accepts two Vectors as inputs. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectUnrotate is the inverse operation of vectRotate; it returns the original Vector before it was rotated by another Vector using vectRotate.  \newfunc
 	
 	\textbf{vectLength:} & \textbf{Input:} & Each vectLength function accepts a Vector as input. \\
 	& \textbf{Exceptions:} & None.\\
 	& \textbf{Transition:} & None. \\
 	& \textbf{Output:} & vectLength and vectLengthSq calculates the regular and squared length of the input Vector, respectively, and returns the result as a double.  \newfunc
 	
-	\textbf{vectNormalize:} & \textbf{Input:} & vectNormalize accepts a Vector as input. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectNormalize converts the input Vector into a unit vector and returns the normalized Vector as output.  \newfunc
-	
-	\textbf{vectClamp:} & \textbf{Input:} & vectClamp accepts a Vector and a double as inputs. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectClamp restricts the input Vector to a length specified by the input double. If the length of the input Vector is less than the input length, vectClamp returns the input Vector. Otherwise, it shrinks the Vector to the specified length and returns the resultant Vector.  \newfunc
-	
-	\textbf{vectLerp:} & \textbf{Input:} & vectLerp accepts two Vectors and a double as inputs. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectLerp linearly interpolates between the two input Vectors for a percentage specified by the input double, and returns the new interpolated Vector as output.   \newfunc
-	
-	\textbf{vectDist:} & \textbf{Input:} & Each vectDist function accepts two Vectors as input. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None.  \\
-	& \textbf{Output:} & vectDist and vectDistSq calculates the regular and squared distance, respectively, between the two input Vectors and returns the result as a double.  \newfunc
-	
-	\textbf{vectNear:} & \textbf{Input:} & vectNear accepts two Vectors and a double as input. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & None. \\
-	& \textbf{Output:} & vectNear returns true if the distance between the input Vectors is less than the distance specified by the input double, and false otherwise.  \newfunc
+%	\textbf{vectNormalize:} & \textbf{Input:} & vectNormalize accepts a Vector as input. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectNormalize converts the input Vector into a unit vector and returns the normalized Vector as output.  \newfunc
+%	
+%	\textbf{vectClamp:} & \textbf{Input:} & vectClamp accepts a Vector and a double as inputs. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectClamp restricts the input Vector to a length specified by the input double. If the length of the input Vector is less than the input length, vectClamp returns the input Vector. Otherwise, it shrinks the Vector to the specified length and returns the resultant Vector.  \newfunc
+%	
+%	\textbf{vectLerp:} & \textbf{Input:} & vectLerp accepts two Vectors and a double as inputs. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectLerp linearly interpolates between the two input Vectors for a percentage specified by the input double, and returns the new interpolated Vector as output.   \newfunc
+%	
+%	\textbf{vectDist:} & \textbf{Input:} & Each vectDist function accepts two Vectors as input. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None.  \\
+%	& \textbf{Output:} & vectDist and vectDistSq calculates the regular and squared distance, respectively, between the two input Vectors and returns the result as a double.  \newfunc
+%	
+%	\textbf{vectNear:} & \textbf{Input:} & vectNear accepts two Vectors and a double as input. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & None. \\
+%	& \textbf{Output:} & vectNear returns true if the distance between the input Vectors is less than the distance specified by the input double, and false otherwise.  \newfunc
 \end{longtable*}
 
 %%%%%%%%%%%%%%%%%%%% BOUNDING BOX MODULE %%%%%%%%%%%%%%%%%%%%%%%
@@ -2454,7 +2454,7 @@ N/A
 	shapesCollide & Shape*, Shape* & ContactPointSet & - \\ \hline
 \end{longtable}
 
-\subsection{Interface Semantics}
+\subsection{Semantics}
 
 \subsubsection{State Variables} \label{SecSVCollision}
 \textbf{SupportPoint:} 
@@ -2693,11 +2693,11 @@ N/A
 	& \textbf{Output:} & EPARecurse returns the new ClosestPoints structure as output. \newfunc
 	\fi
 	
-	\textbf{EPA:} & \textbf{Input:} & EPA accepts a SupportContext pointer, and three MinkowskiPoint structures as inputs. \\
-	& \textbf{Exceptions:} & EPA may throw a SameVertices exception when the EPA vertices are the same. It may also raise HighIterWarning when the number of iterations reaches the \hyperref[SecECCollision]{WARN_EPA_ITERATIONS} threshold. \\
-	& \textbf{Transition:} & EPA recursively finds the closest points on the surface of two overlapping Shapes using the EPA (Expanding Polytope Algorithm). The function initializes a convex hull array of vertices and each recursion adds a point to the hull until the function obtains the closest points on the surfaces of the Shapes. \\
-	& \textbf{Output:} & EPA generates a new ClosestPoints structure containing information about the computed closest points and returns it as output. \newfunc
-	
+%	\textbf{EPA:} & \textbf{Input:} & EPA accepts a SupportContext pointer, and three MinkowskiPoint structures as inputs. \\
+%	& \textbf{Exceptions:} & EPA may throw a SameVertices exception when the EPA vertices are the same. It may also raise HighIterWarning when the number of iterations reaches the \hyperref[SecECCollision]{WARN_EPA_ITERATIONS} threshold. \\
+%	& \textbf{Transition:} & EPA recursively finds the closest points on the surface of two overlapping Shapes using the EPA (Expanding Polytope Algorithm). The function initializes a convex hull array of vertices and each recursion adds a point to the hull until the function obtains the closest points on the surfaces of the Shapes. \\
+%	& \textbf{Output:} & EPA generates a new ClosestPoints structure containing information about the computed closest points and returns it as output. \newfunc
+%	
 	\iffalse
 	% Decided to merge GJK and GJKRecurse together.
 	\textbf{GJKRecurse:} & \textbf{Input:} & GJKRecurse accepts a SupportContext pointer, two MinkowskiPoint structures and an integer as inputs.\\
@@ -2707,17 +2707,17 @@ N/A
 	\\
 	& \textbf{Output:} & GJKRecurse returns the new ClosestPoints structure as output. \newfunc
 	
-	% Convenience constructor that calls the appropriate support point-generating function for the input Shape.
+	 Convenience constructor that calls the appropriate support point-generating function for the input Shape.
 	\textbf{shapePoint:} & \textbf{Input:} & shapePoint accepts a Shape pointer and an integer as inputs. \\
 	& \textbf{Exceptions:} & None.\\
 	& \textbf{Transition:} & shapePoint creates a new SupportPoint depending on the type of the input Shape and index (the input integer). \\
 	& \textbf{Output:} & shapePoint returns the new SupportPoint as output. \newfunc
 	\fi
 	
-	\textbf{GJK:} & \textbf{Input:} & GJK accepts a SupportContext pointer and a CollisionID pointer as inputs. \\
-	& \textbf{Exceptions:} & GJK may raise a HighIterWarning when the number of iterations reaches the \hyperref[SecECCollision]{WARN_GJK_ITERATIONS} threshold, or \hyperref[SecECCollision]{WARN_EPA_ITERATIONS} when \hyperref[SecLCCollision]{EPA} needs to be called. \\
-	& \textbf{Transition:} & GJK recursively finds the closest points between two shapes using the (Gilbert-Johnson-Keerthi) algorithm. If the collision Shapes are found to overlap at some iteration of the algorithm, the function will then execute \hyperref[SecLCCollision]{EPA} to find the closest points. \\
-	& \textbf{Output:} & GJK generates a new ClosestPoints structure containing information about the computed closest points and returns it as output. \newfunc
+%	\textbf{GJK:} & \textbf{Input:} & GJK accepts a SupportContext pointer and a CollisionID pointer as inputs. \\
+%	& \textbf{Exceptions:} & GJK may raise a HighIterWarning when the number of iterations reaches the \hyperref[SecECCollision]{WARN_GJK_ITERATIONS} threshold, or \hyperref[SecECCollision]{WARN_EPA_ITERATIONS} when \hyperref[SecLCCollision]{EPA} needs to be called. \\
+%	& \textbf{Transition:} & GJK recursively finds the closest points between two shapes using the (Gilbert-Johnson-Keerthi) algorithm. If the collision Shapes are found to overlap at some iteration of the algorithm, the function will then execute \hyperref[SecLCCollision]{EPA} to find the closest points. \\
+%	& \textbf{Output:} & GJK generates a new ClosestPoints structure containing information about the computed closest points and returns it as output. \newfunc
 	
 	\textbf{contactPoints:} & \textbf{Input:} & contactPoints accepts two Edge structures, a ClosestPoints structure and a CollisionInfo pointer as inputs. \\
 	& \textbf{Exceptions:} & None.\\
@@ -2756,10 +2756,10 @@ N/A
 	& \textbf{Transition:} & PolyToPoly creates a new SupportContext structure with the input PolyShapes and the polySupportPoint function. It then generates a ClosestPoints structure with GJK, using pointers to the context structure and the ID of the input CollisionInfo. Afterwards, it will check if the closest points are nearer than the minimum collision distance, which is the sum of the Shapes' radii, and if so, push a new Contact structure to the Contacts array of the input CollisionInfo. \\
 	& \textbf{Output:} & None. \newfunc
 	
-	\textbf{SegmentTo Poly:} & \textbf{Input:} & SegmentToPoly accepts a SegmentShape pointer, a PolyShape pointer and a CollisionInfo pointer as inputs. \\
-	& \textbf{Exceptions:} & None.\\
-	& \textbf{Transition:} & SegmentToPoly creates a new SupportContext structure with the input Shapes and their corresponding SupportPointFuncs. It then generates a ClosestPoints structure with GJK, using pointers to the context structure and the ID of the input CollisionInfo. Afterwards, it will check if the closest points are nearer than the minimum collision distance, which is the sum of the Shapes' radii, and if so, push a new Contact structure to the Contacts array of the input CollisionInfo. End-cap collisions are rejected if tangents are provided. \\\\
-	& \textbf{Output:} & None. \newfunc
+%	\textbf{SegmentTo Poly:} & \textbf{Input:} & SegmentToPoly accepts a SegmentShape pointer, a PolyShape pointer and a CollisionInfo pointer as inputs. \\
+%	& \textbf{Exceptions:} & None.\\
+%	& \textbf{Transition:} & SegmentToPoly creates a new SupportContext structure with the input Shapes and their corresponding SupportPointFuncs. It then generates a ClosestPoints structure with GJK, using pointers to the context structure and the ID of the input CollisionInfo. Afterwards, it will check if the closest points are nearer than the minimum collision distance, which is the sum of the Shapes' radii, and if so, push a new Contact structure to the Contacts array of the input CollisionInfo. End-cap collisions are rejected if tangents are provided. \\\\
+%	& \textbf{Output:} & None. \newfunc
 	
 	\textbf{CircleToPoly:} & \textbf{Input:} & CircleToPoly accepts a CircleShape pointer, a PolyShape pointer and a CollisionInfo pointer as inputs. \\
 	& \textbf{Exceptions:} & None.\\
