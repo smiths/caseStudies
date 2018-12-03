@@ -1196,9 +1196,9 @@ instance models.
 		+ \left[ - H_{i} + H_{i-1} +
 		U_{\text{t,}i} \sin\left(\beta_{i}\right) \right]
 		\sin\left(\alpha_{i}\right) - U_{\text{b,i}} \end{array}
-		\right) \cdot \tan\left(\varphi'\right)
+		\right) \cdot \left( \begin{array}{l} \tan\left(\varphi'\right)\\
 		+ c'_{i} \cdot b_{i} \cdot
-		\sec\left(\alpha_{i}\right) \end{array} $\\
+		\sec\left(\alpha_{i}\right) \end{array} \right) \end{array}$\\
 		
 		\hline Description &$i$ is the index representing a single slice.\\
 		&$R$ is the resistive shear force without the influence of interslice 
@@ -1425,15 +1425,29 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_W}\\
 
 \hline
 Equation & 
- $W_i$ = $b_{i}\begin{cases}
-\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}} & 
-{y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
-\left({y_{\text{us,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+ $W_{i,1}$ = $b_{i}\begin{cases}
+\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}} & 
+{y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
+\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
 -{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
- & {y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
-\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+ & {y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
 {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
+~\newline~\newline
+ $W_{i,2}$ = $b_{i}\begin{cases}
+\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}}
+ & 
+{y_{\text{wt,}i-1}}\geq{}{y_{\text{slope,}i-1}}\\
+\left(\begin{array}{l}\left({y_{\text{slope,}i-1}}-{y_{\text{wt,}i-1}}\right)\gamma{}\\
++\left({y_{\text{wt,}i-1}}
+-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}} \end{array} \right)
+& {y_{\text{slope,}i-1}}>{y_{\text{wt,}i-1}}>{y_{\text{slip,}i-1}}\\
+\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right)\gamma{} & 
+{y_{\text{wt,}i-1}}\leq{}{y_{\text{slip,}i-1}}
+\end{cases}$
+~\newline~\newline
+$W_i$ = $0.5(W_{i,1}+W_{i,2})$
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
@@ -1537,9 +1551,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 \hline
 Equation & 
 ${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
-\left({y_{\text{wt,}i}}-{y_{\text{us,}i}}\right){\gamma{}_{\text{w}}} & 
-{y_{\text{wt,}i}}>{y_{\text{us,}i}}\\
-0 & {y_{\text{wt,}i}}\leq{}{y_{\text{us,}i}}
+\left({y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right){\gamma{}_{\text{w}}} & 
+{y_{\text{wt,}i}}>{y_{\text{slope,}i}}\\
+0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slope,}i}}
 \end{cases}$
 \\ 
 
@@ -1586,12 +1600,12 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \hline SI Units& \si{\newton\per\meter}\\
 
 \hline Equation & $H_i$ = $\begin{cases}
-\frac{\left[{y_{\text{us,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
-\left[{y_{\text{wt,}i}}-{y_{\text{us,}i}}\right]^{2}{\gamma{}_\text{w}}
- & {y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+\frac{\left[{y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
+\left[{y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right]^{2}{\gamma{}_\text{w}}
+ & {y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
 \frac{\left[{y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}
  & 
-{y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+{y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
 0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
 \\
@@ -1684,8 +1698,8 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Angles_Beta}\\
 
 \hline
 Equation & 
-\( \beta_i = \arctan \left( \frac{y_{\text{us,}i} -
-  y_{\text{us,}i-1}}{x_{\text{us,}i} - x_{\text{us,}i-1}} \right) \)\\
+\( \beta_i = \arctan \left( \frac{y_{\text{slope,}i} -
+  y_{\text{slope,}i-1}}{x_{\text{slope,}i} - x_{\text{slope,}i-1}} \right) \)\\
 
 \hline
 Description &$i$ is the index representing a single slice.\\
