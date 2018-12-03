@@ -285,7 +285,7 @@ framework.
 	test-input\_ftype &  \textit{soln.ftype} = 0\\ 
 	\hline
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputEvenslc} & 
-	test-input\_evenslc &  \textit{soln.evenslc} = 1\\ 
+	test-input\_evnslc &  \textit{soln.evnslc} = 1\\ 
 	\hline
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCncvu} & 
 	test-input\_cncvu &  \textit{soln.cncvu} = 1\\ 
@@ -873,9 +873,109 @@ safety.
 
 \subsubsection{Slip Slicing Module}
 The MIS for this module shows that it uses two different slicing algorithms, 
-depending on the value of the boolean \textit{soln.evenslc}. Thus, a test case 
+depending on the value of the boolean \textit{soln.evnslc}. Thus, a test case 
 was selected for each algorithm, to ensure that it slices the given slip 
 surface properly.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerEvnslcSize}] 
+	test-slicer\_evnslcSize
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 1.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$|\textit{slip'}| = 7$.
+	
+	Test Case Derivation: The input 6 means that the output slip surface should 
+	have 6 slices. The number of slices is one less than the number of 
+	vertices, so the expected size of the output is 7.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerEvnslcVals}] 
+	test-slicer\_evnslcVals
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 1.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: [(0, 10), (2, 8), (4, 6), (8, 2), (10, 3), (13, 4), (16, 5)].
+	
+	Test Case Derivation: The specification in the MIS for the case where 
+	\textit{soln.evnslc} is true was applied manually to the input coordinates 
+	to derive the expected output coordinates.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+		\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcSize}] 
+	test-slicer\_notEvnslcSize
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$|\textit{slip'}| = 7$.
+	
+	Test Case Derivation: The input 6 means that the output slip surface should 
+	have 6 slices. The number of slices is one less than the number of 
+	vertices, so the expected size of the output is 7.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcVals}] 
+	test-slicer\_notEvnslcVals
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: [(0, 10), (4, 6), (8, 2), (9, 2.5), (10, 3), (13, 4), (16, 5)].
+	
+	Test Case Derivation: The specification in the MIS for the case where 
+	\textit{soln.evnslc} is false was applied manually to the input coordinates 
+	to derive the expected output coordinates.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcIndivisible}] 
+	test-slicer\_notEvnslcVals
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3)], 5.
+	
+	Output: \textit{slip'} such that the following predicate holds true:\\ 
+	$|\textit{slip'}| = 5$.
+	
+	Test Case Derivation: In the case where \textit{soln.evnslc} is false, if 
+	the desired number of slices is not divisible by the starting number of 
+	slices, the desired number of slices should be adjusted to the greatest 
+	number divisible by the starting number of slices but less than the input 
+	desired number of slices. In this case, that number is 4, so the size of 
+	the output should be 5.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
 
 \subsubsection{Morgenstern-Price Calculation Module}
 Correct calculation of the factor of safety is covered by \tcref{SVnV-TC_Ex1FS} 
