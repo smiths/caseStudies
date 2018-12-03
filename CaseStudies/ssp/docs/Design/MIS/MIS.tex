@@ -923,7 +923,8 @@ count(\textit{a}, \textit{A}) = $+(x : slip | x \in A \land x = a : 1)$\\
 
 \noindent assign\_weights(\textit{s}) : slips $\rightarrow$ slips\\
 assign\_weights(\textit{s}) = $s'$ such that\\
-$s'[0].wt = s[0].Fs - s[|s|-1]$ and \\
+$\frac{s'[0].wt = s[0].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : 
+s[j].Fs - s[|s|-1].Fs)}$ and \\
 $\forall(i : \mathbb{Z} | i \in [1..|s|-1] : s'[i].wt = s'[i-1].wt + 
 \frac{s[i].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : s[j].Fs - 
 s[|s|-1].Fs)})$\\
