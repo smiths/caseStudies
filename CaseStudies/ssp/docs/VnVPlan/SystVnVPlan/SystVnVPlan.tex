@@ -227,18 +227,19 @@ input parameter that should have a different value than specified by the table.
 
 \begin{table}[!h]
 	\renewcommand{\arraystretch}{1.5}
-	\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
+	\begin{tabularx}{1.0\textwidth}{p{3cm} l X}
 		\toprule \textbf{Input} &
 		\textbf{Unit} & \textbf{Value}\\ \midrule
-		$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 25), 
+		$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(0, 
+		25), 
 		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
 		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
 		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
 		14), (70, 14)\}\\
-		${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 10\\
-		${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 24\\
-		${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 34\\
-		${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 53\\
+		${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 53\\
 		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
 		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
 		$c'$ & $\si{\pascal}$ & 5000 \\
@@ -299,7 +300,8 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with slope coordinates 
-$\{\left(x_\text{us},y_\text{us}\right)\}$ increasing as $x$ increases, as 
+$\{\left(x_\text{slope},y_\text{slope}\right)\}$ increasing as $x$ increases, 
+as 
 follows: \{(0, 
 15), (30, 15), (40, 20), (50, 25), (70, 25)\}.
 
@@ -344,7 +346,8 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with  except with only 
-2 slope coordinates $\{\left(x_\text{us},y_\text{us}\right)\}$, as follows: 
+2 slope coordinates $\{\left(x_\text{slope},y_\text{slope}\right)\}$, as 
+follows: 
 \{(0, 
 25), (20, 25). Also, with no water table vertices 
 $\{\left(x_\text{wt},y_\text{wt}\right)\}$.
@@ -367,29 +370,29 @@ Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated test on unit testing framework
 
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMinStartEqual}] 
-test-valid\_input\_xMinStartEqual
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMinEtrEqual}] 
+test-valid\_input\_xMinEtrEqual
 
 Control: Automatic
 
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with 
-${x_\text{slip}^\text{minStart}}$ set to 0.
+${x_\text{slip}^\text{minEtr}}$ set to 0.
 
 Output: \progname{} runs to completion with no errors
 
 How test will be performed: Automated test on unit testing framework
 
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMaxEndEqual}] 
-test-valid\_input\_xMaxEndEqual
+\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidInXMaxExtEqual}] 
+test-valid\_input\_xMaxExtEqual
 
 Control: Automatic
 
 Initial State: New session
 
 Input: As described in Table~\ref{ExValidInputs}, except with 
-${x_\text{slip}^\text{maxEnd}}$ set to 70.
+${x_\text{slip}^\text{maxExt}}$ set to 70.
 
 Output: \progname{} runs to completion with no errors
 
@@ -416,31 +419,35 @@ performed as automated tests on a unit testing framework.
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDecToInc} & 
 	test-invalid\_slope\_decToInc & 
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 25), (20, 25), (30, 20), 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 25), (20, 25), 
+	(30, 20), 
 	(40, 25), 
 	(70, 25)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeIncToDec} & 
 	test-invalid\_slope\_incToDec & 
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
+	(30, 20), 
 	(40, 15), 
 	(70, 15)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStart} & 
 	test-invalid\_slope\_diffStart & 
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
+	(30, 20), 
 	(40, 25), 
 	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (70, 25)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffEnd} & 
 	test-invalid\_slope\_diffEnd & 
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15), (20, 15), (30, 20), 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
+	(30, 20), 
 	(40, 25), 
 	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (60, 25)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePt} & 
 	test-invalid\_slope\_onePt & 
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & \{(0, 15)\}\\ 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStartWT} & 
 	test-invalid\_slope\_diffStartWT & 
@@ -458,20 +465,29 @@ performed as automated tests on a unit testing framework.
 	test-invalid\_slope\_onePtWT & 
 	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22)\}\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinStart} & 
-	test-invalid\_slip\_xMinStart & ${x_\text{slip}^\text{minStart}}$ & -5\\ 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinEtr} & 
+	test-invalid\_slip\_xMinEtr & ${x_\text{slip}^\text{minEtr}}$ & -5\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxStart} & 
-	test-invalid\_slip\_xMaxStart & ${x_\text{slip}^\text{maxStart}}$ & 5\\ 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEtr} & 
+	test-invalid\_slip\_xMaxEtr & ${x_\text{slip}^\text{maxEtr}}$ & -5\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinEnd} & 
-	test-invalid\_slip\_xMinEnd & ${x_\text{slip}^\text{minStart}}$ & 20\\ 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinExt} & 
+	test-invalid\_slip\_xMinExt & ${x_\text{slip}^\text{minExt}}$ & -5\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEnd} & 
-	test-invalid\_slip\_xMaxEnd & ${x_\text{slip}^\text{minStart}}$ & 30\\ 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxExt} & 
+	test-invalid\_slip\_xMaxExt & ${x_\text{slip}^\text{maxExt}}$ & -5\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEndOut} & 
-	test-invalid\_slip\_xMaxEndOut & ${x_\text{slip}^\text{minStart}}$ & 75\\ 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinEtrOut} & 
+	test-invalid\_slip\_xMinEtrOut & ${x_\text{slip}^\text{minEtr}}$ & 75\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxEtrOut} & 
+	test-invalid\_slip\_xMaxEtrOut & ${x_\text{slip}^\text{maxEtr}}$ & 75\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMinExtOut} & 
+	test-invalid\_slip\_xMinExtOut & ${x_\text{slip}^\text{minExt}}$ & 75\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipXMaxExtOut} & 
+	test-invalid\_slip\_xMaxExtOut & ${x_\text{slip}^\text{maxExt}}$ & 75\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYMin} & 
 	test-invalid\_slip\_yMin & ${y_\text{slip}^\text{min}}$ & 30\\ 
@@ -537,13 +553,13 @@ test case, the sources to compare to are specified.
 \begin{tabularx}{1.0\textwidth}{p{7cm} l X}
 	\toprule \textbf{Input} &
 	\textbf{Unit} & \textbf{Value}\\ \midrule
-	$\{\left(x_\text{us},y_\text{us}\right)\}$ & $\text{m}$ & \{(0, 5), 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(0, 5), 
 	(5, 5), (15, 10), (25, 10)\}\\
 	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & N/A\\
-	${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 0\\
-	${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 10\\
-	${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 10\\
-	${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 20\\
+	${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 0\\
+	${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 10\\
+	${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 10\\
+	${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 20\\
 	${y_\text{slip}^\text{min}}$ & $\text{m}$ & 0\\
 	${y_\text{slip}^\text{max}}$ & $\text{m}$ & 12\\
 	$c'$ & $\si{\pascal}$ & 9800 \\
@@ -759,10 +775,10 @@ Output: \progname{} reports back the input values listed below.\\
 \begin{tabularx}{1.0\textwidth}{p{7cm} l X}
 		\toprule \textbf{Input} &
 		\textbf{Unit} & \textbf{Value}\\ \midrule
-		${x_\text{slip}^\text{minStart}}$ & $\text{m}$ & 10\\
-		${x_\text{slip}^\text{maxStart}}$ & $\text{m}$ & 24\\
-		${x_\text{slip}^\text{minEnd}}$ & $\text{m}$ & 34\\
-		${x_\text{slip}^\text{maxEnd}}$ & $\text{m}$ & 53\\
+		${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 53\\
 		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
 		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
 		Boolean representing the form of the interslice variation function $f$. 
@@ -991,7 +1007,7 @@ with an ``X'' may have to be modified as well.
 		\rref{SRS-R_OutputFS}& 
 		\rref{SRS-R_NormalGraph}& \rref{SRS-R_ShearGraph} \\
 		\hline
-		\tcref{TC_ValidInDec} - \tcref{TC_ValidInXMaxEndEqual}                 
+		\tcref{TC_ValidInDec} - \tcref{TC_ValidInXMaxExtEqual}                 
 		& X& & & & & & & & & & \\ \hline
 		\tcref{TC_InvalidSlopeDecToInc} - \tcref{TC_InvalidUnitWtWaterNegative} 
 		& & X& & & & & & & & & \\ \hline
