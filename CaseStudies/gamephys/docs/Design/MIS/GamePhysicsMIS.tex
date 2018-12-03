@@ -448,10 +448,14 @@ N/A
 & \textbf{Output:} & None. \newfunc
 & \textbf{Exceptions:} & None \\
 
-%\textbf{apply_force:} & \textbf{Transition:} & apply_force will apply forces. And it recalculates the total force acting on a Body*.  \\%& \textbf{Input:}  bodyUpdateVelocity accepts a Body pointer, a Vector and a double value as its input. \\
-%& \textbf{Exceptions:} & None \\
-%
-%& \textbf{Output:} & None. \newfunc
+\textbf{apply_force:} & \textbf{Transition:} & apply_force will apply forces on the rigid bodies and it recalculates the total force acting on each body.  \\%& \textbf{Input:}  bodyUpdateVelocity accepts a Body pointer, a Vector and a double value as its input. \\
+& \textbf{Output:} & None. \newfunc
+& \textbf{Exceptions:} & None \\
+
+
+\textbf{apply_torque:} & \textbf{Transition:} & apply_torque will apply forces(for rotation) on rigid bodies and recalculates the total torque acting on each body.  \\
+& \textbf{Output:} & None. \newfunc
+& \textbf{Exceptions:} & None \\
 
 %\textbf{bodyKinetic Energy:} & \textbf{Input:} & bodyKineticEnergy accepts a Body pointer as input. \\
 %& \textbf{Exceptions:} & None.\\
@@ -522,16 +526,14 @@ N/A
 %	ShapeCacheDataImpl : Shape* $\times$ Transform $\to$ BB \\
 %	ShapeDestroyImpl : Shape* $\to$ void
 	
-\pagebreak % for pagebreak
-	
 \subsubsection{Exported Access Programs} \label{SecEAPShape}
 	\renewcommand*{\arraystretch}{1.2}
 	\begin{longtable}{| y | x{3.5cm} | y | x{3.5cm} |}
 		\hline \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline 
 		%shapeInit & Shape*, ShapeClass*, Body*, ShapeMassInfo & Shape* & - \\ \hline
 		set_angle & Shape* & $\mathbb{R}$ & - \\ \hline
-		set_pos & Shape* & $\mathbb{R}$ & - \\ \hline
-		get_centre & Shape* & Vec2* & - \\ \hline
+		set_pos & Shape* & Vec2* & - \\ \hline
+		get_center & Shape* & Vec2* & - \\ \hline
 %		shapeDestroy & Shape* & - & - \\ \hline
 %		shapeGetSpace & Shape* & Space* & - \\ \hline
 %		shapeGetBody & Shape* & Body* & - \\ \hline
@@ -594,17 +596,19 @@ N/A
 %	$\text{Shape.elast} \ge 0 $ \\
 %	$\text{Shape.fric} \ge 0 $ 
 
+\subsubsection{Enviroment Vaiables}
+None
 \subsubsection{Assumptions} \label{SecAShape}
 	All input pointers are assumed to be non-null. Also see \ref{SecACircle}, \ref{SecAPoly}.
 	
 \subsubsection{Access Program Semantics} \label{SecAPSShape}
 	\renewcommand*{\arraystretch}{\funcPadding}
 	\begin{longtable*}{@{} p{3.3cm} l p{\colDescrip}} 
-%		\textbf{shapeInit:} & \textbf{Input:} & shapeInit accepts a Shape pointer, ShapeClass pointer, Body pointer and a ShapeMassInfo structure as inputs.\\
-%		& \textbf{Exceptions:} & None. \\
-%		& \textbf{Transition:} & shapeInit initializes the input Shape. It sets the Shape's class, body and mass information to the input parameters, and zero-initializes all other variables. \\
-%		& \textbf{Output:} & shapeInit returns a pointer to the initialized Shape as output.  \newfunc
-%		
+	
+		& \textbf{Transition:} & None. \\
+		\textbf{get_center:} & \textbf{Exceptions:} & None. \\
+		& \textbf{Output:} &get_center returns the coordinates of the input Shape object.\\
+		
 %		\textbf{shapeDestroy:} & \textbf{Input:} & shapeDestroy accepts a Shape pointer as input. \\
 %		& \textbf{Exceptions:} & None. \\ \pagebreak %stylebreak
 %		& \textbf{Transition:} & shapeDestroy frees the input Shape object. \\ 
@@ -614,21 +618,27 @@ N/A
 %		& \textbf{Exceptions:} & None.\\
 %		& \textbf{Transition:} & None. \\
 %		& \textbf{Output:} & Each shapeGet function returns the value of their corresponding parameter.  \newfunc
-%		
-%		\textbf{shapeSet:} & \textbf{Input:} & Each shapeSet function accepts a Shape pointer and their corresponding parameter as inputs.\\
-%		& \textbf{Exceptions:} & Various, see Section \ref{SecEAPShape}. \\
-%		& \textbf{Transition:} & Each shapeSet function will set the corresponding parameter to the input value. shapeSetMass sets the mass of the Shape's mass information and recalculates the mass of its associated Body accordingly. \\
-%		& \textbf{Output:} & None.  \newfunc
-%		
+		
+		\textbf{set_angle:} & \textbf{Transition:} & Each set_angle function sets their corresponding angle with the input value\\
+		& \textbf{Exceptions:} & None. \\
+		& \textbf{Output:} & None.  \newfunc
+		
+		\textbf{set_pos:} & \textbf{Transition:} & Each set_pos function sets their corresponding position of a shape pointer in space\\
+		& \textbf{Exceptions:} & None. \\
+		& \textbf{Output:} & None.  
+				
 %		\textbf{shapeCacheBB:} & \textbf{Input:} & shapeCacheBB accepts a Shape pointer as input. \\
 %		& \textbf{Exceptions:} & None.\\
 %		& \textbf{Transition:} & shapeCacheBB updates the input Shape using the Transform matrix of its associated Body and modifies its bounding box (BB). \\
 %		& \textbf{Output:} & shapeCacheBB returns the new BB as output.  \newfunc
 %		
-%		\textbf{shapeUpdate:} & \textbf{Input:} & shapeUpdate accepts a Shape pointer and a Transform matrix as inputs.\\
-%		& \textbf{Exceptions:} & None.\\
-%		& \textbf{Transition:} & shapeUpdate will call the cacheData function in the input Shape's class using the given parameters and modify the Shape's BB. \\
-%		& \textbf{Output:} & shapeUpdate returns the BB returned by the cacheData function as output.  \newfunc
+%\textbf{shapeUpdate:} & \textbf{Input:} & shapeUpdate accepts a Shape pointer and a Transform matrix as inputs.\\
+%& \textbf{Exceptions:} & None.\\
+%& \textbf{Transition:} & shapeUpdate will call the cacheData function in the input Shape's class using the given parameters and modify the Shape's BB. \\
+%& \textbf{Output:} & shapeUpdate returns the BB returned by the cacheData function as output.  \newfunc
+%\textbf{get_centre:} & \textbf{Transition:} & None\\
+%%	& \textbf{Exceptions:} & None. \\
+%%	& \textbf{Output:} & get_center returns the coordinates of the centre of a shape pointer.\\
 	\end{longtable*}
 
 \subsection{Submodule Name: CircleShape} \label{MISCircle}
