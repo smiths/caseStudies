@@ -708,11 +708,168 @@ met.
 \subsubsection{Slip Weighting Module}
 As specified in the MIS for this module, it accepts a list of slip surfaces, 
 sorts them based on their factor of safety, and assigns a weight to each slip 
-surface. To cover this functionality, there is a test case verifying that the 
-slip surfaces get correctly sorted, and a second test case verifying that the 
+surface. To cover this functionality, there are test cases verifying that the 
+slip surfaces are correctly sorted, and test cases verifying that the 
 weights are calculated correctly. A final test case verifies that the weights 
 are correct in the special case where every slip surface has the same factor of 
 safety.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterSort}] 
+	test-weighter\_sort
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0), (surf : [], Fs : 
+	0.8, G : [], X : [], wt : 0), (surf : [], Fs : 1.5, G : [], X : [], wt : 
+	0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\textit{slips'}[0].\textit{Fs} = 0.8\\ 
+	\land \textit{slips'}[0].\textit{Fs} = 1.0 \\
+	\land \textit{slips'}[0].\textit{Fs} = 1.5$.
+	
+	Test Case Derivation: The input list of slip surfaces was manually sorted 
+	in ascending order of factor of safety to derive the expected output.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterSize}] 
+	test-weighter\_size
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.5, G : [], X : [], wt : 0), (surf : [], Fs : 0.8, G : [], X : [], wt : 
+	0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$|\textit{slips'}| = 3$.
+	
+	Test Case Derivation: The weighter function should not change the size of 
+	the input list of slip surfaces, so the expected size of the output is 
+	equal to the size of the input.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterFirst}] 
+	test-weighter\_first
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
+	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\textit{slips'}[0].wt = 0.6$.
+
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the first slip 
+	surface according to the specification in the MIS.
+
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterMid}] 
+	test-weighter\_mid
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
+	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\textit{slips'}[1].wt = 0.9$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the second slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_WeighterSecondLast}] 
+	test-weighter\_secondLast
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
+	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\textit{slips'}[2].wt = 1.0$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the third slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterLast}] 
+	test-weighter\_last
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
+	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\textit{slips'}[3].wt = 1.0$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the fourth slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterNaN}] 
+	test-weighter\_last
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0), (surf : [], Fs : 
+	1.0, G : [], X : [], wt : 0), (surf : [], Fs : 1.0, G : [], X : [], wt : 
+	0)].
+	
+	Output: \textit{slips'} such that the following predicate holds true:\\ 
+	$\forall(i : \mathbb{Z} | i \in [0..2] : \textit{slips'}[i].wt = 
+	\text{NaN})$.
+	
+	Test Case Derivation: All slip surfaces in the input list were chosen to 
+	have equal factors of safety. According to the specification in the MIS, 
+	this results in a division by zero in the calculation of the weights. In 
+	MatLab, the result of a division by zero is NaN, thus each weight in the 
+	output list is expected to be NaN.
+	
+	How test will be performed: Automated test on unit testing framework.
+
+\end{enumerate}
 
 \subsubsection{Slip Slicing Module}
 The MIS for this module shows that it uses two different slicing algorithms, 
