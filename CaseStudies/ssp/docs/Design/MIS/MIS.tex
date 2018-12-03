@@ -957,7 +957,7 @@ N/A
 			p{0.45\textwidth} } \hline 
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
-		slicer & coords, $\mathbb{Z}$ & slip & - \\ \hline
+		slicer & coords, $\mathbb{Z}$ & coords & - \\ \hline
 		
 	\end{tabular}
 \end{center}
@@ -981,19 +981,21 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ ($\textit{evnslc} \Rightarrow$ 
+		\item[] \textit{out} $\coloneqq$ ($\textit{soln.evnslc} \Rightarrow$ 
 		\textit{slip\_surf'} obtained by repeatedly applying 
 		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})] $||$ 
 		midpoint(\textit{slip\_surf}[large\_segment(\textit{slip\_surf})], 
 		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1])
 		$||$ \textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1] until 
 		$|\textit{slip\_surf'}| = \textit{num\_slices}$ \\
-		$| \lnot \textit{evnslc} \Rightarrow$ \textit{slip\_surf'} such that 
+		$| \lnot \textit{soln.evnslc} \Rightarrow$ \textit{slip\_surf'} such 
+		that 
 		$\forall(i : \mathbb{Z} | i \in [0..|\textit{slip\_surf}|-2] : 
-		\textit{slip\_surf'}[i*\frac{\textit{num\_slices}}
-		{|\textit{slip\_surf}|-1}..(i+1)*\frac{\textit{num\_slices}}
-		{|\textit{slip\_surf}|-1}] = subslice(\frac{\textit{num\_slices}}
-		{|\textit{slip\_surf}|-1}, \textit{slip\_surf}[i], 
+		\textit{slip\_surf'}[i*\textit{round\_down}(\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1})..(i+1)*\textit{round\_down}(\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1})] = \\
+		subslice(\textit{round\_down}(\frac{\textit{num\_slices}}
+		{|\textit{slip\_surf}|-1}), \textit{slip\_surf}[i], 
 		\textit{slip\_surf}[i+1]))$
 	\end{itemize}
 \end{itemize}
@@ -1010,8 +1012,13 @@ $\rightarrow$ coord\\
 midpoint(\textit{point1}, \textit{point2}) = $< \frac{point1.x + point2.x}{2}, 
 \frac{point1.y + point2.y}{2} >$\\
 
-\noindent subslice(\textit{n}, \textit{point1}, \textit{point2}) : int $\times$ 
-coord $\times$ coord $\rightarrow$ coords\\
+\noindent round\_down(\textit{num}) : $\mathbb{R}$ $\rightarrow$ $\mathbb{Z}$\\
+round\_down(\textit{num}) = \textit{rounded\_num} such that\\
+$\forall(i : \mathbb{Z} | i \leq \textit{num} < i + 1 : \textit{rounded\_num = 
+i})$\\
+
+\noindent subslice(\textit{n}, \textit{point1}, \textit{point2}) : $\mathbb{Z}$ 
+$\times$ coord $\times$ coord $\rightarrow$ coords\\
 subslice(\textit{n}, \textit{point1}, \textit{point2}) = \textit{subslices} 
 such that\\
 $\forall(i : \mathbb{Z} | i \in [0..n] : subslices[i].x = point1.x + 
