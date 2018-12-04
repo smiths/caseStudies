@@ -112,7 +112,7 @@ Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
 found at 
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp}
-{the GitHub repository for the project}.
+{the GitHub repository for the project}. \wss{good to point to repo}
 
 % ---------------------------------------------------------------- %
 % ------------------------ NOTATION ------------------------------ %
@@ -187,6 +187,11 @@ to the critical slip surface.
 information does seem useful, but maybe this is not the right place for it? 
 Maybe this should go to an appendix?}
 
+\wss{I like this content too.  I particularly like that IM1 to IM4 are invoked.
+  I think it is fine to keep this content here.  This information might belong
+  to the ``connection between the requirement and design'' section of the MG,
+  but that feels a bit premature.  Let's leave it here for now.}
+
 % ---------------------------------------------------------------- %
 % --------------------- MODULE DECOMPOSITION --------------------- %
 % ---------------------------------------------------------------- %
@@ -233,6 +238,8 @@ project.
 % --------------------- CONTROL MODULE --------------------------- %
 % ---------------------------------------------------------------- %
 
+\clearpage
+\newpage
 \section{MIS of the Control Module}
 
 \subsection{Module}
@@ -288,6 +295,11 @@ control(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
+\wss{This function doesn't give me enough information.  What is fname?  Is it a
+  file name?  What states are being transitioned?  The state of the Input
+  Module?  Can you explain the control module by giving the series of calls to
+  the other access programs?  Something along the lines of what is done for SWHS?}
+
 \subsubsection{Local Functions}
 
 N/A
@@ -296,6 +308,7 @@ N/A
 % ---------------------- INPUT MODULE ---------------------------- %
 % ---------------------------------------------------------------- %
 
+\newpage \wss{Add a new page between all modules}
 \section{MIS of the Input Module} \label{sec:InputMod}
 
 \subsection{Module}
@@ -324,6 +337,21 @@ N/A
 	paramsSoln &=& tuple of (ltor, ftype, evnslc, cncvu, obtu : 
 	$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam}) \\
 \end{longtable}
+
+\wss{The above types don't really have anything specifically to do with the
+  input module.  I suggest that you add a new module ``Types'' that exports your
+  ``global'' types for this program.  This is the same idea as a module for exporting
+  constants that are used throughout a specification.}
+
+\wss{I like that the appendix explains these types.  The names are very
+  esoteric.  An explanation is helpful.}
+
+\wss{I've been looking in the document for where these types are used and, at
+  least for the ones that I've checked, they don't seem to be used anywhere
+  other than here.  If that is the case, why even export types like this?  They
+  could just be defined locally, or not defined at all.  The main thing seems to
+  be having a way to capture the input parameters and the access programs that
+  provide output seem to do that fine.}
 
 \subsubsection{Exported Access Programs}
 
@@ -364,6 +392,11 @@ p{0.45\textwidth} } \hline
 
 \end{tabular}
 \end{center}
+
+\wss{Is there any value to combining slopeX and slopeY into a list of
+  coordinates?  The same question applies for piezX and piezY.  It depends on
+  how they are used in the code, but I'm not sure how slopeX is used.  I
+  couldn't find it used anywhere else in the specification.}
 
 \subsection{Semantics}
 
@@ -621,6 +654,18 @@ load\_params(\textit{fname}):
 
 N/A
 
+\wss{I'm not suggesting we change the design, but I wonder if there is a
+  different design that is more elegant?  I don't like that we are passing
+  around so many parameters and lists.  At some point in the future, not as part
+  of 741, I'd like to discuss a more OO style design.  What if we had an object
+  for the soil mass and another for the slip surface?  The constructor could
+  populate the necessary information and then the object could be queried for
+  the services that matter.  The slip surface could be asked to return its own
+  Fs, rather than use another module to calculate it.  This redesign probably
+  won't go anywhere, but we should discuss it at some point.  We could just
+  sketch out the access programs and state variables, to see if there is
+  something viable.}
+
 % ---------------------------------------------------------------- %
 % -------------------- GEN ALG MODULE ------------------------- %
 % ---------------------------------------------------------------- %
@@ -654,6 +699,9 @@ NUM\_ADDS = 2\\
 	coords, wt : $\mathbb{R}$) \\
 	slips &=& [slip] \\
 \end{longtable}
+
+\wss{If you do introduce a module whose sole purpose is to export types, these
+  types could go in that module.}
 
 \subsubsection{Exported Access Programs}
 
@@ -805,7 +853,11 @@ kinAdm(\textit{slip\_surf}):
 \end{itemize}
 
 \bmac{Not sure if I'm allowed to use "else" here but don't know how else to 
-express the "else" case succintly}
+express the "else" case succinctly}
+
+\wss{With the conditional rule, you would just replace your ``else'' with
+  ``True.''  The H\&S syntax works by following the first rule where the
+  condition evaluates to true.  A true at the end acts as a catch all.}
 
 \subsubsection{Local Functions}
 linSlope(\textit{point1}, \textit{point2}) : coord $\times$ coord $\rightarrow$ 
@@ -929,6 +981,12 @@ $\forall(i : \mathbb{Z} | i \in [1..|s|-1] : s'[i].wt = s'[i-1].wt +
 \frac{s[i].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : s[j].Fs - 
 s[|s|-1].Fs)})$\\
 
+\wss{Could you say in a comment what is happening with assign\_weights.  It is
+  not obvious from reading the definition.  The equality at the top of the
+  fraction looks like it evaluates to a Boolean, but then you are diving by an
+  integer?  Even if the formula is correct, you should explain it, since
+  whatever is going on, it is complicated.}
+
 % ---------------------------------------------------------------- %
 % -------------------- SLICER MODULE ----------------------------- %
 % ---------------------------------------------------------------- %
@@ -999,6 +1057,10 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 		\textit{slip\_surf}[i+1]))$
 	\end{itemize}
 \end{itemize}
+
+\wss{The specification of the slicer access program is confusing to me.  As
+  mentioned previously for another complex spec, could you please say in words,
+  in a comment, what is going on here?}
 
 \subsubsection{Local Functions}
 large\_segment(\textit{surf}) : coords $\rightarrow$ $\mathbb{Z}$\\
@@ -1170,6 +1232,9 @@ morg\_price(\textit{slip\_surf}):
 		\textit{slip\_surf'}.X \coloneqq 1000, [], []$.
 	\end{itemize}
 \end{itemize}
+
+\wss{Nice to see excerpts from the SRS.  That is an encouraging sign.  The mix
+  of equations and description seems like a good spec to me.}
 
 \subsubsection{Local Functions}
 N/A
@@ -1442,6 +1507,11 @@ N/A
 % ---------------------------------------------------------------- %
 
 \section{MIS of the Sequence Data Structure Module} \label{sec:SequenceData}
+
+\wss{Nice that you included the specification of this module.  You could have
+  simply said, ``as implemented by Matlab,'' but I like this. Matlab has other
+  operations on sequences that aren't specified (like assignment), but we
+  shouldn't invest too much time in this spec, so you don't need to add this.}
 
 \subsection{Module}
 Sequence
