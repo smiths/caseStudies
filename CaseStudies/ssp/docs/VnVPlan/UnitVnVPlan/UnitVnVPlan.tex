@@ -242,7 +242,7 @@ framework.
 	(40, 25), (70, 25)]\\
 	\hline 
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputPhi} & 
-	test-input\_phi &  \textit{slope.phi} = 0.34906585\\ 
+	test-input\_phi &  \textit{slope.phi} = 0.34906585040\\ 
 	\hline
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCoh} & 
 	test-input\_coh &  \textit{slope.coh} = 5000\\ 
@@ -728,10 +728,11 @@ safety.
 	0.8, G : [], X : [], wt : 0), (surf : [], Fs : 1.5, G : [], X : [], wt : 
 	0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\textit{slips'}[0].\textit{Fs} = 0.8\\ 
-	\land \textit{slips'}[0].\textit{Fs} = 1.0 \\
-	\land \textit{slips'}[0].\textit{Fs} = 1.5$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[0].\textit{Fs} = 0.8\\ 
+	\land \textit{slips}^\prime[0].\textit{Fs} = 1.0 \\
+	\land \textit{slips}^\prime[0].\textit{Fs} = 1.5$.
 	
 	Test Case Derivation: The input list of slip surfaces was manually sorted 
 	in ascending order of factor of safety to derive the expected output.
@@ -749,8 +750,9 @@ safety.
 	1.5, G : [], X : [], wt : 0), (surf : [], Fs : 0.8, G : [], X : [], wt : 
 	0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$|\textit{slips'}| = 3$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slips}^\prime| = 3$.
 	
 	Test Case Derivation: The weighter function should not change the size of 
 	the input list of slip surfaces, so the expected size of the output is 
@@ -769,8 +771,9 @@ safety.
 	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
 	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\textit{slips'}[0].wt = 0.6$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[0].wt = 0.6$.
 
 	Test Case Derivation: The input list of slip surfaces was chosen to be 
 	already 
@@ -791,8 +794,9 @@ safety.
 	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
 	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\textit{slips'}[1].wt = 0.9$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[1].wt = 0.9$.
 	
 	Test Case Derivation: The input list of slip surfaces was chosen to be 
 	already 
@@ -814,8 +818,9 @@ safety.
 	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
 	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\textit{slips'}[2].wt = 1.0$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[2].wt = 1.0$.
 	
 	Test Case Derivation: The input list of slip surfaces was chosen to be 
 	already 
@@ -836,8 +841,9 @@ safety.
 	1.4, G : [], X : [], wt : 0), (surf : [], Fs : 1.8, G : [], X : [], wt : 
 	0), (surf : [], Fs : 2.0, G : [], X : [], wt : 0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\textit{slips'}[3].wt = 1.0$.
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[3].wt = 1.0$.
 	
 	Test Case Derivation: The input list of slip surfaces was chosen to be 
 	already 
@@ -858,8 +864,9 @@ safety.
 	1.0, G : [], X : [], wt : 0), (surf : [], Fs : 1.0, G : [], X : [], wt : 
 	0)].
 	
-	Output: \textit{slips'} such that the following predicate holds true:\\ 
-	$\forall(i : \mathbb{Z} | i \in [0..2] : \textit{slips'}[i].wt = 
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\forall(i : \mathbb{Z} | i \in [0..2] : \textit{slips}^\prime[i].wt = 
 	\text{NaN})$.
 	
 	Test Case Derivation: All slip surfaces in the input list were chosen to 
@@ -890,8 +897,9 @@ surface properly.
 	
 	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$|\textit{slip'}| = 7$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 7$.
 	
 	Test Case Derivation: The input 6 means that the output slip surface should 
 	have 6 slices. The number of slices is one less than the number of 
@@ -927,8 +935,9 @@ surface properly.
 	
 	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$|\textit{slip'}| = 7$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 7$.
 	
 	Test Case Derivation: The input 6 means that the output slip surface should 
 	have 6 slices. The number of slices is one less than the number of 
@@ -964,8 +973,9 @@ surface properly.
 	
 	Input: [(0, 10), (8, 2), (10, 3)], 5.
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$|\textit{slip'}| = 5$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 5$.
 	
 	Test Case Derivation: In the case where \textit{soln.evnslc} is false, if 
 	the desired number of slices is not divisible by the starting number of 
@@ -1006,8 +1016,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
 	0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.Fs} = 1000$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{Fs} = 1000$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to not converge within MAX\_ITER iterations, and thus will meet the 
@@ -1030,8 +1041,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
 	0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.G} = []$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{G} = []$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to not converge within MAX\_ITER iterations, and thus will meet the 
@@ -1054,8 +1066,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (30, 10), (40, 15)], Fs : 0, G : [], X : [], wt : 
 	0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.X} = []$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{X} = []$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to not converge within MAX\_ITER iterations, and thus will meet the 
@@ -1078,8 +1091,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
 	G : [], X : [], wt : 0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.Fs} = 1000$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{Fs} = 1000$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to have a factor of safety less than 0.5, and thus will meet the 
@@ -1101,8 +1115,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
 	G : [], X : [], wt : 0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.G} = []$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{G} = []$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to have a factor of safety less than 0.5, and thus will meet the 
@@ -1125,8 +1140,9 @@ and one covers the interslice shear force.
 	Input: (surf : [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)], Fs : 0, 
 	G : [], X : [], wt : 0).
 	
-	Output: \textit{slip'} such that the following predicate holds true:\\ 
-	$\textit{slip'.X} = []$.
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{X} = []$.
 	
 	Test Case Derivation: The input slip surface was chosen as one that is 
 	known to have a factor of safety less than 0.5, and thus will meet the 
@@ -1140,9 +1156,325 @@ and one covers the interslice shear force.
 
 \subsubsection{Slice Property Calculation Module}
 The MIS shows that this module is responsible for calculating seven properties 
-for each slice of a slip surface. The calculation of some of these properties 
-is itself dependent on conditions. Test cases have been selected such that each 
-possible calculation is covered by at least one test case. 
+for each slice of a slip surface. The calculations of some of these properties 
+are themselves dependent on conditions. Test cases have been selected such that 
+each possible calculation is covered by at least one test case. 
+
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{1.0\textwidth}{p{3cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(-10, 
+		10), (0, 20), (30, 20), (40, 25), (70, 25)\}\\
+		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(-10, 25),
+		(10, 25), (20, 10), (70, 10)\}\\
+		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 20000 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 10000 \\ 
+		\bottomrule
+	\end{tabularx}
+	\caption{Input to be used for slice property calculation test cases}
+	\label{SlicePropInputs}
+\end{table}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWWet}] 
+	test-prop\_wWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(0, 15), (10, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.W}[0] = 1500000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies completely above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWWetDry}] 
+	test-prop\_wWetDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 5), (30, 0)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.W}[0] = 3000000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies partially below and partially 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWDry}] 
+	test-prop\_wDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 15), (30, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.W}[0] = 1125000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies completely below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUbWet}] 
+	test-prop\_ubWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(0, 15), (10, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.Ub}[0] = 1397542.4859$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUbDry}] 
+	test-prop\_ubDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 15), (30, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.Ub}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUtWet}] 
+	test-prop\_utWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(-10, 5), (0, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.Ut}[0] = 1414213.5624$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUtDry}] 
+	test-prop\_utDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 15), (30, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.Ut}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHWet}] 
+	test-prop\_hWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(0, 15), (10, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.H}[0] = 375000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the MIS for the case where the water 
+	table lies above the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHWetDry}] 
+	test-prop\_hWetDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 5), (30, 0)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.H}[0] = 125000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the	MIS for the case where the water 
+	table crosses the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHDry}] 
+	test-prop\_hDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 15), (30, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{force.H}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the MIS for the case where the water 
+	table lies below the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyAlpha}] 
+	test-prop\_alpha
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(20, 15), (30, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{angles.alpha}[0] = -0.46364760900$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base angle of the input slice based on the specification in 
+	the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyBeta}] 
+	test-prop\_beta
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(-10, 10), (0, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{angles.beta}[0] = -0.78539816340$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface angle of the input slice based on the specification 
+	in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHeight}] 
+	test-prop\_height
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: (surf : [(0, 15), (10, 10)], Fs : 0, G : [], X : [], wt : 
+	0).
+	
+	Output: $\textit{heights}[0] = 7.5$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the height of the input slice based on the specification in the 
+	MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
 
 \subsubsection{Output Module}
 The verification of the output is covered by \tcref{SVnV-TC_ValidOutFS} in the 
@@ -1151,6 +1483,29 @@ System VnV Plan document. The delivery of each output is covered by
 document. This document therefore only adds test cases for items not covered by 
 the System VnV Plan document. The test case here verifies that an output file 
 with the correct name is created.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_OutputFile}] 
+	test-output\_file
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: 1.0, [], [], [], ``outputtest''.
+	
+	Output: A file called outputtest.out exists in the file system.
+	
+	Test Case Derivation: As stated in the MIS, the output module should write 
+	a file with extension ``.out'' and the name given as string input to the 
+	module.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
