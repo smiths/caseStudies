@@ -10,6 +10,8 @@
 \usepackage{siunitx}
 \usepackage{caption}
 \usepackage{graphicx}
+\usepackage{afterpage}
+\usepackage{pdflscape}
 \usepackage{hyperref}
 \usepackage[numbib,nottoc]{tocbibind}
 \hypersetup{
@@ -121,7 +123,7 @@ correctly. The tests described in this document cannot definitively prove
 correctness, but they can build confidence by verifying that the software is 
 correct for the cases covered by tests.
 
-\subsection{Scope}
+\subsection{Scope} \label{Scope}
 
 The Hardware-Hiding module, \noindent \mref{MG-mHH}, will not be unit tested as 
 it is implemented by the operating system of the hardware on which \progname{} 
@@ -1513,21 +1515,52 @@ Not applicable for any of the modules of \progname{}.
 
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
+Table~\ref{TestModuleTrace} shows the traceability between test cases and 
+modules. Every module is covered by test cases except for those that were 
+declared out of scope in Section~\ref{Scope} of this document.
+
+\afterpage{
+\begin{landscape}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		& \mref{MG-mHH}& \mref{MG-mControl}& \mref{MG-mInput}& 
+		\mref{MG-mGenAlg}& \mref{MG-mKinAdm} & \mref{MG-mSlipWeight}& 
+		\mref{MG-mSlipSlicer}& \mref{MG-mMorgPrice}& 
+		\mref{MG-mSliceProperty}& 
+		\mref{MG-mOutput}& \mref{MG-mArrayOps}& \mref{MG-mRandNum}& 
+		\mref{MG-mPlot} \\
+		\hline
+		\tcref{TC_InputSlope} - \tcref{TC_InputNoWTgamw}                 
+		& & & X& & & & & & & & & & \\ \hline
+		\tcref{TC_GenAlgXextMin} - \tcref{TC_GenAlgVertices} 
+		& & & & X& & & & & & & & &\\ \hline
+		\tcref{TC_KinAdmXDec} - \tcref{TC_KinAdmObtuOff}          
+		& & & & & X& & & & & & & & \\ \hline
+		\tcref{TC_WeighterSort} - \tcref{TC_WeighterLast}       
+		& & & & & & X& & & & & & & \\ \hline
+		\tcref{TC_SlicerEvnslcSize} - \tcref{TC_SlicerNotEvnslcVals}
+		& & & & & & & X& & & & & & \\ \hline
+		\tcref{TC_MorgPriceNonConvergingFs} - \tcref{TC_MorgPriceSpuriousX}   
+		& & & & & & & & X& & & & & \\ \hline
+		\tcref{TC_PropertyWWet} - \tcref{TC_PropertyHeight}
+		& & & & & & & & & X& & & & \\ \hline
+		\tcref{TC_OutputFile}
+		& & & & & & & & & & X& & & \\
+		\hline
+	\end{tabular}
+	\caption{Traceability Matrix Showing the Connections Between Modules and 
+	Test Cases}
+	\label{TestModuleTrace}
+\end{table}
+\end{landscape}
+}
+
+\newpage
 
 \bibliographystyle{plainnat}
 
 \bibliography{../../../refs/References}
-
-\newpage
-
-\section{Appendix}
-
-\wss{This is where you can place additional information, as appropriate}
-
-\subsection{Symbolic Parameters}
-
-\wss{The definition of the test cases may call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
 
 \end{document}
