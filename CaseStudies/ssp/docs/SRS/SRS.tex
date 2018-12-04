@@ -1453,7 +1453,7 @@ $W_i$ = $0.5(W_{i,1}+W_{i,2})$
 \hline Description &$i$ is the index representing a single slice.\\
 &$W$ is the weight (\si{\newton\per\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
-(\si{\meter}).\\
+(\si{\meter}), defined in \ddref{DD_b}.\\
 &${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
@@ -1498,18 +1498,27 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ub}\\
 
 \hline
 Equation & 
-${U_{\text{b,}i}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+${U_{\text{b,}i,1}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
 \left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}} & 
 {y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
 0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
+~\newline~\newline
+${U_{\text{b,}i,2}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+\left({y_{\text{wt,}i-1}}-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{w}}} & 
+{y_{\text{wt,}i-1}}>{y_{\text{slip,}i-1}}\\
+0 & {y_{\text{wt,}i-1}}\leq{}{y_{\text{slip,}i-1}}
+\end{cases}$
+~\newline~\newline
+${U_{\text{b,}i}}$ = $0.5({U_{\text{b,}i,1}} + {U_{\text{b,}i,2}})$
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
  &${U_{\text{b}}}$ is the base hydrostatic force
  (\si{\newton\per\meter}).\\
  &${\ell{}_{\text{b}}}$ is the base length of a slice in the 
-direction parallel to the slope of the base (\si{\meter}).\\
+direction parallel to the slope of the base (\si{\meter}), defined in 
+\ddref{DD_lb}.\\
  &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
  (\si{\meter}).\\
  &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
@@ -1550,17 +1559,25 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_Ut}\\
 
 \hline
 Equation & 
-${U_{\text{t,}i}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
+${U_{\text{t,}i,1}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
 \left({y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right){\gamma{}_{\text{w}}} & 
 {y_{\text{wt,}i}}>{y_{\text{slope,}i}}\\
 0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slope,}i}}
 \end{cases}$
+~\newline~\newline
+${U_{\text{t,}i,2}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
+\left({y_{\text{wt,}i-1}}-{y_{\text{slope,}i-1}}\right){\gamma{}_{\text{w}}} & 
+{y_{\text{wt,}i-1}}>{y_{\text{slope,}i-1}}\\
+0 & {y_{\text{wt,}i-1}}\leq{}{y_{\text{slope,}i-1}}
+\end{cases}$
+~\newline~\newline
+$U_{\text{t,}i} = 0.5({U_{\text{t,}i,1}} + {U_{\text{t,}i,2}})$
 \\ 
 
 \hline Description &$i$ is the index representing a single slice.\\
 &${U_{\text{t}}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
-parallel to the slope of the surface (\si{\meter}).\\
+parallel to the slope of the surface (\si{\meter}), defined in \ddref{DD_ls}.\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
 table (\si{\meter}).\\
 &${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
@@ -1616,7 +1633,7 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
-&${\gamma{}_{\text{Sat}}}$ is the soil saturated unit weight. 
+&${\gamma{}_{\text{w}}}$ is the unit weight of water. 
 (\si{\newton\per\meter\cubed}).\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
 (\si{\meter}).\\
