@@ -1237,7 +1237,12 @@ instance models.
 
 ~\newline
 
-
+\bmac{You had a comment that the symbol for R should be $R^\prime$ because it 
+is an effective force value. However, even though the effective normal force is 
+used in this equation, does that mean that R itself is effective? Our two 
+primary sources (Brandon's paper and the Zhu et al. paper) do not refer to R or 
+T as effective. If we do decide to define R as the effective resistive shear, 
+then we should also define T as effective mobile shear, right?}
 
 % ------------------------------------------ %
 %               Begin GD T    %
@@ -1805,12 +1810,11 @@ ${\ell{}_{\text{b,}i}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 
 \hline Description &$i$ is the index representing a single slice.\\
 &${\ell{}_{\text{b}}}$ is the base length of a slice in the direction parallel 
-to the 
-slope of the base (\si{\meter}).\\
+to the slope of the base (\si{\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
-(\si{\meter}).\\
+(\si{\meter}), defined in \ddref{DD_b}.\\
 &$\alpha{}$ is the angle between the base of a slice and the horizontal 
-(\si{\degree}).\\
+(\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -1851,9 +1855,9 @@ ${\ell{}_{\text{s,}i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 parallel to 
 the slope of the surface (\si{\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x} direction 
-(\si{\meter}).\\
+(\si{\meter}), defined in \ddref{DD_b}.\\
 &$\beta{}$ is the angle between the surface of a slice and the horizontal 
-(\si{\degree}).\\
+(\si{\degree}), defined in \ddref{DD_Angles_beta}.\\
 
 \hline Sources& \cite{FredlundKrahn}\\
 
@@ -2087,7 +2091,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
-y_{\text{slip}}\right)\}$ \\
+y_{\text{slip}}\right)\}, \textit{const\_f}$ \\
 
 \hline
 Output &
@@ -2484,7 +2488,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Lambda}\\
 
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $\gamma_{\text{w}}$, 
-$\{\left(x_{\text{slip}}, y_{\text{slip}}\right)\}$ \\
+$\{\left(x_{\text{slip}}, y_{\text{slip}}\right)\}, \textit{const\_f}$ \\
 
 \hline
 Output & 
@@ -2666,7 +2670,7 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
 $\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
-y_{\text{slip}}\right)\}$\\
+y_{\text{slip}}\right)\}, \textit{const\_f}$\\
 
 \hline
 Output &
@@ -2756,31 +2760,45 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 
 \hline Label& \bf Critical Slip Surface Identification \\
 
-\hline Input & $\{(x_\text{slope},y_\text{slope})\}$ \\
+\hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
+$\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\textit{const\_f}$ \\
 
-\hline Output & \(  \left( F_\text{S}^\text{Min}, \left\{ 
+\hline Output & $\begin{array}{l}\left( F_\text{S}^\text{Min}, \left\{ 
 \left(x_\text{cs},y_\text{cs}\right)\right\} \right)
- = \Upsilon\left( \left\{\left(x_\text{slope},y_\text{slope}\right)\right\} 
- \right)\)
+ =\\ \Upsilon\left( \{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}, 
+ \{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}, c', \varphi', \gamma, 
+ \gamma_{\text{Sat}}, \gamma_{\text{w}}, \textit{const\_f}
+ \right)\end{array}$
  \\
 
 \hline Description & $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
 associated with 
 the critical slip surface.\\
 &$x_{\text{cs}}$ is the \textit{x}-ordinate of a point on the critical slip 
-surface 
-(\si{\meter}).\\
+surface (\si{\meter}).\\
 &$x_{\text{cs}}$ is the \textit{y}-ordinate of a point on the critical slip 
-surface 
-(\si{\meter}).\\
+surface (\si{\meter}).\\
 &$\Upsilon$ is a minimization algorithm or function.\\
 &$x_{\text{slope}}$ is the \textit{x}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &$y_{\text{slope}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
+&$x_{\text{wt}}$ is the \textit{x}-ordinate of a point on the water table 
+(\si{\meter}).\\
+&$y_{\text{wt}}$ is the \textit{y}-ordinate of a point on the water table 
+(\si{\meter}).\\
+&$c'$ is the effective cohesion (\si{\pascal}).\\
+&$\varphi'$ is the effective angle of friction (\si{\degree}).\\
+&$\gamma{}$ is the soil dry unit weight (\si{\newton\per\meter\cubed}).\\
+&${\gamma{}_{\text{Sat}}}$ is the soil saturated unit weight 
+(\si{\newton\per\meter\cubed}).\\
+&${\gamma{}_{\text{w}}}$ is the unit weight of water
+(\si{\newton\per\meter\cubed}).\\
+&\textit{const\_f} is a boolean decision on which form of \textit{f} 
+the user desires: constant if true, or half-sine if false.\\
 
 \hline Sources& \cite{LiEtAl}\\
-
 \hline
 \end{tabular}
 \end{minipage}\\
