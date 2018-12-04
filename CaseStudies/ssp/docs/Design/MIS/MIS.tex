@@ -395,12 +395,12 @@ load\_params(\textit{fname}):
 	\begin{itemize}
 		\item[] \textit{slope}, \textit{piez}, 
 		\textit{search}, 
-		\textit{soln} $\coloneqq$  \textit{slope'}, 
-		\textit{piez'}, \textit{search'}, 
-		\textit{soln'}\\ 
-		where \textit{slope'}, 
-		\textit{piez'}, \textit{search'}, and 
-		\textit{soln'}
+		\textit{soln} $\coloneqq$  $\textit{slope}^\prime$, 
+		$\textit{piez}^\prime$, $\textit{search}^\prime$, 
+		$\textit{soln}^\prime$\\ 
+		where $\textit{slope}^\prime$, 
+		$\textit{piez}^\prime$, $\textit{search}^\prime$, and 
+		$\textit{soln}^\prime$
 		are populated based on the contents of \textit{in\_file}.
 	\end{itemize}
 
@@ -903,8 +903,9 @@ weighter(\textit{slip\_surfs}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{slip\_surfs'} such that 
-		$\textit{slip\_surfs'} = 
+		\item[] \textit{out} $\coloneqq$ $\textit{slip\_surfs}^\prime$ such 
+		that 
+		$\textit{slip\_surfs}^\prime = 
 		\textit{assign\_weights}(\textit{sort\_Fs}({\textit{slip\_surfs}}))$
 	\end{itemize}
 \end{itemize}
@@ -982,16 +983,17 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 	\item output:
 	\begin{itemize}
 		\item[] \textit{out} $\coloneqq$ ($\textit{soln.evnslc} \Rightarrow$ 
-		\textit{slip\_surf'} obtained by repeatedly applying 
+		$\textit{slip\_surf}^\prime$ obtained by repeatedly applying 
 		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})] $||$ 
 		midpoint(\textit{slip\_surf}[large\_segment(\textit{slip\_surf})], 
 		\textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1])
 		$||$ \textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1] until 
-		$|\textit{slip\_surf'}| = \textit{num\_slices}$ \\
-		$| \lnot \textit{soln.evnslc} \Rightarrow$ \textit{slip\_surf'} such 
+		$|\textit{slip\_surf}^\prime| = \textit{num\_slices}$ \\
+		$| \lnot \textit{soln.evnslc} \Rightarrow$ $\textit{slip\_surf}^\prime$ 
+		such 
 		that 
 		$\forall(i : \mathbb{Z} | i \in [0..|\textit{slip\_surf}|-2] : 
-		\textit{slip\_surf'}[i*\textit{round\_down}(\frac{\textit{num\_slices}}
+		\textit{slip\_surf}^\prime[i*\textit{round\_down}(\frac{\textit{num\_slices}}
 		{|\textit{slip\_surf}|-1})..(i+1)*\textit{round\_down}(\frac{\textit{num\_slices}}
 		{|\textit{slip\_surf}|-1})] = \\
 		subslice(\textit{round\_down}(\frac{\textit{num\_slices}}
@@ -1078,14 +1080,16 @@ morg\_price(\textit{slip\_surf}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ \textit{slip\_surf'} where 
-		\textit{slip\_surf'}.\textit{Fs}, \textit{slip\_surf'}.\textit{G}, and 
-		\textit{slip\_surf'}.\textit{X} satisfy the following system of 
+		\item[] \textit{out} $\coloneqq$ $\textit{slip\_surf}^\prime$ where 
+		$\textit{slip\_surf}^\prime$.\textit{Fs}, 
+		$\textit{slip\_surf}^\prime$.\textit{G}, and 
+		$\textit{slip\_surf}^\prime$.\textit{X} satisfy the following system of 
 		equations, taken from the SRS document. The equations are presented 
 		with the symbols from the SRS document for readability, though the 
 		symbols $F_\text{S}$, $G$, and $X$ correspond to 
-		\textit{slip\_surf'}.\textit{Fs}, \textit{slip\_surf'}.\textit{G}, and 
-		\textit{slip\_surf'}.\textit{X}, respectively.\\
+		$\textit{slip\_surf}^\prime$.\textit{Fs}, 
+		$\textit{slip\_surf}^\prime$.\textit{G}, and 
+		$\textit{slip\_surf}^\prime$.\textit{X}, respectively.\\
 		
 		(\iref{SRS-IM_FS}): \( {F_\text{S}}= 
 		\frac{\displaystyle\sum_{i=1}^{n-1} \left[ 
@@ -1161,13 +1165,13 @@ morg\_price(\textit{slip\_surf}):
 		MAX\_DIFF, or until the absolute difference between $\lambda$ in the 
 		current iteration and in the previous iteration is less than MAX\_DIFF. 
 		When this occurs, $X$ is computed using \dref{SRS-GD_X}, and 
-		$\textit{slip\_surf'}.Fs, \textit{slip\_surf'}.G, 
-		\textit{slip\_surf'}.X \coloneqq F_\text{S}, G, X$.
+		$\textit{slip\_surf}^\prime.Fs, \textit{slip\_surf}^\prime.G, 
+		\textit{slip\_surf}^\prime.X \coloneqq F_\text{S}, G, X$.
 		If MAX\_ITER iterations occur, the solution is considered to be 
 		non-converging. If the solution converges but $F_\text{S} <$ 
 		MIN\_FS, the solution is considered to be spurious. In either case, 
-		$\textit{slip\_surf'}.Fs, \textit{slip\_surf'}.G, 
-		\textit{slip\_surf'}.X \coloneqq 1000, [], []$.
+		$\textit{slip\_surf}^\prime.Fs, \textit{slip\_surf}^\prime.G, 
+		\textit{slip\_surf}^\prime.X \coloneqq 1000, [], []$.
 	\end{itemize}
 \end{itemize}
 
@@ -1244,7 +1248,8 @@ prop\_calc(\textit{slip\_surf}):
 		document for this project for the sake of brevity. The SRS should be 
 		consulted for the definitions of these symbols.\\
 		\item[] $\textit{force}, \textit{angles},	\textit{heights} \coloneqq 
-		\textit{force'}, \textit{angles'}, \textit{soil'} \textit{heights'}$ 
+		\textit{force}^\prime, \textit{angles}^\prime, \textit{soil}^\prime, 
+		\textit{heights}^\prime$ 
 		where \\
 		$\forall(i : \mathbb{Z} | i \in [1..|\textit{slip\_surf}|-1] :\\ 
 		\textit{force}.Ub[i] = 
@@ -1255,28 +1260,28 @@ prop\_calc(\textit{slip\_surf}):
 		0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 		\end{cases}\\
 			\land \textit{force}.Ut[i] = {\ell{}_{\text{s,}i}}\begin{cases}
-			\left({y_{\text{wt,}i}}-{y_{\text{us,}i}}\right){\gamma{}_{\text{w}}}
+			\left({y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right){\gamma{}_{\text{w}}}
 			 & 
-			{y_{\text{wt,}i}}>{y_{\text{us,}i}}\\
-			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{us,}i}}
+			{y_{\text{wt,}i}}>{y_{\text{slope,}i}}\\
+			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slope,}i}}
 			\end{cases}\\
 			\land \textit{force}.W[i] = b_{i}\begin{cases}
-				\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+				\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
 				 & 
-				{y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
-				\left({y_{\text{us,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+				{y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
+				\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
 				-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
-				& {y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
-				\left({y_{\text{us,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+				& {y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+				\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
 				{y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 			\end{cases}\\
 			\land \textit{force}.H[i] = \begin{cases}
-			\frac{\left[{y_{\text{us,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
-			\left[{y_{\text{wt,}i}}-{y_{\text{us,}i}}\right]^{2}{\gamma{}_\text{w}}
-			& {y_{\text{wt,}i}}\geq{}{y_{\text{us,}i}}\\
+			\frac{\left[{y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
+			\left[{y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right]^{2}{\gamma{}_\text{w}}
+			& {y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
 			\frac{\left[{y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}
 			& 
-			{y_{\text{us,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+			{y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
 			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 			\end{cases}\\
 			\land \textit{angles}.\textit{alpha}[i] =
@@ -1285,11 +1290,12 @@ prop\_calc(\textit{slip\_surf}):
 				\right) 
 				\\
 			\land \textit{angles}.\textit{beta}[i] = \arctan \left( 
-			\frac{y_{\text{us,}i} -
-				y_{\text{us,}i-1}}{x_{\text{us,}i} - x_{\text{us,}i-1}} 
+			\frac{y_{\text{slope,}i} -
+				y_{\text{slope,}i-1}}{x_{\text{slope,}i} - 
+				x_{\text{slope,}i-1}} 
 				\right)\\
 			\land \textit{heights}[i] = 
-			0.5*(({y_{\text{us,}i}}-{y_{\text{slip,}i}})+({y_{\text{us,}i+1}}-{y_{\text{slip,}i+1}})))$
+			0.5*(({y_{\text{slope,}i}}-{y_{\text{slip,}i}})+({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}})))$
 	\end{itemize}
 \end{itemize}
 
