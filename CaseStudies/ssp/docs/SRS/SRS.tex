@@ -2838,34 +2838,30 @@ is intended to provide a feel for a common scenario.
   specified. 
   Starts and ends on the same $x$ values as soil layers.  
   & N/A & 10\% \\
-  $\{(x_{\text{slope}},y_{\text{slope}})\}$ (**) & At least two ordered pairs 
+  $\{(x_{\text{slope}},y_{\text{slope}})\}$ & At least two ordered pairs 
   must be 
   specified. 
   $y$ values of consecutive vertices are always increasing or always 
   decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
-  ${x_{\text{slip}}^{\text{maxExt}}}$ & ${x_{\text{slip}}^{\text{maxExt}}} > 
-  {x_{\text{slip}}^{\text{minExt}}}$ and must 
-  be less than or equal to the maximum $x$ value of the slope. & N/A & 10\% \\
-  ${x_{\text{slip}}^{\text{minExt}}}$ & ${x_{\text{slip}}^{\text{minExt}}} \geq 
-  {x_{\text{slip}}^{\text{maxEtr}}}$ & 
+  ${x_{\text{slip}}^{\text{maxExt}}}$ & must be greater than or equal to the 
+  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
+  value of the slope & N/A & 10\% \\
+  ${x_{\text{slip}}^{\text{minExt}}}$ & must be greater than or equal to the 
+  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
+  value of the slope & 
   N/A & 
   10\% \\
-  ${x_{\text{slip}}^{\text{maxEtr}}}$ & ${x_{\text{slip}}^{\text{maxEtr}}} > 
-  {x_{\text{slip}}^{\text{minEtr}}}$ & 
+  ${x_{\text{slip}}^{\text{maxEtr}}}$ & must be greater than or equal to the 
+  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
+  value of the slope & 
   N/A & 10\% \\
   ${x_{\text{slip}}^{\text{minEtr}}}$ & must be greater than or equal to the 
-  minimum 
-  $x$ 
-  value of the 
-  slope. & N/A & 10\% \\
-  ${y_{\text{slip}}^{\text{max}}}$ & ${y_{\text{slip}}^{\text{max}}} > 
-  {y_{\text{slip}}^{\text{min}}}$ & N/A & 10\% \\
-  ${y_{\text{slip}}^{\text{min}}}$ & ${y_{\text{slip}}^{\text{min}}} < 
-  {y_{\text{slip}}^{\text{max}}}$ & N/A & 10\% \\
-  $c'$ (**) & $c >0$ & 10 & 10\%\\
-  $\varphi'$ (**) & $ 0 < \varphi < 90 $ & 25 & 10\% \\
-  $\gamma$ (**) & $\gamma > 0$ & 20 & 10\% \\
-  $\gamma_{\text{Sat}}$ (**) & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\% \\
+  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
+  value of the slope & N/A & 10\% \\
+  $c'$ & $c >0$ & 10 & 10\%\\
+  $\varphi'$ & $ 0 < \varphi < 90 $ & 25 & 10\% \\
+  $\gamma$ & $\gamma > 0$ & 20 & 10\% \\
+  $\gamma_{\text{Sat}}$ & $\gamma_{\text{Sat}} > 0 $ & 20 & 10\% \\
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9.8 & 10\% \\
   \bottomrule
 \end{longtable*}
@@ -2873,7 +2869,6 @@ is intended to provide a feel for a common scenario.
 
 \noindent \begin{description}
 \item[(*)] Optional input.
-\item[(**)] Input must be specified for each layer.
 \end{description}
 
 \begin{table}[!h]
@@ -2884,13 +2879,15 @@ is intended to provide a feel for a common scenario.
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $F_\text{S}$ & $F_\text{S}>0$ \\
-  $\{(x_{\text{cs}},y_{\text{cs}})\}$ &  $x$ values must be between the minimum 
-  and maximum 
-  $x$ values of the slope. $y$ values must not exceed the maximum $y$ value of 
-  the slope. The slope between consecutive vertices must be always increasing 
-  as $x$ increases. \\
-  $G_i$ & $G_i>0$ \\
-  $X_i$ & $X_i<0$ \\
+  $\{(x_{\text{cs}},y_{\text{cs}})\}$ &  All $x$ values must be between 
+  ${x_{\text{slip}}^{\text{minEtr}}}$ and ${x_{\text{slip}}^{\text{maxExt}}}$. 
+  $y$ values must not be below ${y_{\text{slip}}^{\text{min}}}$. For any given 
+  vertex, the $y_\text{cs}$ value must not exceed the $y_\text{slope}$ value 
+  corresponding to the same $x_\text{cs}$ value. The first and last vertices 
+  must each be equal to one of the vertices in 
+  $\{(x_{\text{slope}},y_{\text{slope}})\}$. The slope between consecutive 
+  vertices must be always increasing as $x$ increases. The internal angle 
+  between consecutive vertices should not be below 110 degrees.\\
   \bottomrule
 \end{longtable*}
 \end{table}
@@ -2898,21 +2895,7 @@ is intended to provide a feel for a common scenario.
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
 \noindent
-A correct solution must exhibit conformation to the system of non-linear 
-equations presented in \iref{IM_FS}, \iref{IM_Lambda}, and \iref{IM_E}. In 
-addition, the factor of safety for the critical slip surface must be lower than 
-the factors of safety calculated for other slip surfaces compared by 
-\iref{IM_Min}. The coordinates of the critical slip surface must form a concave 
-up function.
-
-\wss{It seems to me that the content of this section could all be deleted,
-  except for the last sentence.  Saying that the solution agrees with the
- instance models is covered by the requirements.  The shape of the critical slip
- surface seems to be the only new information here.  What do you think BM?}
-
-\bmac{I agree that the information is covered elsewhere. Even the last sentence 
-is mostly covered by \aref{A_Concave}. I struggled to come up with content for 
-this section.}
+Not applicable for \progname{}.
 
 \section{Requirements} \label{sec_Reqs}
 
@@ -2929,10 +2912,10 @@ requirements, the qualities that the software is expected to exhibit.
   inputs, shown in the table below, and store the data.
   \begin{table}[!h]
   \renewcommand{\arraystretch}{1.5}
-  \noindent \begin{tabularx}{1.0\textwidth}{l l X} \toprule \textbf{symbol} &
+  \noindent \begin{tabularx}{1.0\textwidth}{l l X} \toprule \textbf{Symbol} &
 %  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
     \refstepcounter{tablenum}  \label{Table:Inputs}
-    \textbf{unit} & \textbf{description}\\ \midrule
+    \textbf{Unit} & \textbf{Description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
     of the slope layers, for the water table if one exists, and for potential 
     entry and exit points of a slip surface.\\
@@ -2951,8 +2934,8 @@ requirements, the qualities that the software is expected to exhibit.
 \end{table}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyInput}:] Verify that 
-the 
-input data lies within physical constraints shown in Table~\ref{TblInputVar}.
+the input data lies within physical constraints shown in 
+Table~\ref{TblInputVar}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_InitGen}:] Generate
 potential critical slip surfaces for the input slope (using \iref{IM_Min}). 
@@ -2967,17 +2950,16 @@ minimum factor of safety, corresponding to the critical slip surface (using
 \iref{IM_Min}).
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] Verify that 
-the factor of safety, critical slip surface, and interslice forces satisfy the 
-physical constraints shown in Table~\ref{TblOutputVar} and Section
-\ref{sec_CorrectSolution}.
+the factor of safety and critical slip surface satisfy the 
+physical constraints shown in Table~\ref{TblOutputVar}.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] Display as 
 output the user-supplied inputs listed in the table below:
 \begin{table}[!h]
 	\renewcommand{\arraystretch}{1.5}
-	\noindent \begin{tabularx}{1.0\textwidth}{l X} \toprule \textbf{symbol} &
+	\noindent \begin{tabularx}{1.0\textwidth}{l X} \toprule \textbf{Symbol} &
 		%  \noindent \begin{longtable}{l l p{12cm}} \toprule \textbf{symbol} &
-		\textbf{description}\\ \midrule
+		\textbf{Description}\\ \midrule
 		${x_{\text{slip}}^{\text{maxExt}}}$ & Maximum potential 
 		\textit{x}-ordinate of 
 		the exit point of a slip surface \\
@@ -2993,13 +2975,9 @@ output the user-supplied inputs listed in the table below:
 		of 
 		the entry point of a slip surface \\
 		${y_{\text{slip}}^{\text{max}}}$ & Maximum potential 
-		\textit{y}-ordinate of 
-		the 
-		of a point on a slip surface\\
+		\textit{y}-ordinate of a point on a slip surface\\
 		${y_{\text{slip}}^{\text{min}}}$ & Minimum potential 
-		\textit{y}-ordinate of 
-		the 
-		of a point on a slip surface \\
+		\textit{y}-ordinate of a point on a slip surface \\
 		\textit{const\_f} & Boolean decision on which form of \textit{f} 
 		the user desires: constant if true, or half-sine if false.\\ 
 		\bottomrule
