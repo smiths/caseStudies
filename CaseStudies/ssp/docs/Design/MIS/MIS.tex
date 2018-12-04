@@ -290,15 +290,32 @@ control(\textit{fname}):
 \begin{itemize}
 	\item transition: 
 	\begin{itemize}
-		\item[] Modifies the state of the Input Module, Genetic Algorithm 
-		Module, and Output Module.
+		\item[] Modifies the state of the Input Module by calling it, calls the 
+		Genetic Algorithm Module, and calls the Output Module. The series of 
+		calls is shown in more detail below.
 	\end{itemize}
 \end{itemize}
+
+load\_params(\textit{fname});\\
+
+verify\_params();\\
+
+[\textit{Fs}, \textit{crit\_slip}, \textit{G}, \textit{X}] = genetic\_alg();\\
+
+verify\_output(\textit{Fs});\\
+
+output(\textit{Fs}, \textit{crit\_slip}, \textit{G}, \textit{X}, 
+\textit{fname})\\
 
 \wss{This function doesn't give me enough information.  What is fname?  Is it a
   file name?  What states are being transitioned?  The state of the Input
   Module?  Can you explain the control module by giving the series of calls to
-  the other access programs?  Something along the lines of what is done for SWHS?}
+  the other access programs?  Something along the lines of what is done for 
+  SWHS?}
+
+\bmac{Added the series of calls and modified the text since it was giving the 
+false impression of changing the state of more than just the Input Module. Is 
+this better?}
 
 \subsubsection{Local Functions}
 
@@ -309,6 +326,7 @@ N/A
 % ---------------------------------------------------------------- %
 
 \newpage \wss{Add a new page between all modules}
+\bmac{Done}
 \section{MIS of the Input Module} \label{sec:InputMod}
 
 \subsection{Module}
@@ -352,6 +370,13 @@ N/A
   could just be defined locally, or not defined at all.  The main thing seems to
   be having a way to capture the input parameters and the access programs that
   provide output seem to do that fine.}
+
+\bmac{The motivation behind these types was to clean up the specifications. 
+When I first wrote these, I had the tuples being passed around to all of the 
+functions instead of being state variables, and so the specifications got 
+really cluttered with these long tuples. Since I switched to state variables, 
+maybe I could have removed these types, because you're right that the types 
+aren't used in the rest of the document.}
 
 \subsubsection{Exported Access Programs}
 
@@ -397,6 +422,17 @@ p{0.45\textwidth} } \hline
   coordinates?  The same question applies for piezX and piezY.  It depends on
   how they are used in the code, but I'm not sure how slopeX is used.  I
   couldn't find it used anywhere else in the specification.}
+
+\bmac{What happened here is that I forgot I had access programs for getting 
+these input parameters, so in the rest of the document I called the state 
+variables directly by name instead of using these access programs. Which means 
+that I treated the slope and piez as lists of coordinates. If I combined slopeX 
+and slopeY into ``slope'', I will have calls like ``slope[0].x'' and 
+``slope[0].y'', whereas if I keep them the same and update my calls in the rest 
+of the document the calls will be ``slopeX[0]'' and ``slopeY[0]''. This choice 
+seems like a matter of preference to me, but I think I might go with the first 
+option because it makes it more explicit that the x and y are coming from a 
+common slope value. What do you think?}
 
 \subsection{Semantics}
 
@@ -666,10 +702,12 @@ N/A
   sketch out the access programs and state variables, to see if there is
   something viable.}
 
+\bmac{We can discuss that, certainly}
+
 % ---------------------------------------------------------------- %
 % -------------------- GEN ALG MODULE ------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Genetic Algorithm Module} \label{sec:GenAlgMod}
 
 \subsection{Module}
@@ -702,6 +740,14 @@ NUM\_ADDS = 2\\
 
 \wss{If you do introduce a module whose sole purpose is to export types, these
   types could go in that module.}
+
+\bmac{As mentioned in an earlier comment, I will likely remove lots of the 
+types I have defined. Types like slip, slips, coord, and coords, however, are 
+used in many modules. Would it still make sense to write a separate module just 
+for these types? I think yes. (Though I should mention that in the actual 
+implementation, none of these types exist. Slips are simply tuples and coords 
+are arrays, though I found it easier to create types for these for the purposes 
+of specification)}
 
 \subsubsection{Exported Access Programs}
 
@@ -759,7 +805,7 @@ genetic\_alg():
 		slip surface
 		\item using rand to generate a new pool of NUM\_SLIPS slip surfaces by 
 		applying crossovers and mutations to the previous generation, with the 
-		more highly-weighted members having a greater likelihood of 
+		more lowly-weighted members having a greater likelihood of 
 		contributing to the subsequent generations
 		\item applying kinAdm, slicer, morg\_price, and weighter to the new 
 		generation
@@ -783,7 +829,7 @@ Xrange[0]))$
 % ---------------------------------------------------------------- %
 % -------------------- KIN ADM MODULE ---------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Kinematic Admissibility
 	Module} \label{sec:KinAdmMod}
 
@@ -848,7 +894,7 @@ kinAdm(\textit{slip\_surf}):
 		\lor (obtu() \land 
 		\lnot (has\_no\_sharp\_angles(\textit{slip\_surf}.\textit{surf})))\\
 		\Rightarrow false\\
-		| else \Rightarrow true$)
+		| true \Rightarrow true$)
 	\end{itemize}
 \end{itemize}
 
@@ -858,6 +904,8 @@ express the "else" case succinctly}
 \wss{With the conditional rule, you would just replace your ``else'' with
   ``True.''  The H\&S syntax works by following the first rule where the
   condition evaluates to true.  A true at the end acts as a catch all.}
+
+\bmac{Makes sense, thanks. Fixed}
 
 \subsubsection{Local Functions}
 linSlope(\textit{point1}, \textit{point2}) : coord $\times$ coord $\rightarrow$ 
@@ -904,7 +952,7 @@ has\_no\_sharp\_angles(\textit{surf}) = $(\forall(i : \mathbb{Z} | i \in
 % ---------------------------------------------------------------- %
 % -------------------- SLIP WEIGHTING MODULE ------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Slip Weighting
 	Module} \label{sec:WeightMod}
 
@@ -974,9 +1022,14 @@ sorted[i].Fs \leq sorted[i+1].Fs)$\\
 $\mathbb{Z}$\\
 count(\textit{a}, \textit{A}) = $+(x : slip | x \in A \land x = a : 1)$\\
 
+\noindent \#\textit{The weight assigned to a given slip is the difference 
+between that slip's factor of safety and the largest factor of safety, divided 
+by the sum of all of these differences and cumulatively added, so that the slip 
+with the lowest factor of safety has the lowest weight and the slip with the 
+highest factor of safety has a weight of 1.}\\
 \noindent assign\_weights(\textit{s}) : slips $\rightarrow$ slips\\
 assign\_weights(\textit{s}) = $s'$ such that\\
-$\frac{s'[0].wt = s[0].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : 
+$s'[0].wt = \frac{s[0].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : 
 s[j].Fs - s[|s|-1].Fs)}$ and \\
 $\forall(i : \mathbb{Z} | i \in [1..|s|-1] : s'[i].wt = s'[i-1].wt + 
 \frac{s[i].Fs - s[|s|-1].Fs}{+(j : \mathbb{Z} | j \in [0..|s|-1] : s[j].Fs - 
@@ -988,10 +1041,13 @@ s[|s|-1].Fs)})$\\
   integer?  Even if the formula is correct, you should explain it, since
   whatever is going on, it is complicated.}
 
+\bmac{The boolean divided by an integer was a typo. Fixed that, and also added 
+a comment with some explanation.}
+
 % ---------------------------------------------------------------- %
 % -------------------- SLICER MODULE ----------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Slip Slicing Module} \label{sec:SlicerMod}
 
 \subsection{Module}
@@ -1036,7 +1092,15 @@ N/A
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
-slicer(\textit{slip\_surf}, \textit{num\_slices}):
+\noindent \#\textit{Based on the value of evnslc, there are two potential 
+slicing algorithms that could be used. If evnslc is true, the slip surface's 
+largest segment will be sliced in half, and then the new largest segment will 
+be sliced in half, and so on until the desired number of slices is reached. If 
+evnslc is false, each slice will be divided into an equal number of 
+subslices such that the resulting number of slices is as close as possible to 
+the desired number without going over.}
+
+~\newline \noindent slicer(\textit{slip\_surf}, \textit{num\_slices}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -1048,8 +1112,7 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 		$||$ \textit{slip\_surf}[large\_segment(\textit{slip\_surf})+1] until 
 		$|\textit{slip\_surf}^\prime| = \textit{num\_slices}$ \\
 		$| \lnot \textit{soln.evnslc} \Rightarrow$ $\textit{slip\_surf}^\prime$ 
-		such 
-		that 
+		such that 
 		$\forall(i : \mathbb{Z} | i \in [0..|\textit{slip\_surf}|-2] : 
 		\textit{slip\_surf}^\prime[i*\textit{round\_down}(\frac{\textit{num\_slices}}
 		{|\textit{slip\_surf}|-1})..(i+1)*\textit{round\_down}(\frac{\textit{num\_slices}}
@@ -1063,6 +1126,8 @@ slicer(\textit{slip\_surf}, \textit{num\_slices}):
 \wss{The specification of the slicer access program is confusing to me.  As
   mentioned previously for another complex spec, could you please say in words,
   in a comment, what is going on here?}
+
+\bmac{Added a comment above.}
 
 \subsubsection{Local Functions}
 large\_segment(\textit{surf}) : coords $\rightarrow$ $\mathbb{Z}$\\
@@ -1092,7 +1157,7 @@ $\forall(i : \mathbb{Z} | i \in [0..n] : subslices[i].x = point1.x +
 % ---------------------------------------------------------------- %
 % -------------------- MORG PRICE MODULE ------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Morgenstern-Price Calculation Module} \label{sec:MPMod}
 
 \subsection{Module}
@@ -1246,7 +1311,7 @@ N/A
 % ---------------------------------------------------------------- %
 % -------------------- PROPERTY SORTER MODULE -------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Slice Property Calculation Module} \label{sec:PropSortMod}
 
 \subsection{Module} 
@@ -1426,7 +1491,7 @@ N/A
 % ---------------------------------------------------------------- %
 % -------------------- OUTPUT MODULE ----------------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Output Module} \label{sec:OutputMod}
 
 \subsection{Module}
@@ -1471,7 +1536,7 @@ N/A
 	hardware running \progname{}. \\
 \end{itemize}
 
-\textit{screen} : [$\mathbb{Z}$]
+\noindent \textit{screen} : [$\mathbb{Z}$]
 \begin{itemize}
 	\item \textit{screen} represents the colour values for each pixel on the 
 	screen of the hardware running \progname{}. \\
@@ -1511,7 +1576,7 @@ N/A
 % ---------------------------------------------------------------- %
 % ---------------- SEQUENCE DATA STRUCTURE MODULE ---------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Sequence Data Structure Module} \label{sec:SequenceData}
 
 \wss{Nice that you included the specification of this module.  You could have
@@ -1601,7 +1666,7 @@ by Matlab.
 % ---------------------------------------------------------------- %
 % ---------------- RANDOM NUMBER GENERATION MODULE --------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Random Number Generation Module} \label{sec:Random}
 
 \subsection{Module}
@@ -1667,7 +1732,7 @@ This module is the rand function implemented by Matlab.
 % ---------------------------------------------------------------- %
 % ------------------------- PLOTTING MODULE ---------------------- %
 % ---------------------------------------------------------------- %
-
+\newpage
 \section{MIS of the Plotting Module} \label{sec:Plotting}
 
 \subsection{Module}
