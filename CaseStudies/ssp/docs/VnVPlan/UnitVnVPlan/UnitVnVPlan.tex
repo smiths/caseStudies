@@ -59,6 +59,7 @@
 \midrule
 11/26/2018 & 1.0 & Initial template fill-ins\\
 11/29/2018 & 1.1 & Updates based on presentation feedback\\
+12/03/2018 & 1.2 & Added tests for remaining modules\\
 \bottomrule
 \end{tabularx}
 
@@ -67,12 +68,6 @@
 \tableofcontents
 
 \listoftables
-
-\wss{Do not include if not relevant}
-
-\listoffigures
-
-\wss{Do not include if not relevant}
 
 \newpage
 
@@ -88,8 +83,7 @@ document.
 \begin{tabular}{l l} 
 	\toprule		
 	\textbf{symbol} & \textbf{description}\\
-	\midrule 
-	$j$ & index representing a single coordinate\\
+	\midrule
 	MIS & Module Interface Specification\\
 	MG & Module Guide\\
 	TC & Test Case\\
@@ -362,7 +356,7 @@ How test will be performed: Automated test on unit testing framework.
 
 \subsubsection{Genetic Algorithm Module}
 
-~\newline \noindent The test cases described in Table~\ref{GenAlgTests} 
+The test cases described in Table~\ref{GenAlgTests} 
 verify that the critical slip surface returned by the genetic algorithm 
 satisfies certain properties. Since the genetic algorithm includes randomness, 
 it is impossible to verify the exact output. This is why test cases were 
