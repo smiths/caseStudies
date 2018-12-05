@@ -727,55 +727,53 @@ likely change [LC], in which the respective assumption is used.
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Constant}] The factor 
 of safety is assumed to be constant across the entire slip surface. 
-[\dref{GD_MobShear}, \iref{IM_FS}, \iref{IM_E}]
+[\dref{GD_MobShear}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The soil mass 
 is homogeneous, with consistent soil properties throughout. [\dref{GD_P}, 
-\dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}, \lcref{LC_inhomogeneous}]
+\ddref{DD_W} \lcref{LC_inhomogeneous}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Saturated}] The soil 
 properties are independent of dry or saturated conditions, with the exception 
-of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R}, 
-\dref{GD_T}]
+of unit weight. [\dref{GD_P}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Isotropic}]
-  The soil mass is treated as if it has isotropic properties. [\dref{GD_P}, 
-  \dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}]
+  The soil mass is treated as if the effective cohesion and effective angle of 
+  friction are isotropic properties. [\dref{GD_P}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
   Following the assumption of \cite{MorgPrice}, interslice normal and shear 
   forces have a proportional relationship, depending on a proportionality 
   constant $\left({\lambda}\right)$ and a function $\left({f}\right)$ 
   describing variation depending on $x$ position. [\dref{GD_X}, \iref{IM_FS}, 
-  \iref{IM_Lambda}, \iref{IM_E}]
+  \iref{IM_Lambda}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
-  slope and slip surface extends far into and out of the geometry 
+  slope and slip surface extends far into and out of the geometry
   ($z$-coordinate). This implies plane strain conditions, making 2D
   analysis appropriate. [\tref{TM_Eqm}, \dref{GD_P}, \dref{GD_EffNormal}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Lin}] The
   effective normal stress is large enough that the resistive shear to
   effective normal stress relationship can be approximated as a linear
-  relationship. [\tref{TM_Fmc}, \dref{GD_EffNormal}]
+  relationship. [\tref{TM_Fmc}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Straight}]
   The surface and base of a slice are approximated as straight lines 
-  [\ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_Angles_alpha}, 
-  \ddref{DD_Angles_Beta}, \ddref{DD_lb}, \ddref{DD_ls}].
+  [\ddref{DD_W}, \ddref{DD_Ub}, \ddref{DD_Ut}, \ddref{DD_Angles_alpha}, 
+  \ddref{DD_Angles_Beta}, \ddref{DD_lb}, \ddref{DD_ls}, \ddref{DD_h}].
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_EdgeSlices}] The 
 interslice forces at the \textit{0}th and \textit{n}th interslice interfaces 
 are zero. [\iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}].
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Seismic}] There is no 
-seismic force acting on the slope. [\dref{GD_R}, \dref{GD_T}, \iref{IM_FS}, 
-\iref{IM_Lambda}, \iref{IM_E}, \lcref{LC_Seismic}]
+seismic force acting on the slope. [\iref{IM_FS}, \iref{IM_Lambda}, 
+\lcref{LC_Seismic}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_External}] There is 
 no imposed surface load, and therefore no external force, acting on the slope. 
-[\dref{GD_R}, \dref{GD_T}, \iref{IM_FS}, \iref{IM_Lambda}, \iref{IM_E}, 
-\lcref{LC_External}]
+[\iref{IM_FS}, \iref{IM_Lambda}, \lcref{LC_External}]
 
 \end{enumerate}
 
@@ -1095,7 +1093,10 @@ instance models.
  strength, \tref{TM_Fmc}, and multiplying both sides of the equation by the 
  area of the slice in the shear-$z$ plane. Since the slope is assumed to extend 
  infinitely in the $z$-direction (\aref{A_2D}), the resulting forces are 
- expressed per meter in the $z$-direction.\\
+ expressed per meter in the $z$-direction. The effective angle of friction 
+ $\varphi'$ and the effective cohesion $c'$ are not indexed by $i$ because they 
+ are assumed to be isotropic (\aref{A_Isotropic}) and the soil is assumed to be 
+ homogeneous, with constant soil properties throughout (\aref{A_Homo}).\\
  &$i$ is the index representing a single slice.\\
  &$P$ is the resistive shear force per meter in the $z$-direction 
  (\si{\newton\per\meter}).\\
@@ -1138,7 +1139,9 @@ instance models.
     \right) + c'_i \cdot \ell_{\text{b},i} }{F_\text{S}} \) \\
   
   \hline Description & Mobile shear force as derived from the definition of the 
-  factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. \\
+  factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. 
+  The factor of safety $F_\text{S}$ is not indexed by $i$ because it is assumed 
+  to be constant for the entire slip surface (\aref{A_Constant}). \\
   &$i$ is the index representing a single slice.\\
   &$S$ is the mobile shear force per meter in the $z$-direction 
   (\si{\newton\per\meter}).\\
@@ -1508,7 +1511,12 @@ Equation &
 $W_i$ = $0.5(W_{i,1}+W_{i,2})$
 \\
 
-\hline Description &$i$ is the index representing a single slice.\\
+\hline Description &This equation is based on the assumption that the surface 
+and base of a slice are straight lines (\aref{A_Straight}). The soil dry unit 
+weight $\gamma$ and the soil saturated unit weight $\gamma_\text{Sat}$ are not 
+indexed by $i$ because the soil is assumed to be homogeneous, with constant 
+soil properties throughout (\aref{A_Homo}).\\
+&$i$ is the index representing a single slice.\\
 &$W$ is the weight per meter in the $z$-direction (\si{\newton\per\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}), defined in \ddref{DD_b}.\\
@@ -1571,7 +1579,9 @@ ${U_{\text{b,}i,2}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
 ${U_{\text{b,}i}}$ = $0.5({U_{\text{b,}i,1}} + {U_{\text{b,}i,2}})$
 \\
 
-\hline Description &$i$ is the index representing a single slice.\\
+\hline Description &This equation is based on the assumption that the base of a 
+slice is a straight line (\aref{A_Straight}).\\
+ &$i$ is the index representing a single slice.\\
  &${U_{\text{b}}}$ is the base hydrostatic force
  per meter in the $z$-direction (\si{\newton\per\meter}).\\
  &${\ell{}_{\text{b}}}$ is the base length of a slice in the 
@@ -1632,7 +1642,9 @@ ${U_{\text{t,}i,2}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
 $U_{\text{t,}i} = 0.5({U_{\text{t,}i,1}} + {U_{\text{t,}i,2}})$
 \\ 
 
-\hline Description &$i$ is the index representing a single slice.\\
+\hline Description &This equation is based on the assumption that the surface 
+of a slice is a straight line (\aref{A_Straight}).\\
+&$i$ is the index representing a single slice.\\
 &${U_{\text{t}}}$ is the surface hydrostatic force per meter in the 
 $z$-direction (\si{\newton\per\meter}).\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
@@ -1734,7 +1746,9 @@ Equation &
   y_{\text{slip,}i-1}}{x_{\text{slip,}i} - x_{\text{slip,}i-1}} \right) \)\\
 
 \hline
-Description &$i$ is the index representing a single slice.\\
+Description &This equation is based on the assumption that the base of a slice 
+is a straight line (\aref{A_Straight}).\\
+ &$i$ is the index representing a single slice.\\
  &$\alpha{}$ is the angle between the base of a slice and the horizontal 
  (\si{\degree}).\\
  &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
@@ -1779,7 +1793,9 @@ Equation &
   y_{\text{slope,}i-1}}{x_{\text{slope,}i} - x_{\text{slope,}i-1}} \right) \)\\
 
 \hline
-Description &$i$ is the index representing a single slice.\\
+Description &This equation is based on the assumption that the surface of a 
+slice is a straight line (\aref{A_Straight}).\\
+&$i$ is the index representing a single slice.\\
 &$\beta{}$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}).\\
 &${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
@@ -1863,7 +1879,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_lb}\\
 Equation & 
 ${\ell{}_{\text{b,}i}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 
-\hline Description &$i$ is the index representing a single slice.\\
+\hline Description &This equation is based on the assumption that the base of a 
+slice is a straight line (\aref{A_Straight}).\\
+&$i$ is the index representing a single slice.\\
 &${\ell{}_{\text{b}}}$ is the base length of a slice in the direction parallel 
 to the slope of the base (\si{\meter}).\\
 &$b$ is the width of the base of a slice in the \textit{x}-direction 
@@ -1905,7 +1923,9 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
 Equation & 
 ${\ell{}_{\text{s,}i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 
-\hline Description &$i$ is the index representing a single slice.\\
+\hline Description &This equation is based on the assumption that the surface 
+of a slice is a straight line (\aref{A_Straight}).\\
+&$i$ is the index representing a single slice.\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
 parallel to 
 the slope of the surface (\si{\meter}).\\
@@ -1949,7 +1969,9 @@ the slope of the surface (\si{\meter}).\\
 		$h_i$ = $0.5(({y_{\text{slope,}i}}-{y_{\text{slip,}i}}) + 
 		({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}))$\\
 		
-		\hline Description &$i$ is the index representing a single slice.\\
+		\hline Description &This equation is based on the assumption that the 
+		surface and base of a slice are straight lines (\aref{A_Straight}).\\
+		&$i$ is the index representing a single slice.\\
 		&$h$ is the height in the \textit{y}-direction from the base of a slice 
 		to the slope surface, at the \textit{x}-direction midpoint of the slice
 		(\si{\meter}).\\
@@ -2919,9 +2941,11 @@ $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\textit{const\_f}$ \\
  \right)\end{array}$
  \\
 
-\hline Description & $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
-associated with 
-the critical slip surface.\\
+\hline Description & The minimization algorithm must enforce the constraints on 
+the critical slip surface expressed in \aref{A_Concave} and 
+Table~\ref{TblOutputVar}.\\
+& $F_\text{S}^{\text{Min}}$ is the minimum factor of safety 
+associated with the critical slip surface.\\
 &$x_{\text{cs}}$ is the \textit{x}-ordinate of a point on the critical slip 
 surface (\si{\meter}).\\
 &$x_{\text{cs}}$ is the \textit{y}-ordinate of a point on the critical slip 
@@ -3093,6 +3117,13 @@ potential critical slip surfaces for the input slope (using \iref{IM_Min}).
 factor of safety for each potential critical slip surface to determine the 
 minimum factor of safety, corresponding to the critical slip surface (using 
 \iref{IM_Min}).
+
+\bmac{R3-R5 have never sat well with me because they read too much like an 
+algorithm. I always end up leaving them because I like how they separate the 
+calculation of factor of safety from the minimization of the factor of safety. 
+I still wonder if I should replace them with one all-encompassing requirement 
+like "Determine the critical slip surface corresponding to the minimum factor 
+of safety". What do you think?}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] Verify that 
 the factor of safety and critical slip surface satisfy the 
