@@ -166,6 +166,8 @@ their units.
 \hline
 \textbf{Symbol} & \textbf{Unit} & \textbf{Description} \\
 \hline
+$A$ & \si{\meter\squared}& area on which a force acts
+\\
 $b$ & \si{\meter}& width of the base of a slice in the \textit{x}-direction
 \\
 \textit{const\_f} & & boolean decision on which form of \textit{f} 
@@ -178,6 +180,8 @@ of the interslice normal to shear force proportionality constant
 \\
 ${C_{\text{den},i}}$ & \si{\newton}& expression used to calculate the 
 denominator of the interslice normal to shear force proportionality constant
+\\
+$F$ & \si{\newton}& force
 \\
 ${F_{x}}$ & \si{\newton} & $x$-component of force
 \\
@@ -748,7 +752,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R},
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_2D}] The
   slope and slip surface extends far into and out of the geometry 
   ($z$-coordinate). This implies plane strain conditions, making 2D
-  analysis appropriate. [\tref{TM_Eqm}]
+  analysis appropriate. [\tref{TM_Eqm}, \dref{GD_P}, \dref{GD_EffNormal}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Lin}] The
   effective normal stress is large enough that the resistive shear to
@@ -1087,10 +1091,11 @@ instance models.
   \varphi'_{i} \right) + c'_i \cdot \ell{}_{\text{b,}i} \) \\
   
   \hline Description & 
- Derived from the Mohr-Coulomb resistive shear strength, \tref{TM_Fmc}, by 
- multiplying both sides of the equation by the length of the slice in the shear 
- direction, which converts the stresses to forces per meter in the 
- $z$-direction.\\
+ Derived by substituting \ddref{DD_sigma} into the Mohr-Coulomb resistive shear 
+ strength, \tref{TM_Fmc}, and multiplying both sides of the equation by the 
+ area of the slice in the shear-$z$ plane. Since the slope is assumed to extend 
+ infinitely in the $z$-direction (\aref{A_2D}), the resulting forces are 
+ expressed per meter in the $z$-direction.\\
  &$i$ is the index representing a single slice.\\
  &$P$ is the resistive shear force per meter in the $z$-direction 
  (\si{\newton\per\meter}).\\
@@ -1176,9 +1181,11 @@ instance models.
 		
 		\hline Equation & \( N'_{i} = N_{i} - U_{\text{b,}i} \) \\
 	
-	\hline Description & Derived from \tref{TM_EffStress} by multiplying both 
-	sides of the equation by the length of the slice in the shear direction, 
-	which converts the stresses to forces per meter in the $z$-direction. 
+	\hline Description & Derived by substituting \ddref{DD_sigma} into 
+	\tref{TM_EffStress} and multiplying both sides of the equation by the area 
+	of the slice in the shear-$z$ plane. Since the slope is assumed to extend 
+	infinitely in the $z$-direction (\aref{A_2D}), the resulting forces are 
+	expressed per meter in the $z$-direction. 
 	\\
 	&$i$ is the index representing a single slice.\\
 	&$N'$ is the effective normal force per meter in the $z$-direction 
@@ -1429,7 +1436,7 @@ then we should also define T as effective mobile shear, right?}
  defined in \ddref{DD_W}. \\
  &$h$ is the height in the \textit{y}-direction from the base of a slice 
  to the slope surface, at the \textit{x}-direction midpoint of the slice 
- (\si{\meter}).\\
+ (\si{\meter}), defined in \ddref{DD_h}.\\
  &$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
  (\si{\newton\per\meter}), 
  defined in \ddref{DD_Ut}. \\
@@ -1807,7 +1814,7 @@ horizontal (\si{\degree}).\\
 \hline \rowcolor[gray]{0.9} Number&
 DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_b}\\
 
-\hline Label& \bf Base $x$-Direction Width of a Slice \\
+\hline Label& \bf Base \textit{x}-Direction Width of a Slice \\
 \hline Symbol& $b$\\
 \hline SI Units& \si{\meter}\\
 
@@ -1917,6 +1924,90 @@ the slope of the surface (\si{\meter}).\\
 
 % ------------------------------------------ %
 %               End DD ls        %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD h                   %
+% ------------------------------------------ %
+
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.6}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_h}\\
+		
+		\hline Label& \bf \textit{y}-Direction Height of a Slice \\
+		\hline Symbol& $h$\\
+		\hline SI Units& \si{\meter}\\
+		
+		\hline
+		Equation & 
+		$h_i$ = $0.5(({y_{\text{slope,}i}}-{y_{\text{slip,}i}}) + 
+		({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}))$\\
+		
+		\hline Description &$i$ is the index representing a single slice.\\
+		&$h$ is the height in the \textit{y}-direction from the base of a slice 
+		to the slope surface, at the \textit{x}-direction midpoint of the slice
+		(\si{\meter}).\\
+		&${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the 
+		slope (\si{\meter}).\\
+		&${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip 
+		surface (\si{\meter}).\\
+		
+		\hline Sources& \cite{FredlundKrahn}\\
+		
+		\hline Ref.\ By & \dref{GD_M}, \iref{IM_Lambda}\\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD h                     %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%               Begin DD sigma               %
+% ------------------------------------------ %
+
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.6}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_sigma}\\
+		
+		\hline Label& \bf Stress\\
+		\hline Symbol& $\sigma$\\
+		\hline SI Units& \si{\pascal}\\
+		
+		\hline
+		Equation & 
+		
+		\( \sigma = \frac{F}{A} \) \\
+		
+		\hline Description &$\sigma$ is the total stress on the soil mass, 
+		where stress is force divided by area (\si{\pascal}).\\
+		&$F$ is the force (\si{\newton}).\\
+		&$A$ is the area on which a force acts (\si{\meter\squared}).\\
+		
+		\hline Sources& \cite{Stress}\\
+		
+		\hline Ref.\ By & \dref{GD_P}, \dref{GD_EffNormal}\\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+
+% ------------------------------------------ %
+%               End DD sigma                     %
 % ------------------------------------------ %
 
 ~\newline
@@ -2154,13 +2245,13 @@ Output &
 &$F_\text{S}$ is the factor of safety.\\
 &$R$ is the resistive shear force without the influence of interslice forces 
 per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
-\dref{GD_R}\\
+\dref{GD_R}.\\
 &$\Psi$ is the second function used to convert shear without the influence of 
 interslice forces to shear with the influence of interslice forces, defined in 
-\dref{DD_Psi}\\
+\dref{DD_Psi}.\\
 &$T$ is the mobile shear force without the influence of interslice forces 
 per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
-\dref{GD_T}\\
+\dref{GD_T}.\\
 
 \hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
 
@@ -2585,22 +2676,22 @@ i=n $ \\
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
 &$b$ is the width of the base of a slice in the \textit{x}-direction 
-(\si{\meter}).\\
+(\si{\meter}), defined in \ddref{DD_b}.\\
 &$G$ is the interslice normal force per meter in the $z$-direction 
 (\si{\newton\per\meter}).\\
 &$H$ is the interslice water force per meter in the $z$-direction 
-(\si{\newton\per\meter}). \\
+(\si{\newton\per\meter}), defined in \ddref{DD_H}. \\
 &$\alpha$ is the angle between the base of a slice and the 
-horizontal (\si{\degree}). \\
+horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
 &$h$ is the height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint of the slice 
-(\si{\meter}).\\
+(\si{\meter}), defined in \ddref{DD_h}.\\
 &$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
-(\si{\newton\per\meter}).\\
+(\si{\newton\per\meter}), defined in \ddref{DD_Ut}.\\
 &$\beta$ is the angle between the surface of a slice and the 
-horizontal (\si{\degree}). \\
+horizontal (\si{\degree}), defined in \ddref{DD_Angles_beta}. \\
 &$f$ is the variation of the interslice normal to shear force ratio as a 
-function of distance in the $x$-direction. \\
+function of distance in the $x$-direction, defined in \ddref{DD_f}. \\
 &$\lambda$ is the proportionality constant.\\
 
 \hline Sources& \cite{ZhuEtAl2005}\\
@@ -2648,9 +2739,9 @@ Equation~(\ref{eq:lambda1}).
           \tan\left(\alpha_{i}\right)} \right] +
       {G}_{i-1} \left[ {h_{\text{z,}i-1}} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] - H_{i}\left[ h_{\text{z,}i} -
+        \right] - H_{i}\left[ h_{\text{z,w,}i} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,}i-1} +
+        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
         \right] + K_{\text{c}} W_{i} \frac{h_{i}}{2} -
       U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} -
@@ -2670,9 +2761,9 @@ external forces, respectively are zero.
 		\tan\left(\alpha_{i}\right)} \right] +
 	{G}_{i-1} \left[ {h_{\text{z,}i-1}} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] - H_{i}\left[ h_{\text{z,}i} -
+	\right] - H_{i}\left[ h_{\text{z,w,}i} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,}i-1} +
+	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
 	\right] -
 	U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \end{array} } 
@@ -2749,15 +2840,17 @@ $2\leq i \leq n-1$ \\
 (\si{\newton\per\meter}).\\
 &$F_\text{S}$ is the factor of safety.\\
 &$T$ is the mobile shear force  without the influence of interslice forces 
-per meter in the $z$-direction (\si{\newton\per\meter}).\\
+per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+\ddref{GD_T}.\\
 &$R$ is the resistive shear force  without the influence of interslice forces 
-per meter in the $z$-direction (\si{\newton\per\meter}).\\
+per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+\ddref{GD_R}.\\
 &$\Phi$ is the first function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
-interslice forces.\\
+interslice forces, defined in \ddref{DD_Phi}.\\
 &$\Psi$ is the second function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
-interslice forces.\\
+interslice forces, defined in \ddref{DD_Psi}.\\
 
 
 \hline Sources& \cite{ZhuEtAl2005}\\
