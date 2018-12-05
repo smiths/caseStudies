@@ -166,7 +166,7 @@ their units.
 \hline
 \textbf{Symbol} & \textbf{Unit} & \textbf{Description} \\
 \hline
-$b$ & \si{\meter}& width of the base of a slice in the \textit{x} direction
+$b$ & \si{\meter}& width of the base of a slice in the \textit{x}-direction
 \\
 \textit{const\_f} & & boolean decision on which form of \textit{f} 
 the user desires: constant if true, or a half-sine if false
@@ -191,9 +191,11 @@ $F_\text{S}$ & & factor of safety
 $F_\text{S}^{\text{Min}}$ & & minimum factor of safety associated with the 
 critical slip surface
 \\
-$G$ & \si{\newton\per\meter} & interslice normal force
+$G$ & \si{\newton\per\meter} & interslice normal force per meter in the 
+$z$-direction
 \\
-$H$ & \si{\newton\per\meter} & interslice water force
+$H$ & \si{\newton\per\meter} & interslice water force per meter in the 
+$z$-direction
 \\
 $h$ &  \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint of the slice
@@ -210,34 +212,40 @@ ${K_{\text{c}}}$ & & horizontal seismic coefficient
 \\
 $M$ & N \si{\meter}& moment
 \\
-$N$ & \si{\newton\per\meter} & normal force
+$N$ & \si{\newton\per\meter} & normal force per meter in the $z$-direction
 \\
-$N'$ &\si{\newton\per\meter} & effective normal force
+$N'$ &\si{\newton\per\meter} & effective normal force per meter in the 
+$z$-direction
 \\
 $n$ & & the total number of slices
 \\
-$P$ & \si{\newton\per\meter} & resistive shear force
+$P$ & \si{\newton\per\meter} & resistive shear force per meter in the 
+$z$-direction
 \\
-$Q$ & \si{\newton\per\meter} & imposed surface load or external force
+$Q$ & \si{\newton\per\meter} & imposed surface load or external force per meter 
+in the $z$-direction
 \\
 $R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
-interslice forces
+interslice forces per meter in the $z$-direction
 \\
-$S$ & \si{\newton\per\meter} & mobilized shear force
+$S$ & \si{\newton\per\meter} & mobilized shear force per meter in the 
+$z$-direction
 \\
 $T$ & \si{\newton\per\meter} & mobilized shear force without the influence of 
-interslice 
-forces
+interslice forces per meter in the $z$-direction
 \\
-${U_{\text{b}}}$ & \si{\newton\per\meter} & base hydrostatic force
+${U_{\text{b}}}$ & \si{\newton\per\meter} & base hydrostatic force per meter in 
+the $z$-direction
 \\
-${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force
+${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force per meter 
+in the $z$-direction
 \\
 $u$ &\si{\pascal} & pore pressure from water within the soil
 \\
-$W$ & \si{\newton\per\meter} & self-weight
+$W$ & \si{\newton\per\meter} & self-weight per meter in the $z$-direction
 \\
-$X$ & \si{\newton\per\meter} & interslice shear force
+$X$ & \si{\newton\per\meter} & interslice shear force per meter in the 
+$z$-direction
 \\
 $x$ & \si{\meter}& \textit{x}-ordinate in the Cartesian coordinate system
 \\
@@ -593,8 +601,8 @@ The Physical System (PS) of \progname{}, as shown in Figure~\ref{Fig_PhysSyst},
 includes the following elements:
 
 \begin{itemize}
-\item[PS1:] A slope comprised of one or more layers of soil.
-\item[PS2:] A water table within the soil layers, which may or may not exist.
+\item[PS1:] A slope comprised of one layer of soil.
+\item[PS2:] A water table, which may or may not exist.
 \end{itemize}
 
 \begin{figure}[h!]
@@ -717,10 +725,9 @@ likely change [LC], in which the respective assumption is used.
 of safety is assumed to be constant across the entire slip surface. 
 [\dref{GD_MobShear}, \iref{IM_FS}, \iref{IM_E}]
 
-\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The
-  different layers of the soil are homogeneous, with consistent soil
-  properties throughout. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R}, 
-  \dref{GD_T}, \lcref{LC_inhomogeneous}]
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Homo}] The soil mass 
+is homogeneous, with consistent soil properties throughout. [\dref{GD_P}, 
+\dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}, \lcref{LC_inhomogeneous}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Saturated}] The soil 
 properties are independent of dry or saturated conditions, with the exception 
@@ -728,7 +735,7 @@ of unit weight. [\dref{GD_P}, \dref{GD_MobShear}, \dref{GD_R},
 \dref{GD_T}]
 
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Isotropic}]
-  Soil layers are treated as if they have isotropic properties. [\dref{GD_P}, 
+  The soil mass is treated as if it has isotropic properties. [\dref{GD_P}, 
   \dref{GD_MobShear}, \dref{GD_R}, \dref{GD_T}]
   
 \item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_Base}]
@@ -793,8 +800,10 @@ on.
   \hline Description & $F_\text{S}$ is the factor of safety, or stability 
   metric of the 
   slope.\\
-  & $S$ is the mobile shear force (\si{\newton\per\meter}).\\
-  & $P$ is the resistive shear force (\si{\newton\per\meter}). \\
+  & $S$ is the mobile shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
+  & $P$ is the resistive shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
  
   \hline Source & \cite{FredlundKrahn}\\
 
@@ -957,21 +966,28 @@ instance models.
   direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
   &$i$ is the index representing a single slice.\\
-  &$N$ is the normal force (\si{\newton\per\meter}). \\
-  &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
-  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+  &$N$ is the normal force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$W$ is the weight per meter in the $z$-direction (\si{\newton\per\meter}), 
+  defined in \ddref{DD_W}. \\
+  &$X$ is the interslice shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
+  (\si{\newton\per\meter}), 
   defined in \ddref{DD_Ut}. \\
   &$\beta$ is the angle between the surface of a slice and the 
   horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
-  &$Q$ is the external force (\si{\newton\per\meter}). \\
+  &$Q$ is the external force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
   &$\omega$ is the angle between the imposed surface load acting into 
   the surface and the vertical (\si{\degree}). \\
   &$\alpha$ is the angle between the base of a slice and the 
   horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
   &$K_\text{c}$ is the seismic coefficient. \\
-  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
-  &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+  &$G$ is the interslice normal force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force per meter in the $z$-direction 
+  (\si{\newton\per\meter}), defined in 
   \ddref{DD_H}. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
@@ -1016,21 +1032,28 @@ instance models.
   direction. Force equilibrium is derived from the free body diagram of 
   Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
   &$i$ is the index representing a single slice.\\
-  &$S$ is the mobile shear force (\si{\newton\per\meter}). \\
-  &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
-  &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
-  &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+  &$S$ is the mobile shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$W$ is the weight per meter in the $z$-direction (\si{\newton\per\meter}), 
+  defined in \ddref{DD_W}. \\
+  &$X$ is the interslice shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
+  (\si{\newton\per\meter}), 
   defined in \ddref{DD_Ut}. \\
   &$\beta$ is the angle between the surface of a slice and the 
   horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
-  &$Q$ is the external force (\si{\newton\per\meter}). \\
+  &$Q$ is the external force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
   &$\omega$ is the angle between the imposed surface load acting into 
   the surface and the vertical (\si{\degree}). \\
   &$\alpha$ is the angle between the base of a slice and the 
   horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
   &$K_\text{c}$ is the seismic coefficient. \\
-  &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
-  &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+  &$G$ is the interslice normal force per meter in the $z$-direction 
+  (\si{\newton\per\meter}). \\
+  &$H$ is the interslice water force per meter in the $z$-direction 
+  (\si{\newton\per\meter}), defined in 
   \ddref{DD_H}. \\
 
   \hline Source & \cite{ZhuEtAl2005}\\
@@ -1069,8 +1092,10 @@ instance models.
  direction, which converts the stresses to forces per meter in the 
  $z$-direction.\\
  &$i$ is the index representing a single slice.\\
- &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
- &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
+ &$P$ is the resistive shear force per meter in the $z$-direction 
+ (\si{\newton\per\meter}).\\
+ &$N'$ is the effective normal force per meter in the $z$-direction 
+ (\si{\newton\per\meter}).\\
  &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
  &$c'$ is the effective cohesion (\si{\pascal}).\\
  &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
@@ -1110,9 +1135,12 @@ instance models.
   \hline Description & Mobile shear force as derived from the definition of the 
   factor of safety in \tref{TM_FS}, and the definition of $P$ in \dref{GD_P}. \\
   &$i$ is the index representing a single slice.\\
-  &$S$ is the mobile shear force (\si{\newton\per\meter}).\\
-  &$P$ is the resistive shear force (\si{\newton\per\meter}).\\
-  &$N'$ is the effective normal force (\si{\newton\per\meter}).\\
+  &$S$ is the mobile shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
+  &$P$ is the resistive shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
+  &$N'$ is the effective normal force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
   &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
   &$c'$ is the effective cohesion (\si{\pascal}).\\
   &$\ell_\text{b}$ is the width of the base of a slice in the \textit{x} 
@@ -1153,9 +1181,12 @@ instance models.
 	which converts the stresses to forces per meter in the $z$-direction. 
 	\\
 	&$i$ is the index representing a single slice.\\
-	&$N'$ is the effective normal force (\si{\newton\per\meter}).\\
-	&$N$ is the normal force (\si{\newton\per\meter}).\\
-	&$U_\text{b}$ is the base hydrostatic force (\si{\newton\per\meter}), 
+	&$N'$ is the effective normal force per meter in the $z$-direction 
+	(\si{\newton\per\meter}).\\
+	&$N$ is the normal force per meter in the $z$-direction 
+	(\si{\newton\per\meter}).\\
+	&$U_\text{b}$ is the base hydrostatic force per meter in the $z$-direction 
+	(\si{\newton\per\meter}), 
 	defined in \ddref{DD_Ub}.\\
 	
 	\hline Source & \cite{ZhuEtAl2005}\\
@@ -1203,21 +1234,25 @@ instance models.
 		\hline Description &$i$ is the index representing a single slice.\\
 		&$R$ is the resistive shear force without the influence of interslice 
 		forces
-		(\si{\newton\per\meter}).\\
-		&$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
+		per meter in the $z$-direction (\si{\newton\per\meter}).\\
+		&$W$ is the weight per meter in the $z$-direction 
+		(\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
 		&${U_{\text{t}}}$ is the surface hydrostatic force 
-		(\si{\newton\per\meter}), defined in \ddref{DD_Ut}.\\
+		per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+		\ddref{DD_Ut}.\\
 		&$\beta{}$ is the angle between the surface of a slice and the 
 		horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}.\\
 		&$\alpha{}$ is the angle between the base of a slice and the 
 		horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
-		&$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+		&$H$ is the interslice water force per meter in the $z$-direction 
+		(\si{\newton\per\meter}), defined in 
 		\ddref{DD_H}.\\
 		&${U_{\text{b}}}$ is the base hydrostatic force 
-		(\si{\newton\per\meter}), defined in \ddref{DD_Ub}.\\
+		per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+		\ddref{DD_Ub}.\\
 		&$\varphi{}'$ is the effective angle of friction (\si{\degree}).\\
 		&$c'$ is the effective cohesion (Pa).\\
-		&$b$ is the width of the base of a slice in the \textit{x} direction 
+		&$b$ is the width of the base of a slice in the \textit{x}-direction 
 		(\si{\meter}), defined in \ddref{DD_b}.\\
 		&This equation for $R$ arises as part of the derivation for 
 		\iref{IM_FS}, so that derivation should be consulted for information 
@@ -1271,15 +1306,18 @@ then we should also define T as effective mobile shear, right?}
 		
 		\hline Description &$i$ is the index representing a single slice.\\ 
 		&$T$ is the mobilized shear force without the influence of interslice 
-		forces (\si{\newton\per\meter}).\\
-		&$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
+		forces per meter in the $z$-direction (\si{\newton\per\meter}).\\
+		&$W$ is the weight per meter in the $z$-direction 
+		(\si{\newton\per\meter}), defined in \ddref{DD_W}.\\
 		&${U_{\text{t}}}$ is the surface hydrostatic force 
-		(\si{\newton\per\meter}), defined in \ddref{DD_Ut}.\\ 
+		per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+		\ddref{DD_Ut}.\\ 
 		&$\beta{}$ is the angle between the surface of a slice and the 
 		horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}.\\
 		&$\alpha{}$ is the angle between the base of a slice and the horizontal 
 		(\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
-		&$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+		&$H$ is the interslice water force per meter in the $z$-direction 
+		(\si{\newton\per\meter}), defined in 
 		\ddref{DD_H}.\\
 		&This equation for $T$ arises as part of the derivation for 
 		\iref{IM_FS}, so that derivation should be consulted for information 
@@ -1318,8 +1356,10 @@ then we should also define T as effective mobile shear, right?}
 
   \hline Description & Mathematical representation of the primary assumption 
   for the Morgenstern-Price method (\aref{A_Base}).\\
-  &$X$ is the interslice shear force (\si{\newton\per\meter}).\\
-  &$G$ is the interslice normal force (\si{\newton\per\meter}).\\
+  &$X$ is the interslice shear force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
+  &$G$ is the interslice normal force per meter in the $z$-direction 
+  (\si{\newton\per\meter}).\\
   &$\lambda$ is the proportionality constant.\\
   &$f$ is the variation of the interslice normal to shear force ratio as a 
   function of distance in the $x$-direction, defined in \ddref{DD_f}. \\
@@ -1369,28 +1409,34 @@ then we should also define T as effective mobile shear, right?}
  Force equilibrium is derived from the free body diagram of 
  Figure~\ref{Fig_Forces} in Section~\ref{sec_system}.\\
  &$i$ is the index representing a single slice.\\
- &$G$ is the interslice normal force (\si{\newton\per\meter}). \\
+ &$G$ is the interslice normal force per meter in the $z$-direction 
+ (\si{\newton\per\meter}). \\
  &$h_\text{z}$ is the height in the \textit{y}-direction from the base of a 
  slice to the center of the slice (\si{\meter}).\\
- &$b$ is the width of the base of a slice in the \textit{x} direction 
+ &$b$ is the width of the base of a slice in the \textit{x}-direction 
  (\si{\meter}), defined in \ddref{DD_b}.\\
  &$\alpha$ is the angle between the base of a slice and the 
  horizontal (\si{\degree}), defined in \ddref{DD_Angles_alpha}. \\
- &$H$ is the interslice water force (\si{\newton\per\meter}), defined in 
+ &$H$ is the interslice water force per meter in the $z$-direction 
+ (\si{\newton\per\meter}), defined in 
  \ddref{DD_H}. \\
  &$h_\text{z,w}$ is the height in the \textit{y}-direction from the base of a 
  slice halfway to the water table (\si{\meter}).\\
- &$X$ is the interslice shear force (\si{\newton\per\meter}). \\
+ &$X$ is the interslice shear force per meter in the $z$-direction 
+ (\si{\newton\per\meter}). \\
  &$K_\text{c}$ is the seismic coefficient. \\
- &$W$ is the weight (\si{\newton\per\meter}), defined in \ddref{DD_W}. \\
+ &$W$ is the weight per meter in the $z$-direction (\si{\newton\per\meter}), 
+ defined in \ddref{DD_W}. \\
  &$h$ is the height in the \textit{y}-direction from the base of a slice 
  to the slope surface, at the \textit{x}-direction midpoint of the slice 
  (\si{\meter}).\\
- &$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}), 
+ &$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
+ (\si{\newton\per\meter}), 
  defined in \ddref{DD_Ut}. \\
  &$\beta$ is the angle between the surface of a slice and the 
  horizontal (\si{\degree}), defined in \ddref{DD_Angles_Beta}. \\
- &$Q$ is the external force (\si{\newton\per\meter}). \\
+ &$Q$ is the external force per meter in the $z$-direction 
+ (\si{\newton\per\meter}). \\
  &$\omega$ is the angle between the imposed surface load acting into 
  the surface and the vertical (\si{\degree}). \\
 
@@ -1456,8 +1502,8 @@ $W_i$ = $0.5(W_{i,1}+W_{i,2})$
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
-&$W$ is the weight (\si{\newton\per\meter}).\\
-&$b$ is the width of the base of a slice in the \textit{x} direction 
+&$W$ is the weight per meter in the $z$-direction (\si{\newton\per\meter}).\\
+&$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}), defined in \ddref{DD_b}.\\
 &${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
@@ -1520,7 +1566,7 @@ ${U_{\text{b,}i}}$ = $0.5({U_{\text{b,}i,1}} + {U_{\text{b,}i,2}})$
 
 \hline Description &$i$ is the index representing a single slice.\\
  &${U_{\text{b}}}$ is the base hydrostatic force
- (\si{\newton\per\meter}).\\
+ per meter in the $z$-direction (\si{\newton\per\meter}).\\
  &${\ell{}_{\text{b}}}$ is the base length of a slice in the 
 direction parallel to the slope of the base (\si{\meter}), defined in 
 \ddref{DD_lb}.\\
@@ -1580,7 +1626,8 @@ $U_{\text{t,}i} = 0.5({U_{\text{t,}i,1}} + {U_{\text{t,}i,2}})$
 \\ 
 
 \hline Description &$i$ is the index representing a single slice.\\
-&${U_{\text{t}}}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&${U_{\text{t}}}$ is the surface hydrostatic force per meter in the 
+$z$-direction (\si{\newton\per\meter}).\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
 parallel to the slope of the surface (\si{\meter}), defined in \ddref{DD_ls}.\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
@@ -1633,7 +1680,8 @@ DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_H}\\
 \\
 
 \hline Description &$i$ is the index representing a single slice.\\
-&$H$ is the interslice water force (\si{\newton\per\meter}).\\
+&$H$ is the interslice water force per meter in the $z$-direction 
+(\si{\newton\per\meter}).\\
 &${y_{\text{slope}}}$ is the \textit{y}-ordinate of a point on the slope 
 (\si{\meter}).\\
 &${y_{\text{slip}}}$ is the \textit{y}-ordinate of a point on a slip surface 
@@ -1768,7 +1816,7 @@ Equation &
 $b_i$ = ${x_{\text{slip,}i}}-{x_{\text{slip,}i-1}}$\\
 
 \hline Description &$i$ is the index representing a single slice.\\
-&$b$ is the width of the base of a slice in the \textit{x} direction 
+&$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}).\\
 &${x_{\text{slip}}}$ is the \textit{x}-ordinate of a point on a slip surface 
 (\si{\meter}).\\
@@ -1811,7 +1859,7 @@ ${\ell{}_{\text{b,}i}}$ = $b_{i}\sec\left(\alpha{}_{i}\right)$\\
 \hline Description &$i$ is the index representing a single slice.\\
 &${\ell{}_{\text{b}}}$ is the base length of a slice in the direction parallel 
 to the slope of the base (\si{\meter}).\\
-&$b$ is the width of the base of a slice in the \textit{x} direction 
+&$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}), defined in \ddref{DD_b}.\\
 &$\alpha{}$ is the angle between the base of a slice and the horizontal 
 (\si{\degree}), defined in \ddref{DD_Angles_alpha}.\\
@@ -1854,7 +1902,7 @@ ${\ell{}_{\text{s,}i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
 &${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
 parallel to 
 the slope of the surface (\si{\meter}).\\
-&$b$ is the width of the base of a slice in the \textit{x} direction 
+&$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}), defined in \ddref{DD_b}.\\
 &$\beta{}$ is the angle between the surface of a slice and the horizontal 
 (\si{\degree}), defined in \ddref{DD_Angles_beta}.\\
@@ -2105,12 +2153,14 @@ Output &
 &$n$ is the total number of slices.\\
 &$F_\text{S}$ is the factor of safety.\\
 &$R$ is the resistive shear force without the influence of interslice forces 
-(\si{\newton\per\meter}), defined in \dref{GD_R}\\
+per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+\dref{GD_R}\\
 &$\Psi$ is the second function used to convert shear without the influence of 
 interslice forces to shear with the influence of interslice forces, defined in 
 \dref{DD_Psi}\\
 &$T$ is the mobile shear force without the influence of interslice forces 
-(\si{\newton\per\meter}), defined in \dref{GD_T}\\
+per meter in the $z$-direction (\si{\newton\per\meter}), defined in 
+\dref{GD_T}\\
 
 \hline Sources& \cite{ZhuEtAl2005}, \cite{Karchewski2012}\\
 
@@ -2534,16 +2584,19 @@ i=n $ \\
 
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
-&$b$ is the width of the base of a slice in the \textit{x} direction 
+&$b$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}).\\
-&$G$ is the interslice normal force (\si{\newton\per\meter}).\\
-&$H$ is the interslice water force (\si{\newton\per\meter}). \\
+&$G$ is the interslice normal force per meter in the $z$-direction 
+(\si{\newton\per\meter}).\\
+&$H$ is the interslice water force per meter in the $z$-direction 
+(\si{\newton\per\meter}). \\
 &$\alpha$ is the angle between the base of a slice and the 
 horizontal (\si{\degree}). \\
 &$h$ is the height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint of the slice 
 (\si{\meter}).\\
-&$U_\text{t}$ is the surface hydrostatic force (\si{\newton\per\meter}).\\
+&$U_\text{t}$ is the surface hydrostatic force per meter in the $z$-direction 
+(\si{\newton\per\meter}).\\
 &$\beta$ is the angle between the surface of a slice and the 
 horizontal (\si{\degree}). \\
 &$f$ is the variation of the interslice normal to shear force ratio as a 
@@ -2692,12 +2745,13 @@ $2\leq i \leq n-1$ \\
 
 \hline Description & $i$ is the index representing a single slice.\\
 &$n$ is the total number of slices.\\
-&$G$ is the interslice normal force (\si{\newton\per\meter}).\\
+&$G$ is the interslice normal force per meter in the $z$-direction 
+(\si{\newton\per\meter}).\\
 &$F_\text{S}$ is the factor of safety.\\
 &$T$ is the mobile shear force  without the influence of interslice forces 
-(\si{\newton\per\meter}).\\
+per meter in the $z$-direction (\si{\newton\per\meter}).\\
 &$R$ is the resistive shear force  without the influence of interslice forces 
-(\si{\newton\per\meter}).\\
+per meter in the $z$-direction (\si{\newton\per\meter}).\\
 &$\Phi$ is the first function used to convert shear without the 
 influence of interslice forces to shear with the influence of 
 interslice forces.\\
@@ -2835,14 +2889,12 @@ is intended to provide a feel for a common scenario.
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
   $\{(x_{\text{wt}},y_{\text{wt}})\}$ (*) & At least two ordered pairs must be 
-  specified. 
-  Starts and ends on the same $x$ values as soil layers.  
+  specified. Starts and ends on the same $x$ values as soil mass.  
   & N/A & 10\% \\
   $\{(x_{\text{slope}},y_{\text{slope}})\}$ & At least two ordered pairs 
   must be 
-  specified. 
-  $y$ values of consecutive vertices are always increasing or always 
-  decreasing. All layers start and end on the same $x$ values. & N/A & 10\% \\
+  specified. $y$ values of consecutive vertices are always increasing or always 
+  decreasing. & N/A & 10\% \\
   ${x_{\text{slip}}^{\text{maxExt}}}$ & must be greater than or equal to the 
   minimum $x$ value of the slope and less than or equal to the maximum $x$ 
   value of the slope & N/A & 10\% \\
@@ -2917,7 +2969,7 @@ requirements, the qualities that the software is expected to exhibit.
     \refstepcounter{tablenum}  \label{Table:Inputs}
     \textbf{Unit} & \textbf{Description}\\ \midrule
     $\left(x,y\right)$ & $\text{m}$ & $x$ and $y$-coordinates for vertices
-    of the slope layers, for the water table if one exists, and for potential 
+    of the soil mass, for the water table if one exists, and for potential 
     entry and exit points of a slip surface.\\
     $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
@@ -3029,9 +3081,8 @@ recorded in traceability matrices in the SRS and module guide.
 
 \noindent \begin{itemize}
 \item[\refstepcounter{lcnum}\lthelcnum \label{LC_inhomogeneous}:] The system 
-currently assumes the different layers of the soil are homogeneous 
-(\aref{A_Homo}). In the future, implementation can be added for inconsistent 
-soil properties throughout.
+currently assumes the soil mass is homogeneous (\aref{A_Homo}). In the future, 
+implementation can be added for inconsistent soil properties throughout.
  
 \item[\refstepcounter{lcnum}\lthelcnum \label{LC_Seismic}:] The system 
 currently assumes no seismic force (\aref{A_Seismic}). In the future, 
