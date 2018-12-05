@@ -12,12 +12,14 @@
 }
 \usepackage[round]{natbib}
 
+\newcommand{\progname}{Tamias2D}
+
 \input{../../Comments}
 
 \begin{document}
 
-\title{Project Title: Unit Verification and Validation Plan} 
-\author{Author Name}
+\title{Tamias2D: Unit Verification and Validation Plan} 
+\author{Oluwaseun Owojaiye}
 \date{\today}
 	
 \maketitle
@@ -29,7 +31,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
+Nov. 29, 2018 & 1.0 & Initial Draft\\
 Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
@@ -37,7 +39,7 @@ Date 2 & 1.1 & Notes\\
 ~\newpage
 
 \section{Symbols, Abbreviations and Acronyms}
-
+See MIS documentation at \url{https://github.com/smiths/caseStudies/blob/gamephy_MIS/CaseStudies/gamephys/docs/Design/MIS/GamePhysicsMIS.pdf} \\
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{l l} 
   \toprule		
@@ -47,7 +49,7 @@ Date 2 & 1.1 & Notes\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+%\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
 
 \newpage
 
@@ -61,6 +63,19 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
+This document describes the unit verification and validation (V\&V) plan for \progname, a 2D Physics Game Library. It is intended to be a refinement of the tool's system (V\&V) plan by providing test cases based on the modules in the library's module interface specification (MIS) document. The MIS, along with the full documentation of \progname{}, can be found at: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}.The unit V\&V plan starts by providing general information about the library Section \ref{GeneralInfo}. Then, Section \ref{Plan} provides additional details 
+
+about the plan, which include information about the V\&V team, automated 
+
+testing and verification tools and non-testing based verification. This is 
+
+followed by the unit test description in Section \ref{UnitTestDescription}, 
+
+which consists of tests for the library's functional and nonfunctional 
+
+requirements, categorized based on the modules in the MIS, and traceability 
+
+between the test cases and modules.
 This document ... \wss{provide an introductory blurb and roadmap of the
   unit V\&V plan}
 
@@ -74,169 +89,312 @@ This document ... \wss{provide an introductory blurb and roadmap of the
 
 \section{Plan}
 	
-\subsection{Software Description}
+\subsection{Verification and Validation Team}
 
-\subsection{Test Team}
+Member(s) of the verification and validation team will include myself, Olu.
 
-\wss{Probably just you.  :-)}
+\subsection{Automated Testing and Verification Tools}
+PyTest framework will be used for automated unit
+testing. A script with all the testcases covering all \progname{} modules  will be created by me. 
 
-\subsection{Automated Testing Approach}
-
-\subsection{Verification Tools}
-
-\wss{Thoughts on what tools to use, such as the following: unit testing
-  framework, valgrind, static analyzer, make, continuous integration, test
-  coverage tool, etc.}
-
-% \subsection{Testing Schedule}
-		
-% See Gantt Chart at the following url ...
 
 \subsection{Non-Testing Based Verification}
+Not applicable for \progname
 
-\wss{List any approaches like code inspection, code walkthrough, symbolic
-  execution etc.  Enter not applicable if that is the case.}
+%\wss{List any approaches like code inspection, code walkthrough, symbolic
+%  execution etc.  Enter not applicable if that is the case.}
 
-\section{System Test Description}
+\section{Unit Test Description}
+The test cases discussed in this section are based on the Module Interface Specification(MIS) which can be found at \url{https://github.com/smiths/caseStudies/blob/gamephy_MIS/CaseStudies/gamephys/docs/Design/MIS/GamePhysicsMIS.pdf}. Each test case listed covers for all applicable functions that need to be tested in each module to ensure that \progname{} functions as intended based on the requirements of the software.
 	
 \subsection{Tests for Functional Requirements}
 
-\subsubsection{Area of Testing1}
+\subsubsection{Body Module}
 		
-\paragraph{Title for Test}
-
+\paragraph{}
+Body module is responsible for storing the physical properties of an object such as mass, position, rotation properties, velocity, e.t.c and provides operations on rigid bodies such as setting the mass, moment, applying force e.t.c.
 \begin{enumerate}
+	
 
-\item{test-id1\\}
+\item{UTC1} {: Validate apply\_force1 \\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+Type: Automatic.
 					
+Initial State: Initial force on a body is Vec2(0, 0)
+					
+Input: b.apply\_force(Vec2(10, 6))
+					
+Output: New total force applied to body is Vec2(10, 6)
+					
+How test will be performed: PyTest 
+					
+\item{UTC2}{: Validate apply\_force2\\}
+
+Type: Automatic
+					
+Initial State: Vec2(10, 6)
+					
+Input: b.apply\_force (Vec2(-20, 2))
+					
+Output: New total force is Vec2(-10, 8)
+
+\item{UTC3}{: Validate apply\_force3\\}
+
+Type: Automatic
+
+Initial State: Vec2(-2, -1)
+
+Input: b.apply\_force (Vec2(-5, -8))
+
+Output: New total force is Vec2(-7, -8)
+					
+How test will be performed: PyTest
+
+\item{UTC4}{: Validate apply\_torque\\}
+
+Type: Automatic
+
+Initial State: 0
+
+Input: apply\_torque(100)
+
+Output: self.torque=100
+
+How test will be performed: PyTest
+
+\item{UTC5}{: Validate set\_space\\}
+
+Type: Automatic
+
 Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+Input: body.set\_space(space)
 
+Output: Expected result of(space is body.space): True
+
+How test will be performed: PyTest\\
+
+{-Not sure how to unit test set\_space, each body has a reference to space, and it accesses the gravity in space.\\
+-update: updates parameters after a cycle\\}
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Vector Module}
 
-...
+\paragraph{}
+Vector module provides operations such as addition, scalar and vector multiplication, dot and cross products e.t.c.
+\begin{enumerate}
+	
+	\item{UTC6}{: Validate vector addition \\}
+	
+	Type: Automatic.
+	
+	Initial State: 
+	
+	Input: Vec2(2,5) + Vec2(1,1)
+	
+	Output: Vec2(3,6)
+	
+	How test will be performed: PyTest 
+	
+	\item{UTC7}{: Validate vector subtraction\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Vec2(2,5) - Vec2(1,1)
+	
+	Output: New total force is Vec2(-1, 4)
+	
+	\item{UTC8}{: Validate scalar multiplication\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: apply force Vec(2, 4) * 2
+	
+	Output: New total force is Vec2(4, 8)
+	
+	How test will be performed: PyTest
+	
+	\item{UTC9}{: Validate scalar division\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: apply force Vec(2, 4) / 2
+	
+	Output: New total force is Vec2(1, 2)
+	
+	How test will be performed: PyTest
+	
+	\item{UTC10}{: Validate vector magnitude\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Velocity = Vec(2, 0)
+	
+	Output: magnitude = V.mag() = 2.0
+	
+	How test will be performed: PyTest\\
+	Ref: \url{https://www.omnicalculator.com/math/distance}
+	
+	\item{UTC11}{: Validate vector dot product\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Vec2.dot(Vec2(1,2), Vec2(2,1))
+	
+	Output: magnitude = 4.0
+	
+	How test will be performed: PyTest
+	
+\end{enumerate}
+
+\subsubsection{Shape Module}
+
+\paragraph{}
+Shape module is responsible for storing the surface properties of an object such as restitutionand provides operations on shapes, such as setting the coefficient of restitution. e.t.c.
+\begin{enumerate}
+	
+	
+	\item{UTC12} {: Validate set\_angle \\}
+	
+	Type: Automatic.
+	
+	Initial State: 
+	
+	Input: shape.set\_angle(45)
+	
+	Output: self.angle = 45
+	
+	How test will be performed: PyTest 
+	
+	\item{UTC13}{: Validate set\_position\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: shape.set\_pos(Vec2(2,2))
+	
+	Output: Vec2(2,2)
+	
+	\item{UTC14}{: Validate get\_vertices\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: shape.get\_verts(Box(Vec2(0,0), Vec2(100,100), 0)) 
+	
+	Output: 4
+	
+	How test will be performed: PyTest
+	
+
+\end{enumerate}
+\subsubsection{Space Module}
+
+\paragraph{}
+The space module is responsible for all the rigid bodies and shape interaction. It is the container for simulation.
+\begin{enumerate}
+	
+	
+	\item{UTC15} {: Validate set\_gravity \\}
+	
+	Type: Automatic.
+	
+	Initial State: 
+	
+	Input: space.set\_gravity(Vec2(0, 9.8))
+	
+	Output: (Vec2(0, 9.8)
+	
+	How test will be performed: PyTest 
+	
+	\item{UTC16}{: Validate add\_body\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: space.add\_body(b)
+	
+	Output: len(self.bodies) = 1
+	
+
+	\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+Non-Functional testing will not be required for unit testing. This will be covered in section 5.2 of the System Verification and Validation document located at: 
 
-\begin{enumerate}
-
-\item{test-id1\\}
-
-Type: 
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
-
-\end{enumerate}
-
-\subsubsection{Area of Testing2}
-
-...
+\url{https://github.com/smiths/caseStudies/blob/gamephy_SysVnVPlan/CaseStudies/gamephys/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf.pdf}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-% \section{Tests for Proof of Concept}
 
-% \subsection{Area of Testing1}
+\begin{table} [h!]
+	
+	\centering
+	
+	\begin{tabular}{|c|c|}
 		
-% \paragraph{Title for Test}
-
-% \begin{enumerate}
-
-% \item{test-id1\\}
-
-% Type: Functional, Dynamic, Manual, Static etc.
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: 
-					
-% How test will be performed: 
-					
-% \item{test-id2\\}
-
-% Type: Functional, Dynamic, Manual, Static etc.
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: 
-					
-% How test will be performed: 
-
-% \end{enumerate}
-
-% \subsection{Area of Testing2}
-
-% ...
-				
-\section{Unit Testing Plan}
+		\hline	
 		
-\wss{Unit testing plans for internal functions and, if appropriate, output
-  files}
+		\textbf{Test Case ID} & \textbf{Module}\\
+		
+		\hline 
+		
+	
+		UTC1-UTC5& Body Module\\ \hline
+		
+		UTC6 - UTC11& Vector  Module\\ \hline
+		
+		UTC12 - UTC14&  Shape Module\\ \hline
+		
+		UTC15 - & Module\\ \hline
+		
+		T5& Module\\ \hline
+		
+	\end{tabular}
+	
+	\caption{Traceability Between Test Cases and Modules}
+	
+	\label{Table:Traceability} 
+	
+\end{table}
 
+~\newpage
 \bibliographystyle{plainnat}
 
-\bibliography{SRS}
+\bibliography {../../../refs/References}
 
-\newpage
+~\newpage
+
+
 
 \section{Appendix}
 
-This is where you can place additional information.
+
+
+This section provides additional content related to this document.
+
+
 
 \subsection{Symbolic Parameters}
 
-The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
 
-\subsection{Usability Survey Questions?}
 
-This is a section that would be appropriate for some teams.
+There are no symbolic parameters used in this document.
+
+
 
 \end{document}
