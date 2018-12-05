@@ -369,6 +369,8 @@ really cluttered with these long tuples. Since I switched to state variables,
 maybe I could have removed these types, because you're right that the types 
 aren't used in the rest of the document.}
 
+\bmac{I have now removed the types which were not used anywhere else}
+
 \subsubsection{Exported Access Programs}
 
 \begin{center}
@@ -386,8 +388,8 @@ p{0.45\textwidth} } \hline
    badSatUnitWeight, badPiezGeometry, badWatUnitWeight \\
    
    strat & - & coords & - \\
-   slopeX & - & [$\mathbb{R}$] & - \\
-   slopeY & - & [$\mathbb{R}$] & - \\
+   stratX & - & [$\mathbb{R}$] & - \\
+   stratY & - & [$\mathbb{R}$] & - \\
    phi & - & $\mathbb{R}$ & - \\
    coh & - & $\mathbb{R}$ & - \\
    gam & - & $\mathbb{R}$ & - \\
@@ -414,16 +416,12 @@ p{0.45\textwidth} } \hline
   how they are used in the code, but I'm not sure how slopeX is used.  I
   couldn't find it used anywhere else in the specification.}
 
-\bmac{What happened here is that I forgot I had access programs for getting 
-these input parameters, so in the rest of the document I called the state 
-variables directly by name instead of using these access programs. Which means 
-that I treated the slope and piez as lists of coordinates. If I combined slopeX 
-and slopeY into ``slope'', I will have calls like ``slope[0].x'' and 
-``slope[0].y'', whereas if I keep them the same and update my calls in the rest 
-of the document the calls will be ``slopeX[0]'' and ``slopeY[0]''. This choice 
-seems like a matter of preference to me, but I think I might go with the first 
-option because it makes it more explicit that the x and y are coming from a 
-common slope value. What do you think?}
+\bmac{The reason slopeX is not used anywhere else in the document is because I 
+used equations from the SRS for the specs that use the inputs for brevity. 
+Also, the strat access program is what you're describing. I also included 
+slopeX and slopeY in case there were scenarios where it was more convenient to 
+only deal with either x or y. I changed the name of slopeX and slopeY to stratX 
+and stratY to make this more clear.}
 
 \subsection{Semantics}
 
@@ -530,7 +528,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent slopeX():
+\noindent stratX():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -540,7 +538,7 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\noindent slopeY():
+\noindent stratY():
 \begin{itemize}
 	\item output:
 	\begin{itemize}
