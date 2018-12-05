@@ -122,6 +122,7 @@
 	10/04/18 & 1.6 & Minor fixes throughout\\
 	10/12/18 & 1.7 & Minor fixes based on feedback\\
 	10/17/18 & 1.8 & More fixes based on feedback\\
+	12/05/18 & 1.9 & Completed major revisions\\
 	\bottomrule
 \end{tabularx}
 
@@ -319,8 +320,7 @@ ${\gamma{}_{\text{w}}}$ & \si{\newton\per\cubic\meter} & unit weight of water
 $\lambda{}$ & & proportionality constant for the interslice normal to shear 
 force ratio
 \\
-$\sigma{}$ & \si{\pascal} & total stress on the soil mass, where stress is 
-force divided by area 
+$\sigma{}$ & \si{\pascal} & total stress on the soil mass
 \\
 $\sigma{}_N'$ & \si{\pascal} & effective normal stress
 \\
@@ -914,8 +914,8 @@ on.
   
   \hline Equation& \( \sigma' =\sigma - u \) \\
   
-  \hline Description & $\sigma$ is the total stress on the soil mass, where 
-  stress is force divided by area (\si{\pascal}).\\
+  \hline Description & $\sigma$ is the total stress on the soil mass 
+  (\si{\pascal}), defined in \ddref{DD_Sigma}.\\
   & $\sigma'$ is the effective stress provided by the soil skeleton 
   (\si{\pascal}).\\
   & $u$ is the pore pressure from water within the soil (\si{\pascal}).\\
@@ -2015,8 +2015,8 @@ the slope of the surface (\si{\meter}).\\
 		
 		\( \sigma = \frac{F}{A} \) \\
 		
-		\hline Description &$\sigma$ is the total stress on the soil mass, 
-		where stress is force divided by area (\si{\pascal}).\\
+		\hline Description &$\sigma$ is the total stress on the soil mass 
+		(\si{\pascal}).\\
 		&$F$ is the force (\si{\newton}).\\
 		&$A$ is the area on which a force acts (\si{\meter\squared}).\\
 		
@@ -2996,37 +2996,29 @@ exercise. The constraints are conservative, to give the user of the model the
 flexibility to experiment with unusual situations. The column of typical values 
 is intended to provide a feel for a common scenario.
 
-\newpage
-
 \begin{table}[!h]
-\caption{Input Variables} 
 \renewcommand{\arraystretch}{1.5}
 \noindent \begin{longtable*}{p{3.1cm} p{5.1cm} p{1.2cm} c}
-  \toprule  \label{TblInputVar}
+  \toprule
   \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical
     Value} & \textbf{Uncertainty}\\ \midrule
   $\{(x_{\text{wt}},y_{\text{wt}})\}$ (*) & At least two ordered pairs must be 
-  specified. Starts and ends on the same $x$ values as soil mass.  
+  specified. First and last $x$ values must be the same as the soil mass.  
   & N/A & 10\% \\
   $\{(x_{\text{slope}},y_{\text{slope}})\}$ & At least two ordered pairs 
   must be 
-  specified. $y$ values of consecutive vertices are always increasing or always 
-  decreasing. & N/A & 10\% \\
-  ${x_{\text{slip}}^{\text{maxExt}}}$ & must be greater than or equal to the 
-  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
-  value of the slope & N/A & 10\% \\
-  ${x_{\text{slip}}^{\text{minExt}}}$ & must be greater than or equal to the 
-  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
-  value of the slope & 
+  specified. $y$ values must be monotonic. & N/A & 10\% \\
+  ${x_{\text{slip}}^{\text{maxExt}}}$ & must be between or equal to the 
+  minimum and maximum $x_\text{slope}$ values. & N/A & 10\% \\
+  ${x_{\text{slip}}^{\text{minExt}}}$ & must be between or equal to the 
+  minimum and maximum $x_\text{slope}$ values. & 
   N/A & 
   10\% \\
-  ${x_{\text{slip}}^{\text{maxEtr}}}$ & must be greater than or equal to the 
-  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
-  value of the slope & 
+  ${x_{\text{slip}}^{\text{maxEtr}}}$ & must be between or equal to the 
+  minimum and maximum $x_\text{slope}$ values. & 
   N/A & 10\% \\
-  ${x_{\text{slip}}^{\text{minEtr}}}$ & must be greater than or equal to the 
-  minimum $x$ value of the slope and less than or equal to the maximum $x$ 
-  value of the slope & N/A & 10\% \\
+  ${x_{\text{slip}}^{\text{minEtr}}}$ & must be between or equal to the 
+  minimum and maximum $x_\text{slope}$ values. & N/A & 10\% \\
   $c'$ & $c >0$ & 10 & 10\%\\
   $\varphi'$ & $ 0 < \varphi < 90 $ & 25 & 10\% \\
   $\gamma$ & $\gamma > 0$ & 20 & 10\% \\
@@ -3034,6 +3026,8 @@ is intended to provide a feel for a common scenario.
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9.8 & 10\% \\
   \bottomrule
 \end{longtable*}
+\caption{Input Variables} 
+\label{TblInputVar}
 \end{table}
 
 \noindent \begin{description}
@@ -3041,10 +3035,9 @@ is intended to provide a feel for a common scenario.
 \end{description}
 
 \begin{table}[!h]
-\caption{Output Variables} 
 \renewcommand{\arraystretch}{1.2} 
 \noindent \begin{longtable*}{p{2cm} p{14cm}} 
-  \toprule \label{TblOutputVar}
+  \toprule
   \textbf{Var} & \textbf{Physical Constraints} \\
   \midrule 
   $F_\text{S}$ & $F_\text{S}>0$ \\
@@ -3059,6 +3052,8 @@ is intended to provide a feel for a common scenario.
   between consecutive vertices should not be below 110 degrees.\\
   \bottomrule
 \end{longtable*}
+\caption{Output Variables} 
+\label{TblOutputVar}
 \end{table}
 
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
