@@ -345,15 +345,6 @@ N/A
 \begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
 	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
 	coords &=& [coord] \\
-	paramsLayers &=& tuple of (strat : coords, phi : $\mathbb{R}$, coh : 
-	$\mathbb{R}$, gam : $\mathbb{R}$, gams : $\mathbb{R}$) 
-	(Appendix~\ref{Tbl:LayerParam})\\
-	paramsPiez &=& tuple of (piez : coords, gamw : $\mathbb{R}$) 
-	(Appendix~\ref{Tbl:PiezParam}) \\
-	paramsSearch &=& tuple of (Xext, Xetr, Ylim : 
-	[$\mathbb{R}$]\textsuperscript{1,2}) (Appendix~\ref{Tbl:SearchParam}) \\
-	paramsSoln &=& tuple of (ltor, ftype, evnslc, cncvu, obtu : 
-	$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam}) \\
 \end{longtable}
 
 \wss{The above types don't really have anything specifically to do with the
@@ -438,10 +429,15 @@ common slope value. What do you think?}
 
 \subsubsection{State Variables}
 
-\textit{slope} : paramsLayers\\
-\textit{piez} : paramsPiez\\
-\textit{search} : paramsSearch\\
-\textit{soln} : paramsSoln\\
+\textit{slope} : tuple of (strat : coords, phi : $\mathbb{R}$, coh : 
+$\mathbb{R}$, gam : $\mathbb{R}$, gams : $\mathbb{R}$) 
+(Appendix~\ref{Tbl:LayerParam})\\
+\textit{piez} : tuple of (piez : coords, gamw : $\mathbb{R}$) 
+(Appendix~\ref{Tbl:PiezParam})\\
+\textit{search} : tuple of (Xext, Xetr, Ylim : 
+[$\mathbb{R}$]\textsuperscript{1,2}) (Appendix~\ref{Tbl:SearchParam})\\
+\textit{soln} : tuple of (ltor, ftype, evnslc, cncvu, obtu : 
+$\mathbb{B}$) (Appendix~\ref{Tbl:SolnParam})\\
 
 \subsubsection{Environment Variables}
 
@@ -1326,13 +1322,7 @@ Input (Section~\ref{sec:InputMod}), Sequence (Section~\ref{sec:SequenceData})
 N/A
 
 \subsubsection{Exported Data Types}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.22\textwidth} c p{0.8\textwidth}}
-	paramsInternalForce &=& tuple of (Ub, Ut, W, H : [$\mathbb{R}$]) 
-	(Appendix~\ref{Tbl:ForceParam})\\
-	paramsAngles &=& tuple of (alpha, beta : [$\mathbb{R}$]) 
-	(Appendix~\ref{Tbl:AngleParam}) \\
-\end{longtable}
+N/A
 
 \subsubsection{Exported Access Programs}
 
@@ -1357,8 +1347,11 @@ N/A
 \subsection{Semantics}
 
 \subsubsection{State Variables}
-\textit{force} : paramsInternalForce\\
-\textit{angles} : paramsAngles\\
+
+\textit{force} : tuple of (Ub, Ut, W, H : [$\mathbb{R}$]) 
+(Appendix~\ref{Tbl:ForceParam})\\
+\textit{angles} : tuple of (alpha, beta : [$\mathbb{R}$]) 
+(Appendix~\ref{Tbl:AngleParam})\\
 \textit{heights} : [$\mathbb{R}$]\\
 
 \subsubsection{Environment Variables}
@@ -1852,8 +1845,8 @@ This module is the plot function implemented by Matlab.
 
 \subsubsection{Layer Parameters} \label{Tbl:LayerParam}
 \noindent
-The elements in the paramsLayers structure, which describe the mass of soil on 
-which slope stability analysis is to be performed, are explained in the table 
+The elements of the structure which describes the mass of soil on 
+which slope stability analysis is to be performed are explained in the table 
 below.
 
 \begin{center}
@@ -1881,7 +1874,7 @@ below.
 
 \subsubsection{Piezometric Parameter} \label{Tbl:PiezParam}
 \noindent
-The elements in the paramsPiez structure, which describe the water table, are 
+The elements in the structure which describes the water table are 
 explained in the table below.
 
 \begin{center}
@@ -1898,8 +1891,8 @@ explained in the table below.
 
 \subsubsection{Search Range Parameters} \label{Tbl:SearchParam}
 \noindent
-The elements in the paramsSearch structure, which are parameters relating to 
-the range of coordinates between which the critical slip surface may exist, are 
+The elements in the structure which holds parameters relating to 
+the range of coordinates between which the critical slip surface may exist are 
 described in the table below.
 
 \begin{center}
@@ -1929,8 +1922,8 @@ described in the table below.
 
 \subsubsection{Solution Parameters} \label{Tbl:SolnParam}
 \noindent
-The elements in the paramsSoln structure, which are parameters relating to the 
-solution method, are described in the table below.
+The elements in the structure which holds parameters relating to the 
+solution method are described in the table below.
 
 \begin{center}
 \begin{longtable}{ p{0.15\textwidth} 
@@ -1968,7 +1961,7 @@ solution method, are described in the table below.
 
 \subsubsection{Internal Force Parameters} \label{Tbl:ForceParam}
 \noindent
-The elements in the paramsInternalForce structure, which are parameters 
+The elements in the structure which holds parameters 
 relating to the forces acting on a slice, and water in the slope acting
 on itself, are described in the table below. $n$ refers to the number of slices 
 composing the slip surface under evaluation, and is defined by the Slicer 
@@ -2000,10 +1993,10 @@ module (section \ref{sec:SlicerMod}).
 
 \subsubsection{Angle Parameters} \label{Tbl:AngleParam}
 \noindent
-The elements in the paramsAngles structure, which are parameters relating to 
-the angles of the slice surfaces. $n$ refers to the number of slices composing 
-the slip surface under evaluation, and is defined by the Slicer module (section 
-\ref{sec:SlicerMod}).
+The elements in the structure which holds parameters relating to 
+the angles of the slice surfaces are described in the table below. $n$ refers 
+to the number of slices composing the slip surface under evaluation, and is 
+defined by the Slicer module (section \ref{sec:SlicerMod}).
 
 \begin{center}
 \begin{longtable}{ p{0.3\textwidth}
