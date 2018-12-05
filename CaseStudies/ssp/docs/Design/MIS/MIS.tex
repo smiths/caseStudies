@@ -1379,33 +1379,15 @@ prop\_calc(\textit{slip\_surf}):
 		consulted for the definitions of these symbols.\\
 		\item[] $\textit{force}, \textit{angles},	\textit{heights} \coloneqq 
 		\textit{force}^\prime, \textit{angles}^\prime, \textit{soil}^\prime, 
-		\textit{heights}^\prime$ 
+		\textit{heights}^\prime$,\\
+		~\newline
 		where \\
 		$\forall(i : \mathbb{Z} | i \in [1..|\textit{slip\_surf}|-1] :\\ 
-		\textit{force}.Ub[i] = 
-		{\ell{}_{\text{b,}i}}\begin{cases}
-		\left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}} 
-		& 
-		{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
-		0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
-		\end{cases}\\
-			\land \textit{force}.Ut[i] = {\ell{}_{\text{s,}i}}\begin{cases}
-			\left({y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right){\gamma{}_{\text{w}}}
-			 & 
-			{y_{\text{wt,}i}}>{y_{\text{slope,}i}}\\
-			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slope,}i}}
-			\end{cases}\\
-			\land \textit{force}.W[i] = b_{i}\begin{cases}
-				\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
-				 & 
-				{y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
-				\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
-				-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
-				& {y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
-				\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
-				{y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
-			\end{cases}\\
-			\land \textit{force}.H[i] = \begin{cases}
+		\textit{force}.Ub[i] = 0.5({U_{\text{b,}i,1}} + {U_{\text{b,}i,2}})\\
+		\land \textit{force}.Ut[i] = 0.5({U_{\text{t,}i,1}} + 
+		{U_{\text{t,}i,2}})\\
+		\land \textit{force}.W[i] = 0.5(W_{i,1}+W_{i,2})\\
+		\land \textit{force}.H[i] = \begin{cases}
 			\frac{\left[{y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right]^{2}}{2}{\gamma{}_\text{w}}+
 			\left[{y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right]^{2}{\gamma{}_\text{w}}
 			& {y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
@@ -1414,18 +1396,72 @@ prop\_calc(\textit{slip\_surf}):
 			{y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
 			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 			\end{cases}\\
-			\land \textit{angles}.\textit{alpha}[i] =
+		\land \textit{angles}.\textit{alpha}[i] =
 			\arctan \left( \frac{y_{\text{slip,}i} -
-				y_{\text{slip,}i-1}}{x_{\text{slip,}i} - x_{\text{slip,}i-1}} 
-				\right) 
-				\\
-			\land \textit{angles}.\textit{beta}[i] = \arctan \left( 
+			y_{\text{slip,}i-1}}{x_{\text{slip,}i} - x_{\text{slip,}i-1}} 
+			\right) \\
+		\land \textit{angles}.\textit{beta}[i] = \arctan \left( 
 			\frac{y_{\text{slope,}i} -
-				y_{\text{slope,}i-1}}{x_{\text{slope,}i} - 
-				x_{\text{slope,}i-1}} 
-				\right)\\
-			\land \textit{heights}[i] = 
-			0.5*(({y_{\text{slope,}i}}-{y_{\text{slip,}i}})+({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}})))$
+			y_{\text{slope,}i-1}}{x_{\text{slope,}i} - 
+			x_{\text{slope,}i-1}} 
+			\right)\\
+		\land \textit{heights}[i] = 
+			0.5*(({y_{\text{slope,}i}}-{y_{\text{slip,}i}}) + 
+			({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}})))$,\\
+			~\newline
+			where \\
+			${U_{\text{b,}i,1}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+			\left({y_{\text{wt,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{w}}}
+			 & 
+			{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
+			\end{cases}$,\\
+			~\newline~\newline
+			${U_{\text{b,}i,2}}$ = ${\ell{}_{\text{b,}i}}\begin{cases}
+			\left({y_{\text{wt,}i-1}}-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{w}}}
+			 & 
+			{y_{\text{wt,}i-1}}>{y_{\text{slip,}i-1}}\\
+			0 & {y_{\text{wt,}i-1}}\leq{}{y_{\text{slip,}i-1}}
+			\end{cases}$,\\
+			~\newline~\newline
+			${U_{\text{t,}i,1}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
+			\left({y_{\text{wt,}i}}-{y_{\text{slope,}i}}\right){\gamma{}_{\text{w}}}
+			 & 
+			{y_{\text{wt,}i}}>{y_{\text{slope,}i}}\\
+			0 & {y_{\text{wt,}i}}\leq{}{y_{\text{slope,}i}}
+			\end{cases}$,\\
+			~\newline~\newline
+			${U_{\text{t,}i,2}}$ = ${\ell{}_{\text{s,}i}}\begin{cases}
+			\left({y_{\text{wt,}i-1}}-{y_{\text{slope,}i-1}}\right){\gamma{}_{\text{w}}}
+			 & 
+			{y_{\text{wt,}i-1}}>{y_{\text{slope,}i-1}}\\
+			0 & {y_{\text{wt,}i-1}}\leq{}{y_{\text{slope,}i-1}}
+			\end{cases}$,\\
+			~\newline~\newline
+			$W_{i,1}$ = $b_{i}\begin{cases}
+			\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+			 & 
+			{y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
+			\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+			-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
+			& {y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
+			\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+			{y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
+			\end{cases}$,\\
+			~\newline~\newline
+			$W_{i,2}$ = $b_{i}\begin{cases}
+			\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}}
+			& 
+			{y_{\text{wt,}i-1}}\geq{}{y_{\text{slope,}i-1}}\\
+			\left(\begin{array}{l}\left({y_{\text{slope,}i-1}}-{y_{\text{wt,}i-1}}\right)\gamma{}\\
+			+\left({y_{\text{wt,}i-1}}
+			-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}} \end{array} 
+			\right)
+			& {y_{\text{slope,}i-1}}>{y_{\text{wt,}i-1}}>{y_{\text{slip,}i-1}}\\
+			\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right)\gamma{} & 
+			{y_{\text{wt,}i-1}}\leq{}{y_{\text{slip,}i-1}}
+			\end{cases}$
+			~\newline~\newline
 	\end{itemize}
 \end{itemize}
 
