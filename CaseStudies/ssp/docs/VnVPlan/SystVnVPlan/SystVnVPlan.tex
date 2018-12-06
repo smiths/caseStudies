@@ -187,8 +187,7 @@ Module Interface Specification (MIS) documents. The design will be verified by
 review of these documents. Brooks MacLachlan will extensively review both 
 documents. To verify correctness, part of this review will be to ensure that 
 every module traces to a requirement and that every requirement is traced to by 
-a module. To evaluate the modularity of the design, "uses" \wss{Use ``uses'' to
-  get the correct opening and closing quotes.} relationships 
+a module. To evaluate the modularity of the design, ``uses'' relationships 
 between modules will be examined to ensure modules do not mutually use each 
 other. The review will also check that each module hides exactly one secret. 
 Ensuring the program is well-modularized contributes to verification of the 
@@ -203,6 +202,10 @@ class of CAS 741. Any design issues discovered during this presentation will be
 subsequently fixed by Brooks MacLachlan. Reviews of these design documents will 
 also focus on ensuring understandability by identifying descriptions and 
 specifications that are ambiguous.
+
+\wss{Use ``uses'' to get the correct opening and closing quotes.} 
+
+\bmac{Thanks, done here and throughout documentation}
 
 \subsection{Implementation Verification Plan} \label{sec_ImpPlan}
 
@@ -856,19 +859,17 @@ Type: Manual
 					
 Initial State: Test subject has a completed MG for \progname{}
 					
-Input/Condition: MG for \progname{} and the following question "If you were 
+Input/Condition: MG for \progname{} and the following question ``If you were 
 tasked with modifying \progname{} to accept an imposed surface load as an input 
 and incorporate this additional force into the computation, which module(s) 
-would you change?"
+would you change?''
 					
-Output/Result: Input Module, Input Verification Module, Calculation Module
-
-\bmac{Subject to change since design has not been completed yet}
+Output/Result: Input Module, Morgenstern-Price Calculation Module
 					
 How test will be performed: Test subject will be asked the question described 
-in "Input/Condition" and must answer only by consulting the MG. Their answer 
+in ``Input/Condition'' and must answer only by consulting the MG. Their answer 
 will be recorded and compared with the correct answer outlined in 
-"Output/Result". If the subject answers correctly, the test passes and 
+``Output/Result''. If the subject answers correctly, the test passes and 
 confidence in the maintainability of \progname{} is increased. If the subject 
 answers incorrectly, the test fails and the documentation or implementation of 
 \progname{} must be updated to be more maintainable.
