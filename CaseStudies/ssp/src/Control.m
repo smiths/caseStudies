@@ -52,7 +52,7 @@ function ssp(fname)
 % -------------------------------------------------------------------------
 
 [params_layers, params_piez, params_search,... % Get input data
-    params_soln, params_load, sepind] = Input(fname);
+    params_soln, params_load] = Input(fname);
 
 
 % -------------------------------------------------------------------------
@@ -60,8 +60,7 @@ function ssp(fname)
 % -------------------------------------------------------------------------
 
 [cslip, F, Nint, Tint] = ... % run genetic algorithm search
-    GenAlg(@MorgPriceSolver, params_layers,...
-    params_piez, params_search, params_soln, params_load);
+    GenAlg(params_layers, params_piez, params_search, params_soln, params_load);
 
 
 % -------------------------------------------------------------------------
