@@ -65,7 +65,7 @@ else
     string_gamw = '';
     add_gamw = 0;
 end
-lengthtoend_Vals = exp_laststrat + exp_piez + exp_rng + 1 + add_gamw;
+lengthtoend_Vals = exp_laststrat + exp_piez + exp_rng + 2 + add_gamw; % + 2 for the line with the number of vertices for water table and the line with the value for ftype
 lengthtoend_Size = A1 - layersindexA(end);
 if lengthtoend_Vals ~= lengthtoend_Size
     error('Input Error : Expected %d vertex sets describing the last stratigraphic layer, %d vertex set describing the piezometric surface%s, and %d vertex sets describing the search range do not match the detected', exp_laststrat, exp_piez, string_gamw, exp_rng)
