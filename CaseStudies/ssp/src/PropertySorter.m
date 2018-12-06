@@ -63,12 +63,8 @@ ypz         y-coord of piez surf for each interface
 yly         y-coord of each strat layer at each interface
 phib        tan(phi) at base of each slice (effective)
 cohb        cohesion at base of each slice (effective)
-Eb          elastic modulus at base of each slice
-nub         Poisson's ratio at base of each slice
 phii        tan(phi) for each interslice interface (effective)
 cohi        cohesion for each interslice interface (effective)
-Ei          elastic modulus at each interslice interface
-nui         Poisson's ratio at each interslice interface
 cly1,cly2   for tracking layer transitions
 %}
 
@@ -82,8 +78,6 @@ phi = params_layers.phi; % soil property extraction
 coh = params_layers.coh;
 gamly = params_layers.gam;
 gamsly = params_layers.gams;
-E = params_layers.E;
-nu = params_layers.nu;
 
 piez = params_piez.piez; % piez extraction
 gamw = params_piez.gamw;
@@ -101,13 +95,9 @@ end
 hi= zeros(1,nint); %Initialize interlsice property vectors
 phi_IS = zeros(1,nint); 
 coh_IS = zeros(1,nint);
-E_IS = zeros(1,nint);
-nu_IS = zeros(1,nint);
 
 phi_B = zeros(1,n); %Initialize base property vectors
 coh_B = zeros(1,n);
-E_B = zeros(1,n); 
-nu_B = zeros(1,n);
 
 ub = zeros(1,n+1); % Initialize slice and surface pore pressures
 ut = zeros(1,n+1);
@@ -206,8 +196,6 @@ for i = 1:n+1   % loop through interfaces
             hi(ipv) = hi(ipv) + dh;
             phi_IS(ipv) = phi_IS(ipv) + dh*(phi(ily)); %Initialize interlsice property vectors
             coh_IS(ipv) = coh_IS(ipv) + dh*(coh(ily));
-            E_IS(ipv) = E_IS(ipv) + dh*(E(ily));
-            nu_IS(ipv) = nu_IS(ipv) + dh*(nu(ily));
         end
 
         if npz && ypz(i) > yb  % check if water table lies above bottom y coord
@@ -244,8 +232,6 @@ for i = 1:n+1   % loop through interfaces
             % linearly interpolate between layer properties
             phi_B(ipv) = wt*(phi(cly1)) + (1-wt)*(phi(cly2)); %Initialize interlsice property vectors
             coh_B(ipv) = wt*(coh(cly1)) + (1-wt)*(coh(cly2));
-            E_B(ipv) = wt*(E(cly1)) + (1-wt)*(E(cly2)); 
-            nu_B(ipv) = wt*(nu(cly1)) + (1-wt)*(nu(cly2));
             
         elseif cly1 > cly2  % if base is ascending a layer
             
@@ -256,15 +242,11 @@ for i = 1:n+1   % loop through interfaces
             % linearly interpolate between layer properties
             phi_B(ipv) = wt*(phi(cly1)) + (1-wt)*(phi(cly2)); %Initialize interlsice property vectors
             coh_B(ipv) = wt*(coh(cly1)) + (1-wt)*(coh(cly2));
-            E_B(ipv) = wt*(E(cly1)) + (1-wt)*(E(cly2)); 
-            nu_B(ipv) = wt*(nu(cly1)) + (1-wt)*(nu(cly2));
             
         else    % if strat layer has not changed, use current layer props
             
             phi_B(ipv) = phi(cly2); %Initialize interlsice property vectors
             coh_B(ipv) = coh(cly2);
-            E_B(ipv) = E(cly2); 
-            nu_B(ipv) = nu(cly2);
             
         end     % if cly2>cly1, elseif cly1>cly2, interpolation of slice properties
         
@@ -288,14 +270,10 @@ Ut = 0.5*(ut(2:n+1)+ut(1:n)).*b.*sec(beta);
 
 phi_IS = (phi_IS) ./ (hi);
 coh_IS = (coh_IS) ./ (hi);
-E_IS = (E_IS) ./ (hi);
-nu_IS = (nu_IS) ./ (hi);
 
 
-params_soilBase = struct('phi_B',phi_B,'coh_B',coh_B,...
-    'E_B',E_B,'nu_B',nu_B);
-params_soilInterior = struct('hi',hi,'phi_IS',phi_IS,'coh_IS',coh_IS,...
-    'E_IS',E_IS,'nu_IS',nu_IS);
+params_soilBase = struct('phi_B',phi_B,'coh_B',coh_B);
+params_soilInterior = struct('hi',hi,'phi_IS',phi_IS,'coh_IS',coh_IS);
 params_angles = struct('Alpha',alpha,'Beta',beta);
 params_internalForce = struct('Ub',Ub,'Ut',Ut,'W',W,'H',H);
 
