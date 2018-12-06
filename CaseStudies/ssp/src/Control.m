@@ -1,3 +1,5 @@
+function ssp(fname)
+
 % Slope Stability Analysis Program
 % Control.m
 %
@@ -54,7 +56,7 @@ clc
 % -------------------------------------------------------------------------
 
 [params_layers, params_piez, params_search,... % Get input data
-    params_soln, params_load, fname, sepind] = Input;
+    params_soln, params_load, sepind] = Input(fname);
 
 
 % -------------------------------------------------------------------------
@@ -67,7 +69,7 @@ clc
 
 
 % -------------------------------------------------------------------------
-% REANALYZE CRITICAL SURFACE USING MORG-PRICE AND RFEM (FOR PLOTTING)
+% OUTPUT RESULTS OF MORG-PRICE ANALYSIS (WITH PLOTS)
 % -------------------------------------------------------------------------
 
 Output(cslip, params_layers, params_piez,... % Reanalyze and plot
