@@ -68,4 +68,4 @@ function ssp(fname)
 % -------------------------------------------------------------------------
 
 Output(cslip, F, Nint, Tint, params_layers, params_piez,... % Reanalyze and plot
-params_soln, params_load, params_search);
+params_soln, params_load, params_search, fname);
