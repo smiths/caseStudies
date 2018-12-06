@@ -191,8 +191,8 @@ iadd = 0;
 nvtx = 4;
 nslice = 36;
 npsrf = size(strat{1},2);
-slips = cell(Mslip,5);
-pool = cell(Mpool,5);
+slips = cell(Mslip,6);
+pool = cell(Mpool,6);
 nslip = 0;
 nof = 0;
 
@@ -313,10 +313,10 @@ end
 % (10) Evaluate factor of safety for each initial surface
 for i = 1:Mslip
     
-    evalslip = Slicer(evnslc, slips{i,1}, nslice);
+    slips{i,6} = Slicer(evnslc, slips{i,1}, nslice);
     
     % evaluate factor of safety
-    [slips{i,2}, ~, slips{i,3}, slips{1,4}] = MorgPriceSolver(evalslip, params_layers, params_piez,...
+    [slips{i,2}, ~, slips{i,3}, slips{1,4}] = MorgPriceSolver(slips{i,6}, params_layers, params_piez,...
         params_soln, params_load);
     nof = nof+1;
     
@@ -455,6 +455,7 @@ while 1
                 pool{i,2} = slips{j,2};
                 pool{i,3} = slips{j,3};
                 pool{i,4} = slips{j,4};
+                pool{i,6} = slips{j,6};
                 pool{i+Mslip,1} = slips{j,1};
                 break;
             end
@@ -472,6 +473,7 @@ while 1
             pool{i,2} = slips{prtsel(i),2};
             pool{i,3} = slips{prtsel(i),3};
             pool{i,4} = slips{prtsel(i),4};
+            pool{i,6} = slips{prtsel(i),6};
             pool{i+Mslip,1} = slips{prtsel(i),1};
         end
     end
@@ -689,6 +691,7 @@ while 1
     slips{1,2} = pool{1,2};
     slips{1,3} = pool{1,3};
     slips{1,4} = pool{1,4};
+    slips{1,6} = pool{1,6};
     pool{1,5} = 0;
     
     % (6,iii) Randomly select 3 surfaces from the tournament pool at a time
@@ -714,6 +717,7 @@ while 1
         slips{i,2} = pool{isel,2};
         slips{i,3} = pool{isel,3};
         slips{i,4} = pool{isel,4};
+        slips{i,6} = pool{isel,6};
         pool{isel,5} = 0;           % prevent same surface being selected twice
         if isel == Mpool,   pool{Mpool-1,5} = 1;    end
         
@@ -729,6 +733,7 @@ while 1
             slips{i,2} = pool{i,2};
             slips{i,3} = pool{i,3};
             slips{i,4} = pool{i,4};
+            slips{i,6} = pool{i,6};
         end
     end
     
@@ -772,7 +777,7 @@ if ltor
 end
 
 % ASSIGN CRITICAL SURFACE AND FACTOR OF SAFETY TO RETURN PARAMETERS
-cslip = slips{1,1};
+cslip = slips{1,6};
 F = slips{1,2};
 Nint = slips{1,3};
 Tint = slips{1,4};
