@@ -669,8 +669,8 @@ while 1
             
             evalslip = Slicer(evnslc, pool{i,1}, []);    
 
-            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(evalslip, params_layers, params_piez,...
-                params_soln, params_load);
+            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(evalslip, ...
+                params_layers, params_piez, params_soln, params_load);
             nof = nof+1;
             
         end

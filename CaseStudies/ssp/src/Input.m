@@ -1,6 +1,6 @@
 function [params_layers, params_piez, params_search,...
     params_soln, params_load]=...
-    Input
+    Input(fname)
 
 % Slope Stability Analysis Program
 % Input.m
