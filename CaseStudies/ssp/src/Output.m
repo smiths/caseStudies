@@ -71,9 +71,9 @@ hold off;
 
 % plot interslice forces
 hfrc = subplot(212);
-plot(cslip(1,2:end),Nint,'-k');
+plot(cslip(1,2:end-1),Nint,'-k');
 hold on;
-plot(cslip(1,2:end),Tint,'-r');
+plot(cslip(1,2:end-1),Tint,'-r');
 hold off;
 
 set(hfrc, 'xlim', [minx maxx]);
@@ -138,7 +138,7 @@ fprintf(fout, 'Interslice Forces\r\n');
 fprintf(fout, '\r\n');
 fprintf(fout, '        x         N_mp         T_mp\r\n');
 fprintf(fout, '%9.4f  %11.3f  %11.3f\r\n', ...
-                    [   cslip(1,2:end);
+                    [   cslip(1,2:end-1);
                         Nint;
                         Tint]     );
 
