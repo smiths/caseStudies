@@ -773,6 +773,8 @@ if ltor
     for i = 1:size(slips,1)
         slips{i,1}(1,:) = xmax - slips{i,1}(1,:) + xmin;
         slips{i,1} = fliplr(slips{i,1});
+        slips{i,6}(1,:) = xmax - slips{i,6}(1,:) + xmin;
+        slips{i,6} = fliplr(slips{i,6});
     end
 end
 
