@@ -774,8 +774,8 @@ end
 % ASSIGN CRITICAL SURFACE AND FACTOR OF SAFETY TO RETURN PARAMETERS
 cslip = slips{1,1};
 F = slips{1,2};
-Nint = slips{1,3}
-Tint = slips{1,4}
+Nint = slips{1,3};
+Tint = slips{1,4};
 
 % compute run time
 rt = cputime-rt;
