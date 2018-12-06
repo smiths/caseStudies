@@ -57,7 +57,7 @@ set(h,'linewidth',2)
 xlabel('x','fontweight','bold');
 ylabel('y','fontweight','bold');
 title(sprintf('Critical slip surface, Fs = %5.4f', ...
-                F_mp), 'fontweight', 'bold');
+                F), 'fontweight', 'bold');
 
 minx = min(strat{1}(1,:));
 maxx = max(strat{1}(1,:));
