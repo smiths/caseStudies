@@ -67,4 +67,5 @@ function ssp(fname)
 % OUTPUT RESULTS OF MORG-PRICE ANALYSIS (WITH PLOTS)
 % -------------------------------------------------------------------------
 
-Output(cslip, F, Nint, Tint);
+Output(cslip, F, Nint, Tint, params_layers, params_piez,... % Reanalyze and plot
+params_soln, params_load, params_search);
