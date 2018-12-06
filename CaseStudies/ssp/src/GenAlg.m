@@ -669,9 +669,9 @@ while 1
         % factor of safety
         else
             
-            evalslip = Slicer(evnslc, pool{i,1}, []);    
+            pool{i,6} = Slicer(evnslc, pool{i,1}, []);    
 
-            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(evalslip, ...
+            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(pool{i,6}, ...
                 params_layers, params_piez, params_soln, params_load);
             nof = nof+1;
             
