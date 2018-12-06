@@ -1,5 +1,5 @@
 function [params_layers, params_piez, params_search,...
-    params_soln, params_load, fname, sepind]=...
+    params_soln, params_load]=...
     Input
 
 % Slope Stability Analysis Program
@@ -19,10 +19,7 @@ function [params_layers, params_piez, params_search,...
 %
 % -------------------------------------------------------------------------
 
-fname = ...
-    input('Enter the name of the slope data file (including extension):\n', 's'); % get name of data file
-
-sepind = find(fname=='.',1,'last'); % find separator (for creating output file later)
+sepind = find(fname=='.',1,'last');
 
 nfile = length(fname);
 if ~isempty(sepind) && (    strcmp(fname(sepind+1:nfile),'out') ...
@@ -33,17 +30,12 @@ end
 data = dlmread(fname);% read in slope geometry, stratigraphy, and piezometric surface
 [A1, A2] = size(data);
 
-if A2 > 7
+if A2 > 5
     error('Input Error : An extra soil data input has been given')
 end
 
-
-rngInFile= input(['\nSelect input file type,\n'...
-    '0 => Entrance/Exit range not included in file\n'...
-    '1 => Entrance/Exit range included in file: ']); %Input file type
-
 layer_checkA = data(:,3); layersindexA = find(layer_checkA);
-layer_checkB = data(:,7); layersindexB = find(layer_checkB);
+layer_checkB = data(:,5); layersindexB = find(layer_checkB);
 
 if ~isequal(layersindexA,layersindexB)
     error('Input Error : Stratigraphic soil properties not fully defined')
@@ -63,11 +55,7 @@ for c = 1 : numlayer - 1
        error('Input Error : Expected %d and detected %d vertex sets describing stratigraphic layer %d', data(layersindexA(c),1), layer_vertlengths, i )
    end
 end
-if rngInFile
-    exp_rng = 3;
-else
-    exp_rng = 0;
-end
+exp_rng = 3;
 exp_laststrat = data(layersindexA(end),1);
 exp_piez = data(layersindexA(end) + data(layersindexA(end),1) + 1,1);
 if exp_piez > 0
@@ -90,8 +78,6 @@ phi = zeros(nlayer,1);      % effective angle of friction
 coh = zeros(nlayer,1);      % effective cohesion
 gam = zeros(nlayer,1);      % dry unit weight
 gams = zeros(nlayer,1);     % sat unit weight
-E = zeros(nlayer,1);        % elastic modulus
-nu = zeros(nlayer,1);       % Poisson's ratio
 
 i = i+1;
 for ilayer=1:nlayer     % loop through layers
@@ -103,7 +89,7 @@ for ilayer=1:nlayer     % loop through layers
         error('Input Error : Effective angle of friction of layer %d does not meet physical constraints, must be between 0 and 90 degrees, given %0.1f', ilayer, phi(ilayer))
     end
     coh(ilayer) = data(i,3);
-    if coh(ilayer) < 0 
+    if coh(ilayer) <= 0 
         error('Input Error : cohesion of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, coh(ilayer))
     end
     gam(ilayer) = data(i,4);
@@ -113,14 +99,6 @@ for ilayer=1:nlayer     % loop through layers
     gams(ilayer) = data(i,5);
     if gams(ilayer) <= 0 
         error('Input Error : Saturated soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gams(ilayer))
-    end
-    E(ilayer) = data(i,6);
-    if E(ilayer) <= 0 
-        error('Input Error : Youngs modulus of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, E(ilayer))
-    end
-    nu(ilayer) = data(i,7);
-    if nu(ilayer) <= 0 
-        error('Input Error : Poissons ratio of layer %d does not meet physical constraints, must be greater than 0 and less than 1, given %0.1f', ilayer, nu(ilayer))
     end
     
     i = i+1;
@@ -167,7 +145,7 @@ for c = 2:length(nlayer)
 end
 
 params_layers = struct('strat',strat, 'phi',phi, 'coh',coh,...
-    'gam',gam, 'gams',gams, 'E',E, 'nu',nu);
+    'gam',gam, 'gams',gams);
 
 nwpts = data(i,1);  % number of points in piez data (0 if dry)
 if nwpts > 0
@@ -209,33 +187,20 @@ Kc = 0;
 
 params_load = struct('Kc',Kc, 'Q',Q, 'omega',omega);
 
-if  rngInFile % set up genetic algorithm search data file read
-    x1 = data(i,1);
-    x2 = data(i,2);
-    Xetr = [min(x1,x2),max(x1,x2)];
-    
-    i=i+1;
-    x1 = data(i,1);
-    x2 = data(i,2);
-    Xext = [min(x1,x2),max(x1,x2)];
 
-    i=i+1;
-    y1 = data(i,1);
-    y2 = data(i,2);
-    Ylim = [min(y1,y2),max(y1,y2)]; 
-else % set up genetic algorithm search command prompts
-    x1 = input('\nEnter minimum x-coord for slip surface entry: ');
-    x2 = input('Enter maximum x-coord for slip surface entry: ');
-    Xetr = [min(x1,x2),max(x1,x2)];
+x1 = data(i,1);
+x2 = data(i,2);
+Xetr = [min(x1,x2),max(x1,x2)];
 
-    x1 = input('\nEnter minimum x-coord for slip surface exit: ');
-    x2 = input('Enter maximum x-coord for slip surface exit: ');
-    Xext = [min(x1,x2),max(x1,x2)];
+i=i+1;
+x1 = data(i,1);
+x2 = data(i,2);
+Xext = [min(x1,x2),max(x1,x2)];
 
-    y1 = input('\nEnter minimum y-coord for slip surface: ');
-    y2 = input('Enter maximum y-coord for slip surface: ');
-    Ylim = [min(y1,y2),max(y1,y2)];   
-end
+i=i+1;
+y1 = data(i,1);
+y2 = data(i,2);
+Ylim = [min(y1,y2),max(y1,y2)]; 
 
 params_search = struct('Xext',Xext, 'Xetr',Xetr,'Ylim',Ylim);
 
@@ -243,9 +208,8 @@ cncvu = 1; % slopes must be concave (Kin Adm)
 obtu = 1; % slopes must be obtuse (Kin Adm)
 evnslc = 1; % Slice evenly
 
-ftype = input(['\nSelect interslice shear force distribution,\n'...
-    '1 => f(x) = 1 (Spencer''s method)\n'...
-    '0 => f(x) = half-sine (standard Morgenstern-Price): ']);
+i = i+1
+ftype = data(i,1);
 
 params_soln = struct('ltor',ltor, 'ftype',ftype,...
     'evnslc',evnslc, 'cncvu',cncvu, 'obtu',obtu);

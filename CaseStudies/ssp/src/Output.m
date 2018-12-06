@@ -18,6 +18,8 @@ function Output(cslip, params_layers, params_piez,...
 % REANALYZE CRITICAL SURFACE USING MORG-PRICE AND RFEM (FOR PLOTTING)
 % -------------------------------------------------------------------------
 
+sepind = find(fname=='.',1,'last'); % find separator (for creating output file later)
+
 nlayer = length(params_layers); % strat extraction
 strat = cell(nlayer,1);
 for i = 1:nlayer
