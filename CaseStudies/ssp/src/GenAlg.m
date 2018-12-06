@@ -1,5 +1,5 @@
-function [cslip, F, slips, gens, Fgens, nof, rt, switch7, switch13 ] = ...
-            GenAlg (funcF, params_layers,...
+function [cslip, F, Nint, Tint, slips, gens, Fgens, nof, rt, switch7, switch13 ] = ...
+            GenAlg (params_layers,...
     params_piez, params_search, params_soln, params_load)
 % Slope Stability Analysis Program
 % Output.m
@@ -170,7 +170,7 @@ slips       container for slip surfaces, factors of safety, and weighting
 pool        container for parent and child slip surfaces,
             dimension(Mpool,3)
 nslip       counter for number of surfaces added to population
-nof         counter for number of objective function, funcF, evaluations
+nof         counter for number of objective function, MorgPriceSolver, evaluations
 %}
 Mslip = 20;
 Mpool = 2*Mslip;
@@ -191,8 +191,8 @@ iadd = 0;
 nvtx = 4;
 nslice = 36;
 npsrf = size(strat{1},2);
-slips = cell(Mslip,3);
-pool = cell(Mpool,3);
+slips = cell(Mslip,5);
+pool = cell(Mpool,5);
 nslip = 0;
 nof = 0;
 
@@ -316,7 +316,7 @@ for i = 1:Mslip
     evalslip = Slicer(evnslc, slips{i,1}, nslice);
     
     % evaluate factor of safety
-    slips{i,2} = funcF(evalslip, params_layers, params_piez,...
+    [slips{i,2}, ~, slips{i,3}, slips{1,4}] = MorgPriceSolver(evalslip, params_layers, params_piez,...
         params_soln, params_load);
     nof = nof+1;
     
@@ -449,10 +449,12 @@ while 1
     for i = 1:Mslip
         found = 0;
         for j = 1:Mslip
-            if prtsel(i) <= slips{j,3}
+            if prtsel(i) <= slips{j,5}
                 found = 1;
                 pool{i,1} = slips{j,1};
                 pool{i,2} = slips{j,2};
+                pool{i,3} = slips{j,3};
+                pool{i,4} = slips{j,4};
                 pool{i+Mslip,1} = slips{j,1};
                 break;
             end
@@ -468,6 +470,8 @@ while 1
         for i = 1:Mslip
             pool{i,1} = slips{prtsel(i),1};
             pool{i,2} = slips{prtsel(i),2};
+            pool{i,3} = slips{prtsel(i),3};
+            pool{i,4} = slips{prtsel(i),4};
             pool{i+Mslip,1} = slips{prtsel(i),1};
         end
     end
@@ -665,7 +669,7 @@ while 1
             
             evalslip = Slicer(evnslc, pool{i,1}, []);    
 
-            pool{i,2} = funcF(evalslip, params_layers, params_piez,...
+            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(evalslip, params_layers, params_piez,...
                 params_soln, params_load);
             nof = nof+1;
             
@@ -683,7 +687,9 @@ while 1
     % the population for the next generation.
     slips{1,1} = pool{1,1};
     slips{1,2} = pool{1,2};
-    pool{1,3} = 0;
+    slips{1,3} = pool{1,3};
+    slips{1,4} = pool{1,4};
+    pool{1,5} = 0;
     
     % (6,iii) Randomly select 3 surfaces from the tournament pool at a time
     % and place the one with the lowest factor of safety into the next
@@ -695,7 +701,7 @@ while 1
         found = 0;
         for j = 1:3
             for k = 1:Mpool
-                if trnsel(j) <= pool{k,3} && k < isel
+                if trnsel(j) <= pool{k,5} && k < isel
                     found = 1;
                     isel = k;
                     break;
@@ -706,8 +712,10 @@ while 1
         
         slips{i,1} = pool{isel,1};  % place into population
         slips{i,2} = pool{isel,2};
-        pool{isel,3} = 0;           % prevent same surface being selected twice
-        if isel == Mpool,   pool{Mpool-1,3} = 1;    end
+        slips{i,3} = pool{isel,3};
+        slips{i,4} = pool{isel,4};
+        pool{isel,5} = 0;           % prevent same surface being selected twice
+        if isel == Mpool,   pool{Mpool-1,5} = 1;    end
         
     end
     
@@ -719,6 +727,8 @@ while 1
         for i = 2:Mslip
             slips{i,1} = pool{i,1};
             slips{i,2} = pool{i,2};
+            slips{i,3} = pool{i,3};
+            slips{i,4} = pool{i,4};
         end
     end
     
@@ -764,6 +774,8 @@ end
 % ASSIGN CRITICAL SURFACE AND FACTOR OF SAFETY TO RETURN PARAMETERS
 cslip = slips{1,1};
 F = slips{1,2};
+Nint = slips{1,3}
+Tint = slips{1,4}
 
 % compute run time
 rt = cputime-rt;

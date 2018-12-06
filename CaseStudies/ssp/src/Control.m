@@ -47,10 +47,6 @@ function ssp(fname)
 % -------------------------------------------------------------------------
 
 
-clear
-clc
-
-
 % -------------------------------------------------------------------------
 % GET INPUT DATA (GEOMETRY, STRATIGRAPHY, MATL PROPS, ETC.) FROM USER
 % -------------------------------------------------------------------------
@@ -63,7 +59,7 @@ clc
 % ANALYZE SLOPE USING GENETIC ALGORITHM
 % -------------------------------------------------------------------------
 
-[cslip] = ... % run genetic algorithm search
+[cslip, F, Nint, Tint] = ... % run genetic algorithm search
     GenAlg(@MorgPriceSolver, params_layers,...
     params_piez, params_search, params_soln, params_load);
 
@@ -72,5 +68,4 @@ clc
 % OUTPUT RESULTS OF MORG-PRICE ANALYSIS (WITH PLOTS)
 % -------------------------------------------------------------------------
 
-Output(cslip, params_layers, params_piez,... % Reanalyze and plot
-    params_soln, params_load, fname, sepind, params_search);
+Output(cslip, F, Nint, Tint);

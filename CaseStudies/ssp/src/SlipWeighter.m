@@ -20,7 +20,7 @@ function [newslips] = SlipWeighter (Meval, slipsurfs)
 % -------------------------------------------------------------------------
 
 wts = zeros(Meval,1);
-newslips = cell(Meval,3);
+newslips = cell(Meval,5);
 for i = 1:Meval
     wts(i) = slipsurfs{i,2};
 end
@@ -31,9 +31,11 @@ wts = wts./wtSum;
 for i = 1:Meval
     newslips{i,1} = slipsurfs{ix(i),1};
     newslips{i,2} = slipsurfs{ix(i),2};
+    newslips{i,3} = slipsurfs{ix(i),3};
+    newslips{i,4} = slipsurfs{ix(i),4};
 
-    if i > 1, newslips{i,3} = newslips{i-1,3} + wts(i);
-    else newslips{i,3} = wts(i);
+    if i > 1, newslips{i,5} = newslips{i-1,5} + wts(i);
+    else newslips{i,5} = wts(i);
     end
     
 end
