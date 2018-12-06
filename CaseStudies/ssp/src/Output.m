@@ -61,7 +61,7 @@ title(sprintf('Critical slip surface, Fs = %5.4f', ...
 
 minx = min(strat{1}(1,:));
 maxx = max(strat{1}(1,:));
-miny = min([min(evalslip(2,:)) min(strat{nlayer}(2,:))]);
+miny = min([min(cslip(2,:)) min(strat{nlayer}(2,:))]);
 maxy = max(strat{1}(2,:));
 hslp = max(strat{1}(2,:)) - min(strat{1}(2,:));
 
