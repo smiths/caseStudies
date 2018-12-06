@@ -97,7 +97,7 @@ document.
 
 This document provides the unit Verification and Validation (VnV) plan for the 
 software. General information related to the system under test is given in 
-Section~\ref{sec_Info}. Section~\ref{sec_Plan} outlines at a high level the 
+Section~\ref{sec_Info}. Section~\ref{sec_UnitPlan} outlines at a high level the 
 plan for verifying and validating the software. Section~\ref{sec_Tests} gives 
 more detail about the specific tests that will be used to verify each module.
 
@@ -132,7 +132,7 @@ tested by the system tests outlined in the
 not included in the unit verification plan because they are also sufficiently 
 covered by the System VnV Plan.
 
-\section{Plan} \label{sec_Plan}
+\section{Plan} \label{sec_UnitPlan}
 	
 \subsection{Verification and Validation Team}
 
@@ -211,7 +211,7 @@ inputs from a file. For each value contained in the file, there is a
 corresponding test case verifying that the value was properly read into the 
 data structure containing the input parameters. In cases where the user input 
 may take different forms, such as the input for when a water table exists and 
-the input for when a water table does not exists, each potential form of input 
+the input for when a water table does not exist, each potential form of input 
 is covered by at least one test case. The input module is also responsible for 
 verifying the input, so for each possible violation of an input constraint, 
 there is a corresponding test case verifying that the correct exception was 
@@ -347,6 +347,60 @@ Test Case Derivation: If the input includes no water table vertices, the
 \textit{piez.gamw} variable should be 0.
 
 How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputMin}] 
+test-valid\_input\_minimal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with only 
+2 slope coordinates $\{\left(x_\text{slope},y_\text{slope}\right)\}$, as 
+follows: 
+\{(0, 25), (20, 25). Also, with no water table vertices 
+$\{\left(x_\text{wt},y_\text{wt}\right)\}$.
+
+Output: \textit{slope.strat} = [(0, 25), (20, 25)]
+
+Test Case Derivation: \progname{} should accept an input slope with at least 2 
+coordinates.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputXMinEtrEqual}] 
+test-input\_xMinEtrEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with  
+${x_\text{slip}^\text{minEtr}}$ set to 0.
+
+Output: \textit{search.Xetr}[0] = 0
+
+Test Case Derivation: \progname{} should accept values for the search 
+parameters even if they lie on the edges of the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputXMaxExtEqual}] 
+test-input\_xMaxExtEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with 
+${x_\text{slip}^\text{maxExt}}$ set to 70.
+
+Output: \textit{search.Xext}[1] = 70
+
+Test Case Derivation: \progname{} should accept values for the search 
+parameters even if they lie on the edges of the slope.
+
+How test will be performed: Automated test on unit testing framework
     
 \end{enumerate}
 
@@ -1526,7 +1580,7 @@ declared out of scope in Section~\ref{Scope} of this document.
 		\mref{MG-mOutput}& \mref{MG-mArrayOps}& \mref{MG-mRandNum}& 
 		\mref{MG-mPlot} \\
 		\hline
-		\tcref{TC_InputSlope} - \tcref{TC_InputNoWTgamw}                 
+		\tcref{TC_InputSlope} - \tcref{TC_InputXMaxExtEqual}                 
 		& & & X& & & & & & & & & & \\ \hline
 		\tcref{TC_GenAlgXextMin} - \tcref{TC_GenAlgVertices} 
 		& & & & X& & & & & & & & &\\ \hline
