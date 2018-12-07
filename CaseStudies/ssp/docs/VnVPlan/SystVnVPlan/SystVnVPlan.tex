@@ -331,17 +331,35 @@ performed as automated tests on a unit testing framework.
 	test-invalid\_slope\_onePt & 
 	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15)\}\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStartWT} & 
-	test-invalid\_slope\_diffStartWT & 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeHighStartWT} & 
+	test-invalid\_slope\_highStartWT & 
 	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(10, 22), (10.87, 21.28), 
 	(21.14, 
 	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (70, 14)\}\\ 
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffEndWT} & 
-	test-invalid\_slope\_diffEndWT & 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeHighEndWT} & 
+	test-invalid\_slope\_highEndWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22), (10.87, 21.28), 
+	(21.14, 
+	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (80, 14)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeLowStartWT} & 
+	test-invalid\_slope\_lowStartWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(-10, 22), (10.87, 21.28), 
+	(21.14, 
+	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (70, 14)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeLowEndWT} & 
+	test-invalid\_slope\_lowEndWT & 
 	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22), (10.87, 21.28), 
 	(21.14, 
 	19.68), (31.21, 17.17), (38.69, 14.56), (40, 14), (60, 14)\}\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeNonMonoWT} & 
+	test-invalid\_slope\_nonMonoWT & 
+	$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & \{(0, 22), (10.87, 
+	21.28), (21.14, 19.68), (31.21, 17.17), (28.69, 14.56), (40, 14), (60, 
+	14)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePtWT} & 
 	test-invalid\_slope\_onePtWT & 
