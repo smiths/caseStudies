@@ -35,13 +35,23 @@ if A2 > 5
 end
 
 layer_checkA = data(:,3); layersindexA = find(layer_checkA);
-layer_checkB = data(:,5); layersindexB = find(layer_checkB);
+layer_checkB = data(:,4); layersindexB = find(layer_checkB); %This is a workaround to allow for one 0 value for one material property
+layer_checkC = data(:,5); layersindexC = find(layer_checkC);
 
-if ~isequal(layersindexA,layersindexB)
+if ~isequal(layersindexA,layersindexB) && ~isequal(layersindexC,layersindexB) && ~isequal(layersindexA,layersindexC)
     error('Input Error : Stratigraphic soil properties not fully defined')
 end
 
-numlayer = length(layersindexA);
+[numlayer, maxIndex] = max([length(layersindexA), length(layersindexB), length(layersindexC)];
+
+switch maxIndex
+    case 1
+        layersindex = layersindexA
+    case 2
+        layersindex = layersindexB
+    case 3
+        layersindex = layersindexC
+end
 
 i = 1;
 nlayer = data(i,1);         % number of stratigraphic layers
@@ -50,14 +60,14 @@ if nlayer ~= numlayer
 end
 
 for c = 1 : numlayer - 1
-   layer_vertlengths = layersindexA(c+1) - layersindexA(c) - 1;
-   if layer_vertlengths ~= data(layersindexA(c),1)
-       error('Input Error : Expected %d and detected %d vertex sets describing stratigraphic layer %d', data(layersindexA(c),1), layer_vertlengths, i )
+   layer_vertlengths = layersindex(c+1) - layersindex(c) - 1;
+   if layer_vertlengths ~= data(layersindex(c),1)
+       error('Input Error : Expected %d and detected %d vertex sets describing stratigraphic layer %d', data(layersindex(c),1), layer_vertlengths, i )
    end
 end
 exp_rng = 3;
-exp_laststrat = data(layersindexA(end),1);
-exp_piez = data(layersindexA(end) + data(layersindexA(end),1) + 1,1);
+exp_laststrat = data(layersindex(end),1);
+exp_piez = data(layersindex(end) + data(layersindex(end),1) + 1,1);
 if exp_piez > 0
     string_gamw = ' and 1 line describing the weight of water';
     add_gamw = 1;
@@ -66,7 +76,7 @@ else
     add_gamw = 0;
 end
 lengthtoend_Vals = exp_laststrat + exp_piez + exp_rng + 2 + add_gamw; % + 2 for the line with the number of vertices for water table and the line with the value for ftype
-lengthtoend_Size = A1 - layersindexA(end);
+lengthtoend_Size = A1 - layersindex(end);
 if lengthtoend_Vals ~= lengthtoend_Size
     error('Input Error : Expected %d vertex sets describing the last stratigraphic layer, %d vertex set describing the piezometric surface%s, and %d vertex sets describing the search range do not match the detected', exp_laststrat, exp_piez, string_gamw, exp_rng)
 end
