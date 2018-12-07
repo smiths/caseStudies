@@ -266,7 +266,7 @@ N/A
 p{0.45\textwidth} } \hline 
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
 
-  ssp & string & - & - \\ \hline
+  control & string & - & - \\ \hline
 \end{tabular}
 \end{center}
 
@@ -286,7 +286,7 @@ The access program is called with a string parameter.
 
 \subsubsection{Access Routine Semantics}
 
-ssp(\textit{fname}):
+control(\textit{fname}):
 \begin{itemize}
 	\item transition: 
 	\begin{itemize}
@@ -728,7 +728,7 @@ NUM\_ADDS = 2\\
 \renewcommand*{\arraystretch}{1.5}
 \begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
 	slip &=& tuple of (surf : coords, Fs : $\mathbb{R}$, G : coords, X : 
-	coords, wt : $\mathbb{R}$) \\
+	coords, wt : $\mathbb{R}$, slicedSlip : coords) \\
 	slips &=& [slip] \\
 \end{longtable}
 
@@ -773,7 +773,7 @@ genetic\_alg():
 	\item output:
 	\begin{itemize}
 	\item[] \textit{out} $\coloneqq$ 
-	weighter(\textit{slip\_surfs})[0].\textit{surf}, 
+	weighter(\textit{slip\_surfs})[0].\textit{slicedSlip}, 
 	weighter(\textit{slip\_surfs})[0].\textit{Fs}, 
 	weighter(\textit{slip\_surfs})[0].\textit{G}, 
 	and weighter(\textit{slip\_surfs})[0].\textit{X}, where 
@@ -786,7 +786,7 @@ genetic\_alg():
 		and \textit{generate\_slips(xExt)}. Corresponding y-coordinates are 
 		determined by interpolating on the slope geometry. The total number of 
 		coordinates for each slip surface is INIT\_NUM\_VERTICES.
-		\item using kinAdm to verify that the geometry of each potential slip 
+		\item using kin\_adm to verify that the geometry of each potential slip 
 		surface is physically realizable. If any are not, new slip surfaces are 
 		randomly generated until NUM\_SLIPS valid slip surfaces have been 
 		generated,
@@ -801,7 +801,7 @@ genetic\_alg():
 		applying crossovers and mutations to the previous generation, with the 
 		more lowly-weighted members having a greater likelihood of 
 		contributing to the subsequent generations
-		\item applying kinAdm, slicer, morg\_price, and weighter to the new 
+		\item applying kin\_adm, slicer, morg\_price, and weighter to the new 
 		generation
 		\item repeating the above two steps, but every time 
 		$\frac{\text{MIN\_GENS}}{\text{NUM\_ADDS}+1}$ generations have occured, 
@@ -850,7 +850,7 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 		
-		kinAdm & slip & $\mathbb{B}$ & - \\ \hline
+		kin\_adm & slip & $\mathbb{B}$ & - \\ \hline
 		
 	\end{tabular}
 \end{center}
@@ -871,7 +871,7 @@ N/A
 \end{itemize}
 
 \subsubsection{Access Routine Semantics}
-kinAdm(\textit{slip\_surf}):
+kin\_adm(\textit{slip\_surf}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
@@ -1181,7 +1181,7 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 
-  morg\_price & slip & slip & - \\ \hline
+  morg\_price & coords & $\mathbb{R}$, coords, coords & - \\ \hline
 \end{tabular}
 \end{center}
 
@@ -1201,16 +1201,12 @@ morg\_price(\textit{slip\_surf}):
 \begin{itemize}
 	\item output:
 	\begin{itemize}
-		\item[] \textit{out} $\coloneqq$ $\textit{slip\_surf}^\prime$ where 
-		$\textit{slip\_surf}^\prime$.\textit{Fs}, 
-		$\textit{slip\_surf}^\prime$.\textit{G}, and 
-		$\textit{slip\_surf}^\prime$.\textit{X} satisfy the following system of 
+		\item[] \textit{out} $\coloneqq$ \textit{Fs}, \textit{G}, and 
+		\textit{X}, satisfying the following system of 
 		equations, taken from the SRS document. The equations are presented 
 		with the symbols from the SRS document for readability, though the 
-		symbols $F_\text{S}$, $G$, and $X$ correspond to 
-		$\textit{slip\_surf}^\prime$.\textit{Fs}, 
-		$\textit{slip\_surf}^\prime$.\textit{G}, and 
-		$\textit{slip\_surf}^\prime$.\textit{X}, respectively.\\
+		symbols $F_\text{S}$, $G$, and $X$ correspond to \textit{Fs}, 
+		\textit{G}, and \textit{X}, respectively.\\
 		
 		(\iref{SRS-IM_FS}): \( {F_\text{S}}= 
 		\frac{\displaystyle\sum_{i=1}^{n-1} \left[ 
