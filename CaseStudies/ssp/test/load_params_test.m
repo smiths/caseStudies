@@ -8,10 +8,28 @@ function test_input_slope(testCase)
     verifyEqual(testCase, params_layers.strat, expStrat)
 end
 
-function test_input_slope(testCase)
+function test_input_phi(testCase)
     global params_layers;
     expPhi = 0.34906585040;
     verifyEqual(testCase, params_layers.phi, expPhi, 'RelTol', 1e-10)
+end
+
+function test_input_coh(testCase)
+    global params_layers;
+    expCoh = 5000;
+    verifyEqual(testCase, params_layers.coh, expCoh)
+end
+
+function test_input_gam(testCase)
+    global params_layers;
+    expGam = 15000;
+    verifyEqual(testCase, params_layers.gam, expGam)
+end
+
+function test_input_gams(testCase)
+    global params_layers;
+    expGams = 15000;
+    verifyEqual(testCase, params_layers.gams, expGams)
 end
 
 function setupOnce(testCase)
