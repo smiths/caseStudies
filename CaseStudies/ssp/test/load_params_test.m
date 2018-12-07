@@ -116,13 +116,13 @@ function test_input_rtol(testCase)
     verifyEqual(testCase, params_soln.ltor, expLtor)
 end
 
-function test_input_piez(testCase)
+function test_input_noWTpiez(testCase)
     [~, params_piez] = load_params('ValidInputNoWT.txt');
     expPiez = [];
     verifyEqual(testCase, params_piez.piez, expPiez)
 end
 
-function test_input_gamw(testCase)
+function test_input_noWTgamw(testCase)
     [~, params_piez] = load_params('ValidInputNoWT.txt');
     expGamw = 0;
     verifyEqual(testCase, params_piez.gamw, expGamw)
