@@ -32,7 +32,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Nov. 29, 2018 & 1.0 & Initial Draft\\
-Date 2 & 1.1 & Notes\\
+Dec. 1, 2018 & 1.1 & Updates from github feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -120,45 +120,48 @@ Body module is responsible for storing the physical properties of an object such
 
 Type: Automatic.
 					
-Initial State: Initial force on a body is Vec2(0, 0)
+Initial State: Initial force on a body is Vec2(0.0, 0.0)
 					
-Input: b.apply\_force(Vec2(10, 6))
+Input: b.apply\_force(Vec2(10.0, 6.0))
 					
-Output: New total force applied to body is Vec2(10, 6)
+Output: New total force applied to body is Vec2(10.0, 6.0)
 					
-How test will be performed: PyTest 
+How test will be performed: PyTest\\ 
+Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 					
 \item{UTC2}{: Validate apply\_force2\\}
 
 Type: Automatic
 					
-Initial State: Vec2(10, 6)
+Initial State: Vec2(10.0, 6.0)
 					
-Input: b.apply\_force (Vec2(-20, 2))
+Input: b.apply\_force (Vec2(-20.0, 2.0))
 					
-Output: New total force is Vec2(-10, 8)
+Output: New total force is Vec2(-10.0, 8.0)
+Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 
 \item{UTC3}{: Validate apply\_force3\\}
 
 Type: Automatic
 
-Initial State: Vec2(-2, -1)
+Initial State: Vec2(-2.0, -1.0)
 
-Input: b.apply\_force (Vec2(-5, -8))
+Input: b.apply\_force (Vec2(-5.0, -8.0))
 
-Output: New total force is Vec2(-7, -8)
+Output: New total force is Vec2(-7.0, -9.0)
 					
-How test will be performed: PyTest
+How test will be performed: PyTest\\
+Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 
 \item{UTC4}{: Validate apply\_torque\\}
 
 Type: Automatic
 
-Initial State: 0
+Initial State: 0.0
 
-Input: apply\_torque(100)
+Input: apply\_torque(100.0)
 
-Output: self.torque=100
+Output: self.torque=100.0
 
 How test will be performed: PyTest
 
@@ -174,8 +177,7 @@ Output: Expected result of(space is body.space): True
 
 How test will be performed: PyTest\\
 
-{-Not sure how to unit test set\_space, each body has a reference to space, and it accesses the gravity in space.\\
--update: updates parameters after a cycle\\}
+
 \end{enumerate}
 
 \subsubsection{Vector Module}
@@ -190,70 +192,125 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	Initial State: 
 	
-	Input: Vec2(2,5) + Vec2(1,1)
+	Input: Vec2(2.22,5.17) + Vec2(1.0,1.0)
 	
-	Output: Vec2(3,6)
+	Output: Vec2(3.22, 6.17)
 	
-	How test will be performed: PyTest 
+	How test will be performed: PyTest \\
+	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC7}{: Validate vector subtraction\\}
-	
-	Type: Automatic
-	
-	Initial State: 
-	
-	Input: Vec2(2,5) - Vec2(1,1)
-	
-	Output: New total force is Vec2(-1, 4)
-	
-	\item{UTC8}{: Validate scalar multiplication\\}
+	\item{UTC7}{: Validate vector subtraction1\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: apply force Vec(2, 4) * 2
+	Input: Vec2(2.0 ,5.0 ) - Vec2(1.0 ,2.0)
 	
-	Output: New total force is Vec2(4, 8)
+	Output: Vec2(1.0, 3.0)\\
+	How will test be performed: PyTest\\
+	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
+	
+	\item{UTC8}{: Validate vector subtraction2\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Vec2(-20.0,5.0) - Vec2(1.0,-10.0)
+	
+	Output: Vec2(-21.0, 15.0)\\
+	How will test be performed: PyTest\\
+	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
+	
+	\item{UTC9}{: Validate scalar multiplication1\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Vec(2.0, 4.0) * 2.0
+	
+	Output: Vec2(4.0, 8.0)
+	
+	How test will be performed: PyTest
+	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/multiply3/}
+	
+	\item{UTC10}{: Validate scalar multiplication2\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input:  Vec(-2.0, -4.0) * 2.0
+	
+	Output:  Vec2(-4.0, -8.0)
+	
+	How test will be performed: PyTest
+	Ref. source:\url{https://onlinemschool.com/math/assistance/vector/multiply3/}
+	
+	\item{UTC11}{: Validate scalar division1\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: apply force Vec(-10.2, 4.2) / 2.0
+	
+	Output: New total force is Vec2(-5.1, 2.1)
 	
 	How test will be performed: PyTest
 	
-	\item{UTC9}{: Validate scalar division\\}
+	\item{UTC12}{: Validate scalar division2\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: apply force Vec(2, 4) / 2
+	Input: Vec(22.24, 4.34) / 2.0
 	
-	Output: New total force is Vec2(1, 2)
+	Output: Vec2(11.12, 2.17)
 	
 	How test will be performed: PyTest
 	
-	\item{UTC10}{: Validate vector magnitude\\}
+	\item{UTC13}{: Validate vector magnitude1\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: Velocity = Vec(2, 0)
+	Input: Velocity = Vec(2.0, 0.0)
 	
 	Output: magnitude = V.mag() = 2.0
 	
 	How test will be performed: PyTest\\
-	Ref: \url{https://www.omnicalculator.com/math/distance}
+	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
 	
-	\item{UTC11}{: Validate vector dot product\\}
+	\item{UTC14}{: Validate vector magnitude2\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: Vec2.dot(Vec2(1,2), Vec2(2,1))
+	Input: Velocity = Vec(-2.0, -4.0)
+	
+	Output: magnitude = V.mag() = -5.65
+	
+	How test will be performed: PyTest\\
+	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
+	\item{UTC15}{: Validate vector dot product\\}
+	
+	Type: Automatic
+	
+	Initial State: 
+	
+	Input: Vec2.dot(Vec2(1.0,2.0), Vec2(2.0,1.0))
 	
 	Output: magnitude = 4.0
 	
-	How test will be performed: PyTest
+	How test will be performed: PyTest\\
+	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/multiply/}
+	
 	
 \end{enumerate}
 
