@@ -42,7 +42,7 @@ if ~isequal(layersindexA,layersindexB) && ~isequal(layersindexC,layersindexB) &&
     error('Input Error : Stratigraphic soil properties not fully defined')
 end
 
-[numlayer, maxIndex] = max([length(layersindexA), length(layersindexB), length(layersindexC)];
+[numlayer, maxIndex] = max([length(layersindexA), length(layersindexB), length(layersindexC)]);
 
 switch maxIndex
     case 1
