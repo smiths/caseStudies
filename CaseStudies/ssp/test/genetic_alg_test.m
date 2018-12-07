@@ -19,7 +19,7 @@ end
 
 function test_genetic_alg_xEtrMax(testCase)
     global cslip params_search;
-    verifyEqual(testCase, cslip(1,1) >= params_search.Xetr(2), true)
+    verifyEqual(testCase, cslip(1,1) <= params_search.Xetr(2), true)
 end
 
 function test_genetic_alg_yLimMin(testCase)
@@ -50,7 +50,7 @@ function test_genetic_alg_vertices(testCase)
     global cslip;
     init_num_vertices = 4;
     num_adds = 2;
-    num_vertices = (init_num_vertices * 2 ^ num_adds) - (2 ^ num_adds - 1)
+    num_vertices = (init_num_vertices * 2 ^ num_adds) - (2 ^ num_adds - 1);
     verifyEqual(testCase, length(cslip(1,:)), num_vertices)
 end
 

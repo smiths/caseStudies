@@ -1,4 +1,4 @@
-function [cslip, F, Nint, Tint, slips, gens, Fgens, nof, rt, switch7, switch13 ] = ...
+function [cslip, F, Nint, Tint, slips, unslicedcslip, gens, Fgens, nof, rt, switch7, switch13 ] = ...
             genetic_alg (params_layers,...
     params_piez, params_search, params_soln, params_load)
 % Slope Stability Analysis Program
@@ -783,6 +783,7 @@ cslip = slips{1,6};
 F = slips{1,2};
 Nint = slips{1,3};
 Tint = slips{1,4};
+unslicedcslip = slips{1,1};
 
 % compute run time
 rt = cputime-rt;
