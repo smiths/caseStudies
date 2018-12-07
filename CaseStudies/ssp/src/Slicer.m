@@ -1,7 +1,7 @@
-function [evalslip] = Slicer(evnslc, slip, inslice)
+function [evalslip] = slicer(evnslc, slip, inslice)
 
 % Slope Stability Analysis Program
-% Slicer.m
+% slicer.m
 %
 % 20 August 2015
 % 

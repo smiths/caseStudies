@@ -1,5 +1,5 @@
 function [pass, newslip, ReportCode, CodeSlip, thetalist] = ...
-   KinAdm(slip, strat1, params_soln)
+   kin_adm(slip, strat1, params_soln)
 
 % Slope Stability Analysis Program
 % KinAdm.m

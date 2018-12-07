@@ -1,7 +1,7 @@
-function ssp(fname)
+function control(fname)
 
 % Slope Stability Analysis Program
-% Control.m
+% control.m
 %
 % 20 August 2015
 % 
@@ -52,20 +52,24 @@ function ssp(fname)
 % -------------------------------------------------------------------------
 
 [params_layers, params_piez, params_search,... % Get input data
-    params_soln, params_load] = Input(fname);
+    params_soln, params_load] = load_params(fname);
+
+verify_params(params_layers, params_piez, params_search, params_soln, params_load);
 
 
-% -------------------------------------------------------------------------
+% ------------------------------------------------------------------------- 
 % ANALYZE SLOPE USING GENETIC ALGORITHM
 % -------------------------------------------------------------------------
 
 [cslip, F, Nint, Tint] = ... % run genetic algorithm search
-    GenAlg(params_layers, params_piez, params_search, params_soln, params_load);
+    genetic_alg(params_layers, params_piez, params_search, params_soln, params_load);
 
 
 % -------------------------------------------------------------------------
 % OUTPUT RESULTS OF MORG-PRICE ANALYSIS (WITH PLOTS)
 % -------------------------------------------------------------------------
 
-Output(cslip, F, Nint, Tint, params_layers, params_piez,... % Reanalyze and plot
+verify_output(F);
+
+output(cslip, F, Nint, Tint, params_layers, params_piez,... % Reanalyze and plot
 params_soln, params_load, params_search, fname);

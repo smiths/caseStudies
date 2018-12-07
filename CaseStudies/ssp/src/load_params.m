@@ -1,6 +1,6 @@
 function [params_layers, params_piez, params_search,...
     params_soln, params_load]=...
-    Input(fname)
+    load_params(fname)
 
 % Slope Stability Analysis Program
 % Input.m
@@ -85,31 +85,13 @@ for ilayer=1:nlayer     % loop through layers
     npts = data(i,1);           % number of points in strat geom
     
     phi(ilayer) = data(i,2);
-    if phi(ilayer) <= 0 || phi(ilayer) >= 90
-        error('Input Error : Effective angle of friction of layer %d does not meet physical constraints, must be between 0 and 90 degrees, given %0.1f', ilayer, phi(ilayer))
-    end
     coh(ilayer) = data(i,3);
-    if coh(ilayer) <= 0 
-        error('Input Error : cohesion of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, coh(ilayer))
-    end
     gam(ilayer) = data(i,4);
-    if gam(ilayer) <= 0 
-        error('Input Error : Soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gam(ilayer) )
-    end
     gams(ilayer) = data(i,5);
-    if gams(ilayer) <= 0 
-        error('Input Error : Saturated soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gams(ilayer))
-    end
     
     i = i+1;
     
     strat{ilayer} = data(i:i+npts-1,1:2)';   % read strat geom
-    
-    for c = 1 : length(strat{ilayer}) - 1
-        if strat{ilayer}(1,c+1) < strat{ilayer}(1,c)
-            error('Input Error : Given x-ordinates describing layer %d are not in an increasing order', ilayer)
-        end
-    end
     
     if ilayer == 1
         Y_start = strat{1}(2,1);
@@ -123,26 +105,12 @@ for ilayer=1:nlayer     % loop through layers
                 error('Input Error : Detected soil motion direction (right to left), does not match given soil motion')
             end
         end
-    else
-        strat_init = strat{1}(1,1);
-        strat_fin = strat{1}(1,end);
-        if strat{ilayer}(1,1) ~= strat_init || strat{ilayer}(1,end) ~= strat_fin
-            error('Input Error : Given initial x-ordinate of %0.1f, and final x-ordinate of %0.1f, of layer %d, do not match those given in the first layer with an initial x of %0.1f and final x of %0.1f', strat{ilayer}(1,1), strat{ilayer}(1,end), ilayer, strat_init, strat_fin)
-        end
     end
     
     i = i+npts;
     
 end
 phi = phi*(pi/180);
-
-strat_init = strat{1}(1,1);
-strat_fin = strat{1}(1,end);
-for c = 2:length(nlayer)
-    if strat{c}(1,1) ~= strat_init || strat{c}(1,end) ~= strat_fin
-        error('Input Error : Given initial x-ordinate of %0.1f, and final x-ordinate of %0.1f, of layer %d, do not match those given in the first layer with an initial x of %0.1f and final x of %0.1f', strat{c}(1,1), strat{c}(1,end), c, strat_init, strat_fin)
-    end
-end
 
 params_layers = struct('strat',strat, 'phi',phi, 'coh',coh,...
     'gam',gam, 'gams',gams);
@@ -157,18 +125,6 @@ if nwpts > 0
     piez = data(i:i+nwpts-1,1:2)';   % piez surface data
     
     i=i+nwpts; % jump for entrance/exit input
-    
-    for c = 1 : length(piez) - 1
-        if piez(1,c+1) < piez(1,c)
-            error('Input Error : Given x-ordinates describing the piezometric surface are not in an increasing order')
-        end
-    end
-    
-    strat_init = strat{1}(1,1);
-    strat_fin = strat{1}(1,end);
-    if piez(1,1) ~= strat_init || piez(1,end) ~= strat_fin
-        error('Input Error : Given initial x-ordinate of %0.1f, and final x-ordinate of %0.1f, of the piezometric surface, do not match those given in the first layer with an initial x of %0.1f and final x of %0.1f', piez(1,1), piez(1,end), strat_init, strat_fin)
-    end
     
 else
     

@@ -1,5 +1,5 @@
 function [ F, lam, Nint, Tint, thrust, piezthrust, lamArray ] = ...
-    MorgPriceSolver(slip, params_layers, params_piez,...
+    morg_price(slip, params_layers, params_piez,...
     params_soln, params_load)
 % 
 % Slope Stability Analysis Program
@@ -87,7 +87,7 @@ b = slip(1,2:n+1) - slip(1,1:n);
 
 % COMPUTE SLIP FORCE/ANGLE/SOIL PROPERTIES
 %{
-Compute using the PropertySorter.m module. Recieve the params_soilBase,
+Compute using the prop_calc.m module. Recieve the params_soilBase,
 params_angles, and params_internalForce structures from the property sorter
 algorithm, as outlined in the MIS. Identifies forces between slices, angles 
 of the base and top surfaces of slices, and the soil properties at the base 
@@ -96,7 +96,7 @@ soil interslice properties.
 %}
 [params_internalForce, params_angles,...
     ~,params_soilBase, hw, h]=...
-    PropertySorter(slip,params_layers,params_piez);
+    prop_calc(slip,params_layers,params_piez);
 
 alpha = params_angles.Alpha; % angle extraction
 beta = params_angles.Beta;

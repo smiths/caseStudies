@@ -1,8 +1,8 @@
 function [cslip, F, Nint, Tint, slips, gens, Fgens, nof, rt, switch7, switch13 ] = ...
-            GenAlg (params_layers,...
+            genetic_alg (params_layers,...
     params_piez, params_search, params_soln, params_load)
 % Slope Stability Analysis Program
-% Output.m
+% genetic_alg.m
 %
 % 20 August 2015
 % 
@@ -170,7 +170,7 @@ slips       container for slip surfaces, factors of safety, and weighting
 pool        container for parent and child slip surfaces,
             dimension(Mpool,3)
 nslip       counter for number of surfaces added to population
-nof         counter for number of objective function, MorgPriceSolver, evaluations
+nof         counter for number of objective function, morg_price, evaluations
 %}
 Mslip = 20;
 Mpool = 2*Mslip;
@@ -230,14 +230,14 @@ The initialization of a random surface is as follows:
     points and angles.
 6. Select middle points along these line segments with a bias in the
     direction of the intersection point.
-7. Check admissibility criteria for the surface using the KinAdm.m module.
+7. Check admissibility criteria for the surface using the kin_adm.m module.
 8. If the surface passes the checks in step 7, add it to the
     population.
 9. Repeat steps 1-8 until the size of the population reaches Mslip.
-10. Divide each member of the initial population using the Slicer.m
+10. Divide each member of the initial population using the slicer.m
     module.
 11. Sort the population from lowest to highest factor of safety and
-    compute the weighting factor for each using the SlipWeighter.m module.
+    compute the weighting factor for each using the weighter.m module.
 %}
 while nslip < Mslip     % (9) iterate until population is filled
     
@@ -300,7 +300,7 @@ while nslip < Mslip     % (9) iterate until population is filled
     
     % (7) Evaluate admissibility criteria
     [pass, newslip] =...
-   KinAdm(newslip, strat{1}, params_soln);
+   kin_adm(newslip, strat{1}, params_soln);
     
     % (8) If the surface is admissible, add it to the initial population
     if pass
@@ -313,10 +313,10 @@ end
 % (10) Evaluate factor of safety for each initial surface
 for i = 1:Mslip
     
-    slips{i,6} = Slicer(evnslc, slips{i,1}, nslice);
+    slips{i,6} = slicer(evnslc, slips{i,1}, nslice);
     
     % evaluate factor of safety
-    [slips{i,2}, ~, slips{i,3}, slips{1,4}] = MorgPriceSolver(slips{i,6}, params_layers, params_piez,...
+    [slips{i,2}, ~, slips{i,3}, slips{1,4}] = morg_price(slips{i,6}, params_layers, params_piez,...
         params_soln, params_load);
     nof = nof+1;
     
@@ -325,7 +325,7 @@ end
 % (11) Sort the list of surfaces by factor of safety and apply the
 % weighting scheme
 
-slips = SlipWeighter(Mslip, slips);
+slips = weighter(Mslip, slips);
 
 F = slips{1,2}; % initialize minimum factor of safety
 Fgens = [Fgens F];
@@ -356,18 +356,18 @@ are as follows:
 	by Li et al (2010) if a random number is less than rmut.
 4. Admissibility Check
 	Ensure each slip surface in the pool of children passes the
-	kinematic admissibility criterion using the KinAdm.m module. If any of 
+	kinematic admissibility criterion using the kin_adm.m module. If any of 
     these fail, assign a factor of safety of 1000 to the surface so that it 
     will not be selected for the next generation.
 5. Evaluation
 	Compute the factor of safety for each of the slip surfaces in the
 	pool of children (unless it has already been set in step 4), using the 
-    MorgPriceSolver.m module.
+    morg_price.m module.
 6. Tournament Selection
 	(i) Sort the tournament pool, which contains parents and children from
             the crossover and mutation stages, based on factor of safety
             and assign weights to each slip surface, using the 
-            SlipWeighter.m module.
+            weighter.m module.
     (ii) Immediately place the minimum factor of safety from the tournament
             pool into the population for the next generation to prevent
             loss of this information.
@@ -376,7 +376,7 @@ are as follows:
             next generation. Assign a weight of 0 to the surface that
             was selected so that it is only selected once.
 	(iv) Once the new population is filled, sort it and assign new
-            weights, again using the SlipWeighter.m module for the next 
+            weights, again using the weighter.m module for the next 
             round of crossover.
 	(v) Compute relative difference in minimum factor of safety and
             increment counters as necessary.
@@ -658,7 +658,7 @@ while 1
     for i = Mslip+1:Mpool
         
         [pass, pool{i,1}]=...
-   KinAdm(pool{i,1}, strat{1}, params_soln);
+   kin_adm(pool{i,1}, strat{1}, params_soln);
         
         % if kinematic admissibility failed, assign high factor of safety
         % so that this surface will not be selected in the tournament
@@ -669,9 +669,9 @@ while 1
         % factor of safety
         else
             
-            pool{i,6} = Slicer(evnslc, pool{i,1}, []);    
+            pool{i,6} = slicer(evnslc, pool{i,1}, []);    
 
-            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = MorgPriceSolver(pool{i,6}, ...
+            [pool{i,2}, ~, pool{i,3}, pool{i,4}] = morg_price(pool{i,6}, ...
                 params_layers, params_piez, params_soln, params_load);
             nof = nof+1;
             
@@ -683,7 +683,7 @@ while 1
     % (6,i) Sort the tournament pool by factor of safety and apply the
     % weighting scheme
     
-    pool = SlipWeighter(Mpool, pool);
+    pool = weighter(Mpool, pool);
     
     % (6,ii) Place the surface with the minimum factor of safety so far in
     % the population for the next generation.
@@ -741,7 +741,7 @@ while 1
     % (6,iv) Sort the new population and assign weights for the next round
     % of crossover
     
-    slips = SlipWeighter(Mslip, slips);
+    slips = weighter(Mslip, slips);
     
     % (6,v) Compute improvement of F and increment counters
     F = slips{1,2};

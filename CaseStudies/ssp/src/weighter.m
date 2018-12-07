@@ -1,4 +1,4 @@
-function [newslips] = SlipWeighter (Meval, slipsurfs)
+function [newslips] = weighter(Meval, slipsurfs)
 
 % Slope Stability Analysis Program
 % SlipWeighter.m

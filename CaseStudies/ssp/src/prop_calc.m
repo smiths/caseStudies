@@ -1,10 +1,10 @@
 function [params_internalForce, params_angles,...
     params_soilInterior, params_soilBase, hw, h]=...
-    PropertySorter(slip, params_layers, params_piez)
+    prop_calc(slip, params_layers, params_piez)
 
 % 
 % Slope Stability Analysis Program
-% PropertySorter.m
+% prop_calc.m
 %
 % 20 August 2015
 % 

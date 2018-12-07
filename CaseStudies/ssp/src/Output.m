@@ -1,8 +1,8 @@
-function Output(cslip, F, Nint, Tint, params_layers, params_piez,...
+function output(cslip, F, Nint, Tint, params_layers, params_piez,...
     params_soln, params_load, params_search, fname)
 
 % Slope Stability Analysis Program
-% Output.m
+% output.m
 %
 % 20 August 2015
 % 
