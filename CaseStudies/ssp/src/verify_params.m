@@ -51,7 +51,7 @@ for ilayer=1:nlayer     % loop through layers
         error('verify_params:badSatUnitWeight','Input Error : Saturated soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gams(ilayer))
     end
 
-    if length(strat{ilayer}) < 2
+    if length(strat{ilayer}(1,:)) < 2
         error('verify_params:NotEnoughSlopeVertices','Input Error : Each slope layer must be described by at least 2 vertices')
     end
     
@@ -72,7 +72,7 @@ end
 
 if length(piez) > 0
 
-    if length(piez) < 2
+    if length(piez(1,:)) < 2
         error('verify_params:NotEnoughPiezVertices','Input Error : Piezometric surface must be described by at least 2 vertices')
     end
     

@@ -46,11 +46,11 @@ end
 
 switch maxIndex
     case 1
-        layersindex = layersindexA
+        layersindex = layersindexA;
     case 2
-        layersindex = layersindexB
+        layersindex = layersindexB;
     case 3
-        layersindex = layersindexC
+        layersindex = layersindexC;
 end
 
 i = 1;
