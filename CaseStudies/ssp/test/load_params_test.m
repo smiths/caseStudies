@@ -40,7 +40,7 @@ end
 
 function test_input_gamw(testCase)
     global params_piez;
-    expGamw = 15000;
+    expGamw = 9800;
     verifyEqual(testCase, params_piez.gamw, expGamw)
 end
 
