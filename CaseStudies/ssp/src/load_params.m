@@ -164,7 +164,7 @@ cncvu = 1; % slopes must be concave (Kin Adm)
 obtu = 1; % slopes must be obtuse (Kin Adm)
 evnslc = 1; % Slice evenly
 
-i = i+1
+i = i+1;
 ftype = data(i,1);
 
 params_soln = struct('ltor',ltor, 'ftype',ftype,...
