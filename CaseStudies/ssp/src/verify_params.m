@@ -50,7 +50,7 @@ for ilayer=1:nlayer     % loop through layers
         error('Input Error : Saturated soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gams(ilayer))
     end
 
-    if length(start{ilayer}) < 2
+    if length(strat{ilayer}) < 2
         error('Input Error : Each slope layer must be described by at least 2 vertices')
     end
     
