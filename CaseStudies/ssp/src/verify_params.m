@@ -52,7 +52,7 @@ for ilayer=1:nlayer     % loop through layers
     end
 
     if length(strat{ilayer}(1,:)) < 2
-        error('verify_params:NotEnoughSlopeVertices','Input Error : Each slope layer must be described by at least 2 vertices')
+        error('verify_params:NotEnoughLayerVertices','Input Error : Each slope layer must be described by at least 2 vertices')
     end
     
     for c = 1 : length(strat{ilayer}) - 1
@@ -102,11 +102,11 @@ for i = 1:2
 end
 
 if params_soln.ltor == 1
-    strat_max = strat{1}(2,1)
-    strat_min = strat{1}(2,end)
+    strat_max = strat{1}(2,1);
+    strat_min = strat{1}(2,end);
 else
-    strat_max = strat{1}(2,end)
-    strat_min = strat{1}(2,1)
+    strat_max = strat{1}(2,end);
+    strat_min = strat{1}(2,1);
 end
 
 if max(Ylim) < strat_min
