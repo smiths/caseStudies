@@ -30,6 +30,7 @@ gam = params_layers.gam;
 gams = params_layers.gams;
 
 piez = params_piez.piez; % piez extraction
+gamw = params_piez.gamw;
 
 Xetr = params_search.Xetr; % search extraction
 Xext = params_search.Xext;
@@ -87,6 +88,10 @@ if length(piez) > 0
     
 end
 
+if gamw <= 0 
+    error('verify_params:badWatUnitWeight','Input Error : Unit weight of water %0.1f does not meet physical constraints, must be greater than 0', gamw)
+end
+
 for i = 1:2
     if Xetr(i) < strat_init || Xetr(i) > strat_fin
         error('verify_params:XEtrGuessOutOfBounds','Input Error : Given bound on x of slip surface entry %0.1f is not between minimum slope x of %0.1f and maximum slope x of %0.1f', Xetr(i), strat_init, strat_fin)
@@ -96,4 +101,20 @@ for i = 1:2
     end
 end
 
-end     
+if params_soln.ltor == 1
+    strat_max = strat{1}(2,1)
+    strat_min = strat{1}(2,end)
+else
+    strat_max = strat{1}(2,end)
+    strat_min = strat{1}(2,1)
+end
+
+if max(Ylim) < strat_min
+    error('verify_params:YMaxGuessOutOfBounds','Input Error : Given upper limit on slip surface %0.1f is less than the minimum y value of the slope', max(Ylim))
+end    
+
+if min(Ylim) > strat_max
+    error('verify_params:YMinGuessOutOfBounds','Input Error : Given lower limit on slip surface %0.1f is greater than the maximum y value of the slope', min(Ylim))
+end 
+
+end

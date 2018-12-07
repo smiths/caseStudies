@@ -324,8 +324,8 @@ performed as automated tests on a unit testing framework.
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeNonMonotonic} & 
 	test-invalid\_slope\_nonMono & 
-	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
-	(30, 20), (20, 25), (70, 25)\}\\ 
+	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 25), (20, 25), 
+	(30, 20), (20, 15), (70, 15)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePt} & 
 	test-invalid\_slope\_onePt & 
@@ -393,10 +393,7 @@ performed as automated tests on a unit testing framework.
 	test-invalid\_slip\_yMin & ${y_\text{slip}^\text{min}}$ & 30\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYMax} & 
-	test-invalid\_slip\_yMax & ${y_\text{slip}^\text{min}}$ & 0\\ 
-	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlipYEqual} & 
-	test-invalid\_slip\_yEqual & ${y_\text{slip}^\text{min}}$ & 5\\ 
+	test-invalid\_slip\_yMax & ${y_\text{slip}^\text{max}}$ & 0\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidCohesion0} & 
 	test-invalid\_cohesion\_0 & $c'$ & 0\\ 
