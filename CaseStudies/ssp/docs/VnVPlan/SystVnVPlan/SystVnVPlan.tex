@@ -322,33 +322,10 @@ performed as automated tests on a unit testing framework.
 	\hline
 	\textbf{Test Case} & \textbf{Test Name} & \textbf{Input} & \textbf{Value} \\
 	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDecToInc} & 
-	test-invalid\_slope\_decToInc & 
-	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 25), (20, 25), 
-	(30, 20), 
-	(40, 25), 
-	(70, 25)\}\\ 
-	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeIncToDec} & 
-	test-invalid\_slope\_incToDec & 
+	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeNonMonotonic} & 
+	test-invalid\_slope\_nonMono & 
 	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
-	(30, 20), 
-	(40, 15), 
-	(70, 15)\}\\ 
-	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffStart} & 
-	test-invalid\_slope\_diffStart & 
-	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
-	(30, 20), 
-	(40, 25), 
-	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (70, 25)\}\\ 
-	\hline
-	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeDiffEnd} & 
-	test-invalid\_slope\_diffEnd & 
-	$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & \{(0, 15), (20, 15), 
-	(30, 20), 
-	(40, 25), 
-	(70, 25)\}, \{(10, 15), (20, 15), (30, 20), (40, 25), (60, 25)\}\\ 
+	(30, 20), (20, 25), (70, 25)\}\\ 
 	\hline
 	TC\refstepcounter{testnum}\thetestnum \label{TC_InvalidSlopeOnePt} & 
 	test-invalid\_slope\_onePt & 
@@ -553,7 +530,7 @@ Input: As described in Table~\ref{ExValidInputs}.
 
 Output: Relative error between the factor of safety calculated by \progname{} 
 and the factor of safety calculated by the original version of \progname{}, 
-0.9804, which is assumed to be correct and can be found at \newline
+0.9835, which is assumed to be correct and can be found at \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
 {https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
 
@@ -666,7 +643,7 @@ constant. This is accomplished by setting the \textit{const\_f} input to 1.
 
 Output: \progname{} runs to completion with no errors and the output is similar 
 to Figures~\ref{OrigProgSlip} and \ref{OrigProgForces}, though not identical. 
-The relative difference in the factor of safety output compared to 0.9804 (the 
+The relative difference in the factor of safety output compared to 0.9835 (the 
 known factor of safety output by the original program) will also be reported.
 
 How test will be performed: Visual inspection of output.
@@ -937,7 +914,8 @@ with an ``X'' may have to be modified as well.
 		UnitVnVPlan \tcref{UVnV-TC_InputSlope} - 
 		\tcref{UVnV-TC_InputXMaxExtEqual}               
 		& X& & & & & & & & & & \\ \hline
-		\tcref{TC_InvalidSlopeDecToInc} - \tcref{TC_InvalidUnitWtWaterNegative} 
+		\tcref{TC_InvalidSlopeNonMonotonic} - 
+		\tcref{TC_InvalidUnitWtWaterNegative} 
 		& & X& & & & & & & & & \\ \hline
 		\tcref{TC_Ex1FS} - \tcref{TC_OrigProgSlip}                             
 		& & & X& X& X& & & & & & \\ \hline

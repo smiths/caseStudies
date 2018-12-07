@@ -484,7 +484,7 @@ load\_params(\textit{fname}):
 	\begin{itemize}
 		\item[] \textit{exc} $\coloneqq$ ($\lnot (\forall(i : \mathbb{Z} | i 
 		\in [0..|slope.strat|-2] : slope.strat[i].x - slope.strat[i+1].x \leq 
-		0))$ $\Rightarrow$ badSlopeGeometry\\
+		0))$ $\lor |slope.strat| < 2$ $\Rightarrow$ badSlopeGeometry\\
 		$|$ $\lnot (0 < slope.phi < 90)$ $\Rightarrow$ 
 		badEffAngleFriction\\
 		$|$ $\lnot (0 < slope.coh)$ $\Rightarrow$ 
@@ -496,8 +496,8 @@ load\_params(\textit{fname}):
 		$|$ $\lnot (\forall(i : \mathbb{Z} | i \in 
 		[0..|piez.piez|-2] : piez.piez[i].x - piez.piez[i+1].x \leq 0))\\ 
 		\lor piez.piez[0].x \neq slope.strat[0].x \\
-		\lor piez.piez[|piez.piez|-1].x \neq slope.strat[|slope.strat|-1].x$\\ 
-		$\Rightarrow$ badPiezGeometry\\
+		\lor piez.piez[|piez.piez|-1].x \neq slope.strat[|slope.strat|-1].x\\ 
+		\lor |piez.piez| = 1$ $\Rightarrow$ badPiezGeometry\\
 		$|$ ($\textit{slope.strat}[|\textit{slope.strat}|-1].x > 
 		\textit{slope.strat}[0].x$ $\Rightarrow$ $\forall(i : \mathbb{Z} | i 
 		\in [0..1] :\\
