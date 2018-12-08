@@ -43,8 +43,7 @@ function test_output_inputYlimMax(testCase)
 end
 
 function test_output_inputFtype(testCase)
-    global params_soln;
-    outputText = fileread('outputtest.out');
+    global params_soln outputText;
     if params_soln.ftype
         textToSearchFor = 'constant (Spencer)';
     else
@@ -54,22 +53,37 @@ function test_output_inputFtype(testCase)
 end
 
 function test_output_Fs(testCase)
-    global F;
-    actF = dlmread('outputtest.out', ' ', [34 10 34 10]);
-    verifyEqual(testCase, actF, F)
+    global outputText;
+    patternFs = 'Fs =[\t]*1.000';
+    verifyEqual(testCase, isempty(regexp(outputText, patternFs)), false)
 end
+
+function test_output_cslip(testCase)
+    global cslip;
+    cslipX = dlmread('outputtest.out', ' ', [23 2 27 2]);
+    cslipY = dlmread('outputtest.out', ' ', [23 6 27 6]);
+    verifyEqual(testCase, cslipX == cslip(1,:) && cslipY == cslip(2,:), true)
+end
+
+% function test_output_normal(testCase)
+%     global cslip;
+%     cslipX = dlmread('outputtest.out', ' ', [23 2 27 2]);
+%     cslipY = dlmread('outputtest.out', ' ', [23 6 27 6]);
+%     verifyEqual(testCase, cslipX == cslip(1,:) && cslipY == cslip(2,:), true)
+% end
 
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
-    global params_search params_soln F
+    global params_search params_soln F outputText;
     [params_layers, params_piez, params_search, params_soln, params_load] = ...
         load_params('ValidInput.txt');
     cslip = [10 20 30 40 50; 25 20 10 15 20];
     F = 1;
-    Nint = [20 30 40; 50 100 75];
-    Tint = [20 30 40; -25 -75 -50];
+    Nint = [50 100 75];
+    Tint = [-25 -75 -50];
     output(cslip, F, Nint, Tint, params_layers, params_piez, params_search, ...
         params_soln, params_load, 'outputtest.dat');
+    outputText = fileread('outputtest.out');
 end
 
 % function teardownOnce(testCase)

@@ -136,7 +136,7 @@ fprintf(fout, 'Fs =\t\t%5.4f\r\n', F);
 fprintf(fout, '\r\n\r\n');
 fprintf(fout, 'Interslice Forces\r\n');
 fprintf(fout, '\r\n');
-fprintf(fout, '        x         N_mp         T_mp\r\n');
+fprintf(fout, '        x         G         X\r\n');
 fprintf(fout, '%9.4f  %11.3f  %11.3f\r\n', ...
                     [   cslip(1,2:end-1);
                         Nint;
