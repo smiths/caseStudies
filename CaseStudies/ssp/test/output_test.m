@@ -54,7 +54,7 @@ end
 
 function test_output_Fs(testCase)
     global F;
-    actF = dlmread('outputtest.out', ' ', [32 2 32 2]);
+    actF = dlmread('outputtest.out', ' ', [32 0 32 0]);
     verifyEqual(testCase, actF, F)
 end
 
@@ -62,7 +62,7 @@ function test_output_cslip(testCase)
     global cslip;
     cslipX = dlmread('outputtest.out', ' ', [23 2 27 2]);
     cslipY = dlmread('outputtest.out', ' ', [23 6 27 6]);
-    verifyEqual(testCase, all(cslipX == cslip(1,:)) && all(cslipY == cslip(2,:)), true)
+    verifyEqual(testCase, all(cslipX == cslip(1,:)') && all(cslipY == cslip(2,:)'), true)
 end
 
 function test_output_normal(testCase)
@@ -91,6 +91,6 @@ function setupOnce(testCase)
     outputText = fileread('outputtest.out');
 end
 
-% function teardownOnce(testCase)
-%     delete 'outputtest.out';
-% end
+function teardownOnce(testCase)
+    delete 'outputtest.out';
+end
