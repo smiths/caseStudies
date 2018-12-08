@@ -26,7 +26,7 @@ else % specified # of slices
 end
 
 nvtx = size(slip,2);
-nsubslice = xslice / (nvtx-1);
+nsubslice = floor(xslice / (nvtx-1));
 
 if evnslc
     % initialize surface for evaluation
