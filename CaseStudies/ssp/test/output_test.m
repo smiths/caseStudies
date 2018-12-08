@@ -62,19 +62,24 @@ function test_output_cslip(testCase)
     global cslip;
     cslipX = dlmread('outputtest.out', ' ', [23 2 27 2]);
     cslipY = dlmread('outputtest.out', ' ', [23 6 27 6]);
-    verifyEqual(testCase, cslipX == cslip(1,:) && cslipY == cslip(2,:), true)
+    verifyEqual(testCase, all(cslipX == cslip(1,:)) && all(cslipY == cslip(2,:)), true)
 end
 
-% function test_output_normal(testCase)
-%     global cslip;
-%     cslipX = dlmread('outputtest.out', ' ', [23 2 27 2]);
-%     cslipY = dlmread('outputtest.out', ' ', [23 6 27 6]);
-%     verifyEqual(testCase, cslipX == cslip(1,:) && cslipY == cslip(2,:), true)
-% end
+function test_output_normal(testCase)
+    global Nint;
+    normForces = dlmread('outputtest.out', ' ', [38 9 40 9]);
+    verifyEqual(testCase, all(normForces == Nint), true)
+end
+
+function test_output_shear(testCase)
+    global Tint;
+    shearForces = dlmread('outputtest.out', ' ', [38 15 40 15]);
+    verifyEqual(testCase, all(shearForces == Tint), true)
+end
 
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
-    global params_search params_soln F outputText;
+    global params_search params_soln F Nint Tint outputText;
     [params_layers, params_piez, params_search, params_soln, params_load] = ...
         load_params('ValidInput.txt');
     cslip = [10 20 30 40 50; 25 20 10 15 20];
@@ -86,6 +91,6 @@ function setupOnce(testCase)
     outputText = fileread('outputtest.out');
 end
 
-% function teardownOnce(testCase)
-%     delete 'outputtest.out';
-% end
+function teardownOnce(testCase)
+    delete 'outputtest.out';
+end
