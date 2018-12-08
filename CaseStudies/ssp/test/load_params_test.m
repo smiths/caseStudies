@@ -11,7 +11,7 @@ end
 function test_input_phi(testCase)
     global params_layers;
     expPhi = 0.34906585040;
-    verifyEqual(testCase, params_layers.phi, expPhi, 'RelTol', 1e-11)
+    verifyEqual(testCase, params_layers.phi, expPhi, 'RelTol', 1e-10)
 end
 
 function test_input_coh(testCase)
