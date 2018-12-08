@@ -53,9 +53,9 @@ function test_output_inputFtype(testCase)
 end
 
 function test_output_Fs(testCase)
-    global outputText;
-    patternFs = 'Fs =[\t]*1.000';
-    verifyEqual(testCase, isempty(regexp(outputText, patternFs)), false)
+    global F;
+    actF = dlmread('outputtest.out', ' ', [32 2 32 2]);
+    verifyEqual(testCase, actF, F)
 end
 
 function test_output_cslip(testCase)
@@ -91,6 +91,6 @@ function setupOnce(testCase)
     outputText = fileread('outputtest.out');
 end
 
-function teardownOnce(testCase)
-    delete 'outputtest.out';
-end
+% function teardownOnce(testCase)
+%     delete 'outputtest.out';
+% end

@@ -130,7 +130,7 @@ fprintf(fout, '%9.4f  %9.4f\r\n', cslip);
 fprintf(fout, '\r\n\r\n');
 fprintf(fout, 'Factor of Safety\r\n');
 fprintf(fout, '\r\n');
-fprintf(fout, 'Fs =\t\t%5.4f\r\n', F);
+fprintf(fout, '\t\t%5.4f\r\n', F);
 
 
 fprintf(fout, '\r\n\r\n');
