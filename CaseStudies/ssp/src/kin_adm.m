@@ -42,7 +42,7 @@ npsrf = size(strat1,2);
 
 thetalist = zeros (1, nvtx-2);
 
-pass=1;
+pass=true;
 CodeA='';
 CodeB='';
 
@@ -57,7 +57,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
             
     % (i) x-coords monotonically increasing
     if xnxt < xcur
-        pass = 0;
+        pass = false;
         ReportCode=' Failure Code1 - Non monotonic x';
         break;
     end
@@ -66,7 +66,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
     if j == 1 % entrance vertice
         
         if xcur < xmin || xcur > xmax
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code2 - Vertex outside x range';
             break;
         end
@@ -89,7 +89,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
     elseif j == nvtx-1 % exit vertice
         
         if xnxt < xmin || xnxt > xmax
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code2 - Vertex outside x range';
             break;
         end
@@ -120,7 +120,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
         end
         
         if ycur > ys
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code3 - Vertex above surface';
             break;
         end
@@ -128,7 +128,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
     % (iii) non-end vertices must be in the domain
     else
         if xcur < xmin || xcur > xmax
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code2 - Vertex outside x range';
             break;
         end
@@ -144,7 +144,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
         end
         
         if ycur > ys
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code3 - Vertex above surface';
             break;
         end
@@ -165,7 +165,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
             xint-xnxt < -1e-3 && ...
             xint-xly1 > 1e-3 && ...
             xint-xly2 < -1e-3
-            pass = 0;
+            pass = false;
             ReportCode=' Failure Code4 - Surface Intersection';
         break;
         end
@@ -175,7 +175,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
             
     % (v) surface must be concave up (optional)
     if cncvu && j > 1 && mcur < mprv - eps_cncvu
-        pass = 0;
+        pass = false;
         ReportCode=strcat(' Failure Code5 - Concave Down, mcur=',num2str(mcur),' mprv=',num2str(mprv));
         break;
     end
@@ -193,7 +193,7 @@ for j = 1:nvtx-1 % loop through vertices of slope
         thetalist(j-1) = theta;
 
         if theta < 1.9199     % limit is 110deg in radians
-            pass = 0;
+            pass = false;
             ReportCode=strcat(' Failure Code6 - Sharp angle, Theta=',num2str(theta));
             break;
         end
