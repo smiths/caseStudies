@@ -787,54 +787,6 @@ Input: As described in Table~\ref{ExValidInputs}.
 Output: The factor of safety reported by \progname{} is greater than 0.
 
 How test will be performed: Automated test on unit testing framework
-
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutSlip}] 
-test-valid\_output\_slip
-
-Control: Automatic
-
-Initial State: New session
-
-Input: As described in Table~\ref{ExValidInputs}.
-
-Output: The slope between consecutive coordinates of the critical slip surface 
-are always increasing. In mathematical terms, if $j$ is an index representing a 
-single coordinate and $j+1$ represents the consecutive coordinate in the 
-positive $x$-direction, \newline
-$\left(\frac{y_{\text{cs}_{j+2}}-y_{\text{cs}_{j+1}}}{x_{\text{cs}_{j+2}}-
-		x_{\text{cs}_{j+1}}}\right)-\left(\frac{y_{\text{cs}_{j+1}}-
-			y_{\text{cs}_{j}}}{x_{\text{cs}_{j+1}}-
-				x_{\text{cs}_{j}}}\right) > 0$.
-
-How test will be performed: Automated test on unit testing framework
-
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutNormal}] 
-test-valid\_output\_normal
-
-Control: Automatic
-
-Initial State: New session
-
-Input: As described in Table~\ref{ExValidInputs}.
-
-Output: The interslice normal forces reported by \progname{} are always greater 
-than 0 across the entire critical slip surface.
-
-How test will be performed: Automated test on unit testing framework
-
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_ValidOutShear}] 
-test-valid\_output\_shear
-
-Control: Automatic
-
-Initial State: New session
-
-Input: As described in Table~\ref{ExValidInputs}.
-
-Output: The interslice shear forces reported by \progname{} are always less 
-than 0 across the entire critical slip surface.
-
-How test will be performed: Automated test on unit testing framework
 	
 \end{enumerate}
 
@@ -948,7 +900,7 @@ with an ``X'' may have to be modified as well.
 		& & & & & & & & & & X& \\ \hline
 		\tcref{TC_OutShear}                                                    
 		& & & & & & & & & & & X \\ \hline
-		\tcref{TC_ValidOutFS} - \tcref{TC_ValidOutShear}                        
+		\tcref{TC_ValidOutFS}                   
 		& & & & & & X& & & & & \\
 		\hline
 	\end{tabular}

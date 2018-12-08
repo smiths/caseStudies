@@ -1500,13 +1500,52 @@ each possible calculation is covered by at least one test case.
 
 \subsubsection{Output Module}
 The verification of the output is covered by \tcref{SVnV-TC_ValidOutFS} in the 
-System VnV Plan document. The delivery of each output is covered by 
+System VnV Plan document, but this plan adds more tests for the case where the 
+verification of the output triggers an exception. The delivery of each output 
+is covered by 
 \tcref{SVnV-TC_OutInputs} to \tcref{SVnV-TC_OutShear} in the System VnV Plan 
-document. This document therefore only adds test cases for items not covered by 
-the System VnV Plan document. The test case here verifies that an output file 
-with the correct name is created.
+document. This document only adds test cases for items not covered by 
+the System VnV Plan document. The second test case here verifies that an output 
+file with the correct name is created.
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InvalidFs}] 
+	test-verify\_output\_FsNegative
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: -1.0.
+	
+	Output: An exception is triggered.
+	
+	Test Case Derivation: It makes no physical sense for a factor of safety to 
+	be less than 0, so in accordance with the MIS, \progname{} should throw an 
+	exception.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InvalidFs0}] 
+	test-verify\_output\_Fs0
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: 0.
+	
+	Output: An exception is triggered.
+	
+	Test Case Derivation: It makes no physical sense for a factor of safety to 
+	be 0, so in accordance with the MIS, \progname{} should throw an exception.
+	
+	How test will be performed: Automated test on unit testing framework.
 	
 	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_OutputFile}] 
 	test-output\_file
@@ -1566,7 +1605,7 @@ declared out of scope in Section~\ref{Scope} of this document.
 		& & & & & & & & X& & & & & \\ \hline
 		\tcref{TC_PropertyWWet} - \tcref{TC_PropertyHeight}
 		& & & & & & & & & X& & & & \\ \hline
-		\tcref{TC_OutputFile}
+		\tcref{TC_InvalidFs} - \tcref{TC_OutputFile}
 		& & & & & & & & & & X& & & \\
 		\hline
 	\end{tabular}
