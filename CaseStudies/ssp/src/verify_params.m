@@ -85,11 +85,11 @@ if length(piez) > 0
     if piez(1,1) ~= strat_init || piez(1,end) ~= strat_fin
         error('verify_params:DiffPiezStartEnd','Input Error : Given initial x-ordinate of %0.1f, and final x-ordinate of %0.1f, of the piezometric surface, do not match those given in the first layer with an initial x of %0.1f and final x of %0.1f', piez(1,1), piez(1,end), strat_init, strat_fin)
     end
-    
-end
 
-if gamw <= 0 
-    error('verify_params:badWatUnitWeight','Input Error : Unit weight of water %0.1f does not meet physical constraints, must be greater than 0', gamw)
+    if gamw <= 0 
+        error('verify_params:badWatUnitWeight','Input Error : Unit weight of water %0.1f does not meet physical constraints, must be greater than 0', gamw)
+    end
+    
 end
 
 for i = 1:2

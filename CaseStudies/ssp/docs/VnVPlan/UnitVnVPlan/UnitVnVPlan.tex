@@ -348,6 +348,24 @@ Test Case Derivation: If the input includes no water table vertices, the
 
 How test will be performed: Automated test on unit testing framework.
 
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_Inputgamw0NoWT}] 
+test-input\_noWTgamw0
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table. The 
+verify\_params method must be called as part of this test.
+
+Output: \textit{piez.gamw} = 0.
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.gamw} variable should be 0, and verify\_params should not throw an 
+exception.
+
+How test will be performed: Automated test on unit testing framework.
+
 \item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputMin}] 
 test-valid\_input\_minimal
 
@@ -359,7 +377,8 @@ Input: As described in Table~\ref{Inputs}, except with only
 2 slope coordinates $\{\left(x_\text{slope},y_\text{slope}\right)\}$, as 
 follows: 
 \{(0, 25), (20, 25). Also, with no water table vertices 
-$\{\left(x_\text{wt},y_\text{wt}\right)\}$.
+$\{\left(x_\text{wt},y_\text{wt}\right)\}$.  The verify\_params method must be 
+called as part of this test.
 
 Output: \textit{slope.strat} = [(0, 25), (20, 25)]
 
@@ -376,7 +395,8 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{Inputs}, except with  
-${x_\text{slip}^\text{minEtr}}$ set to 0.
+${x_\text{slip}^\text{minEtr}}$ set to 0.  The verify\_params method must be 
+called as part of this test.
 
 Output: \textit{search.Xetr}[0] = 0
 
@@ -393,7 +413,8 @@ Control: Automatic
 Initial State: New session
 
 Input: As described in Table~\ref{Inputs}, except with 
-${x_\text{slip}^\text{maxExt}}$ set to 70.
+${x_\text{slip}^\text{maxExt}}$ set to 70.  The verify\_params method must be 
+called as part of this test.
 
 Output: \textit{search.Xext}[1] = 70
 

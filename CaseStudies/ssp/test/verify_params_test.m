@@ -212,6 +212,37 @@ function test_invalid_input_unitWtWaterNegative(testCase)
         params_search, params_soln, params_load), 'verify_params:badWatUnitWeight')
 end
 
+function test_input_unitWtWater0NoWT(testCase)
+    [params_layers, params_piez, params_search, params_soln, params_load] = ...
+        load_params('ValidInputNoWT.txt');
+    verify_params(params_layers, params_piez, params_search, params_soln, params_load);
+    verifyEqual(testCase, params_piez.gamw, 0) %Should not throw exception for gamw value of 0 if there is no water table
+end
+
+function test_input_minimal(testCase)
+    [params_layers, params_piez, params_search, params_soln, params_load] = ...
+        load_params('ValidInputMin.txt');
+    verify_params(params_layers, params_piez, params_search, params_soln, params_load);
+    expStrat = [0 20; 25 25];
+    verifyEqual(testCase, params_layers.strat, expStrat)
+end
+
+function test_input_xEtrMinEqual(testCase)
+    [params_layers, params_piez, params_search, params_soln, params_load] = ...
+        load_params('ValidInputSearchBounds.txt');
+    verify_params(params_layers, params_piez, params_search, params_soln, params_load);
+    expXEtrMin = 0;
+    verifyEqual(testCase, params_search.Xetr(1), expXEtrMin)
+end
+
+function test_input_xExtMaxEqual(testCase)
+    [params_layers, params_piez, params_search, params_soln, params_load] = ...
+        load_params('ValidInputSearchBounds.txt');
+    verify_params(params_layers, params_piez, params_search, params_soln, params_load);
+    expXExtMax = 70;
+    verifyEqual(testCase, params_search.Xext(2), expXExtMax)
+end
+
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
 end

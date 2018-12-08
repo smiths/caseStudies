@@ -128,24 +128,6 @@ function test_input_noWTgamw(testCase)
     verifyEqual(testCase, params_piez.gamw, expGamw)
 end
 
-function test_input_minimal(testCase)
-    [params_layers] = load_params('ValidInputMin.txt');
-    expStrat = [0 20; 25 25];
-    verifyEqual(testCase, params_layers.strat, expStrat)
-end
-
-function test_input_xEtrMinEqual(testCase)
-    [~, ~, params_search] = load_params('ValidInputSearchBounds.txt');
-    expXEtrMin = 0;
-    verifyEqual(testCase, params_search.Xetr(1), expXEtrMin)
-end
-
-function test_input_xExtMaxEqual(testCase)
-    [~, ~, params_search] = load_params('ValidInputSearchBounds.txt');
-    expXExtMax = 70;
-    verifyEqual(testCase, params_search.Xext(2), expXExtMax)
-end
-
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
     global params_layers params_piez params_search params_soln;
