@@ -3,7 +3,7 @@ function tests = verify_output_test
 end
 
 function test_output_file(testCase)
-    verifyEqual(testCase, isfile('outputtest.out'), true)
+    verifyEqual(testCase, exist('outputtest.out', 'file'), 2)
 end
 
 function setupOnce(testCase)
@@ -16,4 +16,8 @@ function setupOnce(testCase)
     Tint = [20 30 40; -25 -75 -50];
     output(cslip, F, Nint, Tint, params_layers, params_piez, params_search, ...
         params_soln, params_load, 'outputtest.dat');
+end
+
+function teardownOnce(testCase)
+    delete 'outputtest.out';
 end
