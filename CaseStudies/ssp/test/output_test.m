@@ -6,40 +6,40 @@ function test_output_file(testCase)
     verifyEqual(testCase, exist('outputtest.out', 'file'), 2)
 end
 
-function test_output_inputXEtrMin(testCase)
+function test_output_inputXetrMin(testCase)
     global params_search;
-    xEtrMin = dlmread('outputtest.out', ' ', [13 0 14 1]);
-    verifyEqual(testCase, xEtrMin, params_search.XEtr(1))
+    xEtrMin = dlmread('outputtest.out', ' ', [13 2 13 2]);
+    verifyEqual(testCase, xEtrMin, params_search.Xetr(1))
 end
 
-function test_output_inputXEtrMax(testCase)
+function test_output_inputXetrMax(testCase)
     global params_search;
-    xEtrMax = dlmread('outputtest.out', ' ', [14 0 15 1]);
-    verifyEqual(testCase, xEtrMax, params_search.XEtr(2))
+    xEtrMax = dlmread('outputtest.out', ' ', [14 2 14 2]);
+    verifyEqual(testCase, xEtrMax, params_search.Xetr(2))
 end
 
-function test_output_inputXExtMin(testCase)
+function test_output_inputXextMin(testCase)
     global params_search;
-    xExtMin = dlmread('outputtest.out', ' ', [13 1 14 2]);
-    verifyEqual(testCase, xExtMin, params_search.XExt(1))
+    xExtMin = dlmread('outputtest.out', ' ', [13 6 13 6]);
+    verifyEqual(testCase, xExtMin, params_search.Xext(1))
 end
 
-function test_output_inputXExtMax(testCase)
+function test_output_inputXextMax(testCase)
     global params_search;
-    xExtMax = dlmread('outputtest.out', ' ', [14 1 15 2]);
-    verifyEqual(testCase, xExtMax, params_search.XExt(2))
+    xExtMax = dlmread('outputtest.out', ' ', [14 6 14 6]);
+    verifyEqual(testCase, xExtMax, params_search.Xext(2))
 end
 
 function test_output_inputYlimMin(testCase)
     global params_search;
-    yLimMin = dlmread('outputtest.out', ' ', [13 2 14 3]);
-    verifyEqual(testCase, yLimMin, params_search.YLim(1))
+    yLimMin = dlmread('outputtest.out', ' ', [13 11 13 11]);
+    verifyEqual(testCase, yLimMin, params_search.Ylim(1))
 end
 
 function test_output_inputYlimMax(testCase)
     global params_search;
-    yLimMax = dlmread('outputtest.out', ' ', [14 2 15 3]);
-    verifyEqual(testCase, yLimMax, params_search.YLim(2))
+    yLimMax = dlmread('outputtest.out', ' ', [14 10 14 10]);
+    verifyEqual(testCase, yLimMax, params_search.Ylim(2))
 end
 
 function test_output_inputFtype(testCase)
@@ -53,9 +53,15 @@ function test_output_inputFtype(testCase)
     verifyEqual(testCase, isempty(strfind(outputText, textToSearchFor)), false)
 end
 
+function test_output_Fs(testCase)
+    global F;
+    actF = dlmread('outputtest.out', ' ', [34 10 34 10]);
+    verifyEqual(testCase, actF, F)
+end
+
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
-    global params_search params_soln
+    global params_search params_soln F
     [params_layers, params_piez, params_search, params_soln, params_load] = ...
         load_params('ValidInput.txt');
     cslip = [10 20 30 40 50; 25 20 10 15 20];
@@ -66,6 +72,6 @@ function setupOnce(testCase)
         params_soln, params_load, 'outputtest.dat');
 end
 
-function teardownOnce(testCase)
-    delete 'outputtest.out';
-end
+% function teardownOnce(testCase)
+%     delete 'outputtest.out';
+% end
