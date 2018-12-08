@@ -75,8 +75,7 @@ function test_kin_adm_cncvUpOff(testCase)
 end
 
 function test_kin_adm_cncvUpEq(testCase)
-    global strat;
-    params_soln = struct('cncvu', 0, 'obtu', 1);
+    global strat params_soln;
     slip = [20 30 35 40; 25 15 15 15];
     pass = kin_adm(slip, strat, params_soln);
     verifyEqual(testCase, pass, true)
