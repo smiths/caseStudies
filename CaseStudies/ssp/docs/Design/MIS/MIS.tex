@@ -850,7 +850,7 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 		
-		kin\_adm & slip & $\mathbb{B}$ & - \\ \hline
+		kin\_adm & coords & $\mathbb{B}$ & - \\ \hline
 		
 	\end{tabular}
 \end{center}
@@ -864,11 +864,7 @@ N/A
 N/A
 
 \subsubsection{Assumptions}
-\begin{itemize}
-	\item The \textit{surf} field is populated for every member of the input 
-	sequence of 
-	slip data.
-\end{itemize}
+N/A
 
 \subsubsection{Access Routine Semantics}
 kin\_adm(\textit{slip\_surf}):
@@ -876,17 +872,17 @@ kin\_adm(\textit{slip\_surf}):
 	\item output:
 	\begin{itemize}
 		\item[] \textit{out} $\coloneqq$ ( $\lnot(\forall(i : \mathbb{Z} | i 
-		\in [0..|\textit{slip\_surf}.\textit{surf}| - 2] : 
-		\textit{slip\_surf}.\textit{surf}[i].x - 
-		\textit{slip\_surf}.\textit{surf}[i+1].x \leq 0)) \\
-		\lor \lnot is\_on\_slope(\textit{slip\_surf}.\textit{surf}[0])\\
+		\in [0..|\textit{slip\_surf}| - 2] : 
+		\textit{slip\_surf}[i].x - 
+		\textit{slip\_surf}[i+1].x \leq 0)) \\
+		\lor \lnot is\_on\_slope(\textit{slip\_surf}[0])\\
 		\lor \lnot 
-		is\_on\_slope(\textit{slip\_surf}.\textit{surf}[|\textit{slip\_surf}.\textit{surf}-1|])\\
-		\lor \lnot is\_in\_slope(\textit{slip\_surf}.\textit{surf})\\
+		is\_on\_slope(\textit{slip\_surf}[|\textit{slip\_surf}-1|])\\
+		\lor \lnot is\_in\_slope(\textit{slip\_surf})\\
 		\lor (cncvu() \land 
-		\lnot (is\_concave\_up(\textit{slip\_surf}.\textit{surf})))\\
+		\lnot (is\_concave\_up(\textit{slip\_surf})))\\
 		\lor (obtu() \land 
-		\lnot (has\_no\_sharp\_angles(\textit{slip\_surf}.\textit{surf})))\\
+		\lnot (has\_no\_sharp\_angles(\textit{slip\_surf})))\\
 		\Rightarrow false\\
 		| true \Rightarrow true$)
 	\end{itemize}

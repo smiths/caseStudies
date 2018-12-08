@@ -3,7 +3,7 @@ function tests = weighter_test
 end
 
 function test_weighter_sort(testCase)
-    slipsurfs = cell(3, 6);
+    slipsurfs = cell(3,6);
     slipsurfs{1,2} = 1.0;
     slipsurfs{2,2} = 0.8;
     slipsurfs{3,2} = 1.5;
@@ -13,7 +13,7 @@ function test_weighter_sort(testCase)
 end
 
 function test_weighter_size(testCase)
-    slipsurfs = cell(3, 6);
+    slipsurfs = cell(3,6);
     slipsurfs{1,2} = 1.0;
     slipsurfs{2,2} = 0.8;
     slipsurfs{3,2} = 1.5;
@@ -61,8 +61,8 @@ function test_weighter_last(testCase)
     verifyEqual(testCase, newslips(4,5), 1.0)
 end
 
-function test_weighter_equal(testCase)
-    slipsurfs = cell(3, 6);
+function test_weighter_NaN(testCase)
+    slipsurfs = cell(3,6);
     slipsurfs{1,2} = 1.0;
     slipsurfs{2,2} = 1.0;
     slipsurfs{3,2} = 1.0;
@@ -74,5 +74,5 @@ end
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
     global slipsurfs;
-    slipsurfs = cell(4, 6);
+    slipsurfs = cell(4,6);
 end

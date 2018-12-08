@@ -421,7 +421,7 @@ any inputs, it uses state variables instead. The type of these test cases is
 automatic. As the initial state for each, \textit{slope}, \textit{piez}, 
 \textit{search}, and \textit{soln} state variables are loaded with the inputs 
 from Table~\ref{Inputs}. For each test case, a predicate on the output that is 
-expected to hold true is given for each in Table~\ref{GenAlgTests}. These 
+expected to hold true is given in Table~\ref{GenAlgTests}. These 
 predicates include a variable called $cslip$, which represents the critical 
 slip surface output by the genetic algorithm. The expected output is derived 
 based on the specification for the genetic algorithm found in the MIS document. 
@@ -489,8 +489,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 15), (25, 15), (40, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (25, 15), (40, 15)].
 	
 	Output: false.
 	
@@ -509,8 +508,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 14), (30, 14), (40, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 14), (30, 14), (40, 15)].
 	
 	Output: true.
 	
@@ -530,8 +528,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(-10, 25), (30, 15), (35, 12), (40, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(-10, 25), (30, 15), (35, 12), (40, 15)].
 	
 	Output: false.
 	
@@ -551,8 +548,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(0, 25), (30, 15), (35, 14), (40, 15)], Fs : 0, G : [], X : 
-	[], wt : 0, slicedSlip : []).
+	Input: [(0, 25), (30, 15), (35, 14), (40, 15)].
 	
 	Output: true.
 	
@@ -572,8 +568,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 15), (35, 12), (80, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (35, 12), (80, 15)].
 	
 	Output: false.
 	
@@ -593,8 +588,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 15), (35, 12), (70, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (35, 12), (70, 15)].
 	
 	Output: true.
 	
@@ -613,8 +607,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 25), (35, 12), (40, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 25), (35, 12), (40, 15)].
 	
 	Output: false.
 	
@@ -633,8 +626,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
 	
-	Input: (surf : [(20, 25), (30, 15), (34, 18), (38, 15), (40, 15)], Fs : 0, 
-	G : [], X : [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (34, 18), (38, 15), (40, 15)].
 	
 	Output: true.
 	
@@ -656,8 +648,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)], Fs : 0, 
-	G : [], X : [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)].
 	
 	Output: false.
 	
@@ -677,8 +668,7 @@ met.
 	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu} = 
 	0.
 	
-	Input: (surf : [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)], Fs : 0, 
-	G : [], X : [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)].
 	
 	Output: true.
 	
@@ -697,10 +687,9 @@ met.
 	
 	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
 	\textit{soln} state variables are loaded with the inputs from 
-	Table~\ref{Inputs} and with \textit{soln.cncvu}=0.
+	Table~\ref{Inputs}.
 	
-	Input: (surf : [(20, 25), (30, 15), (35, 15), (40, 15)], Fs : 0, G : [], X 
-	: [], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (35, 15), (40, 15)].
 	
 	Output: true.
 	
@@ -719,8 +708,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs} and with \textit{soln.cncvu}=0.
 	
-	Input: (surf : [(20, 25), (30, 15), (31, 5), (40, 15)], Fs : 0, G : [], X : 
-	[], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (31, 5), (40, 15)].
 	
 	Output: false.
 	
@@ -741,8 +729,7 @@ met.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
 	
-	Input: (surf : [(20, 25), (30, 15), (31, 5), (40, 15)], Fs : 0, G : [], X : 
-	[], wt : 0, slicedSlip : []).
+	Input: [(20, 25), (30, 15), (31, 5), (40, 15)].
 	
 	Output: true.
 	
@@ -908,7 +895,7 @@ safety.
 	How test will be performed: Automated test on unit testing framework.
 	
 	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterNaN}] 
-	test-weighter\_last
+	test-weighter\_NaN
 	
 	Type: Automatic
 	
