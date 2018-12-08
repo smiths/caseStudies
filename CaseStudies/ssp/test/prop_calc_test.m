@@ -83,7 +83,7 @@ function test_prop_calc_beta(testCase)
     global params_layers params_piez;
     slip = [-10 0; 10 10];
     [~, params_angles] = prop_calc(slip, params_layers, params_piez);
-    verifyEqual(testCase, params_angles.Beta(1), -0.78539816340, 'RelTol', 1e-10)
+    verifyEqual(testCase, params_angles.Beta(1), 0.78539816340, 'RelTol', 1e-10)
 end
 
 function test_prop_calc_height(testCase)
