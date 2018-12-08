@@ -19,6 +19,10 @@ function output(cslip, F, Nint, Tint, params_layers, params_piez,...
 % -------------------------------------------------------------------------
 
 sepind = find(fname=='.',1,'last'); % find separator (for creating output file later)
+foutname = fname;
+
+% strip file extension
+if ~isempty(sepind),    foutname = foutname(1:sepind-1);    end
 
 nlayer = length(params_layers); % strat extraction
 strat = cell(nlayer,1);
@@ -82,16 +86,12 @@ ylabel('G, X','fontweight','bold');
 title('Interslice forces','fontweight','bold');
 legend('G','X');
 
-
+saveas(gcf, [foutname '.png']);
 
 % -------------------------------------------------------------------------
 % GENERATE OUTPUT FILE
 % -------------------------------------------------------------------------
 
-foutname = fname;
-
-% strip file extension
-if ~isempty(sepind),    foutname = foutname(1:sepind-1);    end
 
 % check for existing output file and set output filename
 if exist([foutname '.OUT'],'file')

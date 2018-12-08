@@ -9,10 +9,10 @@ function test_control_Ex1Fs(testCase)
     F1_li = 1.327;
 
     F_ssp = dlmread('Ex1.out', ' ', [64 0 64 0]);
-    rel_err_grec = abs(F1_grec - F_ssp) / F1_grec
-    rel_err_malk = abs(F1_malk - F_ssp) / F1_malk
-    rel_err_cheng = abs(F1_cheng - F_ssp) / F1_cheng
-    rel_err_li = abs(F1_li - F_ssp) / F1_li
+    rel_err_grec = abs(F1_grec - F_ssp) / F1_grec;
+    rel_err_malk = abs(F1_malk - F_ssp) / F1_malk;
+    rel_err_cheng = abs(F1_cheng - F_ssp) / F1_cheng;
+    rel_err_li = abs(F1_li - F_ssp) / F1_li;
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_grec < rel_tol && rel_err_malk < rel_tol && ...
@@ -65,7 +65,48 @@ function test_control_OrigFs(testCase)
 
     F_ssp = dlmread('ValidInput.out', ' ', [64 0 64 0]);
 
-    rel_err_orig = abs(F_orig - F_ssp) / F_orig
+    rel_err_orig = abs(F_orig - F_ssp) / F_orig;
+
+    rel_tol = 0.1;
+    verifyEqual(testCase, rel_err_orig < rel_tol, true)
+end
+
+function test_control_OrigSlip(testCase)
+    slipX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [23 2 59 2]);
+    slipY_orig = dlmread('./dataFiles/OrigProg.out', ' ', [23 6 59 6]);
+    slip_orig = [slipX_orig'; slipY_orig];
+    slip_origVert = MatchSlice (slip_orig, 10); %Reslices slip surface into 10 slices
+    slip_origNorm = norm(slip_origVert);
+
+    slipX_ssp = dlmread('ValidInput.out', ' ', [23 2 59 2]);
+    slipY_ssp = dlmread('ValidInput.out', ' ', [23 6 59 6]);
+    slip_ssp = [slipX_ssp'; slipY_ssp'];
+    slip_sspVert = MatchSlice(slip_ssp, 10);
+
+    diffNorm_orig = norm(slip_origVert - slip_sspVert);
+
+    rel_err_orig = diffNorm_orig / slip_origNorm
+
+    rel_tol = 0.1;
+    verifyEqual(testCase, rel_err_orig < rel_tol, true)
+end
+
+function test_control_OrigNormal(testCase)
+    normalX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 2 187 2]);
+    normalY_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 9 187 9]);
+    normal_orig = [normalX_orig'; normalY_orig'];
+    normal_origVert = MatchSlice (normal_orig, 10); %Reslices slip surface into 10 slices
+    normal_origNorm = norm(normal_origVert);
+
+    slipX_ssp = dlmread('ValidInput.out', ' ', [70 2 104 2]);
+    slipX_ssp = slipX_ssp(2:end-1);
+    normalY_ssp = dlmread('ValidInput.out', ' ', [70 9 104 9]);
+    normal_ssp = [slipX_ssp'; normalY_ssp'];
+    normal_sspVert = MatchSlice(normal_ssp, 10);
+
+    diffNorm_orig = norm(normal_origVert - normal_sspVert);
+
+    rel_err_orig = diffNorm_orig / normal_origNorm
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_orig < rel_tol, true)
@@ -79,5 +120,7 @@ end
 
 function teardownOnce(testCase)
     % delete 'ValidInput.out';
-    % delete 'Ex1.out';
+    % delete 'ValidInput.png';
+    delete 'Ex1.out';
+    delete 'Ex1.png';
 end
