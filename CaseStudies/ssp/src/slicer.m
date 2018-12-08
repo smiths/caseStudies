@@ -53,7 +53,7 @@ if evnslc
     
 else
     % initialize surface
-    evalslip = zeros(2,xslice+1);
+    evalslip = zeros(2,(nvtx-1)*nsubslice);
     evalslip(:,1) = slip(:,1);
 
     % divide each subsegment into an equal number of slices
