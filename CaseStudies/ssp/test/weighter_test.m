@@ -67,8 +67,8 @@ function test_weighter_NaN(testCase)
     slipsurfs{2,2} = 1.0;
     slipsurfs{3,2} = 1.0;
     newslips = weighter(3, slipsurfs);
-    verifyEqual(testCase, newslips{1,5} == NaN && newslips{2,5} == NaN && ...
-    newslips{3,5} == NaN, true)
+    verifyEqual(testCase, isnan(newslips{1,5}) && isnan(newslips{2,5}) && ...
+    isnan(newslips{3,5}), true)
 end
 
 function setupOnce(testCase)
