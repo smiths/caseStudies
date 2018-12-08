@@ -19,6 +19,47 @@ function test_control_Ex1Fs(testCase)
         rel_err_cheng < rel_tol && rel_err_li < rel_tol, true)
 end
 
+function test_control_Ex1Slip(testCase)
+    data = dlmread('./dataFiles/Ex1_Greco1996.surf')'; 
+    slip1_grec = data(1:2,:);
+    slip1_grecVert = MatchSlice (slip1_grec, 10); %Reslices slip surface into 10 slices
+    slip1_grecNorm = norm(slip1_grecVert);
+
+    data = dlmread('./dataFiles/Ex1_MalkawiEtAl2001.surf')'; 
+    slip1_malk = data(1:2,:);
+    slip1_malkVert = MatchSlice (slip1_malk, 10);
+    slip1_malkNorm = norm(slip1_malkVert);
+
+    data = dlmread('./dataFiles/Ex1_ChengEtAl2007.surf')'; 
+    slip1_cheng = data(1:2,:);
+    slip1_chengVert = MatchSlice (slip1_cheng, VertInspect);
+    slip1_chengNorm = norm(slip1_chengVert);
+
+    data = dlmread('./dataFiles/Ex1_LiEtAl2010.surf')'; 
+    slip1_li = data(1:2,:);
+    slip1_liVert = MatchSlice (slip1_li, VertInspect);
+    slip1_liNorm = norm(slip1_liVert);
+
+    slipX_ssp = dlmread('Ex1.out', ' ', [23 2 59 2]);
+    slipY_ssp = dlmread('Ex1.out', ' ', [23 6 59 6]);
+    slip_ssp = [slipX_ssp; slipY_ssp];
+    slip_sspVert = MatchSlice(slip_ssp, 10);
+
+    diffNorm_grec = norm(slip1_grecVert - slip_sspVert);
+    diffNorm_malk = norm(slip1_malkVert - slip_sspVert);
+    diffNorm_cheng = norm(slip1_chengVert - slip_sspVert);
+    diffNorm_li = norm(slip1_liVert - slip_sspVert);
+
+    rel_err_grec = diffNorm_grec / slip1_grecNorm
+    rel_err_malk = diffNorm_grec / slip1_grecNorm
+    rel_err_cheng = diffNorm_grec / slip1_grecNorm
+    rel_err_li = diffNorm_grec / slip1_grecNorm
+
+    rel_tol = 0.1;
+    verifyEqual(testCase, rel_err_grec < rel_tol && rel_err_malk < rel_tol && ...
+        rel_err_cheng < rel_tol && rel_err_li < rel_tol, true)
+end
+
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
     control('Ex1.dat');
