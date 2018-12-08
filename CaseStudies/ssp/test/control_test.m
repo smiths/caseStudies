@@ -51,9 +51,9 @@ function test_control_Ex1Slip(testCase)
     diffNorm_li = norm(slip1_liVert - slip_sspVert);
 
     rel_err_grec = diffNorm_grec / slip1_grecNorm
-    rel_err_malk = diffNorm_grec / slip1_grecNorm
-    rel_err_cheng = diffNorm_grec / slip1_grecNorm
-    rel_err_li = diffNorm_grec / slip1_grecNorm
+    rel_err_malk = diffNorm_malk / slip1_malkNorm
+    rel_err_cheng = diffNorm_cheng / slip1_chengNorm
+    rel_err_li = diffNorm_li / slip1_liNorm
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_grec < rel_tol && rel_err_malk < rel_tol && ...
