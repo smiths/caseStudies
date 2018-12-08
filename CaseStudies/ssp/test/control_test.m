@@ -40,12 +40,8 @@ function test_control_Ex1Slip(testCase)
     slip1_liVert = MatchSlice (slip1_li, 10);
     slip1_liNorm = norm(slip1_liVert);
 
-    slipX1_ssp = dlmread('Ex1.out', ' ', [23 2 59 2]);
-    slipX2_ssp = dlmread('Ex1.out', ' ', [23 3 59 3]);
-    slipX_ssp = slipX1_ssp + slipX2_ssp;
-    slipY1_ssp = dlmread('Ex1.out', ' ', [23 6 59 6]);
-    slipY2_ssp = dlmread('Ex1.out', ' ', [23 7 59 7]);
-    slipY_ssp = slipY1_ssp + slipY2_ssp;
+    slipX_ssp = sum(dlmread('Ex1.out', ' ', [23 2 59 3]), 2);
+    slipY_ssp = sum(dlmread('Ex1.out', ' ', [23 6 59 8]), 2);
     slip_ssp = [slipX_ssp'; slipY_ssp'];
     slip_sspVert = MatchSlice(slip_ssp, 10);
 
