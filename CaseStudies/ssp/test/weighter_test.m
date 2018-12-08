@@ -28,7 +28,7 @@ function test_weighter_first(testCase)
     slipsurfs{3,2} = 1.8;
     slipsurfs{4,2} = 2.0;
     newslips = weighter(4, slipsurfs);
-    verifyEqual(testCase, newslips(1,5), 0.6)
+    verifyEqual(testCase, newslips{1,5}, 0.6)
 end
 
 function test_weighter_mid(testCase)
@@ -38,7 +38,7 @@ function test_weighter_mid(testCase)
     slipsurfs{3,2} = 1.8;
     slipsurfs{4,2} = 2.0;
     newslips = weighter(4, slipsurfs);
-    verifyEqual(testCase, newslips(2,5), 0.9)
+    verifyEqual(testCase, newslips{2,5}, 0.9)
 end
 
 function test_weighter_secondLast(testCase)
@@ -48,7 +48,7 @@ function test_weighter_secondLast(testCase)
     slipsurfs{3,2} = 1.8;
     slipsurfs{4,2} = 2.0;
     newslips = weighter(4, slipsurfs);
-    verifyEqual(testCase, newslips(3,5), 1.0)
+    verifyEqual(testCase, newslips{3,5}, 1.0)
 end
 
 function test_weighter_last(testCase)
@@ -58,7 +58,7 @@ function test_weighter_last(testCase)
     slipsurfs{3,2} = 1.8;
     slipsurfs{4,2} = 2.0;
     newslips = weighter(4, slipsurfs);
-    verifyEqual(testCase, newslips(4,5), 1.0)
+    verifyEqual(testCase, newslips{4,5}, 1.0)
 end
 
 function test_weighter_NaN(testCase)
@@ -67,8 +67,8 @@ function test_weighter_NaN(testCase)
     slipsurfs{2,2} = 1.0;
     slipsurfs{3,2} = 1.0;
     newslips = weighter(3, slipsurfs);
-    verifyEqual(testCase, newslips{1,2} == NaN && newslips{2,2} == NaN && ...
-    newslips{3,2} == NaN, true)
+    verifyEqual(testCase, newslips{1,5} == NaN && newslips{2,5} == NaN && ...
+    newslips{3,5} == NaN, true)
 end
 
 function setupOnce(testCase)
