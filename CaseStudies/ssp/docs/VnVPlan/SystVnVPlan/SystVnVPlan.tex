@@ -680,34 +680,43 @@ requirement test cases. Is that true?}
 \paragraph{Output Delivery Tests}
 
 ~\newline \noindent The following set of test cases are intended to 
-verify that all expected outputs are delivered by \progname{}.
+verify that all expected outputs are delivered by \progname{}. The test cases 
+in Table~\ref{OutputInputTests} cover the output of certain input values. For 
+each test the table lists the input value that is expected to be output. They 
+are automatic tests with a new session as initial state and will be performed 
+on a unit testing framework, with inputs described in Table~\ref{ExValidInputs}.
+
+\begin{longtable}{  l  p{5cm}  l  p{5cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Input} & \textbf{Expected 
+	Output} \\
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputXEtrMin} & 
+	test-output\_input\_XEtrMin &  ${x_\text{slip}^\text{minEtr}}$ & 10\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputXEtrMax} & 
+	test-output\_input\_XEtrMax &  ${x_\text{slip}^\text{maxEtr}}$ & 24\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputXExtMin} & 
+	test-output\_input\_XExtMin &  ${x_\text{slip}^\text{minExt}}$ & 34\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputXExtMax} & 
+	test-output\_input\_XExtMax &  ${x_\text{slip}^\text{maxExt}}$ & 53\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputYlimMin} & 
+	test-output\_input\_YLimMin &  ${y_\text{slip}^\text{min}}$ & 5\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputYlimMax} & 
+	test-output\_input\_YLimMax &  ${y_\text{slip}^\text{max}}$ & 26\\ 
+	\hline
+	TC\refstepcounter{testnum}\thetestnum \label{TC_OutputInputConstf} & 
+	test-output\_input\_Const\_f &  \textit{const\_f} & 0\\ 
+	\hline
+	\caption{Test cases for output of input values}
+	\label{OutputInputTests}
+\end{longtable}
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
-	
-\item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutInputs}] 
-test-output\_inputs
-
-Control: Automatic
-
-Initial State: New session
-
-Input: As described in Table~\ref{ExValidInputs}.
-
-Output: \progname{} reports back the input values listed below.\\
-\begin{tabularx}{1.0\textwidth}{p{7cm} l X}
-		\toprule \textbf{Input} &
-		\textbf{Unit} & \textbf{Value}\\ \midrule
-		${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 10\\
-		${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 24\\
-		${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 34\\
-		${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 53\\
-		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
-		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
-		\textit{const\_f} & N/A & 0\\ 
-		\bottomrule
-\end{tabularx}
-
-How test will be performed: Automated test on unit testing framework
 
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_OutFS}] 
 test-output\_FS
@@ -890,7 +899,7 @@ with an ``X'' may have to be modified as well.
 		& & & & & & & & & X& & \\ \hline
 		\tcref{TC_OrigProgShear}                                               
 		& & & & & & & & & & X& \\ \hline
-		\tcref{TC_OutInputs}   
+		\tcref{TC_OutputInputXEtrMin} - \tcref{TC_OutputInputConstf}   
 		& & & & & & & X& & & & \\ \hline
 		\tcref{TC_OutFS}                                                       
 		& & & & & & & & X& & & \\ \hline
