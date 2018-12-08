@@ -1278,13 +1278,11 @@ morg\_price(\textit{slip\_surf}):
 		MAX\_DIFF, or until the absolute difference between $\lambda$ in the 
 		current iteration and in the previous iteration is less than MAX\_DIFF. 
 		When this occurs, $X$ is computed using \dref{SRS-GD_X}, and 
-		$\textit{slip\_surf}^\prime.Fs, \textit{slip\_surf}^\prime.G, 
-		\textit{slip\_surf}^\prime.X \coloneqq F_\text{S}, G, X$.
+		$Fs$, $G$, $X$ $\coloneqq F_\text{S}, G, X$.
 		If MAX\_ITER iterations occur, the solution is considered to be 
 		non-converging. If the solution converges but $F_\text{S} <$ 
 		MIN\_FS, the solution is considered to be spurious. In either case, 
-		$\textit{slip\_surf}^\prime.Fs, \textit{slip\_surf}^\prime.G, 
-		\textit{slip\_surf}^\prime.X \coloneqq 1000, [], []$.
+		$Fs$, $G$, $X$ $\coloneqq 1000, [], []$.
 	\end{itemize}
 \end{itemize}
 
@@ -1323,7 +1321,7 @@ N/A
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
 
-  prop\_calc & slip & - & - \\ 
+  prop\_calc & coords & - & - \\ 
   ub & - & [$\mathbb{R}$] & - \\
   ut & - & [$\mathbb{R}$] & - \\
   w & - & [$\mathbb{R}$] & - \\
