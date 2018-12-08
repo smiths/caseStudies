@@ -47,18 +47,18 @@ function test_genetic_alg_yLimMax(testCase)
 end
 
 function test_genetic_alg_vertices(testCase)
-    global cslip;
+    global unslicedcslip;
     init_num_vertices = 4;
     num_adds = 2;
     num_vertices = (init_num_vertices * 2 ^ num_adds) - (2 ^ num_adds - 1);
-    verifyEqual(testCase, length(cslip(1,:)), num_vertices)
+    verifyEqual(testCase, length(unslicedcslip(1,:)), num_vertices)
 end
 
 function setupOnce(testCase)
     addpath(genpath('dataFiles/'), '../src/');
-    global cslip params_search;
+    global cslip params_search unslicedcslip;
     [params_layers, params_piez, params_search, params_soln, params_load] = ...
         load_params('ValidInput.txt');
-    cslip = genetic_alg(params_layers, params_piez, params_search, ...
+    [cslip, ~, ~, ~, unslicedcslip] = genetic_alg(params_layers, params_piez, params_search, ...
         params_soln, params_load);
 end
