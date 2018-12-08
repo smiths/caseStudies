@@ -1,5 +1,5 @@
 function output(cslip, F, Nint, Tint, params_layers, params_piez,...
-    params_soln, params_load, params_search, fname)
+    params_search, params_soln, params_load, fname)
 
 % Slope Stability Analysis Program
 % output.m

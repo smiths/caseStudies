@@ -72,4 +72,4 @@ verify_params(params_layers, params_piez, params_search, params_soln, params_loa
 verify_output(F);
 
 output(cslip, F, Nint, Tint, params_layers, params_piez,... % Reanalyze and plot
-params_soln, params_load, params_search, fname);
+params_search, params_soln, params_load, fname);

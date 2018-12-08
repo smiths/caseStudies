@@ -4,12 +4,12 @@ end
 
 function test_verify_output_FsNegative(testCase)
     F = -1;
-    verifyError(testCase, @() verifyError(F), 'verify_output:badFactorOfSafety')
+    verifyError(testCase, @() verify_output(F), 'verify_output:badFactorOfSafety')
 end
 
 function test_verify_output_Fs0(testCase)
     F = 0;
-    verifyError(testCase, @() verifyError(F), 'verify_output:badFactorOfSafety')
+    verifyError(testCase, @() verify_output(F), 'verify_output:badFactorOfSafety')
 end
 
 function test_verify_output_Fs(testCase)
