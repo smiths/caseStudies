@@ -341,11 +341,7 @@ Sequence (Section~\ref{sec:SequenceData})
 N/A
 
 \subsubsection{Exported Data Types}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
-	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
-	coords &=& [coord] \\
-\end{longtable}
+N/A
 
 \wss{The above types don't really have anything specifically to do with the
   input module.  I suggest that you add a new module ``Types'' that exports your
@@ -370,6 +366,8 @@ maybe I could have removed these types, because you're right that the types
 aren't used in the rest of the document.}
 
 \bmac{I have now removed the types which were not used anywhere else}
+
+\bmac{I also changed the remaining types to local types}
 
 \subsubsection{Exported Access Programs}
 
@@ -680,8 +678,14 @@ load\_params(\textit{fname}):
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Local Functions}
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
 
+\subsubsection{Local Functions}
 N/A
 
 \wss{I'm not suggesting we change the design, but I wonder if there is a
@@ -725,12 +729,7 @@ INIT\_NUM\_VERTICES = 4\\
 NUM\_ADDS = 2\\
 
 \subsubsection{Exported Data Types}
-\renewcommand*{\arraystretch}{1.5}
-\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
-	slip &=& tuple of (surf : coords, Fs : $\mathbb{R}$, G : coords, X : 
-	coords, wt : $\mathbb{R}$, slicedSlip : coords) \\
-	slips &=& [slip] \\
-\end{longtable}
+N/A
 
 \wss{If you do introduce a module whose sole purpose is to export types, these
   types could go in that module.}
@@ -742,6 +741,8 @@ for these types? I think yes. (Though I should mention that in the actual
 implementation, none of these types exist. Slips are simply tuples and coords 
 are arrays, though I found it easier to create types for these for the purposes 
 of specification)}
+
+\bmac{Moved types to local types based on discussion in GitHub}
 
 \subsubsection{Exported Access Programs}
 
@@ -813,6 +814,16 @@ genetic\_alg():
 	\end{itemize}
 	\end{itemize}
 \end{itemize}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+	slip &=& tuple of (surf : coords, Fs : $\mathbb{R}$, G : coords, X : 
+	coords, wt : $\mathbb{R}$, slicedSlip : coords) \\
+	slips &=& [slip] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 generate\_slips(\textit{Xrange}) : [$\mathbb{R}$] $\rightarrow$ $\mathbb{R}$\\
@@ -896,6 +907,13 @@ express the "else" case succinctly}
   condition evaluates to true.  A true at the end acts as a catch all.}
 
 \bmac{Makes sense, thanks. Fixed}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 linSlope(\textit{point1}, \textit{point2}) : coord $\times$ coord $\rightarrow$ 
@@ -999,6 +1017,16 @@ weighter(\textit{slip\_surfs}):
 		\textit{assign\_weights}(\textit{sort\_Fs}({\textit{slip\_surfs}}))$
 	\end{itemize}
 \end{itemize}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+	slip &=& tuple of (surf : coords, Fs : $\mathbb{R}$, G : coords, X : 
+	coords, wt : $\mathbb{R}$, slicedSlip : coords) \\
+	slips &=& [slip] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 sort\_Fs(\textit{unsorted}) : slips $\rightarrow$ slips
@@ -1118,6 +1146,13 @@ the desired number without going over.}
   in a comment, what is going on here?}
 
 \bmac{Added a comment above.}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 large\_segment(\textit{surf}) : coords $\rightarrow$ $\mathbb{Z}$\\
@@ -1288,6 +1323,13 @@ morg\_price(\textit{slip\_surf}):
 
 \wss{Nice to see excerpts from the SRS.  That is an encouraging sign.  The mix
   of equations and description seems like a good spec to me.}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 N/A
@@ -1502,6 +1544,13 @@ prop\_calc(\textit{slip\_surf}):
 	\end{itemize}
 \end{itemize}
 
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
+
 \subsubsection{Local Functions}
 N/A
 
@@ -1534,7 +1583,6 @@ N/A
 			p{0.25\textwidth} } \hline 
 		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ 
 		\hline
-		
 		verify\_output & $\mathbb{R}$ & - & negativeFS \\
 		output & $\mathbb{R}$, coords, coords, coords, string & - & - \\ \hline
 	\end{tabular}
@@ -1586,6 +1634,13 @@ verify\_output(\textit{Fs}):
 		\textit{G.y}), and plot(\textit{X.x}, \textit{X.y}).  \\
 	\end{itemize}
 \end{itemize}
+
+\subsubsection{Local Types}
+\renewcommand*{\arraystretch}{1.5}
+\begin{longtable}{p{0.14\textwidth} c p{0.8\textwidth}}
+	coord &=& tuple of (x : $\mathbb{R}$, y : $\mathbb{R}$) \\
+	coords &=& [coord] \\
+\end{longtable}
 
 \subsubsection{Local Functions}
 N/A
