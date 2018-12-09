@@ -138,8 +138,8 @@ function setupOnce(testCase)
 end
 
 function teardownOnce(testCase)
-    % delete 'ValidInput.out';
-    % delete 'ValidInput.png';
+    delete 'ValidInput.out';
+    delete 'ValidInput.png';
     delete 'Ex1.out';
     delete 'Ex1.png';
 end
