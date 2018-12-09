@@ -67,7 +67,7 @@ function test_control_OrigFs(testCase)
 
     rel_err_orig = abs(F_orig - F_ssp) / F_orig;
 
-    rel_tol = 0.1;
+    rel_tol = 0.01;
     verifyEqual(testCase, rel_err_orig < rel_tol, true)
 end
 
@@ -87,7 +87,7 @@ function test_control_OrigSlip(testCase)
 
     rel_err_orig = diffNorm_orig / slip_origNorm;
 
-    rel_tol = 0.1;
+    rel_tol = 0.05;
     verifyEqual(testCase, rel_err_orig < rel_tol, true)
 end
 
