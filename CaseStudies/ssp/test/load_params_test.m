@@ -2,11 +2,11 @@ function tests = load_params_test
     tests = functiontests(localfunctions);
 end
 
-function test_input_badFilename
+function test_input_badFilename(testCase)
     verifyError(testCase, @() load_params('ValidInput.out'), 'load_params:badFilename');
 end
 
-function test_input_unexpected
+function test_input_unexpected(testCase)
     verifyError(testCase, @() load_params('UnexpectedInput.txt'), 'load_params:unexpectedInput');
 end
 
