@@ -18,7 +18,7 @@
 
 \begin{document}
 
-\title{Tamias2D: Unit Verification and Validation Plan} 
+\title{Tamias2D: Unit Verification and Validation Plan for a 2D Rigid Body Game Physics Library} 
 \author{Oluwaseun Owojaiye}
 \date{\today}
 	
@@ -63,29 +63,17 @@ See MIS documentation at \url{https://github.com/smiths/caseStudies/blob/gamephy
 
 \pagenumbering{arabic}
 
-This document describes the unit verification and validation (V\&V) plan for \progname, a 2D Physics Game Library. It is intended to be a refinement of the tool's system (V\&V) plan by providing test cases based on the modules in the library's module interface specification (MIS) document. The MIS, along with the full documentation of \progname{}, can be found at: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}.The unit V\&V plan starts by providing general information about the library Section \ref{GeneralInfo}. Then, Section \ref{Plan} provides additional details 
+This document describes the unit verification and validation (V\&V) plan for \progname, a 2D Physics Game Library. The purpose of this document is to specify the details of testing each unit of software by providing test cases based on the modules in the library's module interface specification (MIS) document. The MIS, with all other documentation relating to \progname{}, can be found at: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}.
 
-about the plan, which include information about the V\&V team, automated 
-
-testing and verification tools and non-testing based verification. This is 
-
-followed by the unit test description in Section \ref{UnitTestDescription}, 
-
-which consists of tests for the library's functional and nonfunctional 
-
-requirements, categorized based on the modules in the MIS, and traceability 
-
-between the test cases and modules.
-This document ... \wss{provide an introductory blurb and roadmap of the
-  unit V\&V plan}
+%This document ... \wss{provide an introductory blurb and roadmap of the unit V\&V plan}
 
 \section{General Information}
-
 \subsection{Purpose}
 
-\subsection{Scope}
+This section details the summary of what is being tested in this document, the objectives of this document and references for this document. \progname is a 2D rigid body physics library that can be used to simulate the interaction between rigid bodies.This software is able to simulate movement, rotation and collision of rigid bodies.
 
-\subsection{Overview of Document}
+\subsection{Scope}
+All modules will be verified using the testcases listed in this document.
 
 \section{Plan}
 	
@@ -177,6 +165,89 @@ Output: Expected result of(space is body.space): True
 
 How test will be performed: PyTest\\
 
+\item{UTC6}{: Validate - Initialize dynamic body\\}
+This testcase is to initialize a body object.
+A body object is initialized with these parameters:\\ 
+body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= DYNAMIC, restitution\_ = 0) to create and initialize a body.\\
+
+Initial State: 
+
+Input: space.add\_body(body)\\
+body = Body(Vec2(250,0), 1000, 100, shape, 0, Body.DYNAMIC,1)\\
+
+Output: body = Body(Vec2(250,0), 1000, 100, shape, 0, Body.DYNAMIC,1), 1 body created
+
+How test will be performed: PyTest\\
+
+\item{UTC7}{: Validate - Initialize static body\\}
+This testcase is to initialize a body object.
+A body object is initialized with these parameters:\\ 
+body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= STATIC, restitution\_ = 0) to create and initialize a body.\\
+
+Initial State: 
+
+Input: space.add\_body(body)\\
+body = Body(Vec2(250,0), 1000, 100, polyShape, 0, Body.STATIC,1)\\
+
+Output: body = Body(Vec2(250,0), 1000, 100, polyShape, 0, Body.STATIC,1); 1 body created
+
+How test will be performed: PyTest\\
+
+\item{UTC8}{: Validate - Initialize multiple bodies\\}
+This testcase is to initialize multiple body objects.
+A body object is initialized with these parameters:\\ 
+body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= DYNAMIC, restitution\_ = 0) to create and initialize a body.\\
+
+Initial State: 
+
+Input: space.add\_body(body)\\
+body = Body(Vec2(250,0), 1000, 100, polyShape, 0, Body.DYNAMIC,1)\\
+body = Body(Vec2(200,0), 1000, 100, polyShape, 0, Body.DYNAMIC,1)\\
+
+Output: body = Body(Vec2(250,0), 1000, 100, polyShape, 0, Body.DYNAMIC,1)\\
+        body = Body(Vec2(200,0), 1000, 100, polyShape, 0, Body.DYNAMIC,1)\\
+        2 bodies created
+
+How test will be performed: PyTest\\
+
+\item{UTC9}{: Validate - Update Body\\}
+This testcase is to update body object(s), after a cycle/tick.
+
+Initial State: \[p_{initial} = (20,20), v_{initial} = (0, 0)\]
+            
+Input: apply\_force(20, 20)\\
+Output: The table below displays the position and time of a rigid body when a force is applied. The result shows the output velocity and position from 0.5secs to 3secs.
+\begin{table} [h!]
+	
+	\centering
+	
+	\begin{tabular}{|c|c|c|c}
+		
+		\hline	
+		
+	\textbf{Position} &\textbf{Velocity} & \textbf{after time t(secs)}\\
+	\hline 
+
+	\hline(20.025, 20.025)& (0.05, 0.05)& 0.5sec \\ \hline
+		
+    (20.175, 20.172)& (0.15, 0.15)& 1secs \\ \hline
+		
+	(20.625, 20.613)& (0.15, 0.15)& 1.5secs \\ \hline
+		
+    (21.625, 20.592)& (0.5, 0.5)& 2.0secs \\ \hline
+		
+	(23.500, 23.430)& (0.75, 0.74)& 2.5secs \\ \hline
+	
+	(26.650, 26.520)& (1.05, 1.03)& 3.0secs \\ \hline
+		
+	\end{tabular}
+	
+	
+\end{table}
+How test will be performed: PyTest\\
+
+Ref. source: \url{https://calculator.tutorvista.com/physics/535/velocity-calculator.html}
+
 
 \end{enumerate}
 
@@ -186,20 +257,20 @@ How test will be performed: PyTest\\
 Vector module provides operations such as addition, scalar and vector multiplication, dot and cross products e.t.c.
 \begin{enumerate}
 	
-	\item{UTC6}{: Validate vector addition \\}
+	\item{UTC10}{: Validate vector addition \\}
 	
 	Type: Automatic.
 	
 	Initial State: 
 	
-	Input: Vec2(2.22,5.17) + Vec2(1.0,1.0)
+	Input: Vec2(2.22,5.17) + Vec2(1.00,1.00)
 	
 	Output: Vec2(3.22, 6.17)
 	
 	How test will be performed: PyTest \\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC7}{: Validate vector subtraction1\\}
+	\item{UTC11}{: Validate vector subtraction1\\}
 	
 	Type: Automatic
 	
@@ -211,7 +282,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How will test be performed: PyTest\\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC8}{: Validate vector subtraction2\\}
+	\item{UTC12}{: Validate vector subtraction2\\}
 	
 	Type: Automatic
 	
@@ -223,7 +294,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How will test be performed: PyTest\\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC9}{: Validate scalar multiplication1\\}
+	\item{UTC13}{: Validate scalar multiplication1\\}
 	
 	Type: Automatic
 	
@@ -236,7 +307,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/multiply3/}
 	
-	\item{UTC10}{: Validate scalar multiplication2\\}
+	\item{UTC14}{: Validate scalar multiplication2\\}
 	
 	Type: Automatic
 	
@@ -249,7 +320,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest
 	Ref. source:\url{https://onlinemschool.com/math/assistance/vector/multiply3/}
 	
-	\item{UTC11}{: Validate scalar division1\\}
+	\item{UTC15}{: Validate scalar division1\\}
 	
 	Type: Automatic
 	
@@ -273,7 +344,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	How test will be performed: PyTest
 	
-	\item{UTC13}{: Validate vector magnitude1\\}
+	\item{UTC16}{: Validate vector magnitude1\\}
 	
 	Type: Automatic
 	
@@ -286,7 +357,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest\\
 	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
 	
-	\item{UTC14}{: Validate vector magnitude2\\}
+	\item{UTC17}{: Validate vector magnitude2\\}
 	
 	Type: Automatic
 	
@@ -298,7 +369,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	How test will be performed: PyTest\\
 	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
-	\item{UTC15}{: Validate vector dot product\\}
+	\item{UTC18}{: Validate vector dot product\\}
 	
 	Type: Automatic
 	
@@ -317,11 +388,11 @@ Vector module provides operations such as addition, scalar and vector multiplica
 \subsubsection{Shape Module}
 
 \paragraph{}
-Shape module is responsible for storing the surface properties of an object such as restitutionand provides operations on shapes, such as setting the coefficient of restitution. e.t.c.
+Shape module is responsible for storing the surface properties of an object such as restitution and provides operations on shapes, such as setting the coefficient of restitution. e.t.c.
 \begin{enumerate}
 	
 	
-	\item{UTC12} {: Validate set\_angle \\}
+	\item{UTC19} {: Validate set\_angle \\}
 	
 	Type: Automatic.
 	
@@ -333,7 +404,7 @@ Shape module is responsible for storing the surface properties of an object such
 	
 	How test will be performed: PyTest 
 	
-	\item{UTC13}{: Validate set\_position\\}
+	\item{UTC20}{: Validate set\_position\\}
 	
 	Type: Automatic
 	
@@ -343,7 +414,7 @@ Shape module is responsible for storing the surface properties of an object such
 	
 	Output: Vec2(2,2)
 	
-	\item{UTC14}{: Validate get\_vertices\\}
+	\item{UTC21}{: Validate get\_vertices\\}
 	
 	Type: Automatic
 	
@@ -364,7 +435,7 @@ The space module is responsible for all the rigid bodies and shape interaction. 
 \begin{enumerate}
 	
 	
-	\item{UTC15} {: Validate set\_gravity \\}
+	\item{UTC22} {: Validate set\_gravity \\}
 	
 	Type: Automatic.
 	
@@ -376,7 +447,7 @@ The space module is responsible for all the rigid bodies and shape interaction. 
 	
 	How test will be performed: PyTest 
 	
-	\item{UTC16}{: Validate add\_body\\}
+	\item{UTC23}{: Validate add\_body\\}
 	
 	Type: Automatic
 	
@@ -389,6 +460,51 @@ The space module is responsible for all the rigid bodies and shape interaction. 
 
 	\end{enumerate}
 
+\subsubsection{Collision Solver Module}
+
+\paragraph{}
+This module is responsible for shape to shape collision detection, response and resolution.Te new velocity,positions and orientation of bodies will be calculated and updated.
+\begin{enumerate}
+	
+	
+	\item{UTC24} {: Validate \_is\_intersecting\_with\_True \\}
+This testcase checks for collision i.e. if points on rigid bodies are intersecting.\\	
+	Type: Automatic.
+	
+	Initial State: 
+	
+	Input: \\
+	shape1 = Box(Vec2(0,0), Vec2(100,100), 0)\\
+	body1 = Body(Vec2(250,0), 1000, 100, shape1, 0, Body.DYNAMIC,0)\\
+	
+	shape2 = Box(Vec2(0,0), Vec2(100,200), 0)\\
+	body2 = Body(Vec2(300,50), 1000, 100, shape2, 0, Body.DYNAMIC,0)\\
+	
+	Output: \_is\_intersecting\_with(body1, body2): True
+	
+	How test will be performed: PyTest 
+	
+	\item{UTC25} {: Validate \_is\_intersecting\_with\_False \\}
+	This testcase checks for collision i.e if points on rigid bodies are intersecting.\\	
+	Type: Automatic.
+	
+	Initial State: 
+	
+	Input: \\
+	shape1 = Box(Vec2(0,0), Vec2(100,100), 0)\\
+	body1 =  Body(Vec2(250,0), 1000, 100, shape1, 0, Body.DYNAMIC,0)\\
+	
+	shape2 = Box(Vec2(10,0), Vec2(300,200), 0)\\
+	body2 = Body(Vec2(300,50), 1000, 100, shape2, 0, Body.DYNAMIC,0)\\
+	
+	Output: \_is\_intersecting\_with(body1, body2): False
+	
+	How test will be performed: PyTest 
+	
+	
+	
+\end{enumerate}
+
 \subsection{Tests for Nonfunctional Requirements}
 
 Non-Functional testing will not be required for unit testing. This will be covered in section 5.2 of the System Verification and Validation document located at: 
@@ -397,6 +513,9 @@ Non-Functional testing will not be required for unit testing. This will be cover
 
 \subsection{Traceability Between Test Cases and Requirements}
 
+The table below shows the traceability map between test cases and 
+
+modules.
 
 \begin{table} [h!]
 	
@@ -411,15 +530,15 @@ Non-Functional testing will not be required for unit testing. This will be cover
 		\hline 
 		
 	
-		UTC1-UTC5& Body Module\\ \hline
+		UTC1-UTC9& Body Module\\ \hline
 		
-		UTC6 - UTC11& Vector  Module\\ \hline
+		UTC10 - UTC18& Vector  Module\\ \hline
 		
-		UTC12 - UTC14&  Shape Module\\ \hline
+		UTC19 - UTC21&  Shape Module\\ \hline
 		
-		UTC15 - UTC16& Module\\ \hline
+		UTC22 - UTC23& Space\\ \hline
 		
-		T5& Module\\ \hline
+		UTC24 - UTC25 & Collision Solver\\ \hline
 		
 	\end{tabular}
 	
