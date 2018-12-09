@@ -90,8 +90,6 @@ phi = zeros(nlayer,1);      % effective angle of friction
 coh = zeros(nlayer,1);      % effective cohesion
 gam = zeros(nlayer,1);      % dry unit weight
 gams = zeros(nlayer,1);     % sat unit weight
-E = zeros(nlayer,1);        % elastic modulus
-nu = zeros(nlayer,1);       % Poisson's ratio
 
 i = i+1;
 for ilayer=1:nlayer     % loop through layers
@@ -113,14 +111,6 @@ for ilayer=1:nlayer     % loop through layers
     gams(ilayer) = data(i,5);
     if gams(ilayer) <= 0 
         error('Input Error : Saturated soil weight of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, gams(ilayer))
-    end
-    E(ilayer) = data(i,6);
-    if E(ilayer) <= 0 
-        error('Input Error : Youngs modulus of layer %d does not meet physical constraints, must be greater than 0, given %0.1f', ilayer, E(ilayer))
-    end
-    nu(ilayer) = data(i,7);
-    if nu(ilayer) <= 0 
-        error('Input Error : Poissons ratio of layer %d does not meet physical constraints, must be greater than 0 and less than 1, given %0.1f', ilayer, nu(ilayer))
     end
     
     i = i+1;
@@ -167,7 +157,7 @@ for c = 2:length(nlayer)
 end
 
 params_layers = struct('strat',strat, 'phi',phi, 'coh',coh,...
-    'gam',gam, 'gams',gams, 'E',E, 'nu',nu);
+    'gam',gam, 'gams',gams);
 
 nwpts = data(i,1);  % number of points in piez data (0 if dry)
 if nwpts > 0
