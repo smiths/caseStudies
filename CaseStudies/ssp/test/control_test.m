@@ -50,10 +50,10 @@ function test_control_Ex1Slip(testCase)
     diffNorm_cheng = norm(slip1_chengVert - slip_sspVert);
     diffNorm_li = norm(slip1_liVert - slip_sspVert);
 
-    rel_err_grec = diffNorm_grec / slip1_grecNorm
-    rel_err_malk = diffNorm_malk / slip1_malkNorm
-    rel_err_cheng = diffNorm_cheng / slip1_chengNorm
-    rel_err_li = diffNorm_li / slip1_liNorm
+    rel_err_grec = diffNorm_grec / slip1_grecNorm;
+    rel_err_malk = diffNorm_malk / slip1_malkNorm;
+    rel_err_cheng = diffNorm_cheng / slip1_chengNorm;
+    rel_err_li = diffNorm_li / slip1_liNorm;
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_grec < rel_tol && rel_err_malk < rel_tol && ...
@@ -98,14 +98,34 @@ function test_control_OrigNormal(testCase)
     normal_origVert = MatchSlice (normal_orig, 10); %Reslices slip surface into 10 slices
     normal_origNorm = norm(normal_origVert);
 
-    normalX_ssp = dlmread('ValidInput.out', ' ', [70 2 104 2]);
-    normalY_ssp = dlmread('ValidInput.out', ' ', [70 9 104 9]);
+    normalX_ssp = sum(dlmread('ValidInput.out', ' ', [70 2 104 2]), 2);
+    normalY_ssp = sum(dlmread('ValidInput.out', ' ', [70 8 104 10]), 2);
     normal_ssp = [normalX_ssp'; normalY_ssp'];
     normal_sspVert = MatchSlice(normal_ssp, 10);
 
     diffNorm_orig = norm(normal_origVert - normal_sspVert);
 
     rel_err_orig = diffNorm_orig / normal_origNorm
+
+    rel_tol = 0.1;
+    verifyEqual(testCase, rel_err_orig < rel_tol, true)
+end
+
+function test_control_OrigShear(testCase)
+    shearX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 2 187 2]);
+    shearY_orig = sum(dlmread('./dataFiles/OrigProg.out', ' ', [153 8 187 10]), 2);
+    shear_orig = [shearX_orig'; shearY_orig'];
+    shear_origVert = MatchSlice (shear_orig, 10); %Reslices slip surface into 10 slices
+    shear_origNorm = norm(shear_origVert);
+
+    shearX_ssp = sum(dlmread('ValidInput.out', ' ', [70 2 104 2]), 2);
+    shearY_ssp = sum(dlmread('ValidInput.out', ' ', [70 14 104 17]), 2);
+    shear_ssp = [shearX_ssp'; shearY_ssp'];
+    shear_sspVert = MatchSlice(shear_ssp, 10);
+
+    diffNorm_orig = norm(shear_origVert - shear_sspVert);
+
+    rel_err_orig = diffNorm_orig / shear_origNorm
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_orig < rel_tol, true)

@@ -67,12 +67,14 @@ end
 
 function test_output_normal(testCase)
     global Nint;
+    Nint = Nint./1000;
     normForces = dlmread('outputtest.out', ' ', [38 9 40 9]);
     verifyEqual(testCase, all(normForces == Nint'), true)
 end
 
 function test_output_shear(testCase)
     global Tint;
+    Tint = Tint./1000;
     shearForces = dlmread('outputtest.out', ' ', [38 15 40 15]);
     verifyEqual(testCase, all(shearForces == Tint'), true)
 end
@@ -84,14 +86,14 @@ function setupOnce(testCase)
         load_params('ValidInput.txt');
     cslip = [10 20 30 40 50; 25 20 10 15 20];
     F = 1;
-    Nint = [50 25 75];
-    Tint = [-25 -75 -50];
+    Nint = [50000 25000 75000];
+    Tint = [-25000 -75000 -50000];
     output(cslip, F, Nint, Tint, params_layers, params_piez, params_search, ...
         params_soln, params_load, 'outputtest.dat');
     outputText = fileread('outputtest.out');
 end
 
 function teardownOnce(testCase)
-    % delete 'outputtest.out';
+    delete 'outputtest.out';
     delete 'outputtest.png';
 end
