@@ -33,7 +33,7 @@ end
 data = dlmread(fname);% read in slope geometry, stratigraphy, and piezometric surface
 [A1, A2] = size(data);
 
-if A2 > 7
+if A2 > 5
     error('Input Error : An extra soil data input has been given')
 end
 
@@ -43,7 +43,7 @@ rngInFile= input(['\nSelect input file type,\n'...
     '1 => Entrance/Exit range included in file: ']); %Input file type
 
 layer_checkA = data(:,3); layersindexA = find(layer_checkA);
-layer_checkB = data(:,7); layersindexB = find(layer_checkB);
+layer_checkB = data(:,5); layersindexB = find(layer_checkB);
 
 if ~isequal(layersindexA,layersindexB)
     error('Input Error : Stratigraphic soil properties not fully defined')
