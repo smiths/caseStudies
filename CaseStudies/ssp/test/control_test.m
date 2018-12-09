@@ -176,7 +176,7 @@ function test_control_OrigShear(testCase)
     rel_err_orig3 = diffNorm_orig3 / shear_origNorm3;
     rel_err_orig4 = diffNorm_orig4 / shear_origNorm4;
 
-    rel_tol = 0.1;
+    rel_tol = 0.15;
     verifyEqual(testCase, rel_err_orig < rel_tol || rel_err_orig2 < rel_tol || ...
     rel_err_orig3 < rel_tol || rel_err_orig4 < rel_tol, true)
 end
