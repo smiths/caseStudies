@@ -131,7 +131,7 @@ function test_control_OrigNormal(testCase)
     rel_err_orig3 = diffNorm_orig3 / normal_origNorm3;
     rel_err_orig4 = diffNorm_orig4 / normal_origNorm4;
 
-    rel_tol = 0.1;
+    rel_tol = 0.15;
     verifyEqual(testCase, rel_err_orig < rel_tol || rel_err_orig2 < rel_tol || ...
         rel_err_orig3 < rel_tol || rel_err_orig4 < rel_tol, true)
 end
@@ -144,19 +144,19 @@ function test_control_OrigShear(testCase)
     shear_origNorm = norm(shear_origVert);
 
     shearX_orig2 = dlmread('./dataFiles/OrigProg2.out', ' ', [153 2 187 2]);
-    shearY_orig2 = sum(dlmread('./dataFiles/OrigProg2.out', ' ', [153 8 187 10]), 2);
+    shearY_orig2 = sum(dlmread('./dataFiles/OrigProg2.out', ' ', [153 14 187 17]), 2);
     shear_orig2 = [shearX_orig2'; shearY_orig2'];
     shear_origVert2 = MatchSlice (shear_orig2, 10); %Reslices slip surface into 10 slices
     shear_origNorm2 = norm(shear_origVert2);
 
     shearX_orig3 = dlmread('./dataFiles/OrigProg3.out', ' ', [153 2 187 2]);
-    shearY_orig3 = sum(dlmread('./dataFiles/OrigProg3.out', ' ', [153 8 187 10]), 2);
+    shearY_orig3 = sum(dlmread('./dataFiles/OrigProg3.out', ' ', [153 14 187 17]), 2);
     shear_orig3 = [shearX_orig3'; shearY_orig3'];
     shear_origVert3 = MatchSlice (shear_orig3, 10); %Reslices slip surface into 10 slices
     shear_origNorm3 = norm(shear_origVert3);
 
     shearX_orig4 = dlmread('./dataFiles/OrigProg4.out', ' ', [153 2 187 2]);
-    shearY_orig4 = sum(dlmread('./dataFiles/OrigProg4.out', ' ', [153 8 187 10]), 2);
+    shearY_orig4 = sum(dlmread('./dataFiles/OrigProg4.out', ' ', [153 14 187 17]), 2);
     shear_orig4 = [shearX_orig4'; shearY_orig4'];
     shear_origVert4 = MatchSlice (shear_orig4, 10); %Reslices slip surface into 10 slices
     shear_origNorm4 = norm(shear_origVert4);
