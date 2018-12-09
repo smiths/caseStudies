@@ -2,6 +2,14 @@ function tests = load_params_test
     tests = functiontests(localfunctions);
 end
 
+function test_input_badFilename
+    verifyError(testCase, @() load_params('ValidInput.out'), 'load_params:badFilename');
+end
+
+function test_input_unexpected
+    verifyError(testCase, @() load_params('UnexpectedInput.txt'), 'load_params:unexpectedInput');
+end
+
 function test_input_slope(testCase)
     global params_layers;
     expStrat = [0 20 30 40 70; 25 25 20 15 15];

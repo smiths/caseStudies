@@ -212,7 +212,9 @@ corresponding test case verifying that the value was properly read into the
 data structure containing the input parameters. In cases where the user input 
 may take different forms, such as the input for when a water table exists and 
 the input for when a water table does not exist, each potential form of input 
-is covered by at least one test case. The input module is also responsible for 
+is covered by at least one test case. There are also test cases to cover poorly 
+formatted or named input files, where \progname{} should throw exceptions. The 
+input module is also responsible for 
 verifying the input, so for each possible violation of an input constraint, 
 there is a corresponding test case verifying that the correct exception was 
 thrown.
@@ -420,6 +422,38 @@ Output: \textit{search.Xext}[1] = 70
 
 Test Case Derivation: \progname{} should accept values for the search 
 parameters even if they lie on the edges of the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputBadFilename}] 
+test-input\_badFilename
+
+Control: Automatic
+
+Initial State: New session
+
+Input: ``ValidInput.out'' to the load\_params access program.
+
+Output: ``badFilename'' exception should be thrown.
+
+Test Case Derivation: \progname{} should not accept input files with the 
+``.out'' extension, as stated in the MIS.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputUnexpected}] 
+test-input\_unexpected
+
+Control: Automatic
+
+Initial State: New session
+
+Input: ``UnexpectedInput.txt'' to the load\_params access program.
+
+Output: ``unexpectedInput'' exception should be thrown.
+
+Test Case Derivation: \progname{} should not accept input files with incorrect 
+formatting, as stated in the MIS.
 
 How test will be performed: Automated test on unit testing framework
     
@@ -1612,7 +1646,7 @@ declared out of scope in Section~\ref{Scope} of this document.
 		\mref{MG-mOutput}& \mref{MG-mArrayOps}& \mref{MG-mRandNum}& 
 		\mref{MG-mPlot} \\
 		\hline
-		\tcref{TC_InputSlope} - \tcref{TC_InputXMaxExtEqual}                 
+		\tcref{TC_InputSlope} - \tcref{TC_InputUnexpected}                 
 		& & & X& & & & & & & & & & \\ \hline
 		\tcref{TC_GenAlgXextMin} - \tcref{TC_GenAlgVertices} 
 		& & & & X& & & & & & & & &\\ \hline

@@ -24,14 +24,14 @@ sepind = find(fname=='.',1,'last');
 nfile = length(fname);
 if ~isempty(sepind) && (    strcmp(fname(sepind+1:nfile),'out') ...
                             || strcmp(fname(sepind+1:nfile),'OUT')  )
-	error('Cannot use extension ''.out'' for input file.');
+	error('load_params:badFilename','Cannot use extension ''.out'' for input file.');
 end
 
 data = dlmread(fname);% read in slope geometry, stratigraphy, and piezometric surface
 [A1, A2] = size(data);
 
 if A2 > 5
-    error('Input Error : An extra soil data input has been given')
+    error('load_params:unexpectedInput','Input Error : An extra soil data input has been given')
 end
 
 layer_checkA = data(:,3); layersindexA = find(layer_checkA);
@@ -56,7 +56,7 @@ end
 i = 1;
 nlayer = data(i,1);         % number of stratigraphic layers
 if nlayer ~= numlayer
-    error('Input Error : Expected %d and  detected %d stratigraphic layers', nlayer, numlayer)
+    error('Input Error : Expected %d and detected %d stratigraphic layers', nlayer, numlayer)
 end
 
 for c = 1 : numlayer - 1

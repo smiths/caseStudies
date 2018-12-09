@@ -482,7 +482,8 @@ Initial State: New session
 Input: As described in Table~\ref{Ex1Input}.
 
 Output: Relative error between factor of safety calculated by \progname{} and 
-factor of safety from literature, as described below. \newline
+factor of safety from literature, as described below. The relative error will 
+be averaged across 5 runs since there is some expected variability. \newline
 \begin{tabularx}{1.0\textwidth}{p{7cm} l}
 	\toprule \textbf{Source} & \textbf{Factor of Safety}\\ \midrule
 	\cite{Greco1996} & 1.3270\\
@@ -503,8 +504,9 @@ Initial State: New session
 Input: As described in Table~\ref{Ex1Input}.
 
 Output: Relative error between critical slip surface determined by \progname{} 
-and critical slip surfaces from literature. Relative error is calculated 
-by dividing the critical slip surfaces into 10 evenly spaced vertices, 
+and critical slip surfaces from literature. The relative error will be averaged 
+across 5 runs since there is some expected variability. Relative error is 
+calculated by dividing the critical slip surfaces into 10 evenly spaced slices, 
 calculating the distance between respective vertices from \progname{} and from 
 literature, computing the Euclidean norm of the resulting vector, and dividing 
 it by the Euclidean norm for the vector describing the original slip surface 
@@ -547,7 +549,9 @@ Output: Relative error between the factor of safety calculated by \progname{}
 and the factor of safety calculated by the original version of \progname{}, 
 0.9835, which is assumed to be correct and can be found at \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
-{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be averaged across 5 runs since there is some expected 
+variability.
 
 How test will be performed: Automated test on unit testing framework
 
@@ -564,14 +568,15 @@ Output: Relative error between critical slip surface determined by \progname{}
 and critical slip surfaces determined by the original version of 
 \progname{}, which is assumed to be correct and can be found at \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
-{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. 
-Relative error is calculated by dividing the critical slip surfaces into 10 
-evenly spaced vertices, calculating the distance between respective vertices 
-from \progname{} and from the original version, computing the Euclidean norm of 
-the resulting vector, and dividing it by the Euclidean norm for the vector 
-describing the slip surface from the original version of \progname{}. The 
-critical slip surface calculated by the original version of SSP is shown in 
-Figure~\ref{OrigProgSlip}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be averaged across 5 runs since there is some expected 
+variability. Relative error is calculated by dividing the critical slip 
+surfaces into 10 evenly spaced slices, calculating the distance between 
+respective vertices from \progname{} and from the original version, computing 
+the Euclidean norm of the resulting vector, and dividing it by the Euclidean 
+norm for the vector describing the slip surface from the original version of 
+\progname{}. The critical slip surface calculated by the original version of 
+SSP is shown in Figure~\ref{OrigProgSlip}
 
 \begin{figure}[h!]
 	\begin{center}
@@ -598,9 +603,11 @@ Output: Relative error between the interslice normal force calculated by
 of \progname{}, which is assumed to be correct and can be found at 
 \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
-{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. 
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be averaged across 5 runs since there is some expected 
+variability.
 Relative error is calculated by dividing the interslice normal force curve into 
-10 evenly spaced vertices, calculating the distance between respective vertices 
+10 evenly spaced slices, calculating the distance between respective vertices 
 from \progname{} and from the original version, computing the Euclidean norm of 
 the resulting vector, and dividing it by the Euclidean norm for the vector 
 describing the interslice normal force from the original version of 
@@ -623,9 +630,11 @@ Output: Relative error between the interslice shear force calculated by
 of \progname{}, which is assumed to be correct and can be found at 
 \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}
-{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. 
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/ssp/misc}. The 
+relative error will be averaged across 5 runs since there is some expected 
+variability.
 Relative error is calculated by dividing the interslice shear force curve into 
-10 evenly spaced vertices, calculating the distance between respective vertices 
+10 evenly spaced slices, calculating the distance between respective vertices 
 from \progname{} and from the original version, computing the Euclidean norm of 
 the resulting vector, and dividing it by the Euclidean norm for the vector 
 describing the interslice shear force from the original version of \progname{}. 
