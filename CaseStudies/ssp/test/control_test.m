@@ -85,7 +85,7 @@ function test_control_OrigSlip(testCase)
 
     diffNorm_orig = norm(slip_origVert - slip_sspVert);
 
-    rel_err_orig = diffNorm_orig / slip_origNorm
+    rel_err_orig = diffNorm_orig / slip_origNorm;
 
     rel_tol = 0.1;
     verifyEqual(testCase, rel_err_orig < rel_tol, true)
@@ -113,7 +113,7 @@ end
 
 function test_control_OrigShear(testCase)
     shearX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 2 187 2]);
-    shearY_orig = sum(dlmread('./dataFiles/OrigProg.out', ' ', [153 8 187 10]), 2);
+    shearY_orig = sum(dlmread('./dataFiles/OrigProg.out', ' ', [153 14 187 17]), 2);
     shear_orig = [shearX_orig'; shearY_orig'];
     shear_origVert = MatchSlice (shear_orig, 10); %Reslices slip surface into 10 slices
     shear_origNorm = norm(shear_origVert);
