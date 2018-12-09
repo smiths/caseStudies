@@ -136,11 +136,11 @@ fprintf(fout, '\t\t%5.4f\r\n', F);
 fprintf(fout, '\r\n\r\n');
 fprintf(fout, 'Interslice Forces\r\n');
 fprintf(fout, '\r\n');
-fprintf(fout, '        x         G         X\r\n');
+fprintf(fout, '        x       G (kN/m^3)       X kN/m^3)\r\n');
 fprintf(fout, '%9.4f  %11.3f  %11.3f\r\n', ...
                     [   cslip(1,2:end-1);
-                        Nint;
-                        Tint]     );
+                        Nint./1000;
+                        Tint./1000]     );
 
 fprintf(fout, '\r\n\r\n');
 

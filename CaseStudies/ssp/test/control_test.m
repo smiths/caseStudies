@@ -74,7 +74,7 @@ end
 function test_control_OrigSlip(testCase)
     slipX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [23 2 59 2]);
     slipY_orig = dlmread('./dataFiles/OrigProg.out', ' ', [23 6 59 6]);
-    slip_orig = [slipX_orig'; slipY_orig];
+    slip_orig = [slipX_orig'; slipY_orig'];
     slip_origVert = MatchSlice (slip_orig, 10); %Reslices slip surface into 10 slices
     slip_origNorm = norm(slip_origVert);
 
@@ -93,15 +93,14 @@ end
 
 function test_control_OrigNormal(testCase)
     normalX_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 2 187 2]);
-    normalY_orig = dlmread('./dataFiles/OrigProg.out', ' ', [153 9 187 9]);
+    normalY_orig = sum(dlmread('./dataFiles/OrigProg.out', ' ', [153 8 187 10]), 2);
     normal_orig = [normalX_orig'; normalY_orig'];
     normal_origVert = MatchSlice (normal_orig, 10); %Reslices slip surface into 10 slices
     normal_origNorm = norm(normal_origVert);
 
-    slipX_ssp = dlmread('ValidInput.out', ' ', [70 2 104 2]);
-    slipX_ssp = slipX_ssp(2:end-1);
+    normalX_ssp = dlmread('ValidInput.out', ' ', [70 2 104 2]);
     normalY_ssp = dlmread('ValidInput.out', ' ', [70 9 104 9]);
-    normal_ssp = [slipX_ssp'; normalY_ssp'];
+    normal_ssp = [normalX_ssp'; normalY_ssp'];
     normal_sspVert = MatchSlice(normal_ssp, 10);
 
     diffNorm_orig = norm(normal_origVert - normal_sspVert);

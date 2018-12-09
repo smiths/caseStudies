@@ -92,6 +92,6 @@ function setupOnce(testCase)
 end
 
 function teardownOnce(testCase)
-    delete 'outputtest.out';
+    % delete 'outputtest.out';
     delete 'outputtest.png';
 end
