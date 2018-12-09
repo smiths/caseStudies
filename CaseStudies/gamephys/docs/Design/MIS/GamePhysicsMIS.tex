@@ -178,7 +178,12 @@ natural number & $\mathbb{N}$ & A number without a fractional
 \bottomrule
 \end{longtable} 
 
-\noindent \progname also uses non-primitive data types such as arrays, enumerations, pointers (references), strings, structures, unions. These are summarized in the following table.
+\noindent \progname also uses non-primitive data types such as arrays,
+enumerations, pointers (references), strings, structures, unions. These are
+summarized in the following table.
+
+\wss{I'm not sure we need pointers at this point.  An abstract design probably
+  shouldn't have to invoke the concept of pointers.}
 
 \renewcommand*{\arraystretch}{1.2}
 \noindent \begin{longtable}{l l p{9.5cm}}
@@ -194,9 +199,19 @@ natural number & $\mathbb{N}$ & A number without a fractional
 	\bottomrule
 \end{longtable}
 
-\noindent Finally, \progname uses two more important type-related concepts: void and function pointers. Void is not a data type in itself; however, functions that do not return any value are assigned a return type of void, and void pointers, denoted by void*, are used for references to objects of an unspecified data type. \progname also allows passing functions to other functions through the use of function pointers, which hold references to function definitions. Each function pointer is denoted by the name of their function type and is defined by a specific function signature, such as: 
+\noindent Finally, \progname uses two more important type-related concepts: void
+and function pointers. Void is not a data type in itself; however, functions
+that do not return any value are assigned a return type of void, and void
+pointers, denoted by void*, are used for references to objects of an unspecified
+data type. \progname also allows passing functions to other functions through
+the use of function pointers, which hold references to function
+definitions. Each function pointer is denoted by the name of their function type
+and is defined by a specific function signature, such as:
 $$\text{Function Type} : \text{Arg}_1 \times \text{Arg}_2 \times ... \times \text{Arg}_n \to \text{Return Type}$$
 For example, an inequality operator would have the signature \inquote{Inequality : $\mathbb{R} \times \mathbb{R} \to \mathbb{B}$}.
+
+\wss{I really don't think we need void in the abstract MIS.  If an access
+  program doesn't return any value, we just don't assign it one.}
 
 \iffalse
 
@@ -265,6 +280,7 @@ The following table is taken directly from the Module Guide document for this pr
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%% RIGID BODY MODULE %%%%%%%%%%%%%%%%%%%%%%%
+\newpage \wss{put a newpage between all modules.}
 
 \section{MIS of the Rigid Body Module} \label{MISBody}
 
@@ -339,9 +355,11 @@ N/A
 \subsection{Semantics}
 
 \subsubsection{State Variables} \label{SecSVBody}
-	\textbf{BodyType} $\in$ \{DYNAMIC, STATIC\} \\ 
+	\textbf{BodyType} $\in$ \{DYNAMIC, STATIC\} \\ \wss{if you are going to
+          create a new type, then this should be an exported type, not a state variable.}
 	\newline
-	\textbf{Body:} 
+	\textbf{Body:} \wss{I don't know what this heading means?  You can just
+          have your list of state variables.}
 	 \begin{multicols}{3}
 		\noindent type: BodyType \\
 	%	positionFunc: PositionFunc \\
@@ -364,9 +382,11 @@ N/A
 	%	shapeList: Shape* \\
 	%	arbiterList: Arbiter* 
 	\end{multicols}
-	
-\subsubsection{State Invariant} \label{SecSIBody}
-	For dynamic bodies, the following invariants apply. Any value in $\mathbb{R}$ means that it must be a valid and finite real number: 
+	\wss{You don't need the pointers.  That is an implementation detail.}
+
+        \subsubsection{State Invariant} \label{SecSIBody} For dynamic bodies,
+        the following invariants apply. Any value in $\mathbb{R}$ means that it
+        must be a valid and finite real number:
 	\begin{itemize}
 	\item Body.mass $\in [0, \infty)$ 
 	\item Body.moment $\in [0, \infty)$ 
@@ -377,12 +397,21 @@ N/A
 	\item $|\text{Body.angular_accler}| \in \mathbb{R}$  
 	\item $|\text{Body.torque}| \in \mathbb{R}$
 	\end{itemize}
+
+\wss{Most of the state invariants above are just restating the type of the state
+  variables.  This is redunant and can be removed.  For more interesting
+  invariants, like the one about the mass being positive, you need to make sure
+  that the constructor will not allow this invariant to be violated.  I can see
+  below that this is not done.  Invariants aren't automatically true.  Your
+  specification needs to enforce them.}
+
 \subsubsection{Environment Variables}	\label{SecEVBody}
 N/A
 \subsubsection{Assumptions} \label{SecABody}
 %	bodyAlloc, or newBody, or newStaticBody are called before any 
 %	other access program. 
-	All input pointers are also assumed to be non-null.
+	All input pointers are also assumed to be non-null.  \wss{This is far
+          too implementation specific.  Don't worry about pointers at this point.}
 
 \subsubsection{Access Routine Semantics} \label{SecAPSBody}
 
@@ -395,9 +424,14 @@ N/A
 
 \textbf{bodyInit:} %& \textbf{Input:} & bodyInit accepts a Body pointer and two double values as inputs. \\
 %& \textbf{Exceptions:} & None.\\
-& \textbf{Transition:} & bodyInit allocates a new Body and initializes its mass, moment, bodyType, restitution, angle and shape  with the input values. Other fields are zero-initialized and kinematic functions are set to default ones. \\
+& \textbf{Transition:} & bodyInit allocates a new Body and initializes its mass,
+moment, bodyType, restitution, angle and shape with the input values. Other
+fields are zero-initialized and kinematic functions are set to default
+ones. \wss{Where do these inputs come from?  Only two real numbers are passed to
+  body?}\\
+
 & \textbf{Output:} & bodyInit returns a pointer to the initialized Body.\newfunc
-& \textbf{Exceptions:} & None.\\
+& \textbf{Exceptions:} & None.\wss{Why aren't you checking that the mass is positive?}\\ 
 %\textbf{newBody:} & \textbf{Input:} & newBody accepts two double values as inputs. \\
 %& \textbf{Exceptions:} & newBody may throw a NaNMass, NaNMoment, NegativeMass or NegativeMoment exception when the user provides NaN or negative values for input, or an InfiniteMass exception when the user provides an infinite value for the first input double. \\
 %& \textbf{Transition:} & newBody will allocate a new Body, initialize it with the input and default values, and set it to a dynamic body. \\
@@ -444,16 +478,25 @@ N/A
 %& \textbf{Output:} & None. \newfunc
 
 \textbf{Update :} %& \textbf{Input:} & bodyUpdatePosition accepts a Body pointer and a double value as inputs. \\
-& \textbf{Transition:}  & Update will update Body's position and all other parameters(bodyInit) associated to the body after each cycle. \\
+& \textbf{Transition:}  & Update will update Body's position and all other
+parameters (bodyInit) associated to the body after each cycle. \wss{How is the
+  update done?  The equations from your SRS should appear in your MIS.  You
+  haven't given enough information for someone to code this module.}\\
+& \textbf{Output:} & None. \wss{If there is no output, do not include this
+  field.  Remember that output and transition are unlikely to go together,
+  except for constructors.}\newfunc
+& \textbf{Exceptions:} & None \\
+
+\textbf{apply_force:} & \textbf{Transition:} & apply_force will apply forces on
+the rigid bodies and it recalculates the total force acting on each
+body. \wss{What state variable is updated?} \\%& \textbf{Input:}  bodyUpdateVelocity accepts a Body pointer, a Vector and a double value as its input. \\
 & \textbf{Output:} & None. \newfunc
 & \textbf{Exceptions:} & None \\
 
-\textbf{apply_force:} & \textbf{Transition:} & apply_force will apply forces on the rigid bodies and it recalculates the total force acting on each body.  \\%& \textbf{Input:}  bodyUpdateVelocity accepts a Body pointer, a Vector and a double value as its input. \\
-& \textbf{Output:} & None. \newfunc
-& \textbf{Exceptions:} & None \\
-
-
-\textbf{apply_torque:} & \textbf{Transition:} & apply_torque will apply forces(for rotation) on rigid bodies and recalculates the total torque acting on each body.  \\
+\textbf{apply_torque:} & \textbf{Transition:} & apply_torque will apply
+forces(for rotation) on rigid bodies and recalculates the total torque acting on
+each body.  \wss{What state variable is updated?  How is it changed?  I should
+  see an explicit change to a state variable, not just vague words.}\\
 & \textbf{Output:} & None. \newfunc
 & \textbf{Exceptions:} & None \\
 
@@ -467,6 +510,11 @@ N/A
 %& \textbf{Transition:} & Each bodyEach function will iterate through the Body's Shapes or Arbiters, depending on the function's corresponding parameter, and apply the input function to each object in the list, using the data (void pointer) from the third input value. \\
 %& \textbf{Output:} & None.  \newfunc
 \end{longtable*} 
+
+\wss{There are state variables that do not appear to have any transitions.  How
+  are they influenced?  Is there no way to inspect the values of the state
+  variables?  You have an access program for set space, but you don't actually
+  specify it.}
 
 \subsubsection{Local Functions} \label{SecLFBody}
 
@@ -503,6 +551,21 @@ N/A
 %%%%%%%%%%%%%%%%%%%% SHAPE MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MIS of the Shape Module} \label{MISShape}
+
+\wss{I have similar comments on this module to the previous.  Exported types
+  should be in an exported types field, or in their own ADT.  You shouldn't show
+  transition and output for every module.  You don't want to use pointers.  Put
+  a newpage between modules.  Transitions and outputs should be expressed as
+  equations, not words.}
+
+\wss{Modifying the previous documentation by deleting the things that don't
+  apply isn't really working well.  The previous design is far too tied to the
+  Chipmunk implementation.  We want the new documentation to follow the MIS
+  examples we showed in class.  We also want it much simpler.  It should be
+  based on the SRS, not the code.}
+
+\wss{You seem to have inheritance, but you haven't used the way we covered in
+  class to show it.}
 
 \subsection{Module Name: Shape} 
 
@@ -643,6 +706,9 @@ None
 
 \subsection{Submodule Name: CircleShape} \label{MISCircle}
 
+\wss{Out template doesn't have a heading called Submodule.  I don't know what
+  this means.  Document inheritance as we discussed it in class.}
+
 \subsection{Uses} \label{SecUCircle}
 	\Body, \Shape, \Vector
 
@@ -666,6 +732,9 @@ None
 		momentForCircle & double, double, double, Vector & double & - \\ \hline
 		areaForCircle & double, double & double & - \\ \hline
 	\end{longtable}
+
+\wss{How is the center of the circle a double?}
+\wss{Why aren't the semantics given for all of the access programs?}
 	
 \subsection{Semantics}
 
@@ -2772,6 +2841,19 @@ N/A
 	& \textbf{Transition:} & CollisionError throws an exception and aborts the program. This function is stored in the exported \hyperref[SecLCCollision]{CollisionFuncs} array and called by \hyperref[SecAPSCollision]{collide} when the colliding Shape types are not in order. \\
 	& \textbf{Output:} & None. \newfunc
 \end{longtable*}
+
+\wss{Please remove the commented out portions.  They are distracting.  Nothing
+  will be lost, since it is all in version control.  Moreover, I don't think we
+  want to continue along the path of the previous documentation.  It was too
+  tied to the implementation.}
+
+\wss{As mentioned above, we need a simpler design.  One that is tied to the SRS,
+  not the the existing code.  The ``easy'' way of modifying the previous
+  documentation was likely a mistake.  It would be better if you thought about
+  the problem following the design examples from class.}
+
+\wss{You won't have time for completely redoing this document, but please
+  indicate how you would change it in the revised documentation.}
 
 %%%%%%%%%%%%%%%%%%%%% SEQUENCE DATA STRUCTURE MODULE %%%%%%%%%%%%%%%%%%%%%%%
 %
