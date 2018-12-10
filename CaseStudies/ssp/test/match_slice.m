@@ -1,4 +1,4 @@
-function slipnew = MatchSlice( slip, nSlices )
+function slipnew = match_slice( slip, nSlices )
 
 XMin = slip (1,1);
 XMax = slip (1,length(slip));
