@@ -823,12 +823,17 @@ Type: Manual
 					
 Initial State: Test subject has a completed MG for \progname{}
 					
-Input/Condition: MG for \progname{} and the following question ``If you were 
-tasked with modifying \progname{} to accept an imposed surface load as an input 
-and incorporate this additional force into the computation, which module(s) 
-would you change?''
+Input/Condition: MG for \progname{} and the following question ``The current 
+implementation of \progname{} assumes there is no surface load on the slope of 
+soil. If you were tasked with modifying \progname{} to accept an imposed 
+surface load as an input and incorporate this additional force into the 
+calculations of the factor of safety and interslice forces, which module(s) do 
+you think you would need to change?''
 					
-Output/Result: Input Module, Morgenstern-Price Calculation Module
+Output/Result: Input Module, Morgenstern-Price Calculation Module. The Slice 
+Property Calculation Module is also an acceptable answer, though not required 
+as it would be up to the designer whether to include imposed surface load in 
+that module.
 					
 How test will be performed: Test subject will be asked the question described 
 in ``Input/Condition'' and must answer only by consulting the MG. Their answer 

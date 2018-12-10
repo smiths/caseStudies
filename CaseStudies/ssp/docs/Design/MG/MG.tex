@@ -344,8 +344,8 @@ on the programming language selected.
 \begin{description}
 \item[Secrets:]The contents of the required behaviors.
 \item[Services:]Includes programs that provide externally visible
-  behaviors of the system as specified in the software requirements
-  specification (SRS) documents. This module serves as a communication
+  behaviors of the system as specified in the Software Requirements
+  Specification (SRS) document. This module serves as a communication
   layer between the hardware-hiding module and the software decision
   module. The programs in this module will need to change if there are
   changes in the SRS.
@@ -400,8 +400,9 @@ sharp angles, points outside of the soil bed, or downward concavity.
 \subsubsection{Slip Weighting (\mref{mSlipWeight})}
 
 \begin{description}
-\item[Secrets:] The criteria for weighting each slip surface in a given set of 
-slip surfaces based on how closely they resemble the critical slip surface.
+\item[Secrets:] The algorithm for assigning weights to each slip surface in a 
+given set of slip surfaces based on how closely they resemble the critical slip 
+surface, for the genetic algorithm to use when generating new slip surfaces.
 \item[Services:] Assigns weights to each slip surface in a given set of slip 
 surfaces based on their factors of safety. A slip surface with a lower factor 
 of safety will have a higher weight as it is closer to the critical slip 
@@ -412,22 +413,22 @@ surface.
 \subsubsection{Slip Slicing (\mref{mSlipSlicer})}
 
 \begin{description}
-	\item[Secrets:] Algorithm to determine the coordinates of where the
-	slip surface interslice nodes occur.
-	\item[Services:] When preparing a slip surface for analysis by the
-	Morgenstern-Price Module (\mref{mMorgPrice}) the x-coordinates defining the 
-	boundaries of the slices are identified and stored in a vector.
+	\item[Secrets:] Algorithm for slicing a slip surface so that it is defined 
+	by a greater number of coordinates.
+	\item[Services:] Prepares a slip surface for analysis by the
+	Morgenstern-Price Calculation Module (\mref{mMorgPrice}) by dividing the 
+	slip surface into a greater number of coordinates.
 	\item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Morgenstern-Price Calculation (\mref{mMorgPrice})}
 
 \begin{description}
-\item[Secrets:] The algorithm for calculating the factor of safety of a given 
-slip surface.
-\item[Services:] Calculates the factor of safety of a given slip
-  surface, through implementation of a Morgenstern-Price slope
-  stability analysis method.
+\item[Secrets:] The algorithm for calculating the factor of safety and 
+interslice forces of a given slip surface.
+\item[Services:] Calculates the factor of safety and interslice normal and 
+shear forces of a given slip surface, through implementation of a 
+Morgenstern-Price slope stability analysis method.
 \item[Implemented By:] \progname
 \end{description} 
 
