@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{multirow}
+\usepackage{amsmath, mathtools}
 \usepackage{geometry}
 \usepackage{caption}
 \usepackage{bm}
@@ -23,6 +24,7 @@
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{array}
 \usepackage{tabu}
+\usepackage{enumitem}
 \usepackage[numbib,nottoc]{tocbibind}
 %\usepackage{refcheck}
 
@@ -37,11 +39,21 @@
 
 \input{../../Comments}
 \externaldocument[SRS-]{../../SRS/glassbr_srs}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
 
-\externaldocument[MG-]{../../Design/MG/MG}
-\externaldocument[MIS-]{../../Design/MIS/glassbr_mis}
+\externaldocument[MG-]{../../Design/MG/glassbr_mg}
+\newcommand{\mref}[1]{M\ref{#1}}
+
 \externaldocument[SVnV-]{../SystVnVPlan/SystVnVPlan}
+\newcommand{\tcref}[1]{TC\ref{#1}}
 
+\externaldocument[MIS-]{../../Design/MIS/glassbr_mis}
+
+
+\newcounter{utestnum} %Assumption Number
+\newcommand{\utcthetestnum}{TC\theutestnum}
+\newcommand{\utcref}[1]{TC\ref{#1}}
 
 \newcommand{\colZwidth}{1.0\textwidth}
 \newcommand{\blt}{- } %used for bullets in a list
@@ -79,7 +91,7 @@
 \newcommand{\iref}[1]{IM\ref{#1}}
 \newcounter{reqnum} %Requirement Number
 \newcommand{\rthereqnum}{P\thereqnum}
-\newcommand{\rref}[1]{R\ref{#1}}
+
 \newcounter{lafnum}
 \newcommand{\lthelafnum}{L\thelafnum}
 \newcommand{\lref}[1]{L\laf{#1}}
@@ -119,6 +131,7 @@
 \newcommand{\euler}{e}
 \newcommand{\complex}{i}
 
+
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 %\oddsidemargin 0mm
@@ -148,6 +161,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 27/11/18 & 1.0 & initial UnitVnVPlan based on new template\\
+07/12/18 & 2.0 & Major changes based on existing modules in the MIS\\
 
 \bottomrule
 \end{tabularx}
@@ -184,21 +198,38 @@
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  unit V\&V plan}
+This document provides the unit Verification and Validation (VnV) plan for the 
+software. Section~\ref{sec_Plan} outlines at a high level the 
+plan for verifying and validating the software. Section~\ref{sec_Tests} gives 
+more details about the specific tests that will be used to verify each module and Access Routin Semantics.
 
 \section{General Information}
 
 \subsection{Purpose}
 
-\wss{Identify software that is being unit tested (verified).}
+\noindent This document will identify what testing is going to be done on \progname{}. 
+This document is different from the System VnV Plan in that it considers each 
+module as already written according to the Module Instance Specification (MIS) 
+document.These test cases can be tested using a white box approach, where the inputs, outputs, and 
+transitions between the inputs and outputs are known.
 
-\subsection{Scope}
-All introduced modules in MG are inside of the scope to UnitVnVPlan
+\noindent The purpose of the unit verification and validation activities is to 
+confirm that every module of \progname{} performs its expected actions 
+correctly. The tests described in this document cannot definitively prove 
+correctness, but they can build confidence by verifying that the software is 
+correct for the cases covered by tests.
+
+\subsection{Scope} \label{Scope}
+
+\noindent The Hardware-Hiding module is implemented by the operating system of the hardware on which \progname{} 
+is running, will not be unit tested as 
+ and is assumed to work correctly. Verification of the non-functional requirements is 
+not included in the unit verification plan because they are also sufficiently 
+covered by the System VnV Plan \href{https://github.com/smiths/caseStudies/blob/glass_UnitVnV/CaseStudies/glass/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
+{System VnV Plan document}.
 
 
-
-\section{Plan}
+\section{Plan} \label{sec_Plan}
 	
 \subsection{Verification and Validation Team}
 Responsible member for the verification and validation of GlassBR is Vajiheh Motamer.
@@ -216,244 +247,409 @@ According to that all test files are going to develop based on Python. The follo
 
 
 \subsection{Non-Testing Based Verification}
-This section for \progname is not applicable.
+This section for \progname{} is not applicable.
 
 \section{Unit Test Description}
 
-\wss{Reference your MIS and explain your overall philosophy for test case
-  selection.}
+\noindent Test cases have been selected to verify that each module conforms to 
+the specification for the module described in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/glass/docs/Design/MIS/glassbr_mis.pdf}
+{Module Interface Specification (MIS) document}. The test cases has been intended to cover all Access Routine Semantics both with exceptions and without exceptions. 
+
+~\newline \noindent Many of the tests refer to variables or constants as part 
+of the initial state, input, or expected output. The specifications for these 
+variables and constants can be found in the MIS document for this project.
+
+~\newline \noindent The values in Table~\ref{defaultInputTBL} will be used as input for 
+many of the test cases described throughout this section. These values were 
+taken from the \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/glass/src/Python/NewImplementation/TestFiles/defaultInputFile.txt} {Default Values} for this project. Individual 
+test cases will reference the table as input but specify new values for any 
+input parameter that should have a different value than specified by the table.
+
+\begin{table}[!h]
+	\centering
+	
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ | p{3cm} | p{3cm}| p{3cm} | }  
+		\toprule
+		\textbf{Input} & \textbf{Value} & \textbf{Unit}\\
+		\midrule 
+		$\text{a}$ &1600 & \text{m} \\
+		$\text{b}$ &1500 & \text{m}\\
+		$\text{g}$ &\text{HS} & \text{-}\\
+		$P_{b_{\text{tol}}}$ &0.008& \text{-}\\
+		$\text{SD}_x$ & 0 &  \si{\meter}\\
+		$\text{SD}_y$ &1.5 & \si{\metre}\\
+		$\text{SD}_z$ & 11.0 &\si{\metre}\\
+		$\text{t}$ &10.0 & \text{mm}\\
+		$\text{TNT}$ &1.0 & \text{-}\\
+		$w$ &10.0	& \si{\kilo\gram}\\
+		\bottomrule
+	\end{tabular}
+	\caption{Input to be used for test cases}
+	\label{defaultInputTBL}
+\end{table}
+
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
-
-\subsubsection{Control Module}
-With reference to Section \ref{MIS-Main} from MIS, this section determines if the main program produces the correct output.
-
-\begin{enumerate}
-
-\item{TstMain\_1}
-
-Type: Automotic
-					
-Initial State: New Session
-					
-Input: defaultInput.txt, output.txt\\ from the following path: https://github.com/smiths/caseStudies/tree/master
-	/CaseStudies/glass/src/Python/Test/Inputfiles
-
-					
-Output: assertEqual(GenOutput.txt, output.txt)
-\aida{Should I use sOut (Exported Constant in MIS) instead of GenOutput.txt? Besides, Should I use "GenOutput.txt, output.txt" for expected output instead of assert?}
-
-Test Case Derivation: \iref{SRS-IM_prob} and \tref{SRS-T_Pb} in SRS.
-
-How test will be performed: Unit testing using PyUnit.
-					
-\item{TstMain\_2\\}
-
-Type: Automotic
-
-Initial State: New Session
-
-Input: TestInput1.txt, output1.txt\\ https://github.com/smiths/caseStudies/tree/master
-/CaseStudies/glass/src/Python/Test/Inputfiles
-
-
-Output: assertEqual(GenOutput1.txt, output1.txt)
-\aida{Should I consider only a test case which consists of a number of inputfile and outputfile instead of seperate test cases with same body and different input and output? }
-
-Test Case Derivation: \iref{SRS-IM_prob} and \tref{SRS-T_Pb} in SRS.
-
-How test will be performed: Unit testing using PyUnit.
-
-
-    
-\end{enumerate}
-
-\begin{enumerate}
-
 \subsubsection{Input Module}
+~\newline As described in the MIS, the Input module is expected to read in many user 
+inputs from a file. For each value contained in the file, there is a 
+corresponding test case verifying that the value was properly read into the 
+data structure containing the input parameters.  The input module is also responsible for 
+verifying the input using describing in verify\_params() of \ref{MIS-InputARS} from MIS, so for each possible violation of an input constraint, 
+there is a corresponding test case verifying that the correct exception was 
+thrown.
 
-\item{TstCheckConstraints} \\
-Invalid input is input that defies the data constraints described
-in Section~\ref{SRS-sec_datadef} of the SRS. This test case has considered to test verify params routin from MIS \\
-Type: Automotic
+\paragraph{Valid User Input}
 
-Initial State: New Session
-
-Input: Table~\ref{SVnV-testCheckConstraints}  and Table~\ref{SVnV-defaultInputTBL} from SystVnVPlan
-
-
-Output: assertEqual(("Specified Error in the Table~\ref{SVnV-testCheckConstraints} "), "Generated Error by GlassBR")
-\aida{What should I consider instead of "generated error by glassbr"?}
-
-Test Case Derivation: R1 and R2 from SRS.
-
-How test will be performed: Unit testing using PyUnit.
-
-\item{testInputFormat} \\
-The following set of test cases is intended to ensure data is being read in from the input file correctly and it has considered to test of load\_params(s) routin from MIS
-
-Type: Automotic
-
-Initial State: New Session
-
-Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
-/CaseStudies/glass/src/Python/Test/Inputfiles
-
-
-Output: assertEqual(Params as maual( for example for length 1200), readed param from the input file)
-\aida{Do you have  better suggestion for the format of arguments of assertEqual?}
-
-Test Case Derivation: R1 and R2 from SRS.
-
-How test will be performed: Unit testing using PyUnit.
-
-\item{testDerivedValues} \\
-The following set of test cases is intended to ensure value from the derived quantities has been calculated correctly.
-
-Type: Automotic
-
-Initial State: New Session
-
-Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
-/CaseStudies/glass/src/Python/Test/Inputfiles
-
-
-Output: assertEqual(Params as manual( for example for sdExpected 11.10180165558726), readed sd from the input file)
-\aida{Should I have a sperate table for input and outputs similar to SystVnVPlan??}
-
-Test Case Derivation: R2 from SRS.
-
-How test will be performed: Unit testing using PyUnit.
+~\newline ~\newline \noindent The test cases described in Table~\ref{InputTests} 
+verify that each user input is correctly read. These test cases are identical 
+to each other with the exception of the expected output on which they assert. 
+The input for each is a file containing the inputs specified in 
+Table~\ref{defaultInputTBL}. The type of these test cases is automatic. The initial 
+state for each is a new session. The expected output for each is given in 
+Table~\ref{InputTests}. The expected output is derived based on the given 
+inputs. The tests will be performed as automated tests on a unit testing 
+framework.
 
 
 
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_Length} & 
+	test-input\_a &  \textit{a} = 1600\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_Breadth} & 
+	test-input\_b &  \textit{b} = 1500\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GlassType} & 
+	test-input\_g &  \textit{g} = \textit{HS}\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_PbTol} & 
+	test-input\_$P_{b_\text{tol}}$ &  $P_{b_\text{tol}}$ = 0.008\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_SDx} & 
+	test-input\_${SD}_x$ &  \textit{SDx} = 15000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_Sdy} & 
+	test-input\_$\text{SD}_y$ &  \textit{SDy} = 1.5\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_SDz} & 
+	test-input\_$\text{SD}_z$ &  \textit{SDz} = 11.0\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_Thickness} & 
+	test-input\_$t$ &  $t$= 10.0\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_TNT} & 
+	test-input\_TNT &  \textit{TNT} = 1.0\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_W} & 
+	test-input\_$w$ &  $w$ = 10.0\\ 
+	\hline
+	\caption{Input Test Cases}
+	\label{InputTests}
+\end{longtable}
 
-\end{enumerate}
-\begin{enumerate}
+\paragraph{Derived Quantities}
+
+~\newline ~\newline \noindent The test cases described in Table~\ref{DerivedValueTests} 
+to ensure initial inputs from Table~\ref{defaultInputTBL}  regarding to the Constants Values and Calculations describing in load\_params($s$) of \ref{MIS-InputARS} from MIS have been correctly converted into derived quantities. The expected output for each test case have been considered in 
+Table~\ref{DerivedValueTests}. The type of these test cases is automatic. The initial 
+state for each test case is a new session. The tests will be performed as automated tests on a unit testing 
+framework.	
+
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_LDF} & 
+	test-input\_LDF &  $\text{LDF}$ = 0.2696493494752911\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_h} & 
+	test-input\_h &  $h$ = 9.02\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GTF} & 
+	test-input\_GTF &   $\mbox{GTF}$ = \textit{2.0}\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_SD} & 
+	test-input\_SD &  $\mbox{SD}$ = 11.10180165558726\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_AR} & 
+	test-input\_AR &  $\mbox{AR}$ = 1.0666666666666667\\ 
+	\hline
+	\caption{Derived Quantities Test Cases}
+	\label{DerivedValueTests}
+\end{longtable}
+
+
+\paragraph{Invalid User Input}
+
+
+~\newline ~\newline \noindent The test cases described in Table~\ref{SVnV-testCheckConstraints} from System VnV Plan document are intended to cover all invalid input possibilities. Invalid input is input 
+that defies the data constraints described in Section 
+\ref{SRS-sec_DataConstraints} of the SRS. These test cases are identical to 
+each other with the exception of their input. 
+~\newline \noindent  \tcref{SVnV-TC_checkAPositiveTest} - 
+\tcref{SVnV-TC_incorrectWEqUpprBndTest} in the System VnV Plan document cover these set of tests.
 	
-	\subsubsection{Input Module}
+
+\subsubsection{LoadASTM Module}	
 	
-	\item{TstCheckConstraints} \\
-	Invalid input is input that defies the data constraints described
-	in Section~\ref{SRS-sec_datadef} of the SRS. This test case has considered to test verify params routin from MIS \\
-	Type: Automotic
+~\newline This module Reads the data from each ASTM file as a text file and create an object of FunctT and add it to the ContoursT object that is described in \ref{MIS-LoadARS} from MIS as two (Access Routins Semantics) : i) LoadTSD($s$) which is for 3 second equivalent, 
+pressure ($q$) versus stand off distance (SD) versus charge weight ($w$) and ii) LoadSDF($s$) which is Non dimensional lateral load ($\hat q$) versus aspect ration versus Stress
+distribution factor ($J$). 
+
+
+\begin{longtable}{  l  p{4cm} p{4cm}  p{6cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected \textit{w}} & \textbf{Expected\textit{[SD]}} & \textbf{Expected \textit{[q]}}\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_TSD} & 	test-input\_sTSD &
+	[4.5, 9.1, 14., 18.] &  [[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]] & [[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]]  \\                                                                                                                                                                 
+	\hline
+	\caption{Test LoadTSD(s)}
+	\label{TSDTests}
+\end{longtable}
+
+
+
+\subsubsection{Calc Module}
+	
+This Module has been designed for the equations for predicting the probability of glass 
+breakage, capacity, and demand and other routines in the Calc module in the MIS using the input parameters.
+~\newline The test cases for this Module from \tcref{SVnV-TC_defultInput} - 
+\tcref{SVnV-TC_LowThicknessInput} in the System VnV Plan document cover these set of tests. 
+
+\subsubsection{GlassType ADT Module}	
+From Section \ref{MIS-GlassTypeADT} in the MIS, The implementation of the ``glass type'' and 'Glass Type Factor'. In this section it represents test cases which covers all semantic routins in this module.
+
+\subsubsection{Thickness ADT Module}	
+From Section \ref{MIS-ThicknessADT} in the MIS, the implementation of the thickness type and it Defines abstract data type for thickness. In this section it represents test cases which covers all semantic routins in this module.
+
+	
+\subsubsection{SeqServices Module}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{isAscendingTest}] 
+	test\_isAscending\_true
+	
+	Type: Automatic
 	
 	Initial State: New Session
 	
-	Input: Table~\ref{SVnV-testCheckConstraints}  and Table~\ref{SVnV-defaultInputTBL} from SystVnVPlan
+	Input: (X : [1, 2, 3, 4, 5.5]).
 	
+	Output: $out$ := true
 	
-	Output: assertEqual(("Specified Error in the Table~\ref{SVnV-testCheckConstraints} "), "Generated Error by GlassBR")
-	\aida{What should I consider instead of "generated error by glassbr"?}
+	Test Case Derivation: This test case has been designed to Check to see if a given list is monotonically increasing. In this test case, the input has been sorted in the ascending sequence. So, the expected result would be true.
 	
-	Test Case Derivation: R1 and R2 from SRS.
+	How test will be performed: Automated test on unit testing framework.
 	
-	How test will be performed: Unit testing using PyUnit.
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{notisAscendingTest}] 
+	test\_isAscending\_false
 	
-	\item{testInputFormat} \\
-	The following set of test cases is intended to ensure data is being read in from the input file correctly and it has considered to test of load\_params(s) routin from MIS
-	
-	Type: Automotic
+	Type: Automatic
 	
 	Initial State: New Session
 	
-	Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
-	/CaseStudies/glass/src/Python/Test/Inputfiles
+	Input: (X : [1, 2, 3, 4, 0]).
+
 	
+	Output: $out$ := false
 	
-	Output: assertEqual(Params as maual( for example for length 1200), readed param from the input file)
-	\aida{Do you have  better suggestion for the format of arguments of assertEqual?}
+	Test Case Derivation: In this test case, the input has not been sorted in the ascending sequence. So, the expected result would be false.
 	
-	Test Case Derivation: R1 and R2 from SRS.
+	How test will be performed: Automated test on unit testing framework.
 	
-	How test will be performed: Unit testing using PyUnit.
+		\item [TC\refstepcounter{utestnum}\theutestnum: \label{isInBoundsTest}] 
+	test\_isInBounds\_true
 	
-	\item{testDerivedValues} \\
-	The following set of test cases is intended to ensure value from the derived quantities has been calculated correctly.
-	
-	Type: Automotic
+	Type: Automatic
 	
 	Initial State: New Session
 	
-	Input: defaultInput.txt,testInput1.txt,testInput2.txt \\ https://github.com/smiths/caseStudies/tree/master
-	/CaseStudies/glass/src/Python/Test/Inputfiles
+	Input: (X : [1, 2, 3, 4, 5.5] , x : 3.5)
 	
+	Output: $out$ := true
 	
-	Output: assertEqual(Params as manual( for example for sdExpected 11.10180165558726), readed sd from the input file)
-	\aida{Should I have a sperate table for input and outputs similar to SystVnVPlan??}
+	Test Case Derivation: Regarding with MIS, this routine Checks to see if a given value is within the bounds of a provided list. In this test case, the input has not been is within the bounds of the given list. So, the expected result would be true.
 	
-	Test Case Derivation: R2 from SRS.
-	
-	How test will be performed: Unit testing using PyUnit.
-	
-\aida{I think this test case covers GlassTypeADT Module and ThicknessADT Module and Constants Module. Do you agree?}	
-	
-	
-\end{enumerate}
-\begin{enumerate}
-	
-	\subsubsection{Calc Module}
-	
-	\item{testCalculations} \\
-	These set of tests are same to  TC1 to TC7 in SystVnVPlan.
+	How test will be performed: Automated test on unit testing framework.
 
 	
-	\aida{Is that enough to reference to SystVnVplan?}	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{interpLinTest}] 
+	test\_interpLin\_x
 	
+	Type: Automatic
 	
-\end{enumerate}
-
-\subsection{Tests for Nonfunctional Requirements}
-
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
-
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
-
-\subsubsection{Module ?}
+	Initial State: It is assumed that isAscending is True and isInBounds is True as well.
+	
+	Input: (X : [1, 2, 3, 4, 5.5] , x : 1 , x : 3.12345678 )
+	
+	Output: $out$ := 0 , $out$ := 2
+	
+	Test Case Derivation: Regarding to th MIS, this test case Determines the best "placement" for a value against a provided list. In this test case, in the first x, it is present in list. In the second x, $x$ $<$ $X(2+1)$ and it will return $i$ which is 2.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
 		
-\begin{enumerate}
+		\item [TC\refstepcounter{utestnum}\theutestnum: \label{interpQuadTest}] 
+	test-interpQuad\_x
+	
+	Type: Automatic
+	
+	Initial State: It is assumed that isAscending is True.
+	
+	Input: ($x_0, y_0, x_1, y_1, x_2, y_2, x$) = (0, 0, 3 , 6 , 4.5 , 5.67 , 4)
+	
+	Output: $out := y_1 + \frac{y_2 - y_0}{x_2-x_0} (x - x_1) + \frac{y_2 - 2 y_1 + y_0}{2
+		(x_2-x_1)^2} (x - x_1)^2$ = 5.8533333333333335
+	
+	Test Case Derivation: Regarding to the MIS, $out$ and input values are members of $\mathbb{R}$, this test case is to test of Quad interpolation function which returns interpolated value which is calculated using provided inputs and .
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{indexTest}] 
+	test\_index\_x
+	
+	Type: Automatic
+	
+	Initial State: It is assumed that isAscending is True.
+	
+	Input: (X : [1, 2, 3, 4, 5.5] )
+	
+	Output: $out := y_1 + \frac{y_2 - y_0}{x_2-x_0} (x - x_1) + \frac{y_2 - 2 y_1 + y_0}{2
+		(x_2-x_1)^2} (x - x_1)^2$ = 5.8533333333333335
+	
+	Test Case Derivation: Regarding to the MIS, $out$ and input values are members of $\mathbb{R}$, this test case is to test of Quad interpolation function which returns interpolated value which is calculated using provided inputs and .
+	
+	How test will be performed: Automated test on unit testing framework.
 
-\item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+Output: $out$ := false
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+Test Case Derivation: In this test case, the input has not been sorted in the ascending sequence. So, the expected result would be false.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{isInBoundsTest}] 
+test\_isInBounds\_true
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: (X : [1, 2, 3, 4, 5.5] , x : 3.5)
+
+Output: $out$ := true
+
+Test Case Derivation: Regarding with MIS, this routine Checks to see if a given value is within the bounds of a provided list. In this test case, the input has not been is within the bounds of the given list. So, the expected result would be true.
+
+How test will be performed: Automated test on unit testing framework.
+
+
+\subsubsection{FuncADT Module}	
+From Section \ref{MIS-FunctADT} in the MIS, this module is used to represent a two dimensional
+function.  For instance, the data may be represented by a table of data, or a
+polynomial, or a piecewise linear function, etc.
+It Defines the abstract data type for functions, providing a
+constructor and a means to evaluate the function for a given value of the
+independent variable. In this section it represents test cases which covers all semantic routins.
+
+\paragraph{Testing exceptions of FuncT} 
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTnotAscendingErrTest}] 
+test\_FuncT\_notAscendingErr
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: (X : [5,4,6] , Y : [0, 1, 3], i: 2).
+
+Output: $out$ := raise IndepVarNotAscending('Independent variables are not in ascending order!')
+
+
+Test Case Derivation: This test case uses of isAscending from SeqServices module. Because X is not in the ascending sequence, the system must raise an exception. 
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTssmErrTest}] 
+test\_FuncT\_ssmErr
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: (X : [0,1,2], Y : [0], i: 1).
+
+Output: $out$ := raise SeqSizeMismatch('Sequences are not of the same length!')
+
+
+Test Case Derivation: Because Sequences are not in the same length, the system raises an exception. 
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTssmErrTest}] 
+test\_FuncT\_InvalidInterpErr
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: (X :[1, 2, 3], Y: [0, 1, 3], i : 0 or 3).
+
+Output: $out$ := raise InvalidInterpOrder("Invalid interpretation error!")
+
+
+Test Case Derivation: According to the MIS, $i$ must be between [1..\mbox{MAX\_ORDER}]. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncToodErrTest}] 
+test\_FuncT\_oodErr
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( X : [1, 2, 10] , Y : [1, 2, 10] , $o$ : 1 , $x$: 100).
+
+Output: $out$ :=  raise OutOfDomain('Out of domain!')
+
+
+Test Case Derivation:  $x$ must be between \mbox{minX} and \mbox{maxX}. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\subsubsection{ContoursADT Module}	
+From Section \ref{MIS-ContoursADT} in the MIS, The data structure used to represent a
+sequence of two dimensional functions in the form of contours. Each function
+is associated with a particular value, like a contour in a contour map.
+It Defines the abstract data type for a sequence of functions.
+Allows adding/removing functions to/from the sequence.  Provides evaluation of
+the 3d function at values between the contours. In this section it represents test cases which covers all semantic routins in this module.
+
+\subsubsection{Output Module}	
+
+The verification of the output is covered by \ref{SVnV-TC_ValidOutFS} in the 
+System VnV Plan document. The delivery of each output is covered by 
+\tcref{SVnV-TstDrvdValsHSGlTy} to \tcref{SVnV-TstDrvdValsFTGlTy} in the System VnV Plan 
+document. This document therefore only adds test cases for items not covered by 
+the System VnV Plan document.
+
 
 \end{enumerate}
-
-\subsubsection{Module ?}
-
-...
 
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
+Every module is covered by test cases except for those that were 
+declared out of scope in Section~\ref{Scope} of this document.
 
 \bibliographystyle{plainnat}
 
@@ -461,13 +657,8 @@ How test will be performed:
 
 \newpage
 
-\section{Appendix}
+\bibliographystyle{plainnat}
 
-\wss{This is where you can place additional information, as appropriate}
 
-\subsection{Symbolic Parameters}
-
-\wss{The definition of the test cases may call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
 
 \end{document}
