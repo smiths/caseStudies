@@ -158,12 +158,8 @@ bodies and shapes interact together.
   %control of the simulation is orchestrated, including the input and output of data.
 \item[\refstepcounter{acnum} \actheacnum \label{acVector}:] The implementation of mathematical vectors.
 \item[\refstepcounter{acnum} \actheacnum \label{acBBox}:] The implementation of bounding box structures.
-\item[\refstepcounter{acnum} \actheacnum \label{acTrans}:] The implementation of transformation matrices.
-\item[\refstepcounter{acnum} \actheacnum \label{acSpatialIndex}:] How the simulation space is spatially indexed.
 \item[\refstepcounter{acnum} \actheacnum \label{acSolver}:] The algorithm used for solving collisions.
-\item[\refstepcounter{acnum} \actheacnum \label{acSeqDS}:] The implementation for the sequence (array) data structure.
-\item[\refstepcounter{acnum} \actheacnum \label{acLinkDS}:] The implementation for the linked (tree) data structure.
-\item[\refstepcounter{acnum} \actheacnum \label{acAssocDS}:] The implementation for the associative (hash table) data structure.
+
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -201,23 +197,14 @@ actually be implemented.  Modules are numbered by \textbf{M}
 followed by a number.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mBody}:] Rigid Body Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mShape}:] Shape Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mCircle}:] Circle Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSegment}:] Segment Module
-\item [\refstepcounter{mnum} \mthemnum \label{mPoly}:] Polygon Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSpace}:] Space Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mCollision}:] Arbiter Module 
-%\item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mVector}:] Vector Module
-\item [\refstepcounter{mnum} \mthemnum \label{mBBox}:] Bounding Box Module
-\item [\refstepcounter{mnum} \mthemnum \label{mTrans}:] Transform Matrix Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSpatialIndex}:] Spatial Index Module
-\item [\refstepcounter{mnum} \mthemnum \label{mSolver}:] Collision Solver Module 
-\item [\refstepcounter{mnum} \mthemnum \label{mSeqDS}:] Sequence Data Structure Module
-\item [\refstepcounter{mnum} \mthemnum \label{mLinkDS}:] Linked Data Structure Module  
-\item [\refstepcounter{mnum} \mthemnum \label{mAssocDS}:] Associative Data Structure Module 
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding 
+\item [\refstepcounter{mnum} \mthemnum \label{mBody}:] Rigid Body 
+\item [\refstepcounter{mnum} \mthemnum \label{mShape}:] Shape 
+\item [\refstepcounter{mnum} \mthemnum \label{mCircle}:] Circle
+\item [\refstepcounter{mnum} \mthemnum \label{mPoly}:] Polygon
+\item [\refstepcounter{mnum} \mthemnum \label{mSpace}:] Space  
+\item [\refstepcounter{mnum} \mthemnum \label{mVector}:] Vector
+\item [\refstepcounter{mnum} \mthemnum \label{mSolver}:] Collision Solver 
 \end{description}
 \noindent
 Note that \mref{mHH} is a commonly used module and is already implemented by the operating
@@ -237,22 +224,13 @@ system.  It will not be reimplemented.
 & Rigid Body Module \\
 & \multirow{3}{0.3\textwidth}{Shape Module} 
 & Circle Module \\
-& &Segment Module \\
 & &Polygon Module \\ 
 & Space Module \\ 
-& Arbiter Module \\
 %& Control Module \\
-\olu{Removed Control module, as this will be used by a device program}\\
 \midrule
-\multirow{4}{0.3\textwidth}{Software Decision Module} 
+\multirow{3}{0.3\textwidth}{Software Decision Module} 
 & Vector Module \\
-& Transform Matrix Module \\
-& Bounding Box Module \\
-& Spatial Index Module \\
 & Collision Solver Module \\  
-& Sequence Data Structure Module \\  
-& Linked Data Structure Module \\  
-& Associative Data Structure Module \\  
 \bottomrule
 \end{tabular}
 \caption{Module Hierarchy}
@@ -330,13 +308,6 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 	\item[Implemented By:] {\progname}
 \end{description}
 
-\paragraph{Segment Module (\mref{mSegment})}
-
-\begin{description}
-	\item[Secrets:] The data structure of a segment shape.
-	\item[Services:] Provides operations on segments such as initializing a new segment, calculating moment and area, etc.
-	\item[Implemented By:] {\progname}
-\end{description}
 
 \paragraph{Polygon Module (\mref{mPoly})}
 
@@ -353,25 +324,7 @@ position, rotation, velocity, etc, and provides operations on rigid bodies, such
 	\item[Services:]Controls how all the rigid bodies and shapes interact together.
 	\item[Implemented By:] {\progname}
 \end{description} 
-
-\subsubsection{Arbiter Module (\mref{mCollision})}
-
-\begin{description}
-\item[Secrets:]The data structure containing collision information.
-\item[Services:]Stores all collision data, such as which bodies 
-collided and their masses.
-\item[Implemented By:] {\progname}
-\end{description}
  
-%\subsubsection{Control Module (\mref{mControl})} 
-\olu{removed control module}\\
-
-%\begin{description}
-%\item[Secrets:] The algorithm for coordinating the running of the program %and the interface for receiving inputs and sending outputs.
-%\item[Services:] Provides the main program.
-%\item[Implemented By:] Chipmunk
-%\end{description}
-%\\olu: removed the above
 \subsection{Software Decision Module}
 
 \begin{description}
@@ -381,7 +334,7 @@ collided and their masses.
 \item[Services:] Includes data structure and algorithms used in the system that do not provide direct interaction with the user. 
   Changes in these modules are more likely to be motivated by a desire to
   improve performance than by externally imposed changes.
-\item[Implemented By:] -- {\progname}
+\item[Implemented By:] -- {}
 \end{description}
 
 \subsubsection{Vector Module (\mref{mVector})}
@@ -392,60 +345,13 @@ collided and their masses.
 	\item[Implemented By:] {\progname}
 \end{description}
 
-\subsubsection{Bounding Box Module (\mref{mBBox})}
-
-\begin{description}
-	\item[Secrets:] The data structure for representing bounding boxes.
-	\item[Services:] Provides constructors for bounding boxes and operations such as merging boxes, calculating their centroids and areas, etc.
-	\item[Implemented By:] {\progname}
-\end{description}
-
-\subsubsection{Transform Matrix Module (\mref{mTrans})}
-
-\begin{description}
-	\item[Secrets:] The data structure representing transformation matrices.
-	\item[Services:] Provides constructors for affine transformation matrices, matrix operations such as inverse, transpose, multiplications, and operations for applying transformations to vectors and bounding boxes.
-	\item[Implemented By:] {\progname}
-\end{description}
-
-\subsubsection{Spatial Index Module (\mref{mSpatialIndex})}
-
-\begin{description}
-	\item[Secrets:] The data structures and algorithms for spatially indexing the simulation space.
-	\item[Services:] Provides spatial indexing operations and tracks the positions of bodies in the simulation space.
-	\item[Implemented By:] {\progname}
-\end{description}
 
 \subsubsection{Collision Solver Module (\mref{mSolver})}
 
 \begin{description}
 	\item[Secrets:] The data structures and algorithms for detecting collisions.
 	\item[Services:] Fast collision filtering, primitive shape to shape collision detection.
-	\item[Implemented By:] {\progname}
-\end{description}
-
-\subsubsection{Sequence Data Structure Module (\mref{mSeqDS})}
-
-\begin{description}
-\item[Secrets:] The data structure for a sequence data type.
-\item[Services:] Provides array manipulation operations, such as building an array, accessing a specific entry, slicing an array, etc.
-\item[Implemented By:] {\progname}
-\end{description}
-
-\subsubsection{Linked Data Structure Module (\mref{mLinkDS})}
-
-\begin{description}
-\item[Secrets:] The data structure for a linked data type.
-\item[Services:] Provides tree manipulation operations, such as building a tree, accessing a specific entry, etc.
-\item[Implemented By:] {\progname}
-\end{description}
-
-\subsubsection{Associative Data Structure Module (\mref{mAssocDS})}
-
-\begin{description}
-\item[Secrets:] The data structure for an associative data type.
-\item[Services:] Provides operations on hash tables, such as building a hash table, accessing a specific entry, etc.
-\item[Implemented By:] {\progname}
+	\item[Implemented By:] {collision.py}
 \end{description}
 
 \section{Traceability Matrix} \label{SecTM}
@@ -461,15 +367,15 @@ requirements, and between the modules and the anticipated changes. We should als
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-	R1 & M\ref{mSpace}, M\ref{mSeqDS} \\
-	R2 & M\ref{mBody}, M\ref{mVector}, M\ref{mTrans} \\
-	R3 & M\ref{mShape},M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mVector} \\
-	R4 & M\ref{mBody}, M\ref{mShape},M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly}, M\ref{mSpace} \\
-	R5 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans} \\
-	R6 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans} \\
-	R7 & M\ref{mBody}, M\ref{mSpace}, M\ref{mBBox},M\ref{mSpatialIndex}, M\ref{mLinkDS}, M\ref{mAssocDS} M\ref{mSolver}\\
-	R8 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector}, M\ref{mTrans},
-	M\ref{mCollision} \\
+	R1 & M\ref{mSpace} \\
+	R2 & M\ref{mBody}, M\ref{mVector} \\
+	R3 & M\ref{mShape},M\ref{mCircle}, M\ref{mPoly}, M\ref{mVector} \\
+	R4 & M\ref{mBody}, M\ref{mShape},M\ref{mCircle}, M\ref{mPoly}, M\ref{mSpace} \\
+	R5 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector} \\
+	R6 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector} \\
+	R7 & M\ref{mBody}, M\ref{mSpace}, M\ref{mSolver}\\
+	R8 & M\ref{mBody}, M\ref{mSpace}, M\ref{mVector},
+	M\ref{mSolver} \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -484,18 +390,13 @@ requirements, and between the modules and the anticipated changes. We should als
 \midrule
 	AC\ref{acHardware} & M\ref{mHH} \\
 	AC\ref{acBody} & M\ref{mBody} \\
-	AC\ref{acShape} & M\ref{mShape}, M\ref{mCircle}, M\ref{mSegment}, M\ref{mPoly} \\
+	AC\ref{acShape} & M\ref{mShape}, M\ref{mCircle}, M\ref{mPoly} \\
 	AC\ref{acSpace} & M\ref{mSpace} \\
-	AC\ref{acCollision} & M\ref{mCollision} \\
-	%AC\ref{acControl} & M\ref{mControl} \\
+	AC\ref{acCollision} & M\ref{mSolver} \\
 	AC\ref{acVector} & M\ref{mVector} \\
-	AC\ref{acBBox} & M\ref{mBBox} \\
-	AC\ref{acTrans} & M\ref{mTrans} \\
-	AC\ref{acSpatialIndex} & M\ref{mSpatialIndex} \\
+	AC\ref{acBBox} & M\ref{mShape} \\
 	AC\ref{acSolver} & M\ref{mSolver} \\
-	AC\ref{acSeqDS} & M\ref{mSeqDS} \\
-	AC\ref{acLinkDS} & M\ref{mLinkDS} \\
-	AC\ref{acAssocDS} & M\ref{mAssocDS} \\
+
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -507,7 +408,7 @@ requirements, and between the modules and the anticipated changes. We should als
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if correct execution of B may be necessary for A to complete the task described in its specification. That is, A {\em uses} B if there exist situations in which the correct functioning of A depends upon the availability of a correct implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between the modules. It can be seen that the graph is a directed acyclic graph (DAG). Each level of the hierarchy offers a testable and usable subset of the system, and modules in the higher level of the hierarchy are essentially simpler because they use modules from the lower levels. As the modules M\ref{mVector} and M\ref{mBBox} are used by many other modules, their uses have been color-coded for clarity.
+provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if correct execution of B may be necessary for A to complete the task described in its specification. That is, A {\em uses} B if there exist situations in which the correct functioning of A depends upon the availability of a correct implementation of B.  Figure \ref{Fig_uses} illustrates the use relation between the modules. It can be seen that the graph is a directed acyclic graph (DAG). Each level of the hierarchy offers a testable and usable subset of the system, and modules in the higher level of the hierarchy are essentially simpler because they use modules from the lower levels.
 
 ~\newpage
 \begin{figure}[htbp]
@@ -520,19 +421,19 @@ provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
 \end{center}
 \end{figure}
 
-\section{Inheritance Hierarchy Between Modules} \label{SecInheritance}
-In this section the inheritance hierarchy between modules is provided (Figure \ref{Fig_Inheritance}).
-Modules in the lower level of the hierarchy inherit properties from the higher levels.
-\begin{figure}[htbp]
-\begin{center}
-%\rotatebox{-90}
-{
- \includegraphics[width=0.75\textwidth]{inherit.png}
-}
-\caption{\label{Fig_Inheritance}Inheritance hierarchy among Modules}
-\end{center}
-\end{figure}
-\olu{This section is not in the MG template but provides more info. about the Shape module}
+%\section{Inheritance Hierarchy Between Modules} \label{SecInheritance}
+%In this section the inheritance hierarchy between modules is provided (Figure \ref{Fig_Inheritance}).
+%Modules in the lower level of the hierarchy inherit properties from the higher levels.
+%\begin{figure}[htbp]
+%\begin{center}
+%%\rotatebox{-90}
+%{
+% \includegraphics[width=0.75\textwidth]{inherit.png}
+%}
+%\caption{\label{Fig_Inheritance}Inheritance hierarchy among Modules}
+%\end{center}
+%\end{figure}
+%\olu{This section is not in the MG template but provides more info. about the Shape module}
 ~\newpage
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/Physics_Game_Library}
