@@ -267,7 +267,18 @@ confidence in the correctness of \progname{}.
 \tcref{SVnV-TC_Maintainability} in the System VnV Plan is a test for gaining 
 confidence in the maintainability of \progname{}. The test question was asked 
 to a volunteer test subject who was given the Module Guide (MG) for \progname{} 
-as a resource to answer the question.
+as a resource to answer the question. The volunteer's response was the Input 
+module, Morgenstern-Price calculation module, and potentially the Slice 
+Property Calculation and Genetic Algorithm modules. This answer was correct 
+with the exception of the Genetic Algorithm module. The volunteer's explanation 
+for thinking this module might need to be changed was that, due to their lack 
+of domain knowledge, they did not know if the changes to the Morgenstern-Price 
+Calculation module would include changes to its interface. Since the Genetic 
+Algorithm module uses the Morgenstern-Price Calculation module, it would need 
+to be changed if the interface to the Morgenstern-Price Calculation module 
+changed. This explanation was not only reasonable but also prudent, and thus 
+the response was considered correct and this test result was considered a pass, 
+giving confidence in the maintainability of \progname{}.
 		
 \subsection{Reusability}
 
