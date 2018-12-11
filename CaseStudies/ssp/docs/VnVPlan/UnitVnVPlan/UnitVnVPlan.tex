@@ -60,8 +60,9 @@
 11/26/18 & 1.0 & Initial template fill-ins\\
 11/29/18 & 1.1 & Updates based on presentation feedback\\
 12/03/18 & 1.2 & Added tests for remaining modules\\
-12/09/18 & 1.3 & Updates prompted by test implementation and for final 
+12/09/18 & 1.3 & Updates prompted by test implementation and for final  
 submission\\
+12/11/18 & 1.4 & Changes based on peer review\\
 \bottomrule
 \end{tabularx}
 
@@ -77,8 +78,9 @@ submission\\
 
 The symbols, abbreviations, and acronyms used in this document include those 
 defined in the table below, as well as any defined in the tables found in 
-Section \ref{SRS-sec_RefMat} of the Software Requirements Specification (SRS) 
-document.
+Section \ref{SRS-sec_RefMat} of the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/SRS/SRS.pdf}
+{Software Requirements Specification (SRS) document}.
 \newline
 
 \renewcommand{\arraystretch}{1.2}
@@ -130,7 +132,7 @@ are all implemented by MatLab. The Control Module, \mref{MG-mControl}, is out
 of scope for this document because it is considered to have been sufficiently 
 tested by the system tests outlined in the 
 \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
-{System VnV Plan document}.Verification of the non-functional requirements is 
+{System VnV Plan document}. Verification of the non-functional requirements is 
 not included in the unit verification plan because they are also sufficiently 
 covered by the System VnV Plan.
 
@@ -167,7 +169,9 @@ be allowed. The error will be described after running the tests.
 
 ~\newline \noindent Many of the tests refer to variables or constants as part 
 of the initial state, input, or expected output. The specifications for these 
-variables and constants can be found in the MIS document for this project.
+variables and constants can be found in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/Design/MIS/MIS.pdf}
+{MIS document} for this project.
 
 ~\newline \noindent The values in Table~\ref{Inputs} will be used as input for 
 many of the test cases described throughout this section. These values were 
@@ -1613,7 +1617,7 @@ file with the correct name is created.
 	\textit{soln} state variables are loaded with the inputs from 
 	Table~\ref{Inputs}.
 	
-	Input: 1.0, [], [], [], ``outputtest''.
+	Input: 1.0, [], [], [], ``outputtest.dat''.
 	
 	Output: A file called outputtest.out exists in the file system.
 	
@@ -1654,9 +1658,9 @@ declared out of scope in Section~\ref{Scope} of this document.
 		& & & & X& & & & & & & & &\\ \hline
 		\tcref{TC_KinAdmXDec} - \tcref{TC_KinAdmObtuOff}          
 		& & & & & X& & & & & & & & \\ \hline
-		\tcref{TC_WeighterSort} - \tcref{TC_WeighterLast}       
+		\tcref{TC_WeighterSort} - \tcref{TC_WeighterNaN}       
 		& & & & & & X& & & & & & & \\ \hline
-		\tcref{TC_SlicerEvnslcSize} - \tcref{TC_SlicerNotEvnslcVals}
+		\tcref{TC_SlicerEvnslcSize} - \tcref{TC_SlicerNotEvnslcIndivisible}
 		& & & & & & & X& & & & & & \\ \hline
 		\tcref{TC_MorgPriceNonConvergingFs} - \tcref{TC_MorgPriceSpuriousX}   
 		& & & & & & & & X& & & & & \\ \hline
