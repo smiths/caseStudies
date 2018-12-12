@@ -162,6 +162,7 @@
 \midrule
 27/11/18 & 1.0 & initial UnitVnVPlan based on new template\\
 07/12/18 & 2.0 & Major changes based on existing modules in the MIS\\
+11/12/18 & 2.1 &  Updated changes in some of the modules\\
 
 \bottomrule
 \end{tabularx}
@@ -172,27 +173,16 @@
 
 \listoftables
 
-\wss{Do not include if not relevant}
 
-\listoffigures
-
-\wss{Do not include if not relevant}
 
 \newpage
 
 \section{Symbols, Abbreviations and Acronyms}
-
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
-  \bottomrule
-\end{tabular}\\
-
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS, MG or MIS
-  tables if needed}
+The symbols, abbreviations, and acronyms used in this document include those 
+defined in the table below, as well as any defined in the tables found in 
+Section \ref{SRS-sec_abbrevf} of the Software Requirements Specification (SRS) 
+document.
+\newline
 
 \newpage
 
@@ -286,7 +276,7 @@ input parameter that should have a different value than specified by the table.
 		$w$ &10.0	& \si{\kilo\gram}\\
 		\bottomrule
 	\end{tabular}
-	\caption{Input to be used for test cases}
+	\caption{Default Inputs}
 	\label{defaultInputTBL}
 \end{table}
 
@@ -350,7 +340,7 @@ framework.
 	TC\refstepcounter{utestnum}\theutestnum  \label{TC_W} & 
 	test-input\_$w$ &  $w$ = 10.0\\ 
 	\hline
-	\caption{Input Test Cases}
+	\caption{Valid User Input Test Cases}
 	\label{InputTests}
 \end{longtable}
 
@@ -403,17 +393,24 @@ each other with the exception of their input.
 pressure ($q$) versus stand off distance (SD) versus charge weight ($w$) and ii) LoadSDF($s$) which is Non dimensional lateral load ($\hat q$) versus aspect ration versus Stress
 distribution factor ($J$). 
 
+\noindent \newline TC\refstepcounter{utestnum}\theutestnum: \label{TC_TSD}
+test-input\_sTSD
 
-\begin{longtable}{  l  p{4cm} p{4cm}  p{6cm}  p{6cm}  }
-	\hline
-	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected \textit{w}} & \textbf{Expected\textit{[SD]}} & \textbf{Expected \textit{[q]}}\\ 
-	\hline
-	TC\refstepcounter{utestnum}\theutestnum  \label{TC_TSD} & 	test-input\_sTSD &
-	[4.5, 9.1, 14., 18.] &  [[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]] & [[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]]  \\                                                                                                                                                                 
-	\hline
-	\caption{Test LoadTSD(s)}
-	\label{TSDTests}
-\end{longtable}
+Type: Automatic
+
+Initial State: New Session
+
+Input: testTable1.txt
+
+Output: $out$ := 
+\noindent \newline Expected $w$ : [4.5, 9.1, 14., 18.] \newline
+\noindent \newline Expected $SD$ : [[[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]]] \newline
+\noindent \newline Expected $q$ : [[[4.411877630513, 7.62703125734, 9.952136903603, 9.992650492472],[4.388319475839, 7.575020192327, 10.00554408521, 9.924527029632],[4.364878545185, 7.494339327108, 9.898975926537, 9.871513535251],[4.341579876052, 7.534556975369, 9.793542815831, 9.833410793036],[4.318397091121, 7.434385814135, 9.846098917578, 9.766372924029]]] \newline
+
+
+\noindent \newline Test Case Derivation: None 
+
+\noindent \newline How test will be performed: Automated test on unit testing framework.
 
 
 
@@ -427,9 +424,118 @@ breakage, capacity, and demand and other routines in the Calc module in the MIS 
 \subsubsection{GlassType ADT Module}	
 From Section \ref{MIS-GlassTypeADT} in the MIS, The implementation of the ``glass type'' and 'Glass Type Factor'. In this section it represents test cases which covers all semantic routins in this module.
 
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{ConstructorGlassTypeTTest}] 
+	test\_constructor\_GlassTypeT
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: ($s$ : ``HS").
+	
+	Output: $out$ := gtf.HTS
+	
+	Test Case Derivation: None
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{GTFTest}] 
+	test\_GTF
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: ($s$ : ``HS").
+	
+	Output: $out$ := gtf.HTS = 2.0
+	
+	Test Case Derivation: None
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{GlassTypeToStringTest}] 
+	test\_toString
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: ( g : gtf.AN ).
+	
+	Output: $out$ := ``AN"
+	
+	Test Case Derivation: None
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	
+	
+\end{enumerate}
+
+
+
 \subsubsection{Thickness ADT Module}	
 From Section \ref{MIS-ThicknessADT} in the MIS, the implementation of the thickness type and it Defines abstract data type for thickness. In this section it represents test cases which covers all semantic routins in this module.
 
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{ConstructorEXPThicknessTest}] 
+	test\_constructorEXP\_ThicknessT
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: $x$ : 1.0
+	
+	Output: $out$ : raise ValueError("Invalid input")
+	
+	
+	Test Case Derivation: According to the MIS, if $x$ be $(\neg (x \in T)$, the system throws an exception. So, this test case covers this exception.
+	
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{toMinThickTest}] 
+	test\_toMinThick
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: $x$ := $t$ in MIS in the section \ref{MIS-ThicknessADT}
+	
+	
+	Output: $out$ := According to the MIS in the section \ref{MIS-ThicknessADT}
+	
+		
+	Test Case Derivation: None
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+		\item [TC\refstepcounter{utestnum}\theutestnum: \label{toFloatTest}] 
+test\_toFloat
+	
+	Type: Automatic
+	
+	Initial State: New Session
+	
+	Input: $x$ : 2.5 , 8.0 , 22.0
+	
+	Output: $out$ : $x$
+	
+	
+	Test Case Derivation: None
+	
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	
+	
+\end{enumerate}
 	
 \subsubsection{SeqServices Module}
 
@@ -561,7 +667,56 @@ It Defines the abstract data type for functions, providing a
 constructor and a means to evaluate the function for a given value of the
 independent variable. In this section it represents test cases which covers all semantic routins.
 
-\paragraph{Testing exceptions of FuncT} 
+
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTminDTest}] 
+test\_minD
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( X : [1, 2, 10] , Y : [1, 2, 10] , $o$ : 1 )
+
+Output: $out := \mbox{minX}$ : 1
+
+
+Test Case Derivation: None
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTmaxDTest}] 
+test\_maxD
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( X : [1, 2, 10] , Y : [1, 2, 10] , $o$ : 1 )
+
+Output: $out := \mbox{minX}$ : 10
+
+
+Test Case Derivation: None
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTevalDTest}] 
+test\_eval
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( X : [1, 2, 10] , Y : [1, 2, 10] , $x$= 3 ,  $o$ : 1 )
+
+Output: $out := \mbox{interpLin}(X_i, Y_i, X_{i+1}, Y_{i+1}, x)$ = 3
+
+
+Test Case Derivation: None
+
+How test will be performed: Automated test on unit testing framework.
+
 
 \item [TC\refstepcounter{utestnum}\theutestnum: \label{FuncTnotAscendingErrTest}] 
 test\_FuncT\_notAscendingErr
@@ -628,12 +783,110 @@ Test Case Derivation:  $x$ must be between \mbox{minX} and \mbox{maxX}. So, this
 How test will be performed: Automated test on unit testing framework.
 
 \subsubsection{ContoursADT Module}	
-From Section \ref{MIS-ContoursADT} in the MIS, The data structure used to represent a
+From Section \ref{MIS-ContoursADT} in the MIS, the data structure used to represent a
 sequence of two dimensional functions in the form of contours. Each function
 is associated with a particular value, like a contour in a contour map.
 It Defines the abstract data type for a sequence of functions.
 Allows adding/removing functions to/from the sequence.  Provides evaluation of
 the 3d function at values between the contours. In this section it represents test cases which covers all semantic routins in this module.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{ConstructorEXPContoursTest}] 
+test\_constructorEXP\_ContoursT
+
+Type: Automatic
+
+Initial State: ($S$ : [] , $Z$ : [], $o$ : i)
+
+Input: (i : 0 or 3).
+
+Output: $out$ := raise InvalidInterpOrder("Invalid interpretation error!")
+
+
+Test Case Derivation: According to the MIS, $i$ must be between [1..\mbox{MAX\_ORDER}]. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{addEXPContoursTest}] 
+test\_addEXP\_ContoursT
+
+Type: Automatic
+
+Initial State: ($S$ : [] , $Z$ : [], $o$ : i)
+
+Input: (i : 0 or 3).
+
+Output: $out$ := raise InvalidInterpOrder("Invalid interpretation error!")
+
+
+Test Case Derivation: According to the MIS, $i$ must be between [1..\mbox{MAX\_ORDER}]. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{AddEXPContoursTest}] 
+Add\_constructorEXP\_ContoursT
+
+Type: Automatic
+
+Initial State: ($S$ : [] , $Z$ : [], $o$ : i)
+
+Input: (i : 0 or 3).
+
+Output: $out$ := raise InvalidInterpOrder("Invalid interpretation error!")
+
+
+Test Case Derivation: According to the MIS, $i$ must be between [1..\mbox{MAX\_ORDER}]. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{addEXPContoursTest}] 
+test\_addEXP\_ContoursT
+
+Type: Automatic
+
+Initial State: ($S$ : [] , $Z$ : [], $o$ : i)
+
+Input: ( $S$ : [1, 2, 10] , $z$ : 0 )
+
+Output: $out$ := add($s, z$) : raise InvalidInterpOrder(``Independent variables not in ascending order!")
+
+
+Test Case Derivation: According to the MIS, this routin appends elements to state variable sequences if $(|Z| > 0 \wedge z
+< Z_{|Z|-1} \Rightarrow \mbox{IndepVarNotAscending})$ system throws an exception. So, this test case covers this exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{getCContoursTest}] 
+test\_getC\_ContoursT
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( $S$ : [[1, 2, 10] , [2, 3, 11]] , i: 1)
+
+Output: $out$ := getC(1) : [2,3,11]
+
+
+Test Case Derivation: This method gets the ith element from the sequence S and it returns the ith element from S.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{getCEXPContoursTest}] 
+test\_getCEXP\_ContoursT
+
+Type: Automatic
+
+Initial State: New Session
+
+Input: ( $S$ : [[1, 2, 10] , [2, 3, 11]] , i: 3)
+
+Output: $out$ := getC(3) : raise InvalidIndex(``Index out of range")
+
+
+Test Case Derivation: According to the MIS, if $(\neg(0 \leq i < |S|))$ , system throws an exception. So, this test case with $i$=3 covers this exception.
+
+
 
 \subsubsection{Output Module}	
 
