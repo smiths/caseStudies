@@ -70,10 +70,17 @@ This document describes the unit verification and validation (V\&V) plan for \pr
 \section{General Information}
 \subsection{Purpose}
 
-This section details the summary of what is being tested in this document, the objectives of this document and references for this document. \progname is a 2D rigid body physics library that can be used to simulate the interaction between rigid bodies.This software is able to simulate movement, rotation and collision of rigid bodies.
+This section details the summary of what is being tested in this document, the
+objectives of this document and references for this document. \progname is a 2D
+rigid body physics library that can be used to simulate the interaction between
+rigid bodies.This software is able to simulate movement, rotation and collision
+of rigid bodies.
 
 \subsection{Scope}
+
 All modules will be verified using the testcases listed in this document.
+\wss{You could specifically list the names of the modules that will be tested.
+  A reference to your MG would be good here.}
 
 \section{Plan}
 	
@@ -82,25 +89,36 @@ All modules will be verified using the testcases listed in this document.
 Member(s) of the verification and validation team will include myself, Olu.
 
 \subsection{Automated Testing and Verification Tools}
-PyTest framework will be used for automated unit
-testing. A script with all the testcases covering all \progname{} modules  will be created by me. 
 
+PyTest framework will be used for automated unit testing. A script with all the
+testcases covering all \progname{} modules will be created by me.
 
 \subsection{Non-Testing Based Verification}
+
 Not applicable for \progname
 
 %\wss{List any approaches like code inspection, code walkthrough, symbolic
 %  execution etc.  Enter not applicable if that is the case.}
 
 \section{Unit Test Description}
-The test cases discussed in this section are based on the Module Interface Specification(MIS) which can be found at \url{https://github.com/smiths/caseStudies/blob/gamephy_MIS/CaseStudies/gamephys/docs/Design/MIS/GamePhysicsMIS.pdf}. Each test case listed covers for all applicable functions that need to be tested in each module to ensure that \progname{} functions as intended based on the requirements of the software.
+
+The test cases discussed in this section are based on the Module Interface
+Specification(MIS) which can be found at
+\url{https://github.com/smiths/caseStudies/blob/gamephy_MIS/CaseStudies/gamephys/docs/Design/MIS/GamePhysicsMIS.pdf}. Each
+test case listed covers for all applicable functions that need to be tested in
+each module to ensure that \progname{} functions as intended based on the
+requirements of the software.
 	
 \subsection{Tests for Functional Requirements}
 
 \subsubsection{Body Module}
 		
 \paragraph{}
-Body module is responsible for storing the physical properties of an object such as mass, position, rotation properties, velocity, e.t.c and provides operations on rigid bodies such as setting the mass, moment, applying force e.t.c.
+Body module is responsible for storing the physical properties of an object such
+as mass, position, rotation properties, velocity, e.t.c and provides operations
+on rigid bodies such as setting the mass, moment, applying force
+e.t.c. \wss{Please write etc.\, not e.t.c.}
+
 \begin{enumerate}
 	
 
@@ -501,7 +519,9 @@ This testcase checks for collision i.e. if points on rigid bodies are intersecti
 	
 	How test will be performed: PyTest 
 	
-	
+\wss{Your test cases are definitely an improvement over the first draft.  I like
+the test cases.  There seems like there could be more test cases for the
+interesting access programs of update and collision detection.}	
 	
 \end{enumerate}
 
