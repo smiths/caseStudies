@@ -178,29 +178,31 @@
 \newpage
 
 \section{Symbols, Abbreviations and Acronyms}
-The symbols, abbreviations, and acronyms used in this document include those 
-defined in the table below, as well as any defined in the tables found in 
-Section \ref{SRS-sec_abbrevf} of the Software Requirements Specification (SRS) 
-document.
-\newline
+The symbols, abbreviations, and acronyms used in this document include those
+defined in the table below, as well as any defined in the tables found in
+Section \ref{SRS-sec_abbrevf} \wss{this reference didn't work - the other
+  external references also don't seem to work} of the Software
+Requirements Specification (SRS) document.  \newline
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document provides the unit Verification and Validation (VnV) plan for the 
-software. Section~\ref{sec_Plan} outlines at a high level the 
-plan for verifying and validating the software. Section~\ref{sec_Tests} gives 
-more details about the specific tests that will be used to verify each module and Access Routin Semantics.
+This document provides the unit Verification and Validation (VnV) plan for the
+software. Section~\ref{sec_Plan} outlines at a high level the plan for verifying
+and validating the software. Section~\ref{sec_Tests} gives more details about
+the specific tests that will be used to verify each module and Access Routin
+\wss{spell check} Semantics.  \wss{This shouldn't be in all caps.}
 
 \section{General Information}
 
 \subsection{Purpose}
 
-\noindent This document will identify what testing is going to be done on \progname{}. 
-This document is different from the System VnV Plan in that it considers each 
-module as already written according to the Module Instance Specification (MIS) 
-document.These test cases can be tested using a white box approach, where the inputs, outputs, and 
+\noindent This document will identify what testing is going to be done on
+\progname{}.  This document is different from the System VnV Plan in that it
+considers each module as already written according to the Module Instance
+Specification (MIS) document.These \wss{proof read - watch spacing} test cases
+can be tested using a white box approach, where the inputs, outputs, and
 transitions between the inputs and outputs are known.
 
 \noindent The purpose of the unit verification and validation activities is to 
@@ -216,8 +218,8 @@ is running, will not be unit tested as
  and is assumed to work correctly. Verification of the non-functional requirements is 
 not included in the unit verification plan because they are also sufficiently 
 covered by the System VnV Plan \href{https://github.com/smiths/caseStudies/blob/glass_UnitVnV/CaseStudies/glass/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
-{System VnV Plan document}.
-
+{System VnV Plan document}. \wss{Don't list System VnV Plan twice.} \wss{List
+  the names of the specific modules that will be tested.  Reference your MG}
 
 \section{Plan} \label{sec_Plan}
 	
@@ -235,16 +237,23 @@ According to that all test files are going to develop based on Python. The follo
 		 \end{itemize}
 	 \end{itemize}
 
+\wss{Don't say what tools are being considered.  Say what tool you are going to
+  use.}
 
 \subsection{Non-Testing Based Verification}
-This section for \progname{} is not applicable.
+This section for \progname{} is not applicable.  \wss{Why not?  Did you say
+  ``not applicable'' because this is the easiest option for you, or because it
+  isn't justified for this problem?  We are already doing informal review, so
+  with no extra effort, informal review can be part of your verification.}
 
 \section{Unit Test Description}
 
 \noindent Test cases have been selected to verify that each module conforms to 
 the specification for the module described in the 
 \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/glass/docs/Design/MIS/glassbr_mis.pdf}
-{Module Interface Specification (MIS) document}. The test cases has been intended to cover all Access Routine Semantics both with exceptions and without exceptions. 
+{Module Interface Specification (MIS) document}. The test cases has been
+intended to cover all Access Routine Semantics \wss{This shouldn't be in all
+  caps} both with exceptions and without exceptions. 
 
 ~\newline \noindent Many of the tests refer to variables or constants as part 
 of the initial state, input, or expected output. The specifications for these 
@@ -253,7 +262,7 @@ variables and constants can be found in the MIS document for this project.
 ~\newline \noindent The values in Table~\ref{defaultInputTBL} will be used as input for 
 many of the test cases described throughout this section. These values were 
 taken from the \href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/glass/src/Python/NewImplementation/TestFiles/defaultInputFile.txt} {Default Values} for this project. Individual 
-test cases will reference the table as input but specify new values for any 
+test cases will reference the table as input, but specify new values for any 
 input parameter that should have a different value than specified by the table.
 
 \begin{table}[!h]
@@ -284,13 +293,14 @@ input parameter that should have a different value than specified by the table.
 \subsection{Tests for Functional Requirements}
 
 \subsubsection{Input Module}
-~\newline As described in the MIS, the Input module is expected to read in many user 
-inputs from a file. For each value contained in the file, there is a 
-corresponding test case verifying that the value was properly read into the 
-data structure containing the input parameters.  The input module is also responsible for 
-verifying the input using describing in verify\_params() of \ref{MIS-InputARS} from MIS, so for each possible violation of an input constraint, 
-there is a corresponding test case verifying that the correct exception was 
-thrown.
+~\newline As described in the MIS, the Input module is expected to read in many
+\wss{remove the word `many'} user inputs from a file. For each value contained
+in the file, there is a corresponding test case verifying that the value was
+properly read into the data structure containing the input parameters.  The
+input module is also responsible for verifying the input using describing
+\wss{clarify what you mean here} in verify\_params() of \ref{MIS-InputARS} from
+MIS, so for each possible violation of an input constraint, there is a
+corresponding test case verifying that the correct exception was thrown.
 
 \paragraph{Valid User Input}
 
@@ -346,11 +356,17 @@ framework.
 
 \paragraph{Derived Quantities}
 
-~\newline ~\newline \noindent The test cases described in Table~\ref{DerivedValueTests} 
-to ensure initial inputs from Table~\ref{defaultInputTBL}  regarding to the Constants Values and Calculations describing in load\_params($s$) of \ref{MIS-InputARS} from MIS have been correctly converted into derived quantities. The expected output for each test case have been considered in 
-Table~\ref{DerivedValueTests}. The type of these test cases is automatic. The initial 
-state for each test case is a new session. The tests will be performed as automated tests on a unit testing 
-framework.	
+~\newline ~\newline \noindent The test cases described in
+Table~\ref{DerivedValueTests} to ensure initial inputs from
+Table~\ref{defaultInputTBL} regarding to the Constants Values and Calculations
+\wss{remove the misplaced capitals, clarify this sentence}
+describing in load\_params($s$) of \ref{MIS-InputARS} from MIS have been
+correctly converted into derived quantities. The expected output for each test
+case have been considered in Table~\ref{DerivedValueTests}. The type of these
+test cases is automatic. The initial state for each test case is a new
+session. The tests will be performed as automated tests on a unit testing
+framework. \wss{How were the derived quantities calculated?  Where are the
+  equations found?  Are they in a specific module of the MIS?}
 
 \begin{longtable}{  l  p{4cm}  p{6cm}  }
 	\hline
@@ -379,19 +395,26 @@ framework.
 \paragraph{Invalid User Input}
 
 
-~\newline ~\newline \noindent The test cases described in Table~\ref{SVnV-testCheckConstraints} from System VnV Plan document are intended to cover all invalid input possibilities. Invalid input is input 
-that defies the data constraints described in Section 
-\ref{SRS-sec_DataConstraints} of the SRS. These test cases are identical to 
-each other with the exception of their input. 
-~\newline \noindent  \tcref{SVnV-TC_checkAPositiveTest} - 
-\tcref{SVnV-TC_incorrectWEqUpprBndTest} in the System VnV Plan document cover these set of tests.
+~\newline ~\newline \noindent The test cases described in
+Table~\ref{SVnV-testCheckConstraints} from System VnV Plan document are intended
+to cover all invalid input possibilities. Invalid input is input that defies the
+data constraints described in Section \ref{SRS-sec_DataConstraints} of the
+SRS. These test cases are identical to each other with the exception of their
+input.  ~\newline \noindent \tcref{SVnV-TC_checkAPositiveTest} -
+\tcref{SVnV-TC_incorrectWEqUpprBndTest} in the System VnV Plan document cover
+these set of tests.
 	
 
 \subsubsection{LoadASTM Module}	
 	
-~\newline This module Reads the data from each ASTM file as a text file and create an object of FunctT and add it to the ContoursT object that is described in \ref{MIS-LoadARS} from MIS as two (Access Routins Semantics) : i) LoadTSD($s$) which is for 3 second equivalent, 
-pressure ($q$) versus stand off distance (SD) versus charge weight ($w$) and ii) LoadSDF($s$) which is Non dimensional lateral load ($\hat q$) versus aspect ration versus Stress
-distribution factor ($J$). 
+~\newline This module Reads \wss{you insert capitals in odd locations; read
+  should be lower case; the other odd capitals should also be removed from this
+  document} the data from each ASTM file as a text file and create an object of
+FunctT and add it to the ContoursT object that is described in \ref{MIS-LoadARS}
+from MIS as two (Access Routins Semantics) : i) LoadTSD($s$) which is for 3
+second equivalent, pressure ($q$) versus stand off distance (SD) versus charge
+weight ($w$) and ii) LoadSDF($s$) which is Non dimensional lateral load
+($\hat q$) versus aspect ration versus Stress distribution factor ($J$).
 
 \noindent \newline TC\refstepcounter{utestnum}\theutestnum: \label{TC_TSD}
 test-input\_sTSD
@@ -400,15 +423,23 @@ Type: Automatic
 
 Initial State: New Session
 
-Input: testTable1.txt
+Input: testTable1.txt \wss{where is this file? the reader needs to know if they
+  are to conduct the tests}
 
 Output: $out$ := 
 \noindent \newline Expected $w$ : [4.5, 9.1, 14., 18.] \newline
 \noindent \newline Expected $SD$ : [[[6.143397364345, 6.128184215473, 6.344639409554, 7.199850837298],[6.158648279689, 6.158648279689, 6.344639409554, 7.21772438659],[6.189263785047, 6.189263785047, 6.376179502933, 7.253604707984],[6.189263785047, 6.189263785047, 6.407876386546, 7.271611700659],[6.204628563268, 6.22003148438, 6.407876386546, 7.289663395493]]] \newline
 \noindent \newline Expected $q$ : [[[4.411877630513, 7.62703125734, 9.952136903603, 9.992650492472],[4.388319475839, 7.575020192327, 10.00554408521, 9.924527029632],[4.364878545185, 7.494339327108, 9.898975926537, 9.871513535251],[4.341579876052, 7.534556975369, 9.793542815831, 9.833410793036],[4.318397091121, 7.434385814135, 9.846098917578, 9.766372924029]]] \newline
 
-
-\noindent \newline Test Case Derivation: None 
+\noindent \newline Test Case Derivation: None \wss{There is a derivation.  How
+  were the values calculated above?  How does the reader know they are correct?
+  You don't have to go through all of the details, but they should at least know
+  what steps were involved.  Are you just loading the files and then verifying
+  that the input matches?  How are you going to access the w, SD values etc.
+  LoadASTM doesn't give you access programs for these, does it? (I haven't
+  checked the MIS to see one way or the other.)  You make a similar omission
+  with many of your other test cases. You should say where the expected output
+  comes from, or how it was derived.}
 
 \noindent \newline How test will be performed: Automated test on unit testing framework.
 
@@ -491,8 +522,9 @@ From Section \ref{MIS-ThicknessADT} in the MIS, the implementation of the thickn
 	
 	Input: $x$ : 1.0
 	
-	Output: $out$ : raise ValueError("Invalid input")
-	
+	Output: $out$ : raise ValueError("Invalid input") \wss{Your quotes are
+          in the wrong direction ``Invalid input''.  This mistake is made
+          throughout the document.}
 	
 	Test Case Derivation: According to the MIS, if $x$ be $(\neg (x \in T)$, the system throws an exception. So, this test case covers this exception.
 	
@@ -906,7 +938,8 @@ declared out of scope in Section~\ref{Scope} of this document.
 
 \bibliographystyle{plainnat}
 
-\bibliography{SRS}
+\bibliography{SRS} \wss{There is no bibliography in this document, and if there
+  was, its name wouldn't be SRS.}
 
 \newpage
 
