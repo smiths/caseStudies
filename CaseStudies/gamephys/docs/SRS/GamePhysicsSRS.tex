@@ -163,6 +163,8 @@ description of the unit with the SI name. \\
 	\\
 	rad & angle (radian)
 	\\
+	J & energy (joules)
+	\\
 	\bottomrule
 	
 \end{longtable*}
@@ -193,11 +195,13 @@ their units. More specific instances of these symbols will be described in their
   $j$ & \si{\newton\second} & Impulse (scalar) \\
   $\mathbf{J}$ & \si{\newton\second} & Impulse (vector) \\
   %$\mathbf{k}$ & \si{\newton\per\metre} & Spring constant \\
+  $KE$ & \si{\J} & Kinetic Energy \\
   $L$ & \si{\metre} & Length \\
   $m$ & \si{\kilogram} & Mass \\
   $n$ & unitless & Number of particles in a rigid body \\
   $\mathbf{n}$ & \si{\metre} & Collision normal vector \\
   $\boldsymbol{\omega}$ & \si{\radian\per\second} & Angular velocity \\
+  $PE$ & \si{\J} & Potential Energy \\
   $\mathbf{p}$ & \si{\metre} & Position \\
   $\boldsymbol{\phi}$ & \si{\radian} & Orientation \\
   $r$ & \si{\metre} & Distance \\
@@ -510,7 +514,7 @@ library is based on. \\
 		\hline
 		Source & ~ \\
 		\hline
-		Ref.\ By & GD\ref{GD_I}, GD\ref{GD_GA} IM\ref{IM_FT} \\
+		Ref.\ By & DD\ref{DD_I}, GD\ref{GD_GA} IM\ref{IM_FT} \\
 		\hline
 	\end{tabular}
 \end{minipage}
@@ -568,39 +572,8 @@ library is based on. \\
 
 ~\newline
 
-%%% commenting out Hooke's Law because we don't need it right now
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \iffalse
-%Theoretical Model 4 - T4 - Hooke's Law
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_HL}\\
-  \hline
-  Label&\bf Hooke's law\\
-  \hline
-  Equation&  $\mathbf{ F} =k\mathbf{x}$\\  
-  \hline
-  Description & 
-  The force $\mathbf{F}$ (\si{\newton}) required to extend or compress a spring by some distance $\mathbf{x}$ (\si{\metre}) from equilibrium is proportional to that distance, where $k$ (\si{\newton\per\metre}), the spring constant, is the constant of proportionality in this equation. \\
-  \hline
-  Source & \\
-  \hline
-  Ref.\ By & IM\ref{IM_CON} \\
-  \hline
-\end{tabular}
-\end{minipage}
-
-~\newline
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\fi
-
-%Theoretical Model 4 - T4 - Chasles' Theorem
+%Theoretical Model 4 - T4 - Chasles' Theorem, moved to DD9
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand{\arraystretch}{1.5}
@@ -609,8 +582,7 @@ library is based on. \\
 	\rowcolor[gray]{0.9}
 	Number & T\refstepcounter{theorynum}\thetheorynum \label{T_CT} \\
 	\hline
-	Label & \textbf{Chasles' theorem} \wss{Please make this a DD; it isn't
-                abstract, general or fundamental.}\\
+	Label & \textbf{Chasles' theorem} \wss{Please make this a DD; it isn't abstract, general or fundamental. \olu{moved to DD9}}\\
 	\hline
 	Equation & $\mathbf{v}_\mathrm{B} = \mathbf{v}_\mathrm{O} + (\boldsymbol{\omega} \times \mathbf{r}_\mathrm{OB})$ \\
 	\hline
@@ -623,9 +595,8 @@ library is based on. \\
 	\hline
 \end{tabular}
 \end{minipage}
-
 ~\newline
-
+\fi
 %Theoretical Model 6 - T6 - Newton's Second Law for Rotational Motion
 \noindent
 \begin{minipage}{\textwidth}
@@ -640,13 +611,38 @@ library is based on. \\
   Equation& $\tau = \mathbf{I}\alpha$\\  
   \hline
   Description &  
-  The net torque $\tau$ (\si{\newton\metre}) on a body (GD\ref{GD_T}) is proportional to its angular acceleration $\alpha$ (\si{\radian\per\second\tothe{2}}). Here, $\mathbf{I}$ (\si{\kilogram\metre\tothe{2}}) denotes the moment of inertia of the body (GD\ref{GD_MI}). We also assume that all rigid bodies involved are two-dimensional (A\ref{A_2d}). \\
+  The net torque $\tau$ (\si{\newton\metre}) on a body (DD\ref{DD_T}) is proportional to its angular acceleration $\alpha$ (\si{\radian\per\second\tothe{2}}). Here, $\mathbf{I}$ (\si{\kilogram\metre\tothe{2}}) denotes the moment of inertia of the body (DD\ref{DD_MI}). We also assume that all rigid bodies involved are two-dimensional (A\ref{A_2d}). \\
   \hline
   Source & \\
   \hline
   Ref.\ By &IM\ref{IM_FR} \\
   \hline
 \end{tabular}
+\end{minipage}
+
+~\newline
+
+%Theoretical Model 5 - T5 - Collision Detection
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& T\refstepcounter{theorynum}\thetheorynum \label{T_NRM}\\
+		\hline
+		Label&\bf Collision Detection\\
+		\hline
+		Equation& $\tau = \mathbf{I}\alpha$\\  
+		\hline
+		Description &  
+		Collision detection is detecting the intersection of two or more colliding objects. The computation of collision detection is used to determine whether two objects have collided. We also assume that all rigid bodies involved are two-dimensional (A\ref{A_2d}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By &IM\ref{IM_C} \\
+		\hline
+	\end{tabular}
 \end{minipage}
 \\
 
@@ -656,55 +652,55 @@ library is based on. \\
 This section collects  the laws and equations that will be used in deriving the
 data definitions, which in turn will be used to build the instance models. \\
 
-%General Definition 1 -GD1 - Impulse
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.5}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-  \hline
-  \rowcolor[gray]{0.9}
-  Number& GD\refstepcounter{defnum}\thedefnum \label{GD_I}\\
-  \hline
-  Label&\bf Impulse \wss{Make this a data definition}\\
-  \hline
-  Units& \si{\newton\second} \\
-  \hline
-  Equation & $\mathbf{J} = \int \mathbf{F} \,\dt = \Delta\mathbf{P}$ = $m\Delta \mathbf{v}$\\
-  \hline
-  Description &  
-  An impulse $\mathbf{J}$ occurs when a force $\mathbf{F}$ acts over an interval of time. \\
-	&$\mathbf{J}$ is the resultant impulse applied on the body (\si{\newton\second}).\\
-	&$\mathbf{F}$ is the force applied on the body (\si{\newton}). \\
-	&$\Delta\mathbf{P}$ is the change in momentum of the body (\si{\newton\second}). \\
-	&$m$ is the mass of the body (\si{\kilogram}). \\
-	&$\Delta\mathbf{v}$ is the change in velocity of the body (\si{\metre\per\second}). \\
-  \hline
-  Source & \\
-  \hline
-  Ref.\ By &GD\ref{GD_COM}, DD\ref{DD_IM}, IM\ref{IM_C}\\
-  \hline
-\end{tabular}
-\end{minipage} \\
-
-%General Definition 1 - GD1 - Derivation of Impulse
-\subsubsection*{Derivation of Impulse}
-
-Newton's second law of motion (T\ref{T_NSL}) states:
-\begin{equation*}
-\mathbf{F}= m\mathbf{a} = m \frac{\dv}{\dt}
-\end{equation*}
-
-\noindent
-Rearranging: 
-\begin{equation*}
-\int_{t_1}^{t_2} \mathbf{F} \,\dt = m \int_{v_1}^{v_2} \,\dv
-\end{equation*}
-
-\noindent
-Integrating the right hand side: 
-\begin{equation*}
-\int_{t_1}^{t_2} \mathbf{F} \,\dt = m\mathbf{v_2} - m\mathbf{v_1} = m\Delta\mathbf{v}
-\end{equation*}
+%%General Definition 1 -GD1 - Impulse, moved to DD10 section
+%\noindent
+%\begin{minipage}{\textwidth}
+%\renewcommand*{\arraystretch}{1.5}
+%\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+%  \hline
+%  \rowcolor[gray]{0.9}
+%  Number& GD\refstepcounter{defnum}\thedefnum \label{GD_I}\\
+%  \hline
+%  Label&\bf Impulse \wss{Make this a data definition}\olu{moved to DD section}\\
+%  \hline
+%  Units& \si{\newton\second} \\
+%  \hline
+%  Equation & $\mathbf{J} = \int \mathbf{F} \,\dt = \Delta\mathbf{P}$ = $m\Delta \mathbf{v}$\\
+%  \hline
+%  Description &  
+%  An impulse $\mathbf{J}$ occurs when a force $\mathbf{F}$ acts over an interval of time. \\
+%	&$\mathbf{J}$ is the resultant impulse applied on the body (\si{\newton\second}).\\
+%	&$\mathbf{F}$ is the force applied on the body (\si{\newton}). \\
+%	&$\Delta\mathbf{P}$ is the change in momentum of the body (\si{\newton\second}). \\
+%	&$m$ is the mass of the body (\si{\kilogram}). \\
+%	&$\Delta\mathbf{v}$ is the change in velocity of the body (\si{\metre\per\second}). \\
+%  \hline
+%  Source & \\
+%  \hline
+%  Ref.\ By &GD\ref{GD_COM}, DD\ref{DD_IM}, IM\ref{IM_C}\\
+%  \hline
+%\end{tabular}
+%\end{minipage} \\
+%
+%%General Definition 1 - GD1 - Derivation of Impulse
+%\subsubsection*{Derivation of Impulse}
+%
+%Newton's second law of motion (T\ref{T_NSL}) states:
+%\begin{equation*}
+%\mathbf{F}= m\mathbf{a} = m \frac{\dv}{\dt}
+%\end{equation*}
+%
+%\noindent
+%Rearranging: 
+%\begin{equation*}
+%\int_{t_1}^{t_2} \mathbf{F} \,\dt = m \int_{v_1}^{v_2} \,\dv
+%\end{equation*}
+%
+%\noindent
+%Integrating the right hand side: 
+%\begin{equation*}
+%\int_{t_1}^{t_2} \mathbf{F} \,\dt = m\mathbf{v_2} - m\mathbf{v_1} = m\Delta\mathbf{v}
+%\end{equation*}
 
 ~\newline
 
@@ -750,7 +746,7 @@ The objects collide with each other for the exact same amount of time $t$:
 \end{equation}
 
 \noindent
-The above equation is equal to the impulse (GD\ref{GD_I}):
+The above equation is equal to the impulse (DD\ref{DD_I}):
 \begin{equation*}
 \mathbf{F}_1t = \int \mathbf{F}_1 \, \dt = \mathbf{J}
 \end{equation*}
@@ -847,7 +843,7 @@ Thus:
 \mathbf{g} = [-g_\mathrm{x}, -g_\mathrm{y}]
 \end{equation*}
 
-
+\iffalse
 %General Definition 4 - GD4 - Relative velocity 
 \noindent
 \begin{minipage}{\textwidth}
@@ -857,8 +853,7 @@ Thus:
 		\rowcolor[gray]{0.9}
 		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_RV}\\
 		\hline
-		Label&\bf  Relative velocity in collisions \wss{Make this a data
-          definition}\\
+		Label&\bf  Relative velocity in collisions \wss{Make this a data definition} \olu{moved GD3 to DD11}\\
 		\hline
 		Units & \si{\metre\per\second} \\
 		\hline
@@ -920,7 +915,7 @@ Thus:
   \rowcolor[gray]{0.9}
   Number& GD\refstepcounter{defnum}\thedefnum \label{GD_T}\\
   \hline
-  Label&\bf Torque \wss{Make this a data definition} \\
+  Label&\bf Torque \wss{Make this a data definition}\olu{moved to DD13} \\
   \hline
   Units & \si{\newton\metre} \\
   \hline
@@ -941,7 +936,7 @@ Thus:
 
 ~\newline
 
-%General Definition 7 - GD7 - Moment of inertia 
+%General Definition 7 - GD7 - Moment of inertia, moved to DD14
 \noindent
 \begin{minipage}{\textwidth}
 \renewcommand*{\arraystretch}{1.5}
@@ -970,8 +965,7 @@ Thus:
   \hline
 \end{tabular}
 \end{minipage}
-
-~\newpage
+\fi
 
 %4.2.4 Data Definitions
 %4.2.4 Data Definitions
@@ -988,7 +982,7 @@ models. The dimension of each quantity is also given. \\
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number & DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_CM}\olu{moved to DD10, comment this out}\\
+		Number & DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_CM}\\
 		\hline
 		Label & \textbf{Center of mass} \\
 		\hline
@@ -1105,44 +1099,6 @@ models. The dimension of each quantity is also given. \\
 
 ~\newline
 
-%% Commenting this out since we don't consider damping for now
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
-%Data Definition 2 -DD2 - Kinematics with damping
-\noindent
-\begin{minipage}{\textwidth}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-		\hline
-		\rowcolor[gray]{0.9}
-		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_KD}\\
-		\hline
-		Label& \bf Kinematics with damping\\
-		\hline
-		Symbol &$\mathbf{p, v}$\\
-		\hline
-		Units & m, m $\cdot$ s$^{-1}$ \\
-		\hline
-		Equation&$\mathbf{p}(t) = \mathbf{p}_{\text{i}} + \mathbf{v}_{\text{i}}t\zeta^t + \frac{1}{2}\mathbf{a}t^2, \, \mathbf{v}(t) = \mathbf{v}_{\text{i}}\zeta^t + \mathbf{a}t $ \\
-		\hline
-		Description & 
-		$\mathbf{p}(t)$ is the position of a body as a function of time $t$ (m). \\
-		& $\mathbf{v}(t)$ is the velocity of a body as a function of time $t$ (m $\cdot$ s$^{-1}$). \\
-		&$\bf p_\text{i}$ is the initial position of a body (m). \\
-		&$\bf v_\text{i} $ is the initial velocity of a body (m $\cdot$ s$^{-1}$). \\
-		&$\bf a $ is the acceleration of a body (m $\cdot$ s$^{-2}$). \\
-		&$\zeta$ is the damping ratio (unitless). \\
-		\hline
-		Sources& \\
-		\hline
-		Ref.\ By & IM\ref{IM_FR} \\
-		\hline
-	\end{tabular}
-\end{minipage}
-
-~\newline
-\fi
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Data Definition 5 -DD5- Angular displacement
 \noindent
@@ -1236,47 +1192,6 @@ models. The dimension of each quantity is also given. \\
 
 ~\newline
 
-%% Commenting this out since we won't consider damping for now
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\iffalse
-%Data Definition 4 -DD4 -  Rotational kinematics with damping
-\noindent
-\begin{minipage}{\textwidth}
-	\renewcommand*{\arraystretch}{1.5}
-	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-		\hline
-		\rowcolor[gray]{0.9}
-		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_RKD}\\
-		\hline
-		Label& \bf Rotational kinematics with damping \\
-		\hline
-		Symbol &$\boldsymbol{\phi}, \boldsymbol{\omega}$\\
-		\hline
-		Units &$\si{\radian}, \si{\radian} \cdot \text{s}^{-1}$\\
-		\hline
-		Equation&$\boldsymbol \phi(t)  = \boldsymbol \phi_\text{i} +  \boldsymbol  \omega_\text{i}t\zeta^t + \frac{1}{2}\boldsymbol \alpha t^{2}$, \,
-		$\boldsymbol \omega(t) =  \boldsymbol \omega_\text{i}\zeta^t + \boldsymbol \alpha t$\\
-		\hline
-		Description & 
-		
-		$\boldsymbol{\phi}(t)$ is the orientation of a body as a function of time $t$ ($\si{\radian}$). \\
-		& $\boldsymbol{\omega}(t)$ is the angular velocity of a body as a function of time $t$ ($\si{\radian}\cdot \text{s}^{-1}$). \\
-		&$\boldsymbol{\phi}_\text{i}$ is the initial orientation of a body ($\si{\radian}$). \\
-		&$\boldsymbol{\omega}_\text{i} $ is the initial angular velocity of a body ($\si{\radian} \cdot \text{s}^{-1}$). \\
-		&$\boldsymbol{\alpha} $ is the angular acceleration of a body ($\si{\radian}\cdot \text{s}^{-2}$). \\
-		&$\zeta$ is the damping ratio (unitless). \\
-		\hline
-		Sources& \\
-		\hline
-		Ref.\ By & T\ref{T_NRM}, IM\ref{IM_CON} \\
-		\hline
-	\end{tabular}
-\end{minipage}
-
-~\newline
-\fi
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %Data Definition 8 - DD8 -  Impulse for collision response
 \noindent
 \begin{minipage}{\textwidth}
@@ -1296,12 +1211,12 @@ models. The dimension of each quantity is also given. \\
 		\hline
 		Description & 
 		$j$ is the impulse (scalar) used to determine collision response (\aref{A_col}) between two rigid bodies (\aref{A_rigid}, \aref{A_2d}) . \\
-		& $C_\mathrm{R}$ is the coefficient of restitution (GD\ref{GD_COR}). \\
+		& $C_\mathrm{R}$ is the coefficient of restitution (DD\ref{DD_COR}). \\
 		& $\mathbf{n}$ is the collision normal vector (\si{\metre}). Its signed direction is defined by (\aref{A_right}). \\
-		& $\mathbf{v}^{\mathrm{AB}}_{\mathrm{i}}$ is the relative velocity (GD\ref{GD_RV}) between body A and body B (\si{\metre\per\second}). \\
+		& $\mathbf{v}^{\mathrm{AB}}_{\mathrm{i}}$ is the relative velocity (DD\ref{DD_RV}) between body A and body B (\si{\metre\per\second}). \\
 		& $m_\mathrm{A}$ and $m_\mathrm{B}$ are the masses of body A and B, respectively (\si{\kilogram}). \\
 		& $\mathbf{r}_\mathrm{AP}$ and $\mathbf{r}_\mathrm{BP}$ are the displacement vectors between the centers of mass of body A and B, respectively, and the point of contact P (\si{\metre}). \\
-		& $\mathbf{I}_\mathrm{A}$ and $\mathbf{I}_\mathrm{B}$ are the moments of inertia (GD\ref{GD_MI}) for body A and body B, respectively (\si{\kilogram\metre\tothe{2}}). \\
+		& $\mathbf{I}_\mathrm{A}$ and $\mathbf{I}_\mathrm{B}$ are the moments of inertia (DD\ref{DD_MI}) for body A and body B, respectively (\si{\kilogram\metre\tothe{2}}). \\
 		\hline
 		Sources& \\
 		\hline
@@ -1312,15 +1227,15 @@ models. The dimension of each quantity is also given. \\
 
 \subsubsection*{Derivation for Impulse for Collision Response}
 
-Rearranging the equation for the coefficient of restitution (GD\ref{GD_COR}), we get:
+Rearranging the equation for the coefficient of restitution (DD\ref{DD_COR}), we get:
 $$\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}$$
-\noindent Expanding the relative velocity (GD\ref{GD_RV}) on the left:
+\noindent Expanding the relative velocity (DD\ref{DD_RV}) on the left:
 $$(\mathbf{v}^\mathrm{AP}_\mathrm{f} - \mathbf{v}^\mathrm{BP}_\mathrm{f}) \cdot \mathbf{n} = -C_\mathrm{R}\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}$$
 \noindent
-Applying Chasles' Theorem (T\ref{T_CT}) and IM\ref{IM_C} on the left-hand side:
+Applying Chasles' Theorem (DD\ref{DD_CT}) and IM\ref{IM_C} on the left-hand side:
 \wss{This step does not make sense.  IM3 comes from this DD.  This makes this
-  circular.  The derivation should follow the game physics papers that I sent to you.}
-
+  circular.  The derivation should follow the game physics papers that I sent to you.}\\
+\olu{Here it  applies Chasles theorem although in the paper it does not specify Chasles theorem but it also uses equations generated from applying Center of Mass velocities and used that equation to calculate the velocities of an arbitrary point on rotation and translation, which I assume you are referring to rotation when you mentioned 'This makes it circular' above. Even though it does not exactly derive the equation as in the paper but the paper had derived some equation on page 14 which was not necessary and was implicitly stated but the collision response equation includes the term for angular velocity(in the paper) and thats the reason for Chasles law in the SRS.}\\
 \begin{equation*}
 \begin{aligned}
 & (\mathbf{v}^\mathrm{A}_\mathrm{f} + \boldsymbol{\omega}^\mathrm{A}_\mathrm{f} \times \mathbf{r}_\mathrm{AP} - \mathbf{v}^\mathrm{B}_\mathrm{f} - \boldsymbol{\omega}^\mathrm{B}_\mathrm{f} \times \mathbf{r}_\mathrm{BP}) \cdot \mathbf{n} \\
@@ -1407,7 +1322,7 @@ j = \frac{-(1 + C_\mathrm{R}) \mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}
 		\hline
 		Source & \\
 		\hline
-		Ref.\ By &GD\ref{GD_COM}, DD\ref{DD_IM}, IM\ref{IM_C} \olu{should a DD refer to another DD? Regarding DD8 and DD10, 2 occurrences of impulse, DD8 is specific to collision and references by DD10 that was originally in the GD section, should we have 2 instances of Impulse in DD section?}\\
+		Ref.\ By &GD\ref{GD_COM}, DD\ref{DD_IM}, IM\ref{IM_C} \\
 		\hline
 	\end{tabular}
 \end{minipage} \\
@@ -1433,17 +1348,16 @@ Integrating the right hand side:
 \end{equation*}
 
 ~\newline
-%General Definition 4 - GD4 - Relative velocity 
+%Data Definition 11 - DD11 - Relative velocity 
 \noindent
 \begin{minipage}{\textwidth}
 	\renewcommand*{\arraystretch}{1.5}
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_RV}\\
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_RV}\\
 		\hline
-		Label&\bf  Relative velocity in collisions \wss{Make this a data
-			definition}\\
+		Label&\bf  Relative velocity in collisions \wss{Make this a data definition}\olu{updated to DD}\\
 		\hline
 		Units & \si{\metre\per\second} \\
 		\hline
@@ -1458,23 +1372,23 @@ Integrating the right hand side:
 		\hline
 		Source & \\
 		\hline
-		Ref.\ By& GD\ref{GD_COR}, DD\ref{DD_IM}\\
+		Ref.\ By& DD\ref{DD_COR}, DD\ref{DD_IM}\\
 		\hline
 	\end{tabular}
 \end{minipage}
 
 ~\newline
 
-%General Definition 5 - GD5 - Coefficient of restitution
+%Data Definition 12 - DD12 - Coefficient of restitution
 \noindent
 \begin{minipage}{\textwidth}
 	\renewcommand*{\arraystretch}{1.5}
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_COR}\\
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_COR}\\
 		\hline
-		Label&\bf Coefficient of restitution \wss{Make this a data definition}\\
+		Label&\bf Coefficient of restitution \wss{Make this a data definition}\olu{updated}\\
 		\hline
 		\rule{0pt}{22pt}Equation & $C_\text{R} = -\displaystyle\frac{\mathbf{v}^\mathrm{AB}_\mathrm{f} \cdot \mathbf{n}}{\mathbf{v}^\mathrm{AB}_\mathrm{i} \cdot \mathbf{n}}$\\[1.5ex]
 		\hline
@@ -1484,8 +1398,8 @@ Integrating the right hand side:
 		while $C_\mathrm{R} < 1$ results in an inelastic collision, and $C_\mathrm{R} = 0$ results in a totally inelastic collision. \\
 		&$C_\mathrm{R}$ is the coefficient of restitution (unitless). \\
 		&$\mathbf{n}$ is the collision normal vector (\si{\metre}). Its signed direction is defined by (\aref{A_right}). \\
-		&$\mathbf{v}^\mathrm{AB}_\mathrm{i}$ is the initial relative velocity (GD\ref{GD_RV}) of body A with respect to body B before collision (\si{\metre\per\second}). \\
-		&$\mathbf{v}^\mathrm{AB}_\mathrm{f}$ is the final relative velocity (GD\ref{GD_RV}) of body A with respect to body B after collision (\si{\metre\per\second}). \\
+		&$\mathbf{v}^\mathrm{AB}_\mathrm{i}$ is the initial relative velocity (DD\ref{DD_RV}) of body A with respect to body B before collision (\si{\metre\per\second}). \\
+		&$\mathbf{v}^\mathrm{AB}_\mathrm{f}$ is the final relative velocity (DD\ref{DD_RV}) of body A with respect to body B after collision (\si{\metre\per\second}). \\
 		\hline
 		Source & \\
 		\hline
@@ -1496,16 +1410,16 @@ Integrating the right hand side:
 
 ~\newline
 
-%General Definition 6 - GD6 - Torque 
+%Data Definition 13 - DD13 - Torque 
 \noindent
 \begin{minipage}{\textwidth}
 	\renewcommand*{\arraystretch}{1.5}
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_T}\\
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_T}\\
 		\hline
-		Label&\bf Torque \wss{Make this a data definition} \\
+		Label&\bf Torque \wss{Make this a data definition}\olu{updated} \\
 		\hline
 		Units & \si{\newton\metre} \\
 		\hline
@@ -1526,16 +1440,16 @@ Integrating the right hand side:
 
 ~\newline
 
-%General Definition 7 - GD7 - Moment of inertia 
+%Data Definition 14 - DD14 - Moment of inertia 
 \noindent
 \begin{minipage}{\textwidth}
 	\renewcommand*{\arraystretch}{1.5}
 	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 		\hline
 		\rowcolor[gray]{0.9}
-		Number& GD\refstepcounter{defnum}\thedefnum \label{GD_MI}\\
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_MI}\\
 		\hline
-		Label&\bf  Moment of inertia \wss{Make this a data definition}\\
+		Label&\bf  Moment of inertia \wss{Make this a data definition}\olu{updated}\\
 		\hline
 		Units & \si{\kilogram\metre\tothe{2}} \\
 		\hline
@@ -1552,6 +1466,65 @@ Integrating the right hand side:
 		Source & \\
 		\hline
 		Ref.\ By& T\ref{T_NRM}, DD\ref{DD_IM}, IM\ref{IM_C}\\
+		\hline
+	\end{tabular}
+\end{minipage}
+
+~\newline
+
+%Data Definition 15 - DD15 - Kinetic Energy
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_KE}\\
+		\hline
+		Label&\bf Kinetic Energy \\
+		\hline
+		Units & \si{J} \\
+		\hline
+		Equation& $\mathbf{KE} = mv^2/2$ \\
+		\hline
+		Description &  
+		The kinetic energy $\mathbf{KE}$ of a body is the measure of the energy a body possesses due to its motion. ``It is defined as the work needed to accelerate a body of a given mass from rest to its stated velocity". \\
+		& $\mathbf{KE}$ is the kinetic energy (\si{J}). \\ 
+		&$m$ is the mass of the body (\si{\kilogram}). \\
+		&$\mathbf{v}$ is the velocity of the body. (\si{\metre\per\second}). \\
+		\hline 
+		Source & \url{https://www.omnicalculator.com/physics/kinetic-energy#kinetic-energy-definition}\\
+		\hline
+		Ref.\ By& T\ref{T_NRM}, DD\ref{DD_IM}, IM\ref{IM_C} \olu{fix ref by}\\\\ 
+		\hline
+	\end{tabular}
+\end{minipage}
+
+%Data Definition 16 - DD16 - Potential Energy
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_PE}\\
+		\hline
+		Label&\bf Potential Energy \\
+		\hline
+		Units & \si{J} \\
+		\hline
+		Equation& $\mathbf{PE} = mgh$ \\
+		\hline
+		Description &  
+		The potential energy $\mathbf{PE}$ of a body is the measure of the force of gravity exerted on relative to how far it has to fall.\\
+		& $\mathbf{PE}$ is the potential energy (\si{J}). \\ 
+		&$m$ is the mass of the body (\si{\kilogram}). \\
+		&$\mathbf{g}$ is the gravitational force acting the body. (\si{\metre\per\second}). \\
+		&$h$ is the distance through which a body is falling. (\si{\metre}). \\
+		\hline 
+		Source & \url{https://www.omnicalculator.com/physics/kinetic-energy#kinetic-energy-definition}\\
+		\hline
+		Ref.\ By& T\ref{T_NRM}, DD\ref{DD_IM}, IM\ref{IM_C} \olu{fix ref by}\\\\ 
 		\hline
 	\end{tabular}
 \end{minipage}
@@ -1578,7 +1551,7 @@ identified in Sections \ref{sec_theoretical} and \ref{sec_gendef}. \\
   \hline
   Output & $\mathbf{p}_i(t), \mathbf{v}_i(t)$, such that the following ODE is satisfied: \\
   & $\mathbf{a}_i(t) = \frac{\dv_i(t)}{\dt} = \mathbf{g} + \frac{\mathbf{F}_i(t)}{m_i}$ \\
-  \hline                                                                                                                                                                                                                                                                                               
+  \hline                                                                                                                                                                                                                                                                                        
  Description &  The above equation expresses the total acceleration of the rigid body (\aref{A_rigid}, \aref{A_2d}) $i$ as 
  the sum of gravitational acceleration (GD\ref{GD_GA}) and acceleration due to applied force $\mathbf{F}_i(t)$ (T\ref{T_NSL}).
 The resultant outputs are then obtained from this equation using DD\ref{DD_LD}, DD\ref{DD_LV} and DD\ref{DD_LA}.
@@ -1781,8 +1754,7 @@ is intended to provide a feel for a common scenario.
 
 \subsubsection{Properties of a Correct Solution} \label{sec_CorrectSolution}
 
-A correct solution must exhibit conformation to the system of 
-equations presented in IM\ref{IM_FT}, IM\ref{IM_FR} and IM\ref{IM_C}.  
+A correct solution must exhibit conservation of energy. The sum of the potential energies and kinetic energy of all bodies should remain constant or decrease. Energy can decrease if the ${C_R}$ is less than 1.0. Momentum is conserved.
 
 \wss{No, this is just stating (in another way) that the software should follow
   its requirements.  This is a given for any SRS.  Instead, you should state
@@ -1791,7 +1763,7 @@ equations presented in IM\ref{IM_FT}, IM\ref{IM_FR} and IM\ref{IM_C}.
   of the CR is less than 1.0.)  You will have to add the definitions for kinetic
   and potential energy.}
 
-\olu{Added new section}
+\olu{updated properties of a correct solution}
 
 \section{Requirements}
 
@@ -1933,10 +1905,10 @@ This section lists the likely changes to be made to the physics library.
 \olu{fixed sentence}
 
 \begin{itemize}
-	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal
-          ODE-solving algorithm used by the library may change in the
-          future. \wss{This is a design likely change.  We should focus on
-            likely requirements or assumption changes.}
+%	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_solver}:] The internal
+%          ODE-solving algorithm used by the library may change in the
+%          future. \wss{This is a design likely change.  We should focus on
+%            likely requirements or assumption changes.}
 	\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_collisions}:] The
           library may be expanded to deal with edge-to-edge and vertex-to-vertex
           collisions (A\ref{A_col}). 
