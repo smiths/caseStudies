@@ -52,6 +52,8 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 12/09/18 & 1.0 & Initial write-up of document\\
+12/18/18 & 1.1 & Added a comment about relative error for float equality, which 
+was forgotten in the original submission\\
 \bottomrule
 \end{tabularx}
 
@@ -323,7 +325,10 @@ framework and passed, with the exception of
 revealing that the Slip Slicing module had not been properly implemented for 
 the case where the desired number of slices was indivisible by the starting 
 number of slices. This prompted changes to the implementation, discussed 
-further in Section~\ref{sec_Changes}. The test passed after these changes.
+further in Section~\ref{sec_Changes}. The test passed after these changes. For 
+tests that asserted on equality of floats, the relative errors ranged from 
+about $3 \cdot 10^{12}$ to $3 \cdot 10^{11}$, so the relative tolerance was 
+retroactively set as $10^{10}$ for the tests to pass.
 
 \section{Changes Due to Testing} \label{sec_Changes}
 The failure of \tcref{UVnV-TC_SlicerNotEvnslcIndivisible} revealed that the 
