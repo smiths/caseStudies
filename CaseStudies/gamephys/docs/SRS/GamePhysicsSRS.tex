@@ -83,6 +83,7 @@
 
 \newcommand{\tclad}{T_\text{CL}}
 \newcommand{\degree}{\ensuremath{^\circ}}
+\newcommand{\REDEVPERCENT}{10\%}
 
 \newcommand{\progname}{Tamias2D} 
 
@@ -633,12 +634,12 @@ library is based on. \\
 		\hline
 		Label&\bf Collision Detection\\
 		\hline
-		Equation& $\tau = \mathbf{I}\alpha$\\  
+		Equation&  If $A_x,_y$ , $B_x,_y$ $\in$ $P_x,_y$, then A and B have collided\\
 		\hline
-		Description &  
-		Collision detection is detecting the intersection of two or more colliding objects. The computation of collision detection is used to determine whether two objects have collided. We also assume that all rigid bodies involved are two-dimensional (A\ref{A_2d}). \\
-		\hline
-		Source & \\
+		Description & The problem of collision detection is detecting the intersection of two or more colliding objects. The computation of collision detection is used to determine whether two objects have collided. We also assume that all rigid bodies involved are two-dimensional (A\ref{A_2d}). When 2 objects $A_x,_y$ and $B_x,_y$ occupy the same position $P_x,_y$ in space then they have collided. If an object A intersects with an object  \\
+		
+			\hline
+		Source & \url{https://en.wikipedia.org/wiki/Collision_detection} \\
 		\hline
 		Ref.\ By &IM\ref{IM_C} \\
 		\hline
@@ -1841,19 +1842,15 @@ understandability, portability, reliability, and maintainability.
     percent relative difference between the execution times.  You can use the
     same idea for correctness comparison.}
     
-\item[2.] Correctness: Outputs of the code shall have the 
-properties described in \ref{sec_CorrectSolution}.
+\item[2.] Correctness: The output of simulation results shall be compared to an existing implementation like Pymunk.
 
-\item[3.] Usability: Software shall be easy to learn and use. Usability shall be
-  measured by how long it takes a user to learn how to use the library to create
-  their software program. Learning to use a module should take no less than 30
-  to 60 minutes for an intermediate to experienced programmer. \wss{ambiguous}
+\item[3.] Usability: Software shall be easy to learn and use. Usability shall be measured by how long it takes a user to learn how to use the library to create a small program to simulate the movement of 2 bodies over time in space. Creating a program should take no less than 30
+  to 60 minutes for an intermediate to experienced programmer. Please refer Usability NFR test in section 5.2.3 of System VnV Plan located at \url{https://github.com/smiths/caseStudies/blob/gamephy_finaldoc/CaseStudies/gamephys/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}  \wss{ambiguous}
   \olu{updated usability, hope this makes sense} \wss{This is a great start.  As
-    mentioned for performance, I think you could make this usability test part
-    of your VnV plan.  You could point to the VnV plan here.}
+    mentioned for performance, I think you could make this usability test part of your VnV plan.  You could point to the VnV plan here.}
+\olu{Updated usability}
 
-\item[4.] Understandability: Code shall be modularized with complete module 
-guide and module interface specification. \wss{imposing modularization is
+\item[4.] Understandability: Users of \progname{} shall be able to learn the software with ease. Users shall be able to easily create a small program using the library. Creating a small program to simulate the movement of 2 bodies in space should take no less than 60 minutes. \wss{imposing modularization is
   actually a design constraint. It is a good idea, but we don't know for sure
   if this is required, or the best idea.  Is there a way you can specify
   understandability without imposing a design solution?}
@@ -1865,21 +1862,13 @@ guide and module interface specification. \wss{imposing modularization is
   what you described for usability.  I don't think understandability is
   important enough to add a VnV test.  We can keep this requirement a little
   ambiguous and not flesh out all of the details.}
+\olu{updated understandability}
 
-\item[5.] Reusability: All or parts of the software shall be reusable; achieved
-  by modularized code. Sub-modules shall be able to be re-used to add new
-  sub-classes to an existing class. \wss{ambiguous} \olu{updated reusability}
-  \wss{This is still ``how you want to achieve'' reusability, not ``what it
-    means.''  This is a tough one to write in an abstract way.  For now I don't
-    have any ideas that aren't covered by maintainability.  I think you can
-    remove the reusability requirement.  We'll focus on maintainability.}
+\item[5.] Maintainability:  The development time for any
+of the likely changes should not exceed \REDEVPERCENT{} percent of the
+original development time.  
 
-\item[6.] Maintainability: Concerns shall be separated into modules. Software
-  code structure shall be flexible enough to allow extensibility as well as to
-  locate and fix defects easily i.e more parameters or properties can be easily
-  added or updated to the modules of the software within a short period of time
-  depending on the size of required change or fixes. The output type of the
-  software shall be easy to modify \wss{ambiguous} \olu{updated
+ \wss{ambiguous} \olu{updated
     "Maintainability"} \wss{Again, this is not abstract.  This isn't an easy
     requirement to phrase.  My suggestion is to characterize maintainability in
     terms of the likely changes.  You can say that the development time for any
@@ -1955,6 +1944,7 @@ of theoretical models, general definitions, data definitions and instance models
 Finally, Table \ref{ITraceMatrix} shows the dependencies of the theoretical models, general definitions,
 data definitions and instance models on each other. \\
 
+\olu{As per discussion with Dr. Smith, traceability graphs will be fixed automatically}
 \renewcommand*{\thetable}{3}
 \begin{table}[h!]
 \renewcommand*{\arraystretch}{1.2}
