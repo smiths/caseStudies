@@ -13,11 +13,12 @@
 \usepackage[round]{natbib}
 
 \input{../../Comments}
+\newcommand{\progname}{Tamias2D}
 
 \begin{document}
 
-\title{Test Report: Project Title} 
-\author{Author Name}
+\title{Test Report: \progname A 2D Rigid Body Physics Library} 
+\author{Oluwaseun Owojaiye}
 \date{\today}
 	
 \maketitle
@@ -29,8 +30,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Dec. 12, 2018 & 1.0 & Initial draft\\
+%Date 2 & 1.1 & Notes\\
 \bottomrule
 \end{tabularx}
 
@@ -38,17 +39,33 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
+
+%\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
+The symbols, abbreviations, and acronyms used in this document include those defined in the table below, as well as any defined in the tables found in Section 2 of the Software Requirements Specification (SRS) at
+\url {https://github.com/smiths/caseStudies/blob/gamephy_finaldoc/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+
+~\newline
 \renewcommand{\arraystretch}{1.2}
+
 \begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
-  \bottomrule
+	
+	\toprule		
+	
+	\textbf{symbol} & \textbf{description}\\
+	
+	\midrule
+	
+	MIS & Module Interface Specification\\
+	
+	MG & Module Guide\\
+	
+	TC & Test Case\\
+	
+	VnV & Verification and Validation\\
+	
+	\bottomrule
+	
 \end{tabular}\\
-
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS tables if needed}
-
 \newpage
 
 \tableofcontents
@@ -61,27 +78,67 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ...
+This document outlines the results of testing for \progname{}.Evaluation of Functional and NonFunctional Requirements testing are reported in Sections 2 and 3 respectively. This document is related to the System VnV plan and should be referenced when reviewing this document for the details of System VnV test cases. System VnV Plan document can be found at \url{https://github.com/smiths/caseStudies/blob/gamephy_finaldoc/CaseStudies/gamephys/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}. I did some comparison with an existing library Pymunk, although just a few scenarios were compared and my finding were reported in section 5. All changes made as a result of changes to requirement(if any), bug fixes and error detection were discussed in section 7. Section 8 describes the test framework used for test automation. Section 9 and 10 details the traceability between test cases, requirements and modules.
+were implemented with an automated testing framework. 
 
 \section{Functional Requirements Evaluation}
+All functional requirement test cases executed as a part of the System VnV can be found in section 5.1. TC1-TC7 tests for the movement of a body when force or no force is applied and the history of the position and velocity of rigid bodies over time is recorded. This set of test cases cover the functional requirements to create a space for all rigid body simulation(R1), the bodies were initialized with initial values and no force or force was applied on the rigid bodies, the inputs set for the parameters were also verified (R4)and the position and velocities over a period of time was computed upon a force acting on a body (R5).
+
+TC8 - TC10 verified the rotational motion of a body when a rotational force known as 'torque' acts on the body. The angular orientation and angular velocities are computed over a period of time and this satisfies R6. 
+
+T11 - T15 verifies the collision of rigid bodies, in collision test, the software checks for collision, i.e if 2 objects are intersecting and occupying thesame position in space(R7) and the collision response is also determined by the sofware,Coefficient of restitution is applied in collision of 2 objects(R3) and the position and velocities over a period of time is also computed(R8).
+All the above test cases passed.
 
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
-		
 \subsection{Performance}
+The performance of \progname{} was tested using TC9 in the System VnV Plan, where multiple rigid bodies were added in space to simulate collision and we measure the time it takes to compute the velocity and position for 50 cycles. We compare the execution time to simulate collision under the same conditions in Pymunk and the result is displayed in Table 1 and we also compute and compare the Frame Rate per Second(FPS) for Tamias2D and Pymunk. 
 
-\subsection{etc.}
+
+\begin{table}[]
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\hline
+	& Number of bodies & Number of cycles  & Execution time & FPS & Relative error  \\ \hline
+	Tamias2D	&  &  &  &  &  \\ \hline
+	Pymunk	&  &  &  &  &  \\ \hline
+		&  &  &  &  &  \\ \hline
+		
+	\end{tabular}
+~\newline
+\tablename{ 1 :Performance evaluation of Tamias2D}	
+\end{table}
+	
+\subsection{Correctness}
+The NFR of correctness was measured by comparing the simulation results of the velocity and position history of \progname with Pymunk. This was done by executing the following test cases in both systems: TC1, TC2, TC5, TC7, TC10. Table 2 shows my findings for correctness. The results give more confidence to the correctness of \progname
+
+\begin{table}[]
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\hline
+		& Test Case ID & Position  & Velocity & Time & Relative error  \\ \hline
+		Tamias2D	&  &  &  &  &  \\ \hline
+		Pymunk	&  &  &  &  &  \\ \hline
+		&  &  &  &  &  \\ \hline
+		
+	\end{tabular}
+~\newline
+\tablename{ 2 :Correctness evaluation of Tamias2D}
+\end{table}
+
+\subsection{Usability}
+Usability was evaluated by how long it took a user to create a small program as per NFR TC9. After the software was downloaded, the user which was me, was able to create a program to simulate the movement of 2 rigid bodies in space, computing their velocity and position over time in about 9.22 minutes, so an intermediate to experienced programmer especially one who is familiar with using game physics library will be able to do this in about 20 to 35 minutes and a programmer new to game development might take no less than 1 hour to create the small program described above. This proves the usability of \progname{}
 	
 \section{Comparison to Existing Implementation}	
-
+\progname was compared with Pymunk for a couple of testcases, please refer to tables 1 and 2 for results, more testing will be done in a later phase of this project. Pymunk will continually be used as a benchmark for \progname
 This section will not be appropriate for every project.
 
 \section{Unit Testing}
+Please refer to the Unit VnV document located at \url{https://github.com/smiths/caseStudies/blob/gamephy_finaldoc/CaseStudies/gamephys/docs/VnVReport/UnitVnVReport/UnitVnVReport.pdf} for a detailed report on Unit VnV testing.
 
 \section{Changes Due to Testing}
+No changes were made due to testing. All tests were successfully executed.
 
 \section{Automated Testing}
+Pytest framework was used for automated testing. Please refer to test file located at 
 		
 \section{Trace to Requirements}
 		
