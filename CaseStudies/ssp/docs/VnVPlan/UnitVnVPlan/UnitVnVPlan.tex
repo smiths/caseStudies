@@ -1,0 +1,1686 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{xr}
+\usepackage{siunitx}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{afterpage}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+\usepackage[numbib,nottoc]{tocbibind}
+\hypersetup{
+	colorlinks,
+	citecolor=green,
+	filecolor=black,
+	linkcolor=red,
+	urlcolor=blue
+}
+\usepackage[round]{natbib}
+\usepackage{enumitem}
+
+\externaldocument[SRS-]{../../SRS/SRS}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+
+\externaldocument[MG-]{../../Design/MG/MG}
+\newcommand{\mref}[1]{M\ref{#1}}
+
+\externaldocument[SVnV-]{../SystVnVPlan/SystVnVPlan}
+\newcommand{\tcref}[1]{TC\ref{#1}}
+
+\newcounter{utestnum} %Assumption Number
+\newcommand{\utcthetestnum}{TC\theutestnum}
+\newcommand{\utcref}[1]{TC\ref{#1}}
+
+\input{../../Comments}
+\input{../../Common}
+
+\begin{document}
+
+\title{Slope Stability Analysis: Unit Verification and Validation Plan for 
+\progname{}} 
+\author{Brooks MacLachlan}
+\date{\today}
+	
+\maketitle
+
+\pagenumbering{roman}
+
+\section{Revision History}
+
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+11/26/18 & 1.0 & Initial template fill-ins\\
+11/29/18 & 1.1 & Updates based on presentation feedback\\
+12/03/18 & 1.2 & Added tests for remaining modules\\
+12/09/18 & 1.3 & Updates prompted by test implementation and for final  
+submission\\
+12/11/18 & 1.4 & Changes based on peer review\\
+\bottomrule
+\end{tabularx}
+
+~\newpage
+
+\tableofcontents
+
+\listoftables
+
+\newpage
+
+\section{Symbols, Abbreviations and Acronyms}
+
+The symbols, abbreviations, and acronyms used in this document include those 
+defined in the table below, as well as any defined in the tables found in 
+Section \ref{SRS-sec_RefMat} of the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/SRS/SRS.pdf}
+{Software Requirements Specification (SRS) document}.
+\newline
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{l l} 
+	\toprule		
+	\textbf{symbol} & \textbf{description}\\
+	\midrule
+	MIS & Module Interface Specification\\
+	MG & Module Guide\\
+	TC & Test Case\\
+	VnV & Verification and Validation\\
+	\bottomrule
+\end{tabular}\\
+
+\newpage
+
+\pagenumbering{arabic}
+
+This document provides the unit Verification and Validation (VnV) plan for the 
+software. General information related to the system under test is given in 
+Section~\ref{sec_Info}. Section~\ref{sec_UnitPlan} outlines at a high level the 
+plan for verifying and validating the software. Section~\ref{sec_Tests} gives 
+more detail about the specific tests that will be used to verify each module.
+
+\section{General Information} \label{sec_Info}
+
+\subsection{Purpose}
+
+\noindent The software being tested is the Slope Stability analysis Program 
+(\progname{}). Based on user-defined slope geometry and material properties, 
+\progname{} determines the critical slip surface of the given slope, the 
+corresponding factor of safety, and interslice normal and shear forces along 
+the critical slip surface.
+
+\noindent The purpose of the unit verification and validation activities is to 
+confirm that every module of \progname{} performs its expected actions 
+correctly. The tests described in this document cannot definitively prove 
+correctness, but they can build confidence by verifying that the software is 
+correct for the cases covered by tests.
+
+\subsection{Scope} \label{Scope}
+
+The Hardware-Hiding module, \noindent \mref{MG-mHH}, will not be unit tested as 
+it is implemented by the operating system of the hardware on which \progname{} 
+is running, and is assumed to work correctly. The Sequence Data Structure, 
+Random Number Generation, and Plotting modules (\mref{MG-mArrayOps}, 
+\mref{MG-mRandNum}, and \mref{MG-mPlot}) will also not be unit tested as they 
+are all implemented by MatLab. The Control Module, \mref{MG-mControl}, is out 
+of scope for this document because it is considered to have been sufficiently 
+tested by the system tests outlined in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}
+{System VnV Plan document}. Verification of the non-functional requirements is 
+not included in the unit verification plan because they are also sufficiently 
+covered by the System VnV Plan.
+
+\section{Plan} \label{sec_UnitPlan}
+	
+\subsection{Verification and Validation Team}
+
+\noindent Brooks MacLachlan is responsible for the unit verification and 
+validation of \progname{}, though input from various students and the 
+professor, Dr.~Spencer Smith, of CAS 741 will also contribute.
+
+\subsection{Automated Testing and Verification Tools}
+
+\noindent MatLab's built-in unit testing framework will be used to 
+automatically run the unit tests and display the results.
+
+\subsection{Non-Testing Based Verification}
+
+Not applicable for \progname{}.
+
+\section{Unit Test Description} \label{sec_Tests}
+
+\noindent Test cases have been selected to verify that each module conforms to 
+the specification for the module described in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/Design/MIS/MIS.pdf}
+{Module Interface Specification (MIS) document}. Where the MIS included 
+conditional rules, at least one test case covers each branch of the conditional 
+rule. Test cases are minimal, meaning that each test case verifies only one 
+value. If the MIS for a module includes several results, there is a test case 
+for each result, even if they all cover the same branch of a conditional. 
+Throughout this section, if a test is verifying equality between two numbers, a 
+relative error for difference between the actual and expected values will 
+be allowed. The error will be described after running the tests. 
+
+~\newline \noindent Many of the tests refer to variables or constants as part 
+of the initial state, input, or expected output. The specifications for these 
+variables and constants can be found in the 
+\href{https://github.com/smiths/caseStudies/blob/master/CaseStudies/ssp/docs/Design/MIS/MIS.pdf}
+{MIS document} for this project.
+
+~\newline \noindent The values in Table~\ref{Inputs} will be used as input for 
+many of the test cases described throughout this section. These values were 
+taken from the User's Guide for this project by \cite{UserGuide}. Individual 
+test cases will reference the table as input but specify new values for any 
+input parameter that should have a different value than specified by the table.
+
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{1.0\textwidth}{p{3cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(0, 
+		25), 
+		(20, 25), (30, 20), (40, 15), (70, 15)\}\\
+		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(0, 22), 
+		(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
+		14), (70, 14)\}\\
+		${x_\text{slip}^\text{minEtr}}$ & $\text{m}$ & 10\\
+		${x_\text{slip}^\text{maxEtr}}$ & $\text{m}$ & 24\\
+		${x_\text{slip}^\text{minExt}}$ & $\text{m}$ & 34\\
+		${x_\text{slip}^\text{maxExt}}$ & $\text{m}$ & 53\\
+		${y_\text{slip}^\text{min}}$ & $\text{m}$ & 5\\
+		${y_\text{slip}^\text{max}}$ & $\text{m}$ & 26\\
+		$c'$ & $\si{\pascal}$ & 5000 \\
+		$\varphi'$ & \si{\degree} & 20\\
+		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 9800 \\
+		\textit{const\_f} & N/A & 0\\ 
+		\bottomrule
+	\end{tabularx}
+	\caption{Input to be used for test cases}
+	\label{Inputs}
+\end{table}
+
+\subsection{Tests for Functional Requirements}
+
+\subsubsection{Input Module}
+
+As described in the MIS, the Input module is expected to read in many user 
+inputs from a file. For each value contained in the file, there is a 
+corresponding test case verifying that the value was properly read into the 
+data structure containing the input parameters. In cases where the user input 
+may take different forms, such as the input for when a water table exists and 
+the input for when a water table does not exist, each potential form of input 
+is covered by at least one test case. There are also test cases to cover poorly 
+formatted or named input files, where \progname{} should throw exceptions. The 
+input module is also responsible for 
+verifying the input, so for each possible violation of an input constraint, 
+there is a corresponding test case verifying that the correct exception was 
+thrown.
+
+\paragraph{Valid User Input}
+
+~\newline \noindent The test cases described in Table~\ref{InputTests} 
+verify that each user input is correctly read. These test cases are identical 
+to each other with the exception of the expected output on which they assert. 
+The input for each is a file containing the inputs specified in 
+Table~\ref{Inputs}. The type of these test cases is automatic. The initial 
+state for each is a new session. The expected output for each is given in 
+Table~\ref{InputTests}. The expected output is derived based on the given 
+inputs. The tests will be performed as automated tests on a unit testing 
+framework.
+
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputSlope} & 
+	test-input\_slope &  \textit{slope.strat} = [(0, 25), (20, 25), (30, 20), 
+	(40, 25), (70, 25)]\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputPhi} & 
+	test-input\_phi &  \textit{slope.phi} = 0.34906585040\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCoh} & 
+	test-input\_coh &  \textit{slope.coh} = 5000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGam} & 
+	test-input\_gam &  \textit{slope.gam} = 15000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGams} & 
+	test-input\_gams &  \textit{slope.gams} = 15000\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputWT} & 
+	test-input\_piez &  \textit{piez.piez} = [(0, 22), 
+	(10.87, 21.28), (21.14, 19.68), (31.21, 17.17), (38.69, 14.56), (40, 
+	14), (70, 14)]\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputGamw} & 
+	test-input\_gamw &  \textit{piez.gamw} = 9800\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXextMin} & 
+	test-input\_xExtMin &  \textit{search.Xext}[0] = 34\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXextMax} & 
+	test-input\_xExtMax &  \textit{search.Xext}[1] = 53\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXetrMin} & 
+	test-input\_xEtrMin &  \textit{search.Xetr}[0] = 10\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputXetrMax} & 
+	test-input\_xEtrMax &  \textit{search.Xetr}[1] = 24\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputYlimMin} & 
+	test-input\_yLimMin &  \textit{search.Ylim}[0] = 5\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputYlimMax} & 
+	test-input\_yLimMax &  \textit{search.Ylim}[1] = 26\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputLtoR} & 
+	test-input\_ltor &  \textit{soln.ltor} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputFtype} & 
+	test-input\_ftype &  \textit{soln.ftype} = 0\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputEvenslc} & 
+	test-input\_evnslc &  \textit{soln.evnslc} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputCncvu} & 
+	test-input\_cncvu &  \textit{soln.cncvu} = 1\\ 
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_InputObtu} & 
+	test-input\_obtu &  \textit{soln.obtu} = 1\\ 
+	\hline
+	\caption{Test cases for load\_params access program of the Input module}
+	\label{InputTests}
+\end{longtable}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputRtoL}] 
+test-input\_rtol
+
+Type: Automatic
+					
+Initial State: New session
+					
+Input: As described in Table~\ref{Inputs}, except with slope coordinates 
+$\{\left(x_\text{us},y_\text{us}\right)\}$ increasing as $x$ increases, as 
+follows: \{(0, 
+15), (30, 15), (40, 20), (50, 25), (70, 25)\}.
+					
+Output: \textit{soln.ltor} = 0.
+
+Test Case Derivation: Based on the given slope stratigraphy, \progname{} should 
+detect that the slope elevation is increasing as $x$ increases, and set 
+\textit{soln.ltor} accordingly.
+
+How test will be performed: Automated test on unit testing framework.
+					
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputNoWTpiez}] 
+test-input\_noWTpiez
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table.
+
+Output: \textit{piez.piez} = [].
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.piez} variable should be the empty sequence.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputNoWTgamw}] 
+test-input\_noWTgamw
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table.
+
+Output: \textit{piez.gamw} = 0.
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.gamw} variable should be 0.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_Inputgamw0NoWT}] 
+test-input\_noWTgamw0
+
+Type: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with no water table. The 
+verify\_params method must be called as part of this test.
+
+Output: \textit{piez.gamw} = 0.
+
+Test Case Derivation: If the input includes no water table vertices, the 
+\textit{piez.gamw} variable should be 0, and verify\_params should not throw an 
+exception.
+
+How test will be performed: Automated test on unit testing framework.
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputMin}] 
+test-valid\_input\_minimal
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with only 
+2 slope coordinates $\{\left(x_\text{slope},y_\text{slope}\right)\}$, as 
+follows: 
+\{(0, 25), (20, 25). Also, with no water table vertices 
+$\{\left(x_\text{wt},y_\text{wt}\right)\}$.  The verify\_params method must be 
+called as part of this test.
+
+Output: \textit{slope.strat} = [(0, 25), (20, 25)]
+
+Test Case Derivation: \progname{} should accept an input slope with at least 2 
+coordinates.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputXMinEtrEqual}] 
+test-input\_xMinEtrEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with  
+${x_\text{slip}^\text{minEtr}}$ set to 0.  The verify\_params method must be 
+called as part of this test.
+
+Output: \textit{search.Xetr}[0] = 0
+
+Test Case Derivation: \progname{} should accept values for the search 
+parameters even if they lie on the edges of the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputXMaxExtEqual}] 
+test-input\_xMaxExtEqual
+
+Control: Automatic
+
+Initial State: New session
+
+Input: As described in Table~\ref{Inputs}, except with 
+${x_\text{slip}^\text{maxExt}}$ set to 70.  The verify\_params method must be 
+called as part of this test.
+
+Output: \textit{search.Xext}[1] = 70
+
+Test Case Derivation: \progname{} should accept values for the search 
+parameters even if they lie on the edges of the slope.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputBadFilename}] 
+test-input\_badFilename
+
+Control: Automatic
+
+Initial State: New session
+
+Input: ``ValidInput.out'' to the load\_params access program.
+
+Output: ``badFilename'' exception should be thrown.
+
+Test Case Derivation: \progname{} should not accept input files with the 
+``.out'' extension, as stated in the MIS.
+
+How test will be performed: Automated test on unit testing framework
+
+\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InputUnexpected}] 
+test-input\_unexpected
+
+Control: Automatic
+
+Initial State: New session
+
+Input: ``UnexpectedInput.txt'' to the load\_params access program.
+
+Output: ``unexpectedInput'' exception should be thrown.
+
+Test Case Derivation: \progname{} should not accept input files with incorrect 
+formatting, as stated in the MIS.
+
+How test will be performed: Automated test on unit testing framework
+    
+\end{enumerate}
+
+\paragraph{Invalid User Input}
+~\newline \noindent See \tcref{SVnV-TC_InvalidSlopeNonMonotonic} - 
+\tcref{SVnV-TC_InvalidUnitWtWaterNegative} in the System VnV Plan document.
+
+\subsubsection{Genetic Algorithm Module}
+
+The test cases described in Table~\ref{GenAlgTests} 
+verify that the critical slip surface returned by the genetic algorithm 
+satisfies certain properties. Since the genetic algorithm includes randomness, 
+it is impossible to verify the exact output. This is why test cases were 
+selected to verify properties of the output instead. These test cases are 
+identical to each other with the exception of the expected output on which they 
+assert. The input for each is nothing; the genetic\_alg method does not take 
+any inputs, it uses state variables instead. The type of these test cases is 
+automatic. As the initial state for each, \textit{slope}, \textit{piez}, 
+\textit{search}, and \textit{soln} state variables are loaded with the inputs 
+from Table~\ref{Inputs}. For each test case, a predicate on the output that is 
+expected to hold true is given in Table~\ref{GenAlgTests}. These 
+predicates include a variable called $cslip$, which represents the critical 
+slip surface output by the genetic algorithm. The expected output is derived 
+based on the specification for the genetic algorithm found in the MIS document. 
+The tests will be performed as automated tests on a unit testing framework.
+
+\begin{longtable}{  l  p{4cm}  p{6cm}  }
+	\hline
+	\textbf{Test Case} & \textbf{Test Name} & \textbf{Expected Output} \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXextMin} & 
+	test-genAlg\_xExtMin &  $\textit{cslip}[|\textit{cslip}|-1].x \geq 
+	\textit{search.Xext}[0]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXextMax} & 
+	test-genAlg\_xExtMax &  $\textit{cslip}[|\textit{cslip}|-1].x \leq 
+	\textit{search.Xext}[1]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXetrMin} & 
+	test-genAlg\_xEtrMin &  $\textit{cslip}[0].x \geq \textit{search.Xetr}[0]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgXetrMax} & 
+	test-genAlg\_xEtrMax &  $\textit{cslip}[0].x \leq \textit{search.Xetr}[1]$\\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgYlimMin} & 
+	test-genAlg\_yLimMin &  $\forall(i : \mathbb{Z} | i \in 
+	[0..|\textit{cslip}|-1] : \textit{cslip}[i].y \geq 
+	\textit{search.Ylim}[0])$ \\
+	\hline 
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgYlimMax} & 
+	test-genAlg\_yLimMax &  $\forall(i : \mathbb{Z} | i \in 
+	[0..|\textit{cslip}|-1] : \textit{cslip}[i].y \leq 
+	\textit{search.Ylim}[1])$ \\
+	\hline
+	TC\refstepcounter{utestnum}\theutestnum  \label{TC_GenAlgVertices} & 
+	test-genAlg\_vertices &  $|\textit{cslip}| = 
+	(\text{INIT\_NUM\_VERTICES}*(2^\text{NUM\_ADDS}))-(2^\text{NUM\_ADDS}-1)$ 
+	\\
+	\hline
+	\caption{Test cases for Genetic Algorithm module}
+	\label{GenAlgTests}
+\end{longtable}
+
+\subsubsection{Kinematic Admissibility Module}
+
+Based on the specification for this module in the MIS, there are six conditions 
+under which the module should return false. Thus, test cases have been selected 
+to test each of these six conditions. For each condition, there is one test 
+case verifying the behaviour when the condition is met and another test case 
+verifying the behaviour when the slip surface is on the border of meeting the 
+condition. For example, if the condition is that one value must be strictly 
+less than another, there would be a test case where the two values are equal. 
+Two of the conditions are turned on or off based on a boolean, and so an 
+additional test case was selected for each of those to confirm that if the 
+condition is turned off, the module should return true even if the condition is 
+met. 
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmXDec}] 
+	test-kinAdm\_xDec
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 15), (25, 15), (40, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinates are 
+	not monotonically increasing, so the kinematic admissibility module should 
+	return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmXEq}] 
+	test-kinAdm\_xEq
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 14), (30, 14), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinates are 
+	equal for two adjacent points. This does not violate the condition, so the 
+	kinematic admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXetrOnSlope}] 
+	test-kinAdm\_xEtrOnSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(-10, 25), (30, 15), (35, 12), (40, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface entry is not on the slope, so the kinematic admissibility 
+	module should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXetrOnEdge}] 
+	test-kinAdm\_xEtrOnEdge
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(0, 25), (30, 15), (35, 14), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface entry is just on the edge of the slope, so the kinematic 
+	admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXextOnSlope}] 
+	test-kinAdm\_xExtOnSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 15), (35, 12), (80, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface exit is not on the slope, so the kinematic admissibility 
+	module should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_KinAdmXextOnEdge}] 
+	test-kinAdm\_xExtOnEdge
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 15), (35, 12), (70, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the $x$-ordinate of 
+	the slip surface exit is just on the edge of the slope, so the kinematic 
+	admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmInSlope}] 
+	test-kinAdm\_inSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 25), (35, 12), (40, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that one $x$-ordinate of 
+	the slip surface is above the slope, so the kinematic admissibility module 
+	should return false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmOnSlope}] 
+	test-kinAdm\_onSlope
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
+	
+	Input: [(20, 25), (30, 15), (34, 18), (38, 15), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that one interior 
+	$x$-ordinate of the slip surface is on the slope. This does not violate the 
+	condition, so the kinematic admissibility module should return true. Note 
+	that \textit{soln.cncvu} and \textit{soln.obtu} were set to 0 to relax the 
+	concave-up condition and obtuse-angles condition, as this test case would 
+	violate those conditions otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUp}] 
+	test-kinAdm\_cncvUp
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the slip surface is 
+	not fully concave-up, so the kinematic admissibility module should return 
+	false.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUpOff}] 
+	test-kinAdm\_cncvUpOff
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu} = 
+	0.
+	
+	Input: [(20, 25), (30, 15), (32, 15), (35, 12), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface is 
+	not fully concave-up, but \textit{cncvu}=0, so the condition is not 
+	enforced, so the kinematic admissibility module should return true. Note 
+	that \textit{soln.obtu} was set to 0 to relax the obtuse-angles condition, 
+	as this test case would violate that condition otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmCncvUpEq}] 
+	test-kinAdm\_cncvUpEq
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 15), (35, 15), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	adjacent slopes that are equal. This does not violate the condition, so the 
+	kinematic admissibility module should return true.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmObtu}] 
+	test-kinAdm\_obtu
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0.
+	
+	Input: [(20, 25), (30, 15), (31, 5), (40, 15)].
+	
+	Output: false.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	an angle less than 110 degrees, so the kinematic admissibility module 
+	should return false. Note that \textit{soln.cncvu} was set to 0 to relax 
+	the concave-up condition, as this test case would violate that condition 
+	otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_KinAdmObtuOff}] 
+	test-kinAdm\_obtuOff
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs} and with \textit{soln.cncvu}=0 and \textit{soln.obtu}=0.
+	
+	Input: [(20, 25), (30, 15), (31, 5), (40, 15)].
+	
+	Output: true.
+	
+	Test Case Derivation: The input was designed so that the slip surface has 
+	an angle less than 110 degrees, but \textit{soln.obtu}=0, so the condition 
+	is not enforced, so the kinematic admissibility module should return true. 
+	Note that \textit{soln.cncvu} was set to 0 to relax the concave-up 
+	condition, as this test case would violate that condition otherwise.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsubsection{Slip Weighting Module}
+As specified in the MIS for this module, it accepts a list of slip surfaces, 
+sorts them based on their factor of safety, and assigns a weight to each slip 
+surface. To cover this functionality, there are test cases verifying that the 
+slip surfaces are correctly sorted, and test cases verifying that the 
+weights are calculated correctly. A final test case verifies that the weights 
+are correct in the special case where every slip surface has the same factor of 
+safety.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterSort}] 
+	test-weighter\_sort
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.5, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[0].\textit{Fs} = 0.8\\ 
+	\land \textit{slips}^\prime[0].\textit{Fs} = 1.0 \\
+	\land \textit{slips}^\prime[0].\textit{Fs} = 1.5$.
+	
+	Test Case Derivation: The input list of slip surfaces was manually sorted 
+	in ascending order of factor of safety to derive the expected output.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterSize}] 
+	test-weighter\_size
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.5, G : [], X : [], wt : 0, slicedSlip : []),
+	(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slips}^\prime| = 3$.
+	
+	Test Case Derivation: The weighter function should not change the size of 
+	the input list of slip surfaces, so the expected size of the output is 
+	equal to the size of the input.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterFirst}] 
+	test-weighter\_first
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.4, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.8, G : [], X : [], wt : 0, slicedSlip : []),
+	(surf : [], Fs : 2.0, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[0].wt = 0.6$.
+
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the first slip 
+	surface according to the specification in the MIS.
+
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterMid}] 
+	test-weighter\_mid
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.4, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 2.0, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[1].wt = 0.9$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the second slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_WeighterSecondLast}] 
+	test-weighter\_secondLast
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.4, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 2.0, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[2].wt = 1.0$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the third slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterLast}] 
+	test-weighter\_last
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 0.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.4, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.8, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 2.0, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slips}^\prime[3].wt = 1.0$.
+	
+	Test Case Derivation: The input list of slip surfaces was chosen to be 
+	already 
+	sorted so that this test case is independent of the sorting. The expected 
+	output was derived by manually calculating the weight of the fourth slip 
+	surface according to the specification in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_WeighterNaN}] 
+	test-weighter\_NaN
+	
+	Type: Automatic
+	
+	Initial State: New session.
+	
+	Input: [(surf : [], Fs : 1.0, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.0, G : [], X : [], wt : 0, slicedSlip : []), 
+	(surf : [], Fs : 1.0, G : [], X : [], wt : 0, slicedSlip : [])].
+	
+	Output: $\textit{slips}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\forall(i : \mathbb{Z} | i \in [0..2] : \textit{slips}^\prime[i].wt = 
+	\text{NaN})$.
+	
+	Test Case Derivation: All slip surfaces in the input list were chosen to 
+	have equal factors of safety. According to the specification in the MIS, 
+	this results in a division by zero in the calculation of the weights. In 
+	MatLab, the result of a division by zero is NaN, thus each weight in the 
+	output list is expected to be NaN.
+	
+	How test will be performed: Automated test on unit testing framework.
+
+\end{enumerate}
+
+\subsubsection{Slip Slicing Module}
+The MIS for this module shows that it uses two different slicing algorithms, 
+depending on the value of the boolean \textit{soln.evnslc}. Thus, a test case 
+was selected for each algorithm, to ensure that it slices the given slip 
+surface properly.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerEvnslcSize}] 
+	test-slicer\_evnslcSize
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 1.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 7$.
+	
+	Test Case Derivation: The input 6 means that the output slip surface should 
+	have 6 slices. The number of slices is one less than the number of 
+	vertices, so the expected size of the output is 7.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerEvnslcVals}] 
+	test-slicer\_evnslcVals
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 1.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: [(0, 10), (2, 8), (4, 6), (8, 2), (10, 3), (13, 4), (16, 5)].
+	
+	Test Case Derivation: The specification in the MIS for the case where 
+	\textit{soln.evnslc} is true was applied manually to the input coordinates 
+	to derive the expected output coordinates.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+		\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcSize}] 
+	test-slicer\_notEvnslcSize
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 7$.
+	
+	Test Case Derivation: The input 6 means that the output slip surface should 
+	have 6 slices. The number of slices is one less than the number of 
+	vertices, so the expected size of the output is 7.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcVals}] 
+	test-slicer\_notEvnslcVals
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3), (16, 5)], 6.
+	
+	Output: [(0, 10), (4, 6), (8, 2), (9, 2.5), (10, 3), (13, 4), (16, 5)].
+	
+	Test Case Derivation: The specification in the MIS for the case where 
+	\textit{soln.evnslc} is false was applied manually to the input coordinates 
+	to derive the expected output coordinates.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_SlicerNotEvnslcIndivisible}] 
+	test-slicer\_notEvnslcIndivisible
+	
+	Type: Automatic
+	
+	Initial State: \textit{soln.evnslc} = 0.
+	
+	Input: [(0, 10), (8, 2), (10, 3)], 5.
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$|\textit{slip}^\prime| = 5$.
+	
+	Test Case Derivation: In the case where \textit{soln.evnslc} is false, if 
+	the desired number of slices is not divisible by the starting number of 
+	slices, the desired number of slices should be adjusted to the greatest 
+	number divisible by the starting number of slices but less than the input 
+	desired number of slices. In this case, that number is 4, so the size of 
+	the output should be 5.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsubsection{Morgenstern-Price Calculation Module}
+Correct calculation of the factor of safety is covered by \tcref{SVnV-TC_Ex1FS} 
+and \tcref{SVnV-TC_OrigProgFS} in the System VnV Plan document. Correct 
+calculation of the interslice normal forces and interslice shear forces are 
+covered by \tcref{SVnV-TC_OrigProgNormal} and \tcref{SVnV-TC_OrigProgShear}, 
+respectively, in the System VnV Plan document. The additional test cases 
+specified here cover special cases not covered by the System VnV Plan: 
+non-converging and spurious solutions. The MIS states that \progname{} should 
+return a factor of safety of 1000 and empty lists for the interslice forces in 
+both of these cases. For each of these special cases, there are three test 
+cases. One covers the factor of safety, one covers the interslice normal force, 
+and one covers the interslice shear force.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingFs}] 
+	test-morgPrice\_nonConvergingFs
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 10), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{Fs} = 1000$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return a factor of safety of 
+	1000.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingG}] 
+	test-morgPrice\_nonConvergingG
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 10), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{G} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return an empty list of 
+	interslice normal forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceNonConvergingX}] 
+	test-morgPrice\_nonConvergingX
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: [(20, 25), (30, 10), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{X} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to not converge within MAX\_ITER iterations, and thus will meet the 
+	non-converging condition specified in the MIS. In this case, the 
+	specification states that the module should return an empty list of 
+	interslice shear forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousFs}] 
+	test-morgPrice\_spuriousFs
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{Fs} = 1000$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return a factor of safety of 1000.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousG}] 
+	test-morgPrice\_spuriousG
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{G} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return an empty list of interslice shear 
+	forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_MorgPriceSpuriousX}] 
+	test-morgPrice\_spuriousX
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}, except with $\varphi' = 1$ and $c' = 0.1$.
+	
+	Input: [(20, 25), (25, 20), (30, 15), (35, 14), (40, 15)].
+	
+	Output: $\textit{slip}^\prime$ such that the following predicate holds 
+	true:\\ 
+	$\textit{slip}^\prime.\textit{X} = []$.
+	
+	Test Case Derivation: The input slip surface was chosen as one that is 
+	known to have a factor of safety less than 0.5, and thus will meet the 
+	spurious condition specified in the MIS. In this case, the specification 
+	states that the module should return an empty list of interslice shear 
+	forces.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsubsection{Slice Property Calculation Module}
+The MIS shows that this module is responsible for calculating seven properties 
+for each slice of a slip surface. The calculations of some of these properties 
+are themselves dependent on conditions. Test cases have been selected such that 
+each possible calculation is covered by at least one test case. 
+
+\begin{table}[!h]
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabularx}{1.0\textwidth}{p{3cm} l X}
+		\toprule \textbf{Input} &
+		\textbf{Unit} & \textbf{Value}\\ \midrule
+		$\{\left(x_\text{slope},y_\text{slope}\right)\}$ & $\text{m}$ & \{(-10, 
+		10), (0, 20), (30, 20), (40, 25), (70, 25)\}\\
+		$\{\left(x_\text{wt},y_\text{wt}\right)\}$ & $\text{m}$ & \{(-10, 25),
+		(10, 25), (20, 10), (70, 10)\}\\
+		$\gamma$ & $\si{\newton\per\meter\cubed}$ & 15000 \\
+		$\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & 20000 \\
+		$\gamma_{\text{w}}$ & $\si{\newton\per\meter\cubed}$ & 10000 \\ 
+		\bottomrule
+	\end{tabularx}
+	\caption{Input to be used for slice property calculation test cases}
+	\label{SlicePropInputs}
+\end{table}
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWWet}] 
+	test-prop\_wWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(0, 15), (10, 10)].
+	
+	Output: $\textit{force.W}[0] = 1500000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies completely above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWWetDry}] 
+	test-prop\_wWetDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(20, 5), (30, 0)].
+	
+	Output: $\textit{force.W}[0] = 3000000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies partially below and partially 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyWDry}] 
+	test-prop\_wDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(20, 15), (30, 10)].
+	
+	Output: $\textit{force.W}[0] = 1125000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the weight of the input slice based on the specification in the 
+	MIS for the case where the water table lies completely below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUbWet}] 
+	test-prop\_ubWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(0, 15), (10, 10)].
+	
+	Output: $\textit{force.Ub}[0] = 1397542.4859$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUbDry}] 
+	test-prop\_ubDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(20, 15), (30, 10)].
+	
+	Output: $\textit{force.Ub}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUtWet}] 
+	test-prop\_utWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(-10, 5), (0, 10)].
+	
+	Output: $\textit{force.Ut}[0] = 1414213.5624$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	above the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyUtDry}] 
+	test-prop\_utDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(20, 15), (30, 10)].
+	
+	Output: $\textit{force.Ut}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface hydrostatic force on the input slice based on the 
+	specification in the MIS for the case where the water table lies completely 
+	below the slice.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHWet}] 
+	test-prop\_hWet
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(-10, 10), (0, 15), (10, 10)].
+	
+	Output: $\textit{force.H}[0] = 375000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the MIS for the case where the water 
+	table lies above the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHWetDry}] 
+	test-prop\_hWetDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(0, 15), (20, 5), (30, 0)].
+	
+	Output: $\textit{force.H}[0] = 125000$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the	MIS for the case where the water 
+	table crosses the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHDry}] 
+	test-prop\_hDry
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(0, 15), (20, 15), (30, 10)].
+	
+	Output: $\textit{force.H}[0] = 0$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the interslice water force on the first interface of the input 
+	slice based on the specification in the MIS for the case where the water 
+	table lies below the slice interface.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyAlpha}] 
+	test-prop\_alpha
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(20, 15), (30, 10)].
+	
+	Output: $\textit{angles.alpha}[0] = -0.46364760900$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the base angle of the input slice based on the specification in 
+	the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyBeta}] 
+	test-prop\_beta
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(-10, 10), (0, 10)].
+	
+	Output: $\textit{angles.beta}[0] = 0.78539816340$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the surface angle of the input slice based on the specification 
+	in the MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: 
+	\label{TC_PropertyHeight}] 
+	test-prop\_height
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{SlicePropInputs}. For any values not specified in 
+	Table~\ref{SlicePropInputs}, the input is based on Table~\ref{Inputs}.
+	
+	Input: [(0, 15), (10, 10)].
+	
+	Output: $\textit{heights}[0] = 7.5$.
+	
+	Test Case Derivation: The expected output was derived by manually 
+	calculating the height of the input slice based on the specification in the 
+	MIS.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsubsection{Output Module}
+The verification of the output is covered by \tcref{SVnV-TC_ValidOutFS} in the 
+System VnV Plan document, but this plan adds more tests for the case where the 
+verification of the output triggers an exception. The delivery of each output 
+is covered by 
+\tcref{SVnV-TC_OutInputs} to \tcref{SVnV-TC_OutShear} in the System VnV Plan 
+document. This document only adds test cases for items not covered by 
+the System VnV Plan document. The second test case here verifies that an output 
+file with the correct name is created.
+
+\begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InvalidFs}] 
+	test-verify\_output\_FsNegative
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: -1.0.
+	
+	Output: An exception is triggered.
+	
+	Test Case Derivation: It makes no physical sense for a factor of safety to 
+	be less than 0, so in accordance with the MIS, \progname{} should throw an 
+	exception.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_InvalidFs0}] 
+	test-verify\_output\_Fs0
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: 0.
+	
+	Output: An exception is triggered.
+	
+	Test Case Derivation: It makes no physical sense for a factor of safety to 
+	be 0, so in accordance with the MIS, \progname{} should throw an exception.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+	\item [TC\refstepcounter{utestnum}\theutestnum: \label{TC_OutputFile}] 
+	test-output\_file
+	
+	Type: Automatic
+	
+	Initial State: \textit{slope}, \textit{piez}, \textit{search}, and 
+	\textit{soln} state variables are loaded with the inputs from 
+	Table~\ref{Inputs}.
+	
+	Input: 1.0, [], [], [], ``outputtest.dat''.
+	
+	Output: A file called outputtest.out exists in the file system.
+	
+	Test Case Derivation: As stated in the MIS, the output module should write 
+	a file with extension ``.out'' and the name given as string input to the 
+	module.
+	
+	How test will be performed: Automated test on unit testing framework.
+	
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+
+Not applicable for any of the modules of \progname{}.
+
+\subsection{Traceability Between Test Cases and Modules}
+
+Table~\ref{TestModuleTrace} shows the traceability between test cases and 
+modules. Every module is covered by test cases except for those that were 
+declared out of scope in Section~\ref{Scope} of this document.
+
+\afterpage{
+\begin{landscape}
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		& \mref{MG-mHH}& \mref{MG-mControl}& \mref{MG-mInput}& 
+		\mref{MG-mGenAlg}& \mref{MG-mKinAdm} & \mref{MG-mSlipWeight}& 
+		\mref{MG-mSlipSlicer}& \mref{MG-mMorgPrice}& 
+		\mref{MG-mSliceProperty}& 
+		\mref{MG-mOutput}& \mref{MG-mArrayOps}& \mref{MG-mRandNum}& 
+		\mref{MG-mPlot} \\
+		\hline
+		\tcref{TC_InputSlope} - \tcref{TC_InputUnexpected}                 
+		& & & X& & & & & & & & & & \\ \hline
+		\tcref{TC_GenAlgXextMin} - \tcref{TC_GenAlgVertices} 
+		& & & & X& & & & & & & & &\\ \hline
+		\tcref{TC_KinAdmXDec} - \tcref{TC_KinAdmObtuOff}          
+		& & & & & X& & & & & & & & \\ \hline
+		\tcref{TC_WeighterSort} - \tcref{TC_WeighterNaN}       
+		& & & & & & X& & & & & & & \\ \hline
+		\tcref{TC_SlicerEvnslcSize} - \tcref{TC_SlicerNotEvnslcIndivisible}
+		& & & & & & & X& & & & & & \\ \hline
+		\tcref{TC_MorgPriceNonConvergingFs} - \tcref{TC_MorgPriceSpuriousX}   
+		& & & & & & & & X& & & & & \\ \hline
+		\tcref{TC_PropertyWWet} - \tcref{TC_PropertyHeight}
+		& & & & & & & & & X& & & & \\ \hline
+		\tcref{TC_InvalidFs} - \tcref{TC_OutputFile}
+		& & & & & & & & & & X& & & \\
+		\hline
+	\end{tabular}
+	\caption{Traceability matrix showing the connections between modules and 
+	test cases}
+	\label{TestModuleTrace}
+\end{table}
+\end{landscape}
+}
+
+\newpage
+
+\bibliographystyle{plainnat}
+
+\bibliography{../../../refs/References}
+
+\end{document}

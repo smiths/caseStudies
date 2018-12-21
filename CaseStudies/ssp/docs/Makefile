@@ -1,7 +1,7 @@
 # Makefile
 .PHONY:	SRS
 
-all:	SRS MG PS SVnVP #UVnVP SVnVR UVnVR MIS
+all:	SRS MG MIS PS SVnVP UVnVP VnVR
 
 SRS:
 	cd SRS && make && cd ..
@@ -9,8 +9,8 @@ SRS:
 MG:
 	cd Design/MG && make && cd ../..
 
-# MIS:
-# 	cd Design/MIS && make && cd ../..
+MIS:
+	cd Design/MIS && make && cd ../..
 
 PS:
 	cd ProblemStatement && make && cd ..
@@ -18,17 +18,14 @@ PS:
 SVnVP:
 	cd VnVPlan/SystVnVPlan && make && cd ../..
 
-# UVnVP:
-# 	cd VnVPlan/UnitVnVPlan && make && cd ../..
+UVnVP:
+	cd VnVPlan/UnitVnVPlan && make && cd ../..
 
-# SVnVR:
-# 	cd VnVReport/SystVnVReport && make && cd ../..
-
-# UVnVR:
-# 	cd VnVReport/UnitVnVReport && make && cd ../..
+VnVR:
+	cd VnVReport && make && cd ..
 
 
-clean:	cleanSRS cleanMG cleanPS cleanSVnVP #cleanUVnVP cleanSVnVR cleanUVnVR cleanMIS
+clean:	cleanSRS cleanMG cleanMIS cleanPS cleanSVnVP cleanUVnVP cleanVnVR
 
 cleanPS:
 	cd ProblemStatement && make clean && cd ..
@@ -39,17 +36,14 @@ cleanSRS:
 cleanMG:
 	cd Design/MG && make clean && cd ..
 
-# cleanMIS:
-# 	cd Design/MIS && make clean && cd ..
+cleanMIS:
+	cd Design/MIS && make clean && cd ..
 
 cleanSVnVP:
 	cd VnVPlan/SystVnVPlan && make clean && cd ..
 
-# cleanUVnVP:
-# 	cd VnVPlan/UnitVnVPlan && make clean && cd ..
+cleanUVnVP:
+	cd VnVPlan/UnitVnVPlan && make clean && cd ..
 
-# cleanSVnVR:
-# 	cd VnVReport/SystVnVReport && make clean && cd ..
-
-# cleanUVnVR:
-# 	cd VnVReport/UnitVnVReport && make clean && cd ..
+cleanSVnVR:
+	cd VnVReport && make clean && cd ..

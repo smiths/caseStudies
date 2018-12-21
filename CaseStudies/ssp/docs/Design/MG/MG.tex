@@ -64,6 +64,7 @@
 	11/01/2018 & 1.1 & Anticipated changes updates\\
 	11/05/2018 & 1.2 & Edits throughout for submission\\
 	11/13/2018 & 1.3 & Various minor updates based on feedback\\
+	12/09/2018 & 1.4 & Final minor updates for final submission\\
 	\bottomrule
 \end{tabularx}
 
@@ -185,10 +186,6 @@ design for change.
   of the initial input data.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_inputConstraints}:] The       
 constraints on the initial input data.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_output}:] The format
-  of the final output data.
-\item[AC\refstepcounter{acnum}\theacnum \label{AC_outputConstraints}:] The     
-constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_GenAlg}:] The algorithm
   for determining the critical slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Kin}:] The criteria for
@@ -201,6 +198,10 @@ constraints on the factor of safety and interslice forces.
 to calculate the factor of safety for a slip surface.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_PropSorter}:] The
   algorithm for calculating soil properties of and forces on individual slices.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_output}:] The format
+  of the final output data.
+\item[AC\refstepcounter{acnum}\theacnum \label{AC_outputConstraints}:] The     
+  constraints on the factor of safety and interslice forces.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Array}:] The
   implementation of the sequence data structure.
 \item[AC\refstepcounter{acnum}\theacnum \label{AC_Rand}:] The method
@@ -221,9 +222,9 @@ design will potentially need to be modified. Hence, it is not intended
 that these decisions will be changed.
 
 \begin{description}
-\item [\refstepcounter{ucnum}UC\theucnum \label{UC_IO}:] Input/Output
-  devices (Input: File and/or keyboard, Output: File, memory, and/or
-  screen).
+\item [\refstepcounter{ucnum}UC\theucnum \label{UC_IO}:] The input and output
+  capabilities of the hardware. The hardware should have files and/or keyboard 
+  for input, and files, memory, and/or a screen for output.
 \item [\refstepcounter{ucnum}UC\theucnum \label{UC_SSPGoal}:] The goals of 
 \progname{}, to determine a slope's critical slip surface and corresponding 
 factor of safety, will not change.
@@ -243,7 +244,6 @@ followed by a number.
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding
 \item [\refstepcounter{mnum} \mthemnum \label{mControl}:] Control
 \item [\refstepcounter{mnum} \mthemnum \label{mInput}:] Input
-\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mGenAlg}:] Genetic
   Algorithm
 \item [\refstepcounter{mnum} \mthemnum \label{mKinAdm}:] Kinematic
@@ -254,6 +254,7 @@ followed by a number.
   Morgenstern-Price Calculation
 \item [\refstepcounter{mnum} \mthemnum \label{mSliceProperty}:] Slice
   Property Calculation
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:] Output
 \item [\refstepcounter{mnum} \mthemnum \label{mArrayOps}:] Sequence Data 
 Structure
 \item [\refstepcounter{mnum} \mthemnum \label{mRandNum}:] Random Number     
@@ -277,13 +278,13 @@ implemented by the Operating System (OS).
 \multirow{8}{0.3\textwidth}{Behaviour-Hiding} &
 Control \\
 & Input \\
-& Output \\
 & Genetic Algorithm \\
 & Kinematic Admissibility \\
 & Slip Weighting \\
 & Slip Slicing \\
 & Morgenstern-Price Calculation \\
 & Slice Property Calculation \\
+& Output \\
 \midrule
 
 \multirow{3}{0.3\textwidth}{Software Decision} &
@@ -293,7 +294,7 @@ Sequence Data Structure \\
 \bottomrule
 
 \end{tabular}
-\caption{Module Hierarchy}
+\caption{Module hierarchy for \progname{}}
 \label{Table:Decomp}
 \end{table}
 
@@ -343,8 +344,8 @@ on the programming language selected.
 \begin{description}
 \item[Secrets:]The contents of the required behaviors.
 \item[Services:]Includes programs that provide externally visible
-  behaviors of the system as specified in the software requirements
-  specification (SRS) documents. This module serves as a communication
+  behaviors of the system as specified in the Software Requirements
+  Specification (SRS) document. This module serves as a communication
   layer between the hardware-hiding module and the software decision
   module. The programs in this module will need to change if there are
   changes in the SRS.
@@ -375,18 +376,6 @@ on the programming language selected.
 \item[Implemented By:] \progname
 \end{description}
 
-\subsubsection{Output (\mref{mOutput})}
-
-\begin{description}
-\item[Secrets:] The format and structure of the output data.
-\item[Services:] Outputs the results of the calculations, including
-  the factor of safety for the critical slip surface and a plot of the critical
-  slip surface on the slope geometry. Verifies that the output meets physical 
-  constraints. Also outputs input values.
-\item[Implemented By:] \progname
-\end{description} 
-
-
 \subsubsection{Genetic Algorithm (\mref{mGenAlg})}
 
 \begin{description}
@@ -411,8 +400,9 @@ sharp angles, points outside of the soil bed, or downward concavity.
 \subsubsection{Slip Weighting (\mref{mSlipWeight})}
 
 \begin{description}
-\item[Secrets:] The criteria for weighting each slip surface in a given set of 
-slip surfaces based on how closely they resemble the critical slip surface.
+\item[Secrets:] The algorithm for assigning weights to each slip surface in a 
+given set of slip surfaces based on how closely they resemble the critical slip 
+surface, for the genetic algorithm to use when generating new slip surfaces.
 \item[Services:] Assigns weights to each slip surface in a given set of slip 
 surfaces based on their factors of safety. A slip surface with a lower factor 
 of safety will have a higher weight as it is closer to the critical slip 
@@ -423,22 +413,22 @@ surface.
 \subsubsection{Slip Slicing (\mref{mSlipSlicer})}
 
 \begin{description}
-	\item[Secrets:] Algorithm to determine the coordinates of where the
-	slip surface interslice nodes occur.
-	\item[Services:] When preparing a slip surface for analysis by the
-	Morgenstern-Price Module (\mref{mMorgPrice}) the x-coordinates defining the 
-	boundaries of the slices are identified and stored in a vector.
+	\item[Secrets:] Algorithm for slicing a slip surface so that it is defined 
+	by a greater number of coordinates.
+	\item[Services:] Prepares a slip surface for analysis by the
+	Morgenstern-Price Calculation Module (\mref{mMorgPrice}) by dividing the 
+	slip surface into a greater number of coordinates.
 	\item[Implemented By:] \progname
 \end{description} 
 
 \subsubsection{Morgenstern-Price Calculation (\mref{mMorgPrice})}
 
 \begin{description}
-\item[Secrets:] The algorithm for calculating the factor of safety of a given 
-slip surface.
-\item[Services:] Calculates the factor of safety of a given slip
-  surface, through implementation of a Morgenstern-Price slope
-  stability analysis method.
+\item[Secrets:] The algorithm for calculating the factor of safety and 
+interslice forces of a given slip surface.
+\item[Services:] Calculates the factor of safety and interslice normal and 
+shear forces of a given slip surface, through implementation of a 
+Morgenstern-Price slope stability analysis method.
 \item[Implemented By:] \progname
 \end{description} 
 
@@ -449,6 +439,18 @@ acting on the slice.
 \item[Services:] Calculates the weight, hydrostatic forces, and interslice 
 water forces of each slice.
 \item[Implemented By:] \progname
+\end{description} 
+
+\subsubsection{Output (\mref{mOutput})}
+
+\begin{description}
+	\item[Secrets:] The format and structure of the output data.
+	\item[Services:] Outputs the results of the calculations, including
+	the factor of safety for the critical slip surface and a plot of the 
+	critical
+	slip surface on the slope geometry. Verifies that the output meets physical 
+	constraints. Also outputs input values.
+	\item[Implemented By:] \progname
 \end{description} 
 
 
@@ -542,7 +544,7 @@ to this decision, \mref{mMorgPrice} is the only module associated with
 \mref{mPlot}\\
 \bottomrule
 \end{tabular}
-\caption{Trace Between Requirements and Modules}
+\caption{Traceability between requirements and modules}
 \label{Table:Req}
 \end{table}
 
@@ -556,20 +558,20 @@ to this decision, \mref{mMorgPrice} is the only module associated with
 \acref{AC_Control} & \mref{mControl}\\
 \acref{AC_input} & \mref{mInput}\\
 \acref{AC_inputConstraints} & \mref{mInput}\\
-\acref{AC_output}& \mref{mOutput}\\
-\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_GenAlg}& \mref{mGenAlg}\\
 \acref{AC_Kin}& \mref{mKinAdm}\\
 \acref{AC_FSweight}& \mref{mSlipWeight}\\
 \acref{AC_Slicer} & \mref{mSlipSlicer}\\
 \acref{AC_CalcFS} & \mref{mMorgPrice}\\
 \acref{AC_PropSorter}& \mref{mSliceProperty}\\
+\acref{AC_output}& \mref{mOutput}\\
+\acref{AC_outputConstraints}& \mref{mOutput}\\
 \acref{AC_Array} & \mref{mArrayOps}\\
 \acref{AC_Rand} & \mref{mRandNum}\\
 \acref{AC_Plot} & \mref{mPlot}\\
 \bottomrule
 \end{tabular}
-\caption{Trace Between Anticipated Changes and Modules}
+\caption{Traceability between anticipated changes and modules}
 \label{Table:AC}
 \end{table}
 
@@ -593,7 +595,7 @@ modules from the lower levels.
 {
  \includegraphics[width=1.1\textwidth]{UseHierarchyDiagram.png}
 }
-\caption{Use Hierarchy Diagram}
+\caption{Use hierarchy diagram}
 \label{Fig_Use}
 \end{center}
 \end{figure}
@@ -603,6 +605,10 @@ modules from the lower levels.
   define new data types for the tuples that define the given slope stability
   problem. We definitely shouldn't do it now, but if things get complicated
   looking, we can add it later.}
+
+\bmac{This was discussed further in the MIS, we decided to keep types local to 
+each module}.
+
 ~\newpage
 \bibliographystyle {plainnat}
 \bibliography {../../../refs/References}
