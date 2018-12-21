@@ -73,7 +73,8 @@ This document describes the unit verification and validation (V\&V) plan for \pr
 This section details the summary of what is being tested in this document, the objectives of this document and references for this document. \progname is a 2D rigid body physics library that can be used to simulate the interaction between rigid bodies.This software is able to simulate movement, rotation and collision of rigid bodies.
 
 \subsection{Scope}
-All modules will be verified using the testcases listed in this document.
+The following modules will be verified using the testcases listed in this document:
+Space, Shape, Body, Vec2, Collision Solver. 
 
 \section{Plan}
 	
@@ -100,68 +101,84 @@ The test cases discussed in this section are based on the Module Interface Speci
 \subsubsection{Body Module}
 		
 \paragraph{}
-Body module is responsible for storing the physical properties of an object such as mass, position, rotation properties, velocity, e.t.c and provides operations on rigid bodies such as setting the mass, moment, applying force e.t.c.
+Body module is responsible for storing the physical properties of an object such as mass, position, rotation properties, velocity, e.t.c\ and provides operations on rigid bodies such as setting the mass, moment, applying force e.t.c.
 \begin{enumerate}
 	
 
-\item{UTC1} {: Validate apply\_force1 \\}
+\item{UTC1} {: test\_body\_apply\_force1 \\}
 
 Type: Automatic.
 					
-Initial State: Initial force on a body is Vec2(0.0, 0.0)
+Initial State: 
 					
-Input: b.apply\_force(Vec2(10.0, 6.0))
+Input: \\
+shp = Box(Vec2(0, 0), Vec2(100, 100))\\
+mass = 1000\\
+body = Body(Vec2(0, 0), mass, 100, shp)\\
+force = Vec2(1000,0)\\
+body.update(1/60)\\
+expectedAccel = force/mass\\
 					
-Output: New total force applied to body is Vec2(10.0, 6.0)
-					
+Output: body.accel == expectedAccel\\	
 How test will be performed: PyTest\\ 
 Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 					
-\item{UTC2}{: Validate apply\_force2\\}
+\item{UTC2}{: test\_body\_apply\_torque\\}
 
 Type: Automatic
 					
-Initial State: Vec2(10.0, 6.0)
+Initial State: 
 					
-Input: b.apply\_force (Vec2(-20.0, 2.0))
+Input: \\
+shp = Box(Vec2(0, 0), Vec2(100, 100))\\
+inertia = 1000\\
+body = Body(Vec2(0, 0), 100, inertia, shp)\\
+torque = 1000\\
+body.update(1/60)\\
+expectedAngularAccel = torque/inertia\\
 					
-Output: New total force is Vec2(-10.0, 8.0)
+Output: body.angularAccel == expectedAngularAccel
 Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 
-\item{UTC3}{: Validate apply\_force3\\}
-
-Type: Automatic
-
-Initial State: Vec2(-2.0, -1.0)
-
-Input: b.apply\_force (Vec2(-5.0, -8.0))
-
-Output: New total force is Vec2(-7.0, -9.0)
-					
-How test will be performed: PyTest\\
-Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
-
-\item{UTC4}{: Validate apply\_torque\\}
-
-Type: Automatic
-
-Initial State: 0.0
-
-Input: apply\_torque(100.0)
-
-Output: self.torque=100.0
-
-How test will be performed: PyTest
-
-\item{UTC5}{: Validate set\_space\\}
+%\item{UTC3}{: Validate apply\_force3\\}
+%
+%Type: Automatic
+%
+%Initial State: Vec2(-2.0, -1.0)
+%
+%Input: b.apply\_force (Vec2(-5.0, -8.0))
+%
+%Output: New total force is Vec2(-7.0, -9.0)
+%					
+%How test will be performed: PyTest\\
+%Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
+%
+%\item{UTC4}{: Validate apply\_torque\\}
+%
+%Type: Automatic
+%
+%Initial State: 0.0
+%
+%Input: apply\_torque(100.0)
+%
+%Output: self.torque=100.0
+%
+%How test will be performed: PyTest
+%
+\item{UTC5}{: test\_space\_set\_gravity(space)\\}
 
 Type: Automatic
 
 Initial State: 
 
-Input: body.set\_space(space)
+Input: \\
+shp = Box(Vec2(0,0), Vec2(100,100))\\
+body = Body(Vec2(0, 0), 100, 100, shp)\\
+space = Space()\\
+gravity = Vec2(0,9800)\\
+time = 2\\
 
-Output: Expected result of(space is body.space): True
+Output: body.accel == expectedAccel\\
 
 How test will be performed: PyTest\\
 
@@ -179,7 +196,7 @@ Output: body = Body(Vec2(250,0), 1000, 100, shape, 0, Body.DYNAMIC,1), 1 body cr
 
 How test will be performed: PyTest\\
 
-\item{UTC7}{: Validate - Initialize static body\\}
+\item{UTC7}{: Validate - Initialize static body\\} 
 This testcase is to initialize a body object.
 A body object is initialized with these parameters:\\ 
 body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= STATIC, restitution\_ = 0) to create and initialize a body.\\
@@ -193,7 +210,7 @@ Output: body = Body(Vec2(250,0), 1000, 100, polyShape, 0, Body.STATIC,1); 1 body
 
 How test will be performed: PyTest\\
 
-\item{UTC8}{: Validate - Initialize multiple bodies\\}
+\item{UTC8}{: Validate - Initialize multiple bodies\\} 
 This testcase is to initialize multiple body objects.
 A body object is initialized with these parameters:\\ 
 body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= DYNAMIC, restitution\_ = 0) to create and initialize a body.\\
@@ -247,8 +264,6 @@ Output: The table below displays the position and time of a rigid body when a fo
 How test will be performed: PyTest\\
 
 Ref. source: \url{https://calculator.tutorvista.com/physics/535/velocity-calculator.html}
-
-
 \end{enumerate}
 
 \subsubsection{Vector Module}
@@ -257,7 +272,7 @@ Ref. source: \url{https://calculator.tutorvista.com/physics/535/velocity-calcula
 Vector module provides operations such as addition, scalar and vector multiplication, dot and cross products e.t.c.
 \begin{enumerate}
 	
-	\item{UTC10}{: Validate vector addition \\}
+	\item{UTC10}{: test\_vec2\_add - (vector addition) \\}
 	
 	Type: Automatic.
 	
@@ -270,19 +285,19 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest \\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC11}{: Validate vector subtraction1\\}
+	\item{UTC11}{: test\_vec2\_sub1 - (vector subtraction)\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: Vec2(2.0 ,5.0 ) - Vec2(1.0 ,2.0)
+	Input: Vec2(1.0 ,2.0 ) - Vec2(2.0 ,4.0)
 	
-	Output: Vec2(1.0, 3.0)\\
+	Output: Vec2(-1.0, -2.0)\\
 	How will test be performed: PyTest\\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC12}{: Validate vector subtraction2\\}
+	\item{UTC12}{: test\_vec2\_sub2 - (vector subtraction)\\}
 	
 	Type: Automatic
 	
@@ -294,7 +309,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How will test be performed: PyTest\\
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 	
-	\item{UTC13}{: Validate scalar multiplication1\\}
+	\item{UTC13}{: test\_vec2\_mult} - (scalar multiplication)\\
 	
 	Type: Automatic
 	
@@ -307,7 +322,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest
 	Ref. source: \url{https://onlinemschool.com/math/assistance/vector/multiply3/}
 	
-	\item{UTC14}{: Validate scalar multiplication2\\}
+	\item{UTC14}{: test\_vec2\_mult2 - (scalar multiplication2)\\}
 	
 	Type: Automatic
 	
@@ -320,7 +335,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	How test will be performed: PyTest
 	Ref. source:\url{https://onlinemschool.com/math/assistance/vector/multiply3/}
 	
-	\item{UTC15}{: Validate scalar division1\\}
+	\item{UTC15}{: test\_vec2\_div\\}
 	
 	Type: Automatic
 	
@@ -332,7 +347,7 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	How test will be performed: PyTest
 	
-	\item{UTC12}{: Validate scalar division2\\}
+	\item{UTC12}{: test\_vec2\_div2\\}
 	
 	Type: Automatic
 	
@@ -344,20 +359,20 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	How test will be performed: PyTest
 	
-	\item{UTC16}{: Validate vector magnitude1\\}
+	\item{UTC16}{: test\_vec2\_mag1 - (vector magnitude)\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: Velocity = Vec(2.0, 0.0)
+	Input: Vec(0, 4.0)
 	
 	Output: magnitude = V.mag() = 2.0
 	
 	How test will be performed: PyTest\\
 	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
 	
-	\item{UTC17}{: Validate vector magnitude2\\}
+	\item{UTC17}{: test\_vec2\_mag2 - (vector magnitude)\\}
 	
 	Type: Automatic
 	
@@ -365,17 +380,18 @@ Vector module provides operations such as addition, scalar and vector multiplica
 	
 	Input: Velocity = Vec(-2.0, -4.0)
 	
-	Output: magnitude = V.mag() = -5.65
+	Output: magnitude = V.mag() = 4.47
 	
 	How test will be performed: PyTest\\
 	Ref: \url{https://onlinemschool.com/math/assistance/vector/length/}
-	\item{UTC18}{: Validate vector dot product\\}
+	
+	\item{UTC18}{: test\_vec2\_dot1 - (vector dot product)\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: Vec2.dot(Vec2(1.0,2.0), Vec2(2.0,1.0))
+	Input: vec2.dot(vec2(1.0,2.0), vec2(2.0,1.0))
 	
 	Output: magnitude = 4.0
 	
@@ -392,29 +408,31 @@ Shape module is responsible for storing the surface properties of an object such
 \begin{enumerate}
 	
 	
-	\item{UTC19} {: Validate set\_angle \\}
+	\item{UTC19} {: test\_shape\_set\_angle \\}
 	
 	Type: Automatic.
 	
 	Initial State: 
 	
-	Input: shape.set\_angle(45)
+	Input: shp = Box(Vec2(0,0), vec2(100, 100); 
+	             shp.set\_angle(45)\\
 	
-	Output: self.angle = 45
+	Output: shp.angle = 45
 	
 	How test will be performed: PyTest 
 	
-	\item{UTC20}{: Validate set\_position\\}
+	\item{UTC20}{: test\_shape\_set\_pos\\}
 	
 	Type: Automatic
 	
 	Initial State: 
 	
-	Input: shape.set\_pos(Vec2(2,2))
+	Input: shp = Box(Vec2(0,0), vec2(100, 100);
+	             shp.set\_pos(Vec2(2,2))\\
 	
 	Output: Vec2(2,2)
 	
-	\item{UTC21}{: Validate get\_vertices\\}
+	\item{UTC21}{: test\_get\_vertices\\}
 	
 	Type: Automatic
 	
@@ -467,7 +485,7 @@ This module is responsible for shape to shape collision detection, response and 
 \begin{enumerate}
 	
 	
-	\item{UTC24} {: Validate \_is\_intersecting\_with\_True \\}
+	\item{UTC24} {: test\_CollisionHandler\_is\_intersecting\_with\\}
 This testcase checks for collision i.e. if points on rigid bodies are intersecting.\\	
 	Type: Automatic.
 	
@@ -476,11 +494,10 @@ This testcase checks for collision i.e. if points on rigid bodies are intersecti
 	Input: \\
 	shape1 = Box(Vec2(0,0), Vec2(100,100), 0)\\
 	body1 = Body(Vec2(250,0), 1000, 100, shape1, 0, Body.DYNAMIC,0)\\
-	
 	shape2 = Box(Vec2(0,0), Vec2(100,200), 0)\\
 	body2 = Body(Vec2(300,50), 1000, 100, shape2, 0, Body.DYNAMIC,0)\\
 	
-	Output: \_is\_intersecting\_with(body1, body2): True
+	Output: (body1, body2) -collision between body1 and body2
 	
 	How test will be performed: PyTest 
 	
@@ -493,11 +510,10 @@ This testcase checks for collision i.e. if points on rigid bodies are intersecti
 	Input: \\
 	shape1 = Box(Vec2(0,0), Vec2(100,100), 0)\\
 	body1 =  Body(Vec2(250,0), 1000, 100, shape1, 0, Body.DYNAMIC,0)\\
-	
 	shape2 = Box(Vec2(10,0), Vec2(300,200), 0)\\
 	body2 = Body(Vec2(300,50), 1000, 100, shape2, 0, Body.DYNAMIC,0)\\
 	
-	Output: \_is\_intersecting\_with(body1, body2): False
+	Output: () -(no collision)
 	
 	How test will be performed: PyTest 
 	
@@ -511,7 +527,7 @@ Non-Functional testing will not be required for unit testing. This will be cover
 
 \url{https://github.com/smiths/caseStudies/blob/gamephy_SysVnVPlan/CaseStudies/gamephys/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf.pdf}
 
-\subsection{Traceability Between Test Cases and Requirements}
+\subsection{Traceability Between Test Cases and Modules}
 
 The table below shows the traceability map between test cases and 
 
@@ -530,7 +546,7 @@ modules.
 		\hline 
 		
 	
-		UTC1-UTC9& Body Module\\ \hline
+		UTC1-UTC2, UTC5-UTC9& Body Module\\ \hline
 		
 		UTC10 - UTC18& Vector  Module\\ \hline
 		
