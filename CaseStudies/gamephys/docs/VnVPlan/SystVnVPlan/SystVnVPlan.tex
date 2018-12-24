@@ -92,9 +92,11 @@
 
 \input{../../Comments}
 
+\newcommand{\progname}{Tamias2D}
+
 \begin{document}
 
-\title{TamiasMini2D: System Verification and Validation Plan} 
+\title{\progname: System Verification and Validation Plan} 
 \author{Oluwaseun Owojaiye}
 \date{\today}
 	
@@ -107,9 +109,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-2018-11-01 & 1.1 & Updates based on document review and issue tracker\\
 2018-10-15 & 1.0 & Initial draft\\
-%Date 2 & 1.1 & Notes\\
+2018-11-01 & 1.1 & Updates based on document review and issue tracker\\
+2018-12-22 & 1.2 & Updated testcases\\
 \bottomrule
 \end{tabularx}
 
@@ -180,7 +182,7 @@
 
 \pagenumbering{arabic}
 
-This document provides a high-level verification and validation plan for TamiasMini2D - a 2D rigid body physics library. This document is based on the System Requirement Specification(SRS) document located in the following project repository link: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}. It discusses the verification and validation requirements for TamiasMini2D, and describes the test strategy and methods that will be used to evaluate the software. The verification and validation of the software utilizes review, analysis, and testing method to determine whether a software product complies with the specifed requirements. These requirements include both functional and non-functional.
+This document provides a high-level verification and validation plan for \progname - a 2D Rigid Body Game Physics Library. This document is based on the System Requirement Specification(SRS) document located in the following project repository link: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}. It discusses the verification and validation requirements for \progname, and describes the test strategies and methods that will be used to evaluate the software. The verification and validation of the software utilizes review, analysis, and testing method to determine whether the software product complies with the specifed requirements. These requirements include both functional and non-functional.
 %This document ... \wss{provide an introductory blurb and roadmap of the
  % Verification and Validation plan}
 
@@ -190,12 +192,12 @@ This document provides a high-level verification and validation plan for TamiasM
 \section{General Information}
 
 \subsection{Summary}
-The software being tested is TamiasMini2D. It is a 2D rigid body physics library designed to simulate the interaction between rigid bodies. Since physics libraries are an important part of video game development, game developers will be able to make use of this library in their products.
+The software being tested is \progname. It is a 2D rigid body game physics library designed to simulate the interaction between rigid bodies in the game space. It will simulate the movement of objects in space, the behavoiur of objects when there is a collision and it tracks a history of the velocity, position and orientation of each object. Since physics libraries are an important part of video game development, game developers would be able to make use of \progname in their products. 
 %\wss{Say what software is being tested.  Give its name and a brief %overview of its general functions.}
 
 \subsection{Objectives}
 
-The purpose of verification and validation activities are to find bugs and defects in the TamiasMini2D physics library software and also to determine if it has met all the required functionality. It is also to verify that software meets the required standard and that the end product conforms with the software requirements based on the SRS. The objectives of System VnV activities for TamiasMini2D are to:
+The purpose of verification and validation activitiy is to find bugs and defects in the TamiasMini2D software and also to determine if it has met all the required functionality. It is also to verify that the software meets the required standard and the end product conforms with the software requirements based on the SRS. The objectives of System VnV activities for \progname are to:
   \begin{itemize}
 	\item Build confidence in software correctness and performance.
 	\item Verify the maintainability of the software, based on the product's ability to be easily enhanced, modified
@@ -210,9 +212,9 @@ The purpose of verification and validation activities are to find bugs and defec
 \subsection{References}
 
 \wss{You should introduce the references, not just include a link.}
-
+\olu{updated}
 \begin{itemize}
-	\item[1.] \url {https://github.com/smiths/caseStudies/blob/GamePhy_Olu/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+	\item[1.] Software Requirement Specification for \progname : \url {https://github.com/smiths/caseStudies/blob/gamephy_finaldoc/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
 \end{itemize}
 
 %\wss{Reference relevant documentation.  This will definitely include your SRS}
@@ -224,45 +226,33 @@ The verification and validation team consists of a one member team: Olu Owojaiye
 %\wss{Probably just you.  :-)}
 
 \subsection{SRS Verification Plan}
-The SRS for the project will be reviewed by Dr. Smith \wss{\LaTeX{} has a rule
-  that it inserts two spaces at the end of a sentence.  It detects a sentence as
-  a period followed by a capital letter.  This comes up, for instance, with
-  Dr. Smith.  Since the period after Dr.\ isn't actually the end of a sentence,
-  you need to tell \LaTeX{} to insert one space.  You do this either by Dr.\
-  Smith (if you don't mind a line-break between Dr.\ and Smith), or Dr.~Spencer
-  Smith (to force \LaTeX{} to not insert a line break).} and coursemates and
-feedback will be provided. Some SRS feedback for this project have been provided
-and addressed using github issue tracker. Also once the software has been
-implemented, the SRS will be reviewed to ensure that software has met all the
-specified requirements and more feedback will be provided via github issue
-tracker.
+The SRS for the project will be reviewed by Dr.\ Smith \wss{\LaTeX{} has a rule that it inserts two spaces at the end of a sentence.  It detects a sentence as a period followed by a capital letter.  This comes up, for instance, with Dr. Smith.  Since the period after Dr.\ isn't actually the end of a sentence, you need to tell \LaTeX{} to insert one space.  You do this either by Dr.\ Smith (if you don't mind a line-break between Dr.\ and Smith), or Dr.~Spencer Smith (to force \LaTeX{} to not insert a line break).} and coursemate Karol Serkis;
+feedback will be provided. Some SRS feedback for this project have already been provided and addressed using github issue tracker. Once the software has been implemented, the SRS will be reviewed to ensure that software meets all the specified requirements and more feedback will be provided via github issue tracker.
 
-\wss{You can be specific about which classmates are going to review your
-  documents; the specific assignments are in Repos.xlsx.}
+\wss{You can be specific about which classmates are going to review your documents; the specific assignments are in Repos.xlsx.}
+\olu{updated}
 
 %\wss{List any approaches you intend to use for SRS verification. This may %just be ad hoc feedback from reviewers, like your classmates, or you may %have something more rigorous/systematic in mind..}
 
 \subsection{Design Verification Plan}
 To ensure that the Design Specification has been properly specified and meets
-software requirements, Dr. Smith and my coursemate(s) will be verifying the
-software design. The Module Guide and Module Interface Specification will
+software requirements, Dr. Smith and coursemates Robert White and Hanae Zlitni will be verifying the software design. The Module Guide and Module Interface Specification located at \url{https://github.com/smiths/caseStudies/tree/gamephy_MG/CaseStudies/gamephys/docs/Design/MG} and \url{https://github.com/smiths/caseStudies/tree/gamephy_MG/CaseStudies/gamephys/docs/Design/MIS} respectively will
 contain information about the software design. Feedback is expected to be
-provided by reviewers via github issue tracker. \wss{You should have links to MG
-  and MIS.}
+provided by reviewers via github issue tracker. \wss{You should have links to MG and MIS.} \olu{updated with links}
 %\wss{Plans for design verification}
 
 \subsection{Implementation Verification Plan}
- The implementation of TamiasMini2D will involve inspection of the software to ensure that all the required features have been implemented successfully and are functional. Once the development activities are completed, Dr. Smith and some of CAS741 coursemates will perform the implementation verification activities. The software will be installed by the testers and system test cases specified in Section 5 will be run. Reviewers are expected to verify both functional and non-functional requirements specified below. Exploratory testing can also be performed by testers.
- Any implementation verification issues will be reported and tracked via github issue tracker and these issues will be resolved in order of severity by myself. After the issues raised have been fixed, they will be sent back to the reviewer(s) for re-verification.
+ The implementation of \progname{} will involve inspection of the software to ensure that all the required features have been implemented successfully and are functional. Once the development activities are completed, Dr.\ Smith and one of my CAS741 coursemate will be assigned to perform the implementation verification activities. The software will be installed by the reviewer and system test cases specified in Section 5 will be executed as well as unit test cases located at \url{https://github.com/smiths/caseStudies/blob/gamephy_UnitVnV/CaseStudies/gamephys/docs/VnVPlan/UnitVnVPlan/UnitVnVPlan.pdf}. Reviewers are expected to verify both functional and non-functional requirements specified below except otherwise stated. Exploratory testing can also be performed by testers. Any implementation verification issues will be reported and tracked via gitHub issue tracker and these issues will be resolved in order of severity by myself. After the issues raised have been fixed, they will be sent back to the reviewer(s) for re-verification.
 %\wss{You should at least point to the tests listed in this document and %the unit testing plan.}
 
 \subsection{Software Validation Plan}
 
-	There is currently no software validation plan for TamiasMini2D.
+\progname{} will be validated at a future phase with existing physics library Pymunk. 
 %\wss{If there is any external data that can be used for validation, you %should point to it here.  If there are no plans for validation, you %should state that here.}
 
 \wss{You should the reason why
   there is no software validation plan.}
+\olu{updated}
 
 \section{System Test Description}
 	
@@ -277,44 +267,57 @@ provided by reviewers via github issue tracker. \wss{You should have links to MG
 
 \begin{enumerate}
 
-\item{TC1: Static rigid body velocity-position calculation\\}
-
-Description: Calculate the position and velocity of a 2D rigid body that is static after t secs. Gravity is not applied. The object does not move, hence velocity and position does not change based on IM1. Varying positive input parameters can be used in TC1 for each of the parameters
+\item{TC1: test\_system\_horizontal\_translation\_noforce()\\}
+Description: This test computes the position and velocity of a 2D rigid body that is static over 4 secs. Gravity is not applied. The object does not move, hence velocity and position do not change. Varying positive input values can be used in TC1 for each of the parameters
 
 Control: Automatic
 					
 Initial State: NA
 					
-Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 0) ;This is the initial position of body - (x,y) coordinate position\\
-       \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
-       \hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 0\\
-       \hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 10\\
-       \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0 (acceleration due to gravity does not apply on a static body)\\
+Input:\\
+      \hspace*{1.3cm} $\mathbf{p_i}$$\mathbf{(t_0)}$ = (50, 50) ;This  is the initial position of body - (x,y) coordinate position\\
+       \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0, 0\\
+       \hspace*{1.3cm}$\mathbf{F}$$\mathbf{}$ = 0, 0\\
+       \hspace*{1.3cm}$\mathbf{m}$$ \mathbf{}$ = 10\\
+       \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0 (acceleration due to gravity does not apply on a static body)\\			
+Output:\\  
+	     $\mathbf{p_i}$$\mathbf{(t_1)}$ = (50, 50);
+         $\mathbf{v_i}$$\mathbf{(t_1)}$ = (0, 0)\\
+         $\mathbf{p_i}$$\mathbf{(t_2)}$ = (50, 50);
+         $\mathbf{v_i}$$\mathbf{(t_2)}$ = (0, 0);\\
+         $\mathbf{p_i}$$\mathbf{(t_3)}$ = (50, 50);
+         $\mathbf{v_i}$$\mathbf{(t_3)}$ = (0, 0);\\
+         $\mathbf{p_i}$$\mathbf{(t_4)}$ = (50, 50);
+         $\mathbf{v_i}$$\mathbf{(t_4)}$ = (0, 0);\\    
 					
-Output:  $\mathbf{p_i}$$\mathbf{(t)}$ = (0, 0);
-         $\mathbf{v_i}$$\mathbf{(t)}$ = (0, 0); after t secs where t= 3 
+How test will be performed: Unit testing with Pytest
+Ref. source: \url{https://www.calculatorsoup.com/calculators/physics/displacement_v_a_t.php}
 					
-How test will be performed: Unit testing with PyUnit
-					
-\item{TC2: Dynamic 2D rigid body falling from a height velocity-position calculation\\}
+\item{TC2: test\_system\_horizontal\_translation\_right()\\}
 
-Description: Calculation of the new position and velocity of a dynamic body. Force of gravity is in effect and we apply a horizontal force F. The new position and velocity is calculated. This test can be applied to a set of rigid bodies falling from a height at the same different time t.
+Description: This test computes the position and velocity of a 2D rigid body moving at constant acceleration to the right over 4 secs. Gravity does not apply.
  
 Control: Automatic
 					
 Initial State: NA
 					
-Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (20, 20) this is the (x,y) coordinate position\\
-	   \hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
-	   \hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 10\\
-	   \hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 100\\
-	   \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity)\\
-	   
+Input:\\ 
+		$\mathbf{p_i}$$\mathbf{(t_0)}$ = (20, 20) this is the (x,y) coordinate position\\
+	   $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+	   $\mathbf{F}$$\mathbf{}$ = (100, 0)\\
+	   $\mathbf{m}$$ \mathbf{}$ = 10\\ 	   
 	  
-Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (20.9, 20.882);
-		$\mathbf{v_i}$$\mathbf{(t)}$ = (0.3, 0.294); after t secs, where t= 3 
+Output:\\
+	    $\mathbf{p_i}$$\mathbf{(t_1)}$ = (22.84 20.00);
+		$\mathbf{v_i}$$\mathbf{(t_1)}$ = (10.50, 0.0)\\ 
+		$\mathbf{p_i}$$\mathbf{(t_2)}$ = (31.02, 20.0);
+		$\mathbf{v_i}$$\mathbf{(t_2)}$ = (20.83, 0.0)\\ 
+		$\mathbf{p_i}$$\mathbf{(t_3)}$ = (44.54, 20.00);
+		$\mathbf{v_i}$$\mathbf{(t_3)}$ = (31.16, 0.0)\\
+		$\mathbf{p_i}$$\mathbf{(t_4)}$ = (60.66, 20.00);
+		$\mathbf{v_i}$$\mathbf{(t_4)}$ = (40.16, 0.0)\\  
 					
-How test will be performed: Unit testing with PyUnit
+How test will be performed: Unit testing with pytest
 
 \wss{Where did the answers come from?  The reader won't be able to verify what
   you are saying.  You are verifying for one point in time.  You can accomplish
@@ -322,12 +325,135 @@ How test will be performed: Unit testing with PyUnit
   provide the closed form solutions for position change under constant
   acceleration.  You then get can run the simulation until the position is zero
   and verify that the positions are correct.  To get one number for your test
-  you can use the Euclidean (or other) norm of your vector and then divide by
-  the norm of the expected result.}
+  you can use the Euclidean (or other) norm of your vector and then divide by the norm of the expected result.}
+\olu{updated result with history of velocity and position over a period of time}
 
-\item{TC3: Projectile motion of dynamic 2D rigid velocity-position calculation\\}
+\item{TC3: test\_system\_horizontal\_translation\_left()\\}
 
-Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified in input. In horizontal direction, velocity is constant.
+Description: This test computes the position and velocity of a 2D rigid body moving at constant acceleration to the left over 4 secs. Gravity does not apply.
+
+Control: Automatic
+
+Initial State: NA
+
+Input:\\ 
+$\mathbf{p_i}$$\mathbf{(t_0)}$ = (950, 50) this is the (x,y) coordinate position\\
+$\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+$\mathbf{F}$$\mathbf{}$ = (-100, 0)\\
+$\mathbf{m}$$ \mathbf{}$ = 10\\ 	   
+
+Output:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (947.16 50.00);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (-10.50, 0.0)\\ 
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (938.98, 50.0);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (-20.83, 0.0)\\ 
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (925.46, 50.00);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (-31.16, 0.0)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (909.66, 50.00);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (-40.16, 0.0)\\  
+
+How test will be performed: Unit testing with pytest
+
+\item{TC4: test\_system\_free\_falling\\}
+
+Description: This test computes the position and velocity of bodies falling from height over time. Force of gravity is in effect. The position and velocity is calculated over time. 
+
+Control: Automatic
+
+Initial State: NA
+
+Input: \\
+Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (100.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (300.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+Body3: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (600.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0\\
+$\mathbf{m}$$ \mathbf{}$ = 100.0;
+$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity in space)\\
+Mass(m) for each body is 100\\
+
+Output:\\
+Body1:\\
+ $\mathbf{p_i}$$\mathbf{(t_1)}$ = (100.0, 52.78);
+ $\mathbf{v_i}$$\mathbf{(t_1)}$ = (0.0, 10.289)\\
+ $\mathbf{p_i}$$\mathbf{(t_2)}$ = (100.0, 60.80);
+ $\mathbf{v_i}$$\mathbf{(t_2)}$ = (0.0, 20.41)\\
+ $\mathbf{p_i}$$\mathbf{(t_3)}$ = (100.0, 74.05);
+ $\mathbf{v_i}$$\mathbf{(t_3)}$ = (0.0, 30.54)\\
+ $\mathbf{p_i}$$\mathbf{(t_4)}$ = (100.0, 74.05);
+ $\mathbf{v_i}$$\mathbf{(t_4)}$ = (0.0, 39.54)\\
+ 
+ Body2:\\
+ $\mathbf{p_i}$$\mathbf{(t_1)}$ = (300.0, 52.78);
+ $\mathbf{v_i}$$\mathbf{(t_1)}$ = (0.0, 10.289)\\
+ $\mathbf{p_i}$$\mathbf{(t_2)}$ = (300.0, 60.80);
+ $\mathbf{v_i}$$\mathbf{(t_2)}$ = (0.0, 20.41)\\
+ $\mathbf{p_i}$$\mathbf{(t_3)}$ = (300.0, 74.05);
+ $\mathbf{v_i}$$\mathbf{(t_3)}$ = (0.0, 30.54)\\
+ $\mathbf{p_i}$$\mathbf{(t_4)}$ = (300.0, 89.85);
+ $\mathbf{v_i}$$\mathbf{(t_4)}$ = (0.0, 39.54)\\
+ 
+ Body3:\\
+ $\mathbf{p_i}$$\mathbf{(t_1)}$ = (600.0, 52.78);
+ $\mathbf{v_i}$$\mathbf{(t_1)}$ = (0.0, 10.289)\\
+ $\mathbf{p_i}$$\mathbf{(t_2)}$ = (600.0, 60.80);
+ $\mathbf{v_i}$$\mathbf{(t_2)}$ = (0.0, 20.41)\\
+ $\mathbf{p_i}$$\mathbf{(t_3)}$ = (600.0, 74.05);
+ $\mathbf{v_i}$$\mathbf{(t_3)}$ = (0.0, 30.54)\\
+ $\mathbf{p_i}$$\mathbf{(t_4)}$ = (600.0, 89.85);
+ $\mathbf{v_i}$$\mathbf{(t_4)}$ = (0.0, 39.54)\\
+
+How test will be performed: Unit testing with pytest
+
+\item{TC5: test\_system\_free\_bodies\_forces\\}
+
+Description: This test computes the position and velocity of floating bodies over time by applying force (F) on each body. We assume that the force of gravity is not in effect in this case. The position and velocity is calculated over time. 
+
+Control: Automatic
+
+Initial State: NA
+
+Input: \\
+Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{(m_1)}$ = 1; $\mathbf{F}$ =(-300, 0) \\
+Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (300.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{(m_2)}$ = 4000; $\mathbf{F}$ = (0, 80000)\\
+Body3: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (600.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0;
+$\mathbf{m_3}$$ \mathbf{}$ = 10.0, $\mathbf{F}$ = (1000, -2000)\\
+
+
+Output:\\
+Body1:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (-85.233, 50.0);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (-314.97, 0)\\
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (-330.60, 50.0);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (-624.94, 0.0)\\
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (-736.10, 50.0);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (-934.91, 0.0)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (-1219.76, 50.0);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (-1204.88, 0.0)\\
+
+Body2:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (300.0, 55.68);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (0.0, 21.00)\\
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (300.0, 72.04);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (0.0, 41.66)\\
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (300.0, 99.07);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (0.0, 62.33)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (300.0, 131.32);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (0.0, 80.33)\\
+
+Body3:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (628.0, -6.82);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (104.99, -209.98)\\
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (710.20.0, -170.40);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (208.31, -416.63)\\
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (845.37, -440.74);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (311.64, -623.27)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (1006.58, -763.17);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (401.63, -803.25)\\
+
+How test will be performed: Unit testing with pytest
+
+\item{TC6: test\_system\_projectile\_45deg\\}
+
+Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified in input. In the horizontal direction, velocity is constant.
 
 Control: Automatic
 
@@ -338,11 +464,10 @@ Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 125) this is the (x,y) coordinate po
 \hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 10\\
 \hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 10\\
 \hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity)\\
-**Need to doublecheck this calculation\\
 Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (50, 0);
 $\mathbf{v_i}$$\mathbf{(t)}$ = (10, 50); after t secs, where t= 5 
 
-How test will be performed: Unit testing with PyUnit
+How test will be performed: Unit testing with pytest\\
 
 \end{enumerate}
 
