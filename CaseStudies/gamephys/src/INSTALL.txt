@@ -1,1 +1,25 @@
-Instructions for installation and running of software.
+Tamias2D: A 2D Rigid body Game Physics Library (Source Code)
+
+
+Dependencies:
+The following needs to be installed to run Tamias2D:
+
+1. Python3
+2. Download all the files in Tamias2D folder
+3. 
+pip install -e .
+
+ (include the dot after e)- This should install the package and all of the    dependencies.
+
+
+Run Tamias2D:
+There are example files created that can be run:
+*PlotDemo.py simulates the collision of 3 bodies and it computes the history of the position, velocity and angular velocity where applicable. Right click on PlotDemo.py or Game.py and click run to run the file
+It generates the result in the console and generates a graph of velocity over time and position over time. 
+
+
+*Unit tests are provided in tests\test_unit.py. To run it, click Run=>Run from the top toolbar, then choose “pytest for test_unit.py” if you see the option.
+
+*System tests are provided in tests\test_unit.py. To run it, click Run=>Run from the top toolbar, then choose “pytest for test_system.py” if you see the option. All the tests clear with no errors. Run manually  each test or run the entire file however this will display all the graphs for the test results.
+
+
