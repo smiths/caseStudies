@@ -37,8 +37,8 @@
 
 \begin{document}
 
-\title{Glass Breakage Analysis: System Verification and Validation Plan
-  \wss{Include the name GlassBR here}} 
+\title{Glass Breakage Analysis: System Verification and Validation Plan for \progname{}
+  \wss{Include the name GlassBR here}\aida{Fixed}} 
 \author{Vajiheh Motamer}
 \date{\today}
 	
@@ -52,7 +52,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 10/26/18 & 1.0 & Initial Draft\\
-
+12/21/18 & 1.1 & Updates based on Dr.~Smith's feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -72,6 +72,8 @@ document.
   \midrule 
     TC & Test Case\\
   VnV & Verification and Validation\\
+  MIS & Module Interface Specification\\
+  MG & Module Guide\\
   \bottomrule
 \end{tabular}\\
 
@@ -116,7 +118,7 @@ build confidence by verifying that the software is correct for the cases
 covered by tests. Other important qualities to be verified are the 
 portability and reusability of the software.
 
-\subsection{References}
+\subsection{Relevant Documentation}
 
 \noindent Extensive information about the purpose and requirements of
 \progname{} can be found in the SRS document. This System VnV Plan is
@@ -125,7 +127,7 @@ this document are discussed. For more details on test cases specific to the
 implementation of \progname{}, consult the Unit VnV Plan document. The latest
 documentation for \progname{} can be found on GitHub, at \newline
 \href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}
-{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}. \wss{Good!}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}. \wss{Good!}\aida{Thanks! I have fixed it throughout the document.}
 
 \section{Plan} \label{sec_Plan}
 	
@@ -142,38 +144,42 @@ provided and addressed using github issue tracker. Besides, during preparing of 
 
 \subsection{Design Verification Plan}
 
-\noindent The design of \progname{} s  documents will be verified by getting feedback from Dr.
-Spencer Smith and my CAS 741 classmates.The Module Guide and Module Interface Specification will
+\noindent The design of \progname{} 's  documents will be verified by getting feedback from Dr.
+Spencer Smith and my CAS 741 classmates : Malavika Srinivasan
+ for the MG and Robert White
+ for the MIS. The Module Guide and Module Interface Specification will
 contain information about the software design. Feedback is expected to be
 provided by reviewers via github issue tracker. \wss{You can be more descriptive
   here, since you know the names of who is going to review each of your
-  documents (through Repos.xlsx)}
+  documents (through Repos.xlsx)}\aida{Fixed.}
 
 \subsection{Implementation Verification Plan} \label{sec_ImpPlan}
 
-The implementation of the\progname{} program will be verified by performing
-statically code review with Dr. Spencer Smith \wss{\LaTeX{} has a rule that it
+The implementation of the \progname{} program will be verified by performing
+statically code review with Dr.\ Smith \wss{\LaTeX{} has a rule that it
   inserts two spaces at the end of a sentence.  It detects a sentence as a
   period followed by a capital letter.  This comes up, for instance, with
   Dr. Smith.  Since the period after Dr.\ isn't actually the end of a sentence,
   you need to tell \LaTeX{} to insert one space.  You do this either by Dr.\
   Smith (if you don't mind a line-break between Dr.\ and Smith), or Dr.~Spencer
-  Smith (to force \LaTeX{} to not insert a line break).}  and the classmates in
+  Smith (to force \LaTeX{} to not insert a line break).}\aida{Fixed}  and the classmates in
 CAS741 and dynamically by executing the test cases detailed in this plan and the
-unit VnV plan using Pyton \wss{spell check!} testing frameworks.
+unit VnV plan using Python \wss{spell check!}\aida{Fixed} testing frameworks.
 
 \subsection{Software Validation Plan}
 
-There is no validation plan for \progname{}.  \wss{You should the reason why
-  there is no software validation plan.}
+There is no validation plan for \progname{} because there is not any external validation source.\wss{You should the reason why
+  there is no software validation plan.} \aida{Done}
 
 \section{System Test Description} \label{sec_System}
 
 System testing for the \progname{} ensures that the correct inputs produce
 the correct outputs. The test cases in this section are derived from the
 instance models and the requirements detailed in the tool’s SRS. These values were 
-taken from the' Test Documentation' \wss{proof read!} for this project . Individual 
-test cases will reference the table as input but specify new values for any 
+taken from the test input files for \progname{} which can be found on GitHub, at 
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}. \wss{proof read!}\aida{Done}. Individual 
+test cases will reference the table as input in Table~\ref{defaultInputTBL} but specify new values for any 
 input parameter that should have a different value than specified by the table.
 
 \subsection{Tests for Functional Requirements}
@@ -183,8 +189,11 @@ input parameter that should have a different value than specified by the table.
 \paragraph{Valid User Input}
 
 ~\newline \noindent The following set of test cases is intended to cover 
-different forms of valid user input.  \wss{You should say where the values in
-  Table 1 come from.}
+different forms of valid user input. These values were 
+taken from the test input files for \progname{} can be found on GitHub, at 
+\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass/src}
+{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass/src}.  \wss{You should say where the values in
+  Table 1 come from.} \aida{I 'm going to move test cases in the ``src'' to the test folder, so if you approve, I will do. So, maybe it would be better to reference to exact path of the project. would'nt it?}
 
 \begin{enumerate}[label=TC\arabic*:,ref={\arabic*}]
 %BeginTestCase1
@@ -204,14 +213,14 @@ $\hspace*{2cm} $Capacity (LR)=(6.843002155788037e+00) > q$, \\
 $\hspace*{2cm}$\text{$\text{is\_safePb} = \text{True}$ and $\text{is\_safeLR} =
   \text{True}$, The glass is considered safe.}  \wss{Where did these expected
   values come from?  You should tell the reader so that they can judge whether
-  these values make sense.} \wss{You don't need brackets around your numbers.}
+  these values make sense.} \aida{it has described in the test case derivation.}  \wss{You don't need brackets around your numbers.}
 \wss{For scientific notation, you don't use the $e$ notation in \LaTeX{}, you
   can write the multiplication and the power of $10$ explicitly.  For instance,
   $P_b= 1.301524590203718 \times 10^{-4}$}
 
 How test will be performed: Unit testing using PyUnit.
 
-Test Case Derivation:  \rref{SRS} and \rref{SRS-T_Pb} in SRS.
+Test Case Derivation: These expected values has been derived using of equations from Risk of Failure (B) from DD\ref{SRS-DD_B} and ``Probability of Glass Breakage'' from DD\ref{SRS-DD_prob} based on the input values in the Table~\ref{defaultInputTBL}.
 
 \begin{table}[!h]
 \centering
@@ -238,12 +247,12 @@ Test Case Derivation:  \rref{SRS} and \rref{SRS-T_Pb} in SRS.
 \end{table}
 
 %EndTestCase1
-\newpage \wss{You don't normally need to hard code in newpages}
+\wss{You don't normally need to hard code in newpages}\aida{Thanks! Done throughout the document.}
 
 %BeginTestCase2				
 \item [TC\refstepcounter{testnum}\thetestnum: \label{TC_SmallDimensionInput}] 
 Tst\_ Pb\_ SmallDimensionValues \wss{I don't understand how the dimensions are
-  small values.  They look like regular values.}
+  small values.  They look like regular values.} \aida{It has been considered smaller than dimentions in the table 1. Besides, I have taken these values from TestingPythonGlassBR.pdf in the path of project that it has referenced to testinput1.txt for small dimentions as input file. }
 
 Control: Automatic
 					
@@ -459,7 +468,7 @@ $\hspace*{2cm}$\text{$\text{is\_safePb} = \text{False}$ and $\text{is\_safeLR} =
 
 How test will be performed: Unit testing using PyUnit.
 
-Test Case Derivation:  \ref{SRS-IM_prob} and \ref{SRS-T_Pb} in SRS.
+Test Case Derivation:  DD\ref{SRS-DD_prob} and IM\ref{SRS-IM_Pb} in SRS.
 
 
 
@@ -547,7 +556,7 @@ $w$ &10.0	& \si{\kilo\gram}\\
   related like $a$ and $b$).  This approach is more systematic, and it also
   means you don't have to repeat the entire table every time.  You certainly do
   want test cases where the glass is safe and where it isn't, but you didn't
-  distinguish the names of any of your test cases based on this.}
+  distinguish the names of any of your test cases based on this.}\aida{Dr.~Smith I did not make sense of your comment, as you mentioned I held all values constant and only modify one of the values, for example in this case I modified just thickness which is too low and the result is not considered safe. }
 
 \paragraph{Invalid User Input}
 
@@ -599,17 +608,17 @@ TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectB0Test} & incorrectB0T
 \\
 TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectTNT0Test} & incorrectTNT0Test & tnt = 0 & InputError: TNT must be greater than 0 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectAspectREqLwrBndTest } & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectAspectREqLwrBndTest } & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  ``a/b must be between 1 and 5, equation would be uncertaint.'' 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectAspectREqUpprBndTest} & incorrectAspectREqUpprBndTest & a = 7500; b = 1500 & (a/b = 5); "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectAspectREqUpprBndTest} & incorrectAspectREqUpprBndTest & a = 7500; b = 1500 & (a/b = 5); ``a/b must be between 1 and 5, equation would be uncertaint.''
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqLwrBndTest } & incorrectWEqLwrBndTest & w = 4.5 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqLwrBndTest } & incorrectWEqLwrBndTest & w = 4.5 & "wtnt must be greater than or equal \textit{Wmin} = 4.5, equation would be uncertaint." 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest & w = 910 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest & w = 910 & "wtnt must be less than or equal \textit{Wmax} = 910, equation would be uncertaint." 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectSDEqLwrBndTest} & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectSDEqLwrBndTest} & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & ``SD must be greater than or equal \textit{SDmin} =  6, equation would be uncertaint.'' 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & "Encountered an unexpected exception" 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqUpprBndTest} & incorrectSDEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & ``SD must be greater than or equal \textit{SDmax} =  130, equation would be uncertaint.'' 
 \\
 \hline
 \end{tabular}
@@ -618,21 +627,20 @@ TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqUpprBndTest} & incor
 
 \wss{The error messages for the last test cases are all the same ``Encountered
   an unexpected exception''.  Is this what the SRS says?  We really could have a
-  more descriptive error message, as for the other cases.}
+  more descriptive error message, as for the other cases.} \aida{Although wtnn and SD equation in the UpperBand and Lowerband has been considered in the SRS as valid value, however it throw an error which it will been reported in the SystemVnVReport.}
 
 \wss{Use ``uses'' to
-  get the correct opening and closing quotes.}
+  get the correct opening and closing quotes.}\aida{Thanks! Fixed throughout the document.}
 
 \subsubsection{Output Tests} \label{TC_ValidOutFS} 
 
 \paragraph{Test Derived Values} 
 ~\newline \noindent The following set of test cases are intended to 
 verify initial inputs have been correctly converted into derived
-quantities. These test cases follow term definitions and equations from Data
-Definitions in Section \ref{SRS-sec_datadef} of the SRS.. \wss{proof read} For each test case, one input  column references to the specified input table. Besides,The expected output has been specified for each test case and the control method for these test cases is automatic. The initial state for each is a new session. The tests will be performed as automated tests on the PyUnit.
+quantities. These test cases follow term definitions and equations in the Section \ref{SRS-sec_datadef} of the SRS. \wss{proof read}\aida{Done!} For each test case, one input  column references to the specified input table. Besides,The expected output has been specified for each test case and the control method for these test cases is automatic. The initial state for each is a new session. The tests will be performed as automated tests on the PyUnit.
 
 \wss{The text is better for version control, and for reading in other editors,
-  if you use a hard-wrap at 80 characters}
+  if you use a hard-wrap at 80 characters}\aida{Done!}
 
 
 %Table 3: testDerivedValues
@@ -678,9 +686,9 @@ Input/Condition: -
 Output/Result:-
 
 					
-How test will be performed: Running \progname{} on Mac, Windows and
-Linux operating systems \wss{You can be more specific here.  My suggestion is
-  that you explicitly say that all unit tests will be run on all environments.}
+How test will be performed: All unit tests will be run on all environments. Running \progname{} on Mac, Windows and
+Linux operating systems has been considered to test this requirement. \wss{You can be more specific here.  My suggestion is
+  that you explicitly say that all unit tests will be run on all environments.} \aida{Thanks!}
 					
 \end{enumerate}
 
@@ -744,18 +752,31 @@ with an ``X'' may have to be modified as well.
 	\label{Table:T_trace}
 \end{table}
 
-\section{Static Verification Techniques} \label{sec_Static}
+%\section{Static Verification Techniques} \label{sec_Static}
+%
+%Static verification of the \progname{} library implementation will performed using
+%code review with Dr. Spencer Smith and my CAS 741 classmates.
 
-Static verification of the \progname{} library implementation will performed using
-code review with Dr. Spencer Smith and my CAS 741 classmates.
-
-\wss{You can remove this section.}
+\wss{You can remove this section.}\aida{Done!}
 
 \wss{Since the system tests for GlassBR are fairly simple, you should be looking
   at incorporating additional tests in your plan.  For your program a usability
   survey would be a good addition.  We want it to be easy for users to get their
   results from GlassBR.  You could put some survey questions in your Appendix
-  and introduce this idea in the main body of your plan.}
+  and introduce this idea in the main body of your plan.} \aida{ I put this section in the document, however I am not sure this questions would be appropriate or not!}
+
+\subsection{Usability Survey Questions} \label{survey}
+
+
+\begin{enumerate}
+	\item Was the output delivered more quickly or more slowly than expected?
+	\item Did the program accept the valid inputs?
+	\item Did initial inputs have been correctly converted into derived
+	quantities (\textit{AR}, \textit{SD}, \textit{LDF}, \textit{wTNT}, \textit{h}, \textit{GTF})?
+	\item Were you able to install and test the program using the instructions?
+	
+	
+\end{enumerate}
 
 \newpage
 
