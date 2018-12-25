@@ -453,23 +453,42 @@ How test will be performed: Unit testing with pytest
 
 \item{TC6: test\_system\_projectile\_45deg\\}
 
-Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified in input. In the horizontal direction, velocity is constant.
+Description:``Projectile motion is a form of motion experienced by an object or particle (a projectile) that is thrown near the Earth's surface and moves along a curved path under the action of gravity only''. The rigid object is falling from a height specified and angle in the input. In the horizontal direction, velocity is constant.
 
 Control: Automatic
 
 Initial State: NA
 
-Input: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 125) this is the (x,y) coordinate position\\
-\hspace*{1.3cm}$\mathbf{v_i}$$\mathbf{(t_0)}$ = (10,0)\\
-\hspace*{1.3cm}$\mathbf{F_i}$$\mathbf{(t_0)}$ = 10\\
-\hspace*{1.3cm}$\mathbf{m_i}$$ \mathbf{}$ = 10\\
-\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 9.8 (acceleration due to gravity)\\
-Output: $\mathbf{p_i}$$\mathbf{(t)}$ = (50, 0);
-$\mathbf{v_i}$$\mathbf{(t)}$ = (10, 50); after t secs, where t= 5 
+Input:\\
+$\mathbf{p_i}$$\mathbf{(t_0)}$ = (0.0, 0.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = (848.50, 0); $\mathbf{m}$ = 10; $\mathbf{g}$ =(0, -100)(acceleration due to gravity) \\
+
+Output:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (14.14, 14.14);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (848.52, 846.90)\\
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (452.50, 424.09);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (848.53, 743.54)\\
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (890.86, 780.67);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (848.53, 640.22)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (1329.23, 1083.86);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (848.52, 536.89)\\ 
+$\mathbf{p_i}$$\mathbf{(t_5)}$ = (1767.59, 1333.68);
+$\mathbf{v_i}$$\mathbf{(t_5)}$ = (848.52, 433.57)\\ 
+$\mathbf{p_i}$$\mathbf{(t_6)}$ = (2205.95, 1530.11);
+$\mathbf{v_i}$$\mathbf{(t_6)}$ = (848.52, 330.25)\\ 
+$\mathbf{p_i}$$\mathbf{(t_7)}$ = (2644.31, 1673.1758);
+$\mathbf{v_i}$$\mathbf{(t_7)}$ = (848.52, 226.92)\\ 
+$\mathbf{p_i}$$\mathbf{(t_8)}$ = (3082.67, 1762.86);
+$\mathbf{v_i}$$\mathbf{(t_8)}$ = (848.52, 123.60)\\
+$\mathbf{p_i}$$\mathbf{(t_9)}$ = (3521.04, 1799.16);
+$\mathbf{v_i}$$\mathbf{(t_9)}$ = (848.52, 20.28)\\ 
+$\mathbf{p_i}$$\mathbf{(t_10)}$ = (3959.40, 1782.09);
+$\mathbf{v_i}$$\mathbf{(t_10)}$ = (848.52, -83.05)\\   
 
 How test will be performed: Unit testing with pytest\\
+Ref. source:  \url{https://en.wikipedia.org/wiki/Projectile_motion},
+\url{https://www.amesweb.info/Physics/Projectile-Motion-Calculator.aspx}
 
-\end{enumerate}
+%\end{enumerate}
 
 \wss{Same comment as for previous test.  I believe all of the equations you will
   need for your closed form solutions are at:
@@ -481,81 +500,153 @@ How test will be performed: Unit testing with pytest\\
   to make sure that there isn't an error in any of the coordinate directions.
   If everything is down and to the left you won't notice errors with motion up
   or down.}
+\olu{updated testcase}
 
-\subsubsection{Rotation of 2D Rigid Body Simulation}
-This test is to simulate the rotation of a 2D rigid body about its axis.
-\paragraph{}
-\begin{enumerate}
-	
-	\item{TC4: 2D Rigid body rotation about its axis\\}
-	
-	Description: In rotational motion of 2D rigid bodies, Torque $\tau$ is the force which produces rotation. It has magnitude and direction.This test can also be used for multiple set of rigid bodies.(IM2)
-	
-	Control: Automatic
-	
-	Initial State: NA
-	
-	Input: $\mathbf{m_i}$$\mathbf{}$ = 100\\
-	\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = 0\\
-	\hspace*{1.3cm}$\phi$$_i\mathbf{(t_0)}$ = 50\\
-	\hspace*{1.3cm}$\omega$$_i\mathbf{(t_0)}$$ \mathbf{}$ = 0.3\\
-	\hspace*{1.3cm}$\tau$$\mathbf{}$ = 1000 \\
-	\hspace*{1.3cm}$\mathbf{I}$$\mathbf{(i)}$ = 10000
-	
-	Output:  $\phi$$\mathbf{(t)}$ = 50.9;
-	$\omega$$\mathbf{(t)}$ = 0.3; after t secs where t= 3 
-	
-	How test will be performed: Unit testing with PyUnit
+%\begin{enumerate}
+\item{TC7: test\_system\_projectile\_60deg\\}
 
-\end{enumerate}
-
-\wss{Nice to see rotation tests not being forgotten.  As before though, I would
-  like to know how you come up with your output  answers.}
-
-\subsubsection{Rotation of 2D Rigid Body Simulation}
-This test is to simulate the collision of 2D rigid bodies.
-\paragraph{}
-\begin{enumerate}
-	
-	\item{TC5: Dynamic rigid body collision with static body test\\}
-	
-	Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a dynamic object falling from a height with a static object. At collision the static object does not move, the dynamic object's velocity, position, angular velocity, orientation is calculated.Momentum is conserved.
-	
-	Control: Automatic
-	
-	Initial State: NA
-	
-	Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
-	\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
-	\hspace*{1.3cm}$\mathbf{v_k}$$\mathbf{(t_0)}$ = TBD\\
-	\hspace*{1.3cm}$\phi$$_k\mathbf{(t_0)}$ = TBD\\
-	\hspace*{1.3cm}$\omega$$_k\mathbf{(t_0)}$$ \mathbf{}$ = TBD\\
-	\hspace*{1.3cm}$\mathbf{C_R}$$\mathbf{}$ = TBD \\
-	
-	
-	Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
-	\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t)}$ = TBD\\
-	\hspace*{1.3cm}$\phi$$_k\mathbf{(t)}$ = TBD\\
-	\hspace*{1.3cm}$\omega$$_k\mathbf{(t)}$$ \mathbf{}$ = TBD\\
-	 after t secs(t, TBD) 
-	 
-	
-	How test will be performed: Unit testing with PyUnit
-	
-	\item{TC6: Dynamic rigid Body collision test(set of bodies)\\}
-
-Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a set of dynamic object falling from a height with a static object. At collision bodies' velocity, position, angular velocity, orientation is calculated. Momentum is conserved. The input and output set generated is determined by the number of bodies added in space.Multiple objects will be simulated to fall at different times fro a height so we can simulate collision.
+Description: See T6 above(launched at $60\,^{\circ}$ angle)
 
 Control: Automatic
 
 Initial State: NA
 
-Input: $\mathbf{m_k}$$\mathbf{}$ = TBD (to be determined)\\
-\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t_0)}$ = TBD\\
-\hspace*{1.3cm}$\mathbf{v_k}$$\mathbf{(t_0)}$ = TBD\\
-\hspace*{1.3cm}$\phi$$_k\mathbf{(t_0)}$ = TBD\\
-\hspace*{1.3cm}$\omega$$_k\mathbf{(t_0)}$$ \mathbf{}$ = TBD\\
-\hspace*{1.3cm}$\mathbf{C_R}$$\mathbf{}$ = TBD \\
+Input:\\
+$\mathbf{p_i}$$\mathbf{(t_0)}$ = (50.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = (150.0, 260.0); $\mathbf{m}$ = 1000; $\mathbf{g}$ =(0, -40) (acceleration due to gravity) \\
+
+Output:\\
+$\mathbf{p_i}$$\mathbf{(t_1)}$ = (52.50, 54.32);
+$\mathbf{v_i}$$\mathbf{(t_1)}$ = (150.0, 259.141)\\
+$\mathbf{p_i}$$\mathbf{(t_2)}$ = (130.0, 177.19);
+$\mathbf{v_i}$$\mathbf{(t_2)}$ = (150.0, 217.81)\\
+$\mathbf{p_i}$$\mathbf{(t_3)}$ = (207.48, 278.69);
+$\mathbf{v_i}$$\mathbf{(t_3)}$ = (150.0, 176.48)\\
+$\mathbf{p_i}$$\mathbf{(t_4)}$ = (284.97, 358.84);
+$\mathbf{v_i}$$\mathbf{(t_4)}$ = (150.0, 135.15)\\ 
+$\mathbf{p_i}$$\mathbf{(t_5)}$ = (362.47, 417.65);
+$\mathbf{v_i}$$\mathbf{(t_5)}$ = (150.0, 93.82)\\ 
+$\mathbf{p_i}$$\mathbf{(t_6)}$ = (439.96, 455.10);
+$\mathbf{v_i}$$\mathbf{(t_6)}$ = (150.0, 52.49)\\  
+
+How test will be performed: Unit testing with pytest\\
+Ref. source:  \url{https://en.wikipedia.org/wiki/Projectile_motion},
+\url{https://www.amesweb.info/Physics/Projectile-Motion-Calculator.aspx}
+\end{enumerate}
+
+\subsubsection{Rotation of 2D Rigid Body}
+This test is to simulate the rotation of a 2D rigid body about its axis by applying torque.
+\paragraph{}
+\begin{enumerate}
+\item{TC8: test\_system\_rotation\_around\_axis()\\}
+	
+	Description: In rotational motion of 2D rigid bodies, Torque $\tau$ is the force which produces rotation. It has magnitude and direction.This test can also be used for multiple set of rigid bodies.As constant torque is applied over time the angular orientation increases.
+	
+	Control: Automatic
+	
+	Initial State: NA
+	
+	Input:\\
+    \hspace*{1.3cm}$\mathbf{m}$$\mathbf{}$ = 0.5\\
+	\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = (0, 0)\\
+	\hspace*{1.3cm}$\phi$$_i\mathbf{(t_0)}$ = 0\\
+	\hspace*{1.3cm}$\tau$$\mathbf{}$ = 100 \\
+	
+	Output:\\
+	$\phi$$\mathbf{(t_1)}$ = 0.0\\
+	$\phi$$\mathbf{(t_2)}$ = 6.82\\
+	$\phi$$\mathbf{(t_3)}$ = 26.45\\
+	$\phi$$\mathbf{(t_4)}$ = 58.89\\
+	$\phi$$\mathbf{(t_4)}$ = 97.58\\
+
+	
+	How test will be performed: Unit testing with Pytest\\
+Ref source:\url{http://hyperphysics.phy-astr.gsu.edu/hbase/rotq.html} 
+
+\item{TC9: test\_system\_angular\_velocity\\}
+
+Description: This is to calculate the angular velocity $\omega$ of a rotating body over time when torque $\tau$ is applied.
+
+Control: Automatic
+
+Initial State: NA
+
+Input:\\
+\hspace*{1.3cm}$\mathbf{m}$$\mathbf{}$ = 0.5\\
+\hspace*{1.3cm}$\mathbf{g}$$\mathbf{}$ = (0, 0)\\
+\hspace*{1.3cm}$\phi$$_i\mathbf{(t_0)}$ = 0\\
+\hspace*{1.3cm}$\omega$$_i\mathbf{(t_0)}$ = 0\\
+\hspace*{1.3cm}$\tau$$\mathbf{}$ = 100 \\
+
+Output:\\
+$\omega$$\mathbf{(t_1)}$ = 0.40\\
+$\omega$$\mathbf{(t_2)}$ = 12.80\\
+$\omega$$\mathbf{(t_3)}$ = 25.20\\
+$\omega$$\mathbf{(t_4)}$ = 37.60\\
+$\omega$$\mathbf{(t_5)}$ = 48.40\\
+
+
+How test will be performed: Unit testing with Pytest\\
+Ref source: \url{http://hyperphysics.phy-astr.gsu.edu/hbase/rotq.html}
+\end{enumerate}
+
+\wss{Nice to see rotation tests not being forgotten.  As before though, I would
+  like to know how you come up with your output  answers.}
+
+\subsubsection{Collision of 2D Rigid Body Simulation}
+This test is to simulate the collision of 2D rigid bodies.
+\paragraph{}
+\begin{enumerate}
+	
+	\item{TC10: test\_system\_collision\_same\_mass\\}
+	
+	Description: This is to test the collision of a set of rigid bodies that have the same weight.\\
+	
+	Control: Automatic
+	
+	Initial State: NA
+	
+	Input:\\
+	Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 1; $\mathbf{F}$ =(500, 0) \\ 
+	Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (300.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 100; $\mathbf{F}$ =(-500, 0) \\ 
+	$\mathbf{C_R}$$\mathbf{}$ = 1 (this applies to both bodies) \\
+	
+	
+	Output: \\
+	Body1:\\
+	$\mathbf{p_i}$$\mathbf{(t_1)}$ = (1.42, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_1)}$ = (5.25, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_2)}$ = (5.51, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_2)}$ = (10.42, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_3)}$ = (12.27, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_3)}$ = (15.58, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_4)}$ = (20.32, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_4)}$ = (20.08, 0.0)\\
+	
+	Body2:\\
+	$\mathbf{p_i}$$\mathbf{(t_1)}$ = (298.58, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_1)}$ = (-5.25, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_2)}$ = (294.49, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_2)}$ = (-10.42, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_3)}$ = (287.73, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_3)}$ = (-15.58, 0.0)\\
+	$\mathbf{p_i}$$\mathbf{(t_4)}$ = (279.67, 50.0);
+	$\mathbf{v_i}$$\mathbf{(t_4)}$ = (-20.08, 0.0)\\
+	 
+	How test will be performed: Unit testing with Pytest
+	Ref. source: collision.py
+	
+	\item{TC11: test\_system\_col\_impulse\_against\_static\_object\\}
+
+Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a set of dynamic object falling from a height with a static object. At collision bodies' velocity, position, angular velocity, orientation is calculated. Momentum is conserved. Multiple objects will be simulated to fall at different times fro a height so we can simulate collision.
+
+Control: Automatic
+
+Initial State: NA
+
+Input:\\
+Static Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (400, 560.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 10000 \\ 
+Dynamic Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (20.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 100 \\ 
+$\mathbf{C_R}$$\mathbf{}$ = 1 (this applies to both bodies) \\
 
 
 Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
