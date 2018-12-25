@@ -9,17 +9,56 @@ The following needs to be installed to run Tamias2D:
 3. 
 pip install -e .
 
- (include the dot after e)- This should install the package and all of the    dependencies.
-
+ 
+(include the dot after e)- This should install the package and all of the dependencies.
 
 Run Tamias2D:
 There are example files created that can be run:
-*PlotDemo.py simulates the collision of 3 bodies and it computes the history of the position, velocity and angular velocity where applicable. Right click on PlotDemo.py or Game.py and click run to run the file
-It generates the result in the console and generates a graph of velocity over time and position over time. 
+
+*PlotDemo.py simulates the collision of 3 bodies and it computes
+the history of the position, velocity and angular velocity where applicable.
+*Right click on PlotDemo.py and click run to run the file
+It generates the result in the console and generates a graph of velocity 
+over time and position over time. 
 
 
-*Unit tests are provided in tests\test_unit.py. To run it, click Run=>Run from the top toolbar, then choose “pytest for test_unit.py” if you see the option.
+*Unit tests are provided in tests\test_unit.py. To run it, 
+click Run=>Run from the top toolbar, then choose “pytest for test_unit.py”
+if you see the option. All the tests clear with no errors.
 
-*System tests are provided in tests\test_unit.py. To run it, click Run=>Run from the top toolbar, then choose “pytest for test_system.py” if you see the option. All the tests clear with no errors. Run manually  each test or run the entire file however this will display all the graphs for the test results.
+* output.py is used for outputting to the console and activating the plotter
+when the time is right. Plotting is handled in plotter.py and it displays 
+the graphs based on the specified parameters e.g graph of position over time,
+velocity over time e.t.c. In output.py, an enumerator class is defined to make
+choosing what values to display easier. The enumerator is called Options. And 
+can be used as a constant so no misspelling happens.
+	
+Class Options(Enum)
+	POSITION = ‘’position”
+	ROTATION = “rotation”
+	VELOCITY = “velocity”
+	ANGVEL = “angularVel”
+	FORCE = “force”
+	TORQUE = “torque”
+	ACCEL = “accel”
+	ANGACCEL = “angAccel”
 
+The above is used alongside another class called OutputOptions, which 
+contains a dictionary that has all the keys from the enumerators paired 
+with a Boolean value. 
 
+Class Options(Enum)
+	Options.POSITION = “False”
+	Options.ROTATION = “False”
+	Options.VELOCITY = “False”
+	Options.ANGVEL = “False”
+	Options.FORCE = “False”
+	Options.TORQUE = “False”
+	Options.ACCEL = “False”
+	Options.ANGACCEL = “False”
+If you want any of the above values to be outputted for the test 
+you’re executing, just enable it using the key. For example:
+opt = OutputOptions()
+opt.enable_option(Options.POSITION)
+opt.enable_option(Options.VELOCITY)
+output.options = opt
