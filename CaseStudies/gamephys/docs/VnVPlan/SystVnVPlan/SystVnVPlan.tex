@@ -635,32 +635,33 @@ This test is to simulate the collision of 2D rigid bodies.
 	How test will be performed: Unit testing with Pytest\\
 	Ref. source: collision.py
 	
-	\item{TC11: test\_system\_col\_impulse\_against\_static\_object\\}
+\item{TC11: test\_system\_col\_dynamic\_against\_static\_object\\}
 
-Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a set of dynamic object falling from a height with a static object. At collision bodies' velocity, position, angular velocity, orientation is calculated. Momentum is conserved. Multiple objects will be simulated to fall at different times fro a height so we can simulate collision.
+Description: This is to test a set of rigid bodies that collide. This test case will test for collision of a dynamic object falling from a height with a static object. At collision bodies' velocity, position, angular velocity, orientation is calculated. Momentum is conserved. 
 
 Control: Automatic
 
 Initial State: NA
 
 Input:\\
-Static Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (400, 560.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 10000 \\ 
-Dynamic Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (20.0, 50.0); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 100 \\ 
-$\mathbf{C_R}$$\mathbf{}$ = 1 (this applies to both bodies) \\
 
+Static Body1: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (0, 500); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 10000 \\
+shape0 = Box(Vec2(0, 500), Vec2(800, 600), 0)\\ 
+\newline
+Dynamic Body2: $\mathbf{p_i}$$\mathbf{(t_0)}$ = (10, 600); $\mathbf{v_i}$$\mathbf{(t_0)}$ = 0; $\mathbf{m}$ = 100 \\ 
+shape1 = Box(Vec2(0, 0), Vec2(860, 600), 0)\\
 
-Output:  $\mathbf{v_k}$$\mathbf{(t)}$ = TBD \\
-\hspace*{1.3cm}$\mathbf{p_k}$$\mathbf{(t)}$ = TBD\\
-\hspace*{1.3cm}$\phi$$_k\mathbf{(t)}$ = TBD\\
-\hspace*{1.3cm}$\omega$$_k\mathbf{(t)}$$ \mathbf{}$ = TBD\\
-after t secs(t, TBD) 
+**$\mathbf{C_R}$$\mathbf{}$ = 1 (this applies to both bodies) \\
 
-How test will be performed: Unit testing with Pytest
+Output:  
+The trend of output values should show the impact of the impulse on the position and velocity, momentum is also conserved. The velocity of dynamic body increases with time.\\
+%Momentum before collision = $\mathbf{m_1}$${v_1}$ + $\mathbf{m_2}$${v_2}$ must be equal to:\\
+%Momentum after collision = $\mathbf{m_1}$${v_1}$ + $\mathbf{m_2}$${v_2}$
 
-\end{enumerate}	
+How test will be performed: Unit testing with Pytest\\
+Ref. source: \url{https://www.omnicalculator.com/physics/conservation-of-momentum#how-to-use-the-conservation-of-momentum-calculator}
 	
-\wss{The TBDs should be filled in.  I get the impression that some of the
-  physics is giving you trouble.  The following resource looks pretty good
+\wss{The TBDs should be filled in.  I get the impression that some of the physics is giving you trouble.  The following resource looks pretty good
   \url{https://www.myphysicslab.com/engine2D/collision-en.html}.  You could use
   this calculator
   \url{https://www.omnicalculator.com/physics/conservation-of-momentum} with
@@ -669,39 +670,41 @@ How test will be performed: Unit testing with Pytest
   also play around with problems where one mass is so large that that object
   will essentially be stationary.  I can also lend you a physics textbook, if
   that would be helpful.}
+\olu{updated testcase, will test during system testing and see the trend of output result.}
 
+\end{enumerate}	
 \subsection{Tests for Nonfunctional Requirements}
 
-\subsubsection{Usability Test}
+\subsubsection{Usability}
 		
 \paragraph{Usability test}
 
 \begin{enumerate}
 
-\item{TC7\\}
+\item{TC12\\}
 
 Type: Usability test
 					
-Initial State: 
+Initial State: NA
 					
-Input/Condition: 
+Input/Condition: NA
 					
 Output/Result: 
 					
-How test will be performed: Users/reviewers of TamiasMini2D will be asked to install the library and use it. They will be asked to complete the survey in the Appendix section for Usability. 
+How test will be performed: Users/reviewers of \progname{} will be asked to install the library and use it.Users will be asked to create a small program to add 2 bodies in space assigning position, and setting gravity in space.  For an experienced user, this should take no less than 30 to 60 mins including installation time. They will be asked to complete the survey in the Appendix section for Usability. 
 					
 \end{enumerate}
 
-\wss{Nice to see a usability test.  It is a bit simplistic, but that is fine for
-  right now.}
+\wss{Nice to see a usability test.  It is a bit simplistic, but that is fine for right now.}
+\olu{updated TC12}
 
-\subsubsection{Correctness/Performance}
+\subsubsection{Correctness}
 
-\paragraph{Correctness/Performance}
+\paragraph{Correctness Test}
 
 \begin{enumerate}
 
-\item{TC8\\}
+\item{TC13\\}
 
 Type: Dynamic
 
@@ -711,54 +714,57 @@ Input:
 
 Output: 
 
-How test will be performed: Correctness/performance will be measured by comparing output results with ODEs related to each requirement/function.
+How test will be performed: Correctness will be measured by the output results of the execution of functional testcases in section 5.1.Validate output results with ref. source for each testcase and compare with Pymunk results(future phase)
 \end{enumerate}
 
-\wss{This isn't really complete.  For correctness, you can probably refer to
-  your functional tests from the previous section.}
+\wss{This isn't really complete.  For correctness, you can probably refer to your functional tests from the previous section.}\olu{updated}
 
-\subsubsection{Reusability}
+\subsubsection{Performance}
 
-\paragraph{Reusability test}
+\paragraph{Performance test}
 
 \begin{enumerate}
 	
-\item{TC9\\}
-
+\item{TC14\\}
+Performance will be validated by a form of stress test where 50 bodies will be added to different position in space and the velocity and position of all bodies over time(4secs) should be returned without crashing or slowing down the system. This will be compared to Pymunk in a future phase enhancement.
 Type: Dynamic
 
 Initial State: 
 
-Input: 
+Input: 50 dynamic bodies with initial velocities and positions set.
 
-Output: 
+Output: System returns a history of position and velocities of all 50 bodies over 4 secs with no issues.
 
 How test will be performed: Users/reviewers will be asked to see if they can extend the library and use for other purposes.
 ...
 \end{enumerate}
 
 \wss{A survey is an interesting way to measure this.}
+\olu{survey will be looked into in future}
 
-\subsubsection{Understandability/Maintainability}
+%\subsubsection{Understandability/Maintainability}
+%
+%\paragraph{Understandability/Maintainability test}
+%
+%\begin{enumerate}
+%	
+%	\item{TC9\\}
+%	
+%	Type: Dynamic
+%	
+%	Initial State: 
+%	
+%	Input: 
+%	
+%	Output: 
+%	
+%	How test will be performed: Users/reviewers will be asked to see check some see if they are able to find the space module and update the body parameters are desired. Users will be asked on the scale of 1 to 5 how easy it was to find the code, understand it and make changes.
+%	...
 
-\paragraph{Understandability/Maintainability test}
+\olu{commenting out based on SRS feedback, Understandability and maintainability will not be tested in this phase.}
+%\end{enumerate}
 
-\begin{enumerate}
-	
-	\item{TC9\\}
-	
-	Type: Dynamic
-	
-	Initial State: 
-	
-	Input: 
-	
-	Output: 
-	
-	How test will be performed: Users/reviewers will be asked to see check some see if they are able to find the space module and update the body parameters are desired. Users will be asked on the scale of 1 to 5 how easy it was to find the code, understand it and make changes.
-	...
-\end{enumerate}
-
+~\newline
 
 \subsection{Traceability Between Test Cases and Requirements}
 The purpose of the information in Table 1 below is to provide a mapping between the test cases and the requirements in the SRS for easy reference and verification.
@@ -773,55 +779,27 @@ The purpose of the information in Table 1 below is to provide a mapping between 
 		
 		\hline	
 		
-		\textbf{Testcase Number} & \textbf{Instance Models} & \textbf{CA Requirements}\\
+		\textbf{Testcase Number} & \textbf{Instance Models} & \textbf{Requirements}\\
 		
 		\hline 
-		
-		TC1& IM1         & R1, R2, R4, R5       \\ \hline
-		
-		TC2& IM1        & R1, R2, R4, R5       \\ \hline
-		
-		TC3& IM1        & R1, R2, R4, R5       \\ \hline
-		
-		
-		
-		TC4& IM2 & R1, R2, R4, R6   \\ \hline
-		
-		TC5& IM3 & R1, R3, R4, R7, R8   \\ \hline
-		
-		
-		
-		TC6& IM3 & R1, R3, R4, R7, R8   \\ \hline
-		
-		TC7&     & NFR3   \\ \hline
-		
-		
-		
-		TC8&       & NFR1, NFR2  \\ \hline
-		
-		TC9&       & NFR5   \\ \hline
-		
-		TC10&       & NFR4, NFR6   \\ \hline
-		
-		
-		
-		
+		TC1-TC7& IM1 & R1, R2, R4, R5       \\ \hline
+		TC8-TC9& IM2 & R1, R2, R4, R6   \\ \hline
+		TC10-TC11& IM3, IM4 & R1, R3, R4, R7, R8   \\ \hline
+		TC12& &NFR3 \\ \hline
+		TC13& &NFR2 \\ \hline
+		TC14& &NFR1 \\ \hline
+				
 	\end{tabular}\\
 	
 \end{table}
 
-\section{Static Verification Techniques}
-Code review and inspection will be used as the method for implementation verification.
-%\wss{In this section give the details of any plans for static verification of
-%the implementation.  Potential techniques include code walkthroughs, code
-%inspection, static analyzers, etc.}
-\wss{You can remove this section, since the details can be covered in Section
+~\newline
+\wss{You can remove this section, since the details can be covered in Section \olu{removed section}
   4.4.  I've realized that I should remove this section from the template.}
 
 \wss{You should also think about parallel testing.  Calculate the answers for
-  some more complex simulations with existing software and compare these results
-  to your results.}
-
+  some more complex simulations with existing software and compare these results to your results.} \olu{will do, I need a lot of time to implement this library efficiently, I will consider parallel testing in future}
+~\newpage
 \bibliographystyle{plainnat}
 
 \bibliography {../../../refs/References}
@@ -829,7 +807,8 @@ Code review and inspection will be used as the method for implementation verific
 \item{http://www.physicstutorials.org/home/mechanics/1d-kinematics/projectile-motion?start=1}
 \item{https://en.wikipedia.org/wiki/Projectile-motion}
 \item{R. A. BROUCKE.  "Equations of motion of a rotating rigid body", Journal of Guidance, Control, and Dynamics, Vol. 13, No. 6 (1990), pp. 1150-1152.}
-\item{https://github.com/smiths/caseStudies/blob/master/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
+\item{System Requirement Specification for \progname{}: https://github.com/smiths/caseStudies/blob
+	/master/CaseStudies/gamephys/docs/SRS/GamePhysicsSRS.pdf}
 
 \end{itemize}
 
