@@ -1,0 +1,219 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{siunitx}
+\usepackage{afterpage}
+\usepackage{pdflscape}
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=red,
+	urlcolor=blue
+}
+\usepackage[round]{natbib}
+\usepackage{xr}
+
+\input{../Comments}
+
+\newcommand{\progname}{GlassBR}
+
+\externaldocument[SRS-]{../SRS/glassbr_srs}
+\newcommand{\rref}[1]{R\ref{#1}}
+\newcommand{\nfrref}[1]{NFR\ref{#1}}
+
+\externaldocument[MG-]{../Design/MG/glassbr_mg}
+\newcommand{\mref}[1]{M\ref{#1}}
+
+\externaldocument[SVnV-]{../VnVPlan/SystVnVPlan/SystVnVPlan}
+\newcommand{\tcref}[1]{TC\ref{#1}}
+
+\externaldocument[UVnV-]{../VnVPlan/UnitVnVPlan/UnitVnVPlan}
+\newcommand{\utcref}[1]{TC\ref{#1}}
+
+
+\begin{document}
+	
+	\title{Test Report: Glass Breakage analysis Program (\progname{})} 
+	\author{Vajiheh Motamer}
+	\date{\today}
+	
+	\maketitle
+	
+	\pagenumbering{roman}
+	
+	\section{Revision History}
+	
+	\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+		\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+		\midrule
+		12/20/18 & 1.0 & Initial draft based on initial SystemVnVPlan\\
+		12/25/18 & 1.1 & Make changes based on SystemVnVPlan changes\\
+		\bottomrule
+	\end{tabularx}
+	
+	~\newpage
+	
+	\section{Symbols, Abbreviations and Acronyms}
+	
+	The symbols, abbreviations, and acronyms used in this document include those 
+	defined in the table below, as well as any defined in the tables found in 
+	Section \ref{SRS-sec_abbrev} of the Software Requirements Specification (SRS) 
+	document
+	\newline
+	
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{l l} 
+		\toprule		
+		\textbf{symbol} & \textbf{description}\\
+		\midrule
+		MIS & Module Interface Specification\\
+		MG & Module Guide\\
+		TC & Test Case\\
+		VnV & Verification and Validation\\
+		\bottomrule
+	\end{tabular}\\
+	
+	\newpage
+	
+	\tableofcontents
+	
+	\listoftables %if appropriate
+	
+	\listoffigures %if appropriate
+	
+	\newpage
+	
+	\pagenumbering{arabic}
+	
+	This document outlines the results of testing for \progname{}. 
+	Section~\ref{sec_FuncReqEval} reports on the Test Cases (TCs) for functional 
+	requirements and Section~\ref{sec_NonFuncReqEval} reports on the tests for 
+	non-functional requirements, all of which are described in the System 
+	Verification and Validation (VnV) Plan for this project. 
+	Section~\ref{sec_Comparison} compares this implementation of \progname{} to the 
+	original implementation. Section~\ref{sec_UnitTests} reports on the results of 
+	the unit tests, which are described in the Unit VnV Plan for this project. 
+	Section~\ref{sec_Changes} comments on changes to the project that that came as 
+	a result of the testing. Section~\ref{sec_AutoTests} describes how the tests 
+	were implemented with an automated testing framework. 
+	Sections~\ref{sec_TraceReq} and \ref{sec_TraceMod} show the traceability 
+	between test cases and requirements and modules. Supporting documents and other 
+	resources, such as the VnVPlans and original implementation, can be found on 
+	\href{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass}{the 
+		GitHub repository for this project}.
+	
+	\section{Functional Requirements Evaluation} \label{sec_FuncReqEval}
+	
+	The System VnV Plan described \tcref{SVnV-TC_defultInput} - 
+	\tcref{SVnV-TC_LowThicknessInput} for testing the requirement for 
+	verifying different forms of valid user inputs. Besides, these test cases verified \progname{}
+	 for the special values that glass is safe or not. All of these tests passed. 
+	
+	~\newline \noindent The System VnV Plan described \tcref{SVnV-TC_checkAPositiveTest} - 
+	\tcref{SVnV-TC_incorrectWEqUpprBndTest} for testing the requirement for 
+	verifying that inputs meet physical constraints. The test cases \tcref{SVnV-TC_incorrectAspectREqLwrBndTest} and \tcref{SVnV-TC_incorrectAspectREqUpprBndTest} and \tcref{SVnV-TC_incorrectWEqLwrBndTest} and \tcref{SVnV-TC_incorrectWEqUpprBndTest} passed.
+	However, \tcref{SVnV-TC_incorrectSDEqLwrBndTest} and \tcref{SVnV-TC_incorrectSDEqUpprBndTest} failed at the first time, then they passed. I think it would be better equation should be removed from SRS ``W'' and ``SD'' bands.
+	
+	~\newline \noindent The final functional requirement tests in the System VnV 
+	Plan, \tcref{SVnV-TstDrvdValsHSGlTy} - \tcref{SVnV-TstDrvdValsFTGlTy}, were for 
+	verifying the requirements for verifying and delivering output. These tests all 
+	passed.	
+	
+	The System V\&V Plan can be found at: 
+	\url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/glass/docs/VnVPlan/SystVnVPlan/SystVnVPlan.pdf}.
+	
+	\section{Nonfunctional Requirements Evaluation} \label{sec_NonFuncReqEval}
+	
+	
+	\subsection{Reusability}
+	
+	\tcref{SVnV-TC_Reusability} in the System VnV Plan is a test for gaining 
+	confidence in the reusability of \progname{}. The alternative and new implementation(units has been considered as meter)  was 
+	written based off of the old implementation which the units have been considered as ``mm'', which 
+	accepted by \progname . The tests 
+	passed, showing that all of the other modules were reusable in this alternative 
+	version of \progname{}.
+	
+	\subsection{Understandability}
+	Since reusability are related to understandability, the 
+	success of the tests for those requirements gives confidence in the 
+	understandability of \progname{}.
+
+	\subsection{Correctness}
+
+The success of the system tests for the calculations of \progname{}, 
+specifically \tcref{SVnV-TC_defultInput} - \tcref{SVnV-TC_incorrectSDEqUpprBndTest}, gives 
+confidence in the correctness of \progname{}.
+
+\section{Comparison to Existing Implementation}	 \label{ComparisonImplem}
+
+This section is not applicable for \progname{}.
+	
+\section{Unit Testing}  \label{sec_UnitTests}
+The Unit VnV Plan described \tcref{UVnV-TC_Length} - 
+\tcref{UVnV-getCEXPContoursTest}, all of which were implemented in the unit testing 
+framework and passed, with the exception of 
+\tcref{UVnV-FuncTevalDTest}, which failed on the first run, 
+
+\section{Changes Due to Testing} \label{sec_Changes}
+
+
+
+The test cases for missing inputs in the System V\&V Plan initially failed 
+because there was a bug in the condition that checked for missing inputs and 
+was producing an incorrect output. Upon modifying the condition, the correct 
+output was produced and the tests have passed.
+
+The failure of \tcref{UVnV-FuncTevalDTest} revealed that the 
+implementation had a bug in the implementation. This prompted a 
+change to the FuncADT module to properly handle this case. 
+
+\section{Automated Testing} \label{AutomatedTesting}
+
+Every test, with the exception of the tests 
+for non-functional requirements, was automated so that the tests could be 
+executed with a simple command.
+
+\section{Trace to Requirements} \label{sec_TraceReq}
+
+Tables~\ref{Table:TraceTestReq} and \ref{Table:TraceTestNFReq} were taken 
+directly from the System VnV Plan document for this project. It shows that the 
+tests effectively cover every Requirement (R) and Non-Functional Requirement 
+(NFR) from the SRS. Unless otherwise specified, the test cases referenced in 
+the table refer to tests described in the System VnV Plan.
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		\hline
+		& \rref{SRS-Input}& \rref{SRS-KnownValues}& \rref{SRS-Verify_IN}& \rref{SRS-R_OutputInput}& 
+		\rref{SRS-R_ Comparison}& \rref{SRS-R_Output}\\
+		\hline
+		\tcref{SVnV-TC_defultInput} - \tcref{SVnV-TC_LowThicknessInput}                 
+		& X& & & & &  \\ \hline
+		\tcref{SVnV-TC_defultInput} - \tcref{SVnV-TC_LowThicknessInput}                 
+		& &X & & & &  \\ \hline
+		\tcref{SVnV-TC_checkAPositiveTest} - \tcref{SVnV-TC_incorrectWEqUpprBndTest} 
+		& & & X& & & \\ \hline
+		\tcref{SVnV-TC_defultInput} - \tcref{SVnV-TC_LowThicknessInput}                             
+		& & & &X& &   \\ \hline
+		\tcref{SVnV-TC_defultInput} - \tcref{SVnV-TC_LowThicknessInput}                              
+		& & & & &X &   \\ \hline
+		\tcref{SVnV-TstDrvdValsHSGlTy} - \tcref{SVnV-TstDrvdValsFTGlTy}                                                
+		& & & & & &X  \\ \hline
+		
+		\hline
+	\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Requirements 
+and Test Cases}
+\label{Table:TraceTestReq}
+\end{table}
+
+
+\end{document}
