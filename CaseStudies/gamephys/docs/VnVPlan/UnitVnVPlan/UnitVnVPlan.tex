@@ -70,7 +70,7 @@ This document describes the unit verification and validation (V\&V) plan for \pr
 \section{General Information}
 \subsection{Purpose}
 
-This section describes the summary of what is being tested in this, the objectives of this document and references for this document. \progname{} is a 2D rigid body game physics library which can be used to simulate the interaction between rigid bodies. This software is able to simulate movement, rotation, collision and collision response of rigid bodies.
+This section describes the summary of what is being tested, the objectives of this document and references for this document. \progname{} is a 2D rigid body game physics library which can be used to simulate the interaction between rigid bodies. This software is able to simulate movement, rotation, collision and collision response of rigid bodies.
 
 \subsection{Scope}
 
@@ -116,28 +116,38 @@ etc.\ \wss{Please write etc.\, not e.t.c.}\olu{updated}
 \begin{enumerate}
 	
 
-\item{UTC1} {: Validate apply\_force1 \\}
+\item{UTC1} {: test\_body\_apply\_force1 \\}
 
 Type: Automatic.
-					
-Initial State: Initial force on a body is Vec2(0.0, 0.0)
-					
-Input: b.apply\_force(Vec2(10.0, 6.0))
-					
-Output: New total force applied to body is Vec2(10.0, 6.0)
-					
+Initial State: 
+
+Input: \\
+shp = Box(Vec2(0, 0), Vec2(100, 100))\\
+mass = 1000\\
+body = Body(Vec2(0, 0), mass, 100, shp)\\
+force = Vec2(1000,0)\\
+body.update(1/60)\\
+expectedAccel = force/mass\\
+
+Output: body.accel == expectedAccel\\	
 How test will be performed: PyTest\\ 
 Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 					
-\item{UTC2}{: Validate apply\_force2\\}
+\item{UTC2}{: test\_body\_apply\_torque\\}
 
 Type: Automatic
-					
-Initial State: Vec2(10.0, 6.0)
-					
-Input: b.apply\_force (Vec2(-20.0, 2.0))
-					
-Output: New total force is Vec2(-10.0, 8.0)
+
+Initial State: 
+
+Input: \\
+shp = Box(Vec2(0, 0), Vec2(100, 100))\\
+inertia = 1000\\
+body = Body(Vec2(0, 0), 100, inertia, shp)\\
+torque = 1000\\
+body.update(1/60)\\
+expectedAngularAccel = torque/inertia\\
+
+Output: body.angularAccel == expectedAngularAccel
 Ref. source: \url{https://onlinemschool.com/math/assistance/vector/calc/}
 
 \item{UTC3}{: Validate apply\_force3\\}
@@ -165,21 +175,36 @@ Output: self.torque=100.0
 
 How test will be performed: PyTest
 
-\item{UTC5}{: Validate set\_space\\}
+\item{UTC5}{: test\_space\_set\_gravity(space)\\}
 
 Type: Automatic
 
 Initial State: 
 
-Input: body.set\_space(space)
+Input: \\
+shp = Box(Vec2(0,0), Vec2(100,100))\\
+body = Body(Vec2(0, 0), 100, 100, shp)\\
+space = Space()\\
+gravity = Vec2(0,9800)\\
+time = 2\\
 
-Output: Expected result of(space is body.space): True
+Output: body.accel == expectedAccel\\
 
 How test will be performed: PyTest\\
 
 \item{UTC6}{: Validate - Initialize dynamic body\\}
 This testcase is to initialize a body object.
 A body object is initialized with these parameters:\\ 
+body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= DYNAMIC, restitution\_ = 0) to create and initialize a body.\\
+
+Initial State: 
+
+Input: space.add\_body(body)\\
+body = Body(Vec2(250,0), 1000, 100, shape, 0, Body.DYNAMIC,1)\\
+
+Output: body = Body(Vec2(250,0), 1000, 100, shape, 0, Body.DYNAMIC,1), 1 body created
+
+How test will be performed: PyTest\\ is initialized with these parameters:\\ 
 body = Body( position\_, mass\_, inertia\_, shape\_, angle=0, bodyType\_= DYNAMIC, restitution\_ = 0) to create and initialize a body.\\
 
 Initial State: 
