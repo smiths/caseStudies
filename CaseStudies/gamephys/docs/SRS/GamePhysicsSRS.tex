@@ -114,6 +114,7 @@ Nov. 2, 2018 & 1.3 & Updated System Context Diagram ; Off the Shelf solution\\
 Nov. 17, 2018 & 1.4 & Updated NonFunctional Requirements\\
 Nov. 20, 2018 & 1.5 & Moved Chasles Theorem from Theoretical model section to Data definition section; updated from T4 to DD9\\
 Nov. 20, 2018 & 1.6 & Moved  from General Definition to Data definition section; updated from GD1 to DD10\\
+Dec 22, 2018 & 1.7 & Updated TM5 and added IM4\\
 
 \bottomrule
 \end{tabularx}
@@ -190,6 +191,7 @@ their units. More specific instances of these symbols will be described in their
   $\mathbf{F}$ & \si{\newton} & Force \\
   $g$ & \si{\metre\per\second\tothe{2}} & Gravitational acceleration ($9.81$ \si{\metre\per\second\tothe{2}}) \\
   $G$ & \si{\metre\tothe{3}\per\kilogram\second\tothe{-2}} & Gravitational constant ($6.673 \times 10^{-11}$ \si{\metre\tothe{3}\per\kilogram\second\tothe{-2}}) \\
+  $\mathbf{h}$ & \si{\metre} & Height \\
   $\mathbf{I}$ & \si{\kilogram\metre\tothe{2}} & Moment of inertia \\
   $\mathbf{\hat{i}}$ & \si{\metre} & Horizontal unit vector \\
   $\mathbf{\hat{j}}$ & \si{\metre} & Vertical unit vector \\
@@ -212,7 +214,7 @@ their units. More specific instances of these symbols will be described in their
   $\tau$ & \si{\newton\metre} & Torque \\
   $\boldsymbol{\theta}$ & \si{\radian} & Angular displacement \\
   $\mathbf{v}$ & \si{\metre\per\second} & Velocity \\
-  %$V$ & \si{\metre\tothe{3}} & Volume \\
+  $\mathbf{w}$ & \si{\metre} & Width \\
   %$\mathbf{x}$ & \si{\metre} & Displacement of spring from equilibrium position \\
   \bottomrule
 \end{longtable}
@@ -1660,6 +1662,48 @@ Ref.\ By & GS\ref{G_linear}, GS\ref{G_angular}, DD\ref{DD_IM}, R\ref{R_Shape}, R
 \end{tabular}
 \end{minipage}
 
+%Instance Model 4 - IM4 - Collisions Detection of Rectangles - IM4
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& IM\refstepcounter{instnum}\theinstnum \label{IM_C}\\
+		\hline
+		Label& \bf Collision detection of rectangles - Axis Aligned Bounding Box\\
+		\hline
+		Input & $x_1$, $y_1$, $x_2$, $y_2$, $w_1$, $h_1$, $w_2$, $h_2$,  $rect_1$, $rect_2$ \\
+		\hline
+		Output & True(collision is detected) if the below statements are satisfied: \newline
+		         $rect_1$.$x_1$ $<$ $rect_2$.$x_2$ + $rect_2$.$w_2$ and \newline
+		         $rect_1$.$x_1$ + $rect_1$.$w_1$ $>$ $rect_2$.$x_2$ and
+		         \newline
+		         $rect_1$.$y_1$ $<$ $rect_2$.$y_2$ + $rect_2$.$h_2$ and
+		         \newline
+		         $rect_1$.$y_1$ + $rect_1$.$h_1$ $>$ $rect_2$.$y_2$\\
+		         
+		\hline
+		Description & This instance model is based on the assumptions regarding rigid body (\aref{A_rigid}, \aref{A_2d}) and collisions (A\ref{A_col}) and is defined using the Axis Aligned Bounding Box method for collision detection.\\
+		
+		& $rect_1$ and $rect_2$ are 2 rectangular shapes referred to as the bounding boxes of rigid bodies. \\
+		& $\mathbf{x}_1$ is x coordinate position of $rect_1$ in space \\
+		& $\mathbf{y}_1$ is y coordinate position of $rect_1$ in space \\
+		& $\mathbf{x}_2$ is x coordinate position of $rect_2$ in space \\
+		& $\mathbf{y}_2$ is y coordinate position of $rect_2$ in space \\
+		& ** The x, y coordinates are the position of the center of mass\\ 
+		& $\mathbf{w}_1$ is the width of  $rect_1$ (\si{\metre})\\
+		& $\mathbf{w}_2$ is the width of  $rect_2$ (\si{\metre})\\
+		& $\mathbf{h}_1$ is the width of  $rect_1$ (\si{\metre})\\
+		& $\mathbf{h}_2$ is the width of  $rect_2$ (\si{\metre})\\
+		
+		\hline
+		Ref.\ By & GS\ref{G_linear}, R\ref{R_Shape}, R\ref{R_Collision}, R\ref{R_CheckCollision} \\
+		
+		\hline
+	\end{tabular}
+\end{minipage}
+
 \subsubsection*{Collision Diagram}
 
 This section presents an image of a typical collision between two 2D rigid bodies labeled A and B, showing
@@ -1820,7 +1864,8 @@ qualities that the software is expected to exhibit.
   add a theoretical model for detecting collision.  A collision will occur
   between two bodies when any point on both bodies occupies the same location
   in space.  You could then add a corresponding IM that defines what this means
-  for rectangular bodies.}
+  for rectangular bodies.}\olu{Added theoretical model}
+\olu{Added IM4}
 
 %5.2 Nonfunctional Requirements
 \subsection{Nonfunctional Requirements}
