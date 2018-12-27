@@ -63,23 +63,19 @@ See MIS documentation at \url{https://github.com/smiths/caseStudies/blob/gamephy
 
 \pagenumbering{arabic}
 
-This document describes the unit verification and validation (V\&V) plan for \progname, a 2D Physics Game Library. The purpose of this document is to specify the details of testing each unit of software by providing test cases based on the modules in the library's module interface specification (MIS) document. The MIS, with all other documentation relating to \progname{}, can be found at: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}.
+This document describes the unit verification and validation (V\&V) plan for \progname, a 2D Rigid Body Game Library. The purpose of this document is to specify the details of testing each unit of software by providing test cases based on the modules in the library's module interface specification (MIS) document. The MIS, with all other documentation relating to \progname{}, can be found at: \url{https://github.com/smiths/caseStudies/tree/master/CaseStudies/gamephys}.
 
 %This document ... \wss{provide an introductory blurb and roadmap of the unit V\&V plan}
 
 \section{General Information}
 \subsection{Purpose}
 
-This section details the summary of what is being tested in this document, the
-objectives of this document and references for this document. \progname is a 2D
-rigid body physics library that can be used to simulate the interaction between
-rigid bodies.This software is able to simulate movement, rotation and collision
-of rigid bodies.
+This section describes the summary of what is being tested in this, the objectives of this document and references for this document. \progname{} is a 2D rigid body game physics library which can be used to simulate the interaction between rigid bodies. This software is able to simulate movement, rotation, collision and collision response of rigid bodies.
 
 \subsection{Scope}
 
-All modules will be verified using the testcases listed in this document.
-\wss{You could specifically list the names of the modules that will be tested.
+All modules of \progname{} include Body, Vector, Space, Shape and Collision Solver will be verified using the test cases listed in this document. Please see the Module Guide at \url{https://github.com/smiths/caseStudies/tree/gamephy_MG/CaseStudies/gamephys/docs/Design/MG} for a description of each module.
+\wss{You could specifically list the names of the modules that will be tested. \olu{updated}
   A reference to your MG would be good here.}
 
 \section{Plan}
@@ -90,8 +86,7 @@ Member(s) of the verification and validation team will include myself, Olu.
 
 \subsection{Automated Testing and Verification Tools}
 
-PyTest framework will be used for automated unit testing. A script with all the
-testcases covering all \progname{} modules will be created by me.
+PyTest framework will be used for automated unit testing. A script with all the testcases covering all \progname{} modules will be created by me.
 
 \subsection{Non-Testing Based Verification}
 
@@ -115,9 +110,8 @@ requirements of the software.
 		
 \paragraph{}
 Body module is responsible for storing the physical properties of an object such
-as mass, position, rotation properties, velocity, e.t.c and provides operations
-on rigid bodies such as setting the mass, moment, applying force
-e.t.c. \wss{Please write etc.\, not e.t.c.}
+as mass, position, rotation properties, velocity etc.\ and provides operations on rigid bodies such as setting the mass, moment, applying force
+etc.\ \wss{Please write etc.\, not e.t.c.}\olu{updated}
 
 \begin{enumerate}
 	
