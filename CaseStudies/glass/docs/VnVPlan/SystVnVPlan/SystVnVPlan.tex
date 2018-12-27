@@ -184,7 +184,7 @@ input parameter that should have a different value than specified by the table.
 
 \subsection{Tests for Functional Requirements}
 
-\subsubsection{User Input Tests}
+\subsubsection{User Input Tests}\label{sec_CalcTCs}
 
 \paragraph{Valid User Input}
 
@@ -608,17 +608,17 @@ TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectB0Test} & incorrectB0T
 \\
 TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectTNT0Test} & incorrectTNT0Test & tnt = 0 & InputError: TNT must be greater than 0 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectAspectREqLwrBndTest } & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  ``a/b must be between 1 and 5, equation would be uncertaint.'' 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectAspectREqLwrBndTest} & incorrectAspectREqLwrBndTest & a = 1500; b = 1500 & (a/b = 1);  ``a/b must be between 1 and 5, equation would be uncertaint.'' 
 \\
 TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectAspectREqUpprBndTest} & incorrectAspectREqUpprBndTest & a = 7500; b = 1500 & (a/b = 5); ``a/b must be between 1 and 5, equation would be uncertaint.''
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqLwrBndTest } & incorrectWEqLwrBndTest & w = 4.5 & "wtnt must be greater than or equal \textit{Wmin} = 4.5, equation would be uncertaint." 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqLwrBndTest} & incorrectWEqLwrBndTest & w = 4.5 & "wtnt must be greater than or equal \textit{Wmin} = 4.5, equation would be uncertaint." 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest & w = 910 & "wtnt must be less than or equal \textit{Wmax} = 910, equation would be uncertaint." 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqUpprBndTest} & incorrectWEqUpprBndTest & w = 910 & "wtnt must be less than or equal \textit{Wmax} = 910, equation would be uncertaint." 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_ incorrectSDEqLwrBndTest} & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & ``SD must be greater than or equal \textit{SDmin} =  6, equation would be uncertaint.'' 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectSDEqLwrBndTest} & incorrectSDEqLwrBndTest & sdx = 0; sdy = 6; sdz = 0 & ``SD must be greater than or equal \textit{SDmin} =  6, equation would be uncertaint.'' 
 \\
-TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectWEqUpprBndTest} & incorrectSDEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & ``SD must be greater than or equal \textit{SDmax} =  130, equation would be uncertaint.'' 
+TC\refstepcounter{testnum}\thetestnum \label{TC_incorrectSDEqUpprBndTest} & incorrectSDEqUpprBndTest  & sdx = 130; sdy = 0; sdz = 0 & ``SD must be greater than or equal \textit{SDmax} =  130, equation would be uncertaint.'' 
 \\
 \hline
 \end{tabular}
@@ -715,6 +715,11 @@ existing version, then the test passes and confidence in the reusability of
 test fails and the other modules must be modified to be completely reusable.
 	
 \end{enumerate}
+
+\subsubsection{Correctness Tests}
+The correctness NFR is covered by the functional requirement test cases for 
+calculations, found in 
+Section~\ref{sec_CalcTCs}.
 
 \subsection{Traceability Between Test Cases and Requirements}
 
