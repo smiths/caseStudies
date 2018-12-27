@@ -3,6 +3,7 @@
 \usepackage{bm} 
 \usepackage[all]{nowidow}
 \usepackage{amsmath, mathtools} 
+%\usepackage[round]{natbib}
 \usepackage{amsfonts}
 \usepackage{amssymb} 
 \usepackage{graphicx} 
@@ -24,6 +25,8 @@
 \usepackage{enumitem}
 \usepackage{underscore}
 \usepackage{threeparttablex}
+\usepackage{comment}
+\usepackage[square,sort]{natbib}
 
 %\usepackage{refcheck}
 
@@ -78,16 +81,7 @@ urlcolor=cyan % color of external links
 \newcommand{\green}[1]{\textcolor{black!40!green}{#1}}
 
 %% Comments 
-
-\newif\ifcomments\commentstrue
-
-\ifcomments \newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
-\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}} \else
-\newcommand{\authornote}[3]{} \newcommand{\todo}[1]{} \fi
-
-\newcommand{\wss}[1]{\authornote{magenta}{SS}{#1}}
-\newcommand{\hcf}[1]{\authornote{yellow}{HF}{#1}}
-\newcommand{\cjl}[1]{\authornote{green!60!black}{CL}{#1}}
+\input{../../Comments}
 
 \newcolumntype{x}[1]{>{\raggedright\arraybackslash}m{#1}}
 \newcolumntype{y}{>{\raggedright\arraybackslash}l}
@@ -150,18 +144,15 @@ Requirement Specifications and Module Guide. The full documentation and implemen
 
 \section{Notation} \label{SecNotation}
 
-%The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
-%with the addition that template modules have been adapted from
-%\cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
-%\citet{HoffmanAndStrooper1995}.  
+The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995} ,
+with the addition that template modules have been adapted from
+\cite{GhezziEtAl2003} .  The mathematical notation comes from Chapter 3 of
+\citet{HoffmanAndStrooper1995} .  
 For instance, the symbol := is used for a
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.\\
 
 The following table summarizes the primitive data types used by \progname. 
-
-%\progname uses six primitive data types: Booleans, characters, double-precision floating-point numbers (doubles), as well as signed and unsigned integers. These data types are summarized in the following table. The table lists the name of the 
-%data type, its notation, and a description of an element of the data type. 
 
 \renewcommand*{\arraystretch}{1.2}
 \noindent  \begin{longtable}{l l p{10.5cm}} 
@@ -179,11 +170,11 @@ natural number & $\mathbb{N}$ & A number without a fractional
 \end{longtable} 
 
 \noindent \progname also uses non-primitive data types such as arrays,
-enumerations, pointers (references), strings, structures, unions. These are
+enumerations, strings, structures, unions. These are
 summarized in the following table.
 
 \wss{I'm not sure we need pointers at this point.  An abstract design probably
-  shouldn't have to invoke the concept of pointers.}
+  shouldn't have to invoke the concept of pointers.}\olu{updated}
 
 \renewcommand*{\arraystretch}{1.2}
 \noindent \begin{longtable}{l l p{9.5cm}}
@@ -192,55 +183,19 @@ summarized in the following table.
 \midrule
 	Array & array(\textit{T}) & A list of a given data type \textit{T}. \\
 	Enumeration & enum & A data type containing named, constant values. \\
-	Pointer & \textit{T}* & A reference to an object of data type \textit{T}. \\
 	String & string/array(char) & An array of characters. \\
 	Structure & struct & A data type that can store multiple fields of different data types in one variable. \\
 	Union & union & Similar to a structure, but only one field can contain a value at any given time. \\
 	\bottomrule
 \end{longtable}
 
-\noindent Finally, \progname uses two more important type-related concepts: void
-and function pointers. Void is not a data type in itself; however, functions
-that do not return any value are assigned a return type of void, and void
-pointers, denoted by void*, are used for references to objects of an unspecified
-data type. \progname also allows passing functions to other functions through
-the use of function pointers, which hold references to function
-definitions. Each function pointer is denoted by the name of their function type
-and is defined by a specific function signature, such as:
-$$\text{Function Type} : \text{Arg}_1 \times \text{Arg}_2 \times ... \times \text{Arg}_n \to \text{Return Type}$$
-For example, an inequality operator would have the signature \inquote{Inequality : $\mathbb{R} \times \mathbb{R} \to \mathbb{B}$}.
-
 \wss{I really don't think we need void in the abstract MIS.  If an access
-  program doesn't return any value, we just don't assign it one.}
+  program doesn't return any value, we just don't assign it one.} \olu{removed section}
 
-\iffalse
-
-\section{Table of Symbols}
-
-In addition to the table of symbols in Section 
-\ref{SRS-TblOfSym} of the SRS, the following table outlines the 
-symbols that are used in this document. All other tables are sorted alphanumerically, with Greek alphabets following English alphabets. 
-
-\renewcommand*{\arraystretch}{1.2}
-\noindent 
-\begin{longtable}{l l p{12cm}} 
-\toprule 
-\textbf{Symbol} & \textbf{Unit} & \textbf{Description}\\ \midrule
-\bottomrule 
-\end{longtable} 
-
-\section{Numerical Methods} \label{SecNumMethods}
-
-This section outlines the numerical methods that
-are needed in order to fulfill the program requirements and further
-connect the abstract and ambiguous to the concrete and explicit. 
-
-\fi
 
 \section{Module Decomposition} 
 
 The following table is taken directly from the Module Guide document for this project.
-%To view the Module Hierarchy, please refer to the Module Hierarchy section of the MG.
 
 \begin{table}[h!]
 \centering
@@ -252,8 +207,8 @@ The following table is taken directly from the Module Guide document for this pr
 		
 {Hardware-Hiding Module} & ~ \\
 \midrule
-		
-\multirow{3}{0.3\textwidth}{Behaviour-Hiding Module}
+ ~\newpage	
+ \multirow{3}{0.3\textwidth}{Behaviour-Hiding Module}
 & Rigid Body\\
 & Shape\\
 %& \multirow{3}{0.3\textwidth}{Shape Module} 
@@ -269,8 +224,7 @@ The following table is taken directly from the Module Guide document for this pr
 		
 \bottomrule
 		
-		
-		
+			
 	\end{tabular}
 	
 	\caption{Module Hierarchy}
@@ -280,7 +234,7 @@ The following table is taken directly from the Module Guide document for this pr
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%% RIGID BODY MODULE %%%%%%%%%%%%%%%%%%%%%%%
-\newpage \wss{put a newpage between all modules.}
+\newpage \wss{put a newpage between all modules.}\olu{noted}
 
 \section{MIS of the Rigid Body Module} \label{MISBody}
 
