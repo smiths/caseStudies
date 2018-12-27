@@ -169,25 +169,26 @@ natural number & $\mathbb{N}$ & A number without a fractional
 \bottomrule
 \end{longtable} 
 
-\noindent \progname also uses non-primitive data types such as arrays,
-enumerations, strings, structures, unions. These are
-summarized in the following table.
+The specification of \progname \ uses some derived data types: sequences, strings, and tuples. Sequences are lists filled with elements of the same data type. Strings
+are sequences of characters. Tuples contain a list of values, potentially of different types. In addition, \progname \ uses functions, which
+are defined by the data types of their inputs and outputs. Local functions are described by giving their type signature followed by their specification.
+
 
 \wss{I'm not sure we need pointers at this point.  An abstract design probably
   shouldn't have to invoke the concept of pointers.}\olu{updated}
 
-\renewcommand*{\arraystretch}{1.2}
-\noindent \begin{longtable}{l l p{9.5cm}}
-\toprule
-	\textbf{Data Type} & \textbf{Notation} & \textbf{Description} \\
-\midrule
-	Array & array(\textit{T}) & A list of a given data type \textit{T}. \\
-	Enumeration & enum & A data type containing named, constant values. \\
-	String & string/array(char) & An array of characters. \\
-	Structure & struct & A data type that can store multiple fields of different data types in one variable. \\
-	Union & union & Similar to a structure, but only one field can contain a value at any given time. \\
-	\bottomrule
-\end{longtable}
+%\renewcommand*{\arraystretch}{1.2}
+%\noindent \begin{longtable}{l l p{9.5cm}}
+%\toprule
+%	\textbf{Data Type} & \textbf{Notation} & \textbf{Description} \\
+%\midrule
+%	Array & array(\textit{T}) & A list of a given data type \textit{T}. \\
+%	Enumeration & enum & A data type containing named, constant values. \\
+%	String & string/array(char) & An array of characters. \\
+%	Structure & struct & A data type that can store multiple fields of different data types in one variable. \\
+%	Union & union & Similar to a structure, but only one field can contain a value at any given time. \\
+%	\bottomrule
+%\end{longtable}
 
 \wss{I really don't think we need void in the abstract MIS.  If an access
   program doesn't return any value, we just don't assign it one.} \olu{removed section}
@@ -233,12 +234,15 @@ The following table is taken directly from the Module Guide document for this pr
 	
 \end{table}
 
+~\newpage
 %%%%%%%%%%%%%%%%%%%% RIGID BODY MODULE %%%%%%%%%%%%%%%%%%%%%%%
+~\newpage
 \newpage \wss{put a newpage between all modules.}\olu{noted}
 
 \section{MIS of the Rigid Body Module} \label{MISBody}
 
-\subsection{Module Name: Body} 
+\subsection{Module} 
+Body
 
 \subsection{Uses} \label{SecUBody}
 	\Shape, \Space, \Vector %\Transform, %\SpatialIndex, \Sequence
@@ -259,6 +263,19 @@ N/A
 %%	ArbiterIteratorFunc : Body* $\times$ Shape* $\times$ void* $\to$ void 
 	
 \subsubsection{Exported Access Programs} \label{SecEAPBody}
+
+\begin{center}
+	\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+		\hline
+		\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+		\hline
+		{BodyInit} & $\mathbb{R}$$_{mass}$, $\mathbb{R}$$_{moment}$, $\mathbb{R}$$_{x,y}$ & $\mathbb{T}$$_{body}$ & massError \\
+		\hline
+		{Update} & $\mathbb{T}$$_{body}$ & massError \\
+		\hline
+	\end{tabular}
+\end{center}
+
 	\renewcommand*{\arraystretch}{1.2}
 	\begin{longtable}{| y | x{3.5cm} | y | x{3.5cm} |}
 		\hline \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline 
