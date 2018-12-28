@@ -437,15 +437,9 @@ each body.  \wss{What state variable is updated?  How is it changed?  I should
 & \textbf{Output:} & None. \newfunc
 & \textbf{Exceptions:} & None \\
 
-%\textbf{bodyKinetic Energy:} & \textbf{Input:} & bodyKineticEnergy accepts a Body pointer as input. \\
-%& \textbf{Exceptions:} & None.\\
-%& \textbf{Transition:} & bodyKineticEnergy will calculate the Body's kinetic energy based on its mass, moment, and linear and angular velocities. \\
-%& \textbf{Output:} & bodyKineticEnergy returns a double value representing the kinetic energy. \newfunc
-
-%\textbf{bodyEach:} & \textbf{Input:} & Each bodyEach function accepts a Body pointer, a function pointer to the corresponding iterator, and a void pointer as inputs. \\
-%& \textbf{Exceptions:} & None.\\
-%& \textbf{Transition:} & Each bodyEach function will iterate through the Body's Shapes or Arbiters, depending on the function's corresponding parameter, and apply the input function to each object in the list, using the data (void pointer) from the third input value. \\
-%& \textbf{Output:} & None.  \newfunc
+\textbf{set_space:} & \textbf{Transition:} & set_space\\
+& \textbf{Output:} & None. \newfunc
+& \textbf{Exceptions:} & None \\
 \end{longtable*} 
 
 \wss{There are state variables that do not appear to have any transitions.  How
@@ -456,6 +450,9 @@ each body.  \wss{What state variable is updated?  How is it changed?  I should
 \subsubsection{Local Functions} \label{SecLFBody}
 
 N/A
+
+~\newpage
+~\newpage
 
 %\renewcommand*{\arraystretch}{\funcPadding}
 %\begin{longtable*}{@{} p{2.6cm} l p{\colDescrip}} 
@@ -484,6 +481,9 @@ N/A
 %& \textbf{Transition:} & bodySetTransform mutates the input Body's transformation matrix (used to obtain its local position) using the input position Vector and a rotation vector converted from the given angle (last input value). Called by \hyperref[SecAPSBody]{bodySetPosition and bodySetAngle}. \\
 %& \textbf{Output:} & None.  \newfunc
 %\end{longtable*}
+
+~\newpage
+~\newpage
 
 %%%%%%%%%%%%%%%%%%%% SHAPE MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -883,6 +883,9 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 	& \textbf{Output:} & None.  \newfunc
 	
 \end{longtable*}
+
+~\newpage
+~\newpage
 	
 %%%%%%%%%%%%%%%%%%%% SPACE MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
@@ -920,35 +923,10 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 %	spaceGetStaticBody & Space* & Body* & - \\ \hline
 %	spaceSetIterations & Space*, int & - & InvalidIter \\ \hline
 	spaceSetGravity & Space*, Vector & - & - \\ \hline
-%	spaceSetCollisionSlop & Space*, double & - & - \\ \hline
-%	spaceSetCollisionBias & Space*, double & - & - \\ \hline
-%	spaceSetCollisionPersistence & Space*, Timestamp & - & - \\ \hline
-%	spaceSetStaticBody & Space*, Body* & - & AttachedStaticBody \\ \hline
-%	spaceIsLocked & Space* & Boolean & - \\ \hline
-%	spaceAddDefaultCollisionHandler & Space* & CollisionHandler* & - \\ \hline
 	spaceGetBodies & Space* & array* & - \\ \hline
 	spaceAddCollisionHandler & Space*, CollisionType, CollisionType & CollisionHandler* & - \\ \hline
-%	spaceAddWildcardHandler & Space*, CollisionType & CollisionHandler* & - \\ \hline
-%	spaceAddShape & Space*, Shape* & Shape* & DuplicateShape \vor AttachedShape \vor SpaceLocked \\ \hline
 	spaceAddBody & Space*, Body* & Body* & - \\ \hline
-%	spaceFilterArbiters & Space*, Body*, Shape* & - & - \\ \hline
-%	spaceRemoveShape & Space*, Shape* & - & ShapeNotFound \vor SpaceLocked \\ \hline
-%	spaceRemoveBody & Space*, Body* & - & MainStaticBody \vor BodyNotFound \vor SpaceLocked \\ \hline
-%	spaceContainsShape & Space*, Shape* & Boolean & - \\ \hline
-%	spaceContainsBody & Space*, Body* & Boolean & - \\ \hline
-%	spaceEachBody & Space*, SpaceBodyIteratorFunc, void* & - & - \\ \hline
-%	spaceEachShape & Space*, SpaceShapeIteratorFunc, void* & - & - \\ \hline
-%	spaceReindexStatic & Space* & - & SpaceLocked \\ \hline
-%	spaceReindexShape & Space*, Shape* & - & SpaceLocked \\ \hline
-%	spaceReindexShapesForBody & Space*, Body* & - & SpaceLocked \\ \hline
-%	spacePushFreshContactBuffer & Space* & - & - \\ \hline
-%	contactBufferGetArray & Space* & Contact & - \\ \hline
 	spaceCollideShapes & Shape*, Shape*, CollisionID, Space* & CollisionID & - \\ \hline
-%	spaceArbiterSetFilter & Arbiter*, Space* & Boolean & - \\ \hline
-%	spaceLock & Space* & - & - \\ \hline
-%	spaceUnlock & Space*, Boolean & - & SpaceLockUnderflow \\ \hline
-%	spaceArrayForBodyType & Space*, BodyType & Array* & - \\ \hline
-%	shapeUpdateFunc & Shape*, void* & - & - \\ \hline
 	spaceStep & Space*, double & - & - \\ \hline
 \end{longtable}
 
@@ -1103,6 +1081,9 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 
 \end{longtable*}
 
+~\newpage
+~\newpage
+
 %%%%%%%%%%%%%%%%%%%% VECTOR MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
 \section{MIS of the Vector Module} \label{MISVector}
@@ -1224,6 +1205,8 @@ PolyShapeClass := \{POLY_SHAPE, polyShapeCacheData, polyShapeDestroy\}
 	
 \end{longtable*}
 
+~\newpage
+~\newpage
 
 %%%%%%%%%%%%%%%%%%%%  COLLISION SOLVER MODULE %%%%%%%%%%%%%%%%%%%%%%%
 
