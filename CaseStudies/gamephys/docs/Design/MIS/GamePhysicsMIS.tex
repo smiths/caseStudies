@@ -118,7 +118,9 @@ urlcolor=cyan % color of external links
 	\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 	\midrule
 	Nov. 15, 2018 & 1.0 & Updates throughout document; siimplifying document\\
-	Nov 20, 2018 & 1.1 & Notes\\
+	Nov. 20, 2018 & 1.1 & Notes\\
+	Dec. 25, 2018 & 1.2 & Updated with github feedback\\
+	Jan. 3, 2018 & 1.3 & Updated with github feedback\\
 	\bottomrule
 \end{tabularx}
 
@@ -294,7 +296,7 @@ N/A
 		\hline
 		{BodyInit} & $\mathbb{R}$,$\mathbb{R}$, ($\mathbb{R}$$_{x}$,$\mathbb{R}$$_{y}$), $\mathbb{R}$,$\mathbb{N}$, $\mathbb{R}$ & $Body$ & massError \\
 		\hline
-		{Update} & $Body$ &($\mathbb{R}$$_{x}$,$\mathbb{R}$$_{y}$),($\mathbb{R}$$_{x}$,$\mathbb{R}$$_{y}$) & - \\
+		{Update} & $Body$ &$Body$ & - \\
 		\hline
 		{apply\_force} & $Body$  &$Vec2d$& - \\
 		\hline
@@ -303,6 +305,8 @@ N/A
 		{set\_space} & $Body$  &$Space$& - \\
 		\hline
 		{set\_angular\_accler} & $Body$  &$\mathbb{R}$& - \\
+		\hline
+		{BodyType} & & $\mathbb{Z}$ & BodyTypeError \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -321,7 +325,7 @@ ${C_R}$ := 1
 	 \wss{I don't know what this heading means?  You can just
           have your list of state variables.}
 	 \begin{multicols}{3}
-		\noindent type: BodyType \\
+	
 	%	positionFunc: PositionFunc \\
 	%	velocityFunc: VelocityFunc \\
 		mass: \R \\
@@ -368,7 +372,7 @@ ones. \wss{Where do these inputs come from?  Only two real numbers are passed to
   body?}\\
 
 & \textbf{Output:} & bodyInit returns a pointer to the initialized Body.\newfunc
-& \textbf{Exceptions:} & None.\wss{Why aren't you checking that the mass is positive?}\\ 
+& \textbf{Exceptions:} & None.\wss{Why aren't you checking that the mass is positive?} \olu{updated with exception for negative mass}\\ 
 %\textbf{newBody:} & \textbf{Input:} & newBody accepts two double values as inputs. \\
 %& \textbf{Exceptions:} & newBody may throw a NaNMass, NaNMoment, NegativeMass or NegativeMoment exception when the user provides NaN or negative values for input, or an InfiniteMass exception when the user provides an infinite value for the first input double. \\
 %& \textbf{Transition:} & newBody will allocate a new Body, initialize it with the input and default values, and set it to a dynamic body. \\
