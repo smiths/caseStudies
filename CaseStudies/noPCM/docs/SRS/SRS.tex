@@ -176,6 +176,8 @@ systems.  The symbols are listed in alphabetical order.
   %                                                                  the instant
   %                                                                  when melting begins
   % \\ 
+  $E$ & \si[per-mode=symbol] {\joule} & change in heat energy
+  \\ 
   $E_W$ & \si[per-mode=symbol] {\joule} & change in heat energy in the water
   \\ 
   $g$ & \si[per-mode=symbol] {\watt \per \square \metre} & volumetric heat
@@ -608,9 +610,10 @@ has no spatial variation; that is, it is
 %   simulation will start with the PCM in solid form [\iref{epcm}, \iref{I_HPCM}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_OpRange}:] The operating
-  temperature range of the system is such that the water is always in liquid
-  state.  That is, the temperature will not drop below the melting point of water, or rise
-  above its boiling point temperature [\iref{ewat}, \iref{I_HWAT}].
+  temperature range of the system is such that the material (water in this case)
+  is always in a liquid state.  That is, the temperature will not drop below the
+  melting point of water, or rise above its boiling point temperature
+  [\tref{T_SHE}, \iref{ewat}, \iref{I_HWAT}].
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_htank}:] The tank is
   perfectly insulated so that there is no heat loss from the tank [\iref{ewat},
@@ -631,10 +634,6 @@ has no spatial variation; that is, it is
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_tk_prssr}:] The pressure
   in the tank is atmospheric, so the melting and boiling points of water are
   $0^o\text{C}$ and $100^o\text{C}$, respectively [\iref{ewat}, \iref{I_HWAT}].
-
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_VolCoil}:] When
-  considering the volume of water in the tank, the volume of the coil is assumed
-  to be negligible.
 	
 \end{itemize}
 
@@ -677,51 +676,40 @@ on.
 
 ~\newline
 
-% \noindent
-% \begin{minipage}{\textwidth}
-% \renewcommand*{\arraystretch}{1.5}
-% \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
-%   \hline
-%   \rowcolor[gray]{0.9}
-%   Number& T\refstepcounter{theorynum}\thetheorynum \label{T_SHE}\\
-%   \hline
-%   Label&\bf Sensible heat energy\\
-%   \hline
-%   Equation&  
-%   $
-%   E = \begin{cases}
-%   C^{S}m\Delta T & \text { if } T < T_\text{melt}\\
-%   C^{L}m\Delta T & \text { if }  T_\text{melt}<T < T_\text{boil}\\
-%   C^{V}m\Delta T & \text { if }  T_\text{boil}>T \\
-%   \end{cases}
-%   $
-%   \\
-%   &See \tref{T_LHE}, Latent heat energy, if $T$ = $T_\text{boil}$ or 
-%   $T$ = $T_\text{melt}$.\\
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_SHE}\\
+  \hline
+  Label&\bf Sensible heat energy (No State Change)\\
+  \hline
+  Equation&  
+  $
+  E = 
+  C m \Delta T
+  $
+  \\
   
-%   \hline
-%   Description & $E$ is the change in sensible heat energy (J).\\
-%   & $C^S$, $C^L$, $C^V$ are the specific heat capacities of a solid, liquid, 
-% 	and vapour, respectively.\\
-%   & $m$ is the mass.\\
-%   & $T$ is the temperature, and $\Delta T$ is the change in temperature.\\
-%   & $T_\text{melt}$ and $T_\text{boil}$ are the melting and boiling points, respectively.\\
-%   & Sensible heating occurs as long as the material does not reach a temperature 
-%   where a phase change occurs.\\
-%   &A phase change occurs if $T = T_\text{boil}$ or $T = T_\text{melt}$.  
-%   If this is the case, refer to \tref{T_LHE}, Latent heat energy.
-%   \\
-%   \hline
-%   Source &
-%   \url{http://en.wikipedia.org/wiki/Sensible_heat}\\
-%   % The above web link should be replaced with a proper citation to a publication
-%   \hline
-%   Ref.\ By & \iref{I_HWAT}, \iref{I_HPCM}\\
-%   \hline
-% \end{tabular}
-% \end{minipage}\\
-
-% ~\newline
+  \hline
+  Description & $E$ is the change in sensible heat energy (\si{\joule}).\\
+  & $C$ is the specific heat capacity (\si{\joule\per\kilogram\per\celsius}).\\
+  & $m$ is the mass (\si{\kilogram}).\\
+  & $T$ is the temperature (\si{\celsius}), and $\Delta T$ is the change in temperature (\si{\celsius}).\\
+  & Sensible heating occurs as long as the material does not reach a temperature 
+  where a phase change occurs, as assumed in~\aref{A_OpRange}.
+  \\
+  \hline
+  Source &
+  \url{http://en.wikipedia.org/wiki/Sensible_heat}\\
+  % The above web link should be replaced with a proper citation to a publication
+  \hline
+  Ref.\ By & \iref{I_HWAT}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
 
 % \noindent
 % \begin{minipage}{\textwidth}
