@@ -348,9 +348,6 @@ vertical
 ${\ell{}_{\text{b}}}$ &  \si{\meter}& base length of a slice in the 
 direction parallel to the slope of the base
 \\
-${\ell{}_{\text{s}}}$ &  \si{\meter}& surface length of a slice in the 
-direction 
-parallel to the slope of the surface \\
 
 \hline
 \end{longtable*}
@@ -1644,7 +1641,7 @@ of a slice is a straight line (\aref{A_Straight}).\\
 &$i$ is the index representing a single slice.\\
 &${U_{\text{t}}}$ is the surface hydrostatic force per meter in the 
 $z$-direction (\si{\newton\per\meter}).\\
-&${b_{i}}$ is the idth of the base of a slice in the \textit{x}-direction 
+&${b_{i}}$ is the width of the base of a slice in the \textit{x}-direction 
 (\si{\meter}), defined in \ddref{DD_b}.\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water 
 table (\si{\meter}).\\
@@ -1901,51 +1898,6 @@ to the slope of the base (\si{\meter}).\\
 
 % ------------------------------------------ %
 %               End DD lb   %
-% ------------------------------------------ %
-
-~\newline
-
-% ------------------------------------------ %
-%               Begin DD ls   %
-% ------------------------------------------ %
-
-\noindent
-\begin{minipage}{\textwidth}
-\renewcommand*{\arraystretch}{1.6}
-\begin{tabular}{| p{\colAwidth} | p{\colBwidth} |}
-  
-\hline \rowcolor[gray]{0.9} Number&
-DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_ls}\\
-
-\hline Label& \bf Total Surface Length of a Slice\\
-\hline Symbol& $\ell_\text{s}$\\
-\hline SI Units& \si{\meter}\\
-
-\hline
-Equation & 
-${\ell{}_{\text{s,}i}}$ = $b_{i}\sec\left(\beta{}_{i}\right)$\\
-
-\hline Description &This equation is based on the assumption that the surface 
-of a slice is a straight line (\aref{A_Straight}).\\
-&$i$ is the index representing a single slice.\\
-&${\ell{}_{\text{s}}}$ is the surface length of a slice in the direction 
-parallel to 
-the slope of the surface (\si{\meter}).\\
-&$b$ is the width of the base of a slice in the \textit{x}-direction 
-(\si{\meter}), defined in \ddref{DD_b}.\\
-&$\beta{}$ is the angle between the surface of a slice and the horizontal 
-(\si{\degree}), defined in \ddref{DD_Angles_Beta}.\\
-
-\hline Sources& \cite{FredlundKrahn}\\
-
-\hline Ref.\ By & \ddref{DD_Ut}\\
-
-\hline
-\end{tabular}
-\end{minipage}\\
-
-% ------------------------------------------ %
-%               End DD ls        %
 % ------------------------------------------ %
 
 ~\newline
