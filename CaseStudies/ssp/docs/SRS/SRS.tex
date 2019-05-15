@@ -207,11 +207,11 @@ $z$-direction
 $h$ &  \si{\meter}& height in the \textit{y}-direction from the base of a slice 
 to the slope surface, at the \textit{x}-direction midpoint of the slice
 \\
-$h_{\text{z}}$ & \si{\meter}& height in the \textit{y}-direction from the base 
-of a slice to the center of the slice
+$h_{\text{z}}$ & \si{\meter}& height in the \textit{y}-direction of the 
+interslice normal force
 \\
-$h_\text{z,w}$ & \si{\meter}& height in the \textit{y}-direction from the base 
-of a slice halfway to the water table
+$h_\text{z,w}$ & \si{\meter}& height in the \textit{y}-direction of the 
+interslice water force, one-third of the height of the water table
 \\ 
 $i$ & & index representing a single slice 
 \\
@@ -1636,7 +1636,8 @@ ${U_{\text{t,}i,2}}$ = ${b_{i}}\begin{cases}
 $U_{\text{t,}i} = 0.5({U_{\text{t,}i,1}} + {U_{\text{t,}i,2}})$
 \\ 
 
-\hline Description &This equation is based on the assumption that the surface 
+\hline Description &This equation is based on the assumption that 
+the surface 
 of a slice is a straight line (\aref{A_Straight}).\\
 &$i$ is the index representing a single slice.\\
 &${U_{\text{t}}}$ is the surface hydrostatic force per meter in the 
