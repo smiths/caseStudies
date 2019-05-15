@@ -1579,9 +1579,6 @@ Q_{i}\;{\sin\left(\omega_{i}\right)}
 h_{i} \end{array}
 \end{equation*}
 
-
-
-
 % ------------------------------------------ %
 %        End  GD Moment Equilibrium       %
 % ------------------------------------------ %
@@ -2854,18 +2851,18 @@ function of distance in the $x$-direction, defined in \ddref{DD_f}. \\
  \dref{GD_X}, Equation~(\ref{eq:Moment}) can be derived.
 
 \begin{equation}\label{eq:Moment}
-  0 = \begin{array}{l} - {G}_{i} \left[ {h_{\text{z,}i}} -
+  0 = \begin{array}{l} - {G}_{i} \left[ {h_{\text{z,}i}} +
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] + {G}_{i-1} \left[ {h_{\text{z,}i-1}} +
+      \right] + {G}_{i-1} \left[ {h_{\text{z,}i-1}} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] - H_{i}\left[ h_{\text{z,w,}i} -
+      \right] - H_{i}\left[ h_{\text{z,w,}i} +
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
+      \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] -\lambda \frac{b_{i}}{2} \left( G_{i}
-    f_{i} + G_{i-1} f_{i-1} \right) +
-    K_{\text{c}} W_{i} \frac{h_{i}}{2} - U_{\text{t,}i}
-    \sin\left(\beta_{i}\right) h_{i} -
+      \right] +\lambda \frac{b_{i}}{2} \left( G_{i}
+    f_{i} + G_{i-1} f_{i-1} \right) -
+    K_{\text{c}} W_{i} \frac{h_{i}}{2} + U_{\text{t,}i}
+    \sin\left(\beta_{i}\right) h_{i} +
     Q_{i}\;{\sin\left(\omega_{i}\right)}
     h_{i} \end{array}
 \end{equation} 
@@ -2876,18 +2873,18 @@ Equation~(\ref{eq:lambda1}).
 
 \begin{equation}\label{eq:lambda1}
   \lambda = \frac { \begin{array}{l} - {G}_{i} \left[
-        {h_{\text{z,}i}} - \frac{b_{i}}{2} {
+        {h_{\text{z,}i}} + \frac{b_{i}}{2} {
           \tan\left(\alpha_{i}\right)} \right] +
-      {G}_{i-1} \left[ {h_{\text{z,}i-1}} +
+      {G}_{i-1} \left[ {h_{\text{z,}i-1}} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] - H_{i}\left[ h_{\text{z,w,}i} -
+        \right] - H_{i}\left[ h_{\text{z,w,}i} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
+        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] + K_{\text{c}} W_{i} \frac{h_{i}}{2} -
-      U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} -
+        \right] - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+      U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} +
       Q_{i}\;{\sin\left(\omega_{i}\right)}
-      h_{i} \end{array} } { \frac{b_{i}}{2} \left[
+      h_{i} \end{array} } { -\frac{b_{i}}{2} \left[
       G_{i} f_{i} + G_{i-1} f_{i-1}
       \right] }
 \end{equation}
@@ -2898,17 +2895,17 @@ external forces, respectively are zero.
 
 \begin{equation*}
 \lambda = \frac { \begin{array}{l} - {G}_{i} \left[
-	{h_{\text{z,}i}} - \frac{b_{i}}{2} {
+	{h_{\text{z,}i}} + \frac{b_{i}}{2} {
 		\tan\left(\alpha_{i}\right)} \right] +
-	{G}_{i-1} \left[ {h_{\text{z,}i-1}} +
+	{G}_{i-1} \left[ {h_{\text{z,}i-1}} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] - H_{i}\left[ h_{\text{z,w,}i} -
+	\right] - H_{i}\left[ h_{\text{z,w,}i} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} +
+	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] -
+	\right] +
 	U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \end{array} } 
-	{ \frac{b_{i}}{2} \left[
+	{ -\frac{b_{i}}{2} \left[
 	G_{i} f_{i} + G_{i-1} f_{i-1}
 	\right] }
 \end{equation*}
