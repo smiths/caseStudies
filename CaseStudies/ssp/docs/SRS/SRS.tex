@@ -235,6 +235,11 @@ in the $z$-direction
 $R$ & \si{\newton\per\meter} & resistive shear force without the influence of 
 interslice forces per meter in the $z$-direction
 \\
+$\textbf{r}$ & \si{\meter} & position vector of a point where a force is 
+applied, measured from the axis of rotation
+\\
+$r$ & \si{\meter} & length of the moment arm
+\\ 
 $S$ & \si{\newton\per\meter} & mobilized shear force per meter in the 
 $z$-direction
 \\
@@ -327,6 +332,8 @@ $\sigma{}$ & \si{\pascal} & total stress on the soil mass
 $\sigma{}_N'$ & \si{\pascal} & effective normal stress
 \\
 $\sigma{}'$ & \si{\pascal} & effective stress provided by the soil skeleton
+\\
+$\textbf{tau{}}$ & \si{\newton\meter} & torque
 \\
 $\tau{}$ & \si{\pascal} & shear strength
 \\
@@ -1396,20 +1403,35 @@ then we should also define T as effective mobile shear, right?}
   
   \hline Label&\bf Moment Equilibrium\\
   
-  \hline Equation& \( 0 = \begin{array}{l} - {G}_{i} \left[
-      {h_{\text{z,}i}} + \frac{b_{i}}{2} {
-        \tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
-    \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
-        \tan\left(\alpha_{i}\right)} \right] -
-    H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
-        \tan\left(\alpha_{i}\right)} \right] \\[5pt] +
-    H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
-        \tan\left(\alpha_{i}\right)} \right] +
-    \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
-    \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
-    U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
-    Q_{i}\;{\sin\left(\omega_{i}\right)}
-    h_{i} \end{array} \) \\
+  \hline Equation& \( 0 = \begin{cases}\begin{array}{l} - {G}_{i} \left[
+  		{h_{\text{z,}i}} + \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+  		\left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] \\-
+  		H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] +
+  		H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] \\+
+  		\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+  		\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+  		U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+  		Q_{i}\;{\sin\left(\omega_{i}\right)}
+  		h_{i} \end{array} & y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+  	\begin{array}{l} - {G}_{i} \left[
+  		{h_{\text{z,}i}} - \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+  		\left[ {h_{\text{z,}i-1}} + \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] \\-
+  		H_{i}\left[ h_{\text{z,w,}i} - \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] +
+  		H_{i-1}\left[ h_{\text{z,w,}i-1} + \frac{b_{i}}{2} {
+  			\tan\left(\alpha_{i}\right)} \right] \\+
+  		\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+  		\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+  		U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+  		Q_{i}\;{\sin\left(\omega_{i}\right)}
+  		h_{i} \end{array} & y_{\text{slip,}i} < y_{\text{slip,}i-1} \end{cases} 
+  		\) \\
 
  \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
  Force equilibrium is derived from the free body diagram of 
@@ -1453,6 +1475,154 @@ then we should also define T as effective mobile shear, right?}
   \hline
 \end{tabular}
 \end{minipage}\\
+
+\subsubsection*{Derivation of Moment Equilibrium}
+\noindent
+Moment is equal to torque, so the equation from \ddref{DD_T} will be used to 
+calculate moments:
+
+\begin{equation*}
+\boldsymbol{\tau} = \mathbf{r} \times \mathbf{F}
+\end{equation*}
+
+\noindent Considering one dimension, with moments in the clockwise direction as 
+positive and moments in the counterclockwise direction as negative, and 
+replacing the torque symbol with the moment symbol, the equation simplifies to:
+
+\begin{equation*}
+M = F \cdot r
+\end{equation*}
+
+\noindent To represent the moment equilibrium, the moments from each force 
+acting on a slice must be considered and added together. The forces acting on a 
+slice are all shown in Figure \ref{Fig_Forces}. The point at the midpoint of
+the base of a slice is considered as the axis of rotation, from which the 
+length of the moment arm is measured. Considering first the interslice normal 
+force acting on slice interface $i$, the moment is negative because the force 
+pushes the slice in a counter-clockwise direction, and the moment arm is the 
+height of the force plus the difference in height between the base at slice 
+interface $i$ and the base at the midpoint of slice $i$. Thus, the moment is 
+expressed as:
+
+\begin{equation*}
+- G_{i} \begin{cases} h_{\text{z,}i} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
+y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+h_{\text{z,}i} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
+y_{\text{slip,}i-1}\end{cases}
+\end{equation*}
+
+\noindent For the $i-1$th slice interface, the moment is similar but in the
+opposite direction:
+
+\begin{equation*}
+G_{i-1} \begin{cases} h_{\text{z,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
+y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+h_{\text{z,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
+y_{\text{slip,}i-1}\end{cases}
+\end{equation*}
+
+\noindent Next, the interslice water force is considered. For the force acting 
+on slice interface $i$, the moment is:
+
+\begin{equation*}
+H_{i} \begin{cases} h_{\text{z,w,}i} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
+y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+h_{\text{z,w,}i} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
+y_{\text{slip,}i-1}\end{cases}
+\end{equation*}
+
+\noindent The moment for the interslice water force acting on slice interface 
+$i-1$ is:
+
+\begin{equation*}
+H_{i-1} \begin{cases} h_{\text{z,w,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
+y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+h_{\text{z,w,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
+y_{\text{slip,}i-1}\end{cases}
+\end{equation*}
+
+\noindent The interslice shear force at slice interface $i$ is pushing in the 
+clockwise direction, and the length of the moment arm is half the length from 
+the slice edge to the slice midpoint, equivalent to half the width of the 
+slice, so the moment is:
+
+\begin{equation*}
+X_{i} \frac{b_{i}}{2}
+\end{equation*}
+
+\noindent The interslice shear force at slice interface $i-1$ also pushes in 
+the clockwise direction, and has the same length of the moment arm, so the 
+moment is:
+
+\begin{equation*}
+X_{i-1} \frac{b_{i}}{2}
+\end{equation*}
+
+\noindent The seismic force pushes counter-clockwise from the center of the 
+slice, so the moment is negative and the moment arm is simply half of the slice 
+height:
+
+\begin{equation*}
+K_{\text{c}} W_{i} \frac{h_{i}}{2}
+\end{equation*}
+
+\noindent The surface hydrostatic force acts into the midpoint of the surface 
+of the slice. Thus, the vertical component of the force pushes directly towards 
+the point of rotation, and has a moment of zero. The horizontal component of 
+the force pushes in a clockwise direction, and the length of the moment arm is 
+the entire height of the slice. Thus, the moment is:
+
+\begin{equation*}
+U_{\text{t,}i} sin(\beta_{i}) h_{i}
+\end{equation*}
+
+\noindent The external force again acts into the midpoint of the slice surface, 
+so the vertical component does not contribute to the moment, and the length of 
+the moment arm is again the entire height of the slice. The moment is:
+
+\begin{equation*}
+Q_{i} sin(\omega_{i}) h_{i}
+\end{equation*}
+
+\noindent The base hydrostatic force and slice weight both act in the direction 
+of the point of rotation, therefore both have moments of zero. Thus, all of the 
+moments have been determined. The moment equilibrium is then represented by the 
+sum of all moments:
+
+\begin{equation*}
+0 = \begin{cases}\begin{array}{l} - {G}_{i} \left[
+{h_{\text{z,}i}} + \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+\left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] -
+H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] \\[5pt] +
+H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] +
+\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+Q_{i}\;{\sin\left(\omega_{i}\right)}
+h_{i} \end{array} & y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
+\begin{array}{l} - {G}_{i} \left[
+{h_{\text{z,}i}} - \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+\left[ {h_{\text{z,}i-1}} + \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] -
+H_{i}\left[ h_{\text{z,w,}i} - \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] \\[5pt] +
+H_{i-1}\left[ h_{\text{z,w,}i-1} + \frac{b_{i}}{2} {
+	\tan\left(\alpha_{i}\right)} \right] +
+\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+Q_{i}\;{\sin\left(\omega_{i}\right)}
+h_{i} \end{array} & y_{\text{slip,}i} < y_{\text{slip,}i-1} \end{cases}
+\end{equation*}
+
+
+
+
 % ------------------------------------------ %
 %        End  GD Moment Equilibrium       %
 % ------------------------------------------ %
@@ -2157,6 +2327,43 @@ to the slope of the base (\si{\meter}).\\
 % ------------------------------------------ %
 %               End DD Psi                   %
 % ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
+%        Begin DD Torque                     %
+% ------------------------------------------ %
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& DD\refstepcounter{defnum}\thedefnum \label{DD_T}\\
+		\hline
+		Label&\bf Torque \\
+		\hline
+		Symbol& $\boldsymbol{\tau}$ \\
+		\hline
+		Units & \si{\newton\metre} \\
+		\hline
+		Equation& $\boldsymbol{\tau} = \mathbf{r} \times \mathbf{F}$ \\
+		\hline
+		Description &  
+		The torque $\boldsymbol{\tau}$ on a body measures the tendency of a 
+		force to rotate the body around an axis or pivot. \\
+		& $\boldsymbol{\tau}$ is the torque on the body (\si{\newton\metre}). 
+		\\ 
+		&$\mathbf{F}$ is the force applied to the lever arm (\si{\newton}). \\
+		&$\mathbf{r}$ is a position vector of the point where the force is 
+		applied, measured from the axis of rotation (\si{\metre}). \\
+		\hline
+		Source & \\
+		\hline
+		Ref.\ By & \dref{GD_M} \\
+		\hline
+	\end{tabular}
+\end{minipage}
 
 ~\newline
 
