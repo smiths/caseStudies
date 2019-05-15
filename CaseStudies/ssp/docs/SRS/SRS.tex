@@ -1403,35 +1403,20 @@ then we should also define T as effective mobile shear, right?}
   
   \hline Label&\bf Moment Equilibrium\\
   
-  \hline Equation& \( 0 = \begin{cases}\begin{array}{l} - {G}_{i} \left[
-  		{h_{\text{z,}i}} + \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
-  		\left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] \\-
-  		H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] +
-  		H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] \\+
-  		\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
-  		\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
-  		U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
-  		Q_{i}\;{\sin\left(\omega_{i}\right)}
-  		h_{i} \end{array} & y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-  	\begin{array}{l} - {G}_{i} \left[
-  		{h_{\text{z,}i}} - \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
-  		\left[ {h_{\text{z,}i-1}} + \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] \\-
-  		H_{i}\left[ h_{\text{z,w,}i} - \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] +
-  		H_{i-1}\left[ h_{\text{z,w,}i-1} + \frac{b_{i}}{2} {
-  			\tan\left(\alpha_{i}\right)} \right] \\+
-  		\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
-  		\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
-  		U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
-  		Q_{i}\;{\sin\left(\omega_{i}\right)}
-  		h_{i} \end{array} & y_{\text{slip,}i} < y_{\text{slip,}i-1} \end{cases} 
-  		\) \\
+  \hline Equation& \( 0 = \begin{array}{l} - {G}_{i} \left[
+      {h_{\text{z,}i}} + \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
+    \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] -
+    H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] \\[5pt] +
+    H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
+        \tan\left(\alpha_{i}\right)} \right] +
+    \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
+    \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
+    U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
+    Q_{i}\;{\sin\left(\omega_{i}\right)}
+    h_{i} \end{array} \) \\
 
  \hline Description & This equation satisfies \tref{TM_Eqm} for the net moment. 
  Force equilibrium is derived from the free body diagram of 
@@ -1505,40 +1490,28 @@ interface $i$ and the base at the midpoint of slice $i$. Thus, the moment is
 expressed as:
 
 \begin{equation*}
-- G_{i} \begin{cases} h_{\text{z,}i} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
-y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-h_{\text{z,}i} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
-y_{\text{slip,}i-1}\end{cases}
+- G_{i} (h_{\text{z,}i} + \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
 \noindent For the $i-1$th slice interface, the moment is similar but in the
 opposite direction:
 
 \begin{equation*}
-G_{i-1} \begin{cases} h_{\text{z,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
-y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-h_{\text{z,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
-y_{\text{slip,}i-1}\end{cases}
+G_{i-1} (h_{\text{z,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
 \noindent Next, the interslice water force is considered. For the force acting 
 on slice interface $i$, the moment is:
 
 \begin{equation*}
-H_{i} \begin{cases} h_{\text{z,w,}i} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
-y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-h_{\text{z,w,}i} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
-y_{\text{slip,}i-1}\end{cases}
+H_{i} (h_{\text{z,w,}i} + \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
 \noindent The moment for the interslice water force acting on slice interface 
 $i-1$ is:
 
 \begin{equation*}
-H_{i-1} \begin{cases} h_{\text{z,w,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}) & 
-y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-h_{\text{z,w,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}) & y_{\text{slip,}i} < 
-y_{\text{slip,}i-1}\end{cases}
+H_{i-1} (h_{\text{z,w,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
 \noindent The interslice shear force at slice interface $i$ is pushing in the 
@@ -1590,7 +1563,7 @@ moments have been determined. The moment equilibrium is then represented by the
 sum of all moments:
 
 \begin{equation*}
-0 = \begin{cases}\begin{array}{l} - {G}_{i} \left[
+0 = \begin{array}{l} - {G}_{i} \left[
 {h_{\text{z,}i}} + \frac{b_{i}}{2} {
 	\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
 \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
@@ -1603,21 +1576,7 @@ H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
 \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
 U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
 Q_{i}\;{\sin\left(\omega_{i}\right)}
-h_{i} \end{array} & y_{\text{slip,}i} \geq y_{\text{slip,}i-1}\\
-\begin{array}{l} - {G}_{i} \left[
-{h_{\text{z,}i}} - \frac{b_{i}}{2} {
-	\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
-\left[ {h_{\text{z,}i-1}} + \frac{b_{i}}{2} {
-	\tan\left(\alpha_{i}\right)} \right] -
-H_{i}\left[ h_{\text{z,w,}i} - \frac{b_{i}}{2} {
-	\tan\left(\alpha_{i}\right)} \right] \\[5pt] +
-H_{i-1}\left[ h_{\text{z,w,}i-1} + \frac{b_{i}}{2} {
-	\tan\left(\alpha_{i}\right)} \right] +
-\frac{b_{i}}{2} \left( X_{i} + X_{i-1}
-\right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
-U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \\ +
-Q_{i}\;{\sin\left(\omega_{i}\right)}
-h_{i} \end{array} & y_{\text{slip,}i} < y_{\text{slip,}i-1} \end{cases}
+h_{i} \end{array}
 \end{equation*}
 
 
