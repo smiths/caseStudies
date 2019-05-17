@@ -785,6 +785,11 @@ seismic force acting on the slope. [\iref{IM_FS}, \iref{IM_Lambda},
 no imposed surface load, and therefore no external force, acting on the slope. 
 [\iref{IM_FS}, \iref{IM_Lambda}, \lcref{LC_External}]
 
+\item [A\refstepcounter{assumpnum}\theassumpnum: \label{A_SeismicSurfSlope}] 
+The effect of the slope of the surface of the soil mass on the seismic force is 
+assumed to be negligible. 
+[\dref{GD_M}]
+
 \end{enumerate}
 
 \subsubsection{Theoretical Models} \label{sec_theoretical}
@@ -1616,10 +1621,13 @@ horizontal segment of the slice, the seismic force is $K_\text{c}W_{i}$ where
 $W_{i}$ can be expressed as $\gamma b_{i} \mathrm{d}y$ using \dref{GD_W} where 
 $\mathrm{d}y$ is the height of the segment under consideration. The 
 corresponding moment arm is $y$, the height from the base of the slice to the 
-segment under consideration. The resultant moment from these forces with an 
+segment under consideration. In reality, the forces near the surface of the 
+soil mass are slightly different due to the slope of the surface, but this 
+difference is assumed to be negligible (\aref{A_SeismicSurfSlope}). The 
+resultant moment from the forces on all of the segments with an 
 equivalent resultant moment arm is determined by taking the integral over the 
 slice height. The forces tend to rotate in the counter-clockwise direction, so 
-the moment is negative.
+the moment is negative. 
 
 \begin{equation*}
 - \int_{0}^{h_{i}} K_{\text{c}} \gamma b_{i} y \,\mathrm{d}y
