@@ -210,8 +210,8 @@ to the slope surface, at the \textit{x}-direction midpoint of the slice
 $h_{\text{z}}$ & \si{\meter}& height in the \textit{y}-direction of the 
 interslice normal force
 \\
-$h_\text{z,w}$ & \si{\meter}& height in the \textit{y}-direction of the 
-interslice water force, one-third of the height of the water table
+$h_\text{z,w}$ & \si{\meter}& height in the \textit{y}-direction of the water 
+table
 \\ 
 $i$ & & index representing a single slice 
 \\
@@ -253,6 +253,8 @@ ${U_{\text{t}}}$ & \si{\newton\per\meter} & surface hydrostatic force per meter
 in the $z$-direction
 \\
 $u$ &\si{\pascal} & pore pressure from water within the soil
+\\
+$V$ & \si{\cubic\meter} & volume 
 \\
 $W$ & \si{\newton\per\meter} & self-weight per meter in the $z$-direction
 \\
@@ -317,7 +319,9 @@ $\alpha{}$ & \si{\degree} & angle between the base of a slice and the horizontal
 $\beta{}$ &\si{\degree} & angle between the surface of a slice and the 
 horizontal
 \\
-$\gamma{}$ & \si{\newton\per\cubic\meter} & soil dry unit weight
+$\gamma$ & \si{\newton\per\cubic\meter} & specific weight
+\\
+$\gamma{}_{\text{dry}}$ & \si{\newton\per\cubic\meter} & soil dry unit weight
 \\
 ${\gamma{}_{\text{Sat}}}$ &  \si{\newton\per\cubic\meter} & soil saturated unit 
 weight
@@ -935,6 +939,40 @@ on.
 %        End TM Effective Stress             %
 % ----------------------------- %
 
+~\newline
+
+% ----------------------------- %
+%   Begin TM Newton's 2nd Law    %
+% ----------------------------- %
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		\hline
+		\rowcolor[gray]{0.9}
+		Number& T\refstepcounter{theorynum}\thetheorynum \label{T_NSL}\\
+		\hline
+		Label&\bf Newton's second law of motion\\
+		\hline
+		Equation&  $\mathbf{F} = m\mathbf{a}$\\
+		\hline
+		Description & 
+		The net force $\mathbf{F}$ (\si{\newton}) on a body is proportional to 
+		the acceleration $\mathbf{a}$ (\si{\metre\per\second\tothe{2}}) of the 
+		body, where $m$ (\si{\kilogram}) denotes the mass of the body as the 
+		constant of proportionality. \\
+		\hline
+		Source & ~ \\
+		\hline
+		Ref.\ By & GD\ref{GD_W} \\
+		\hline
+	\end{tabular}
+\end{minipage}
+
+% ----------------------------- %
+%        End TM Newton's 2nd law %
+% ----------------------------- %
+
 \subsubsection{General Definitions} \label{sec_gendef}
 
 This section collects the laws and equations that will be used to build the
@@ -1391,6 +1429,39 @@ then we should also define T as effective mobile shear, right?}
 ~\newline
 
 % ------------------------------------------ %
+%        Begin GD  Weight    %
+% ------------------------------------------ %
+\noindent
+\begin{minipage}{\textwidth}
+	\renewcommand*{\arraystretch}{1.5}
+	\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+		
+		\hline \rowcolor[gray]{0.9} Number&
+		GD\refstepcounter{defnum}\thedefnum \label{GD_W}\\
+		
+		\hline Label&\bf Weight\\
+		
+		\hline Equation& \( W = \gamma V \) \\
+		
+		\hline Description
+		&$W$ is the weight (\si{\newton}).\\
+		&$\gamma$ is the specific weight (\si{\newton\per\meter\cubed}).\\
+		&$V$ is the volume (\si{\meter\cubed}).\\
+		
+		\hline Source & \\
+		
+		\hline Ref.\ By & \dref{GD_M} \\
+		
+		\hline
+	\end{tabular}
+\end{minipage}\\
+% ------------------------------------------ %
+%        End  GD Weight       %
+% ------------------------------------------ %
+
+~\newline
+
+% ------------------------------------------ %
 %        Begin GD Moment Equilibrium    %
 % ------------------------------------------ %
 \noindent
@@ -1408,9 +1479,9 @@ then we should also define T as effective mobile shear, right?}
         \tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
     \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] -
-    H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
+    H_{i}\left[ \frac{1}{3} h_{\text{z,w,}i} + \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] \\[5pt] +
-    H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
+    H_{i-1}\left[ \frac{1}{3} h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
         \tan\left(\alpha_{i}\right)} \right] +
     \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
     \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
@@ -1433,8 +1504,8 @@ then we should also define T as effective mobile shear, right?}
  &$H$ is the interslice water force per meter in the $z$-direction 
  (\si{\newton\per\meter}), defined in 
  \ddref{DD_H}. \\
- &$h_\text{z,w}$ is the height in the \textit{y}-direction from the base of a 
- slice halfway to the water table (\si{\meter}).\\
+ &$h_\text{z,w}$ is the height in the \textit{y}-direction of the water table 
+ (\si{\meter}).\\
  &$X$ is the interslice shear force per meter in the $z$-direction 
  (\si{\newton\per\meter}). \\
  &$K_\text{c}$ is the seismic coefficient. \\
@@ -1478,13 +1549,16 @@ replacing the torque symbol with the moment symbol, the equation simplifies to:
 M = F \cdot r
 \end{equation*}
 
-\noindent To represent the moment equilibrium, the moments from each force 
+\noindent where $F$ is the force and $r$ is the moment arm, or the distance 
+between the force and the axis about which the rotation acts. To represent the 
+moment equilibrium, the moments from each force 
 acting on a slice must be considered and added together. The forces acting on a 
 slice are all shown in Figure \ref{Fig_Forces}. The point at the midpoint of
 the base of a slice is considered as the axis of rotation, from which the 
 length of the moment arm is measured. Considering first the interslice normal 
 force acting on slice interface $i$, the moment is negative because the force 
-pushes the slice in a counter-clockwise direction, and the moment arm is the 
+tends to rotate the slice in a counter-clockwise direction, and the moment arm 
+is the 
 height of the force plus the difference in height between the base at slice 
 interface $i$ and the base at the midpoint of slice $i$. Thus, the moment is 
 expressed as:
@@ -1497,33 +1571,39 @@ expressed as:
 opposite direction:
 
 \begin{equation*}
-G_{i-1} (h_{\text{z,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}))
+G_{i-1} (h_{\text{z,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
-\noindent Next, the interslice water force is considered. For the force acting 
-on slice interface $i$, the moment is:
+\noindent Next, the interslice water force is considered. This force is zero at 
+the height of the water table, then increases linearly towards the base of the 
+slice due to the increasing water pressure. For such a triangular distribution, 
+the resultant force acts at one-third of the height. Thus, for the interslice 
+water force acting on slice interface $i$, the moment is:
 
 \begin{equation*}
-H_{i} (h_{\text{z,w,}i} + \frac{b_{i}}{2}tan(\alpha_{i}))
+- H_{i} (\frac{1}{3} h_{\text{z,w,}i} + \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
 \noindent The moment for the interslice water force acting on slice interface 
 $i-1$ is:
 
 \begin{equation*}
-H_{i-1} (h_{\text{z,w,}i-1} + \frac{b_{i}}{2}tan(\alpha_{i}))
+H_{i-1} (\frac{1}{3} h_{\text{z,w,}i-1} - \frac{b_{i}}{2}tan(\alpha_{i}))
 \end{equation*}
 
-\noindent The interslice shear force at slice interface $i$ is pushing in the 
-clockwise direction, and the length of the moment arm is half the length from 
-the slice edge to the slice midpoint, equivalent to half the width of the 
+\noindent The interslice shear force at slice interface $i$ tends to rotate in 
+the 
+clockwise direction, and the length of the moment arm is half of the length 
+from 
+the slice edge to the slice midpoint, equivalent to half of the width of the 
 slice, so the moment is:
 
 \begin{equation*}
 X_{i} \frac{b_{i}}{2}
 \end{equation*}
 
-\noindent The interslice shear force at slice interface $i-1$ also pushes in 
+\noindent The interslice shear force at slice interface $i-1$ also tends to 
+rotate in 
 the clockwise direction, and has the same length of the moment arm, so the 
 moment is:
 
@@ -1531,19 +1611,38 @@ moment is:
 X_{i-1} \frac{b_{i}}{2}
 \end{equation*}
 
-\noindent The seismic force pushes counter-clockwise from the center of the 
-slice, so the moment is negative and the moment arm is simply half of the slice 
-height:
+\noindent Seismic forces act over the entire height of the slice. For each 
+horizontal segment of the slice, the seismic force is $K_\text{c}W_{i}$ where 
+$W_{i}$ can be expressed as $\gamma b_{i} \mathrm{d}y$ using \dref{GD_W} where 
+$\mathrm{d}y$ is the height of the segment under consideration. The 
+corresponding moment arm is $y$, the height from the base of the slice to the 
+segment under consideration. The resultant moment from these forces with an 
+equivalent resultant moment arm is determined by taking the integral over the 
+slice height. The forces tend to rotate in the counter-clockwise direction, so 
+the moment is negative.
 
 \begin{equation*}
-K_{\text{c}} W_{i} \frac{h_{i}}{2}
+- \int_{0}^{h_{i}} K_{\text{c}} \gamma b_{i} y \,\mathrm{d}y
+\end{equation*}
+
+\noindent Solving the definite integral yields:
+
+\begin{equation*}
+- K_{\text{c}} \gamma b_{i} \frac{h_{i}^2}{2}
+\end{equation*}
+
+\noindent Using \dref{GD_W} again to express $\gamma b_{i} h_{i}$ as $W_{i}$, 
+the moment is:
+
+\begin{equation*}
+- K_{\text{c}} W_{i} \frac{h_{i}}{2}
 \end{equation*}
 
 \noindent The surface hydrostatic force acts into the midpoint of the surface 
-of the slice. Thus, the vertical component of the force pushes directly towards 
+of the slice. Thus, the vertical component of the force acts directly towards 
 the point of rotation, and has a moment of zero. The horizontal component of 
-the force pushes in a clockwise direction, and the length of the moment arm is 
-the entire height of the slice. Thus, the moment is:
+the force tends to rotate in a clockwise direction, and the length of the 
+moment arm is the entire height of the slice. Thus, the moment is:
 
 \begin{equation*}
 U_{\text{t,}i} sin(\beta_{i}) h_{i}
@@ -1568,9 +1667,9 @@ sum of all moments:
 	\tan\left(\alpha_{i}\right)} \right] + {G}_{i-1}
 \left[ {h_{\text{z,}i-1}} - \frac{b_{i}}{2} {
 	\tan\left(\alpha_{i}\right)} \right] -
-H_{i}\left[ h_{\text{z,w,}i} + \frac{b_{i}}{2} {
+H_{i}\left[ \frac{1}{3} h_{\text{z,w,}i} + \frac{b_{i}}{2} {
 	\tan\left(\alpha_{i}\right)} \right] \\[5pt] +
-H_{i-1}\left[ h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
+H_{i-1}\left[ \frac{1}{3} h_{\text{z,w,}i-1} - \frac{b_{i}}{2} {
 	\tan\left(\alpha_{i}\right)} \right] +
 \frac{b_{i}}{2} \left( X_{i} + X_{i-1}
 \right) - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
@@ -1611,10 +1710,10 @@ Equation &
  $W_{i,1}$ = $b_{i}\begin{cases}
 \left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}} & 
 {y_{\text{wt,}i}}\geq{}{y_{\text{slope,}i}}\\
-\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}+\left({y_{\text{wt,}i}}
+\left({y_{\text{slope,}i}}-{y_{\text{wt,}i}}\right)\gamma{}_{\text{dry}}+\left({y_{\text{wt,}i}}
 -{y_{\text{slip,}i}}\right){\gamma{}_{\text{Sat}}}
  & {y_{\text{slope,}i}}>{y_{\text{wt,}i}}>{y_{\text{slip,}i}}\\
-\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{} & 
+\left({y_{\text{slope,}i}}-{y_{\text{slip,}i}}\right)\gamma{}_{\text{dry}} & 
 {y_{\text{wt,}i}}\leq{}{y_{\text{slip,}i}}
 \end{cases}$
 ~\newline~\newline
@@ -1622,11 +1721,12 @@ Equation &
 \left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}}
  & 
 {y_{\text{wt,}i-1}}\geq{}{y_{\text{slope,}i-1}}\\
-\left(\begin{array}{l}\left({y_{\text{slope,}i-1}}-{y_{\text{wt,}i-1}}\right)\gamma{}\\
+\left(\begin{array}{l}\left({y_{\text{slope,}i-1}}-{y_{\text{wt,}i-1}}\right)\gamma{}_{\text{dry}}
 +\left({y_{\text{wt,}i-1}}
 -{y_{\text{slip,}i-1}}\right){\gamma{}_{\text{Sat}}} \end{array} \right)
 & {y_{\text{slope,}i-1}}>{y_{\text{wt,}i-1}}>{y_{\text{slip,}i-1}}\\
-\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right)\gamma{} & 
+\left({y_{\text{slope,}i-1}}-{y_{\text{slip,}i-1}}\right)\gamma{}_{\text{dry}} 
+& 
 {y_{\text{wt,}i-1}}\leq{}{y_{\text{slip,}i-1}}
 \end{cases}$
 ~\newline~\newline
@@ -1635,7 +1735,8 @@ $W_i$ = $0.5(W_{i,1}+W_{i,2})$
 
 \hline Description &This equation is based on the assumption that the surface 
 and base of a slice are straight lines (\aref{A_Straight}). The soil dry unit 
-weight $\gamma$ and the soil saturated unit weight $\gamma_\text{Sat}$ are not 
+weight $\gamma{}_{\text{dry}}$ and the soil saturated unit weight 
+$\gamma_\text{Sat}$ are not 
 indexed by $i$ because the soil is assumed to be homogeneous, with constant 
 soil properties throughout (\aref{A_Homo}).\\
 &$i$ is the index representing a single slice.\\
@@ -1650,7 +1751,8 @@ soil properties throughout (\aref{A_Homo}).\\
 (\si{\newton\per\meter\cubed}).\\
 &${y_{\text{wt}}}$ is the \textit{y}-ordinate of a point on the water table 
 (\si{\meter}).\\
-&$\gamma{}$ is the soil dry unit weight (\si{\newton\per\meter\cubed}).
+&$\gamma{}_{\text{dry}}$ is the soil dry unit weight 
+(\si{\newton\per\meter\cubed}).
 \\
 
 \hline Sources& \cite{FredlundKrahn}\\
@@ -2366,7 +2468,8 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_FS}\\
 \hline Label& \bf Factor of Safety \\
 
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
-$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, 
+$\gamma{}_{\text{dry}}$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}, \textit{const\_f}$ \\
 
@@ -2855,14 +2958,14 @@ function of distance in the $x$-direction, defined in \ddref{DD_f}. \\
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
       \right] + {G}_{i-1} \left[ {h_{\text{z,}i-1}} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] - H_{i}\left[ h_{\text{z,w,}i} +
+      \right] - H_{i}\left[ \frac{1}{3} h_{\text{z,w,}i} +
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-      \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
+      \right] \\[5pt] + H_{i-1}\left[ \frac{1}{3} h_{\text{z,w,}i-1} -
       \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
       \right] +\lambda \frac{b_{i}}{2} \left( G_{i}
     f_{i} + G_{i-1} f_{i-1} \right) -
     K_{\text{c}} W_{i} \frac{h_{i}}{2} + U_{\text{t,}i}
-    \sin\left(\beta_{i}\right) h_{i} +
+    \sin\left(\beta_{i}\right) h_{i} +\\
     Q_{i}\;{\sin\left(\omega_{i}\right)}
     h_{i} \end{array}
 \end{equation} 
@@ -2877,9 +2980,9 @@ Equation~(\ref{eq:lambda1}).
           \tan\left(\alpha_{i}\right)} \right] +
       {G}_{i-1} \left[ {h_{\text{z,}i-1}} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] - H_{i}\left[ h_{\text{z,w,}i} +
+        \right] - H_{i}\left[ \frac{1}{3} h_{\text{z,w,}i} +
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-        \right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
+        \right] \\[5pt] + H_{i-1}\left[ \frac{1}{3} h_{\text{z,w,}i-1} -
         \frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
         \right] - K_{\text{c}} W_{i} \frac{h_{i}}{2} +
       U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} +
@@ -2899,9 +3002,9 @@ external forces, respectively are zero.
 		\tan\left(\alpha_{i}\right)} \right] +
 	{G}_{i-1} \left[ {h_{\text{z,}i-1}} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] - H_{i}\left[ h_{\text{z,w,}i} +
+	\right] - H_{i}\left[ \frac{1}{3} h_{\text{z,w,}i} +
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
-	\right] \\[5pt] + H_{i-1}\left[ h_{\text{z,w,}i-1} -
+	\right] \\[5pt] + H_{i-1}\left[ \frac{1}{3} h_{\text{z,w,}i-1} -
 	\frac{b_{i}}{2} { \tan\left(\alpha_{i}\right)}
 	\right] +
 	U_{\text{t,}i} \sin\left(\beta_{i}\right) h_{i} \end{array} } 
@@ -2950,7 +3053,8 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_E}\\
 \hline Label& \bf Interslice Normal Forces \\
 
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
-$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, 
+$\gamma{}_{\text{dry}}$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\{\left(x_{\text{slip}}, 
 y_{\text{slip}}\right)\}, \textit{const\_f}$\\
 
@@ -3046,13 +3150,15 @@ IM\refstepcounter{instnum}\theinstnum \label{IM_Min}\\
 \hline Label& \bf Critical Slip Surface Identification \\
 
 \hline Input & $\{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}$, 
-$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, $\gamma$, 
+$\{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}$, $c'$, $\varphi'$, 
+$\gamma{}_{\text{dry}}$, 
 $\gamma_{\text{Sat}}$, $\gamma_{\text{w}}$, $\textit{const\_f}$ \\
 
 \hline Output & $\begin{array}{l}\left( F_\text{S}^\text{Min}, \left\{ 
 \left(x_\text{cs},y_\text{cs}\right)\right\} \right)
  =\\ \Upsilon\left( \{\left(x_{\text{slope}}, y_{\text{slope}}\right)\}, 
- \{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}, c', \varphi', \gamma, 
+ \{\left(x_{\text{wt}}, y_{\text{wt}}\right)\}, c', \varphi', 
+ \gamma{}_{\text{dry}}, 
  \gamma_{\text{Sat}}, \gamma_{\text{w}}, \textit{const\_f}
  \right)\end{array}$
  \\
@@ -3077,7 +3183,8 @@ surface (\si{\meter}).\\
 (\si{\meter}).\\
 &$c'$ is the effective cohesion (\si{\pascal}).\\
 &$\varphi'$ is the effective angle of friction (\si{\degree}).\\
-&$\gamma{}$ is the soil dry unit weight (\si{\newton\per\meter\cubed}).\\
+&$\gamma{}_{\text{dry}}$ is the soil dry unit weight 
+(\si{\newton\per\meter\cubed}).\\
 &${\gamma{}_{\text{Sat}}}$ is the soil saturated unit weight 
 (\si{\newton\per\meter\cubed}).\\
 &${\gamma{}_{\text{w}}}$ is the unit weight of water
@@ -3135,7 +3242,7 @@ is intended to provide a feel for a common scenario.
   value. & N/A & 10\%\\
   $c'$ & $c >0$ & 10000 & 10\%\\
   $\varphi'$ & $ 0 < \varphi < 90 $ & 25 & 10\% \\
-  $\gamma$ & $\gamma > 0$ & 20000 & 10\% \\
+  $\gamma{}_{\text{dry}}$ & $\gamma{}_{\text{dry}} > 0$ & 20000 & 10\% \\
   $\gamma_{\text{Sat}}$ & $\gamma_{\text{Sat}} > 0 $ & 20000 & 10\% \\
   $\gamma_{\text{w}}$ & $\gamma_{\text{w}} > 0 $ & 9800 & 10\% \\
   \bottomrule
@@ -3200,7 +3307,8 @@ requirements, the qualities that the software is expected to exhibit.
     $c'$ & $\si{\pascal}$ & Cohesion for each slope layer. \\
     $\varphi'$ & \si{\degree} & Effective angle of friction for each
     slope layer. \\
-    $\gamma$ & $\si{\newton\per\meter\cubed}$ & Unit weight of dry
+    $\gamma{}_{\text{dry}}$ & $\si{\newton\per\meter\cubed}$ & Unit weight of 
+    dry
     soil for each slope layer. \\
     $\gamma_{\text{Sat}}$ & $\si{\newton\per\meter\cubed}$ & Unit
     weight of saturated soil for each slope layer. \\
