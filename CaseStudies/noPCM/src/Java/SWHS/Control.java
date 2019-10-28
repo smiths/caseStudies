@@ -23,8 +23,7 @@ public class Control {
         InputParameters.get_input(inParams, filename);
         InputParameters.derived_values(inParams);
         InputParameters.input_constraints(inParams);
-        double T_W = 40;
-        double E_W = 0;
-        OutputFormat.write_output(T_W, E_W);
+        double T_W = Calculations.func_T_W(inParams);
+        OutputFormat.write_output(T_W);
     }
 }
