@@ -21,6 +21,7 @@ public class Control {
         String filename = args[0];
         InputParameters inParams = new InputParameters();
         InputParameters.get_input(inParams, filename);
+        InputParameters.derived_values(inParams);
         InputParameters.input_constraints(inParams);
         double T_W = 40;
         double E_W = 0;

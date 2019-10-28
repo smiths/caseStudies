@@ -1,7 +1,7 @@
 package SWHS;
 
 /** \file InputParameters.java
-    \author Thulasi Jegatheesan
+    \author Thulasi Jegatheesan, Brooks MacLachlan
     \brief Provides the structure for holding input values, the function for reading inputs, and the function for checking the physical constraints and software constraints on the input
 */
 import java.util.Arrays;
@@ -262,5 +262,13 @@ public class InputParameters {
             System.out.print(0);
             System.out.println(".");
         }
+    }
+
+    public static void derived_values(InputParameters inParams) {
+        inParams.V_t = Math.PI * Math.pow(inParams.D / 2, 2) * inParams.L;
+
+        inParams.M_W = inParams.rho_W * inParams.V_t;
+
+        inParams.tau_W = (inParams.M_W * inParams.C_W) / (inParams.h_C * inParams.A_C);
     }
 }
