@@ -258,4 +258,12 @@ public class InputParameters {
             Console.WriteLine(".");
         }
     }
+
+    public static void derived_values(InputParameters inParams) {
+        inParams.V_t = Math.PI * Math.Pow(inParams.D / 2, 2) * inParams.L;
+
+        inParams.M_W = inParams.rho_W * inParams.V_t;
+
+        inParams.tau_W = (inParams.M_W * inParams.C_W) / (inParams.h_C * inParams.A_C);
+    }
 }
