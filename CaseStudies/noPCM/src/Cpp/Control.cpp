@@ -19,6 +19,7 @@ using std::ifstream;
 using std::ofstream;
 
 #include "InputParameters.hpp"
+#include "Calculations.hpp"
 #include "OutputFormat.hpp"
 
 /** \brief Controls the flow of the program
@@ -32,7 +33,7 @@ int main(int argc, const char *argv[]) {
     get_input(inParams, filename);
     input_constraints(inParams);
     derived_values(inParams);
-    double T_W = 40;
+    vector<double> T_W = func_T_W(inParams);
     write_output(T_W);
     
     return 0;

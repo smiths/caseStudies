@@ -16,10 +16,17 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-void write_output(double T_W) {
+void write_output(vector<double> T_W) {
     ofstream outputfile;
     outputfile.open("output.txt", std::fstream::out);
-    outputfile << "T_W = ";
-    outputfile << T_W << std::endl;
+    outputfile << "T_W = [";
+    for (int list_i1 = 0; list_i1 < (int)(T_W.size()) - 1; list_i1++) {
+        outputfile << T_W.at(list_i1);
+        outputfile << ", ";
+    }
+    if ((int)(T_W.size()) > 0) {
+        outputfile << T_W.at((int)(T_W.size()) - 1);
+    }
+    outputfile << "]" << std::endl;
     outputfile.close();
 }
