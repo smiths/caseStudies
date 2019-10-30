@@ -16,8 +16,6 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-#include "InputParameters.hpp"
-
 const double InputParameters::L_min = 0.1;
 const double InputParameters::L_max = 50;
 const double InputParameters::rho_W_min = 950;
@@ -260,3 +258,10 @@ void input_constraints(InputParameters &inParams) {
     }
 }
 
+void derived_values(InputParameters &inParams) {
+    inParams.V_t = M_PI * pow(inParams.D / 2, 2) * inParams.L;
+
+    inParams.M_W = inParams.rho_W * inParams.V_t;
+
+    inParams.tau_W = (inParams.M_W * inParams.C_W) / (inParams.h_C * inParams.A_C);
+}

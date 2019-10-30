@@ -13,8 +13,6 @@ using std::vector;
 using std::ifstream;
 using std::ofstream;
 
-#include "InputParameters.hpp"
-
 /** \brief Structure for holding the input values and constant values
 */
 class InputParameters {
@@ -31,6 +29,9 @@ class InputParameters {
         double D;
         double A_tol;
         double R_tol;
+        double V_t;
+        double M_W;
+        double tau_W;
         static const double L_min;
         static const double L_max;
         static const double rho_W_min;
@@ -58,5 +59,7 @@ void get_input(InputParameters &inParams, string filename);
     \param inParams structure holding the input values
 */
 void input_constraints(InputParameters &inParams);
+
+void derived_values(InputParameters &inParams);
 
 #endif

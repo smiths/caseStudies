@@ -31,6 +31,7 @@ int main(int argc, const char *argv[]) {
     InputParameters inParams = InputParameters();
     get_input(inParams, filename);
     input_constraints(inParams);
+    derived_values(inParams);
     double T_W = 40;
     write_output(T_W);
     
