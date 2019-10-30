@@ -2,9 +2,9 @@ This folder contains the Python implementation of the SWHS software.
 
 The software writes a file containing the output data and a PNG file containing the graphs of water and PCM temperature and energy over the simulation time.
 
-energy.py holds the Energy Equations Module.
+calculations.py holds the Temperature ODEs Module.
 
-event.py and temperature.py hold the Temperature ODEs Module.
+energy.py holds the Energy Equations Module.
 
 load_params.py holds the Input Format Module.
 
