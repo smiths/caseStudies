@@ -2,7 +2,8 @@ package SWHS;
 
 import java.util.Arrays;
 import java.util.ArrayList;
-import org.apache.commons.math3.ode.*;
+import org.apache.commons.math3.ode.FirstOrderIntegrator;
+import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 import org.apache.commons.math3.ode.nonstiff.EulerIntegrator;
 import org.apache.commons.math3.ode.sampling.StepHandler;
 import org.apache.commons.math3.ode.sampling.StepInterpolator;
