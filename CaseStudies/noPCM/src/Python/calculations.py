@@ -1,10 +1,8 @@
-from scipy.integrate import ode
+import scipy.integrate
   
 def func_T_W(params):
-  def f(t, Tw):
-    return (1.0 / params.tau_w) * (params.Tc - Tw)
-
-  r = ode(f).set_integrator('vode', method='bdf', atol=params.AbsTol, rtol=params.RelTol)
+  r = scipy.integrate.ode(lambda t, Tw: (1.0 / params.tau_w) * (params.Tc - Tw[0]))
+  r.set_integrator('vode', method='bdf', atol=params.AbsTol, rtol=params.RelTol)
   r.set_initial_value(params.Tinit)
 
   t = [0.0]
