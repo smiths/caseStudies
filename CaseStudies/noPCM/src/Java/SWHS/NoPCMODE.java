@@ -3,8 +3,8 @@ package SWHS;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
 
 public class NoPCMODE implements FirstOrderDifferentialEquations {
-  double tau_W;
-  double T_C;
+  private double tau_W;
+  private double T_C;
 
   public NoPCMODE (InputParameters inParams) {
     this.tau_W = inParams.tau_W;
