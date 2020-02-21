@@ -25,7 +25,7 @@ class Populate_T_W {
 
     Populate_T_W(vector<double> &T_W);
 
-    void operator() (vector<double> &T_W, double t);
+    void operator() (vector<double> &y, double t);
 };
 
 #endif
