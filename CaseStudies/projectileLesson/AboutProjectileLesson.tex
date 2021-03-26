@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{hhline}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{url}
+\usepackage{hyperref}
+
+\oddsidemargin -10mm
+\evensidemargin -10mm
+\textwidth 160mm
+\textheight 200mm
+\renewcommand\baselinestretch{1.0}
+
+\pagestyle {plain}
+\pagenumbering{arabic}
+
+%% Comments
+
+\usepackage{color}
+
+\newif\ifcomments\commentstrue
+
+\ifcomments
+\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\else
+\newcommand{\authornote}[3]{}
+\newcommand{\todo}[1]{}
+\fi
+
+\newcommand{\wss}[1]{\authornote{blue}{SS}{#1}}
+
+\title{Discussion of Projectile Lesson: What and Why}
+\author{Spencer Smith}
+
+\begin {document}
+
+\maketitle
+
+I've adapted Section 12.6 (Motion of a Projectile) from the classic Hibbler text
+"Engineering Mechanics Dynamnics, 10th edition". To take into account that
+Section 12.6 builds on the previous sections, I've added an initial section that
+simply provides a summary of the equations that were previously derived.  The
+derivation of these equations is fairly similar to how they are derived in the
+current Projectile example in Drasil.  I've made an effort to change the symbols
+and notation to match what is currently in Drasil.
+
+Comments have been incorporated into the text using square brackets [].
+
+I've tried to write the parts using the simplest possible markdown.  Equations
+are added using LaTeX.  To get cross-references to equations to work I had to
+add the LaTeX extensions to my local installation of Jupyter.  Maybe there is a
+better way to do cross-references?
+
+For the code part, I tried to leave the variabilities in code (as opposed to in
+the markdown), so that they can be changed easily.  The figure is ``hardcoded''
+with specific values for the variable inputs.
+
+\section {Discussion}
+
+
+\end {document}
