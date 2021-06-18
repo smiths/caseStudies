@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+
+\begin{document}
+
+\section*{Refinement View of NoPCM}
+
+\subsubsection*{T1: Conservation of Thermal Energy}
+
+\noindent $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$
+
+The definitions associated with this equation are just to define the meaning of
+each term, like $g$ is the volumetric heat generation.  Although it isn't in the
+current document, we will later need the definition of density as an equation
+relating density, mass and volume.
+
+\subsubsection*{R1.1: Density}
+
+\noindent $m = \rho V$
+
+\subsubsection*{T1.1: Simplified Rate of Change of Temperature}
+
+\begin{itemize}
+\item Apply Assumptions: A:Constant-Water-Temp-Across-Tank,
+A:Density-Water-Constant-over-Volume,
+A:Specific-Heat-Energy-Constant-over-Volume
+\item Use relation R1.1
+\item Use Gauss's Theorem
+\end{itemize}
+
+\noindent $m C \frac{dT}{dt} = q_{\mathrm{in}} A_{\mathrm{in}} - 
+q_{\mathrm{out}} A_{\mathrm{out}} + g V$
+
+Later use
+
+\subsubsection*{D1.1.1: Density of Water}
+
+\noindent $m_w = \rho_w V_w$
+
+\end{document}
