@@ -19,6 +19,10 @@ cabal.config
 *.swp
 *.lof
 *.lot
+*-blx.bib
+*.fdb_latexmk
+*.fls
+*.run.xml
 Main
 .idea
 *.out
