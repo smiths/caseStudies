@@ -1,3 +1,4 @@
+% !TEX program = lualatex
 \documentclass[12pt]{article}
 \usepackage{fontspec}
 \usepackage{fullpage}
@@ -60,14 +61,15 @@ theories for arithmetic operations, differentiation, integration, vector
 calculus, etc.  Following the context theories we have background theories.
 Background theories are defined, but not derived.  Typically they will be the
 general forms of the conservation equations, like conservation of thermal energy
-or momentum, and constitutive equations.  Assumptions are often invoked by The level of detail used to define
-background theories can vary, since we do not always need the full theory; we
-sometimes just need to know that the theory exists.  The background theories are
-refined into other theories by making assumptions, like plane stress, or linear
-elasticity, or isothermal material properties, or laminar flow, etc.  These
-theories are combined and refined until the point where we have final theories.
-All theories are part of the documentation, but the final theories are the ones
-that will be transformed into code.
+or momentum, and constitutive equations.  Assumptions are often invoked by The
+level of detail used to define background theories can vary, since we do not
+always need the full theory; we sometimes just need to know that the theory
+exists.  The background theories are refined into other theories by making
+assumptions, like plane stress, or linear elasticity, or isothermal material
+properties, or laminar flow, etc.  These theories are combined and refined until
+the point where we have final theories. All theories are part of the
+documentation, but the final theories are the ones that will be transformed into
+code.
 
 We also have data definitions.  A data definition is a label for part of a
 theory. Assumptions will be maintained from the previous terminology.
@@ -75,6 +77,8 @@ theory. Assumptions will be maintained from the previous terminology.
 Below is an attempt to clarify the new concept of different levels of theories
 by re-writing the relevant parts of the NoPCM model using the new conceptual
 model of theories.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Assumptions}
 \label{Sec:Assumps}
@@ -96,15 +100,29 @@ model of theories.
 \item[Volume-Coil-Negligible:\phantomsection\label{assumpVCN}]{When considering the volume of water in the tank, the volume of the heating coil is assumed to be negligible. (RefBy: \hyperref[DD:waterVolume.nopcm]{DD:waterVolume\_nopcm}.)}
 \end{itemize}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Context Theories}
 
 Some theories do not have to be explicitly invoked.  They are part of the
 context for the other theories, without having to be explicitly stated or
-defined.  The context theories for this problem are as follows: arithmetic
-operations, differentiation, integration, and vector calculus.
+defined.  The context theories for this problem are as follows: 
+
+\begin{itemize}
+  \item arithmetic
+  \item operations 
+  \item differentiation
+  \item partial differentiation
+  \item integration
+  \item vector calculus (gradient operator, dot product)
+\end{itemizes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Background Theories (BT)}
 \label{Sec:TMs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace{\baselineskip}
 \noindent
@@ -131,13 +149,12 @@ Description & \begin{symbDescription}
               \item{$T$ is the temperature (${{}^{\circ}\text{C}}$)}
               \end{symbDescription}
 \\ \midrule \\
-Notes & The above equation gives the law of conservation of energy for transient heat transfer in a given material.
-        
-        For this equation to apply, other forms of energy, such as mechanical
-        energy, are assumed to be negligible in the system
-        (\hyperref[assumpTEO]{A:Thermal-Energy-Only}).  \wss{Should we
-        explicitly say that the above equation relies on vector calculus
-        ``theories'', or should we leave that implicit?}
+Notes & The above equation gives the law of conservation of energy for transient
+        heat transfer in a given material.  For this equation to apply, other
+        forms of energy, such as mechanical energy, are assumed to be negligible
+        in the system (\hyperref[assumpTEO]{A:Thermal-Energy-Only}).
+        \wss{Should we explicitly say that the above equation relies on vector
+        calculus ``theories'', or should we leave that implicit?}
         
 \\ \midrule \\
 Source & \hyperref{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}{}{}{Fourier Law of Heat Conduction and Heat Equation}
@@ -148,8 +165,10 @@ RefBy & \hyperref[GD:rocTempSimp]{GD:rocTempSimp}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
-\vspace{\baselineskip}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{\baselineskip}
 \noindent
 \begin{minipage}{\textwidth}
 \begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
@@ -171,17 +190,23 @@ Description & \begin{symbDescription}
               \item{$ΔT$ is the change in temperature (${{}^{\circ}\text{C}}$)}
               \end{symbDescription}
 \\ \midrule \\
-Notes & $E$ occurs as long as the material does not reach a temperature where a phase change occurs, as assumed in \hyperref[assumpWAL]{A:Water-Always-Liquid}.
+Notes & $E$ occurs as long as the material does not reach a temperature where a
+phase change occurs, as assumed in \hyperref[assumpWAL]{A:Water-Always-Liquid}.
+\wss{This should actually be an assumption of no state change.  This is a
+generic assumption that is necessary to use this theory.}
         
 \\ \midrule \\
 Source & \hyperref{http://en.wikipedia.org/wiki/Sensible_heat}{}{}{Definition of Sensible Heat}
          
 \\ \midrule \\
 RefBy & \hyperref[IM:heatEInWtr]{IM:heatEInWtr}
-        
+
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \vspace{\baselineskip}
 \noindent
 \begin{minipage}{\textwidth}
@@ -220,9 +245,13 @@ RefBy & \hyperref[GD:htFluxWaterFromCoil]{GD:htFluxWaterFromCoil}
 \end{tabular}
 \end{minipage}
 
-\section{General Definitions}
-\label{Sec:GDs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Refined Theories} \label{Sec:RefndTheories}
+
 This section collects the laws and equations that will be used to build the instance models.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace{\baselineskip}
 \noindent
@@ -256,10 +285,13 @@ Source & --
          
 \\ \midrule \\
 RefBy & \hyperref[GD:rocTempSimp]{GD:rocTempSimp} and \hyperref[IM:eBalanceOnWtr]{IM:eBalanceOnWtr}
-        
+
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \paragraph{Detailed derivation of simplified rate of change of temperature:}
 \label{GD:rocTempSimpDeriv}
 Integrating \hyperref[BT:consThermE]{BT:consThermE} over a volume ($V$), we have:
@@ -287,6 +319,9 @@ Using the fact that $ρ$=$m$/$V$, Equation (2) can be written as:
 \begin{displaymath}
 m C \frac{\,dT}{\,dt}={q_{\text{in}}} {A_{\text{in}}}-{q_{\text{out}}} {A_{\text{out}}}+g V
 \end{displaymath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \vspace{\baselineskip}
 \noindent
 \begin{minipage}{\textwidth}
@@ -326,6 +361,8 @@ RefBy & \hyperref[IM:eBalanceOnWtr]{IM:eBalanceOnWtr}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Data Definitions}
 \label{Sec:DDs}
@@ -367,6 +404,8 @@ RefBy & \hyperref[findMass]{FR:Find-Mass}
 \end{tabular}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \vspace{\baselineskip}
 \noindent
 \begin{minipage}{\textwidth}
@@ -405,6 +444,8 @@ RefBy & \hyperref[findMass]{FR:Find-Mass}
 \end{tabular}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \vspace{\baselineskip}
 \noindent
 \begin{minipage}{\textwidth}
@@ -441,6 +482,8 @@ RefBy & \hyperref[DD:waterVolume.nopcm]{DD:waterVolume\_nopcm} and \hyperref[fin
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace{\baselineskip}
 \noindent
@@ -480,11 +523,15 @@ RefBy & \hyperref[outputInputDerivVals]{FR:Output-Input-Derived-Values} and \hyp
 \end{tabular}
 \end{minipage}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Instance Models}
 \label{Sec:IMs}
-This section transforms the problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one which is expressed in mathematical terms. It uses concrete symbols defined in the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the models identified in \hyperref[Sec:TMs]{theoretical models} and \hyperref[Sec:GDs]{general definitions}.
+This section transforms the problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one which is expressed in mathematical terms. It uses concrete symbols defined in the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the models identified in \hyperref[Sec:TMs]{theoretical models} and \hyperref[Sec:RefndTheories]{general definitions}.
 
 The goal \hyperref[waterTempGS]{GS:Predict-Water-Temperature} is met by \hyperref[IM:eBalanceOnWtr]{IM:eBalanceOnWtr} and the goal \hyperref[waterEnergyGS]{GS:Predict-Water-Energy} is met by \hyperref[IM:heatEInWtr]{IM:heatEInWtr}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \vspace{\baselineskip}
 \noindent
@@ -533,6 +580,9 @@ RefBy & \hyperref[unlikeChgNIHG]{UC:No-Internal-Heat-Generation}, \hyperref[find
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \paragraph{Detailed derivation of the energy balance on water:}
 \label{IM:eBalanceOnWtrDeriv}
 To find the rate of change of ${T_{\text{W}}}$, we look at the energy balance on water. The volume being considered is the volume of water in the tank ${V_{\text{W}}}$, which has mass ${m_{\text{W}}}$ and specific heat capacity, ${C_{\text{W}}}$. Heat transfer occurs in the water from the heating coil as ${q_{\text{C}}}$ (\hyperref[GD:htFluxWaterFromCoil]{GD:htFluxWaterFromCoil}), over area ${A_{\text{C}}}$. No heat transfer occurs to the outside of the tank, since it has been assumed to be perfectly insulated (\hyperref[assumpPIT]{A:Perfect-Insulation-Tank}). Since the assumption is made that no internal heat is generated (\hyperref[assumpNIHGBW]{A:No-Internal-Heat-Generation-By-Water}), $g=0$. Therefore, the equation for \hyperref[GD:rocTempSimp]{GD:rocTempSimp} can be written as:
@@ -604,6 +654,5 @@ RefBy & \hyperref[calcChgHeatEnergyWtrOverTime]{FR:Calculate-Change-Heat\_Energy
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
-
 
 \end{document}
