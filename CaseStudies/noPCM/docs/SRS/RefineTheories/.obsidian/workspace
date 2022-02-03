@@ -1,0 +1,115 @@
+{
+  "main": {
+    "id": "77e3d52bf7e7984b",
+    "type": "split",
+    "children": [
+      {
+        "id": "0b352515adb2f1ba",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "RefineBT-consThermE.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      },
+      {
+        "id": "37075c44f666a4cb",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "BT-consThermE.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "fc07dd4445bc9355",
+    "type": "split",
+    "children": [
+      {
+        "id": "b226f31c27e507a2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5a322658b4572af2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "461d2772a6e31fdd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "beef8e1ad9851d25",
+    "type": "split",
+    "children": [
+      {
+        "id": "89d846b010e89764",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "43a36db0a49065df",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "BT-consThermE.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "37075c44f666a4cb",
+  "lastOpenFiles": [
+    "BT-consThermE.md",
+    "RefineBT-consThermE.md",
+    "A-UniformDensity-OverVol.md",
+    "A-UniformSpecHeat-OverVol.md",
+    "A-Density-Independent-of-Temp.md",
+    "BT-Gauss's Divergence Theorem.md",
+    "RT-rocTempSimp.md",
+    "BT-density.md",
+    "A-VolHasPiecewise-Smooth-Surface.md",
+    "A-VolumeIsCompact.md"
+  ]
+}

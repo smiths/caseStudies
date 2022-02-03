@@ -1,0 +1,1 @@
+$$-{\nabla \cdot \mathbf{q} (\mathbf{x}, t)} + g(\mathbf{x}, t) = \rho (\mathbf{x}, T) C (\mathbf{x}, T) \frac{\partial T(\mathbf{x}, t)}{\partial t}$$

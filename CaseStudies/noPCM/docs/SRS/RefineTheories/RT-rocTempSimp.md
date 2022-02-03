@@ -1,0 +1,1 @@
+$$m C \frac{\,dT (t)}{\,dt}=\sum_{i=0}^n q_{i}(t) A_{i}+g(t) V$$
