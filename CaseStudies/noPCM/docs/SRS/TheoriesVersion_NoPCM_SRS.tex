@@ -1024,9 +1024,17 @@ RefBy & \hyperref[outputInputDerivVals]{FR:Output-Input-Derived-Values} and \hyp
 
 \section{Final Theories}
 \label{Sec:FTs}
-This section transforms the problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one which is expressed in mathematical terms. It uses concrete symbols defined in the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the models identified in \hyperref[Sec:BTs]{theoretical models} and \hyperref[Sec:RefndTheories]{general definitions}.
+This section transforms the problem defined in the
+\hyperref[Sec:ProbDesc]{problem description} into one which is expressed in
+mathematical terms. It uses concrete symbols defined in the
+\hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the
+models identified in \hyperref[Sec:BTs]{theoretical models} and
+\hyperref[Sec:RefndTheories]{general definitions}.
 
-The goal \hyperref[waterTempGS]{GS:Predict-Water-Temperature} is met by \hyperref[FT:eBalanceOnWtr]{FT:eBalanceOnWtr} and the goal \hyperref[waterEnergyGS]{GS:Predict-Water-Energy} is met by \hyperref[FT:heatEInWtr]{FT:heatEInWtr}.
+The goal \hyperref[waterTempGS]{GS:Predict-Water-Temperature} is met by
+\hyperref[FT:eBalanceOnWtr]{FT:eBalanceOnWtr} and the goal
+\hyperref[waterEnergyGS]{GS:Predict-Water-Energy} is met by
+\hyperref[FT:heatEInWtr]{FT:heatEInWtr}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1111,7 +1119,7 @@ with the simplified rate of change of temperature equation
 (\hyperref[RT:rocTempSimp]{RT:rocTempSimp}):
 
 \begin{displaymath}
-        m C \frac{\,dT(t)}{\,dt} = -\sum_{i=0}^n {q_i(t)} {A_i} + g(t) V
+m C \frac{\,dT(t)}{\,dt} = -\sum_{i=0}^n {q_i(t)} {A_i} + g(t) V
 \end{displaymath}
 
 The volume under consideration is the water tank.  There are two surfaces
@@ -1123,13 +1131,13 @@ the application of \hyperref[RT:rocTempSimp]{RT:rocTempSimp} to the water tank
 and coil system, we add the following symbols: 
 
 \begin{itemize}
-        \item $m_\text{W}$ for the mass of the water in the tank, $m = m_\text{W}$.
-        \item $C_\text{W}$ for the specific heat capacity of the water, $C =
-        C_\text{W}$.
-        \item $T_\text{W}$ for the temperature of the water in the tank, $T =
-        m_\text{W}$.
-        \item $g_\text{W}$ for the per unit heat generation of the water in the
-        tank, $g = g_\text{W}$.
+\item $m_\text{W}$ for the mass of the water in the tank, $m = m_\text{W}$.
+\item $C_\text{W}$ for the specific heat capacity of the water, $C =
+C_\text{W}$.
+\item $T_\text{W}$ for the temperature of the water in the tank, $T =
+m_\text{W}$.
+\item $g_\text{W}$ for the per unit heat generation of the water in the tank, $g
+= g_\text{W}$.
 \end{itemize}
 
 Substituting the above variables into \hyperref[RT:rocTempSimp]{RT:rocTempSimp}, we have:
@@ -1189,28 +1197,54 @@ By substituting ${τ_{\text{W}}}$ (from \hyperref[DD:balanceDecayRate]{DD:balanc
 
 To use this equation, we need to show that the pre-conditions from
 \hyperref[RT:rocTempSimp]{RT:rocTempSimp} and
-\hyperref[RT:htFluxWaterFromCoil]{RT:htFluxWaterFromCoil} are satisfied.
+\hyperref[RT:htFluxWaterFromCoil]{RT:htFluxWaterFromCoil} are satisfied. \wss{We
+might want to bring in the goal of the simulation, likely related to the purpose
+section.  Some purposes do not require high fidelity simulations.}
 
 \begin{itemize}
 \item \hyperref[assumpTEO]{A:Thermal-Energy-Only}: We will satisfy this
 assumption by making the same assumption.
-\item \hyperref[assumpUnifDens]{A:UniformDensity-OverVol}: we make this assumption because the tank is fully mixed (\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
-\item \hyperref[assumpUnifSpecHeat]{A:UniformSpecHeat-OverVol}: we make this assumption because the tank is fully mixed (\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
-\item \hyperref[assumpUnifTemp]{A:UniformTemp-OverVol}: we make this assumption because the tank is fully mixed (\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
+\item \hyperref[assumpUnifDens]{A:UniformDensity-OverVol}: we make this
+assumption because we assume that the tank is fully mixed
+(\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
+\item \hyperref[assumpUnifSpecHeat]{A:UniformSpecHeat-OverVol}: we make this
+assumption because we assume that the tank is fully mixed
+(\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
+\item \hyperref[assumpUnifTemp]{A:UniformTemp-OverVol}: we make this assumption
+because we assume that the tank is fully mixed
+(\hyperref[assumpFullyMixed]{A:UniformFullyMixed}).
 \item \hyperref[assumpUnifHeatGen]{A:UniformHeatGen-OverVol}: we make this
-assumption because the heat generation is assumed to be zero over the volume
+assumption because we assume that heat generation is zero over the volume
 (\hyperref[assumpNIHGBW]{A:No-Internal-Heat-Generation-By-Water}).
-\item \hyperref[assumpDensIndepT]{A:DensityIndepTemp},
-\item \hyperref[assumpSpecHeatIndepT]{A:SpecHeatIndepTemp},
-\item \hyperref[assumpPiecewiseSmooth]{A:VolumeIsCompact},
-\item \hyperref[assumpPiecewiseSmooth]{A:VolHasPiecewise-Smooth-Surface},
-\item \hyperref[assumpUnifThermFlux]{A:ThermalFlux-UniformOverSurfaces}
-\item \hyperref[assumpUnifHeatTransCoeffCoil]{A:UniformHeatTransCoeffOverCoil}, 
-\item \hyperref[assumpTHCCoL]{A:Temp-Heating-Coil-Constant-over-Length}, 
-\item \hyperref[assumpFullyMixed]{A:UniformFullyMixed}, 
-\item \hyperref[assumpHeatTransCoilIndepTime]{A:HeatTransCoeffCoilIndepTime}, 
-\item \hyperref[assumpHeatTransCoilIndepTemp]{A:HeatTransCoeffCoilIndepTemp}, 
-\item \hyperref[assumpTHCCoT]{A:Temp-Heating-Coil-Constant-over-Time}
+\item \hyperref[assumpDensIndepT]{A:DensityIndepTemp}: we assume that for the water in the tank, and the temperature bounds of the simulation, the density does not change with temperature (\hyperref[assumpDensIndepTWater]{A:DensityIndepTempWater}).  \wss{We could cite actually data for this.}
+\item \hyperref[assumpSpecHeatIndepT]{A:SpecHeatIndepTemp}: we assume that for
+the water in the tank, and the temperature bounds of the simulation, the
+specific heat capacity does not change with temperature
+(\hyperref[assumpSpecHeatIndepTWater]{A:SpecHeatIndepTempWater}).  \wss{We could
+cite actually data for this.}
+\item \hyperref[assumpPiecewiseSmooth]{A:VolumeIsCompact}: The shape of the tank
+is compact, so this assumption is satisfied.  \wss{Do we need more here?}
+\item \hyperref[assumpPiecewiseSmooth]{A:VolHasPiecewise-Smooth-Surface}: The
+shape of the surface of the tank is smooth, as is the surface of the heating
+coil.  \wss{Do we need more here?}
+\item \hyperref[assumpUnifThermFlux]{A:ThermalFlux-UniformOverSurfaces}: This
+assumption is satisfied because of the following assumptions that are
+pre-conditions for \hyperref[RT:htFluxWaterFromCoil]{RT:htFluxWaterFromCoil}:
+\hyperref[assumpUnifHeatTransCoeffCoil]{A:UniformHeatTransCoeffOverCoil},
+\hyperref[assumpTHCCoL]{A:Temp-Heating-Coil-Constant-over-Length},
+\hyperref[assumpFullyMixed]{A:UniformFullyMixed}.
+\item \hyperref[assumpUnifHeatTransCoeffCoil]{A:UniformHeatTransCoeffOverCoil}:
+We will satisfy this assumption by making the same assumption.
+\item \hyperref[assumpTHCCoL]{A:Temp-Heating-Coil-Constant-over-Length}: We will
+satisfy this assumption by making the same assumption.
+\item \hyperref[assumpFullyMixed]{A:UniformFullyMixed}: We will satisfy this
+assumption by making the same assumption.
+\item \hyperref[assumpHeatTransCoilIndepTime]{A:HeatTransCoeffCoilIndepTime}: We
+will satisfy this assumption by making the same assumption.
+\item \hyperref[assumpHeatTransCoilIndepTemp]{A:HeatTransCoeffCoilIndepTemp}: We
+will satisfy this assumption by making the same assumption.
+\item \hyperref[assumpTHCCoT]{A:Temp-Heating-Coil-Constant-over-Time}: We will
+satisfy this assumption by making the same assumption.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1342,6 +1376,7 @@ simulation.
 \item \hyperref[assumpHeatTransCoilIndepTemp]{A:HeatTransCoeffCoilIndepTemp}:
 Our rationale for this is that within the operating range of the coil the change
 in the heat transfer coefficient with temperature is relatively small.
+\item etc.
 \end{itemize}
         
 \section{Requirements} \label{Sec:Requirements}

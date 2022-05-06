@@ -11,11 +11,11 @@
 \usepackage{url}
 \usepackage{hyperref}
 
-\oddsidemargin -10mm
-\evensidemargin -10mm
-\textwidth 160mm
-\textheight 200mm
-\renewcommand\baselinestretch{1.0}
+% \oddsidemargin 10mm
+% \evensidemargin 10mm
+% \textwidth 160mm
+% \textheight 200mm
+% \renewcommand\baselinestretch{1.0}
 
 \pagestyle {plain}
 \pagenumbering{arabic}
@@ -39,17 +39,33 @@
 \title{Discussion of Projectile Lesson: What and Why}
 \author{Spencer Smith}
 
-\begin {document}
+\begin{document}
 
 \maketitle
 
-I've adapted Section 12.6 (Motion of a Projectile) from the classic Hibbler text
-``Engineering Mechanics Dynamnics, 10th edition.''  To take into account that
-Section 12.6 builds on the previous sections, I've added an initial section that
-simply provides a summary of the equations that were previously derived.  The
-derivation of these equations is fairly similar to how they are derived in the
-current Projectile example in Drasil.  I've made an effort to change the symbols
-and notation to match what is currently in Drasil.
+I've adapted Section 12.6 on Motion of a Projectile from the classic Hibbler
+text ``Engineering Mechanics Dynamnics, 10th edition.''  I selected this topic
+because it is one of the first topics typically taught when students are
+introduced to the study of dynamics is projectile motion.  Projectile motion is
+a good starting point for two reasons:
+
+\begin{itemize}
+
+\item The model developed is relatively simple because it only involves kinematic
+quantities, not kinetics.  Kinematics focuses on the geometrics aspects of
+motion, while kinetics introduces the concept of forces.  
+
+\item Projectile motion has practical applications for tracking the motion of
+launched or thrown objects.
+
+\end{itemize}
+
+To take into account that Section 12.6 builds on the
+previous sections, I've added an initial section that simply provides a summary
+of the equations that were previously derived.  The derivation of these
+equations is fairly similar to how they are derived in the current Projectile
+example in Drasil.  I've made an effort to change the symbols and notation to
+match what is currently in Drasil.  
 
 Comments have been incorporated into the text using square brackets [].
 
@@ -61,6 +77,34 @@ better way to do cross-references?
 For the code part, I tried to leave the variabilities in code (as opposed to in
 the markdown), so that they can be changed easily.  The figure is ``hardcoded''
 with specific values for the variable inputs.
+
+For projectile motion, there are 5 equations (4 independent equations), but
+Hibbler doesn't include the one about velocity in the horizontal direction being
+constant in his list of 4 equations.  He mentions it, but doesn't consider it a
+separate equation.
+
+The general view of projecile problems has 10 variables: $p_x, p_y, v_x, v_y,
+p_x^i, p_y^i, v_x^i, v_y^i, a, t$.  There are 4 independent equations (we don't
+need the equation that eliminated time, since it is derived from the other
+equations).  However, solving projectile motion problems isn't as simple as
+solving for 4 unknowns from 4 equations, since the equations aren't all coupled.
+For instance, if there are three unknowns of $p_x, v_x^i$ and $v_x$, there is no
+way to solve for the unknowns, despite having 4 equations.  For completeness of
+the presentation, it doesn't seem to be an option to exhaustively go through all
+cases, since there are 10 choose 4, or 210 cases.  Some of the 210 aren't
+solvable.  The textbooks tend to focus on problems inspired by real engineering
+problems, so $a$ is usually set to g or 0.  Even in this case there are 9 choose
+4, or 126 combinations.
+
+The Drasil viewpoint of the family can be that everything up to the instance
+model is mostly common to all examples.  The instance model selects the specific
+equations, which are then rearranged to solve for the unknowns.
+
+The kinematic equation where time has been eliminated is not used in the
+Projectile SRS, because it isn't necessary.
+
+Incorporating the results of the code into the markdown is possible by using the
+\href {https://github.com/ipython-contrib/jupyter_contrib_nbextensions/tree/master/src/jupyter_contrib_nbextensions/nbextensions/python-markdown} {python-markdown}
 
 \section {Discussion}
 
