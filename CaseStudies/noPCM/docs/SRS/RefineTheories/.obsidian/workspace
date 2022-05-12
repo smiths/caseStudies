@@ -4,20 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "0b352515adb2f1ba",
+        "id": "60a5e29994e28a9b",
         "type": "leaf",
+        "dimension": 78.48244620611553,
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "RefineBT-consThermE.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "graph",
+          "state": {}
         }
       },
       {
-        "id": "37075c44f666a4cb",
+        "id": "4b41aaef66ee2b9d",
         "type": "leaf",
+        "dimension": 21.517553793884485,
         "state": {
           "type": "markdown",
           "state": {
@@ -81,7 +79,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "BT-consThermE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,17 +96,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "37075c44f666a4cb",
+  "active": "60a5e29994e28a9b",
   "lastOpenFiles": [
-    "BT-consThermE.md",
-    "RefineBT-consThermE.md",
-    "A-UniformDensity-OverVol.md",
+    "A-UniformHeatGen-OverVol.md",
     "A-UniformSpecHeat-OverVol.md",
-    "A-Density-Independent-of-Temp.md",
-    "BT-Gauss's Divergence Theorem.md",
-    "RT-rocTempSimp.md",
-    "BT-density.md",
+    "A-UniformTemp-OverVol.md",
     "A-VolHasPiecewise-Smooth-Surface.md",
-    "A-VolumeIsCompact.md"
+    "A-VolumeIsCompact.md",
+    "A-WellMixed.md",
+    "BT-consThermE.md",
+    "BT-density.md",
+    "BT-Gauss's Divergence Theorem.md",
+    "RefineBT-consThermE.md"
   ]
 }
