@@ -1,0 +1,215 @@
+                       __________________________
+
+                        PROJECTILE MOTION LESSON
+
+                             Spencer Smith
+                       __________________________
+
+
+Table of Contents
+_________________
+
+1. Learning Objectives
+2. Rectilinear Kinematics: Continuous Motion (Recap)
+3. Motion of a Projectile
+.. 1. Horizontal Motion
+.. 2. Vertical Motion
+.. 3. Summary
+.. 4. Procedure for Analysis
+..... 1. Step 1: Coordinate System
+
+
+We structure this lesson following Section 12.6 (Motion of a Projectile)
+from the classic Hibbler text "Engineering Mechanics Dynamnics, 10th
+edition".
+
+
+1 Learning Objectives
+=====================
+
+  - Derive kinematic equations for 2D projectile motion from kinematic
+    equations from 1D rectilinear motion
+  - Identify the assumptions required for the projectile motion
+    equations to hold:
+  - Air resistance is neglected
+    - Gravitational acceleration acts downward and is constant,
+      regardless of altitude
+  - Solve any given (well-defined) free-flight projectile motion
+    problems by:
+    - Able to select an appropriate Cartesian coordinate system to
+      simplify the problem as much as possible
+    - Able to identify the known variables
+    - Able to identify the unknown variables
+    - Able to write projectile motion equations for the given problem
+    - Able to solve the projectile motion equations for the unknown
+      quantities
+
+
+2 Rectilinear Kinematics: Continuous Motion (Recap)
+===================================================
+
+  As covered previously, the equations relating velocity ($v$), position
+  ($p$) and time ($t$) for motion in one dimension with constant
+  acceleration ($a$) are as follows:
+
+  \begin{equation}
+  \label{Eq_rectVel}
+  v = v^i + a t
+  \end{equation}
+
+  \begin{equation}
+  \label{Eq_rectPos}
+  p = p^i + v^i t + \frac{1}{2} a t^2
+  \end{equation}
+
+  \begin{equation}
+  \label{Eq_rectNoTime}
+  v^2 = (v^i)^2 + 2 a (p - p^i)
+  \end{equation}
+
+  where $v^i$ and $p^i$ are the initial velocity and position,
+  respectively.
+
+  Only two of these equations are independent, since the third equation
+  can always be derived from the other two.
+
+
+3 Motion of a Projectile
+========================
+
+  The free flight motion of a projectile is often studied in terms of
+  its rectangular components in the $x-y$ plane, since the projectile's
+  acceleration *always* acts in the vertical direction.  To illustrate
+  the kinematic analysis, consider a projectile launched at point
+  $(p_x^i, p_y^i)$ with the initial velocity $\mathbf{v}^i$ having
+  components $v_x^i$ and $v_y^i$, as shown in Figure 1.  The position
+  vector $\mathbf{p}$ changes over time.  At any instant of time $t$ the
+  position is represented by the components $p_x$ and $p_y$. When we
+  assume that air resistance is neglected, the only force acting on the
+  projectile is its weight, which causes the projectile to have a
+  *constant downward acceleration* of approximately $a = a_y = -g =
+  -9.81 \text{m}/\text{s}^2$ or $g = 32.2 \text{ft}/\text{s}^2$.[1]
+
+
+  <../CoordSystAndAssumpts.png>
+
+  The equations for rectilinear kinematics given above (Equations
+  \ref{Eq_rectVel}, \ref{Eq_rectPos} and \ref{Eq_rectNoTime}) are in one
+  dimension.  These equations can be applied for both the vertical
+  motion and the horizontal directions, as follows:
+
+
+3.1 Horizontal Motion
+~~~~~~~~~~~~~~~~~~~~~
+
+  For projectile motion the acceleration in the horizontal direction is
+  constant and equal to zero ($a_x = 0$).  This value can be substituted
+  in the equations for constant acceleration given above to yield the
+  following:
+
+  From Equation \ref{Eq_rectVel}:
+  \begin{equation}
+  \label{Eq_horizVel}
+  v_x = v_x^i
+  \end{equation}
+
+  From Equation \ref{Eq_rectPos}:
+  \begin{equation}
+  \label{Eq_horizPos}
+  p_x = p_x^i + v_x^i
+  \end{equation}
+
+  From Equation \ref{Eq_rectNoTime}:
+  \begin{equation}
+  \label{Eq_horizNoTime}
+  v_x = v_x^i
+  \end{equation}
+
+  Since the acceleration in the $x$ direction ($a_x$) is zero, the
+  horizontal component of velocity always remains constant during
+  motion.
+
+
+3.2 Vertical Motion
+~~~~~~~~~~~~~~~~~~~
+
+  Since the positive $y$ axis is directed upward, the acceleration in
+  the vertical direction is $a_y = -g$.  This value can be substituted
+  in the equations for constant acceleration given above to yield the
+  following:
+
+  From Equation \ref{Eq_rectVel}:
+  \begin{equation}
+  v_y = v_y^i - g t
+  \label{Eq_vertVel}
+  \end{equation}
+
+  From Equation \ref{Eq_rectPos}
+  \begin{equation}
+  p_y = p_y^i + v_y^i t - \frac{1}{2} g t^2
+  \label{Eq_vertPos}
+  \end{equation}
+
+  From Equation \ref{Eq_rectNoTime}:
+  \begin{equation}
+  v_y^2 = (v_y^i)^2 - 2 g ( p_y - p_y^i)
+  \label{Eq_vertNoTime}
+  \end{equation}
+
+  Recall that the last equation can be formulated on the basis of
+  eliminating the time $t$ between the first two equations , and
+  therefore *only two of the above three equations are independent of
+  one another*.
+
+
+3.3 Summary
+~~~~~~~~~~~
+
+  In addition to knowing that the horizontal component of velocity is
+  constant, problems involving the motion of a projectile can have at
+  most three unknowns since only three independent equations can be
+  written: that is, *one* equation in the *horizontal direction* and
+  *two* in the *vertical direction*.  Once $v_x$ and $v_y$ are obtained,
+  the resultant velocity $\mathbf{v}$, which is *always tangent* to the
+  path, is defined by the *vector sum* as shown in Figure 1.
+
+
+3.4 Procedure for Analysis
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Free-flight projectile motion problems can be solved using the
+  following procedure.
+
+
+3.4.1 Step 1: Coordinate System
+-------------------------------
+
+  - Establish the fixed $x$, $y$ coordinate axes and sketch the
+    trajectory of the particle.  Between any *two points* on the path
+    specify the given problem data and the *three unknowns*.  In all
+    cases the acceleration of gravity acts downward.  The particle's
+    initial and final velocities should be represented in terms of their
+    $x$ and $y$ components.
+
+  - Remember that positive and negative position, velocity, and
+    acceleration components always act in accordance with their
+    associated coordinate directions.
+
+  - The two points that are selected should be significant points where
+    something about the motion of the particle is known.  Potential
+    significant points include the initial point of launching the
+    projectile and the final point where it lands. The landing point
+    often has a known $y$ value.
+
+  - The variables in the equation may need to be changed to match the
+    notation of the specific problem.  For instance, a distinction may
+    need to be made between the $x$-coordinate of points $A$ and $B$,
+    via notation like $p_x^A$ and $p_x^B$.
+
+
+
+Footnotes
+_________
+
+[1] : This assumes that the earth's gravitational field does not vary
+with altitude
