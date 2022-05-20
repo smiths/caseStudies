@@ -1,3 +1,9 @@
+# set the header for all code blocks to session, so that all code runs
+# in one continuous session (so variable values are maintained between
+# blocks) since blocks can be named and variables can be set in the
+# header, session is not necessary, just a convenience
+#+PROPERTY: header-args :session
+
 #+TITLE: Projectile Motion Lesson
 #+AUTHOR: Spencer Smith
 #+LATEX_HEADER: \usepackage{xcolor}
@@ -295,7 +301,7 @@ the launch point (Point $A$) and we wish to find values related to the
 time of flight and the landing point (Point $B$).
 
 With respect to notation, we identify point $A$ as the initial point
-and point $B$ as the final point.  Therefore, in equations
+and point $B$ as the final point.  Therefore, in Equations
 \ref{Eq_horizVelo},
 \ref{Eq_horizPos},
 \ref{Eq_vertVelo}, \ref{Eq_vertPos}
@@ -336,34 +342,34 @@ solution for the requested unknown values.)
 
 *Step 4: Kinematic Equations.*
 
-*Step 4.1: Horizonal Motion.* From \ref{Eq_horizVel} we know:
+*Step 4.1: Horizonal Motion.* From Equation \ref{Eq_horizVel} we know:
 
 \begin{equation}
 \label{Eq_1}
 v_x^B = v_x^A
 \end{equation}
 
-From \ref{Eq_horizPos} we know:
+From Equation \ref{Eq_horizPos} we know:
 
 \begin{equation}
 \label{Eq_2}
 p_x^B = p_x^A + v_x^A t_{AB}
 \end{equation}
 
-*Step 4.2: Vertical Motion.* From \ref{Eq_vertVel} we know:
+*Step 4.2: Vertical Motion.* From Equation \ref{Eq_vertVel} we know:
 
 \begin{equation}
 \label{Eq_3}
 v_y^B = v_y^A - g t_{AB}
 \end{equation}
 
-From \ref{Eq_vertPos} we know:
+From Equation \ref{Eq_vertPos} we know:
 \begin{equation}
 \label{Eq_4}
 p_y^B = p_y^A + v_y^A t_{AB} - \frac{1}{2} g t_{AB}^2
 \end{equation}
 
-From \ref{Eq_vertNoTime} we know:
+From Equation \ref{Eq_vertNoTime} we know:
 \begin{equation}
 \label{Eq_5}
 (v_y^B)^2 = (v_y^A)^2 - 2 g ( p_y^B - p_y^A)
@@ -379,12 +385,13 @@ From \ref{Eq_vertNoTime} we know:
 - Eq_5 has one unknown: $v_y^B$
 
 From Step 3, we know that our goal is to find $t_{AB}$ and $p_x^B$.
-We can see that \ref{Eq_4} allows us solve for $t_{AB}$.  Once we have this
-value, we can use \ref{Eq_2} to solve for $p_x^B$.  (Although we could also
-solve for $v_x^B$ and $v_y^B$, using \ref{Eq_1} and \ref{Eq_3} (or \ref{Eq_5}),
-respectively, we are not asked to do so by the question.)
+We can see that Equation \ref{Eq_4} allows us solve for $t_{AB}$.
+Once we have this value, we can use Equation \ref{Eq_2} to solve for
+$p_x^B$.  (Although we could also solve for $v_x^B$ and $v_y^B$, using
+Equations \ref{Eq_1} and \ref{Eq_3} (or \ref{Eq_5}), respectively, we
+are not asked to do so by the question.)
 
-Find $t_{AB}$ from \ref{Eq_4}:
+Find $t_{AB}$ from Equation \ref{Eq_4}:
 
 $p^B_y = p^A_y + v^A_y t - \frac{1}{2} g t_{AB}^2$
 
@@ -406,7 +413,7 @@ print("ANSWER tAB = ", tAB, "s")
 
 #+RESULTS:
 
-Find $p_x^B$ ($R$) from \ref{Eq_2}:
+Find $p_x^B$ ($R$) from Equation \ref{Eq_2}:
 
 $R = p^B_x = p^A_x + v^A_x t_{AB}$
 
@@ -421,7 +428,9 @@ print("ANSWER R =", pBx, "m")
 
 #+RESULTS:
 
-*Kinematic Quantity Symbols Used For Modelling Projectile Motion and Sack Example*
+*APPENDIX*
+
+*Kinematic Quantity Symbols*
 
 | Position | Velocity | Acceleration |
 | --- | --- | --- |

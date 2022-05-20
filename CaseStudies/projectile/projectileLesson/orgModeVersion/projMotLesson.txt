@@ -1,13 +1,12 @@
-                       __________________________
-
+                       ━━━━━━━━━━━━━━━━━━━━━━━━━━
                         PROJECTILE MOTION LESSON
 
                              Spencer Smith
-                       __________________________
+                       ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 Table of Contents
-_________________
+─────────────────
 
 1. Learning Objectives
 2. Rectilinear Kinematics: Continuous Motion (Recap)
@@ -17,6 +16,12 @@ _________________
 .. 3. Summary
 .. 4. Procedure for Analysis
 ..... 1. Step 1: Coordinate System
+..... 2. Step 2: Identify Knowns
+..... 3. Step 3: Identify Unknowns
+..... 4. Step 4: Kinematic Equations
+..... 5. Step 5: Solve for Unknowns
+4. Example (Sack Slides Off of Ramp)
+.. 1. Solution
 
 
 We structure this lesson following Section 12.6 (Motion of a Projectile)
@@ -25,28 +30,28 @@ edition".
 
 
 1 Learning Objectives
-=====================
+═════════════════════
 
-  - Derive kinematic equations for 2D projectile motion from kinematic
+  • Derive kinematic equations for 2D projectile motion from kinematic
     equations from 1D rectilinear motion
-  - Identify the assumptions required for the projectile motion
+  • Identify the assumptions required for the projectile motion
     equations to hold:
-  - Air resistance is neglected
-    - Gravitational acceleration acts downward and is constant,
+  • Air resistance is neglected
+    • Gravitational acceleration acts downward and is constant,
       regardless of altitude
-  - Solve any given (well-defined) free-flight projectile motion
+  • Solve any given (well-defined) free-flight projectile motion
     problems by:
-    - Able to select an appropriate Cartesian coordinate system to
+    • Able to select an appropriate Cartesian coordinate system to
       simplify the problem as much as possible
-    - Able to identify the known variables
-    - Able to identify the unknown variables
-    - Able to write projectile motion equations for the given problem
-    - Able to solve the projectile motion equations for the unknown
+    • Able to identify the known variables
+    • Able to identify the unknown variables
+    • Able to write projectile motion equations for the given problem
+    • Able to solve the projectile motion equations for the unknown
       quantities
 
 
 2 Rectilinear Kinematics: Continuous Motion (Recap)
-===================================================
+═══════════════════════════════════════════════════
 
   As covered previously, the equations relating velocity ($v$), position
   ($p$) and time ($t$) for motion in one dimension with constant
@@ -75,7 +80,7 @@ edition".
 
 
 3 Motion of a Projectile
-========================
+════════════════════════
 
   The free flight motion of a projectile is often studied in terms of
   its rectangular components in the $x-y$ plane, since the projectile's
@@ -100,7 +105,7 @@ edition".
 
 
 3.1 Horizontal Motion
-~~~~~~~~~~~~~~~~~~~~~
+─────────────────────
 
   For projectile motion the acceleration in the horizontal direction is
   constant and equal to zero ($a_x = 0$).  This value can be substituted
@@ -131,7 +136,7 @@ edition".
 
 
 3.2 Vertical Motion
-~~~~~~~~~~~~~~~~~~~
+───────────────────
 
   Since the positive $y$ axis is directed upward, the acceleration in
   the vertical direction is $a_y = -g$.  This value can be substituted
@@ -157,13 +162,13 @@ edition".
   \end{equation}
 
   Recall that the last equation can be formulated on the basis of
-  eliminating the time $t$ between the first two equations , and
-  therefore *only two of the above three equations are independent of
-  one another*.
+  eliminating the time $t$ between the first two equations and therefore
+  *only two of the above three equations are independent of one
+  another*.
 
 
 3.3 Summary
-~~~~~~~~~~~
+───────────
 
   In addition to knowing that the horizontal component of velocity is
   constant, problems involving the motion of a projectile can have at
@@ -175,41 +180,349 @@ edition".
 
 
 3.4 Procedure for Analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+──────────────────────────
 
   Free-flight projectile motion problems can be solved using the
   following procedure.
 
 
 3.4.1 Step 1: Coordinate System
--------------------------------
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-  - Establish the fixed $x$, $y$ coordinate axes and sketch the
+  • Establish the fixed $x$, $y$ coordinate axes and sketch the
     trajectory of the particle.  Between any *two points* on the path
     specify the given problem data and the *three unknowns*.  In all
     cases the acceleration of gravity acts downward.  The particle's
     initial and final velocities should be represented in terms of their
     $x$ and $y$ components.
 
-  - Remember that positive and negative position, velocity, and
+  • Remember that positive and negative position, velocity, and
     acceleration components always act in accordance with their
     associated coordinate directions.
 
-  - The two points that are selected should be significant points where
+  • The two points that are selected should be significant points where
     something about the motion of the particle is known.  Potential
     significant points include the initial point of launching the
     projectile and the final point where it lands. The landing point
     often has a known $y$ value.
 
-  - The variables in the equation may need to be changed to match the
+  • The variables in the equation may need to be changed to match the
     notation of the specific problem.  For instance, a distinction may
     need to be made between the $x$-coordinate of points $A$ and $B$,
     via notation like $p_x^A$ and $p_x^B$.
 
 
+3.4.2 Step 2: Identify Knowns
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  Using the notation for the problem in question, write out the known
+  variables and their values. The known variables will be a subset of
+  the following: $p^i_x, p_x, p^i_y, p_y, v^i_x, v_x, v^i_y, v_y$ and
+  $t$. The knowns should be written in the notation adopted for the
+  particular problem.
+
+
+3.4.3 Step 3: Identify Unknowns
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  Each problem will have at most 4 unknowns that need to be determined,
+  selected from the variables listed in the Step 2 that are not known.
+  The number of relevant unknowns will usually be less than 4, since
+  questions will often focus on one or two unknowns.  As an example, the
+  equation that horizontal velocity is constant is so trivial that most
+  problems will not look for this as an unknown.  The unknowns should be
+  written in the notation adopted for the particular problem.
+
+
+3.4.4 Step 4: Kinematic Equations
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  Depending upon the known data and what is to be determined, a choice
+  should be made as to which four of the following five equations should
+  be applied between the two points on the path to obtain the most
+  direct solution to the problem.
+
+
+◊ 3.4.4.1 Step 4.1: Horizontal Motion
+
+  From Equation \ref{Eq_horizVel}: $v_x = v_x^i$ (The *velocity* in the
+  horizontal or $x$ direction is *constant*)
+
+  From Equation \ref{Eq_horizPos}: $p_x = p_x^i + v_x^i t$
+
+
+◊ 3.4.4.2 Step 4.2: Vertical Motion
+
+  In the vertical or $y$ direction *only two* of the following three
+  equations (using $a_y = -g$) can be used for solution.  (The sign of
+  $g$ will change to positive if the positive $y$ axis is downward.)
+
+  From Equation \ref{Eq_vertVel}: $v_y = v_y^i - g t$
+
+  From Equation \ref{Eq_vertPos}: $p_y = p_y^i + v_y^i t - \frac{1}{2} g
+  t^2$
+
+  From Equation \ref{Eq_vertNoTime}: $v_y^2 = (v_y^i)^2 - 2 g ( p_y -
+  p_y^i)$
+
+  For example, if the particle's final velocity $v_y$ is not needed,
+  then the first and third of these questions (for $y$) will not be
+  useful.
+
+
+3.4.5 Step 5: Solve for Unknowns
+╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
+
+  Use the equations from Step 4, together with the known values from
+  Step 2 to find the unknown values from Step 3.  We can do this
+  systematically by going through each equation and determining how many
+  unknowns are in that equation.  Any equations with one unknown can be
+  used to solve for that unknown directly.
+
+
+4 Example (Sack Slides Off of Ramp)
+═══════════════════════════════════
+
+  A sack slides off the ramp, shown in Figure 1.  We can ignore the
+  physics of the sack sliding down the ramp and just focus on its exit
+  velocity from the ramp.  There is initially no vertical component of
+  velocity and the horizontal velocity is:
+
+  ┌────
+  │ horiz_velo = 17 #m/s
+  └────
+
+  The height of the ramp from the floor is
+
+  ┌────
+  │ height = 6 #m
+  └────
+
+  *Task:* Determine the time needed for the sack to strike the floor and
+  the range $R$ where sacks begin to pile up.
+
+  The acceleration due to gravity $g$ is assumed to have the following
+  value.
+
+  ┌────
+  │ g = 9.81 #m/s^2
+  └────
+
+  <../SackExample.png>
+
+
+4.1 Solution
+────────────
+
+  *Step 1: Coordinate System.* The origin of the coodinates is
+  established at the beginning of the path, point A (Figure 2).  The
+  initial positions and velocities will be taken at Point $A$ and the
+  final positions and velocities will be taken at Point $B$.  Points $A$
+  and $B$ were selected because we know values at the launch point
+  (Point $A$) and we wish to find values related to the time of flight
+  and the landing point (Point $B$).
+
+  With respect to notation, we identify point $A$ as the initial point
+  and point $B$ as the final point.  Therefore, in Equations
+  \ref{Eq_horizVelo}, \ref{Eq_horizPos}, \ref{Eq_vertVelo},
+  \ref{Eq_vertPos} and \ref{Eq_vertNoTime} we have the following new
+  notation:
+
+  $p^i_x = p^A_x, p_x = p^B_x, p^i_y = p^A_y, p_y = p^B_y, v^i_x =
+  v^A_x, v_x = v^B_x, v^i_y = v^A_y, v_y = v^B_y$
+
+  and $t_{AB}$ refers to the time that passes when the particle moves
+  from Point $A$ to Point $B$.
+
+  *Step 2: Identify Knowns.* We know values for 5 of the 9 possible
+  variables:
+
+  • $p_x^A = 0$
+  • $p_y^A = 0$
+  • $v_x^A = \text{horiz_velo}$
+  • $v_y^A = 0$
+  • $p_y^B = -\text{height}$ (negative because below the origin)$
+
+  ┌────
+  │ pAx = 0
+  │ pAy = 0
+  │ vAx = horiz_velo
+  │ vAy = 0
+  │ pBy = -height
+  └────
+
+  *Step 3: Identify Unknowns.* According to the original question our
+   goal is to find 2 unknowns:
+
+  • $t_{AB}$: the time needed for the sack to strike the floor.
+  • $p_x^B$: the range $R$, which is the x-coordinate of the final
+    position.
+
+  (We also have 2 other unknowns that are not specifically asked for:
+  $v_x^B$ and $v_y^B$.  We may need to solve for these as part of the
+  solution for the requested unknown values.)
+
+  *Step 4: Kinematic Equations.*
+
+  *Step 4.1: Horizonal Motion.* From Equation \ref{Eq_horizVel} we know:
+
+  \begin{equation}
+  \label{Eq_1}
+  v_x^B = v_x^A
+  \end{equation}
+
+  From Equation \ref{Eq_horizPos} we know:
+
+  \begin{equation}
+  \label{Eq_2}
+  p_x^B = p_x^A + v_x^A t_{AB}
+  \end{equation}
+
+  *Step 4.2: Vertical Motion.* From Equation \ref{Eq_vertVel} we know:
+
+  \begin{equation}
+  \label{Eq_3}
+  v_y^B = v_y^A - g t_{AB}
+  \end{equation}
+
+  From Equation \ref{Eq_vertPos} we know:
+  \begin{equation}
+  \label{Eq_4}
+  p_y^B = p_y^A + v_y^A t_{AB} - \frac{1}{2} g t_{AB}^2
+  \end{equation}
+
+  From Equation \ref{Eq_vertNoTime} we know:
+  \begin{equation}
+  \label{Eq_5}
+  (v_y^B)^2 = (v_y^A)^2 - 2 g ( p_y^B - p_y^A)
+  \end{equation}
+
+  *Step 5: Solve for the Unknowns.* We can go through each of the above
+  5 equations to see how many unknowns are in each equation:
+
+  • Eq_1 has one unknown: $v_x^B$
+  • Eq_2 has two unknowns: $p_x^B$, $t_{AB}$
+  • Eq_3 has two unknowns: $v_y^B$, $t_{AB}$
+  • Eq_4 has one unknown: $t_{AB}$
+  • Eq_5 has one unknown: $v_y^B$
+
+  From Step 3, we know that our goal is to find $t_{AB}$ and $p_x^B$.
+  We can see that Equation \ref{Eq_4} allows us solve for $t_{AB}$.
+  Once we have this value, we can use Equation \ref{Eq_2} to solve for
+  $p_x^B$.  (Although we could also solve for $v_x^B$ and $v_y^B$, using
+  Equations \ref{Eq_1} and \ref{Eq_3} (or \ref{Eq_5}), respectively, we
+  are not asked to do so by the question.)
+
+  Find $t_{AB}$ from Equation \ref{Eq_4}:
+
+  $p^B_y = p^A_y + v^A_y t - \frac{1}{2} g t_{AB}^2$
+
+  Since $v^A_y = 0$,
+
+  $p^B_y = p^A_y - \frac{1}{2} g t_{AB}^2$
+
+  We can rearrange the above equation to solve for $t_{AB}$:
+
+  $t_{AB} = \sqrt{(p^A_y - p^B_y)/\frac{1}{2}(g)}$
+
+  The following code solves for $t_{AB}$.
+
+  ┌────
+  │ import math
+  │ tAB = math.sqrt((pAy - pBy)/(0.5*(g)))
+  │ print("ANSWER tAB = ", tAB, "s")
+  └────
+
+  ┌────
+  │ ANSWER tAB =  1.106002527218662 s
+  └────
+
+
+  Find $p_x^B$ ($R$) from Equation \ref{Eq_2}:
+
+  $R = p^B_x = p^A_x + v^A_x t_{AB}$
+
+  We know $p^A_x = 0$.  Therefore,
+
+  $R = p^B_x = p^A_x + v^A_x t_{AB}$
+
+  ┌────
+  │ pBx = pAx + vAx*tAB
+  │ print("ANSWER R =", pBx, "m")
+  └────
+
+  ┌────
+  │ ANSWER R = 18.802042962717255 m
+  └────
+
+
+  *APPENDIX*
+
+  *Kinematic Quantity Symbols*
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Position                                     Velocity                           Acceleration                
+   —                                            —                                  —                           
+   p (pos in 1D)                                v (velo in 1D)                     a (accel in 1D)             
+   $\mathbf{p}$ (pos vector)                    $\mathbf{v}$ (velo vector)         $\mathbf{a}$ (accel vector) 
+   $\mathbf{p}^i$ (init pos vector (not used))  $\mathbf{v}^i$ (init velo vector)  NA                          
+   $p_x$ (pos x comp)                           $v_x$ (velo x comp)                $a_x$ (accel x comp)        
+   $p_y$ (pos y comp)                           $v_y$ (velo y comp)                $a_y$ (accel y comp)        
+   $p_x^i$ (init pos x comp)                    $v_x^i$ (init velo x comp)         NA                          
+   $p_y^i$ (init pos y comp)                    $v_y^i$ (init velo y comp)         NA                          
+   $p_x^A$ (Point A pos x comp)                 $v_x^A$ (Point A velo x comp)      NA                          
+   $p_y^A$ (Point A pos y comp)                 $v_y^A$ (Point A velo y comp)      NA                          
+   $p_x^B$ (Point B pos x comp)                 $v_x^B$ (Point B velo x comp)      NA                          
+   $p_y^B$ (Point B pos y comp)                 $v_y^B$ (Point B velo y comp)      NA                          
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  *Other Symbols Used For Modelling Projectile Motion and Sack Example*
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Symbol                          
+   —                               
+   t (time)                        
+   x (x-axis in Cartesian plane)   
+   y (y-axis in Cartesian plane)   
+   g (acceleration due to gravity) 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  *Symbols Used Only For Sack Example*
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Symbol                                                              
+   —                                                                   
+   horiz_velo (horizontal velocity of sack when launched (at A))       
+   height (height of the sack when launched (distance between A and C) 
+   R (Vertical distance covered by sack at instant when it lands at B) 
+   A (Location where sack is launched)                                 
+   B (Location where sack lands)                                       
+   C (Location of ground directly below where sack is launched)        
+   $t_{AB}$ (time elapsed from launch at A to landing at B)            
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  *Traceability Between Symbols in the Model and Code for Sack Example*
+
+  The symbols are presented in the order that they are used in the code.
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Code Symbol  Model Symbol 
+   ————         ———–         
+   horiz_velo   horiz_velo   
+   height       height       
+   vAx          $v^A_x$      
+   g            $g$          
+   pBy          $p^B_y$      
+   pAy          $p^A_y$      
+   tAB          $t_{AB}$     
+   pAx          $p^A_x$      
+   pBx          $p^B_x$      
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
 
 Footnotes
-_________
+─────────
 
 [1] : This assumes that the earth's gravitational field does not vary
 with altitude
