@@ -13,3 +13,6 @@ pBy = -height
 import math
 tAB = math.sqrt((pAy - pBy)/(0.5*(g)))
 print("ANSWER tAB = ", tAB, "s")
+
+pBx = pAx + vAx*tAB
+print("ANSWER R =", pBx, "m")

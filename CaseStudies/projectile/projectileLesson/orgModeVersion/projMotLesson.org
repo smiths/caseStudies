@@ -1,5 +1,3 @@
-#+PROPERTY: :tangle yes
-
 #+TITLE: Projectile Motion Lesson
 #+AUTHOR: Spencer Smith
 #+LATEX_HEADER: \usepackage{xcolor}
@@ -252,19 +250,21 @@ ignore the physics of the sack sliding down the ramp and just focus on
 its exit velocity from the ramp.  There is initially no vertical
 component of velocity and the horizontal velocity is:
 
-#+begin_src python :session lesson :tangle lesson.py
+#+begin_src python :tangle lesson.py
 horiz_velo = 17 #m/s
 #+end_src
 
 #+RESULTS:
+: None
 
 The height of the ramp from the floor is
 
-#+begin_src python :session lesson :tangle lesson.py
+#+begin_src python :tangle lesson.py
 height = 6 #m
 #+end_src
 
 #+RESULTS:
+: None
 
 *Task:* Determine the time needed for the sack to strike the floor and
 the range $R$ where sacks begin to pile up.
@@ -272,11 +272,12 @@ the range $R$ where sacks begin to pile up.
 The acceleration due to gravity $g$ is assumed to have the following
 value.
 
-#+begin_src python :session lesson :tangle lesson.py
+#+begin_src python :tangle lesson.py
 g = 9.81 #m/s^2
 #+end_src
 
 #+RESULTS:
+: None
 
 #+ATTR_LATEX: :width 0.7\textwidth
 #+CAPTION: Coordinate System and Definition of Symbols
@@ -314,7 +315,7 @@ variables:
 - $v_y^A = 0$
 - $p_y^B = -\text{height}$ (negative because below the origin)$
 
-#+begin_src python :session lesson :tangle lesson.py
+#+begin_src python :tangle lesson.py
 pAx = 0
 pAy = 0
 vAx = horiz_velo
@@ -397,11 +398,78 @@ $t_{AB} = \sqrt{(p^A_y - p^B_y)/\frac{1}{2}(g)}$
 
 The following code solves for $t_{AB}$.
 
-#+begin_src python :session lesson :results output :exports both :tangle lesson.py
+#+begin_src python :results output :exports both :tangle lesson.py
 import math
 tAB = math.sqrt((pAy - pBy)/(0.5*(g)))
 print("ANSWER tAB = ", tAB, "s")
 #+end_src
 
 #+RESULTS:
-: ANSWER tAB =  1.106002527218662 s
+
+Find $p_x^B$ ($R$) from \ref{Eq_2}:
+
+$R = p^B_x = p^A_x + v^A_x t_{AB}$
+
+We know $p^A_x = 0$.  Therefore,
+
+$R = p^B_x = p^A_x + v^A_x t_{AB}$
+
+#+begin_src python :results output :exports both :tangle lesson.py
+pBx = pAx + vAx*tAB
+print("ANSWER R =", pBx, "m")
+#+end_src
+
+#+RESULTS:
+
+*Kinematic Quantity Symbols Used For Modelling Projectile Motion and Sack Example*
+
+| Position | Velocity | Acceleration |
+| --- | --- | --- |
+| p (pos in 1D) | v (velo in 1D) | a (accel in 1D) |
+| $\mathbf{p}$ (pos vector) | $\mathbf{v}$ (velo vector) | $\mathbf{a}$ (accel vector) |
+| $\mathbf{p}^i$ (init pos vector (not used)) | $\mathbf{v}^i$ (init velo vector) | NA |
+| $p_x$ (pos x comp) | $v_x$ (velo x comp) | $a_x$ (accel x comp) |
+| $p_y$ (pos y comp) | $v_y$ (velo y comp) | $a_y$ (accel y comp) |
+| $p_x^i$ (init pos x comp) | $v_x^i$ (init velo x comp) | NA |
+| $p_y^i$ (init pos y comp) | $v_y^i$ (init velo y comp) | NA |
+| $p_x^A$ (Point A pos x comp) | $v_x^A$ (Point A velo x comp) | NA |
+| $p_y^A$ (Point A pos y comp) | $v_y^A$ (Point A velo y comp) | NA |
+| $p_x^B$ (Point B pos x comp) | $v_x^B$ (Point B velo x comp) | NA |
+| $p_y^B$ (Point B pos y comp) | $v_y^B$ (Point B velo y comp) | NA |
+
+*Other Symbols Used For Modelling Projectile Motion and Sack Example*
+
+| Symbol | 
+| --- | 
+| t (time) | 
+| x (x-axis in Cartesian plane) |
+| y (y-axis in Cartesian plane) |
+| g (acceleration due to gravity) |
+
+*Symbols Used Only For Sack Example*
+
+| Symbol | 
+| --- | 
+| horiz_velo (horizontal velocity of sack when launched (at A)) | 
+| height (height of the sack when launched (distance between A and C)  |
+| R (Vertical distance covered by sack at instant when it lands at B) |
+| A (Location where sack is launched) |
+| B (Location where sack lands) |
+| C (Location of ground directly below where sack is launched) |
+| $t_{AB}$ (time elapsed from launch at A to landing at B) |
+
+*Traceability Between Symbols in the Model and Code for Sack Example*
+
+The symbols are presented in the order that they are used in the code.
+
+| Code Symbol | Model Symbol |
+| ------------| ----------- |
+| horiz_velo | horiz_velo |
+| height | height |
+| vAx | $v^A_x$ |
+| g | $g$ |
+| pBy | $p^B_y$  |
+| pAy | $p^A_y$ |
+| tAB | $t_{AB}$ |
+| pAx | $p^A_x$ |
+| pBx | $p^B_x$ |
