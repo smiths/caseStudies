@@ -17,6 +17,21 @@
 \usepackage{filecontents}
 \usepackage[backend=bibtex]{biblatex}
 \usepackage{url}
+
+\usepackage{color}
+
+\newif\ifcomments\commentstrue
+
+\ifcomments
+\newcommand{\authornote}[3]{\textcolor{#1}{[#3 ---#2]}}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\else
+\newcommand{\authornote}[3]{}
+\newcommand{\todo}[1]{}
+\fi
+
+\newcommand{\wss}[1]{\authornote{blue}{SS}{#1}} 
+
 \setmathfont{Latin Modern Math}
 \newcommand{\gt}{\ensuremath >}
 \newcommand{\lt}{\ensuremath <}
@@ -250,7 +265,7 @@ This subsection provides a list of terms that are used in the subsequent section
 \item{Target: Where the projectile should be launched to.}
 \item{Gravity: The force that attracts one physical body with mass to another.}
 \item{Cartesian coordinate system: A coordinate system that specifies each point uniquely in a plane by a set of numerical coordinates, which are the signed distances to the point from two fixed perpendicular oriented lines, measured in the same unit of length (from \cite{cartesianWiki}).}
-\item{Rectilinear: Occuring in one dimension.}
+\item{Rectilinear: Occurring \wss{fixed typo in ``Ocurring''} in one dimension.}
 \end{itemize}
 \subsubsection{Physical System Description}
 \label{Sec:PhysSyst}
@@ -300,9 +315,23 @@ This section simplifies the original problem and helps in developing the theoret
 \item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \end{itemize}
-\subsubsection{Theoretical Models}
+
+\subsubsection{Context Theories}
+
+\wss{Some theories do not have to be explicitly invoked. They are part of the context for the other theories, without having to be explicitly stated or defined. The context theories for this problem are as follows:
+\begin{itemize}
+\item real arithmetic
+\item vectors
+\item Cartesian coordinate system
+\item differentiation
+\item integration
+\end{itemize}
+}
+\subsubsection{\wss{Background Theories (BT)}}
 \label{Sec:TMs}
-This section focuses on the general equations and laws that Projectile is based on.
+This section focuses on the general equations and laws that Projectile is based
+on.  \wss{Maybe relabel all of the background theories with the prefix BT,
+instead of TM?}
 
 \medskip
 \noindent
@@ -325,6 +354,8 @@ Description & \begin{symbDescription}
               \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
+Notes & Cartesian coordinate system.
+\\ \midrule
 Source & \cite{accelerationWiki}
          
 \\ \midrule
@@ -333,6 +364,8 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+\noindent \textbf{Preconditions for TM:acceleration}
+\hyperref[cartSyst]{A:cartSyst}
 
 \medskip
 \noindent
