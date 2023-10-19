@@ -198,6 +198,9 @@ This document will be used as a starting point for subsequent development phases
 \label{Sec:ReqsScope}
 The scope of the requirements includes the analysis of a two-dimensional (2D) projectile motion problem with constant acceleration.
 
+\wss{Scope Assumption: Only interested in the position of the projectile, not
+its orientation} %this is how we leave theories out, like theories of rotation
+
 \subsection{Characteristics of Intended Reader}
 \label{Sec:ReaderChars}
 Reviewers of this documentation should have an understanding of undergraduate level 1 physics and undergraduate level 1 calculus. The users of Projectile can have a lower level of expertise, as explained in \hyperref[Sec:UserChars]{Sec:User Characteristics}.
@@ -239,6 +242,7 @@ The interaction between the product and the user is through an application progr
 \item{Calculate the required outputs.}
 \end{itemize}
 \end{itemize}
+
 \subsection{User Characteristics}
 \label{Sec:UserChars}
 The end user of Projectile should have an understanding of high school physics and high school calculus.
@@ -316,7 +320,7 @@ This section simplifies the original problem and helps in developing the theoret
 \item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \end{itemize}
 
-\subsubsection{Context Theories}
+\subsubsection{\wss{Context Theories}}
 
 \wss{Some theories do not have to be explicitly invoked. They are part of the context for the other theories, without having to be explicitly stated or defined. The context theories for this problem are as follows:
 \begin{itemize}
@@ -342,7 +346,14 @@ instead of TM?}
 \label{TM:acceleration}
 \\ \midrule
 Label & Acceleration
-        
+\\ \midrule
+\wss{Input} & \wss{$\symbf{v}(t): \mathbb{R} \rightarrow \mathbb{R}^3$}
+\\ \midrule
+\wss{Output} & \wss{$\symbf{a}(t): \mathbb{R} \rightarrow \mathbb{R}^3$}
+\\ \midrule
+\wss{Input Constraints} & \wss{None}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
 \\ \midrule
 Equation & \begin{displaymath}
            \symbf{a}\text{(}t\text{)}=\frac{\,d\symbf{v}\text{(}t\text{)}}{\,dt}
@@ -354,7 +365,9 @@ Description & \begin{symbDescription}
               \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & Cartesian coordinate system.
+Notes & The velocity and acceleration of the body are expressed using a Cartesian
+coordinate system (\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
+system is rectangular (orthonormal).
 \\ \midrule
 Source & \cite{accelerationWiki}
          
@@ -364,7 +377,9 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+~\\
 \noindent \textbf{Preconditions for TM:acceleration}
+
 \hyperref[cartSyst]{A:cartSyst}
 
 \medskip
@@ -378,6 +393,15 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 Label & Velocity
         
 \\ \midrule
+\wss{Input} & \wss{$\symbf{p}(t): \mathbb{R} \rightarrow \mathbb{R}^3$}
+\\ \midrule
+\wss{Output} & \wss{$\symbf{v}(t): \mathbb{R} \rightarrow \mathbb{R}^3$}
+\\ \midrule
+\wss{Input Constraints} & \wss{None}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
 Equation & \begin{displaymath}
            \symbf{v}\text{(}t\text{)}=\frac{\,d\symbf{p}\text{(}t\text{)}}{\,dt}
            \end{displaymath}
@@ -388,6 +412,11 @@ Description & \begin{symbDescription}
               \item{$\symbf{p}\text{(}t\text{)}$ is the position (${\text{m}}$)}
               \end{symbDescription}
 \\ \midrule
+Notes & The position and velocity of the body are expressed using a Cartesian
+coordinate system (\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
+system is rectangular (orthonormal).
+\\ \midrule
+
 Source & \cite{velocityWiki}
          
 \\ \midrule
@@ -396,11 +425,16 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+~\\
+\noindent \textbf{Preconditions for TM:velocity}
 
-\subsubsection{General Definitions}
+\hyperref[cartSyst]{A:cartSyst}
+
+\subsubsection{\wss{Refined Theories}}
 \label{Sec:GDs}
 This section collects the laws and equations that will be used to build the instance models.
-
+\wss{We should remove the prefix GD.  Maybe we should replace it with the prefix
+TM?}
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -412,8 +446,17 @@ This section collects the laws and equations that will be used to build the inst
 Label & Rectilinear (1D) velocity as a function of time for constant acceleration
         
 \\ \midrule
-Units & $\frac{\text{m}}{\text{s}}$
-        
+Units & $\frac{\text{m}}{\text{s}}$ \wss{Do we need units as a separate field? user option?}
+\\ \midrule
+\wss{Input} & \wss{$v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \mathbb{R}$}
+\\ \midrule
+\wss{Output} & \wss{${v}(t): \mathbb{R} \rightarrow \mathbb{R}$}
+\\ \midrule
+\wss{Input Constraints} & \wss{}$t \geq 0$}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
 \\ \midrule
 Equation & \begin{displaymath}
            v\text{(}t\text{)}={v^{\text{i}}}+{a^{c}} t
