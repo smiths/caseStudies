@@ -199,7 +199,9 @@ This document will be used as a starting point for subsequent development phases
 The scope of the requirements includes the analysis of a two-dimensional (2D) projectile motion problem with constant acceleration.
 
 \wss{We are only interested in the position of the projectile, not
-its orientation \hyperref[A:noOrientation]{A:noOrientation}.} %this is how we leave theories out, like theories of rotation
+its orientation \hyperref[noOrientation]{A:noOrientation}.} %this is how we leave theories out, like theories of rotation
+
+\wss{We assume that forces are not relevant for the model so that we only need kinematic equations \hyperref[kinematicOnly]{A:kinematicOnly}.}
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:ReaderChars}
@@ -304,12 +306,31 @@ This section simplifies the original problem and helps in developing the theoret
 
 \begin{itemize}
 \item[noOrientation:\phantomsection\label{noOrientation}]{\wss{The orientation of the projectile is ignored. We only care about its translation not its rotation. (RefBy: \hyperref[TM:acceleration]{TM:acceleration} and \hyperref[TM:velocity]{TM:velocity}.)}}
+\item[kinematicOnly:\phantomsection\label{kinematicOnly}]{\wss{The motion of the
+projectile is modelled with only kinematic equations. Forces are not
+considered.}} 
 \end{itemize}
 
 \subsubsection{\wss{Background Theory Assumptions}}
 
 \begin{itemize}
 \item[cartSyst:\phantomsection\label{cartSyst}]{A Cartesian coordinate system is used (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\end{itemize}
+
+\subsubsection{\wss{Helper Theory Assumptions (GD:rectVel, GD:rectPos)}}
+
+\begin{itemize}
+\item[cartSyst:\phantomsection\label{oneD}]{The motion of the particle is one dimensional. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\end{itemize}
+
+\subsubsection{\wss{Helper Theory Assumptions (GD:velVec, GD:posVec)}}
+
+\begin{itemize}
+\item[twoDMotion:\phantomsection\label{twoDMotion}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[constAccelX:\phantomsection\label{constAccelX}]{\wss{The acceleration is constant in the $x$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
+\item[constAccelY:\phantomsection\label{constAccelY}]{\wss{The acceleration is constant in the $y$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
+
 \end{itemize}
 
 \subsubsection{\wss{Theory Assumptions}}
@@ -320,7 +341,6 @@ This section simplifies the original problem and helps in developing the theoret
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \item[accelXZero:\phantomsection\label{accelXZero}]{The acceleration in the $x$-direction is zero. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[constAccel]{A:constAccel}.)}
 \item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}.)}
 \item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
@@ -339,7 +359,6 @@ This section simplifies the original problem and helps in developing the theoret
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \item[accelXZero:\phantomsection\label{accelXZero}]{The acceleration in the $x$-direction is zero. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[constAccel]{A:constAccel}.)}
 \item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}.)}
 \item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
@@ -410,7 +429,9 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 ~\\
 \noindent \textbf{Preconditions for TM:acceleration}
 
-\hyperref[cartSyst]{A:cartSyst}
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst}
+\end{itemize}
 
 \medskip
 \noindent
@@ -458,9 +479,11 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 ~\\
 \noindent \textbf{Preconditions for TM:velocity}
 
-\hyperref[cartSyst]{A:cartSyst}
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst}
+\end{itemize}
 
-\subsubsection{\wss{Refined Theories}}
+\subsubsection{\wss{Helper Theories (GD:rectVel and GD:rectPos)}}
 \label{Sec:GDs}
 This section collects the laws and equations that will be used to build the instance models.
 \wss{We should remove the prefix GD.  Maybe we should replace it with the prefix
@@ -482,7 +505,7 @@ Units & $\frac{\text{m}}{\text{s}}$ \wss{Do we need units as a separate field? u
 \\ \midrule
 \wss{Output} & \wss{${v}(t): \mathbb{R} \rightarrow \mathbb{R}$}
 \\ \midrule
-\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[A:timeStartZero]{timeStartZero}}
+\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 \\ \midrule
 \wss{Output Constraints} & \wss{None}
 \\ \midrule
@@ -497,7 +520,7 @@ Description & \begin{symbDescription}
               \item{$t$ is the time (${\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & \wss{See detailed derivation below}
+\wss{Notes} & \wss{See detailed derivation below}
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
          
@@ -508,9 +531,23 @@ RefBy & \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:rectPos]{GD:rectPos}
 \end{tabular}
 \end{minipage}
 
+
 \paragraph{Detailed derivation of rectilinear velocity:}
 \label{GD:rectVelDeriv}
-Assume we have rectilinear motion of a particle (of negligible size and shape, from \hyperref[pointMass]{A:pointMass}); that is, motion in a straight line. The velocity is $v$ and the acceleration is $a$. The motion in \hyperref[TM:acceleration]{TM:acceleration} is now one-dimensional with a constant acceleration, represented by ${a^{c}}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${v^{\text{i}}}$. From \hyperref[TM:acceleration]{TM:acceleration} in 1D, and using the above symbols we have:
+\wss{We start from the theory of acceleration
+\hyperref[TM:acceleration]{TM:acceleration} for a body in 3D Cartesian space:}
+
+$$\symbf{a}\text{(}t\text{)}=\frac{\,d\symbf{v}\text{(}t\text{)}}{\,dt}$$
+
+\wss{At this point we assume the body only travels in a straight line along one
+dimension of the coordinate system (\hyperref[oneD]{A:oneD}):}
+
+$${a}\text{(}t\text{)}=\frac{\,d{v}\text{(}t\text{)}}{\,dt}$$
+
+\wss{We now assume that the acceleration is constant (does not vary with time)
+(\hyperref[constAccel]{A:constAccel}) represented by ${a^{c}}$. The initial
+velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is
+represented by ${v^{\text{i}}}$. We now have:}
 
 \begin{displaymath}
 {a^{c}}=\frac{\,dv}{\,dt}
@@ -525,6 +562,16 @@ Performing the integration, we have the required equation:
 \begin{displaymath}
 v\text{(}t\text{)}={v^{\text{i}}}+{a^{c}} t
 \end{displaymath}
+
+\noindent \textbf{\wss{Preconditions for GD:rectVel}}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[TM:acceleration]{TM:acceleration})
+\item \hyperref[oneD]{A:oneD}
+\item \hyperref[constAccel]{A:constAccel}
+\item \hyperref[timeStartZero]{A:timeStartZero}
+\end{itemize}
+
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -539,6 +586,15 @@ Label & Rectilinear (1D) position as a function of time for constant acceleratio
 Units & ${\text{m}}$
         
 \\ \midrule
+\wss{Input} & \wss{$p^{\text{i}}: \mathbb{R}, v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \mathbb{R}$}
+\\ \midrule
+\wss{Output} & \wss{${p}(t): \mathbb{R} \rightarrow \mathbb{R}$}
+\\ \midrule
+\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
 Equation & \begin{displaymath}
            p\text{(}t\text{)}={p^{\text{i}}}+{v^{\text{i}}} t+\frac{{a^{c}} t^{2}}{2}
            \end{displaymath}
@@ -551,6 +607,9 @@ Description & \begin{symbDescription}
               \item{${a^{c}}$ is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \end{symbDescription}
 \\ \midrule
+\wss{Notes} & \wss{See detailed derivation below}
+\\ \midrule
+
 Source & \cite[(pg. 8)]{hibbeler2004}
          
 \\ \midrule
@@ -562,27 +621,53 @@ RefBy & \hyperref[GD:posVec]{GD:posVec}
 
 \paragraph{Detailed derivation of rectilinear position:}
 \label{GD:rectPosDeriv}
-Assume we have rectilinear motion of a particle (of negligible size and shape, from \hyperref[pointMass]{A:pointMass}); that is, motion in a straight line. The position is $p$ and the velocity is $v$. The motion in \hyperref[TM:velocity]{TM:velocity} is now one-dimensional. The initial position (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${p^{\text{i}}}$. From \hyperref[TM:velocity]{TM:velocity} in 1D, and using the above symbols we have:
+\wss{We start from the kinematic equation for velocity
+\hyperref[TM:velocity]{TM:velocity} for a body in 3D Cartesian space:}
+
+$$\symbf{v}\text{(}t\text{)}=\frac{\,d\symbf{p}\text{(}t\text{)}}{\,dt}$$
+
+\wss{At this point we assume the body only travels in a straight line along one
+dimension of the coordinate system (\hyperref[oneD]{A:oneD}):}
+
+$${v}\text{(}t\text{)}=\frac{\,d{p}\text{(}t\text{)}}{\,dt}$$
+
+\wss{The initial position (at $t=0$, from
+\hyperref[timeStartZero]{A:timeStartZero}) is represented by ${p^{\text{i}}}$.
+Rearranging the above equation and integrating we have:}
 
 \begin{displaymath}
-v=\frac{\,dp}{\,dt}
+\int_{{p^{\text{i}}}}^{p(t)}{1}\,dp=\int_{0}^{t}{v(t)}\,dt
 \end{displaymath}
-Rearranging and integrating, we have:
+\wss{This equation has been changed from the previous version to show $p(t)$ and
+$v(t)$}
+
+\wss{We now assume that the acceleration is constant (does not vary with time)
+(\hyperref[constAccel]{A:constAccel}) represented by ${a^{c}}$. The initial
+velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is
+represented by ${v^{\text{i}}}$. Since we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel} we can replace $v(t)$ to get:}
 
 \begin{displaymath}
-\int_{{p^{\text{i}}}}^{p}{1}\,dp=\int_{0}^{t}{v}\,dt
+\int_{{p^{\text{i}}}}^{p(t)}{1}\,dp=\int_{0}^{t}{{v^{\text{i}}}+{a^{c}} t}\,dt
 \end{displaymath}
-From \hyperref[GD:rectVel]{GD:rectVel}, we can replace $v$:
-
-\begin{displaymath}
-\int_{{p^{\text{i}}}}^{p}{1}\,dp=\int_{0}^{t}{{v^{\text{i}}}+{a^{c}} t}\,dt
-\end{displaymath}
+\wss{The above equation has been changed from the previous version to show
+$p(t)$.}
 Performing the integration, we have the required equation:
 
 \begin{displaymath}
 p\text{(}t\text{)}={p^{\text{i}}}+{v^{\text{i}}} t+\frac{{a^{c}} t^{2}}{2}
 \end{displaymath}
-\medskip
+
+\noindent \textbf{Preconditions for GD:rectPos}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[TM:velocity]{TM:velocity})
+\item \hyperref[oneD]{A:oneD}
+\item \hyperref[constAccel]{A:constAccel}
+\item \hyperref[timeStartZero]{A:timeStartZero}
+\end{itemize}
+
+\subsubsection{\wss{Helper Theories (GD:velVec and GD:posVec)}}
+
 \noindent
 \begin{minipage}{\textwidth}
 \begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
@@ -628,13 +713,13 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoDMotion]{A:twoDM
                                                                                                                                                                                                  \end{bmatrix}$ and the acceleration vector as $\symbf{a}\text{(}t\text{)}=\begin{bmatrix}
                                                                                                                                                                                                                                                                            {a_{\text{x}}}\\
                                                                                                                                                                                                                                                                            {a_{\text{y}}}
-                                                                                                                                                                                                                                                                           \end{bmatrix}$. The acceleration is assumed to be constant (\hyperref[constAccel]{A:constAccel}) and the constant acceleration vector is represented as ${\symbf{a}^{\text{c}}}=\begin{bmatrix}
+                                                                                                                                                                                                                                                                           \end{bmatrix}$. The acceleration is assumed to be constant in both the $x$ direction ${a_{\text{x}}}^{\text{c}}$ (\hyperref[constAccelX]{A:constAccelX}) and $y$ direction ${a_{\text{y}}}^{\text{c}}$ (\hyperref[constAccelY]{A:constAccelY}). The constant acceleration vector is represented as ${\symbf{a}^{\text{c}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                            {{a_{\text{x}}}^{\text{c}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                            {{a_{\text{y}}}^{\text{c}}}
                                                                                                                                                                                                                                                                                                                                                                                                                                                            \end{bmatrix}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${\symbf{v}^{\text{i}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{x}}}^{\text{i}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{y}}}^{\text{i}}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. Since we have a Cartesian coordinate system, \hyperref[GD:rectVel]{GD:rectVel} can be applied to each coordinate of the velocity vector to yield the required equation:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel}. This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:}
 
 \begin{displaymath}
 \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
@@ -1174,6 +1259,19 @@ This section provides the non-functional requirements, the qualities that the so
 \item[Maintainable:\phantomsection\label{maintainable}]{The traceability between requirements, assumptions, theoretical models, general definitions, data definitions, instance models, likely changes, unlikely changes, and modules is completely recorded in traceability matrices in the SRS and module guide.}
 \item[Portable:\phantomsection\label{portable}]{The code is able to be run in different environments.}
 \end{itemize}
+\subsection{\wss{Rationale}}
+\wss{Capture the rationale for the scope assumptions and final theory
+assumptions.  The rationale could vary between problems.  For instance, for
+projectile motion the rationale could be that it is being used for teaching
+purposes.  If the theories are used to solve an actual science or engineering
+problem, the rationale would need more justification.}
+\wss{Neglecting rotation could be justified by assuming a point mass? \hyperref[pointMass]{A:pointMass})}.
+\wss{Should requirements be added related to guaranteeing assumptions and
+constraints?  (As is done after a hazard analysis.)  Requirements could be added
+to check the input constraints, like $x > 0$. Requirements could be added to
+check neglecting curvature.  Would need the radius of the planet, or are we
+assuming it's Earth?}
+
 \section{Traceability Matrices and Graphs}
 \label{Sec:TraceMatrices}
 The purpose of the traceability matrices is to provide easy references on what has to be additionally modified if a certain component is changed. Every time a component is changed, the items in the column of that component that are marked with an ``X'' should be modified as well. \hyperref[Table:TraceMatAvsA]{Tab:TraceMatAvsA} shows the dependencies of the assumptions on each other. \hyperref[Table:TraceMatAvsAll]{Tab:TraceMatAvsAll} shows the dependencies of the data definitions, theoretical models, general definitions, instance models, requirements, likely changes, and unlikely changes on the assumptions. \hyperref[Table:TraceMatRefvsRef]{Tab:TraceMatRefvsRef} shows the dependencies of the data definitions, theoretical models, general definitions, and instance models on each other. \hyperref[Table:TraceMatAllvsR]{Tab:TraceMatAllvsR} shows the dependencies of the requirements and goal statements on the data definitions, theoretical models, general definitions, and instance models.
