@@ -300,6 +300,9 @@ Given the initial velocity vector of the projectile and the geometric layout of 
 \label{Sec:SolCharSpec}
 The instance models that govern Projectile are presented in the \hyperref[Sec:IMs]{Instance Model Section}. The information to understand the meaning of the instance models and their derivation is also presented, so that the instance models can be verified.
 
+\subsubsection{\wss{Types}}
+
+\wss{$\text{time} = \mathbb{R}$}
 \subsubsection{\wss{Scope Assumptions}}
 \label{Sec:Assumps}
 This section simplifies the original problem and helps in developing the theoretical models by filling in the missing information for the physical system. The assumptions refine the scope by providing more detail.
@@ -320,14 +323,17 @@ considered.}}
 \subsubsection{\wss{Helper Theory Assumptions (GD:rectVel, GD:rectPos)}}
 
 \begin{itemize}
-\item[cartSyst:\phantomsection\label{oneD}]{The motion of the particle is one dimensional. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[oneD:\phantomsection\label{oneD}]{The motion of the particle is one dimensional. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \end{itemize}
 
-\subsubsection{\wss{Helper Theory Assumptions (GD:velVec, GD:posVec)}}
+\subsubsection{\wss{Theory Assumptions (GD:velVec, GD:posVec)}}
 
 \begin{itemize}
-\item[twoDMotion:\phantomsection\label{twoDMotion}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[twoD:\phantomsection\label{twoD}]{The variables only depend on
+two-dimensions (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and
+\hyperref[GD:posVec]{GD:posVec}.)} \wss{changed twoDMotion to just twoD, so that
+it can be used for things that are 2D other than just the motion.}
 \item[constAccelX:\phantomsection\label{constAccelX}]{\wss{The acceleration is constant in the $x$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
 \item[constAccelY:\phantomsection\label{constAccelY}]{\wss{The acceleration is constant in the $y$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
 
@@ -336,7 +342,7 @@ considered.}}
 \subsubsection{\wss{Theory Assumptions}}
 
 \begin{itemize}
-\item[twoDMotion:\phantomsection\label{twoDMotion}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[twoD:\phantomsection\label{twoD}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
@@ -354,7 +360,7 @@ considered.}}
 \subsubsection{\wss{Final Theory Assumptions}}
 
 \begin{itemize}
-\item[twoDMotion:\phantomsection\label{twoDMotion}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[twoD:\phantomsection\label{twoD}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
@@ -396,9 +402,9 @@ instead of TM?}
 \\ \midrule
 Label & Acceleration
 \\ \midrule
-\wss{Input} & \wss{$\symbf{v}: \mathbb{R} \rightarrow \mathbb{R}^3$}
+\wss{Input} & \wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$}
 \\ \midrule
-\wss{Output} & \wss{$\symbf{a}: \mathbb{R} \rightarrow \mathbb{R}^3$}
+\wss{Output} & \wss{$\symbf{a}: \text{time} \rightarrow \mathbb{R}^3$}
 \\ \midrule
 \wss{Input Constraints} & \wss{None}
 \\ \midrule
@@ -444,9 +450,9 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 Label & Velocity
         
 \\ \midrule
-\wss{Input} & \wss{$\symbf{p}: \mathbb{R} \rightarrow \mathbb{R}^3$}
+\wss{Input} & \wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^3$}
 \\ \midrule
-\wss{Output} & \wss{$\symbf{v}: \mathbb{R} \rightarrow \mathbb{R}^3$}
+\wss{Output} & \wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$}
 \\ \midrule
 \wss{Input Constraints} & \wss{None}
 \\ \midrule
@@ -483,6 +489,63 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \item \hyperref[cartSyst]{A:cartSyst}
 \end{itemize}
 
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{TM:directionCosines}
+\phantomsection 
+\label{TM:directionCosines}
+\\ \midrule
+Label & \wss{Direction Cosines Representation for Vectors}
+        
+\\ \midrule
+\wss{Input} & \wss{$\alpha: \mathbb{R}, \beta: \mathbb{R}, \gamma: \mathbb{R},
+|\symbf{b}|: \mathbb{R}$}
+\\ \midrule
+\wss{Output} & \wss{$b_x: \mathbb{R}, b_y: \mathbb{R}, b_z: \mathbb{R}$}
+\\ \midrule
+\wss{Input Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
+Equation & \begin{displaymath}
+           b_x = |\symbf{b}| \cos (\alpha), b_y = |\symbf{b}| \cos (\beta), b_z
+           = |\symbf{b}| \cos (\gamma)
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item $\alpha$ is the angle between the vector and the positive $x$ axis 
+              \item $\beta$ is the angle between the vector and the positive $y$ axis 
+              \item $\gamma$ is the angle between the vector and the positive $z$ axis 
+              \item $|\symbf{b}|$ is the magnitude of the vector
+              \item $b_x$ is the $x$ component of the vector $\symbf{b}$
+              \item $b_y$ is the $y$ component of the vector $\symbf{b}$
+              \item $b_z$ is the $z$ component of the vector $\symbf{b}$
+              \end{symbDescription}
+\\ \midrule
+Notes & \wss{The vector $\symbf{b}$ is in a three dimensional Cartesian
+coordinate system (\hyperref[cartSyst]{A:cartSyst}).}  \wss{A figure showing the
+angles for a sample vector would be a nice addition.}
+\\ \midrule
+
+Source & \cite{} \href{https://byjus.com/maths/direction-cosines/} {web-page
+resource}, Long book 
+         
+\\ \midrule
+RefBy & \hyperref{GD:magAngleToCompRep}[GD:magAngleToCompRep]
+        
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+\noindent \textbf{Preconditions for TM:directionCosines}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst}
+\end{itemize}
+
 \subsubsection{\wss{Helper Theories (GD:rectVel and GD:rectPos)}}
 \label{Sec:GDs}
 This section collects the laws and equations that will be used to build the instance models.
@@ -501,9 +564,9 @@ Label & Rectilinear (1D) velocity as a function of time for constant acceleratio
 \\ \midrule
 Units & $\frac{\text{m}}{\text{s}}$ \wss{Do we need units as a separate field? user option?}
 \\ \midrule
-\wss{Input} & \wss{$v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \mathbb{R}$}
+\wss{Input} & \wss{$v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \text{time}$}
 \\ \midrule
-\wss{Output} & \wss{${v}: \mathbb{R} \rightarrow \mathbb{R}$}
+\wss{Output} & \wss{${v}: \mathbb{R}$}
 \\ \midrule
 \wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 \\ \midrule
@@ -586,9 +649,9 @@ Label & Rectilinear (1D) position as a function of time for constant acceleratio
 Units & ${\text{m}}$
         
 \\ \midrule
-\wss{Input} & \wss{$p^{\text{i}}: \mathbb{R}, v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \mathbb{R}$}
+\wss{Input} & \wss{$p^{\text{i}}: \mathbb{R}, v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \text{time}$}
 \\ \midrule
-\wss{Output} & \wss{${p}: \mathbb{R} \rightarrow \mathbb{R}$}
+\wss{Output} & \wss{${p}: \mathbb{R}$}
 \\ \midrule
 \wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 \\ \midrule
@@ -666,7 +729,7 @@ p\text{(}t\text{)}={p^{\text{i}}}+{v^{\text{i}}} t+\frac{{a^{c}} t^{2}}{2}
 \item \hyperref[timeStartZero]{A:timeStartZero}
 \end{itemize}
 
-\subsubsection{\wss{Helper Theories (GD:velVec and GD:posVec)}}
+\subsubsection{\wss{Theories (GD:velVec and GD:posVec)}}
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -681,6 +744,15 @@ Label & Velocity vector as a function of time for 2D motion under constant accel
 Units & $\frac{\text{m}}{\text{s}}$
         
 \\ \midrule
+\wss{Input} & \wss{$v_{\text{x}}^{\text{i}}: \mathbb{R}, v_{\text{y}}^{\text{i}}: \mathbb{R}, {a_{\text{x}}}^{\text{c}}: \mathbb{R}, {a_{\text{y}}}^{\text{c}}: \mathbb{R},t: \text{time}$}
+\\ \midrule
+\wss{Output} & \wss{$\symbf{v}: \mathbb{R}^2$}
+\\ \midrule
+\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
 Equation & \begin{displaymath}
            \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
                                       {{v_{\text{x}}}^{\text{i}}}+{{a_{\text{x}}}^{\text{c}}} t\\
@@ -707,19 +779,19 @@ RefBy &
 
 \paragraph{Detailed derivation of velocity vector:}
 \label{GD:velVecDeriv}
-For a two-dimensional Cartesian coordinate system (\hyperref[twoDMotion]{A:twoDMotion} and \hyperref[cartSyst]{A:cartSyst}), we can represent the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
-                                                                                                                                                                                                 {v_{\text{x}}}\\
-                                                                                                                                                                                                 {v_{\text{y}}}
+For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[cartSyst]{A:cartSyst}), we can represent the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
+                                                                                                                                                                                                 {v_{\text{x}}(\wss{t})}\\
+                                                                                                                                                                                                 {v_{\text{y}}(\wss{t})}
                                                                                                                                                                                                  \end{bmatrix}$ and the acceleration vector as $\symbf{a}\text{(}t\text{)}=\begin{bmatrix}
-                                                                                                                                                                                                                                                                           {a_{\text{x}}}\\
-                                                                                                                                                                                                                                                                           {a_{\text{y}}}
+                                                                                                                                                                                                                                                                           {a_{\text{x}}(\wss{t})}\\
+                                                                                                                                                                                                                                                                           {a_{\text{y}}(\wss{t})}
                                                                                                                                                                                                                                                                            \end{bmatrix}$. The acceleration is assumed to be constant in both the $x$ direction ${a_{\text{x}}}^{\text{c}}$ (\hyperref[constAccelX]{A:constAccelX}) and $y$ direction ${a_{\text{y}}}^{\text{c}}$ (\hyperref[constAccelY]{A:constAccelY}). The constant acceleration vector is represented as ${\symbf{a}^{\text{c}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                            {{a_{\text{x}}}^{\text{c}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                            {{a_{\text{y}}}^{\text{c}}}
                                                                                                                                                                                                                                                                                                                                                                                                                                                            \end{bmatrix}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${\symbf{v}^{\text{i}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{x}}}^{\text{i}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{y}}}^{\text{i}}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel}. This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel} (\hyperref[cartSyst]{A:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:}
 
 \begin{displaymath}
 \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
@@ -727,6 +799,20 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoDMotion]{A:twoDM
                            {{v_{\text{y}}}^{\text{i}}}+{{a_{\text{y}}}^{\text{c}}} t
                            \end{bmatrix}
 \end{displaymath}
+
+~\\
+\noindent \textbf{Preconditions for GD:velVec}
+\begin{itemize}
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectVel]{GD:rectVel})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\hyperref[GD:rectVel]{GD:rectVel})
+\item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
+\item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
+in $x$ direction)
+\item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
+in $y$ direction)
+\end{itemize}
+
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -741,6 +827,15 @@ Label & Position vector as a function of time for 2D motion under constant accel
 Units & ${\text{m}}$
         
 \\ \midrule
+\wss{Input} & \wss{$p_{\text{x}}^{\text{i}}: \mathbb{R}, v_{\text{x}}^{\text{i}}: \mathbb{R}, p_{\text{y}}^{\text{i}}: \mathbb{R}, v_{\text{y}}^{\text{i}}: \mathbb{R}, {a_{\text{x}}}^{\text{c}}: \mathbb{R}, {a_{\text{y}}}^{\text{c}}: \mathbb{R},t: \text{time}$}
+\\ \midrule
+\wss{Output} & \wss{$\symbf{p}: \mathbb{R}^2$}
+\\ \midrule
+\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
 Equation & \begin{displaymath}
            \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
                                       {{p_{\text{x}}}^{\text{i}}}+{{v_{\text{x}}}^{\text{i}}} t+\frac{{{a_{\text{x}}}^{\text{c}}} t^{2}}{2}\\
@@ -770,22 +865,22 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:cal
 
 \paragraph{Detailed derivation of position vector:}
 \label{GD:posVecDeriv}
-For a two-dimensional Cartesian coordinate system (\hyperref[twoDMotion]{A:twoDMotion} and \hyperref[cartSyst]{A:cartSyst}), we can represent the position vector as $\symbf{p}\text{(}t\text{)}=\begin{bmatrix}
-                                                                                                                                                                                                 {p_{\text{x}}}\\
-                                                                                                                                                                                                 {p_{\text{y}}}
+For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[cartSyst]{A:cartSyst}), we can represent the position vector as $\symbf{p}\text{(}t\text{)}=\begin{bmatrix}
+                                                                                                                                                                                                 {p_{\text{x}}\wss{(t)}}\\
+                                                                                                                                                                                                 {p_{\text{y}}\wss{(t)}}
                                                                                                                                                                                                  \end{bmatrix}$, the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
                                                                                                                                                                                                                                                                     {v_{\text{x}}}\\
                                                                                                                                                                                                                                                                     {v_{\text{y}}}
                                                                                                                                                                                                                                                                     \end{bmatrix}$, and the acceleration vector as $\symbf{a}\text{(}t\text{)}=\begin{bmatrix}
-                                                                                                                                                                                                                                                                                                                                               {a_{\text{x}}}\\
-                                                                                                                                                                                                                                                                                                                                               {a_{\text{y}}}
+                                                                                                                                                                                                                                                                                                                                               {a_{\text{x}}\wss{(t)}}\\
+                                                                                                                                                                                                                                                                                                                                               {a_{\text{y}}\wss{(t)}}
                                                                                                                                                                                                                                                                                                                                                \end{bmatrix}$. The acceleration is assumed to be constant (\hyperref[constAccel]{A:constAccel}) and the constant acceleration vector is represented as ${\symbf{a}^{\text{c}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {{a_{\text{x}}}^{\text{c}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {{a_{\text{y}}}^{\text{c}}}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \end{bmatrix}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${\symbf{v}^{\text{i}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {{v_{\text{x}}}^{\text{i}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {{v_{\text{y}}}^{\text{i}}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \end{bmatrix}$. Since we have a Cartesian coordinate system, \hyperref[GD:rectPos]{GD:rectPos} can be applied to each coordinate of the position vector to yield the required equation:
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectPos]{GD:rectPos} (\hyperref[cartSyst]{A:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:} 
 
 \begin{displaymath}
 \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
@@ -793,6 +888,77 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoDMotion]{A:twoDM
                            {{p_{\text{y}}}^{\text{i}}}+{{v_{\text{y}}}^{\text{i}}} t+\frac{{{a_{\text{y}}}^{\text{c}}} t^{2}}{2}
                            \end{bmatrix}
 \end{displaymath}
+
+\noindent \textbf{Preconditions for GD:posVec}
+\begin{itemize}
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectPos]{GD:rectPos})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\hyperref[GD:rectPos]{GD:rectPos})
+\item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
+\item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
+in $x$ direction)
+\item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
+in $y$ direction)
+\end{itemize}
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{GD:magAngleToCompRep}
+\phantomsection 
+\label{GD:magAngleToCompRep}
+\\ \midrule
+Label & \wss{Conversion of Magnitude and Angle Representation of a Vector to the
+Component Representation}
+        
+\\ \midrule
+\wss{Input} & \wss{$\theta: \mathbb{R}, |\symbf{b}|: \mathbb{R}$}
+\\ \midrule
+\wss{Output} & \wss{$b_x: \mathbb{R}, b_y: \mathbb{R}$}
+\\ \midrule
+\wss{Input Constraints} & \wss{None}
+\\ \midrule
+\wss{Output Constraints} & \wss{None}
+\\ \midrule
+
+Equation & \begin{displaymath}
+           b_x = |\symbf{b}| \cos (\theta), b_y = |\symbf{b}| \sin (\theta)
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item $\theta$ is the angle between the vector and the positive $x$ axis 
+              \item $|\symbf{b}|$ is the magnitude of the vector
+              \item $b_x$ is the $x$ component of the vector $\symbf{b}$
+              \item $b_y$ is the $y$ component of the vector $\symbf{b}$
+              \end{symbDescription}
+\\ \midrule
+Notes & \wss{The vector $\symbf{b}$ is in a two dimensional
+(\hyperref[twoD]{A:twoD}) Cartesian coordinate system
+(\hyperref[cartSyst]{A:cartSyst}).} \wss{The equations can be derived from
+\hyperref[TM:directionCosines]{TM:directionCosines} for a 2D sytem.  In a 2D system,
+the angle $\gamma$ is not relevant.  The angle will be $\pi/2$, so the
+$\cos(\gamma) = \cos(\pi/2) = 0$.  In the 2D case we rename the angle $\alpha$
+as $\theta$.  The angle $\beta$ is related to $\theta$ by $\beta = \pi/2 -
+\theta$; therefore, $\cos(\beta) = \cos(\pi/2 - \theta) = \sin(\theta)$.}
+\\ \midrule
+
+Source & \cite{}
+         
+\\ \midrule
+RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
+        
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+\noindent \textbf{Preconditions for GD:magAngleToCompRep}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[directionCosines]{directionCosines})
+\item \hyperref[twoD]{A:twoD}
+\end{itemize}
+
 \subsubsection{Data Definitions}
 \label{Sec:DDs}
 This section collects and defines all the data needed to build the instance models.
@@ -801,36 +967,11 @@ This section collects and defines all the data needed to build the instance mode
 \noindent
 \begin{minipage}{\textwidth}
 \begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
-\toprule \textbf{Refname} & \textbf{DD:vecMag}
+\toprule \textbf{Refname} & \textbf{DD:vecMag} \wss{REMOVE}
 \phantomsection 
 \label{DD:vecMag}
 \\ \midrule
-Label & Speed
-        
-\\ \midrule
-Symbol & $v$
-         
-\\ \midrule
-Units & $\frac{\text{m}}{\text{s}}$
-        
-\\ \midrule
-Equation & \begin{displaymath}
-           v=\|\symbf{v}\text{(}t\text{)}\|
-           \end{displaymath}
-\\ \midrule
-Description & \begin{symbDescription}
-              \item{$v$ is the speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
-              \end{symbDescription}
-\\ \midrule
-Notes & For a given velocity vector $\symbf{v}\text{(}t\text{)}$, the magnitude of the vector ($\|\symbf{v}\text{(}t\text{)}\|$) is the scalar called speed.
-        
-\\ \midrule
-Source & --
-         
-\\ \midrule
-RefBy & \hyperref[DD:speedIY]{DD:speedIY} and \hyperref[DD:speedIX]{DD:speedIX}
-        
+Label & Speed        
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -862,9 +1003,10 @@ Description & \begin{symbDescription}
               \item{$θ$ is the launch angle (${\text{rad}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & ${v^{\text{i}}}$ is from \hyperref[DD:vecMag]{DD:vecMag}.
-        
-        $θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
+Notes & \wss{This equation is a relabelling of
+\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}$ - {v^{\text{i}}}$ is
+$|\symbf{b}|$, ${v_{\text{x}}}^{\text{i}}$ is $b_x$ and $\theta$ is $\theta$.}
+$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
         
 \\ \midrule
 Source & --
@@ -903,9 +1045,9 @@ Description & \begin{symbDescription}
               \item{$θ$ is the launch angle (${\text{rad}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & ${v^{\text{i}}}$ is from \hyperref[DD:vecMag]{DD:vecMag}.
-        
-        $θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
+Notes & \wss{This equation is a relabelling of
+\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}$ - {v^{\text{i}}}$ is
+$|\symbf{b}|$, ${v_{\text{y}}}^{\text{i}}$ is $b_y$ and $\theta$ is $\theta$.}  $θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
         
 \\ \midrule
 Source & --
@@ -1003,6 +1145,11 @@ From \hyperref[DD:speedIY]{DD:speedIY} (with ${v^{\text{i}}}={v_{\text{launch}}}
 \begin{displaymath}
 {t_{\text{flight}}}=\frac{2 {v_{\text{launch}}} \sin\left(θ\right)}{g}
 \end{displaymath}
+\noindent \textbf{Preconditions for IM:calOfLandingTime}
+\begin{itemize}
+\item 
+\end{itemize}
+
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -1080,6 +1227,12 @@ Rearranging this gives us the required equation:
 \begin{displaymath}
 {p_{\text{land}}}=\frac{2 {v_{\text{launch}}}^{2} \sin\left(θ\right) \cos\left(θ\right)}{g}
 \end{displaymath}
+
+\noindent \textbf{Preconditions for IM:calOfLandingDistDeriv}
+\begin{itemize}
+\item 
+\end{itemize}
+
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -1129,6 +1282,11 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+\noindent \textbf{Preconditions for IM:offsetIM}
+\begin{itemize}
+\item 
+\end{itemize}
 
 \medskip
 \noindent
@@ -1188,6 +1346,11 @@ RefBy & \hyperref[outputValues]{FR:Output-Values} and \hyperref[calcValues]{FR:C
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+\noindent \textbf{Preconditions for IM:messageIM}
+\begin{itemize}
+\item 
+\end{itemize}
 
 \subsubsection{Data Constraints}
 \label{Sec:DataConstraints}
@@ -1279,9 +1442,9 @@ The purpose of the traceability matrices is to provide easy references on what h
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Assumptions}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoDMotion]{A:twoDMotion}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
-\hyperref[twoDMotion]{A:twoDMotion} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
+\hyperref[twoD]{A:twoD} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
 \hyperref[cartSyst]{A:cartSyst} &  &  &  &  &  &  &  &  &  &  &  &  & X &  & 
 \\
@@ -1315,7 +1478,7 @@ The purpose of the traceability matrices is to provide easy references on what h
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Items}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoDMotion]{A:twoDMotion}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
 \hyperref[DD:vecMag]{DD:vecMag} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
@@ -1562,3 +1725,14 @@ year={2019}}
 \bibstyle{ieeetr}
 \printbibliography[heading=none]
 \end{document}
+
+TODO
+
+- make assumptions mathematical
+- rotation of the Earth assumption
+- type for position in 1D, 2D and 3D?
+- draw fault tree diagram?
+- draw relationship between parts in a graph
+- rules - every assumption is invoked and listed, inherited assumptions maintained, or justified or renamed
+- table of symbols for final theories?
+- data definition - body becomes projectile?
