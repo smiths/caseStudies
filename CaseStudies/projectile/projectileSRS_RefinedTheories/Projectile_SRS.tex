@@ -386,6 +386,97 @@ it can be used for things that are 2D other than just the motion.}
 \item integration
 \end{itemize}
 }
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:realArith}}
+\phantomsection 
+\label{CT:realArith}
+\\ \midrule
+Label & Real Arithmetic
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & everything (TODO: fill in)
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:vectors}}
+\phantomsection 
+\label{CT:vectors}
+\\ \midrule
+Label & Vectors
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & TODO: fill in
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:CartCoordSyst}}
+\phantomsection 
+\label{CT:CartCoordSyst}
+\\ \midrule
+Label & Cartesian Coordinate System
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & TODO: fill in
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:Differentiation}}
+\phantomsection 
+\label{CT:Differentiation}
+\\ \midrule
+Label & Differentiation
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & TODO: fill in
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:Integration}}
+\phantomsection 
+\label{CT:Integration}
+\\ \midrule
+Label & Integration
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & TODO: fill in
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
 \subsubsection{\wss{Background Theories (BT)}}
 \label{Sec:TMs}
 This section focuses on the general equations and laws that Projectile is based
@@ -402,26 +493,18 @@ instead of TM?}
 \\ \midrule
 Label & Acceleration
 \\ \midrule
-\wss{Input} & \wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$}
-\\ \midrule
-\wss{Output} & \wss{$\symbf{a}: \text{time} \rightarrow \mathbb{R}^3$}
-\\ \midrule
-\wss{Input Constraints} & \wss{None}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
 Equation & \begin{displaymath}
            \symbf{a}\text{(}t\text{)}=\frac{\,d\symbf{v}\text{(}t\text{)}}{\,dt}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$\symbf{a}\text{(}t\text{)}$ is the acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
-              \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
+              \item{\wss{$\symbf{a}: \text{time} \rightarrow \mathbb{R}^3$} is the acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$} is the velocity ($\frac{\text{m}}{\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
 Notes & The velocity and acceleration of the body are expressed using a Cartesian
-coordinate system (\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
+coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}, \hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
 system is rectangular (orthonormal).
 \\ \midrule
 Source & \cite{accelerationWiki}
