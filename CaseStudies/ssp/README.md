@@ -1,3 +1,11 @@
+Case Studies Using Drasil
+
+Files related to the slope stability analysis program.
+
+This is a recreation of the original, manually-created version, which is at:
+
+https://github.com/smiths/swhs
+
 Folder Guide
 
 1. docs - Document driven design files for the program (e.g. design docs, problem statement, SRS, user guide, etc.)
