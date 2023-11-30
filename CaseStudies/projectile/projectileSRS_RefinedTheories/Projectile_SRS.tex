@@ -378,13 +378,6 @@ it can be used for things that are 2D other than just the motion.}
 \subsubsection{\wss{Context Theories}}
 
 \wss{Some theories do not have to be explicitly invoked. They are part of the context for the other theories, without having to be explicitly stated or defined. The context theories for this problem are as follows:
-\begin{itemize}
-\item real arithmetic
-\item vectors
-\item Cartesian coordinate system
-\item differentiation
-\item integration
-\end{itemize}
 }
 
 \medskip
@@ -399,7 +392,25 @@ Label & Real Arithmetic
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & everything (TODO: fill in)
+RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, everything (TODO: fill in)
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{\wss{CT:trigonometry}}
+\phantomsection 
+\label{CT:trigonometry}
+\\ \midrule
+Label & Trigonometry
+\\ \midrule
+Source & \cite{}
+\\ \midrule
+RefBy & \hyperref[TM:directionCosines]{TM:directionCosines}, everything (TODO: fill in)
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -417,7 +428,7 @@ Label & Vectors
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & TODO: fill in
+RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -435,7 +446,7 @@ Label & Cartesian Coordinate System
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & TODO: fill in
+RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -453,7 +464,7 @@ Label & Differentiation
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & TODO: fill in
+RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in 
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -503,9 +514,17 @@ Description & \begin{symbDescription}
               \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$} is the velocity ($\frac{\text{m}}{\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & The velocity and acceleration of the body are expressed using a Cartesian
-coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}, \hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
-system is rectangular (orthonormal).
+Notes & The velocity and acceleration of the body are expressed using a
+Cartesian coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
+(orthonormal). The relationship between acceleration and velocity uses the
+concepts of real arithmetic, vectors and differentiation
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:Differentiation]{CT:Differentiation}).
+\\ \midrule
+\wss{Constraints} & \wss{None}
+
+
 \\ \midrule
 Source & \cite{accelerationWiki}
          
@@ -516,6 +535,15 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 \end{tabular}
 \end{minipage}
 ~\\
+\noindent \textbf{Theories Used by TM:acceleration}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\end{itemize}
+
 \noindent \textbf{Preconditions for TM:acceleration}
 
 \begin{itemize}
@@ -533,30 +561,27 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 Label & Velocity
         
 \\ \midrule
-\wss{Input} & \wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^3$}
-\\ \midrule
-\wss{Output} & \wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$}
-\\ \midrule
-\wss{Input Constraints} & \wss{None}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
 Equation & \begin{displaymath}
            \symbf{v}\text{(}t\text{)}=\frac{\,d\symbf{p}\text{(}t\text{)}}{\,dt}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
-              \item{$\symbf{p}\text{(}t\text{)}$ is the position (${\text{m}}$)}
+              \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
+              \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$} is the velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^3$} is the position (${\text{m}}$)}
               \end{symbDescription}
 \\ \midrule
 Notes & The position and velocity of the body are expressed using a Cartesian
 coordinate system (\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
-system is rectangular (orthonormal).
-\\ \midrule
+system is rectangular (orthonormal).  The relationship between velocity and
+position uses the concepts of real arithmetic, vectors and differentiation
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:Differentiation]{CT:Differentiation}).
 
+\\ \midrule
+\wss{Constraints} & \wss{None}
+
+\\ \midrule
 Source & \cite{velocityWiki}
          
 \\ \midrule
@@ -566,6 +591,15 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \end{tabular}
 \end{minipage}
 ~\\
+\noindent \textbf{Theories Used by TM:velocity}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\end{itemize}
+
 \noindent \textbf{Preconditions for TM:velocity}
 
 \begin{itemize}
@@ -581,48 +615,53 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \label{TM:directionCosines}
 \\ \midrule
 Label & \wss{Direction Cosines Representation for Vectors}
-        
-\\ \midrule
-\wss{Input} & \wss{$\alpha: \mathbb{R}, \beta: \mathbb{R}, \gamma: \mathbb{R},
-|\symbf{b}|: \mathbb{R}$}
-\\ \midrule
-\wss{Output} & \wss{$b_x: \mathbb{R}, b_y: \mathbb{R}, b_z: \mathbb{R}$}
-\\ \midrule
-\wss{Input Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
+\\ \midrule   
 Equation & \begin{displaymath}
            b_x = |\symbf{b}| \cos (\alpha), b_y = |\symbf{b}| \cos (\beta), b_z
            = |\symbf{b}| \cos (\gamma)
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item $\alpha$ is the angle between the vector and the positive $x$ axis 
-              \item $\beta$ is the angle between the vector and the positive $y$ axis 
-              \item $\gamma$ is the angle between the vector and the positive $z$ axis 
-              \item $|\symbf{b}|$ is the magnitude of the vector
-              \item $b_x$ is the $x$ component of the vector $\symbf{b}$
-              \item $b_y$ is the $y$ component of the vector $\symbf{b}$
-              \item $b_z$ is the $z$ component of the vector $\symbf{b}$
+              \item \wss{$\alpha: \mathbb{R}$} is the angle between the vector and the positive $x$ axis 
+              \item \wss{$\beta: \mathbb{R}$} is the angle between the vector and the positive $y$ axis 
+              \item \wss{$\gamma: \mathbb{R}$} is the angle between the vector and the positive $z$ axis 
+              \item \wss{$|\symbf{b}|: \mathbb{R}$} is the magnitude of the vector
+              \item \wss{$b_x: \mathbb{R}$} is the $x$ component of the vector $\symbf{b}$
+              \item \wss{$b_y: \mathbb{R}$} is the $y$ component of the vector $\symbf{b}$
+              \item \wss{$b_z: \mathbb{R}$} is the $z$ component of the vector $\symbf{b}$
               \end{symbDescription}
 \\ \midrule
 Notes & \wss{The vector $\symbf{b}$ is in a three dimensional Cartesian
-coordinate system (\hyperref[cartSyst]{A:cartSyst}).}  \wss{A figure showing the
-angles for a sample vector would be a nice addition.}
+coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[cartSyst]{A:cartSyst}).}  \wss{A figure showing the angles for a
+sample vector would be a nice addition.}  Direction cosines use the context
+theories of real arithmetic, trigonometry and vectors
+(\hyperref[CT:realArith]{CT:realArith},
+\hyperref[CT:trigonometry]{CT:trigonometry}, \hyperref[CT:vectors]{CT:vectors}).
+\\ \midrule
+
+\wss{Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
 \\ \midrule
 
 Source & \cite{} \href{https://byjus.com/maths/direction-cosines/} {web-page
 resource}, Long book 
          
 \\ \midrule
-RefBy & \hyperref{GD:magAngleToCompRep}[GD:magAngleToCompRep]
+RefBy & \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
         
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
 ~\\
+\noindent \textbf{Theories Used by TM:directionCosines}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:trigonometry]{CT:trigonometry}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:vectors]{CT:vectors}
+\end{itemize}
+
 \noindent \textbf{Preconditions for TM:directionCosines}
 
 \begin{itemize}
