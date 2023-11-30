@@ -394,7 +394,8 @@ Source & \cite{}
 \\ \midrule
 RefBy & \hyperref[TM:acceleration]{TM:acceleration},
 \hyperref[TM:velocity]{TM:velocity},
-\hyperref[TM:directionCosines]{TM:directionCosines}, everything (TODO: fill in)
+\hyperref[TM:directionCosines]{TM:directionCosines},
+\hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},everything (TODO: fill in)
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -412,7 +413,7 @@ Label & Trigonometry
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[TM:directionCosines]{TM:directionCosines}, everything (TODO: fill in)
+RefBy & \hyperref[TM:directionCosines]{TM:directionCosines}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},everything (TODO: fill in)
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -432,7 +433,8 @@ Source & \cite{}
 \\ \midrule
 RefBy & \hyperref[TM:acceleration]{TM:acceleration},
 \hyperref[TM:velocity]{TM:velocity},
-\hyperref[TM:directionCosines]{TM:directionCosines}, TODO: fill in
+\hyperref[TM:directionCosines]{TM:directionCosines},
+\hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -452,7 +454,8 @@ Source & \cite{}
 \\ \midrule
 RefBy & \hyperref[TM:acceleration]{TM:acceleration},
 \hyperref[TM:velocity]{TM:velocity},
-\hyperref[TM:directionCosines]{TM:directionCosines}, TODO: fill in
+\hyperref[TM:directionCosines]{TM:directionCosines},
+\hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -470,7 +473,9 @@ Label & Differentiation
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in 
+RefBy & \hyperref[TM:acceleration]{TM:acceleration},
+\hyperref[TM:velocity]{TM:velocity}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, TODO:
+fill in 
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -488,7 +493,7 @@ Label & Integration
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & TODO: fill in
+RefBy & \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -526,7 +531,8 @@ Cartesian coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 (orthonormal). The relationship between acceleration and velocity uses the
 concepts of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
-\hyperref[CT:Differentiation]{CT:Differentiation}).
+\hyperref[CT:Differentiation]{CT:Differentiation}). \wss{Should it be made
+explicit that this theory is 3D by having an A:threeD assumption?}
 \\ \midrule
 \wss{Constraints} & \wss{None}
 
@@ -763,6 +769,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \noindent \textbf{Theories Used by GD:rectVel}
 
 \begin{itemize}
+\item \hyperref[TM:acceleration]{TM:acceleration}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
@@ -872,6 +879,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \noindent \textbf{Theories Used by GD:rectPos}
 
 \begin{itemize}
+\item \hyperref[TM:velocity]{TM:velocity}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
@@ -960,12 +968,13 @@ vectors, Cartesian coodinate system, differentiation and integration
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
 \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 \hyperref[CT:Differentiation]{CT:Differentiation},
-\hyperref[CT:Integration]{CT:Integration}).} ~\\
+\hyperref[CT:Integration]{CT:Integration}).}
 ~\\
 
 \noindent \textbf{Theories Used by GD:velVect}
 
 \begin{itemize}
+\item \hyperref[GD:rectVel]{GD:rectVel}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
@@ -1074,6 +1083,7 @@ vectors, Cartesian coodinate system, differentiation and integration
 \noindent \textbf{Theories Used by GD:posVec}
 
 \begin{itemize}
+\item \hyperref[GD:rectPos]{GD:rectPos}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
@@ -1105,36 +1115,30 @@ Label & \wss{Conversion of Magnitude and Angle Representation of a Vector to the
 Component Representation}
         
 \\ \midrule
-\wss{Input} & \wss{$\theta: \mathbb{R}, |\symbf{b}|: \mathbb{R}$}
-\\ \midrule
-\wss{Output} & \wss{$b_x: \mathbb{R}, b_y: \mathbb{R}$}
-\\ \midrule
-\wss{Input Constraints} & \wss{None}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
 Equation & \begin{displaymath}
            b_x = |\symbf{b}| \cos (\theta), b_y = |\symbf{b}| \sin (\theta)
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item $\theta$ is the angle between the vector and the positive $x$ axis 
-              \item $|\symbf{b}|$ is the magnitude of the vector
-              \item $b_x$ is the $x$ component of the vector $\symbf{b}$
-              \item $b_y$ is the $y$ component of the vector $\symbf{b}$
+              \item \wss{$\theta: \mathbb{R}$} is the angle between the vector and the positive $x$ axis 
+              \item \wss{$|\symbf{b}|: \mathbb{R}$} is the magnitude of the vector
+              \item \wss{$b_x: \mathbb{R}$} is the $x$ component of the vector $\symbf{b}$
+              \item \wss{$b_y: \mathbb{R}$} is the $y$ component of the vector $\symbf{b}$
               \end{symbDescription}
 \\ \midrule
 Notes & \wss{The vector $\symbf{b}$ is in a two dimensional
 (\hyperref[twoD]{A:twoD}) Cartesian coordinate system
 (\hyperref[cartSyst]{A:cartSyst}).} \wss{The equations can be derived from
 \hyperref[TM:directionCosines]{TM:directionCosines} for a 2D sytem.  In a 2D system,
-the angle $\gamma$ is not relevant.  The angle will be $\pi/2$, so the
-$\cos(\gamma) = \cos(\pi/2) = 0$.  In the 2D case we rename the angle $\alpha$
+the angle $\gamma$ is not relevant because in this case $\gamma = \pi/2$, and 
+$\cos(\gamma) = \cos(\pi/2) = 0$.  For the 2D case we rename the angle $\alpha$
 as $\theta$.  The angle $\beta$ is related to $\theta$ by $\beta = \pi/2 -
-\theta$; therefore, $\cos(\beta) = \cos(\pi/2 - \theta) = \sin(\theta)$.}
-\\ \midrule
+\theta$; therefore, $\cos(\beta) = \cos(\pi/2 - \theta) = \sin(\theta)$.}  This theory uses the same context theories as \hyperref[TM:directionCosines]{TM:directionCosines}: \hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:trigonometry]{CT:trigonometry}, \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst} and \hyperref[CT:vectors]{CT:vectors}.
 
+\\ \midrule
+\wss{Constraints} & \wss{None}
+
+\\ \midrule
 Source & \cite{}
          
 \\ \midrule
@@ -1143,6 +1147,17 @@ RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+
+~\\
+\noindent \textbf{Theories Used by GD:magAngleToCompRep}
+
+\begin{itemize}
+\item \hyperref[TM:directionCosines]{TM:directionCosines}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:trigonometry]{CT:trigonometry}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
 ~\\
 \noindent \textbf{Preconditions for GD:magAngleToCompRep}
 
@@ -1190,15 +1205,15 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{${{v_{\text{x}}}^{\text{i}}}$ is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${v^{\text{i}}}$ is the initial speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{$θ$ is the launch angle (${\text{rad}}$)}
+              \item{\wss{${{v_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${v^{\text{i}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$θ: \mathbb{R}$} is the launch angle (${\text{rad}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & \wss{This equation is a relabelling of
-\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}$ - {v^{\text{i}}}$ is
+Notes & \wss{This equation is a relabelling of the $x$ component of
+\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep} --- ${v^{\text{i}}}$ is
 $|\symbf{b}|$, ${v_{\text{x}}}^{\text{i}}$ is $b_x$ and $\theta$ is $\theta$.}
-$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
+$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.  This equation inherits the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}: \hyperref[cartSyst]{A:cartSyst} and \hyperref[twoD]{A:twoD}.
         
 \\ \midrule
 Source & --
@@ -1209,6 +1224,25 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by DD:speedIX}
+
+\begin{itemize}
+\item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
+\item \hyperref[TM:directionCosines]{TM:directionCosines}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:trigonometry]{CT:trigonometry}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:vectors]{CT:vectors}
+\end{itemize}
+
+\noindent \textbf{Preconditions for DD:speedIX}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\end{itemize}
 
 \medskip
 \noindent
@@ -1232,14 +1266,17 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{${{v_{\text{y}}}^{\text{i}}}$ is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${v^{\text{i}}}$ is the initial speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{$θ$ is the launch angle (${\text{rad}}$)}
+              \item{\wss{${{v_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${v^{\text{i}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$θ: \mathbb{R}$}is the launch angle (${\text{rad}}$)}
               \end{symbDescription}
 \\ \midrule
-Notes & \wss{This equation is a relabelling of
-\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}$ - {v^{\text{i}}}$ is
-$|\symbf{b}|$, ${v_{\text{y}}}^{\text{i}}$ is $b_y$ and $\theta$ is $\theta$.}  $θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.
+Notes & \wss{This equation is a relabelling of the $x$ component of
+\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep} --- ${v^{\text{i}}}$ is
+$|\symbf{b}|$, ${v_{\text{y}}}^{\text{i}}$ is $b_y$ and $\theta$ is $\theta$.}
+$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.   This equation inherits
+the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}:
+\hyperref[cartSyst]{A:cartSyst} and \hyperref[twoD]{A:twoD}.
         
 \\ \midrule
 Source & --
@@ -1250,6 +1287,24 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by DD:speedIY}
+
+\begin{itemize}
+\item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
+\item \hyperref[TM:directionCosines]{TM:directionCosines}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Preconditions for DD:speedIY}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\end{itemize}
 
 \subsubsection{Instance Models}
 \label{Sec:IMs}
