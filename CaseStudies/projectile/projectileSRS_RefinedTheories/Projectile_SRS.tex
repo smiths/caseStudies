@@ -392,7 +392,9 @@ Label & Real Arithmetic
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, everything (TODO: fill in)
+RefBy & \hyperref[TM:acceleration]{TM:acceleration},
+\hyperref[TM:velocity]{TM:velocity},
+\hyperref[TM:directionCosines]{TM:directionCosines}, everything (TODO: fill in)
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -428,7 +430,9 @@ Label & Vectors
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in
+RefBy & \hyperref[TM:acceleration]{TM:acceleration},
+\hyperref[TM:velocity]{TM:velocity},
+\hyperref[TM:directionCosines]{TM:directionCosines}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -446,7 +450,9 @@ Label & Cartesian Coordinate System
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, TODO: fill in
+RefBy & \hyperref[TM:acceleration]{TM:acceleration},
+\hyperref[TM:velocity]{TM:velocity},
+\hyperref[TM:directionCosines]{TM:directionCosines}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -572,9 +578,10 @@ Description & \begin{symbDescription}
               \end{symbDescription}
 \\ \midrule
 Notes & The position and velocity of the body are expressed using a Cartesian
-coordinate system (\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate
-system is rectangular (orthonormal).  The relationship between velocity and
-position uses the concepts of real arithmetic, vectors and differentiation
+coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
+(orthonormal).  The relationship between velocity and position uses the concepts
+of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
 \hyperref[CT:Differentiation]{CT:Differentiation}).
 
@@ -686,26 +693,23 @@ Label & Rectilinear (1D) velocity as a function of time for constant acceleratio
 \\ \midrule
 Units & $\frac{\text{m}}{\text{s}}$ \wss{Do we need units as a separate field? user option?}
 \\ \midrule
-\wss{Input} & \wss{$v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \text{time}$}
-\\ \midrule
-\wss{Output} & \wss{${v}: \mathbb{R}$}
-\\ \midrule
-\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
 Equation & \begin{displaymath}
            v\text{(}t\text{)}={v^{\text{i}}}+{a^{c}} t
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$v\text{(}t\text{)}$ is the 1D speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{${v^{\text{i}}}$ is the initial speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{${a^{c}}$ is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
+              \item{\wss{$v: \text{time} \rightarrow \mathbb{R}$} is the 1D speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${v^{\text{i}}: \mathbb{R}}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${a^{c}: \mathbb{R}}$} is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
               \end{symbDescription}
-\\ \midrule
+
+              \\ \midrule
 \wss{Notes} & \wss{See detailed derivation below}
+
+\\ \midrule
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
          
@@ -715,7 +719,6 @@ RefBy & \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:rectPos]{GD:rectPos}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
-
 
 \paragraph{Detailed derivation of rectilinear velocity:}
 \label{GD:rectVelDeriv}
@@ -748,6 +751,25 @@ Performing the integration, we have the required equation:
 v\text{(}t\text{)}={v^{\text{i}}}+{a^{c}} t
 \end{displaymath}
 
+\wss{The theory for rectilinear velocity uses the context theories from
+\hyperref[TM:acceleration]{TM:acceleration} of real arithmetic, vectors,
+Cartesian coodinate system, and differentiation
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[CT:Differentiation]{CT:Differentiation}).  In addition, the context
+theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
+~\\
+
+\noindent \textbf{Theories Used by GD:rectVel}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
 \noindent \textbf{\wss{Preconditions for GD:rectVel}}
 
 \begin{itemize}
@@ -771,30 +793,25 @@ Label & Rectilinear (1D) position as a function of time for constant acceleratio
 Units & ${\text{m}}$
         
 \\ \midrule
-\wss{Input} & \wss{$p^{\text{i}}: \mathbb{R}, v^{\text{i}}: \mathbb{R}, a^{c}: \mathbb{R}, t: \text{time}$}
-\\ \midrule
-\wss{Output} & \wss{${p}: \mathbb{R}$}
-\\ \midrule
-\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
 Equation & \begin{displaymath}
            p\text{(}t\text{)}={p^{\text{i}}}+{v^{\text{i}}} t+\frac{{a^{c}} t^{2}}{2}
            \end{displaymath}
+
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$p\text{(}t\text{)}$ is the 1D position (${\text{m}}$)}
-              \item{${p^{\text{i}}}$ is the initial position (${\text{m}}$)}
-              \item{${v^{\text{i}}}$ is the initial speed ($\frac{\text{m}}{\text{s}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
-              \item{${a^{c}}$ is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$p: \text{time} \rightarrow \mathbb{R}$} is the 1D position (${\text{m}}$)}
+              \item{\wss{${p^{\text{i}}}: \mathbb{R}$} is the initial position (${\text{m}}$)}
+              \item{\wss{${v^{\text{i}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$t: \mathbb{R}$} is the time (${\text{s}}$)}
+              \item{\wss{${a^{c}}: \mathbb{R}$} is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \end{symbDescription}
 \\ \midrule
 \wss{Notes} & \wss{See detailed derivation below}
-\\ \midrule
 
+\\ \midrule
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+
+\\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
          
 \\ \midrule
@@ -829,7 +846,8 @@ $v(t)$}
 \wss{We now assume that the acceleration is constant (does not vary with time)
 (\hyperref[constAccel]{A:constAccel}) represented by ${a^{c}}$. The initial
 velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is
-represented by ${v^{\text{i}}}$. Since we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel} we can replace $v(t)$ to get:}
+represented by ${v^{\text{i}}}$. Since we satisfy the preconditions for
+\hyperref[GD:rectVel]{GD:rectVel} we can replace $v(t)$ to get:}
 
 \begin{displaymath}
 \int_{{p^{\text{i}}}}^{p(t)}{1}\,dp=\int_{0}^{t}{{v^{\text{i}}}+{a^{c}} t}\,dt
@@ -841,6 +859,25 @@ Performing the integration, we have the required equation:
 \begin{displaymath}
 p\text{(}t\text{)}={p^{\text{i}}}+{v^{\text{i}}} t+\frac{{a^{c}} t^{2}}{2}
 \end{displaymath}
+
+\wss{The theory for rectilinear position uses the context theories from
+\hyperref[TM:acceleration]{TM:acceleration} of real arithmetic, vectors,
+Cartesian coodinate system, and differentiation
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[CT:Differentiation]{CT:Differentiation}).  In addition, the context
+theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
+~\\
+
+\noindent \textbf{Theories Used by GD:rectPos}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
 
 \noindent \textbf{Preconditions for GD:rectPos}
 
@@ -866,15 +903,6 @@ Label & Velocity vector as a function of time for 2D motion under constant accel
 Units & $\frac{\text{m}}{\text{s}}$
         
 \\ \midrule
-\wss{Input} & \wss{$v_{\text{x}}^{\text{i}}: \mathbb{R}, v_{\text{y}}^{\text{i}}: \mathbb{R}, {a_{\text{x}}}^{\text{c}}: \mathbb{R}, {a_{\text{y}}}^{\text{c}}: \mathbb{R},t: \text{time}$}
-\\ \midrule
-\wss{Output} & \wss{$\symbf{v}: \mathbb{R}^2$}
-\\ \midrule
-\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
 Equation & \begin{displaymath}
            \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
                                       {{v_{\text{x}}}^{\text{i}}}+{{a_{\text{x}}}^{\text{c}}} t\\
@@ -883,14 +911,18 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$\symbf{v}\text{(}t\text{)}$ is the velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${{v_{\text{x}}}^{\text{i}}}$ is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${{a_{\text{x}}}^{\text{c}}}$ is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
-              \item{${{v_{\text{y}}}^{\text{i}}}$ is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${{a_{\text{y}}}^{\text{c}}}$ is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^2$} is the velocity \wss{vector} ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{v_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item{\wss{${{v_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \end{symbDescription}
 \\ \midrule
+
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\\ \midrule
+
 Source & --
          
 \\ \midrule
@@ -922,7 +954,29 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \
                            \end{bmatrix}
 \end{displaymath}
 
+\wss{The theory for the velocity vector for rectilinear motion in 2D uses the
+context theories from \hyperref[GD:rectVel]{GD:rectVel} of real arithmetic,
+vectors, Cartesian coodinate system, differentiation and integration
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[CT:Differentiation]{CT:Differentiation},
+\hyperref[CT:Integration]{CT:Integration}).} ~\\
 ~\\
+
+\noindent \textbf{Theories Used by GD:velVect}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\wss{If a theory A depends another theory B and theory B uses context theory C,
+does theory A also depend on context theory C, even if context theory C never
+appears in the expression or derivation of theory A?}
+
 \noindent \textbf{Preconditions for GD:velVec}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectVel]{GD:rectVel})
@@ -934,6 +988,8 @@ in $x$ direction)
 \item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
 in $y$ direction)
 \end{itemize}
+
+\wss{The assumptions (preconditions) for GD:velVec are not a superset of the assumptions for the theories it is based on.  Specifically, \hyperref[constAccel]{A:constAccel} becomes two assumptions: \hyperref[constAccel]{A:constAccel} and \hyperref[constAccelY]{A:constAccelY}.  Moreover, the assumption \hyperref[oneD]{A:oneD} becomes \hyperref[twoD]{A:twoD}.}
 
 \medskip
 \noindent
@@ -949,15 +1005,6 @@ Label & Position vector as a function of time for 2D motion under constant accel
 Units & ${\text{m}}$
         
 \\ \midrule
-\wss{Input} & \wss{$p_{\text{x}}^{\text{i}}: \mathbb{R}, v_{\text{x}}^{\text{i}}: \mathbb{R}, p_{\text{y}}^{\text{i}}: \mathbb{R}, v_{\text{y}}^{\text{i}}: \mathbb{R}, {a_{\text{x}}}^{\text{c}}: \mathbb{R}, {a_{\text{y}}}^{\text{c}}: \mathbb{R},t: \text{time}$}
-\\ \midrule
-\wss{Output} & \wss{$\symbf{p}: \mathbb{R}^2$}
-\\ \midrule
-\wss{Input Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\\ \midrule
-\wss{Output Constraints} & \wss{None}
-\\ \midrule
-
 Equation & \begin{displaymath}
            \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
                                       {{p_{\text{x}}}^{\text{i}}}+{{v_{\text{x}}}^{\text{i}}} t+\frac{{{a_{\text{x}}}^{\text{c}}} t^{2}}{2}\\
@@ -966,15 +1013,19 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{$\symbf{p}\text{(}t\text{)}$ is the position (${\text{m}}$)}
-              \item{${{p_{\text{x}}}^{\text{i}}}$ is the $x$-component of initial position (${\text{m}}$)}
-              \item{${{v_{\text{x}}}^{\text{i}}}$ is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{$t$ is the time (${\text{s}}$)}
-              \item{${{a_{\text{x}}}^{\text{c}}}$ is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
-              \item{${{p_{\text{y}}}^{\text{i}}}$ is the $y$-component of initial position (${\text{m}}$)}
-              \item{${{v_{\text{y}}}^{\text{i}}}$ is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
-              \item{${{a_{\text{y}}}^{\text{c}}}$ is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position (${\text{m}}$)}
+              \item{\wss{${{p_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial position (${\text{m}}$)}
+              \item{\wss{${{v_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
+              \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{${{p_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial position (${\text{m}}$)}
+              \item{\wss{${{v_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \end{symbDescription}
+
+              \\ \midrule
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+
 \\ \midrule
 Source & --
          
@@ -1010,6 +1061,25 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \
                            {{p_{\text{y}}}^{\text{i}}}+{{v_{\text{y}}}^{\text{i}}} t+\frac{{{a_{\text{y}}}^{\text{c}}} t^{2}}{2}
                            \end{bmatrix}
 \end{displaymath}
+
+\wss{The theory for the position vector for rectilinear motion in 2D uses the
+context theories from \hyperref[GD:rectPos]{GD:rectPos} of real arithmetic,
+vectors, Cartesian coodinate system, differentiation and integration
+(\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
+\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[CT:Differentiation]{CT:Differentiation},
+\hyperref[CT:Integration]{CT:Integration}).}
+~\\
+
+\noindent \textbf{Theories Used by GD:posVec}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
 
 \noindent \textbf{Preconditions for GD:posVec}
 \begin{itemize}
