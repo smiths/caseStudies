@@ -896,7 +896,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \item \hyperref[timeStartZero]{A:timeStartZero}
 \end{itemize}
 
-\subsubsection{\wss{Theories (GD:velVec and GD:posVec)}}
+\subsubsection{\wss{General Theories (GD:velVec and GD:posVec)}}
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -1166,9 +1166,12 @@ RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
 \item \hyperref[twoD]{A:twoD}
 \end{itemize}
 
-\subsubsection{Data Definitions}
+\subsubsection{\wss{Projectile Theories (List Them)}}
 \label{Sec:DDs}
-This section collects and defines all the data needed to build the instance models.
+\wss{Remove this ``This section collects and defines all the data needed to build the instance models.''}
+
+\wss{The general theories are now refined into a specific projectile theories.
+A specific coordinate system is introduced.}
 
 \medskip
 \noindent
@@ -1306,9 +1309,81 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \end{itemize}
 
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:velVecInitMagAndAngle}
+\phantomsection 
+\label{PT:velVecInitMagAndAngle}
+\\ \midrule
+Label & Velocity vector as a function of time for 2D projectile motion under gravity using the magnitude and angle of the initial velocity.
+        
+\\ \midrule
+Units & $\frac{\text{m}}{\text{s}}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
+                                      {{v}^{\text{i}}} \cos(\theta)+{{a_{\text{x}}}^{\text{c}}} t\\
+                                      {{v}^{\text{i}}} \sin(\theta)+{{a_{\text{y}}}^{\text{c}}} t
+                                      \end{bmatrix}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^2$} is the velocity \wss{vector} ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{v}^{\text{i}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item $\theta: \mathbb{R}$ is the launch angle (rad)
+              \end{symbDescription}
+\\ \midrule
+
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\\ \midrule
+
+Source & --
+         
+\\ \midrule
+RefBy & 
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:velVecInitMagAndAngle}
+
+\begin{itemize}
+\item \hyperref[GD:rectVel]{GD:rectVel}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:Differentiation]{CT:Differentiation}
+\item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\wss{If a theory A depends another theory B and theory B uses context theory C,
+does theory A also depend on context theory C, even if context theory C never
+appears in the expression or derivation of theory A?}
+
+\noindent \textbf{Preconditions for PT:velVecInitMagAndAngle}
+\begin{itemize}
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectVel]{GD:rectVel})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\hyperref[GD:rectVel]{GD:rectVel})
+\item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
+\item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
+in $x$ direction)
+\item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
+in $y$ direction)
+\end{itemize}
+
 \subsubsection{Instance Models}
 \label{Sec:IMs}
 This section transforms the problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one which is expressed in mathematical terms. It uses concrete symbols defined in the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the models identified in \hyperref[Sec:TMs]{theoretical models} and \hyperref[Sec:GDs]{general definitions}.
+
+\wss{In this section the generic ``body'' becomes projectile.  Should we refine
+that in code, or just rely on the user to change the teminology?}
 
 \medskip
 \noindent
