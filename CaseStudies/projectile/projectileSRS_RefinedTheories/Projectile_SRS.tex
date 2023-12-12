@@ -373,6 +373,9 @@ it can be used for things that are 2D other than just the motion.}
 \item[neglectCurv:\phantomsection\label{neglectCurv}]{The distance is small enough that the curvature of the celestial body can be neglected. (RefBy: \hyperref[targetXAxis]{A:targetXAxis} and \hyperref[cartSyst]{A:cartSyst}.)}
 \item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[towardLauncher:\phantomsection\label{towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+\item[magAngleRepInitVelo:\phantomsection\label{magAngleRepInitVelo}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+
 \end{itemize}
 
 \subsubsection{\wss{Context Theories}}
@@ -525,6 +528,9 @@ Description & \begin{symbDescription}
               \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^3$} is the velocity ($\frac{\text{m}}{\text{s}}$)}
               \end{symbDescription}
 \\ \midrule
+\wss{Constraints} & \wss{None}
+
+\\ \midrule
 Notes & The velocity and acceleration of the body are expressed using a
 Cartesian coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 \hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
@@ -533,9 +539,6 @@ concepts of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
 \hyperref[CT:Differentiation]{CT:Differentiation}). \wss{Should it be made
 explicit that this theory is 3D by having an A:threeD assumption?}
-\\ \midrule
-\wss{Constraints} & \wss{None}
-
 
 \\ \midrule
 Source & \cite{accelerationWiki}
@@ -583,6 +586,9 @@ Description & \begin{symbDescription}
               \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^3$} is the position (${\text{m}}$)}
               \end{symbDescription}
 \\ \midrule
+\wss{Constraints} & \wss{None}
+
+\\ \midrule
 Notes & The position and velocity of the body are expressed using a Cartesian
 coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 \hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
@@ -590,9 +596,6 @@ coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
 \hyperref[CT:Differentiation]{CT:Differentiation}).
-
-\\ \midrule
-\wss{Constraints} & \wss{None}
 
 \\ \midrule
 Source & \cite{velocityWiki}
@@ -643,6 +646,10 @@ Description & \begin{symbDescription}
               \item \wss{$b_y: \mathbb{R}$} is the $y$ component of the vector $\symbf{b}$
               \item \wss{$b_z: \mathbb{R}$} is the $z$ component of the vector $\symbf{b}$
               \end{symbDescription}
+
+\\ \midrule
+\wss{Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
+
 \\ \midrule
 Notes & \wss{The vector $\symbf{b}$ is in a three dimensional Cartesian
 coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
@@ -651,11 +658,8 @@ sample vector would be a nice addition.}  Direction cosines use the context
 theories of real arithmetic, trigonometry and vectors
 (\hyperref[CT:realArith]{CT:realArith},
 \hyperref[CT:trigonometry]{CT:trigonometry}, \hyperref[CT:vectors]{CT:vectors}).
-\\ \midrule
 
-\wss{Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
 \\ \midrule
-
 Source & \cite{} \href{https://byjus.com/maths/direction-cosines/} {web-page
 resource}, Long book 
          
@@ -710,11 +714,11 @@ Description & \begin{symbDescription}
               \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
               \end{symbDescription}
 
-              \\ \midrule
-\wss{Notes} & \wss{See detailed derivation below}
-
 \\ \midrule
 \wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+
+\\ \midrule
+\wss{Notes} & \wss{See detailed derivation below}
 
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
@@ -813,10 +817,10 @@ Description & \begin{symbDescription}
               \item{\wss{${a^{c}}: \mathbb{R}$} is the constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \end{symbDescription}
 \\ \midrule
-\wss{Notes} & \wss{See detailed derivation below}
+\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 
 \\ \midrule
-\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\wss{Notes} & \wss{See detailed derivation below}
 
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
@@ -1022,7 +1026,7 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position (${\text{m}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
               \item{\wss{${{p_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial position (${\text{m}}$)}
               \item{\wss{${{v_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial velocity ($\frac{\text{m}}{\text{s}}$)}
               \item{\wss{$t: \text{time}$} is the time (${\text{s}}$)}
@@ -1125,6 +1129,10 @@ Description & \begin{symbDescription}
               \item \wss{$b_x: \mathbb{R}$} is the $x$ component of the vector $\symbf{b}$
               \item \wss{$b_y: \mathbb{R}$} is the $y$ component of the vector $\symbf{b}$
               \end{symbDescription}
+
+\\ \midrule
+\wss{Constraints} & \wss{None}
+
 \\ \midrule
 Notes & \wss{The vector $\symbf{b}$ is in a two dimensional
 (\hyperref[twoD]{A:twoD}) Cartesian coordinate system
@@ -1134,9 +1142,6 @@ the angle $\gamma$ is not relevant because in this case $\gamma = \pi/2$, and
 $\cos(\gamma) = \cos(\pi/2) = 0$.  For the 2D case we rename the angle $\alpha$
 as $\theta$.  The angle $\beta$ is related to $\theta$ by $\beta = \pi/2 -
 \theta$; therefore, $\cos(\beta) = \cos(\pi/2 - \theta) = \sin(\theta)$.}  This theory uses the same context theories as \hyperref[TM:directionCosines]{TM:directionCosines}: \hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:trigonometry]{CT:trigonometry}, \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst} and \hyperref[CT:vectors]{CT:vectors}.
-
-\\ \midrule
-\wss{Constraints} & \wss{None}
 
 \\ \midrule
 Source & \cite{}
@@ -1168,10 +1173,74 @@ RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
 
 \subsubsection{\wss{Projectile Theories (List Them)}}
 \label{Sec:DDs}
-\wss{Remove this ``This section collects and defines all the data needed to build the instance models.''}
+\wss{Remove this ``This section collects and defines all the data needed to
+build the instance models.''}
 
-\wss{The general theories are now refined into a specific projectile theories.
+\wss{The general theories are now refined into specific projectile theories.
 A specific coordinate system is introduced.}
+
+\wss{In this section the generic ``body'' becomes projectile.  Should we refine
+that in code, or just rely on the user to change the teminology?}
+
+\medskip
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:coordSyst}
+\phantomsection 
+\label{PT:coordSyst}
+\\ \midrule
+Label & Coordinate System for Projectile
+        
+\\ \midrule
+Symbol & \wss{none}
+         
+\\ \midrule
+Units & \wss{none}
+        
+\\ \midrule
+Equation & \wss{none}
+
+\\ \midrule
+Description & \wss{none}
+
+\\ \midrule Notes & \wss{The coordinate system is shown in
+\hyperref[Figure:Launch]{Fig:Launch}.  As the figure shows, the origin of the 2D
+(\hyperref[twoD]{A:twoD}) Cartesian coordinate system
+(\hyperref[cartSyst]{A:cartSyst}, \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst})
+coincides with the location of the Launcher
+(\hyperref[launchOrigin]{A:launchOrigin}). The Target lies on the $x$-axis
+(\hyperref[targetXAxis]{A:targetXAxis}) and the positive $x$-direction is from the
+launcher to the target (\hyperref[posXDirection]{A:posXDirection}).  The positive
+$y$-direction is up \hyperref[yAxisGravity]{A:yAxisGravity}.}
+        
+\\ \midrule
+Source & --
+         
+\\ \midrule
+RefBy & \wss{?}
+        
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:coordSyst}
+
+\begin{itemize}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Preconditions for PT:coordSyst}
+
+\begin{itemize}
+\item \hyperref[cartSyst]{A:cartSyst}
+\item \hyperref[twoD]{A:twoD}
+\item \hyperref[launchOrigin]{A:launchOrigin}
+\item \hyperref[targetXAxis]{A:targetXAxis}
+\item \hyperref[posXDirection]{A:posXDirection}
+\item \hyperref[yAxisGravity]{A:yAxisGravity}
+\end{itemize}
 
 \medskip
 \noindent
@@ -1316,7 +1385,9 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \phantomsection 
 \label{PT:velVecInitMagAndAngle}
 \\ \midrule
-Label & Velocity vector as a function of time for 2D projectile motion under gravity using the magnitude and angle of the initial velocity.
+Label & Velocity vector as a function of time for 2D projectile motion under
+constant acceleration in both the $x$ and $y$ directions using the magnitude and
+angle representation of the initial velocity.
         
 \\ \midrule
 Units & $\frac{\text{m}}{\text{s}}$
@@ -1324,28 +1395,46 @@ Units & $\frac{\text{m}}{\text{s}}$
 \\ \midrule
 Equation & \begin{displaymath}
            \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
-                                      {{v}^{\text{i}}} \cos(\theta)+{{a_{\text{x}}}^{\text{c}}} t\\
-                                      {{v}^{\text{i}}} \sin(\theta)+{{a_{\text{y}}}^{\text{c}}} t
+                                      {{v}_{\text{launch}}} \cos(\theta)+{{a_{\text{x}}}^{\text{c}}} t\\
+                                      {{v}_{\text{launch}}} \sin(\theta)+{{a_{\text{y}}}^{\text{c}}} t
                                       \end{bmatrix}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
               \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^2$} is the velocity \wss{vector} ($\frac{\text{m}}{\text{s}}$)}
-              \item{\wss{${{v}^{\text{i}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
               \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
               \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \item $\theta: \mathbb{R}$ is the launch angle (rad)
               \end{symbDescription}
-\\ \midrule
 
-\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 \\ \midrule
+\wss{Constraints} & 
+\begin{symbDescription}
+\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\end{symbDescription}
 
+\\ \midrule \wss{Notes} & This theory starts with
+\hyperref[GD:velVec]{GD:velVec} and switches to the magnitude/angle
+representation for the components of the initial velocity vector
+(\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}).  That is,
+\hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
+for the initial velocity components. The magnitude of the initial velocity is
+called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
+required to satisfy the assumption that the launcher must be aimed toward the
+target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
+
+\\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & 
+RefBy & ?
+
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -1354,36 +1443,390 @@ RefBy &
 \noindent \textbf{Theories Used by PT:velVecInitMagAndAngle}
 
 \begin{itemize}
-\item \hyperref[GD:rectVel]{GD:rectVel}
+\item \hyperref[GD:velVec]{GD:velVec}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
-\item \hyperref[CT:Differentiation]{CT:Differentiation}
-\item \hyperref[CT:Integration]{CT:Integration}
+\item \hyperref[PT:coordSyst]{PT:coordSyst}
+\item \hyperref[DD:speedIX]{DD:speedIX}
+\item \hyperref[DD:speedIY]{DD:speedIY}
 \end{itemize}
-
-\wss{If a theory A depends another theory B and theory B uses context theory C,
-does theory A also depend on context theory C, even if context theory C never
-appears in the expression or derivation of theory A?}
 
 \noindent \textbf{Preconditions for PT:velVecInitMagAndAngle}
 \begin{itemize}
-\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectVel]{GD:rectVel})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from
-\hyperref[GD:rectVel]{GD:rectVel})
-\item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
-in $x$ direction)
+in $x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
-in $y$ direction)
+in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
 \end{itemize}
 
-\subsubsection{Instance Models}
-\label{Sec:IMs}
-This section transforms the problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one which is expressed in mathematical terms. It uses concrete symbols defined in the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the models identified in \hyperref[Sec:TMs]{theoretical models} and \hyperref[Sec:GDs]{general definitions}.
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:posVecInitMagAndAngle}
+\phantomsection 
+\label{PT:posVecInitMagAndAngle}
+\\ \midrule
+Label & Position vector as a function of time for 2D projectile motion under
+constant acceleration in both the $x$ and $y$ directions using the magnitude and
+angle representation of the initial velocity.
+        
+\\ \midrule
+Units & $\frac{\text{m}}{\text{s}}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
+                                      {{p_{\text{x}}}^{\text{i}}}+{v}_{\text{launch}} \cos(\theta) t +\frac{{{a_{\text{x}}}^{\text{c}}} t^{2}}{2}\\
+                                      {{p_{\text{y}}}^{\text{i}}}+{v}_{\text{launch}} \sin(\theta) t +\frac{{{a_{\text{y}}}^{\text{c}}} t^{2}}{2}
+                                      \end{bmatrix}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{${{p_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial position (${\text{m}}$)}
+              \item{\wss{${{p_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial position (${\text{m}}$)}
+              \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item $\theta: \mathbb{R}$ is the launch angle (rad)
+              \end{symbDescription}
 
-\wss{In this section the generic ``body'' becomes projectile.  Should we refine
-that in code, or just rely on the user to change the teminology?}
+\\ \midrule
+\wss{Constraints} & 
+\begin{symbDescription}
+\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\end{symbDescription}
+
+\\ \midrule \wss{Notes} & This theory starts with
+\hyperref[GD:posVec]{GD:posVec} and switches to the magnitude/angle
+representation for the components of the initial velocity vector
+(\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}).  That is,
+\hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
+for the initial velocity components. The magnitude of the initial velocity is
+called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
+required to satisfy the assumption that the launcher must be aimed toward the
+target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
+
+\\ \midrule
+Source & --
+         
+\\ \midrule
+RefBy & ?
+
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:posVecInitMagAndAngle}
+
+\begin{itemize}
+\item \hyperref[GD:posVec]{GD:posVec}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[PT:coordSyst]{PT:coordSyst}
+\item \hyperref[DD:speedIX]{DD:speedIX}
+\item \hyperref[DD:speedIY]{DD:speedIY}
+\end{itemize}
+
+\noindent \textbf{Preconditions for PT:posVecInitMagAndAngle}
+\begin{itemize}
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
+in $x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
+in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
+\end{itemize}
+
+\noindent \begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:posVecInitPos} \phantomsection
+\label{PT:posVecInitPos} \\ \midrule Label & Position vector as a function of
+time for 2D projectile motion under constant acceleration in both the $x$ and
+$y$ directions using the magnitude and angle representation of the initial
+velocity with the initial position at the origin.
+        
+\\ \midrule
+Units & $\frac{\text{m}}{\text{s}}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
+                                      {v}_{\text{launch}} \cos(\theta) t +\frac{a_\text{x}^\text{c} t^2}{2}\\
+                                      {v}_{\text{launch}} \sin(\theta) t +\frac{{{a_{\text{y}}}^{\text{c}}} t^{2}}{2}
+                                      \end{bmatrix}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item $\theta: \mathbb{R}$ is the launch angle (rad)
+              \end{symbDescription}
+
+\\ \midrule
+\wss{Constraints} & 
+\begin{symbDescription}
+\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\end{symbDescription}
+
+\\ \midrule \wss{Notes} & This theory starts with
+\hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle} and uses the
+location of the launcher at the origin
+(\hyperref[A:launchOrigin]{A:launchOrigin}) to find the initial position in both
+coordinate directions is zero. The constraints on $v_\text{launch}$ and $\theta$
+are required to satisfy the assumption that the launcher must be aimed toward
+the target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
+
+\\ \midrule
+Source & --
+         
+\\ \midrule
+RefBy & ?
+
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:posVecInitPos}
+
+\begin{itemize}
+\item \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[PT:coordSyst]{PT:coordSyst}
+\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
+\item \hyperref[DD:speedIY]{DD:speedIY}
+\end{itemize}
+
+\noindent \textbf{Preconditions for PT:posVecInitPos} 
+\begin{itemize} 
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from
+\hyperref[GD:velVec]{GD:velVec}) \item \hyperref[cartSyst]{A:cartSyst}
+(inherited from \hyperref[GD:velVec]{GD:velVec}) \item \hyperref[twoD]{A:twoD}
+(inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+\hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel} in
+$x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+\hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel} in
+$y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+\hyperref[launchOrigin]{A:launchOrigin} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) \item
+\hyperref[targetXAxis]{A:targetXAxis} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) \item
+\hyperref[posXDirection]{A:posXDirection} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) \item
+\hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) \item
+\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} 
+\end{itemize} 
+
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:velVecPlanetaryGrav} \phantomsection
+\label{PT:velVecPlanetaryGrav} \\ \midrule Label & Velocity vector as a function
+of time for 2D projectile motion under gravitational acceleration in both the
+$y$ and zero acceleration in the $x$ direction using the magnitude and angle
+representation of the initial velocity.
+        
+\\ \midrule
+Units & $\frac{\text{m}}{\text{s}}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
+                                      {{v}_{\text{launch}}} \cos(\theta)\\
+                                      {{v}_{\text{launch}}} \sin(\theta) - gt
+                                      \end{bmatrix}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\symbf{v}: \text{time} \rightarrow \mathbb{R}^2$} is the velocity \wss{vector} ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item{\wss{$g: \mathbb{R}$} is the constant acceleration due to gravity ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item $\theta: \mathbb{R}$ is the launch angle (rad)
+              \end{symbDescription}
+
+\\ \midrule
+\wss{Constraints} & 
+\begin{symbDescription}
+\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\end{symbDescription}
+
+\\ \midrule \wss{Notes} & This theory starts with
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle} and uses the
+constant acceleration for projectile motion on a planet.  The $x$ component of
+the acceleration is zero and the $y$ component is $-g$.  The negative sign is
+used because gravity acts in the opposite direction to the positive $y$
+direction assumed for the coordinate system defined in
+\hyperref[PT:coordSyst]{PT:coordSyst}.
+
+\\ \midrule
+Source & --
+         
+\\ \midrule
+RefBy & ?
+
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:velVecPlanetaryGrav}
+
+\begin{itemize}
+\item \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[PT:coordSyst]{PT:coordSyst}
+\item \hyperref[DD:speedIX]{DD:speedIX}
+\item \hyperref[DD:speedIY]{DD:speedIY}
+\end{itemize}
+
+\noindent \textbf{Preconditions for PT:velVecPlanetaryGrav}
+\begin{itemize}
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[accelXZero]{A:accelXZero} (the assumption \hyperref[constAccelX]{A:constAccelX} still applies, but the value for the constant is now set to 0)
+\item \hyperref[accelYGravity]{A:accelYGravity} (the assumption \hyperref[constAccelY]{A:constAccelY} still applies, but the value for the constant acceleration is set to $-g$)
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
+\end{itemize}
+
+\noindent \begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{PT:posVecPlanetaryGrav} \phantomsection
+\label{PT:posVecPlanetaryGrav} \\ \midrule Label & Position vector as a function
+of time for 2D projectile motion under gravitational acceleration on a planet,
+with the $x$ acceleration at 0 and the $y$ direction acceleration at $-g$ using
+the magnitude and angle representation of the initial velocity with the initial
+position at the origin.
+        
+\\ \midrule
+Units & $\frac{\text{m}}{\text{s}}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
+                                      {v}_{\text{launch}} \cos(\theta) t \\
+                                      {v}_{\text{launch}} \sin(\theta) t - \frac{g t^2}{2}
+                                      \end{bmatrix}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
+              \item{\wss{$g: \mathbb{R}$} is the gravitational acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
+              \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
+              \item $\theta: \mathbb{R}$ is the launch angle (rad)
+              \end{symbDescription}
+
+\\ \midrule
+\wss{Constraints} & 
+\begin{symbDescription}
+\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\end{symbDescription}
+
+\\ \midrule \wss{Notes} & This theory starts with
+\hyperref[PT:posVecInitPos]{PT:posVecInitPos} and uses the constant acceleration
+for projectile motion on a planet.  The $x$ component of the acceleration is
+zero and the $y$ component is $-g$.  The negative sign is used because gravity
+acts in the opposite direction to the positive $y$ direction assumed for the
+coordinate system defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
+
+\\ \midrule
+Source & --
+         
+\\ \midrule
+RefBy & ?
+
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Theories Used by PT:posVecPlanetaryGrav}
+
+\begin{itemize}
+\item \hyperref[PT:posVecInitPos]{PT:posVecInitPos}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[PT:coordSyst]{PT:coordSyst}
+\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
+\item \hyperref[DD:speedIY]{DD:speedIY}
+\end{itemize}
+
+\noindent \textbf{Preconditions for PT:posVecPlanetaryGrav} 
+\begin{itemize} 
+\item \hyperref[timeStartZero]{A:timeStartZero} (inherited from
+\hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
+in $x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel}
+in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} 
+\end{itemize}
+
+\subsubsection{Instance Models} \label{Sec:IMs} This section transforms the
+problem defined in the \hyperref[Sec:ProbDesc]{problem description} into one
+which is expressed in mathematical terms. It uses concrete symbols defined in
+the \hyperref[Sec:DDs]{data definitions} to replace the abstract symbols in the
+models identified in \hyperref[Sec:TMs]{theoretical models} and
+\hyperref[Sec:GDs]{general definitions}.
 
 \medskip
 \noindent
