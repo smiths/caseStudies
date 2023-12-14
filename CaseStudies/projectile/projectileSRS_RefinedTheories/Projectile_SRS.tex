@@ -380,8 +380,16 @@ it can be used for things that are 2D other than just the motion.}
 
 \subsubsection{\wss{Context Theories}}
 
-\wss{Some theories do not have to be explicitly invoked. They are part of the context for the other theories, without having to be explicitly stated or defined. The context theories for this problem are as follows:
-}
+\wss{In science and engineering the theories that are used to solve practical
+problems are built on a foundation of mathematical and physical knowledge. For
+practical reasons, it is not usually feasible to define all of the details down
+to the most fundamental level. For instance, the audience reading the
+requirements will typically know the concepts of real arithmetic,
+differentiation, trigonometry, etc.  Nevertheless it is helpful to make the
+dependence on fundamental theories explicit, even if those theories themselves
+are not explicitly defined. These theories form the context in which the higher
+level theories exist.  The context theories that are used for the Projectile
+problem are listed below.}
 
 \medskip
 \noindent
@@ -550,7 +558,7 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 \end{tabular}
 \end{minipage}
 ~\\
-\noindent \textbf{Theories Used by TM:acceleration}
+\noindent \textbf{Context Theories Used by TM:acceleration}
 
 \begin{itemize}
 \item \hyperref[CT:realArith]{CT:realArith}
@@ -558,6 +566,11 @@ RefBy & \hyperref[GD:rectVel]{GD:rectVel}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \end{itemize}
+
+\noindent \textbf{Initial Theories Used by TM:acceleration}
+
+None
+~\\
 
 \noindent \textbf{Preconditions for TM:acceleration}
 
@@ -607,7 +620,7 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \end{tabular}
 \end{minipage}
 ~\\
-\noindent \textbf{Theories Used by TM:velocity}
+\noindent \textbf{Context Theories Used by TM:velocity}
 
 \begin{itemize}
 \item \hyperref[CT:realArith]{CT:realArith}
@@ -615,6 +628,11 @@ RefBy & \hyperref[GD:rectPos]{GD:rectPos}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoodSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \end{itemize}
+
+\noindent \textbf{Initial Theories Used by TM:velocity}
+
+None
+~\\
 
 \noindent \textbf{Preconditions for TM:velocity}
 
@@ -670,7 +688,7 @@ RefBy & \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
 \end{tabular}
 \end{minipage}
 ~\\
-\noindent \textbf{Theories Used by TM:directionCosines}
+\noindent \textbf{Context Theories Used by TM:directionCosines}
 
 \begin{itemize}
 \item \hyperref[CT:realArith]{CT:realArith}
@@ -678,6 +696,11 @@ RefBy & \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:vectors]{CT:vectors}
 \end{itemize}
+
+\noindent \textbf{Initial Theories Used by TM:directionCosines}
+
+None
+~\\
 
 \noindent \textbf{Preconditions for TM:directionCosines}
 
@@ -770,15 +793,20 @@ Cartesian coodinate system, and differentiation
 theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 ~\\
 
-\noindent \textbf{Theories Used by GD:rectVel}
+\noindent \textbf{Context Theories Used by GD:rectVel}
 
 \begin{itemize}
-\item \hyperref[TM:acceleration]{TM:acceleration}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by GD:rectVel}
+
+\begin{itemize}
+\item \hyperref[TM:acceleration]{TM:acceleration}
 \end{itemize}
 
 \noindent \textbf{\wss{Preconditions for GD:rectVel}}
@@ -880,15 +908,20 @@ Cartesian coodinate system, and differentiation
 theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 ~\\
 
-\noindent \textbf{Theories Used by GD:rectPos}
+\noindent \textbf{Context Theories Used by GD:rectPos}
 
 \begin{itemize}
-\item \hyperref[TM:velocity]{TM:velocity}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by GD:rectPos}
+
+\begin{itemize}
+\item \hyperref[TM:velocity]{TM:velocity}
 \end{itemize}
 
 \noindent \textbf{Preconditions for GD:rectPos}
@@ -900,7 +933,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \item \hyperref[timeStartZero]{A:timeStartZero}
 \end{itemize}
 
-\subsubsection{\wss{General Theories (GD:velVec and GD:posVec)}}
+\subsubsection{\wss{Generic Theories (GD:velVec and GD:posVec)}}
 
 \noindent
 \begin{minipage}{\textwidth}
@@ -975,15 +1008,20 @@ vectors, Cartesian coodinate system, differentiation and integration
 \hyperref[CT:Integration]{CT:Integration}).}
 ~\\
 
-\noindent \textbf{Theories Used by GD:velVect}
+\noindent \textbf{Context Theories Used by GD:velVect}
 
 \begin{itemize}
-\item \hyperref[GD:rectVel]{GD:rectVel}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by GD:velVect}
+
+\begin{itemize}
+\item \hyperref[GD:rectVel]{GD:rectVel}
 \end{itemize}
 
 \wss{If a theory A depends another theory B and theory B uses context theory C,
@@ -1087,12 +1125,17 @@ vectors, Cartesian coodinate system, differentiation and integration
 \noindent \textbf{Theories Used by GD:posVec}
 
 \begin{itemize}
-\item \hyperref[GD:rectPos]{GD:rectPos}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:Differentiation]{CT:Differentiation}
 \item \hyperref[CT:Integration]{CT:Integration}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by GD:posVec}
+
+\begin{itemize}
+\item \hyperref[GD:rectPos]{GD:rectPos}
 \end{itemize}
 
 \noindent \textbf{Preconditions for GD:posVec}
@@ -1154,15 +1197,21 @@ RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
 \end{minipage}
 
 ~\\
-\noindent \textbf{Theories Used by GD:magAngleToCompRep}
+\noindent \textbf{Context Theories Used by GD:magAngleToCompRep}
 
 \begin{itemize}
-\item \hyperref[TM:directionCosines]{TM:directionCosines}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:trigonometry]{CT:trigonometry}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \end{itemize}
+
+\noindent \textbf{Initial Theories Used by GD:magAngleToCompRep}
+
+\begin{itemize}
+\item \hyperref[TM:directionCosines]{TM:directionCosines}
+\end{itemize}
+
 ~\\
 \noindent \textbf{Preconditions for GD:magAngleToCompRep}
 
@@ -1225,11 +1274,15 @@ RefBy & \wss{?}
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:coordSyst}
+\noindent \textbf{Context Theories Used by PT:coordSyst}
 
 \begin{itemize}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:coordSyst}
+
+None
 
 \noindent \textbf{Preconditions for PT:coordSyst}
 
@@ -1298,15 +1351,20 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by DD:speedIX}
+\noindent \textbf{Context Theories Used by DD:speedIX}
 
 \begin{itemize}
-\item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
-\item \hyperref[TM:directionCosines]{TM:directionCosines}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:trigonometry]{CT:trigonometry}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \item \hyperref[CT:vectors]{CT:vectors}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by DD:speedIX}
+
+\begin{itemize}
+\item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
+\item \hyperref[TM:directionCosines]{TM:directionCosines}
 \end{itemize}
 
 \noindent \textbf{Preconditions for DD:speedIX}
@@ -1361,14 +1419,19 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by DD:speedIY}
+\noindent \textbf{Context Theories Used by DD:speedIY}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:vectors]{CT:vectors}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by DD:speedIY}
 
 \begin{itemize}
 \item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
 \item \hyperref[TM:directionCosines]{TM:directionCosines}
-\item \hyperref[CT:realArith]{CT:realArith}
-\item \hyperref[CT:vectors]{CT:vectors}
-\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
 \end{itemize}
 
 \noindent \textbf{Preconditions for DD:speedIY}
@@ -1440,13 +1503,18 @@ RefBy & ?
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:velVecInitMagAndAngle}
+\noindent \textbf{Context Theories Used by PT:velVecInitMagAndAngle}
 
 \begin{itemize}
-\item \hyperref[GD:velVec]{GD:velVec}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:velVecInitMagAndAngle}
+
+\begin{itemize}
+\item \hyperref[GD:velVec]{GD:velVec}
 \item \hyperref[PT:coordSyst]{PT:coordSyst}
 \item \hyperref[DD:speedIX]{DD:speedIX}
 \item \hyperref[DD:speedIY]{DD:speedIY}
@@ -1532,13 +1600,18 @@ RefBy & ?
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:posVecInitMagAndAngle}
+\noindent \textbf{Context Theories Used by PT:posVecInitMagAndAngle}
 
 \begin{itemize}
-\item \hyperref[GD:posVec]{GD:posVec}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:posVecInitMagAndAngle}
+
+\begin{itemize}
+\item \hyperref[GD:posVec]{GD:posVec}
 \item \hyperref[PT:coordSyst]{PT:coordSyst}
 \item \hyperref[DD:speedIX]{DD:speedIX}
 \item \hyperref[DD:speedIY]{DD:speedIY}
@@ -1617,13 +1690,18 @@ RefBy & ?
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:posVecInitPos}
+\noindent \textbf{Context Theories Used by PT:posVecInitPos}
 
 \begin{itemize}
-\item \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:posVecInitPos}
+
+\begin{itemize}
+\item \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}
 \item \hyperref[PT:coordSyst]{PT:coordSyst}
 \item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
 \item \hyperref[DD:speedIY]{DD:speedIY}
@@ -1706,13 +1784,18 @@ RefBy & ?
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:velVecPlanetaryGrav}
+\noindent \textbf{Context Theories Used by PT:velVecPlanetaryGrav}
 
 \begin{itemize}
-\item \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:velVecPlanetaryGrav}
+
+\begin{itemize}
+\item \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}
 \item \hyperref[PT:coordSyst]{PT:coordSyst}
 \item \hyperref[DD:speedIX]{DD:speedIX}
 \item \hyperref[DD:speedIY]{DD:speedIY}
@@ -1787,13 +1870,18 @@ RefBy & ?
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by PT:posVecPlanetaryGrav}
+\noindent \textbf{Context Theories Used by PT:posVecPlanetaryGrav}
 
 \begin{itemize}
-\item \hyperref[PT:posVecInitPos]{PT:posVecInitPos}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:vectors]{CT:vectors}
 \item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by PT:posVecPlanetaryGrav}
+
+\begin{itemize}
+\item \hyperref[PT:posVecInitPos]{PT:posVecInitPos}
 \item \hyperref[PT:coordSyst]{PT:coordSyst}
 \item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
 \item \hyperref[DD:speedIY]{DD:speedIY}
@@ -1917,12 +2005,17 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \end{displaymath}
 ~\\
 
-\noindent \textbf{Theories Used by IM:calOfLandingTime}
+\noindent \textbf{Context Theories Used by IM:calOfLandingTime}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:trigonometry]{CT:trigonometry}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by IM:calOfLandingTime}
 
 \begin{itemize}
 \item \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
-\item \hyperref[CT:realArith]{CT:realArith}
-\item \hyperref[CT:trigonometry]{CT:trigonometry}
 \end{itemize}
 
 \noindent \textbf{Preconditions for IM:calOfLandingTime}
@@ -2024,12 +2117,17 @@ Rearranging this gives us the required equation:
 \end{displaymath}
 ~\\
 
-\noindent \textbf{Theories Used by IM:calOfLandingDistDeriv}
+\noindent \textbf{Context Theories Used by IM:calOfLandingDistDeriv}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:trigonometry]{CT:trigonometry}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by IM:calOfLandingDistDeriv}
 
 \begin{itemize}
 \item \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
-\item \hyperref[CT:realArith]{CT:realArith}
-\item \hyperref[CT:trigonometry]{CT:trigonometry}
 \end{itemize}
 
 \noindent \textbf{Preconditions for IM:calOfLandingDistDeriv}
@@ -2098,11 +2196,16 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \end{tabular}
 \end{minipage}
 
-\noindent \textbf{Theories Used by IM:offsetIM}
+\noindent \textbf{Context Theories Used by IM:offsetIM}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\end{itemize}
+
+\noindent \textbf{Initial Theories Used by IM:offsetIM}
 
 \begin{itemize}
 \item \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
-\item \hyperref[CT:realArith]{CT:realArith}
 \end{itemize}
 
 \noindent \textbf{Preconditions for IM:offsetIM}
@@ -2181,7 +2284,12 @@ RefBy & \hyperref[outputValues]{FR:Output-Values} and \hyperref[calcValues]{FR:C
 \end{minipage}
 ~\\
 
-\noindent \textbf{Theories Used by IM:messageIM}
+\noindent \textbf{Context Theories Used by IM:messageIM}
+
+None
+~\\
+
+\noindent \textbf{Initial Theories Used by IM:messageIM}
 
 \begin{itemize}
 \item \hyperref[IM:offsetIM]{IM:offsetIM}
