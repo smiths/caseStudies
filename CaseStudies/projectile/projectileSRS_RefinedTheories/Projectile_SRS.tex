@@ -199,9 +199,9 @@ This document will be used as a starting point for subsequent development phases
 The scope of the requirements includes the analysis of a two-dimensional (2D) projectile motion problem with constant acceleration.
 
 \wss{We are only interested in the position of the projectile, not
-its orientation \hyperref[noOrientation]{A:noOrientation}.} %this is how we leave theories out, like theories of rotation
+its orientation \hyperref[SD:noOrient]{SD:noOrient}.} %this is how we leave theories out, like theories of rotation
 
-\wss{We assume that forces are not relevant for the model so that we only need kinematic equations \hyperref[kinematicOnly]{A:kinematicOnly}.}
+\wss{We assume that forces are not relevant for the model so that we only need kinematic equations \hyperref[SD:kinOnly]{SD:kinOnly}.}
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:ReaderChars}
@@ -293,31 +293,50 @@ The physical system of Projectile, as shown in \hyperref[Figure:Launch]{Fig:Laun
 \label{Sec:GoalStmt}
 Given the initial velocity vector of the projectile and the geometric layout of the launcher and target, the goal statement is:
 
-\begin{itemize}
-\item[targetHit:\phantomsection\label{targetHit}]{Determine if the projectile hits the target.}
-\end{itemize}
-\subsection{Solution Characteristics Specification}
-\label{Sec:SolCharSpec}
-The instance models that govern Projectile are presented in the \hyperref[Sec:IMs]{Instance Model Section}. The information to understand the meaning of the instance models and their derivation is also presented, so that the instance models can be verified.
+\begin{itemize} \item[targetHit:\phantomsection\label{targetHit}]{Determine if
+the projectile hits the target.} \end{itemize} \subsection{Solution
+Characteristics Specification} \label{Sec:SolCharSpec} The instance models that
+govern Projectile are presented in the \hyperref[Sec:IMs]{Instance Model
+Section}. The information to understand the meaning of the instance models and
+their derivation is also presented, so that the instance models can be verified.
 
 \subsubsection{\wss{Types}}
 
-\wss{$\text{time} = \mathbb{R}$}
-\subsubsection{\wss{Scope Assumptions}}
-\label{Sec:Assumps}
-This section simplifies the original problem and helps in developing the theoretical models by filling in the missing information for the physical system. The assumptions refine the scope by providing more detail.
+\wss{$\text{time} = \mathbb{R}$} 
+
+\subsubsection{\wss{Scope Decisions}}
+\label{Sec:ScopeDec} 
 
 \begin{itemize}
-\item[noOrientation:\phantomsection\label{noOrientation}]{\wss{The orientation of the projectile is ignored. We only care about its translation not its rotation. (RefBy: \hyperref[TM:acceleration]{TM:acceleration} and \hyperref[TM:velocity]{TM:velocity}.)}}
-\item[kinematicOnly:\phantomsection\label{kinematicOnly}]{\wss{The motion of the
+\item[SD:noOrient:\phantomsection\label{SD:noOrient}]{\wss{The orientation of the projectile is ignored. We only care about its translation not its rotation.  (RefBy: \hyperref[Sec:ReqsScope]{Scope of Requirements}).}}
+\item[SD:kinOnly:\phantomsection\label{SD:kinOnly}]{\wss{The motion of the
 projectile is modelled with only kinematic equations. Forces are not
-considered.}} 
+considered. (RefBy: \hyperref[Sec:ReqsScope]{Scope of Requirements}).}} 
+\end{itemize}
+
+\subsubsection{\wss{Modelling Decisions}}
+\label{Sec:ModelDec}
+
+\begin{itemize}
+\item[MD:cartSyst:\phantomsection\label{MD:cartSyst}]{A Cartesian coordinate system is used. (RefBy: \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, \hyperref[TM:directionCosines]{TM:directionCosines}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:posVec]{GD:posVec}, \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}, \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}, \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}, \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}, \hyperref[PT:posVecInitPos]{PT:posVecInitPos}, \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav}, \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, \hyperref[IM:calOfLandingDistDeriv]{IM:calOfLandingDistDeriv}, \hyperref[IM:offsetIM]{IM:offsetIM}, and \hyperref[IM:messageIM]{IM:messageIM}.)}
+\item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
+\item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[freeFlight:\phantomsection\label{freeFlight}]{The flight is free; there are no collisions during the trajectory of the projectile. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
+\item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[towardLauncher:\phantomsection\label{towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+\item[magAngleRep:\phantomsection\label{magAngleRep}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+
 \end{itemize}
 
 \subsubsection{\wss{Background Theory Assumptions}}
 
 \begin{itemize}
-\item[cartSyst:\phantomsection\label{cartSyst}]{A Cartesian coordinate system is used (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[threeD:\phantomsection\label{threeD}]{\wss{The motion of the body is in
+all three dimensions.} (RefBy: \hyperref[TM:acceleration] {TM:acceleration},
+\hyperref[TM:velocity] {TM:velocity}, \hyperref[TM:directionCosines]
+{TM:directionCosines})}
 \end{itemize}
 
 \subsubsection{\wss{Helper Theory Assumptions (GD:rectVel, GD:rectPos)}}
@@ -327,7 +346,7 @@ considered.}}
 \item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \end{itemize}
 
-\subsubsection{\wss{Theory Assumptions (GD:velVec, GD:posVec)}}
+\subsubsection{\wss{Generic Theory Assumptions (GD:velVec, GD:posVec)}}
 
 \begin{itemize}
 \item[twoD:\phantomsection\label{twoD}]{The variables only depend on
@@ -339,42 +358,22 @@ it can be used for things that are 2D other than just the motion.}
 
 \end{itemize}
 
-\subsubsection{\wss{Theory Assumptions}}
+\subsubsection{\wss{Projectile Specific Theory Assumptions}}
 
 \begin{itemize}
-\item[twoD:\phantomsection\label{twoD}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
-\item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
-\item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[accelXZero:\phantomsection\label{accelXZero}]{The acceleration in the $x$-direction is zero. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[constAccel]{A:constAccel}.)}
-\item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}.)}
-\item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
-\item[pointMass:\phantomsection\label{pointMass}]{The size and shape of the projectile are negligible, so that it can be modelled as a point mass. (RefBy: \hyperref[GD:rectVel]{GD:rectVel} and \hyperref[GD:rectPos]{GD:rectPos}.)}
-\item[freeFlight:\phantomsection\label{freeFlight}]{The flight is free; there are no collisions during the trajectory of the projectile. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
-\item[neglectCurv:\phantomsection\label{neglectCurv}]{The distance is small enough that the curvature of the celestial body can be neglected. (RefBy: \hyperref[targetXAxis]{A:targetXAxis} and \hyperref[cartSyst]{A:cartSyst}.)}
-\item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}).}
 \item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \end{itemize}
 
-\subsubsection{\wss{Final Theory Assumptions}}
+\subsubsection{\wss{Rationale Assumptions}}
 
 \begin{itemize}
-\item[twoD:\phantomsection\label{twoD}]{The projectile motion is two-dimensional (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
-\item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
-\item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[accelXZero:\phantomsection\label{accelXZero}]{The acceleration in the $x$-direction is zero. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[constAccel]{A:constAccel}.)}
-\item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}.)}
-\item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
 \item[pointMass:\phantomsection\label{pointMass}]{The size and shape of the projectile are negligible, so that it can be modelled as a point mass. (RefBy: \hyperref[GD:rectVel]{GD:rectVel} and \hyperref[GD:rectPos]{GD:rectPos}.)}
-\item[freeFlight:\phantomsection\label{freeFlight}]{The flight is free; there are no collisions during the trajectory of the projectile. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
-\item[neglectCurv:\phantomsection\label{neglectCurv}]{The distance is small enough that the curvature of the celestial body can be neglected. (RefBy: \hyperref[targetXAxis]{A:targetXAxis} and \hyperref[cartSyst]{A:cartSyst}.)}
-\item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[towardLauncher:\phantomsection\label{towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
-\item[magAngleRepInitVelo:\phantomsection\label{magAngleRepInitVelo}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+\item[neglectCurv:\phantomsection\label{neglectCurv}]{The distance is small enough that the curvature of the celestial body can be neglected. (RefBy: \hyperref[targetXAxis]{A:targetXAxis} and \hyperref[MD:cartSyst]{MD:cartSyst}.)}
+\item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
+\item[negPlanetRot:\phantomsection\label{negEarthRot}]{\wss{The rotation of the
+planet is neglected}. (RefBy: ?)}
 
 \end{itemize}
 
@@ -539,14 +538,14 @@ Description & \begin{symbDescription}
 \wss{Constraints} & \wss{None}
 
 \\ \midrule
-Notes & The velocity and acceleration of the body are expressed using a
-Cartesian coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
-\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
-(orthonormal). The relationship between acceleration and velocity uses the
-concepts of real arithmetic, vectors and differentiation
+Notes & The velocity and acceleration of the body are expressed using a 3D
+(\hyperref[threeD]{A:threeD}) Cartesian coordinate system
+(\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[MD:cartSyst]{MD:cartSyst}).  That is, the coordinate system is
+rectangular (orthonormal). The relationship between acceleration and velocity
+uses the concepts of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
-\hyperref[CT:Differentiation]{CT:Differentiation}). \wss{Should it be made
-explicit that this theory is 3D by having an A:threeD assumption?}
+\hyperref[CT:Differentiation]{CT:Differentiation}).
 
 \\ \midrule
 Source & \cite{accelerationWiki}
@@ -575,7 +574,8 @@ None
 \noindent \textbf{Preconditions for TM:acceleration}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst}
+\item \hyperref[MD:cartSyst]{MD:cartSyst}
+\item \hyperref[threeD]{A:threeD}
 \end{itemize}
 
 \medskip
@@ -602,9 +602,9 @@ Description & \begin{symbDescription}
 \wss{Constraints} & \wss{None}
 
 \\ \midrule
-Notes & The position and velocity of the body are expressed using a Cartesian
+Notes & The position and velocity of the body are expressed using a 3D (\hyperref[threeD]{A:threeD}) Cartesian
 coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
-\hyperref[cartSyst]{A:cartSyst}).  That is, the coordinate system is rectangular
+\hyperref[MD:cartSyst]{MD:cartSyst}).  That is, the coordinate system is rectangular
 (orthonormal).  The relationship between velocity and position uses the concepts
 of real arithmetic, vectors and differentiation
 (\hyperref[CT:realArith]{CT:realArith}, \hyperref[CT:vectors]{CT:vectors},
@@ -637,7 +637,8 @@ None
 \noindent \textbf{Preconditions for TM:velocity}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst}
+\item \hyperref[MD:cartSyst]{MD:cartSyst}
+\item \hyperref[threeD]{A:threeD}
 \end{itemize}
 
 \medskip
@@ -669,9 +670,9 @@ Description & \begin{symbDescription}
 \wss{Constraints} & \wss{$\cos^2(\alpha) + \cos^2(\beta) + \cos^2(\gamma) = 1$}
 
 \\ \midrule
-Notes & \wss{The vector $\symbf{b}$ is in a three dimensional Cartesian
-coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
-\hyperref[cartSyst]{A:cartSyst}).}  \wss{A figure showing the angles for a
+Notes & \wss{The vector $\symbf{b}$ is in a 3D (\hyperref[threeD]{A:threeD})
+Cartesian coordinate system (\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
+\hyperref[MD:cartSyst]{MD:cartSyst}).}  \wss{A figure showing the angles for a
 sample vector would be a nice addition.}  Direction cosines use the context
 theories of real arithmetic, trigonometry and vectors
 (\hyperref[CT:realArith]{CT:realArith},
@@ -705,7 +706,8 @@ None
 \noindent \textbf{Preconditions for TM:directionCosines}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst}
+\item \hyperref[MD:cartSyst]{MD:cartSyst}
+\item \hyperref[threeD]{A:threeD}
 \end{itemize}
 
 \subsubsection{\wss{Helper Theories (GD:rectVel and GD:rectPos)}}
@@ -812,7 +814,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \noindent \textbf{\wss{Preconditions for GD:rectVel}}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[TM:acceleration]{TM:acceleration})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[TM:acceleration]{TM:acceleration})
 \item \hyperref[oneD]{A:oneD}
 \item \hyperref[constAccel]{A:constAccel}
 \item \hyperref[timeStartZero]{A:timeStartZero}
@@ -927,7 +929,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 \noindent \textbf{Preconditions for GD:rectPos}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[TM:velocity]{TM:velocity})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[TM:velocity]{TM:velocity})
 \item \hyperref[oneD]{A:oneD}
 \item \hyperref[constAccel]{A:constAccel}
 \item \hyperref[timeStartZero]{A:timeStartZero}
@@ -978,7 +980,7 @@ RefBy &
 
 \paragraph{Detailed derivation of velocity vector:}
 \label{GD:velVecDeriv}
-For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[cartSyst]{A:cartSyst}), we can represent the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
+For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[MD:cartSyst]{MD:cartSyst}), we can represent the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
                                                                                                                                                                                                  {v_{\text{x}}(\wss{t})}\\
                                                                                                                                                                                                  {v_{\text{y}}(\wss{t})}
                                                                                                                                                                                                  \end{bmatrix}$ and the acceleration vector as $\symbf{a}\text{(}t\text{)}=\begin{bmatrix}
@@ -990,7 +992,7 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \
                                                                                                                                                                                                                                                                                                                                                                                                                                                            \end{bmatrix}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${\symbf{v}^{\text{i}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{x}}}^{\text{i}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      {{v_{\text{y}}}^{\text{i}}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel} (\hyperref[cartSyst]{A:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectVel]{GD:rectVel} (\hyperref[MD:cartSyst]{MD:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:}
 
 \begin{displaymath}
 \symbf{v}\text{(}t\text{)}=\begin{bmatrix}
@@ -1031,7 +1033,7 @@ appears in the expression or derivation of theory A?}
 \noindent \textbf{Preconditions for GD:velVec}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectVel]{GD:rectVel})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from
 \hyperref[GD:rectVel]{GD:rectVel})
 \item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
@@ -1089,7 +1091,7 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:cal
 
 \paragraph{Detailed derivation of position vector:}
 \label{GD:posVecDeriv}
-For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[cartSyst]{A:cartSyst}), we can represent the position vector as $\symbf{p}\text{(}t\text{)}=\begin{bmatrix}
+For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \hyperref[MD:cartSyst]{MD:cartSyst}), we can represent the position vector as $\symbf{p}\text{(}t\text{)}=\begin{bmatrix}
                                                                                                                                                                                                  {p_{\text{x}}\wss{(t)}}\\
                                                                                                                                                                                                  {p_{\text{y}}\wss{(t)}}
                                                                                                                                                                                                  \end{bmatrix}$, the velocity vector as $\symbf{v}\text{(}t\text{)}=\begin{bmatrix}
@@ -1104,7 +1106,7 @@ For a two-dimensional Cartesian coordinate system (\hyperref[twoD]{A:twoD} and \
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \end{bmatrix}$. The initial velocity (at $t=0$, from \hyperref[timeStartZero]{A:timeStartZero}) is represented by ${\symbf{v}^{\text{i}}}=\begin{bmatrix}
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {{v_{\text{x}}}^{\text{i}}}\\
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {{v_{\text{y}}}^{\text{i}}}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectPos]{GD:rectPos} (\hyperref[cartSyst]{A:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:} 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \end{bmatrix}$. \wss{For each coordinate direction we satisfy the preconditions for \hyperref[GD:rectPos]{GD:rectPos} (\hyperref[MD:cartSyst]{MD:cartSyst}, \hyperref[oneD]{A:oneD}, \hyperref[constAccel]{A:constAccel}, \hyperref[timeStartZero]{A:timeStartZero}). This means we can use the one dimensional equation for each of the two coordinate directions to yield the required equation:} 
 
 \begin{displaymath}
 \symbf{p}\text{(}t\text{)}=\begin{bmatrix}
@@ -1141,7 +1143,7 @@ vectors, Cartesian coodinate system, differentiation and integration
 \noindent \textbf{Preconditions for GD:posVec}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:rectPos]{GD:rectPos})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from
 \hyperref[GD:rectPos]{GD:rectPos})
 \item \hyperref[twoD]{A:twoD} (\hyperref[oneD]{A:oneD} in both the $x$ and $y$ directions)
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
@@ -1179,7 +1181,7 @@ Description & \begin{symbDescription}
 \\ \midrule
 Notes & \wss{The vector $\symbf{b}$ is in a two dimensional
 (\hyperref[twoD]{A:twoD}) Cartesian coordinate system
-(\hyperref[cartSyst]{A:cartSyst}).} \wss{The equations can be derived from
+(\hyperref[MD:cartSyst]{MD:cartSyst}).} \wss{The equations can be derived from
 \hyperref[TM:directionCosines]{TM:directionCosines} for a 2D sytem.  In a 2D system,
 the angle $\gamma$ is not relevant because in this case $\gamma = \pi/2$, and 
 $\cos(\gamma) = \cos(\pi/2) = 0$.  For the 2D case we rename the angle $\alpha$
@@ -1216,7 +1218,7 @@ RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
 \noindent \textbf{Preconditions for GD:magAngleToCompRep}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[directionCosines]{directionCosines})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[directionCosines]{directionCosines})
 \item \hyperref[twoD]{A:twoD}
 \end{itemize}
 
@@ -1256,7 +1258,7 @@ Description & \wss{none}
 \\ \midrule Notes & \wss{The coordinate system is shown in
 \hyperref[Figure:Launch]{Fig:Launch}.  As the figure shows, the origin of the 2D
 (\hyperref[twoD]{A:twoD}) Cartesian coordinate system
-(\hyperref[cartSyst]{A:cartSyst}, \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst})
+(\hyperref[MD:cartSyst]{MD:cartSyst}, \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst})
 coincides with the location of the Launcher
 (\hyperref[launchOrigin]{A:launchOrigin}). The Target lies on the $x$-axis
 (\hyperref[targetXAxis]{A:targetXAxis}) and the positive $x$-direction is from the
@@ -1287,7 +1289,7 @@ None
 \noindent \textbf{Preconditions for PT:coordSyst}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst}
+\item \hyperref[MD:cartSyst]{MD:cartSyst}
 \item \hyperref[twoD]{A:twoD}
 \item \hyperref[launchOrigin]{A:launchOrigin}
 \item \hyperref[targetXAxis]{A:targetXAxis}
@@ -1338,7 +1340,7 @@ Description & \begin{symbDescription}
 Notes & \wss{This equation is a relabelling of the $x$ component of
 \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep} --- ${v^{\text{i}}}$ is
 $|\symbf{b}|$, ${v_{\text{x}}}^{\text{i}}$ is $b_x$ and $\theta$ is $\theta$.}
-$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.  This equation inherits the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}: \hyperref[cartSyst]{A:cartSyst} and \hyperref[twoD]{A:twoD}.
+$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.  This equation inherits the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}: \hyperref[MD:cartSyst]{MD:cartSyst} and \hyperref[twoD]{A:twoD}.
         
 \\ \midrule
 Source & --
@@ -1364,13 +1366,13 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
 
 \begin{itemize}
 \item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
-\item \hyperref[TM:directionCosines]{TM:directionCosines}
+%\item \hyperref[TM:directionCosines]{TM:directionCosines}
 \end{itemize}
 
 \noindent \textbf{Preconditions for DD:speedIX}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \end{itemize}
 
@@ -1406,7 +1408,7 @@ Notes & \wss{This equation is a relabelling of the $x$ component of
 $|\symbf{b}|$, ${v_{\text{y}}}^{\text{i}}$ is $b_y$ and $\theta$ is $\theta$.}
 $θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.   This equation inherits
 the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}:
-\hyperref[cartSyst]{A:cartSyst} and \hyperref[twoD]{A:twoD}.
+\hyperref[MD:cartSyst]{MD:cartSyst} and \hyperref[twoD]{A:twoD}.
         
 \\ \midrule
 Source & --
@@ -1431,13 +1433,13 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 
 \begin{itemize}
 \item \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}
-\item \hyperref[TM:directionCosines]{TM:directionCosines}
+%\item \hyperref[TM:directionCosines]{TM:directionCosines}
 \end{itemize}
 
 \noindent \textbf{Preconditions for DD:speedIY}
 
 \begin{itemize}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \end{itemize}
 
@@ -1484,7 +1486,7 @@ Description & \begin{symbDescription}
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[GD:velVec]{GD:velVec} and switches to the magnitude/angle
 representation for the components of the initial velocity vector
-(\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}).  That is,
+(\hyperref[magAngleRep]{A:magAngleRep}).  That is,
 \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
 for the initial velocity components. The magnitude of the initial velocity is
 called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
@@ -1523,7 +1525,7 @@ RefBy & ?
 \noindent \textbf{Preconditions for PT:velVecInitMagAndAngle}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
 in $x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
@@ -1533,7 +1535,7 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
+\item \hyperref[magAngleRep]{A:magAngleRep}
 \end{itemize}
 
 \noindent
@@ -1581,7 +1583,7 @@ Description & \begin{symbDescription}
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[GD:posVec]{GD:posVec} and switches to the magnitude/angle
 representation for the components of the initial velocity vector
-(\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}).  That is,
+(\hyperref[magAngleRep]{A:magAngleRep}).  That is,
 \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
 for the initial velocity components. The magnitude of the initial velocity is
 called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
@@ -1620,7 +1622,7 @@ RefBy & ?
 \noindent \textbf{Preconditions for PT:posVecInitMagAndAngle}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
 in $x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
@@ -1630,7 +1632,7 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
+\item \hyperref[magAngleRep]{A:magAngleRep}
 \end{itemize}
 
 \noindent \begin{minipage}{\textwidth}
@@ -1702,15 +1704,15 @@ RefBy & ?
 
 \begin{itemize}
 \item \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}
-\item \hyperref[PT:coordSyst]{PT:coordSyst}
-\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
-\item \hyperref[DD:speedIY]{DD:speedIY}
+%\item \hyperref[PT:coordSyst]{PT:coordSyst}
+%\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
+%\item \hyperref[DD:speedIY]{DD:speedIY}
 \end{itemize}
 
 \noindent \textbf{Preconditions for PT:posVecInitPos} 
 \begin{itemize} 
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from
-\hyperref[GD:velVec]{GD:velVec}) \item \hyperref[cartSyst]{A:cartSyst}
+\hyperref[GD:velVec]{GD:velVec}) \item \hyperref[MD:cartSyst]{MD:cartSyst}
 (inherited from \hyperref[GD:velVec]{GD:velVec}) \item \hyperref[twoD]{A:twoD}
 (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
 \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel} in
@@ -1725,7 +1727,7 @@ $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
 \hyperref[PT:coordSyst]{PT:coordSyst}) \item
 \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) \item
-\hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} 
+\hyperref[magAngleRep]{A:magAngleRep} 
 \end{itemize} 
 
 \noindent
@@ -1796,15 +1798,15 @@ RefBy & ?
 
 \begin{itemize}
 \item \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}
-\item \hyperref[PT:coordSyst]{PT:coordSyst}
-\item \hyperref[DD:speedIX]{DD:speedIX}
-\item \hyperref[DD:speedIY]{DD:speedIY}
+%\item \hyperref[PT:coordSyst]{PT:coordSyst}
+%\item \hyperref[DD:speedIX]{DD:speedIX}
+%\item \hyperref[DD:speedIY]{DD:speedIY}
 \end{itemize}
 
 \noindent \textbf{Preconditions for PT:velVecPlanetaryGrav}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[GD:velVec]{GD:velVec})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[accelXZero]{A:accelXZero} (the assumption \hyperref[constAccelX]{A:constAccelX} still applies, but the value for the constant is now set to 0)
 \item \hyperref[accelYGravity]{A:accelYGravity} (the assumption \hyperref[constAccelY]{A:constAccelY} still applies, but the value for the constant acceleration is set to $-g$)
@@ -1812,7 +1814,7 @@ RefBy & ?
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo}
+\item \hyperref[magAngleRep]{A:magAngleRep}
 \end{itemize}
 
 \noindent \begin{minipage}{\textwidth}
@@ -1882,16 +1884,16 @@ RefBy & ?
 
 \begin{itemize}
 \item \hyperref[PT:posVecInitPos]{PT:posVecInitPos}
-\item \hyperref[PT:coordSyst]{PT:coordSyst}
-\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
-\item \hyperref[DD:speedIY]{DD:speedIY}
+%\item \hyperref[PT:coordSyst]{PT:coordSyst}
+%\item \hyperref[DD:speedIX]{DD:speedIX} \wss{Do ancestor theories need to be explicity listed?}
+%\item \hyperref[DD:speedIY]{DD:speedIY}
 \end{itemize}
 
 \noindent \textbf{Preconditions for PT:posVecPlanetaryGrav} 
 \begin{itemize} 
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from
 \hyperref[GD:velVec]{GD:velVec}) 
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from
 \hyperref[GD:velVec]{GD:velVec}) 
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:velVec]{GD:velVec}) 
 \item \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel}
@@ -1906,7 +1908,7 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} 
+\item \hyperref[magAngleRep]{A:magAngleRep} 
 \end{itemize}
 
 \subsubsection{\wss{Final Theories}} \label{Sec:IMs} This section transforms the
@@ -2021,7 +2023,7 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \noindent \textbf{Preconditions for IM:calOfLandingTime}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[accelXZero]{A:accelXZero} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[accelYGravity]{A:accelYGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
@@ -2029,7 +2031,7 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[gravAccelValue]{A:gravAccelValue}
 
 \end{itemize}
@@ -2133,7 +2135,7 @@ Rearranging this gives us the required equation:
 \noindent \textbf{Preconditions for IM:calOfLandingDistDeriv}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[accelXZero]{A:accelXZero} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[accelYGravity]{A:accelYGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
@@ -2141,7 +2143,7 @@ Rearranging this gives us the required equation:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[gravAccelValue]{A:gravAccelValue}
 
 \end{itemize}
@@ -2211,7 +2213,7 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \noindent \textbf{Preconditions for IM:offsetIM}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[accelXZero]{A:accelXZero} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[accelYGravity]{A:accelYGravity} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
@@ -2219,7 +2221,7 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PIM:calOfLandingDist]{IM:calOfLandingDist})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
+\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 
 \end{itemize}
@@ -2286,8 +2288,9 @@ RefBy & \hyperref[outputValues]{FR:Output-Values} and \hyperref[calcValues]{FR:C
 
 \noindent \textbf{Context Theories Used by IM:messageIM}
 
-None
-~\\
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\end{itemize}
 
 \noindent \textbf{Initial Theories Used by IM:messageIM}
 
@@ -2298,7 +2301,7 @@ None
 \noindent \textbf{Preconditions for IM:messageIM}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
-\item \hyperref[cartSyst]{A:cartSyst} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
+\item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[accelXZero]{A:accelXZero} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[accelYGravity]{A:accelYGravity} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
@@ -2306,7 +2309,7 @@ None
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
-\item \hyperref[magAngleRepInitVelo]{A:magAngleRepInitVelo} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
+\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 
 \end{itemize}
@@ -2387,12 +2390,26 @@ assumptions.  The rationale could vary between problems.  For instance, for
 projectile motion the rationale could be that it is being used for teaching
 purposes.  If the theories are used to solve an actual science or engineering
 problem, the rationale would need more justification.}
-\wss{Neglecting rotation could be justified by assuming a point mass? \hyperref[pointMass]{A:pointMass})}.
+\wss{Neglecting rotation could be justified by assuming a point mass? \hyperref[pointMass]{A:pointMass})}. \wss{Justify the scope decisions.  No need to justify modelling decisions.}
 \wss{Should requirements be added related to guaranteeing assumptions and
 constraints?  (As is done after a hazard analysis.)  Requirements could be added
 to check the input constraints, like $x > 0$. Requirements could be added to
 check neglecting curvature.  Would need the radius of the planet, or are we
 assuming it's Earth?}
+
+\subsubsection{\wss{Rationale for Scope Decisions}}
+
+\wss{The rationale for the scope decisions.  This may require introducing
+assumptions.}
+
+\subsubsection{\wss{Rationale for Modelling Decisions}}
+
+\wss{The rationale for the modelling decisions. For instance, a Cartesian
+coordinate system is used because the interest is in rectilinear motion.}
+
+\subsubsection{\wss{Rationale for Assumptions}}
+
+\wss{The rationale for the assumptions.}
 
 \section{Traceability Matrices and Graphs}
 \label{Sec:TraceMatrices}
@@ -2401,11 +2418,11 @@ The purpose of the traceability matrices is to provide easy references on what h
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Assumptions}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{MD:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
 \hyperref[twoD]{A:twoD} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
-\hyperref[cartSyst]{A:cartSyst} &  &  &  &  &  &  &  &  &  &  &  &  & X &  & 
+\hyperref[MD:cartSyst]{A:cartSyst} &  &  &  &  &  &  &  &  &  &  &  &  & X &  & 
 \\
 \hyperref[yAxisGravity]{A:yAxisGravity} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
@@ -2437,7 +2454,7 @@ The purpose of the traceability matrices is to provide easy references on what h
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Items}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
 \hyperref[DD:vecMag]{DD:vecMag} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
