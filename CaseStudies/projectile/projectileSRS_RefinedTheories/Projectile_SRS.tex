@@ -317,16 +317,20 @@ considered. (RefBy: \hyperref[Sec:ReqsScope]{Scope of Requirements}).}}
 \subsubsection{\wss{Modelling Decisions}}
 \label{Sec:ModelDec}
 
+\wss{The modelling decisions should likely eventually use a prefix like MD, but
+for now most of them will use the prefix A, since that is what was previously
+used.}
+
 \begin{itemize}
-\item[MD:cartSyst:\phantomsection\label{MD:cartSyst}]{A Cartesian coordinate system is used. (RefBy: \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, \hyperref[TM:directionCosines]{TM:directionCosines}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:posVec]{GD:posVec}, \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}, \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}, \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}, \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}, \hyperref[PT:posVecInitPos]{PT:posVecInitPos}, \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav}, \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, \hyperref[IM:calOfLandingDistDeriv]{IM:calOfLandingDistDeriv}, \hyperref[IM:offsetIM]{IM:offsetIM}, and \hyperref[IM:messageIM]{IM:messageIM}.)}
-\item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, and \hyperref[accelYGravity]{A:accelYGravity}.)}
+\item[MD:cartSyst:\phantomsection\label{MD:cartSyst}]{A Cartesian coordinate system is used. (RefBy: \hyperref[TM:acceleration]{TM:acceleration}, \hyperref[TM:velocity]{TM:velocity}, \hyperref[TM:directionCosines]{TM:directionCosines}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:posVec]{GD:posVec}, \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}, \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}, \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}, \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}, \hyperref[PT:posVecInitPos]{PT:posVecInitPos}, \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav}, \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:offsetIM]{IM:offsetIM}, and \hyperref[IM:messageIM]{IM:messageIM}.)}
+\item[yAxisGravity:\phantomsection\label{yAxisGravity}]{The direction of the $y$-axis is directed opposite to gravity. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[PT:posVecInitPos]{PT:posVecInitPos}, \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}, \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav}, \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}, and \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}.)}
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[freeFlight:\phantomsection\label{freeFlight}]{The flight is free; there are no collisions during the trajectory of the projectile. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
 \item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[towardLauncher:\phantomsection\label{towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
-\item[magAngleRep:\phantomsection\label{magAngleRep}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+\item[MD:towardLauncher:\phantomsection\label{MD:towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
+\item[MD:magAngleRep:\phantomsection\label{MD:magAngleRep}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
 
 \end{itemize}
 
@@ -355,6 +359,7 @@ two-dimensions (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and
 it can be used for things that are 2D other than just the motion.}
 \item[constAccelX:\phantomsection\label{constAccelX}]{\wss{The acceleration is constant in the $x$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
 \item[constAccelY:\phantomsection\label{constAccelY}]{\wss{The acceleration is constant in the $y$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
+\item[gravAccel:\phantomsection\label{gravAccel}]{The acceleration is due to gravity. (RefBy: ?.)}
 
 \end{itemize}
 
@@ -405,7 +410,7 @@ Source & \cite{}
 RefBy & \hyperref[TM:acceleration]{TM:acceleration},
 \hyperref[TM:velocity]{TM:velocity},
 \hyperref[TM:directionCosines]{TM:directionCosines},
-\hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},everything (TODO: fill in)
+\hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY},everything (TODO: not complete; almost every theory uses this context theory.)
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -503,7 +508,7 @@ Label & Integration
 \\ \midrule
 Source & \cite{}
 \\ \midrule
-RefBy & \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectVel]{GD:rectVel}, TODO: fill in
+RefBy & \hyperref[GD:rectVel]{GD:rectVel}, TODO: fill in
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -749,7 +754,7 @@ Description & \begin{symbDescription}
 Source & \cite[(pg. 8)]{hibbeler2004}
          
 \\ \midrule
-RefBy & \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:rectPos]{GD:rectPos}
+RefBy & \hyperref[GD:velVec]{GD:velVec}% and \hyperref[GD:rectPos]{GD:rectPos}
         
 \\ \bottomrule
 \end{tabular}
@@ -762,8 +767,10 @@ RefBy & \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:rectPos]{GD:rectPos}
 
 $$\symbf{a}\text{(}t\text{)}=\frac{\,d\symbf{v}\text{(}t\text{)}}{\,dt}$$
 
-\wss{At this point we assume the body only travels in a straight line along one
-dimension of the coordinate system (\hyperref[oneD]{A:oneD}):}
+\wss{At this point we change the assumption of 3D motion
+(\hyperref[threeD]{A:threeD}) to instead assume the body only travels in a
+straight line along one dimension of the coordinate system
+(\hyperref[oneD]{A:oneD}):}
 
 $${a}\text{(}t\text{)}=\frac{\,d{v}\text{(}t\text{)}}{\,dt}$$
 
@@ -815,7 +822,7 @@ theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
 
 \begin{itemize}
 \item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[TM:acceleration]{TM:acceleration})
-\item \hyperref[oneD]{A:oneD}
+\item \hyperref[oneD]{A:oneD} (overrides \hyperref[threeD]{A:threeD})
 \item \hyperref[constAccel]{A:constAccel}
 \item \hyperref[timeStartZero]{A:timeStartZero}
 \end{itemize}
@@ -973,7 +980,7 @@ Description & \begin{symbDescription}
 Source & --
          
 \\ \midrule
-RefBy & 
+RefBy & \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
@@ -1010,7 +1017,7 @@ vectors, Cartesian coodinate system, differentiation and integration
 \hyperref[CT:Integration]{CT:Integration}).}
 ~\\
 
-\noindent \textbf{Context Theories Used by GD:velVect}
+\noindent \textbf{Context Theories Used by GD:velVec}
 
 \begin{itemize}
 \item \hyperref[CT:realArith]{CT:realArith}
@@ -1020,7 +1027,7 @@ vectors, Cartesian coodinate system, differentiation and integration
 \item \hyperref[CT:Integration]{CT:Integration}
 \end{itemize}
 
-\noindent \textbf{Initial Theories Used by GD:velVect}
+\noindent \textbf{Initial Theories Used by GD:velVec}
 
 \begin{itemize}
 \item \hyperref[GD:rectVel]{GD:rectVel}
@@ -1083,7 +1090,7 @@ Description & \begin{symbDescription}
 Source & --
          
 \\ \midrule
-RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
+RefBy & \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle} 
         
 \\ \bottomrule
 \end{tabular}
@@ -1169,7 +1176,7 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item \wss{$\theta: \mathbb{R}$} is the angle between the vector and the positive $x$ axis 
+              \item \wss{$\theta: \mathbb{R}$} is the angle between the vector and the positive $x$ axis (\wss{$\theta$ means something more general here.  Should a different symbol be used?})
               \item \wss{$|\symbf{b}|: \mathbb{R}$} is the magnitude of the vector
               \item \wss{$b_x: \mathbb{R}$} is the $x$ component of the vector $\symbf{b}$
               \item \wss{$b_y: \mathbb{R}$} is the $y$ component of the vector $\symbf{b}$
@@ -1269,7 +1276,7 @@ $y$-direction is up \hyperref[yAxisGravity]{A:yAxisGravity}.}
 Source & --
          
 \\ \midrule
-RefBy & \wss{?}
+RefBy & \hyperref[DD:speedIX]{DD:speedIX}, \hyperref[DD:speedIY]{DD:speedIY}
         
 \\ \bottomrule
 \end{tabular}
@@ -1340,13 +1347,18 @@ Description & \begin{symbDescription}
 Notes & \wss{This equation is a relabelling of the $x$ component of
 \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep} --- ${v^{\text{i}}}$ is
 $|\symbf{b}|$, ${v_{\text{x}}}^{\text{i}}$ is $b_x$ and $\theta$ is $\theta$.}
-$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.  This equation inherits the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}: \hyperref[MD:cartSyst]{MD:cartSyst} and \hyperref[twoD]{A:twoD}.
+$θ$ is shown in \hyperref[Figure:Launch]{Fig:Launch}.  This equation uses the
+projectile coordinate system (\hyperref[PT:coordSyst]{PT:coordSyst}) and
+inherits the assumptions from
+\hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}:
+\hyperref[MD:cartSyst]{MD:cartSyst} and \hyperref[twoD]{A:twoD}.
         
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
+RefBy & \wss{\hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle},
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}}
         
 \\ \bottomrule
 \end{tabular}
@@ -1374,6 +1386,10 @@ RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
 \begin{itemize}
 \item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \end{itemize}
 
 \medskip
@@ -1414,7 +1430,8 @@ the assumptions from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep}:
 Source & --
          
 \\ \midrule
-RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
+RefBy & \wss{\hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle},
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}}
         
 \\ \bottomrule
 \end{tabular}
@@ -1441,6 +1458,10 @@ RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \begin{itemize}
 \item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
 \item \hyperref[twoD]{A:twoD} (inherited from \hyperref[GD:magAngleToCompRep]{GD:magAngleToCompRep})
+\item \hyperref[launchOrigin]{A:launchOrigin} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \end{itemize}
 
 \noindent
@@ -1478,27 +1499,27 @@ Description & \begin{symbDescription}
 \wss{Constraints} & 
 \begin{symbDescription}
 \item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[GD:velVec]{GD:velVec} and switches to the magnitude/angle
 representation for the components of the initial velocity vector
-(\hyperref[magAngleRep]{A:magAngleRep}).  That is,
+(\hyperref[MD:magAngleRep]{MD:magAngleRep}).  That is,
 \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
 for the initial velocity components. The magnitude of the initial velocity is
 called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
 required to satisfy the assumption that the launcher must be aimed toward the
-target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+target \hyperref[MD:towardLauncher]{MD:towardLauncher} for the coordinate system
 defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
 
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & ?
+RefBy & \hyperref[PT:posVecInitPos]{PT:posVecInitPos}
 
 \\ \bottomrule
 \end{tabular}
@@ -1535,7 +1556,8 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRep]{A:magAngleRep}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep}
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher}
 \end{itemize}
 
 \noindent
@@ -1561,7 +1583,7 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^2$} is the position \wss{vector} (${\text{m}}$)}
               \item{\wss{${{p_{\text{x}}}^{\text{i}}}: \mathbb{R}$} is the $x$-component of initial position (${\text{m}}$)}
               \item{\wss{${{p_{\text{y}}}^{\text{i}}}: \mathbb{R}$} is the $y$-component of initial position (${\text{m}}$)}
               \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
@@ -1575,27 +1597,27 @@ Description & \begin{symbDescription}
 \wss{Constraints} & 
 \begin{symbDescription}
 \item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[GD:posVec]{GD:posVec} and switches to the magnitude/angle
 representation for the components of the initial velocity vector
-(\hyperref[magAngleRep]{A:magAngleRep}).  That is,
+(\hyperref[MD:magAngleRep]{MD:magAngleRep}).  That is,
 \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:speedIY]{DD:speedIY} are used
 for the initial velocity components. The magnitude of the initial velocity is
 called $v_\text{launch}$.  The constraints on $v_\text{launch}$ and $\theta$ are
 required to satisfy the assumption that the launcher must be aimed toward the
-target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+target \hyperref[MD:towardLauncher]{MD:towardLauncher} for the coordinate system
 defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
 
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & ?
+RefBy & \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav}
 
 \\ \bottomrule
 \end{tabular}
@@ -1632,7 +1654,8 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRep]{A:magAngleRep}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep}
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher}
 \end{itemize}
 
 \noindent \begin{minipage}{\textwidth}
@@ -1655,7 +1678,7 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^2$} is the position \wss{vector} (${\text{m}}$)}
               \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
               \item{\wss{${{a_{\text{x}}}^{\text{c}}}: \mathbb{R}$} is the $x$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \item{\wss{${{a_{\text{y}}}^{\text{c}}}: \mathbb{R}$} is the $y$-component of constant acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
@@ -1667,9 +1690,9 @@ Description & \begin{symbDescription}
 \wss{Constraints} & 
 \begin{symbDescription}
 \item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
@@ -1678,14 +1701,14 @@ location of the launcher at the origin
 (\hyperref[A:launchOrigin]{A:launchOrigin}) to find the initial position in both
 coordinate directions is zero. The constraints on $v_\text{launch}$ and $\theta$
 are required to satisfy the assumption that the launcher must be aimed toward
-the target \hyperref[towardLauncher]{A:towardLauncher} for the coordinate system
+the target \hyperref[MD:towardLauncher]{MD:towardLauncher} for the coordinate system
 defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
 
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & ?
+RefBy & \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
 
 \\ \bottomrule
 \end{tabular}
@@ -1722,12 +1745,13 @@ $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
 \hyperref[launchOrigin]{A:launchOrigin} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) \item
 \hyperref[targetXAxis]{A:targetXAxis} (inherited from
-\hyperref[PT:coordSyst]{PT:coordSyst}) \item
-\hyperref[posXDirection]{A:posXDirection} (inherited from
-\hyperref[PT:coordSyst]{PT:coordSyst}) \item
-\hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
-\hyperref[PT:coordSyst]{PT:coordSyst}) \item
-\hyperref[magAngleRep]{A:magAngleRep} 
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[posXDirection]{A:posXDirection} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
 \end{itemize} 
 
 \noindent
@@ -1762,24 +1786,24 @@ Description & \begin{symbDescription}
 \wss{Constraints} & 
 \begin{symbDescription}
 \item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle} and uses the
-constant acceleration for projectile motion on a planet.  The $x$ component of
-the acceleration is zero and the $y$ component is $-g$.  The negative sign is
-used because gravity acts in the opposite direction to the positive $y$
-direction assumed for the coordinate system defined in
-\hyperref[PT:coordSyst]{PT:coordSyst}.
+constant acceleration for projectile motion on a planet
+(\hyperref[gravAccel]{A:gravAccel}).  The $x$ component of the acceleration is
+zero and the $y$ component is $-g$.  The negative sign is used because gravity
+acts in the opposite direction to the positive $y$ direction assumed for the
+coordinate system defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
 
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & ?
+RefBy & None
 
 \\ \bottomrule
 \end{tabular}
@@ -1814,7 +1838,9 @@ RefBy & ?
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
-\item \hyperref[magAngleRep]{A:magAngleRep}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
+\item \hyperref[gravAccel]{A:gravAccel}
 \end{itemize}
 
 \noindent \begin{minipage}{\textwidth}
@@ -1838,7 +1864,7 @@ Equation & \begin{displaymath}
            \end{displaymath}
 \\ \midrule
 Description & \begin{symbDescription}
-              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}$} is the position \wss{vector} (${\text{m}}$)}
+              \item{\wss{$\symbf{p}: \text{time} \rightarrow \mathbb{R}^2$} is the position \wss{vector} (${\text{m}}$)}
               \item{\wss{${{v}_{\text{launch}}}: \mathbb{R}$} is the initial speed ($\frac{\text{m}}{\text{s}}$)}
               \item{\wss{$g: \mathbb{R}$} is the gravitational acceleration ($\frac{\text{m}}{\text{s}^{2}}$)}
               \item{\wss{$t$: \text{time}} is the time (${\text{s}}$)}
@@ -1849,23 +1875,25 @@ Description & \begin{symbDescription}
 \wss{Constraints} & 
 \begin{symbDescription}
 \item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[towardLauncher]{A:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
 \hyperref[PT:posVecInitPos]{PT:posVecInitPos} and uses the constant acceleration
-for projectile motion on a planet.  The $x$ component of the acceleration is
-zero and the $y$ component is $-g$.  The negative sign is used because gravity
-acts in the opposite direction to the positive $y$ direction assumed for the
-coordinate system defined in \hyperref[PT:coordSyst]{PT:coordSyst}.
+for projectile motion on a planet (\hyperref[gravAccel]{A:gravAccel}).  The
+$x$ component of the acceleration is zero and the $y$ component is $-g$.  The
+negative sign is used because gravity acts in the opposite direction to the
+positive $y$ direction assumed for the coordinate system defined in
+\hyperref[PT:coordSyst]{PT:coordSyst}.
 
 \\ \midrule
 Source & --
          
 \\ \midrule
-RefBy & ?
+RefBy & \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime},
+\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
 
 \\ \bottomrule
 \end{tabular}
@@ -1908,7 +1936,9 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
-\item \hyperref[magAngleRep]{A:magAngleRep} 
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos})
+\item \hyperref[gravAccel]{A:gravAccel}
 \end{itemize}
 
 \subsubsection{\wss{Final Theories}} \label{Sec:IMs} This section transforms the
@@ -1970,7 +2000,7 @@ defined in \hyperref[Sec:AuxConstants]{Sec:Values of Auxiliary Constants} (
 Source & --
          
 \\ \midrule
-RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, \hyperref[outputValues]{FR:Output-Values}, and \hyperref[calcValues]{FR:Calculate-Values}
+RefBy & \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}
         
 \\ \bottomrule
 \end{tabular}
@@ -2031,8 +2061,12 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[gravAccelValue]{A:gravAccelValue}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+
+\item \hyperref[gravAccelValue]{A:gravAccelValue} (replaces
+\hyperref[gravAccel]{gravAccel} because a specific value for the gravitational
+acceleration has been selected.)
 
 \end{itemize}
 
@@ -2119,20 +2153,21 @@ Rearranging this gives us the required equation:
 \end{displaymath}
 ~\\
 
-\noindent \textbf{Context Theories Used by IM:calOfLandingDistDeriv}
+\noindent \textbf{Context Theories Used by IM:calOfLandingDist}
 
 \begin{itemize}
 \item \hyperref[CT:realArith]{CT:realArith}
 \item \hyperref[CT:trigonometry]{CT:trigonometry}
 \end{itemize}
 
-\noindent \textbf{Initial Theories Used by IM:calOfLandingDistDeriv}
+\noindent \textbf{Initial Theories Used by IM:calOfLandingDist}
 
 \begin{itemize}
 \item \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
+\item \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}
 \end{itemize}
 
-\noindent \textbf{Preconditions for IM:calOfLandingDistDeriv}
+\noindent \textbf{Preconditions for IM:calOfLandingDist}
 \begin{itemize}
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
 \item \hyperref[MD:cartSyst]{MD:cartSyst} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
@@ -2143,8 +2178,9 @@ Rearranging this gives us the required equation:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
-\item \hyperref[gravAccelValue]{A:gravAccelValue}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 
 \end{itemize}
 
@@ -2221,7 +2257,8 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PIM:calOfLandingDist]{IM:calOfLandingDist})
-\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 
 \end{itemize}
@@ -2309,7 +2346,8 @@ RefBy & \hyperref[outputValues]{FR:Output-Values} and \hyperref[calcValues]{FR:C
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
-\item \hyperref[magAngleRep]{A:magAngleRep} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 
 \end{itemize}
