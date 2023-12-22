@@ -359,7 +359,7 @@ two-dimensions (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and
 it can be used for things that are 2D other than just the motion.}
 \item[constAccelX:\phantomsection\label{constAccelX}]{\wss{The acceleration is constant in the $x$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
 \item[constAccelY:\phantomsection\label{constAccelY}]{\wss{The acceleration is constant in the $y$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
-\item[gravAccel:\phantomsection\label{gravAccel}]{The acceleration is due to gravity. (RefBy: ?.)}
+\item[gravAccel:\phantomsection\label{gravAccel}]{The acceleration is due to gravity. (RefBy: \hyperref{PT:velVecPlanetaryGrav}[PT:velVecPlanetaryGrav] and \hyperref{PT:posVecPlanetaryGrav}[PT:posVecPlanetaryGrav].)}
 
 \end{itemize}
 
@@ -2065,7 +2065,7 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (replaces
-\hyperref[gravAccel]{gravAccel} because a specific value for the gravitational
+\hyperref[gravAccel]{A:gravAccel} because a specific value for the gravitational
 acceleration has been selected.)
 
 \end{itemize}
@@ -2663,6 +2663,18 @@ $ε$ & hit tolerance & $2.0\%$ & --
 $π$ & ratio of circumference to diameter for any circle & $3.14159265$ & --
 \label{Table:TAuxConsts}
 \end{longtblr}
+
+\wss{The relationship between the theories, assumptions and modelling decisions
+is summarized in Figure~\ref{Fig:RelateTM2A2MD}.}
+    
+\begin{figure} \label{Fig:RelateTM2A2MD}
+\caption{Relationship between theories, assumptions and modelling decisions for
+Projectile.}
+\begin{center}
+\includegraphics[scale=0.6]{ProjectileTheoriesAssumpts.drawio.pdf}        
+\end{center}
+\end{figure}
+
 \section{References}
 \label{Sec:References}
 \begin{filecontents*}{bibfile.bib}
