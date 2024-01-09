@@ -66,7 +66,15 @@ ${\text{s}}$ & time & second
 \end{longtblr}
 \subsection{Table of Symbols}
 \label{Sec:ToS}
-The symbols used in this document are summarized in the \hyperref[Table:ToS]{Table of Symbols} along with their units. Throughout the document, symbols in bold will represent vectors, and scalars otherwise. The symbols are listed in alphabetical order. For vector quantities, the units shown are for each component of the vector.
+The symbols used in this document are summarized in the
+\hyperref[Table:ToS]{Table of Symbols} along with their units. Throughout the
+document, symbols in bold will represent vectors, and scalars otherwise. The
+symbols are listed in alphabetical order. For vector quantities, the units shown
+are for each component of the vector.  \wss{To avoid confusion and to allow for
+reuse of symbols with slightly different types (like 3D and 2D vectors), a
+separate table of symbols can be generated for each set of theories: background
+theories, helper theories, generic theories, projectile theories and final
+theories.}
 
 \begin{longtblr}
 [caption={Table of Symbols}]
@@ -198,10 +206,16 @@ This document will be used as a starting point for subsequent development phases
 \label{Sec:ReqsScope}
 The scope of the requirements includes the analysis of a two-dimensional (2D) projectile motion problem with constant acceleration.
 
-\wss{We are only interested in the position of the projectile, not
-its orientation \hyperref[SD:noOrient]{SD:noOrient}.} %this is how we leave theories out, like theories of rotation
+\wss{We are only interested in the position of the projectile, not its
+orientation \hyperref[SD:noOrient]{SD:noOrient}.} %this is how we leave theories
+out, like theories of rotation
 
-\wss{We assume that forces are not relevant for the model so that we only need kinematic equations \hyperref[SD:kinOnly]{SD:kinOnly}.}
+\wss{We assume that forces are not relevant for the model so that we only need
+kinematic equations \hyperref[SD:kinOnly]{SD:kinOnly}.}
+
+\wss{Relative to ballistics calculations, the scope of Projectile covers
+relatively short distances and small magnitude initial velocities
+\hyperref[SD:shrtDstSmlMag].} 
 
 \subsection{Characteristics of Intended Reader}
 \label{Sec:ReaderChars}
@@ -244,6 +258,15 @@ The interaction between the product and the user is through an application progr
 \item{Calculate the required outputs.}
 \end{itemize}
 \end{itemize}
+
+\wss{Projectile will be used to explore different scenarios for educational and
+learning purposes. It will not be used to perform engineering calculations,
+mission-critical or safety-critical applications.} \wss{This additional context
+information is needed to determine how much effort should be devoted to the
+rationale section.  If the application is safety-critical, the bar is higher.
+This is currently less structured, but analogous to, the idea to the Automotive
+Safety Integrity Levels (ASILs) that McSCert uses in their automotive hazard
+analyses.}
 
 \subsection{User Characteristics}
 \label{Sec:UserChars}
@@ -327,7 +350,6 @@ used.}
 \item[launchOrigin:\phantomsection\label{launchOrigin}]{The launcher is coincident with the origin. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[targetXAxis:\phantomsection\label{targetXAxis}]{The target lies on the $x$-axis (from \hyperref[neglectCurv]{A:neglectCurv}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[posXDirection:\phantomsection\label{posXDirection}]{The positive $x$-direction is from the launcher to the target. (RefBy: \hyperref[IM:offsetIM]{IM:offsetIM}, \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
-\item[freeFlight:\phantomsection\label{freeFlight}]{The flight is free; there are no collisions during the trajectory of the projectile. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
 \item[timeStartZero:\phantomsection\label{timeStartZero}]{Time starts at zero. (RefBy: \hyperref[GD:velVec]{GD:velVec}, \hyperref[GD:rectVel]{GD:rectVel}, \hyperref[GD:rectPos]{GD:rectPos}, \hyperref[GD:posVec]{GD:posVec}, and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
 \item[MD:towardLauncher:\phantomsection\label{MD:towardLauncher}]\wss{The launch velocity is positive. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
 \item[MD:magAngleRep:\phantomsection\label{MD:magAngleRep}]\wss{Use the magnitude and angle representation for the initial velocity vector. (RefBy: \hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle})}
@@ -347,7 +369,7 @@ all three dimensions.} (RefBy: \hyperref[TM:acceleration] {TM:acceleration},
 
 \begin{itemize}
 \item[oneD:\phantomsection\label{oneD}]{The motion of the particle is one dimensional. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
-\item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[freeFlight]{A:freeFlight}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
+\item[constAccel:\phantomsection\label{constAccel}]{The acceleration is constant (from \hyperref[accelXZero]{A:accelXZero}, \hyperref[accelYGravity]{A:accelYGravity}, \hyperref[neglectDrag]{A:neglectDrag}, and \hyperref[noObstruct]{A:noObstruct}). (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}
 \end{itemize}
 
 \subsubsection{\wss{Generic Theory Assumptions (GD:velVec, GD:posVec)}}
@@ -359,22 +381,36 @@ two-dimensions (2D). (RefBy: \hyperref[GD:velVec]{GD:velVec} and
 it can be used for things that are 2D other than just the motion.}
 \item[constAccelX:\phantomsection\label{constAccelX}]{\wss{The acceleration is constant in the $x$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
 \item[constAccelY:\phantomsection\label{constAccelY}]{\wss{The acceleration is constant in the $y$ direction. (RefBy: \hyperref[GD:velVec]{GD:velVec} and \hyperref[GD:posVec]{GD:posVec}.)}}
-\item[gravAccel:\phantomsection\label{gravAccel}]{The acceleration is due to gravity. (RefBy: \hyperref{PT:velVecPlanetaryGrav}[PT:velVecPlanetaryGrav] and \hyperref{PT:posVecPlanetaryGrav}[PT:posVecPlanetaryGrav].)}
+\item[gravAccel:\phantomsection\label{gravAccel}]{\wss{The acceleration is due to gravity. (RefBy: \hyperref[PT:velVecPlanetaryGrav]{PT:velVecPlanetaryGrav} and \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}.)}}
 
 \end{itemize}
 
 \subsubsection{\wss{Projectile Specific Theory Assumptions}}
 
 \begin{itemize}
-\item[accelXZero:\phantomsection\label{accelXZero}]{The acceleration in the $x$-direction is zero. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[constAccel]{A:constAccel}.)}
-\item[accelYGravity:\phantomsection\label{accelYGravity}]{The acceleration in the $y$-direction is the acceleration due to gravity (from \hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy: \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and \hyperref[constAccel]{A:constAccel}).}
-\item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due to gravity is assumed to have the value provided in the section for \hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy: \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and \hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[accelXZero:\phantomsection\label{accelXZero}]{The constant acceleration in
+the $x$-direction is zero. (RefBy:
+\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and
+\hyperref[constAccel]{A:constAccel}.)}
+\item[accelYGravity:\phantomsection\label{accelYGravity}]{The constant
+acceleration in the $y$-direction is the acceleration due to gravity (from
+\hyperref[yAxisGravity]{A:yAxisGravity}). (RefBy:
+\hyperref[IM:calOfLandingTime]{IM:calOfLandingTime} and
+\hyperref[constAccel]{A:constAccel}).}
+\item[gravAccelValue:\phantomsection\label{gravAccelValue}]{The acceleration due
+to gravity is assumed to have the value provided in the section for
+\hyperref[Sec:AuxConstants]{Values of Auxiliary Constants}. (RefBy:
+\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and
+\hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}.)}
+\item[noObstruct:\phantomsection\label{noObstruct}]{No obstructions impede the path of the projectile.  This means there is nothing rising from the ground that will block the flight and no other projectiles collide with the launched projectile. (RefBy: \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, etc.)}
+\item[flatPlanet:\phantomsection\label{flatPlanet}]{No surface of the planet is assummed flat; that is, there is assumed to be no curvature. (RefBy: \hyperref[PT:coordSyst]{PT:coordSyst}, \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}, etc.)}
+
 \end{itemize}
 
 \subsubsection{\wss{Rationale Assumptions}}
 
 \begin{itemize}
-\item[pointMass:\phantomsection\label{pointMass}]{The size and shape of the projectile are negligible, so that it can be modelled as a point mass. (RefBy: \hyperref[GD:rectVel]{GD:rectVel} and \hyperref[GD:rectPos]{GD:rectPos}.)}
+\item[centreMass:\phantomsection\label{centreMass}]{We only care about the motion of the centre of mass of the projectile. (RefBy: Section~\ref{Sec:SDRationale})}
 \item[neglectCurv:\phantomsection\label{neglectCurv}]{The distance is small enough that the curvature of the celestial body can be neglected. (RefBy: \hyperref[targetXAxis]{A:targetXAxis} and \hyperref[MD:cartSyst]{MD:cartSyst}.)}
 \item[neglectDrag:\phantomsection\label{neglectDrag}]{Air drag is neglected. (RefBy: \hyperref[constAccel]{A:constAccel}.)}
 \item[negPlanetRot:\phantomsection\label{negEarthRot}]{\wss{The rotation of the
@@ -745,10 +781,11 @@ Description & \begin{symbDescription}
               \end{symbDescription}
 
 \\ \midrule
-\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\wss{Constraints} & \wss{$t \geq 0$}
+\wss{\hyperref[timeStartZero]{A:timeStartZero}} 
 
 \\ \midrule
-\wss{Notes} & \wss{See detailed derivation below}
+\wss{Notes} & \wss{See detailed derivation of equation and constraint below}
 
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
@@ -800,6 +837,13 @@ Cartesian coodinate system, and differentiation
 \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 \hyperref[CT:Differentiation]{CT:Differentiation}).  In addition, the context
 theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
+
+\paragraph{Detailed derivation of constraints for GD:rectVel:}
+
+\wss{The data constraint that $t \geq 0$ comes from the assumption that times
+starts at zero (\hyperref[timeStartZero]{A:timeStartZero}); that is, the initial
+velocity applies at $t=0$.  Therefore, the equation is nonsensical for
+negative time.}
 ~\\
 
 \noindent \textbf{Context Theories Used by GD:rectVel}
@@ -857,7 +901,7 @@ Description & \begin{symbDescription}
 \wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
 
 \\ \midrule
-\wss{Notes} & \wss{See detailed derivation below}
+\wss{Notes} & \wss{See detailed derivation of equation and constraint below}
 
 \\ \midrule
 Source & \cite[(pg. 8)]{hibbeler2004}
@@ -915,6 +959,13 @@ Cartesian coodinate system, and differentiation
 \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst},
 \hyperref[CT:Differentiation]{CT:Differentiation}).  In addition, the context
 theory of integration is used (\hyperref[CT:Integration]{CT:Integration}).}
+
+\paragraph{Detailed derivation of constraints for GD:rectPos:}
+
+\wss{The data constraint that $t \geq 0$ comes from the assumption that times
+starts at zero (\hyperref[timeStartZero]{A:timeStartZero}); that is, the initial
+velocity applies at $t=0$.  Therefore, the equation is nonsensical for
+negative time.}
 ~\\
 
 \noindent \textbf{Context Theories Used by GD:rectPos}
@@ -974,7 +1025,8 @@ Description & \begin{symbDescription}
               \end{symbDescription}
 \\ \midrule
 
-\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\wss{Constraints} & \wss{$t \geq 0$} \wss{Inherited from
+\hyperref[GD:rectVel]{GD:rectVel}}
 \\ \midrule
 
 Source & --
@@ -1084,7 +1136,8 @@ Description & \begin{symbDescription}
               \end{symbDescription}
 
               \\ \midrule
-\wss{Constraints} & \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\wss{Constraints} & \wss{$t \geq 0$} \wss{Inherited from
+\hyperref[GD:rectPos]{GD:rectPos}}
 
 \\ \midrule
 Source & --
@@ -1265,12 +1318,15 @@ Description & \wss{none}
 \\ \midrule Notes & \wss{The coordinate system is shown in
 \hyperref[Figure:Launch]{Fig:Launch}.  As the figure shows, the origin of the 2D
 (\hyperref[twoD]{A:twoD}) Cartesian coordinate system
-(\hyperref[MD:cartSyst]{MD:cartSyst}, \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst})
-coincides with the location of the Launcher
-(\hyperref[launchOrigin]{A:launchOrigin}). The Target lies on the $x$-axis
-(\hyperref[targetXAxis]{A:targetXAxis}) and the positive $x$-direction is from the
-launcher to the target (\hyperref[posXDirection]{A:posXDirection}).  The positive
-$y$-direction is up \hyperref[yAxisGravity]{A:yAxisGravity}.}
+(\hyperref[MD:cartSyst]{MD:cartSyst},
+\hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}) coincides with the location of
+the Launcher (\hyperref[launchOrigin]{A:launchOrigin}). The Target lies on the
+$x$-axis (\hyperref[targetXAxis]{A:targetXAxis}) and the positive $x$-direction
+is from the launcher to the target (\hyperref[posXDirection]{A:posXDirection}).
+The positive $y$-direction is up \hyperref[yAxisGravity]{A:yAxisGravity}.}  The
+planet is flat (\hyperref[flatPlanet]{A:flatPlanet}); that is, the curvature of
+the planet is ignored.  Moreover, there are no obstructions blocking the path of
+the projectile (\hyperref[noObstruct]{A:noObstruct}).
         
 \\ \midrule
 Source & --
@@ -1302,6 +1358,8 @@ None
 \item \hyperref[targetXAxis]{A:targetXAxis}
 \item \hyperref[posXDirection]{A:posXDirection}
 \item \hyperref[yAxisGravity]{A:yAxisGravity}
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \end{itemize}
 
 \medskip
@@ -1390,6 +1448,8 @@ RefBy & \wss{\hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle},
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[noObstruct]{A:noObstruct} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \end{itemize}
 
 \medskip
@@ -1462,6 +1522,8 @@ RefBy & \wss{\hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle},
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[noObstruct]{A:noObstruct} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\hyperref[flatPlanet]{A:flatPlanet}
 \end{itemize}
 
 \noindent
@@ -1498,10 +1560,9 @@ Description & \begin{symbDescription}
 \\ \midrule
 \wss{Constraints} & 
 \begin{symbDescription}
-\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$t \geq 0$} \wss{Inherited from \hyperref[GD:velVec]{GD:velVec}}
 \item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
-\item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+\item \wss{$0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
@@ -1556,6 +1617,8 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[noObstruct]{A:noObstruct} (inherited from \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:SpeedIY]{DD:SpeedIY})
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep}
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher}
 \end{itemize}
@@ -1596,7 +1659,7 @@ Description & \begin{symbDescription}
 \\ \midrule
 \wss{Constraints} & 
 \begin{symbDescription}
-\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
+\item \wss{$t \geq 0$} \wss{Inherited from \hyperref[GD:posVec]{GD:posVec}}
 \item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
 \item \wss{$
 0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
@@ -1654,6 +1717,8 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[noObstruct]{A:noObstruct} (inherited from \hyperref[DD:speedIX]{DD:speedIX} and \hyperref[DD:SpeedIY]{DD:SpeedIY})
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep}
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher}
 \end{itemize}
@@ -1689,10 +1754,10 @@ Description & \begin{symbDescription}
 \\ \midrule
 \wss{Constraints} & 
 \begin{symbDescription}
-\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+\item \wss{$t \geq 0$} \wss{Inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}}
+\item \wss{$v_\text{launch} > 0$} \wss{Inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{Inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
@@ -1735,21 +1800,29 @@ RefBy & \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}
 \noindent \textbf{Preconditions for PT:posVecInitPos} 
 \begin{itemize} 
 \item \hyperref[timeStartZero]{A:timeStartZero} (inherited from
-\hyperref[GD:velVec]{GD:velVec}) \item \hyperref[MD:cartSyst]{MD:cartSyst}
-(inherited from \hyperref[GD:velVec]{GD:velVec}) \item \hyperref[twoD]{A:twoD}
-(inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+\hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[MD:cartSyst]{MD:cartSyst}
+(inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item \hyperref[twoD]{A:twoD}
+(inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item
 \hyperref[constAccelX]{A:constAccelX} (\hyperref[constAccel]{A:constAccel} in
-$x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+$x$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item
 \hyperref[constAccelY]{A:constAccelY} (\hyperref[constAccel]{A:constAccel} in
-$y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) \item
+$y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec}) 
+\item
 \hyperref[launchOrigin]{A:launchOrigin} (inherited from
-\hyperref[PT:coordSyst]{PT:coordSyst}) \item
+\hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item
 \hyperref[targetXAxis]{A:targetXAxis} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[noObstruct]{A:noObstruct} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
 \end{itemize} 
@@ -1785,10 +1858,12 @@ Description & \begin{symbDescription}
 \\ \midrule
 \wss{Constraints} & 
 \begin{symbDescription}
-\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
-\item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+\item \wss{$t \geq 0$} \wss{Inherited from
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}}
+\item \wss{$v_\text{launch} > 0$} \wss{Inherited from
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}}
+\item \wss{$ 0 < \theta < \frac{\pi}{2}$} \wss{Inherited from
+\hyperref[PT:velVecInitMagAndAngle]{PT:velVecInitMagAndAngle}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
@@ -1838,6 +1913,8 @@ RefBy & None
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:coordSyst]{PT:coordSyst})
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitMagAndAngle]{PT:posVecInitMagAndAngle})
 \item \hyperref[gravAccel]{A:gravAccel}
@@ -1874,10 +1951,10 @@ Description & \begin{symbDescription}
 \\ \midrule
 \wss{Constraints} & 
 \begin{symbDescription}
-\item \wss{$t \geq 0$} \wss{\hyperref[timeStartZero]{A:timeStartZero}}
-\item \wss{$v_\text{launch} > 0$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+\item \wss{$t \geq 0$} \wss{Inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos}}
+\item \wss{$v_\text{launch} > 0$} \wss{Inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos}}
 \item \wss{$
-0 < \theta < \frac{\pi}{2}$} \wss{\hyperref[MD:towardLauncher]{MD:towardLauncher}}
+0 < \theta < \frac{\pi}{2}$} \wss{Inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos}}
 \end{symbDescription}
 
 \\ \midrule \wss{Notes} & This theory starts with
@@ -1936,6 +2013,8 @@ in $y$ direction) (inherited from \hyperref[GD:velVec]{GD:velVec})
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from
 \hyperref[PT:coordSyst]{PT:coordSyst}) 
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecInitPos]{PT:posVecInitPos})
 \item \hyperref[gravAccel]{A:gravAccel}
@@ -2061,6 +2140,8 @@ Solving for ${t_{\text{flight}}}$ gives us:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 
@@ -2110,7 +2191,7 @@ Description & \begin{symbDescription}
               \end{symbDescription}
 \\ \midrule
 Notes & \wss{The input constraints are inherited from
-\hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav}. The output constraint
+\hyperref[IM:calOfLandingTime]{IM:calOfLandingTime}. The output constraint
 follows from the rules for multiplication and division of positive values, since
 $v_\text{launch} > 0$, $g>0$, $\sin {\theta} > 0$ for $0 < \theta <
 \frac{\pi}{2}$ and $\cos {\theta} > 0$ for $0 < \theta < \frac{\pi}{2}$ (\hyperref[CT:realArith]{CT:realArith},
@@ -2178,6 +2259,8 @@ Rearranging this gives us the required equation:
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[PT:posVecPlanetaryGrav]{PT:posVecPlanetaryGrav})
@@ -2208,7 +2291,9 @@ Input Constraints & \begin{displaymath}
                     {p_{\text{target}}}\gt{}0
                     \end{displaymath}
 \\ \midrule
-Output Constraints & \wss{None}
+Output Constraints & \wss{\begin{displaymath}
+        {d_{\text{offset}}}\gt{}-{p_{\text{target}}}
+        \end{displaymath}}
 \\ \midrule
 Equation & \begin{displaymath}
            {d_{\text{offset}}}={p_{\text{land}}}-{p_{\text{target}}}
@@ -2222,7 +2307,9 @@ Description & \begin{symbDescription}
 \\ \midrule
 Notes & ${p_{\text{land}}}$ is from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist}.
         
-        The constraints ${p_{\text{land}}}\gt{}0$ comes from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and the constraint ${p_{\text{target}}}\gt{}0$ comes from \hyperref[posXDirection]{A:posXDirection}.
+        The constraints ${p_{\text{land}}}\gt{}0$ comes from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist} and the constraint ${p_{\text{target}}}\gt{}0$ comes from \hyperref[posXDirection]{A:posXDirection}. 
+
+        \wss{The constraint ${d_{\text{offset}}}\gt{}-{p_{\text{target}}}$ is from the fact that there is a lower bound of zero on ${p_{\text{land}}}$.}
         
 \\ \midrule
 Source & --
@@ -2233,6 +2320,7 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \\ \bottomrule
 \end{tabular}
 \end{minipage}
+~\\
 
 \noindent \textbf{Context Theories Used by IM:offsetIM}
 
@@ -2257,6 +2345,8 @@ RefBy & \hyperref[IM:messageIM]{IM:messageIM}, \hyperref[outputValues]{FR:Output
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[PIM:calOfLandingDist]{IM:calOfLandingDist})
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})
@@ -2306,9 +2396,9 @@ Description & \begin{symbDescription}
 \\ \midrule
 Notes & ${d_{\text{offset}}}$ is from \hyperref[IM:offsetIM]{IM:offsetIM}.
         
-        The constraint ${p_{\text{target}}}\gt{}0$ is from \wss{\hyperref[IM:offsetIM]{IM:offsetIM}}.
-        
-        \wss{The constraint ${d_{\text{offset}}}\gt{}-{p_{\text{target}}}$ is from the fact that there is a lower bound of zero on ${p_{\text{land}}}$ from \hyperref[IM:offsetIM]{IM:offsetIM}}.
+        The constraints ${p_{\text{target}}}\gt{}0$, \wss{and
+        ${d_{\text{offset}}}\gt{}-{p_{\text{target}}}$}, are from
+        \wss{\hyperref[IM:offsetIM]{IM:offsetIM}}.
         
         $ε$ is defined in \hyperref[Sec:AuxConstants]{Sec:Values of Auxiliary Constants}.
         
@@ -2346,10 +2436,62 @@ RefBy & \hyperref[outputValues]{FR:Output-Values} and \hyperref[calcValues]{FR:C
 \item \hyperref[targetXAxis]{A:targetXAxis} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[posXDirection]{A:posXDirection} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[yAxisGravity]{A:yAxisGravity} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
+\item \hyperref[noObstruct]{A:noObstruct}
+\item \hyperref[flatPlanet]{A:flatPlanet}
 \item \hyperref[MD:magAngleRep]{MD:magAngleRep} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[MD:towardLauncher]{MD:towardLauncher} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 \item \hyperref[gravAccelValue]{A:gravAccelValue} (inherited from \hyperref[IM:offsetIM]{IM:offsetIM})
 
+\end{itemize}
+
+\subsubsection{\wss{Rationale Theories}} \label{Sec:RationaleTheories}
+
+The theories in this section are not part of the final theories.  Their purpose
+is to express the theories that are used to justify and support that rationale
+for the assumptions.
+
+\noindent
+\begin{minipage}{\textwidth}
+\begin{tabular}{>{\raggedright}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.82\textwidth}}
+\toprule \textbf{Refname} & \textbf{RT:lngDstErr}
+\phantomsection 
+\label{RT:lngDstErr}
+\\ \midrule
+Label & \wss{Error introduced by assumming a flat planet instead of accounting for curvature.}        
+\\ \midrule
+Units & $\text{m}$
+        
+\\ \midrule
+Equation & \begin{displaymath}
+           \Delta = \sqrt{a^2 \left( 1 - \cos \left[ \frac{L}{a} \right] \right)^2 + 
+           \left( L - a \sin \left[ \frac{L}{a} \right] \right)^2}
+           \end{displaymath}
+\\ \midrule
+Description & \begin{symbDescription}
+              \item{\wss{$\Delta: \mathbb{R}$} is the distance between the projectile's location via a flat planet model versus a curved planet model. (${\text{m}}$)}
+              \item{\wss{$a: \mathbb{R}$} is semimajor axis length for an oblate spheroid for the equipotential gravitational surface of a planet. (${\text{m}}$)}
+              \item {\wss{$L: \mathbb{R}$} is distance covered by the flight. (${\text{m}}$)}
+              \end{symbDescription}
+\\ \midrule
+
+\wss{Constraints} & \wss{None}
+\\ \midrule
+
+Source & \wss{\cite{Crouse2014}}
+         
+\\ \midrule
+RefBy & \hyperref[Sec:FTRationale]{Rationale section for final theories}
+\\ \bottomrule
+\end{tabular}
+\end{minipage}
+~\\
+
+\noindent \textbf{Context Theories Used by RT:lngDstErr}
+
+\begin{itemize}
+\item \hyperref[CT:realArith]{CT:realArith}
+\item \hyperref[CT:CartCoordSyst]{CT:CartCoordSyst}
+\item \hyperref[CT:vectors]{CT:vectors}
 \end{itemize}
 
 \subsubsection{Data Constraints}
@@ -2361,13 +2503,15 @@ The \hyperref[Table:InDataConstraints]{Data Constraints Table} shows the data co
 {colspec={l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
 \textbf{Var} & \textbf{Physical Constraints} & \textbf{Typical Value} & \textbf{Uncert.}
 \\
-${p_{\text{target}}}$ & ${p_{\text{target}}}\gt{}0$ & $1000$ ${\text{m}}$ & 10$\%$
+${p_{\text{target}}}$ & ${p_{\text{target}}}\gt{}0$ \wss{(\hyperref[IM:messageIM]{IM:messageIM})} & $1000$ ${\text{m}}$ & 10$\%$
 \\
-${v_{\text{launch}}}$ & ${v_{\text{launch}}}\gt{}0$ & $100$ $\frac{\text{m}}{\text{s}}$ & 10$\%$
+${v_{\text{launch}}}$ & ${v_{\text{launch}}}\gt{}0$ \wss{(\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})} & $100$ $\frac{\text{m}}{\text{s}}$ & 10$\%$
 \\
-$θ$ & $0\lt{}θ\lt{}\frac{π}{2}$ & $\frac{π}{4}$ ${\text{rad}}$ & 10$\%$
+$θ$ & $0\lt{}θ\lt{}\frac{π}{2}$ \wss{(\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})} & $\frac{π}{4}$ ${\text{rad}}$ & 10$\%$
 \label{Table:InDataConstraints}
+
 \end{longtblr}
+
 \subsubsection{Properties of a Correct Solution}
 \label{Sec:CorSolProps}
 The \hyperref[Table:OutDataConstraints]{Data Constraints Table} shows the data constraints on the output variables. The column for physical constraints gives the physical limitations on the range of values that can be taken by the variable.
@@ -2377,11 +2521,11 @@ The \hyperref[Table:OutDataConstraints]{Data Constraints Table} shows the data c
 {colspec={l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
 \textbf{Var} & \textbf{Physical Constraints}
 \\
-${p_{\text{land}}}$ & ${p_{\text{land}}}\gt{}0$
+${p_{\text{land}}}$ & ${p_{\text{land}}}\gt{}0$ \wss{(\hyperref[IM:calOfLandingDist]{IM:calOfLandingDist})}
 \\
-${d_{\text{offset}}}$ & ${d_{\text{offset}}}\gt{}-{p_{\text{target}}}$
+${d_{\text{offset}}}$ & ${d_{\text{offset}}}\gt{}-{p_{\text{target}}}$ \wss{(\hyperref[IM:offsetIM]{IM:offsetIM})}
 \\
-${t_{\text{flight}}}$ & ${t_{\text{flight}}}\gt{}0$
+${t_{\text{flight}}}$ & ${t_{\text{flight}}}\gt{}0$ \wss{(\hyperref[IM:calOfLandingTime]{IM:calOfLandingTime})}
 \label{Table:OutDataConstraints}
 \end{longtblr}
 \section{Requirements}
@@ -2422,41 +2566,116 @@ This section provides the non-functional requirements, the qualities that the so
 \item[Maintainable:\phantomsection\label{maintainable}]{The traceability between requirements, assumptions, theoretical models, general definitions, data definitions, instance models, likely changes, unlikely changes, and modules is completely recorded in traceability matrices in the SRS and module guide.}
 \item[Portable:\phantomsection\label{portable}]{The code is able to be run in different environments.}
 \end{itemize}
-\subsection{\wss{Rationale}}
+
+\subsection{\wss{Rationale}} \label{Sec:Rationale}
 \wss{Capture the rationale for the scope assumptions and final theory
 assumptions.  The rationale could vary between problems.  For instance, for
 projectile motion the rationale could be that it is being used for teaching
 purposes.  If the theories are used to solve an actual science or engineering
 problem, the rationale would need more justification.}
-\wss{Neglecting rotation could be justified by assuming a point mass? \hyperref[pointMass]{A:pointMass})}. \wss{Justify the scope decisions.  No need to justify modelling decisions.}
+\wss{Justify the scope decisions.  No need to justify modelling decisions.}
 \wss{Should requirements be added related to guaranteeing assumptions and
 constraints?  (As is done after a hazard analysis.)  Requirements could be added
 to check the input constraints, like $x > 0$. Requirements could be added to
-check neglecting curvature.  Would need the radius of the planet, or are we
-assuming it's Earth?}
+check neglecting curvature.}
 
-\subsubsection{\wss{Rationale for Scope Decisions}}
+\subsubsection{\wss{Rationale for Scope Decisions}} \label{Sec:SDRationale}
 
 \wss{The rationale for the scope decisions.  This may require introducing
-assumptions.}
+new assumptions.}
 
-\subsubsection{\wss{Rationale for Modelling Decisions}}
+\begin{itemize}
+\item \hyperref[SD:noOrient]{SD:noOrient} \wss{Since the software is in the
+context of education and exploration (Section~\ref{Sec:SysContext}), introducing
+rotational motion would make the problem too complex. To keep things simple we
+are only interested in the coordinates of the centre of mass through the
+flight (\hyperref[centreMass]{A:centreMass}).}
+\item \hyperref[SD:kinOnly]{SD:kinOnly} \wss{Since the software is in the
+context of education and exploration (Section~\ref{Sec:SysContext}), introducing
+forces makes the problem too complex. This means we are neglecting the force of air drag (\hyperref[neglectDrag]{A:neglectDrag})} 
+\end{itemize}
 
-\wss{The rationale for the modelling decisions. For instance, a Cartesian
-coordinate system is used because the interest is in rectilinear motion.}
+\subsubsection{\wss{Rationale for Modelling Decisions}} \label{Sec:MDRationale}
 
-\subsubsection{\wss{Rationale for Assumptions}}
+\wss{The rationale for the modelling decisions.}
 
-\wss{The rationale for the assumptions.}
+\begin{itemize}
+\item \hyperref[MD:cartSyst]{MD:cartSyst} \wss{A Cartesian coordinate system is
+used because the theories focus on rectilinear motion.  If the curvature of the
+planet is considered, then a spherical coordinate system would be more natural.}
+\item \hyperref[yAxisGravity]{yAxisGravity} \wss{The standard convention is used of labelling the vertical direction $y$ and making up positive.}
+\item \hyperref[launchOrigin]{launchOrigin} \wss{Placing the launcher at the origin simplifies the equations because the initial coordinates for the position are zero.}
+\item \hyperref[targetXAxis]{targetXAxis} \wss{Placing the target on the $x$ axis makes the calculations easier because the $y$ coordinate for the target is zero.}
+\item \hyperref[posXDirection]{posXDirection} \wss{The standard convention is used of making the horizontal direction to the right positive.}
+\item \hyperref[timeStartZero]{timeStartZero} \wss{The equations are simplified if the initial time is assumed to be zero.}
+\item \hyperref[MD:towardLauncher]{MD:towardLauncher} \wss{The equations are simplified if the cases that would never hit the target are eliminated.}
+\item \hyperref[MD:magAngleRep]{MD:magAngleRep} \wss{This is a standard representation for projectile problems.}
+\end{itemize}
+
+\subsubsection{\wss{Rationale for Final Theory Assumptions}} \label{Sec:FTRationale}
+
+\wss{The rationale for the final theory preconditions.  The relevant assumptions needed for the final theories will have propagated up from all intermediate theories that are used for the final theory.}
+
+\wss{From \hyperref[IM:messageIM]{IM:messageIM}, removing modelling decisions:}
+
+\begin{itemize}
+\item \hyperref[twoD]{A:twoD} \wss{We can consider the problem as two dimensional because there are no forces acting on the projectile to change its course. We also need to neglect the rotation of the planet (Coriolis effect) (\hyperref[negPlanetRot]{A:negPlanetRot}}.
+\item \hyperref[accelXZero]{A:accelXZero} \wss{The projectile motion problem is
+on a planet, like Earth.  There is nothing else as massive as the planet to
+create a gravitational force of attraction on the projectile.  Therefore, the
+only relevant gravitational force is the one straight down; there is no
+horizonal gravitational force.}
+\item \hyperref[accelYGravity]{A:accelYGravity} \wss{The constant acceleration
+in the $y$ direction is the attraction from the massive planet to the
+projectile. The gravitational attraction depends on Newton's law of
+gravitational attraction (not shown in this document).  The attraction varies
+with distance, given that the initial velocities are relatively small, the
+projectile will not get very high and the acceleration due to gravity will only
+have a negligible change over the projectile's flight.}
+\item \hyperref[gravAccelValue]{A:gravAccelValue} \wss{The usual value of acceleration on Earth at sea level is assummed.}
+\item \hyperref[noObstruct]{A:noObstruct} \wss{If there are obstructions then there is no reason to solve the projectile motion problem.}
+\item \hyperref[flatPlanet]{A:flatPlanet} \wss{The curvature of the planet is large enough that we can assume the planet is flat.  This is only possible in the scope of problems with velocities and distances that are relatively small compared to ballistics problems (Section~\ref{Sec:SysContext}). The error can be calculated using \hyperref[RT:lngDstErr]{RT:lngDstErr}.  For the Earth $a = 6 378 137.0 \text{m}$ \cite{Crouse2014}.  For the typical values $L = 1019.4 \text{m}$.  With these numbers the error $\Delta = 0.8$ m.  The relative error is 0.8/1019.4 or 0.008 \%.}
+\end{itemize}
+
+\subsubsection{\wss{Rationale for Typical Values}}
+
+\wss{The typical values for the inputs in Table~\ref{Table:InDataConstraints}
+are based on the scope of short flight distance and relatively small initial
+magnitude of velocity as compared to ballistics problems. The initial velocity
+($v_\text{launch}$) of 100 $\frac{\text{m}}{\text{s}}$ converts to
+100/1000*60*60 = 360 $\frac{\text{km}}{\text{hr}}$. The speed of a bullet, on
+the other hand, is over 1000 $\frac{\text{km}}{\text{hr}}$.}
+
+\wss{Using the typical values $p_\text{land}$ is calculated as 1019.4 m, which is
+close to the given value for the target.  A typical value that gets close to the
+target is logical, assumming that the user has a good feel for the projectile's
+motion based on previous experiences.}
+
+\wss{We might want to change the typical values to be slower and over shorter
+distances.  Numbers more like those from throwing or hitting a ball in a typical
+sport might be more typical when the scope is outside the range of ballistics.}
 
 \section{Traceability Matrices and Graphs}
 \label{Sec:TraceMatrices}
-The purpose of the traceability matrices is to provide easy references on what has to be additionally modified if a certain component is changed. Every time a component is changed, the items in the column of that component that are marked with an ``X'' should be modified as well. \hyperref[Table:TraceMatAvsA]{Tab:TraceMatAvsA} shows the dependencies of the assumptions on each other. \hyperref[Table:TraceMatAvsAll]{Tab:TraceMatAvsAll} shows the dependencies of the data definitions, theoretical models, general definitions, instance models, requirements, likely changes, and unlikely changes on the assumptions. \hyperref[Table:TraceMatRefvsRef]{Tab:TraceMatRefvsRef} shows the dependencies of the data definitions, theoretical models, general definitions, and instance models on each other. \hyperref[Table:TraceMatAllvsR]{Tab:TraceMatAllvsR} shows the dependencies of the requirements and goal statements on the data definitions, theoretical models, general definitions, and instance models.
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed. Every time a
+component is changed, the items in the column of that component that are marked
+with an ``X'' should be modified as well.
+\hyperref[Table:TraceMatAvsA]{Tab:TraceMatAvsA} shows the dependencies of the
+assumptions on each other. \hyperref[Table:TraceMatAvsAll]{Tab:TraceMatAvsAll}
+shows the dependencies of the data definitions, theoretical models, general
+definitions, instance models, requirements, likely changes, and unlikely changes
+on the assumptions. \hyperref[Table:TraceMatRefvsRef]{Tab:TraceMatRefvsRef}
+shows the dependencies of the data definitions, theoretical models, general
+definitions, and instance models on each other.
+\hyperref[Table:TraceMatAllvsR]{Tab:TraceMatAllvsR} shows the dependencies of
+the requirements and goal statements on the data definitions, theoretical
+models, general definitions, and instance models.
 
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Assumptions}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{MD:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{MD:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[centreMass]{A:centreMass}} & \textbf{\hyperref[noObstruct]{A:noObstruct}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
 \hyperref[twoD]{A:twoD} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
@@ -2478,9 +2697,9 @@ The purpose of the traceability matrices is to provide easy references on what h
 \\
 \hyperref[neglectDrag]{A:neglectDrag} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
-\hyperref[pointMass]{A:pointMass} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
+\hyperref[centreMass]{A:centreMass} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
-\hyperref[freeFlight]{A:freeFlight} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
+\hyperref[noObstruct]{A:noObstruct} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
 \hyperref[neglectCurv]{A:neglectCurv} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
@@ -2492,7 +2711,7 @@ The purpose of the traceability matrices is to provide easy references on what h
 \begin{longtblr}
 [caption={Traceability Matrix Showing the Connections Between Assumptions and Other Items}]
 {colspec={l l l l l l l l l l l l l l l l}, rowhead=1, hline{1,Z}=\heavyrulewidth, hline{2}=\lightrulewidth}
-\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[pointMass]{A:pointMass}} & \textbf{\hyperref[freeFlight]{A:freeFlight}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
+\textbf{} & \textbf{\hyperref[twoD]{A:twoD}} & \textbf{\hyperref[MD:cartSyst]{A:cartSyst}} & \textbf{\hyperref[yAxisGravity]{A:yAxisGravity}} & \textbf{\hyperref[launchOrigin]{A:launchOrigin}} & \textbf{\hyperref[targetXAxis]{A:targetXAxis}} & \textbf{\hyperref[posXDirection]{A:posXDirection}} & \textbf{\hyperref[constAccel]{A:constAccel}} & \textbf{\hyperref[accelXZero]{A:accelXZero}} & \textbf{\hyperref[accelYGravity]{A:accelYGravity}} & \textbf{\hyperref[neglectDrag]{A:neglectDrag}} & \textbf{\hyperref[centreMass]{A:centreMass}} & \textbf{\hyperref[noObstruct]{A:noObstruct}} & \textbf{\hyperref[neglectCurv]{A:neglectCurv}} & \textbf{\hyperref[timeStartZero]{A:timeStartZero}} & \textbf{\hyperref[gravAccelValue]{A:gravAccelValue}}
 \\
 \hyperref[DD:vecMag]{DD:vecMag} &  &  &  &  &  &  &  &  &  &  &  &  &  &  & 
 \\
@@ -2667,9 +2886,9 @@ $π$ & ratio of circumference to diameter for any circle & $3.14159265$ & --
 \wss{The relationship between the theories, assumptions and modelling decisions
 is summarized in Figure~\ref{Fig:RelateTM2A2MD}.}
     
-\begin{figure} \label{Fig:RelateTM2A2MD}
+\begin{figure} 
 \caption{Relationship between theories, assumptions and modelling decisions for
-Projectile.}
+Projectile.} \label{Fig:RelateTM2A2MD}
 \begin{center}
 \includegraphics[scale=0.6]{ProjectileTheoriesAssumpts.drawio.pdf}        
 \end{center}
