@@ -317,11 +317,15 @@ The physical system of Projectile, as shown in \hyperref[Figure:Launch]{Fig:Laun
 Given the initial velocity vector of the projectile and the geometric layout of the launcher and target, the goal statement is:
 
 \begin{itemize} \item[targetHit:\phantomsection\label{targetHit}]{Determine if
-the projectile hits the target.} \end{itemize} \subsection{Solution
-Characteristics Specification} \label{Sec:SolCharSpec} The instance models that
+the projectile hits the target.} \end{itemize} 
+
+\subsection{Solution Characteristics Specification} \label{Sec:SolCharSpec} The instance models that
 govern Projectile are presented in the \hyperref[Sec:IMs]{Instance Model
 Section}. The information to understand the meaning of the instance models and
 their derivation is also presented, so that the instance models can be verified.
+
+\wss{Explain strategy from the big picture view.  Distinction between background
+theories, helper theories, generic theories and projectile specific theories.}
 
 \subsubsection{\wss{Types}}
 
@@ -768,7 +772,8 @@ None
 \label{Sec:GDs}
 This section collects the laws and equations that will be used to build the instance models.
 \wss{We should remove the prefix GD.  Maybe we should replace it with the prefix
-TM?}
+TM?} \wss{Add text describing the strategy behind the helper theories.}
+
 \medskip
 \noindent
 \begin{minipage}{\textwidth}
@@ -1007,6 +1012,106 @@ negative time.}
 \end{itemize}
 
 \subsubsection{\wss{Generic Theories (GD:velVec and GD:posVec)}}
+
+\wss{Context for the generic theories.  When can they be used.  How might they
+be used.  The context information could potentially be used for a lesson on this
+topic.}
+
+\wss{\subsection{Procedure for Analysis}} %\label{sec:orgd5c1eaf}
+
+Free-flight projectile motion problems can be solved using the
+following procedure.
+
+\subsubsection{Step 1: Coordinate System} \label{sec:org31dfaea}
+
+\begin{itemize}
+\item Establish the fixed \(x\), \(y\) coordinate axes and sketch the
+trajectory of the particle.  Between any \textbf{two points} on the path
+specify the given problem data and the \textbf{three unknowns}.  In all
+cases the acceleration of gravity acts downward.  The particle's
+initial and final velocities should be represented in terms of their
+\(x\) and \(y\) components.
+
+\item Remember that positive and negative position, velocity, and
+acceleration components always act in accordance with their
+associated coordinate directions.
+
+\item The two points that are selected should be significant points where
+something about the motion of the particle is known.  Potential
+significant points include the initial point of launching the
+projectile and the final point where it lands. The landing point
+often has a known \(y\) value.
+
+\item The variables in the equation may need to be changed to match the
+notation of the specific problem.  For instance, a distinction may
+need to be made between the \$x\$-coordinate of points \(A\) and \(B\),
+via notation like \(p_x^A\) and \(p_x^B\).
+\end{itemize}
+
+\subsubsection{Step 2: Identify Knowns}
+\label{sec:org8a3b415}
+
+Using the notation for the problem in question, write out the known
+variables and their values. The known variables will be a subset of
+the following: \(p^i_x, p_x, p^i_y, p_y, v^i_x, v_x, v^i_y, v_y\) and
+\(t\). The knowns should be written in the notation adopted for the
+particular problem.
+
+\subsubsection{Step 3: Identify Unknowns}
+\label{sec:org4de893b}
+
+Each problem will have at most 4 unknowns that need to be determined,
+selected from the variables listed in the Step 2 that are not known.
+The number of relevant unknowns will usually be less than 4, since
+questions will often focus on one or two unknowns.  As an example, the
+equation that horizontal velocity is constant is so trivial that most
+problems will not look for this as an unknown.  The unknowns should be
+written in the notation adopted for the particular problem.
+
+\subsubsection{Step 4: Kinematic Equations}
+\label{sec:org5e4a6ca}
+
+Depending upon the known data and what is to be determined, a choice
+should be made as to which four of the following five equations should
+be applied between the two points on the path to obtain the most
+direct solution to the problem.
+
+\begin{enumerate}
+\item Step 4.1: Horizontal Motion
+\label{sec:orgfa3c7a5}
+
+From Equation \ref{Eq_horizVel}: \(v_x = v_x^i\) (The \textbf{velocity} in the
+horizontal or \(x\) direction is \textbf{constant})
+
+From Equation \ref{Eq_horizPos}: \(p_x = p_x^i + v_x^i t\)
+
+\item Step 4.2: Vertical Motion
+\label{sec:org41d6b39}
+
+In the vertical or \(y\) direction \textbf{only two} of the following three
+equations (using \(a_y = -g\)) can be used for solution.  (The sign of
+\(g\) will change to positive if the positive \(y\) axis is downward.)
+
+From Equation \ref{Eq_vertVel}: \(v_y = v_y^i - g t\)
+
+From Equation \ref{Eq_vertPos}: \(p_y = p_y^i + v_y^i t - \frac{1}{2} g t^2\)
+
+From Equation \ref{Eq_vertNoTime}: \(v_y^2 = (v_y^i)^2 - 2 g ( p_y - p_y^i)\)
+
+For example, if the particle's final velocity \(v_y\) is not needed,
+then the first and third of these questions (for \(y\)) will not be
+useful.
+\end{enumerate}
+
+\subsubsection{Step 5: Solve for Unknowns}
+\label{sec:org5bdde54}
+
+Use the equations from Step 4, together with the known values from
+Step 2 to find the unknown values from Step 3.  We can do this
+systematically by going through each equation and determining how many
+unknowns are in that equation.  Any equations with one unknown can be
+used to solve for that unknown directly.
+
 
 \noindent
 \begin{minipage}{\textwidth}
