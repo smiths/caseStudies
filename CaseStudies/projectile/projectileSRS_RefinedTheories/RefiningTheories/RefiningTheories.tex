@@ -1,0 +1,125 @@
+\documentclass{article}
+\renewcommand{\baselinestretch}{1.5} 
+
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\title{Refining Theories for Projectile}
+\author{Spencer Smith}
+
+\begin{document}
+
+\maketitle
+
+\section{Projectile Project}
+
+\noindent Project = (StrategyP, \{CT, BT, HT, GT, PT, FT, RT\})\\
+
+\noindent CT = (\{CT:realArith, CT:trigonometry, CT:vectors, CT:CartCoordSyst,
+CT:Differentiation, CT:Integration\}) \textit{generated from the CTs used by the other
+theories}\\
+
+\noindent BT = (StrategyBT, \{TM:acceleration, TM:velocity,
+TM:directionCosines\})\\
+
+\noindent HT = (StrategyHT, \{GD:rectVel, GD:rectPos\})\\
+
+\noindent GT = (StrategyGT, \{GD:velVec, GD:posVec, GD:magAngleToCompRep\})\\
+
+\noindent PT = (StrategyPT, \{PT:coordSyst, DD:speedIX, DD:speedIY,
+PT:velVecInitMagAndAngle, PT:posVecInitMagAndAngle, PT:posVecInitPos,
+PT:velVecPlanetaryGrav, PT:posVecPlanetaryGrav\})\\
+
+\noindent FT = (StrategyFT, \{IM:calOfLandingTime, IM:calOfLandingDist,
+IM:offsetIM, IM:messageIM\})\\
+
+\noindent RT = (StrategyRT, \{RT:lngDstErr\})\\
+
+\section{Assumptions}
+
+The fields for the assumptions are the text description, the relevant
+mathematical relation and the rationale (intention?).\\
+
+\noindent A:oneD = (``The motion of the body is one dimensional.'', $v_2(t) =
+v_3(t) = 0$, ``The body can be modelled as moving in a straight line.'')
+
+\noindent A:constAccel = (``The acceleration is constant'', $\frac{d a}{dt} =
+0$, ``The body undergoes constant acceleration, like when a body is in free fall
+with no external force acting on it, or a charged particle in a constant
+electric field.'')
+
+\noindent A:timeStartZero = (``Time starts at zero.'', $t = 0$, ``The time that
+the modelling starts is an arbitrary decision, so the choice is made to start at
+zero to simplify the equations'')
+
+\section{Theories and Theory Refinement}
+
+\subsection{Theory for TM:acceleration}
+
+\noindent TM:acceleration = ($
+    \left [ 
+    \begin{array}{c}
+    a_1(t)\\
+    a_2(t)\\
+    a_3(t) 
+    \end{array} 
+    \right ] =
+    \frac{d}{dt}
+    \left [ 
+    \begin{array}{c}
+    v_1(t)\\
+    v_2(t)\\
+    v_3(t) 
+    \end{array} 
+    \right ]
+    $, \{CT:realArith, CT:vectors, CT:CartCoodSyst, CT:Differentiation\}, \{MD:cartSyst, A:threeD\})
+    
+\subsection{Refinement for GD:rectVel}
+
+TM:acceleration = ($
+    \left [ 
+    \begin{array}{c}
+    a_1(t)\\
+    a_2(t)\\
+    a_3(t) 
+    \end{array} 
+    \right ] =
+    \frac{d}{dt}
+    \left [ 
+    \begin{array}{c}
+    v_1(t)\\
+    v_2(t)\\
+    v_3(t) 
+    \end{array} 
+    \right ]
+    $, \{CT:realArith, ...\}, \{MD:cartSyst, A:threeD\})
+
+\noindent Replace A:threeD by A:oneD.  $v_2(t) = v_3(t) = 0$ therefore $a_2(t) = a_3(t) = 0$.
+
+TM:acceleration' = ($a_1(t) = \frac{d}{dt} v_1(t)$, \{CT:realArith,
+...\}, \{MD:cartSyst, A:oneD\})
+
+\noindent Apply the assumption A:constAccel.
+
+TM:acceleration'' = ($a_1 = \frac{d}{dt} v_1(t)$, \{CT:realArith,
+...\}, \{MD:cartSyst, A:oneD, A:constAccel\})
+
+\noindent Relabel $a_1$ as $a^c$, the constant acceleration.
+
+TM:acceleration''' = ($a^c = \frac{d}{dt} v_1(t)$, \{CT:realArith,
+...\}, \{MD:cartSyst, A:oneD, A:constAccel\})
+
+\noindent Relabel $v_1(t)$ as $v(t)$.
+
+TM:acceleration'''' = ($a^c = \frac{d}{dt} v(t)$, \{CT:realArith,
+...\}, \{MD:cartSyst, A:oneD, A:constAccel\})
+
+\noindent Assume that at $t = 0$ (A:timeStartZero) the velocity $v(0)$ is $v^i$
+and integrate using CT:integration.
+
+GD:rectVel = ($v(t) = v^i + a^c t$, \{CT:realArith, ...,
+CT:integration\}, \{MD:cartSyst, A:oneD, A:constAccel, A:timeStartZero\})
+
+\end{document}
