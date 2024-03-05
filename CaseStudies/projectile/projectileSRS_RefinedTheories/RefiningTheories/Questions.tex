@@ -1,0 +1,61 @@
+\documentclass{article}
+\renewcommand{\baselinestretch}{1.5} 
+
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fullpage}
+
+\title{Questions on Refining Theories for Projectile}
+\author{Spencer Smith}
+
+\begin{document}
+
+\maketitle
+
+\section{Context Theories}
+
+\noindent CT:realArith
+
+\noindent CT:functions
+
+\noindent CT:nDimSpace(n)
+
+\noindent CT:trigonometry
+
+\noindent CT:vectors
+
+\noindent CT:CartCoordSyst
+
+\noindent CT:Differentiation
+
+\noindent CT:Integration
+
+\section{Proposed Sketch of New Approach}
+
+Does the following informal idea of what we want to do make sense?  If not, how
+do we change it?  Once we have a reasonable sequence of theory refinements, how
+do we write it down in a rigorous/formal way?
+
+\begin{itemize}
+\item P = a theory of a position function in 1D space.  Given a time, return the
+position.  Build using the context theories of CT:nDimSpace(1), CT:functions.
+\item V = refine P by differentiating with respect to time. Uses context
+theories from P and adds CT:Differentiation.
+\item A = refine V by differentiating with respect to time.  Uses context theories of V.
+\item GD:rectVel = refine A by integration using A:timeStartZero and
+A:constAccel. $v(t) = v^i + a^c t$. Adds CT:Integration.
+\item GD:rectPos = refine V by integration using A:timeStartZero and A:constAccel. $p(t) = p^i + v^i t + a^c t^2/2$.  Adds context theory CT:realArith, CT:Integration.
+\item GD:velVec = refine GD:rectVel using CT:nDimSpace(2), CT:CartCoordSyst,
+CT:vectors and the independence of two coordinate directions. The result is a 2D
+vector using the equation from GD:rectVel twice with a different initial
+velocity and constant acceleration in each direction.
+\item PT:posVecInitMagAndAngle = refine GD:velVec using the angle and magnitude
+representation of the initial velocity vector, rather than the component-wise
+representation.  Uses CT:trigonometry.
+\item PT:velVecPlanetaryGrav = refine PT:posVecInitMagAndAngle using an
+acceleration of 0 in the $x$ direction and an acceleration of $-g$ in the $y$
+direction.
+\end{itemize}
+
+\end{document}
