@@ -13,29 +13,23 @@
 
 \maketitle
 
-\section{Projectile Project}
+\section{Context Theories}
 
-\noindent Project = (StrategyP, \{CT, BT, HT, GT, PT, FT, RT\})\\
+\noindent CT:realArith
 
-\noindent CT = (\{CT:realArith, CT:trigonometry, CT:vectors, CT:CartCoordSyst,
-CT:Differentiation, CT:Integration\}) \textit{generated from the CTs used by the other
-theories}\\
+\noindent CT:functions
 
-\noindent BT = (StrategyBT, \{TM:acceleration, TM:velocity,
-TM:directionCosines\})\\
+\noindent CT:nDimSpace(n)
 
-\noindent HT = (StrategyHT, \{GD:rectVel, GD:rectPos\})\\
+\noindent CT:trigonometry
 
-\noindent GT = (StrategyGT, \{GD:velVec, GD:posVec, GD:magAngleToCompRep\})\\
+\noindent CT:vectors
 
-\noindent PT = (StrategyPT, \{PT:coordSyst, DD:speedIX, DD:speedIY,
-PT:velVecInitMagAndAngle, PT:posVecInitMagAndAngle, PT:posVecInitPos,
-PT:velVecPlanetaryGrav, PT:posVecPlanetaryGrav\})\\
+\noindent CT:CartCoordSyst
 
-\noindent FT = (StrategyFT, \{IM:calOfLandingTime, IM:calOfLandingDist,
-IM:offsetIM, IM:messageIM\})\\
+\noindent CT:Differentiation
 
-\noindent RT = (StrategyRT, \{RT:lngDstErr\})\\
+\noindent CT:Integration
 
 \section{Assumptions}
 
@@ -57,6 +51,9 @@ zero to simplify the equations'')
 \section{Theories and Theory Refinement}
 
 \subsection{Theory for TM:acceleration}
+
+\noindent TM:acceleration = ($a(t) = \frac{d}{dt} v(t)\\$, \{CT:realArith,
+CT:vectors, CT:CartCoodSyst, CT:Differentiation\}, \{MD:cartSyst, A:threeD\})
 
 \noindent TM:acceleration = ($
     \left [ 
@@ -121,5 +118,28 @@ and integrate using CT:integration.
 
 GD:rectVel = ($v(t) = v^i + a^c t$, \{CT:realArith, ...,
 CT:integration\}, \{MD:cartSyst, A:oneD, A:constAccel, A:timeStartZero\})
+
+\section{Projectile Project}
+
+\noindent Project = (StrategyP, \{CT, BT, HT, GT, PT, FT, RT\})\\
+
+\noindent CT = (\{CT:realArith, CT:trigonometry, CT:vectors, CT:CartCoordSyst,
+CT:Differentiation, CT:Integration\})\\
+
+\noindent BT = (StrategyBT, \{TM:acceleration, TM:velocity,
+TM:directionCosines\})\\
+
+\noindent HT = (StrategyHT, \{GD:rectVel, GD:rectPos\})\\
+
+\noindent GT = (StrategyGT, \{GD:velVec, GD:posVec, GD:magAngleToCompRep\})\\
+
+\noindent PT = (StrategyPT, \{PT:coordSyst, DD:speedIX, DD:speedIY,
+PT:velVecInitMagAndAngle, PT:posVecInitMagAndAngle, PT:posVecInitPos,
+PT:velVecPlanetaryGrav, PT:posVecPlanetaryGrav\})\\
+
+\noindent FT = (StrategyFT, \{IM:calOfLandingTime, IM:calOfLandingDist,
+IM:offsetIM, IM:messageIM\})\\
+
+\noindent RT = (StrategyRT, \{RT:lngDstErr\})\\
 
 \end{document}
