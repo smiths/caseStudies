@@ -1,0 +1,150 @@
+\documentclass{article}
+\renewcommand{\baselinestretch}{1.5} 
+
+\usepackage{amsmath, mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{fullpage}
+
+\usepackage{hyperref}
+
+\title{Little Theories for Projectile}
+\author{Spencer Smith}
+
+\begin{document}
+
+\maketitle
+
+The inspiration for the following ``little theories'' version of projectile
+motion is Farmer's little theories formalization in simple type theory.  An
+example of this can be found in the paper
+``\href{https://imps.mcmaster.ca/doc/monoids.pdf} {Monoid Theory in Alonzo}'' by
+Farmer and Zvigelsky (2023).
+
+The intention of this document is to start a discussion of the best way to
+envision projectile motion using the little theories approach.  This is an
+informal document where the notation is not rigorous.  For instance, given that
+the author doesn't understand exactly how one theory is transported to another,
+this issue is glossed over by adding a field called ``Transport'' to informally
+communicate this notion.
+
+\section{1D Kinematic Theory}
+
+\noindent \textbf{Name:} Kin1D
+
+\noindent \textbf{Extends:} Theory of real numbers with functions and differentiation
+
+\noindent \textbf{Constants:} $p_{\mathbb{R} \rightarrow \mathbb{R}}$ (position)
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $\forall c: \mathbb{R} \; . \; (\forall \epsilon: \mathbb{R} |
+    \epsilon > 0 \; . \; (\exists \delta : \mathbb{R} | \delta > 0 \; . \;
+    (\forall x: \mathbb{R} \; . \; | x - c | < \delta \rightarrow |p \; x - p \;
+    c | < \epsilon)))$ ($p$ is continuous over all of $\mathbb{R}$)
+    \item $\forall x: \mathbb{R} \; . \; \frac{dp} {dt} \; \text{exists}$ (first derivative of $p$ exists over all of $\mathbb{R}$)
+    \item $\forall x: \mathbb{R} \; . \; \frac{d^2 p} {d t^2} \; \text{exists}$ (second derivative of $p$ exists over all of $\mathbb{R}$)
+\end{enumerate}
+
+\noindent \textbf{Definitions and theorems:}
+
+Def1: $v_{\mathbb{R} \rightarrow \mathbb{R}} = \frac{dp}{dt}$ (velocity)
+
+Def2: $a_{\mathbb{R} \rightarrow \mathbb{R}} = \frac{dv}{dt}$ (acceleration)
+
+\section{1D Kinematic Constant Acceleration Theory}
+
+\noindent \textbf{Name:} Kin1DConstAccel
+
+\noindent \textbf{Transport:} Kin1D
+
+\noindent \textbf{Constants:} $t_{\mathbb{R}}$ (time), ${a^c}_{\mathbb{R}}$
+(constant accel.), ${p^i}_{\mathbb{R}}$ (initial pos.), ${v^i}_{\mathbb{R}}$ (initial velo.)
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $t \geq 0$ (A:timeStartZero)
+    \item $p \; 0 = p^i$ (initial position)
+    \item $v \; 0 = v^i$ (initial velocity)
+    \item $\forall t: \mathbb{R} | t \geq 0 \; . \; a \; t = a^c$ (A:constAccel)
+\end{enumerate}
+
+\noindent \textbf{Definitions and theorems:}
+
+Thm1: $v \; t = v^i + a^c t$
+
+Thm2: $p \; t = p^i + v^i t + \frac{a^c t^2}{2}$
+
+
+\section{nD Kinematic Constant Acceleration Theory}
+
+\noindent \textbf{Name:} KinnDConstAccel (\textit{This section is not complete;
+it is currently a mix of nD and 2D.})
+
+\noindent \textbf{Transport:} Kin1DConstAccel, $n$ Dimensional Euclidean space.  Somehow $p$, $v$ and $a$
+have to be mapped to both $x$ and $y$ components of each.
+
+\noindent \textbf{Constants:} ${a_x^c}_{\mathbb{R}}$ (constant accel.\ $x$
+direction), ${a_y^c}_{\mathbb{R}}$ (constant accel.\ $y$ direction),
+${p_x^i}_{\mathbb{R}}$ (initial pos.\ $x$ direction), ${p_y^i}_{\mathbb{R}}$
+(initial pos.\ $y$ direction),${v_x^i}_{\mathbb{R}}$ (initial velo.\ $x$
+direction), ${v_y^i}_{\mathbb{R}}$ (initial velo.\ $y$ direction) 
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $\forall k: \mathbb{N} | 0 \leq k \leq (n-1) \; . \; p_k \; 0 = p_k^i$ (initial position vector)
+    \item $\forall k: \mathbb{N} | 0 \leq k \leq (n-1) \; . \; v_k \; 0 = v_k^i$ (initial velocity vector)
+    \item $\forall k: \mathbb{N} | 0 \leq k \leq (n-1) \; . \; (\forall t:
+    \mathbb{R} | t \geq 0 \; . \; a_k \; t = a_k^c)$ (constant acceleration vector)
+\end{enumerate}
+
+\noindent \textbf{Definitions and theorems:}
+
+Thm1: \begin{displaymath}
+    \mathbf{v}\text{(}t\text{)}=\begin{bmatrix}
+        v_\text{x}\\
+        v_\text{y}
+        \end{bmatrix} =\begin{bmatrix}
+                               {{v_{\text{x}}}^{\text{i}}}+{{a_{\text{x}}}^{\text{c}}} t\\
+                               {{v_{\text{y}}}^{\text{i}}}+{{a_{\text{y}}}^{\text{c}}} t
+                               \end{bmatrix}
+    \end{displaymath}
+
+Thm2: \begin{displaymath}
+    \mathbf{p}\text{(}t\text{)}=\begin{bmatrix}
+        p_\text{x}\\
+        p_\text{y}
+        \end{bmatrix} = \begin{bmatrix}
+                               {{p_{\text{x}}}^{\text{i}}}+{{v_{\text{x}}}^{\text{i}}} t+\frac{{{a_{\text{x}}}^{\text{c}}} t^{2}}{2}\\
+                               {{p_{\text{y}}}^{\text{i}}}+{{v_{\text{y}}}^{\text{i}}} t+\frac{{{a_{\text{y}}}^{\text{c}}} t^{2}}{2}
+                               \end{bmatrix}
+    \end{displaymath}
+
+\section{Next Steps}
+
+\begin{enumerate}
+    \item Projectile motion specific via $p_x = 0$, $p_y = 0$, $v_x = v^{\text{launch}} \cos \theta$, $v_y = v^{\text{launch}} \sin \theta$, $a_x^c = 0$, $a_y^c = -g$
+    \item Add constraint axioms $v^{\text{launch}} > 0$, $0 < \theta < \frac{\pi} {2}$
+    \item Add theorem for calculation of landing time
+    \item Add theorem for calculation of landing distance
+\end{enumerate}
+
+\section{Questions}
+
+\begin{itemize}
+    \item How should units be handled?  For instance, position has units of
+    length (m), velocity has units of length per unit time (m/s) and
+    acceleration has units of length$^2$ per unit time (m$^2$/2).
+    \item How to capture context information?  The typical values for
+    projectiles used in games are much different than the values for projectiles
+    in ballistics.
+    \item How to document that context-specific rationale information?  For
+    instance, the assumption that the Earth is flat leads to only a tiny error
+    for sports-related projectiles.
+\end{itemize}
+
+\end{document}
