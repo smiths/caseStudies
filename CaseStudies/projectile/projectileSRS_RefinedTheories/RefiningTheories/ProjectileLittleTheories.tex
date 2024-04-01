@@ -29,30 +29,123 @@ the author doesn't understand exactly how one theory is transported to another,
 this issue is glossed over by adding a field called ``Extends'' to informally
 communicate this notion.
 
-\section{1D Kinematic Theory}
+\section{Questions}
 
-\noindent \textbf{Name:} Kin1D
+\begin{itemize}
+    \item How to combine theory with documentation of theory?
+    \item How to bring in the context information (typical values, problem
+    specific constraints etc.)?
+    \item Where does the rationale go?
+\end{itemize}
 
-\noindent \textbf{Extends:} Theory of real numbers with functions and differentiation
+\section{Documentation Theories?}
 
-\noindent \textbf{Constants:} $p_{\mathbb{R} \rightarrow \mathbb{R}}$ (position)
+\noindent \textbf{Name:} Concept
+
+\noindent \textbf{Constants:} $\text{definition}: \mathbb{S}$, $\text{symbol}:
+\mathbb{S}$, $\text{unit}: \text{Unit}$
+
+\section{Time Theory}
+
+\noindent \textbf{Name:} Time
+
+\noindent \textbf{Extends:} Concept, Reals
+
+\noindent \textbf{Variable:} $t: {\mathbb{R}}$ (time)
 
 \noindent \textbf{Axioms:}
 
 \begin{enumerate}
-    \item $\forall c: \mathbb{R} \; . \; (\forall \epsilon: \mathbb{R} |
-    \epsilon > 0 \; . \; (\exists \delta : \mathbb{R} | \delta > 0 \; . \;
-    (\forall x: \mathbb{R} \; . \; | x - c | < \delta \rightarrow |p \; x - p \;
-    c | < \epsilon)))$ ($p$ is continuous over all of $\mathbb{R}$)
-    \item $\forall x: \mathbb{R} \; . \; \frac{dp} {dt} \; \text{exists}$ (first derivative of $p$ exists over all of $\mathbb{R}$)
-    \item $\forall x: \mathbb{R} \; . \; \frac{d^2 p} {d t^2} \; \text{exists}$ (second derivative of $p$ exists over all of $\mathbb{R}$)
+    \item $\text{definition} = \text{``time''}$ 
+    \item $\text{symbol} = t$ (not necessary for the symbol to be the same as $t$)
+    \item $\text{unit} = \text{s}$
 \end{enumerate}
 
-\noindent \textbf{Definitions and theorems:}
+\section{Position Theory}
 
-Def1: $v_{\mathbb{R} \rightarrow \mathbb{R}} = \frac{dp}{dt}$ (velocity)
+\noindent \textbf{Name:} Position
 
-Def2: $a_{\mathbb{R} \rightarrow \mathbb{R}} = \frac{dv}{dt}$ (acceleration)
+\noindent \textbf{Extends:} Concept, Reals
+
+\noindent \textbf{Variable:} $p: {\mathbb{R} \rightarrow \mathbb{R}}$ (position)
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $\text{definition} = \text{``location in space''}$ 
+    \item $\text{symbol} = p$ (not necessary for the symbol to be the same as $p$)
+    \item $\text{unit} = \text{m}$
+    \item $p \in C^2$ (continuous for the function and the first and second derivatives)
+\end{enumerate}
+
+
+\section{Velocity Theory}
+
+\noindent \textbf{Name:} Velocity
+
+\noindent \textbf{Extends:} Concept, Reals, Position
+
+\noindent \textbf{Variable:} $v: {\mathbb{R} \rightarrow \mathbb{R}}$ (velocity)
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $\text{definition} = \text{``rate of change of position in space''}$ 
+    \item $\text{symbol} = v$
+    \item $\text{unit} = \text{m/s}$
+    \item $v = \frac{dp}{dt}$
+\end{enumerate}
+
+\noindent \textbf{Definition and theorems:}
+
+Thm1: $v \in C^1$
+
+\section{Acceleration Theory}
+
+\noindent \textbf{Name:} Acceleration
+
+\noindent \textbf{Extends:} Concept, Reals, Velocity
+
+\noindent \textbf{Constants:} $a: {\mathbb{R} \rightarrow \mathbb{R}}$ (acceleration)
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $\text{definition} = \text{``rate of change of velocity''}$ 
+    \item $\text{symbol} = a$
+    \item $\text{unit} = \frac{\text{m}} {\text{s}^2}$
+    \item $a = \frac{dv}{dt}$
+\end{enumerate}
+
+\noindent \textbf{Definition and theorems:}
+
+Thm1: $a \in C^0$
+
+\section{1D Kinematic Theory}
+
+\noindent \textbf{Name:} Kin1D
+
+\noindent \textbf{Extends:} Position, Velocity, Acceleration
+
+% \noindent \textbf{Constants:} $p: {\mathbb{R} \rightarrow \mathbb{R}}$ (position)
+
+% \noindent \textbf{Axioms:}
+
+% \begin{enumerate}
+%     % \item $\forall c: \mathbb{R} \; . \; (\forall \epsilon: \mathbb{R} |
+%     % \epsilon > 0 \; . \; (\exists \delta : \mathbb{R} | \delta > 0 \; . \;
+%     % (\forall x: \mathbb{R} \; . \; | x - c | < \delta \rightarrow |p \; x - p \;
+%     % c | < \epsilon)))$ ($p$ is continuous over all of $\mathbb{R}$)
+%     % \item $\forall x: \mathbb{R} \; . \; \frac{dp} {dt} \; \text{exists}$ (first derivative of $p$ exists over all of $\mathbb{R}$)
+%     % \item $\forall x: \mathbb{R} \; . \; \frac{d^2 p} {d t^2} \; \text{exists}$ (second derivative of $p$ exists over all of $\mathbb{R}$)
+%     \item $p \in C^2$ (continuous for the function and the first and second derivatives)
+% \end{enumerate}
+
+% \noindent \textbf{Definitions and theorems:}
+
+% Def1: $v: {\mathbb{R} \rightarrow \mathbb{R}}$, $v = \frac{dp}{dt}$ (velocity)
+
+% Def2: $a: {\mathbb{R} \rightarrow \mathbb{R}}$, $a = \frac{dv}{dt}$ (acceleration)
 
 \section{1D Kinematic Constant Acceleration Theory}
 
@@ -60,8 +153,10 @@ Def2: $a_{\mathbb{R} \rightarrow \mathbb{R}} = \frac{dv}{dt}$ (acceleration)
 
 \noindent \textbf{Extends:} Kin1D
 
-\noindent \textbf{Constants:} $t_{\mathbb{R}}$ (time), ${a^c}_{\mathbb{R}}$
-(constant accel.), ${p^i}_{\mathbb{R}}$ (initial pos.), ${v^i}_{\mathbb{R}}$ (initial velo.)
+\noindent \textbf{Variables:} $t: {\mathbb{R}}$ (time)
+
+\noindent \textbf{Constants:} ${a^c}: {\mathbb{R}}$ 
+(constant accel.), ${p^i}: {\mathbb{R}}$ (initial pos.), ${v^i}: {\mathbb{R}}$ (initial velo.)
 
 \noindent \textbf{Axioms:}
 
@@ -78,14 +173,32 @@ Thm1: $v \; t = v^i + a^c t$
 
 Thm2: $p \; t = p^i + v^i t + \frac{a^c t^2}{2}$
 
+\section{Context Theory}
+
+\noindent \textbf{Name:} Context
+
+\noindent \textbf{Extends:} Kin1DConstAccel
+
+\noindent \textbf{Axioms:}
+
+\begin{enumerate}
+    \item $t \geq 0$ (A:timeStartZero)
+    \item constraints on $p^i$
+    \item constraints on $v^i$
+    \item constraints on $a^c$
+\end{enumerate}
 
 \section{nD Kinematic Constant Acceleration Theory}
+
+Do this using a product of 1D theories.
 
 \noindent \textbf{Name:} KinnDConstAccel (\textit{This section is not complete;
 it is currently a mix of nD and 2D.})
 
 \noindent \textbf{Extends:} Kin1DConstAccel, $n$ Dimensional Euclidean space.  Somehow $p$, $v$ and $a$
 have to be mapped to both $x$ and $y$ components of each.
+
+\noindent \textbf{Variables:} $n: {\mathbb{N}}$ (dimension)
 
 \noindent \textbf{Constants:} ${a_x^c}_{\mathbb{R}}$ (constant accel.\ $x$
 direction), ${a_y^c}_{\mathbb{R}}$ (constant accel.\ $y$ direction),
