@@ -30,12 +30,11 @@ all: prog
 
 .PHONY: prog
 prog: $(PROG_TARGET) 
-	$(PROG_TARGET) infile
+	./$(PROG_TARGET) infile
 
 $(PROG_TARGET):
-	$(C_COMPILER) $(CFLAGS) $(SRC_FILES) -o $(PROG_TARGET)
+	$(C_COMPILER) $(CFLAGS) $(SRC_FILES) -o $(PROG_TARGET) -lm
 
 .PHONY: clean
 clean:
 	@-$(RM) $(PROG_TARGET)
-
