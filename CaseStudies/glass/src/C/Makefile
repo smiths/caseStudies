@@ -37,4 +37,4 @@ $(PROG_TARGET):
 
 .PHONY: clean
 clean:
-	@-$(RM) $(PROG_TARGET)
+	@-$(RM) $(PROG_TARGET) outputfile.txt
