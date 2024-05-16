@@ -20,6 +20,8 @@ C_COMPILER=gcc
 
 CFLAGS = -std=c99
 
+LINKED_LIBS = -lm
+
 SRC_FILES=$(wildcard src/*.c)
 
 PROG_NAME=glassbr
@@ -30,12 +32,11 @@ all: prog
 
 .PHONY: prog
 prog: $(PROG_TARGET) 
-	$(PROG_TARGET) infile
+	./$(PROG_TARGET) infile
 
 $(PROG_TARGET):
-	$(C_COMPILER) $(CFLAGS) $(SRC_FILES) -o $(PROG_TARGET)
+	$(C_COMPILER) $(CFLAGS) $(SRC_FILES) -o $(PROG_TARGET) $(LINKED_LIBS)
 
 .PHONY: clean
 clean:
-	@-$(RM) $(PROG_TARGET)
-
+	@-$(RM) "$(PROG_TARGET)" "outputfile.txt"
