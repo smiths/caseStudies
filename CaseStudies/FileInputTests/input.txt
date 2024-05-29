@@ -1,0 +1,6 @@
+Name: String
+John Doe
+Height (cm): Integer
+170
+Weight (lb): Double
+160.5
