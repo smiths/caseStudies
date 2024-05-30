@@ -1,0 +1,2 @@
+## Purpose
+As discussed in [this issue](https://github.com/JacquesCarette/Drasil/issues/3752), GOOL's constructors lack the necessary constraints needed in order to add procedural languages as targets, and the current patterns we use for reading input from a file are a good case study to understand what we need to change.  These examples illustrate the strengths and weaknesses of the current design as well as new designs I proposed in [this wiki page](https://github.com/JacquesCarette/Drasil/wiki/File-Input-Patterns-Design-Discussion).
